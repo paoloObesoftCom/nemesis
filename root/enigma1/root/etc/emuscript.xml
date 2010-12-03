@@ -1,0 +1,32 @@
+<emuscripts>
+	<script>
+		<name>Show NewCS Info</name>
+		<cmd>(echo ''; sleep 1; echo 'version'; sleep 1; echo 'uptime'; sleep 1; echo 'quit') | nc 127.0.0.1 3001</cmd>
+		<info>Show NewCS Info</info>
+	</script>
+	<script>
+		<name>Show NewCS User Info</name>
+		<cmd>(echo ''; sleep 1; echo 'users'; sleep 1; echo 'quit') | nc 127.0.0.1 3001</cmd>
+		<info>Show NewCS User Info</info>
+	</script>
+	<script>
+		<name>Show NewCS Card Info</name>
+		<cmd>(echo ''; sleep 1; echo 'cards'; sleep 1; echo 'quit') | nc 127.0.0.1 3001</cmd>
+		<info>Show NewCS Card Info</info>
+	</script>
+	<script>
+		<name>Show NewCS Subscrition Info</name>
+		<cmd>(echo ''; sleep 1; echo 'sub -1'; sleep 1; echo 'quit') | nc 127.0.0.1 3001</cmd>
+		<info>Show NewCS Sub Info</info>
+	</script>
+	<script>
+		<name>Show MGcamd info</name>
+		<cmd>cat /tmp/mgstat.info</cmd>
+		<info>Show MGcamd Info</info>
+	</script>
+	<script>
+		<name>Show MGcamd share</name>
+		<cmd>cat /tmp/mgshare.info</cmd>
+		<info>Show MGcamd share Info</info>
+	</script>
+</emuscripts>

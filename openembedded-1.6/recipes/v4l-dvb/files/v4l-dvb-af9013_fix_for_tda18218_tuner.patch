@@ -1,0 +1,47 @@
+diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/frontends/af9013.c v4l-dvb/linux/drivers/media/dvb/frontends/af9013.c
+--- v4l-dvb.orig/linux/drivers/media/dvb/frontends/af9013.c	2010-09-09 14:38:50.000000000 +0200
++++ v4l-dvb/linux/drivers/media/dvb/frontends/af9013.c	2010-11-14 22:57:51.984628000 +0100
+@@ -488,6 +488,20 @@
+ 				break;
+ 			}
+ 		}
++		else if(state->config.tuner == AF9013_TUNER_TDA18218) {
++			switch (bw) {
++			case BANDWIDTH_6_MHZ:
++				if_sample_freq = 3000000; /* 3 MHz */
++				break;
++			case BANDWIDTH_7_MHZ:
++				if_sample_freq = 3500000; /* 3.5 MHz */
++				break;
++			case BANDWIDTH_8_MHZ:
++			default:
++				if_sample_freq = 4000000; /* 4 MHz */
++				break;
++			}
++		}
+ 
+ 		while (if_sample_freq > (adc_freq / 2))
+ 			if_sample_freq = if_sample_freq - adc_freq;
+@@ -1390,6 +1404,7 @@
+ 		init = tuner_init_mt2060_2;
+ 		break;
+ 	case AF9013_TUNER_TDA18271:
++	case AF9013_TUNER_TDA18218:
+ 		len = ARRAY_SIZE(tuner_init_tda18271);
+ 		init = tuner_init_tda18271;
+ 		break;
+diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/frontends/af9013_priv.h v4l-dvb/linux/drivers/media/dvb/frontends/af9013_priv.h
+--- v4l-dvb.orig/linux/drivers/media/dvb/frontends/af9013_priv.h	2010-09-09 14:38:50.000000000 +0200
++++ v4l-dvb/linux/drivers/media/dvb/frontends/af9013_priv.h	2010-11-14 22:58:22.695438000 +0100
+@@ -789,8 +789,9 @@
+ 	{ 0x9bd9, 0, 8, 0x08 },
+ };
+ 
+-/* NXP TDA18271 tuner init
+-   AF9013_TUNER_TDA18271   = 156 */
++/* NXP TDA18271 & TDA18218 tuner init
++   AF9013_TUNER_TDA18271   = 156
++   AF9013_TUNER_TDA18218   = 179 */
+ static struct regdesc tuner_init_tda18271[] = {
+ 	{ 0x9bd5, 0, 8, 0x01 },
+ 	{ 0x9bd6, 0, 8, 0x04 },

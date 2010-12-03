@@ -1,0 +1,51 @@
+diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9015.c v4l-dvb/linux/drivers/media/dvb/dvb-usb/af9015.c
+--- v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9015.c	2010-09-09 14:38:50.000000000 +0200
++++ v4l-dvb/linux/drivers/media/dvb/dvb-usb/af9015.c	2010-11-14 22:53:27.477390000 +0100
+@@ -33,6 +33,7 @@
+ #include "tda18271.h"
+ #include "mxl5005s.h"
+ #include "mc44s803.h"
++#include "tda18218.h"
+ 
+ static int dvb_usb_af9015_debug;
+ module_param_named(debug, dvb_usb_af9015_debug, int, 0644);
+@@ -1027,6 +1028,7 @@
+ 		case AF9013_TUNER_MT2060_2:
+ 		case AF9013_TUNER_TDA18271:
+ 		case AF9013_TUNER_QT1010A:
++		case AF9013_TUNER_TDA18218:
+ 			af9015_af9013_config[i].rf_spec_inv = 1;
+ 			break;
+ 		case AF9013_TUNER_MXL5003D:
+@@ -1038,9 +1040,6 @@
+ 			af9015_af9013_config[i].gpio[1] = AF9013_GPIO_LO;
+ 			af9015_af9013_config[i].rf_spec_inv = 1;
+ 			break;
+-		case AF9013_TUNER_TDA18218:
+-			warn("tuner NXP TDA18218 not supported yet");
+-			return -ENODEV;
+ 		default:
+ 			warn("tuner id:%d not supported, please report!", val);
+ 			return -ENODEV;
+@@ -1248,6 +1247,10 @@
+ 	.dig_out = 1,
+ };
+ 
++static struct tda18218_config af9015_tda18218_config = {
++        .i2c_address = 0xc0,
++};
++
+ static int af9015_tuner_attach(struct dvb_usb_adapter *adap)
+ {
+ 	struct af9015_state *state = adap->dev->priv;
+@@ -1278,6 +1281,10 @@
+ 		ret = dvb_attach(tda18271_attach, adap->fe, 0xc0, i2c_adap,
+ 			&af9015_tda18271_config) == NULL ? -ENODEV : 0;
+ 		break;
++	case AF9013_TUNER_TDA18218:
++		ret = dvb_attach(tda18218_attach, adap->fe, i2c_adap,
++			&af9015_tda18218_config) == NULL ? -ENODEV : 0;
++		break;
+ 	case AF9013_TUNER_MXL5003D:
+ 		ret = dvb_attach(mxl5005s_attach, adap->fe, i2c_adap,
+ 			&af9015_mxl5003_config) == NULL ? -ENODEV : 0;

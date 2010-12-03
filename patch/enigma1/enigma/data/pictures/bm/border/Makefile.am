@@ -1,0 +1,12 @@
+installdir = $(TUXBOXDATADIR)/enigma/pictures/bm/border
+
+install_DATA = \
+	3D_border_eButton_bottomLeft.png 3D_border_eButton_bottom.png 3D_border_eButton_bottomRight.png \
+	3D_border_eButton_left.png 3D_border_eButton_right.png 3D_border_eButton_topLeft.png \
+	3D_border_eButton_top.png 3D_border_eButton_topRight.png 3D_border_unselected_corner_darkLight_neu.png \
+	3D_border_unselected_corner_darkLight.png 3D_border_unselected_corner_darkLight_swap.png \
+	3D_border_unselected_corner_dark.png 3D_border_unselected_corner_dark_swap.png \
+	3D_border_unselected_corner_lightDark.png 3D_border_unselected_corner_lightDark_swap.png \
+	3D_border_unselected_corner_light.png 3D_border_unselected_corner_light_swap.png \
+	3D_border_unselected_corner.png 3D_border_unselected_hor_dark.png \
+	3D_border_unselected_hor_light.png 3D_border_unselected_ver_dark.png 3D_border_unselected_ver_light.png

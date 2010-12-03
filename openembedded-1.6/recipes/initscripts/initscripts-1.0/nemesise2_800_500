@@ -1,0 +1,34 @@
+#!/bin/sh
+
+#create swap
+if [ -e /var/etc/.swapcreate.sh ]; then
+	/usr/bin/showiframe /boot/bootlogo_swap.mvi
+	/var/etc/.swapcreate.sh
+	rm -f /var/etc/.swapcreate.sh
+	/usr/bin/showiframe /boot/bootlogo.mvi
+fi
+
+[ -e /usr/script/mount.sh ] && /usr/script/mount.sh
+[ -e /usr/bin/nemesisd ] && /usr/bin/nemesisd &
+
+#Start tihrd-part at boot
+list=`ls /var/etc/*_startup.sh`
+for item in $list
+	do
+		${item} start
+	done
+
+#Start device
+if [ -b /dev/sdb ]; then mount /dev/sdb1 /media/usb || mount /dev/sdb /media/usb; fi
+if [ -b /dev/sdc ]; then mount /dev/sdc1 /media/usb1 || mount /dev/sdc /media/usb1; fi
+if [ -b /dev/sdd ]; then mount /dev/sdd1 /media/usb2 || mount /dev/sdd /media/usb2; fi
+
+#Activate Swap
+[ -e /media/usb/swapfile ] && swapon /media/usb/swapfile
+[ -e /media/cf/swapfile ] && swapon /media/cf/swapfile
+[ -e /media/hdd/swapfile ] && swapon /media/hdd/swapfile
+
+#Restore EPG
+[ -e /media/cf/epg.dat.save ] && cp /media/cf/epg.dat.save /media/cf/epg.dat
+[ -e /media/hdd/epg.dat.save ] && cp /media/hdd/epg.dat.save /media/hdd/epg.dat
+[ -e /media/usb/epg.dat.save ] && cp /media/usb/epg.dat.save /media/usb/epg.dat

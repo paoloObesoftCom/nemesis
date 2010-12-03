@@ -1,0 +1,134 @@
+LD_LIBRARY_PATH=/var/lib
+export LD_LIBRARY_PATH
+
+PASS=dreambox
+PORT=80
+KILLENIGMA=O
+
+STANDBYSTATUS0=`wget -Y off -O- -q "http://root:${PASS}@127.0.0.1:${PORT}/cgi-bin/status" | grep "Standby:" | sed 's/.*<td>\(.*\)<\/td.*/\1/' | sed 's/ON/On/g' | sed 's/OFF/Off/g'`
+
+RECORDINGSTATUS=`wget -Y off -O- -q "http://root:${PASS}@127.0.0.1:${PORT}/cgi-bin/status" | grep "Recording:" | sed 's/.*<td>\(.*\)<\/td.*/\1/' | sed 's/ON/On/g' | sed 's/OFF/Off/g'`
+# Is Recording Active ?
+if [ $RECORDINGSTATUS = "On" ]
+then
+ # recording, so stop here
+ exit 1
+fi
+
+if [ $STANDBYSTATUS0 = "On" ]
+then
+ wget -Y off -q -O /dev/null "http://root:${PASS}@127.0.0.1:${PORT}/cgi-bin/admin?command=wakeup"
+fi
+CURRCHAN=`wget -Y off -O- -q "http://root:${PASS}@127.0.0.1:${PORT}/cgi-bin/status" | grep "reference:<" | sed s'/.*<td>\(.*\)<\/td>.*/\1/'`
+
+# Si en veille et pas d enregistrement : c est un bon moment pour redemarrer enigma
+# ce qui permet de vider la memoire de MV
+if [ $KILLENIGMA = "O" -a $RECORDINGSTATUS = "Off" -a $STANDBYSTATUS0 = "On" ]
+then
+ echo arret enigma
+ rm -f /hdd/epg.dat*
+ ln -s /dev/null /hdd/epg.dat
+ wget -Y off -q -O /dev/null "http://root:${PASS}@127.0.0.1:${PORT}/cgi-bin/admin?command=restart"
+# killall enigma
+ sleep 1
+ rm -f /hdd/epg.dat*
+ sleep 20
+ wget -Y off -q -O /dev/null "http://root:${PASS}@127.0.0.1:${PORT}/cgi-bin/admin?command=standby"
+fi
+
+/var/bin/mvccat >/tmp/getepg.tmp
+. /tmp/getepg.tmp
+echo STD=$STORAGEDIR
+cd $STORAGEDIR
+
+chargeEpg()
+{
+LOCAL=$1
+REMOTE=$2
+TYPE=`echo $REMOTE|sed "s/:.*//"`
+case x$TYPE in
+  'xtsid' | 'xotid' )
+    echo multiepg
+    chan=`echo $REMOTE|sed "s/..id:.*-//"`
+    if [ x$chan = "x" -o x$chan = x$REMOTE ]
+    then
+      return
+    fi
+    # Switching to EPG channel
+    wget -Y off -q -O /dev/null "http://root:${PASS}@127.0.0.1:${PORT}/cgi-bin/zapTo?path=$chan" 2>/dev/null
+    mkdir $LOCAL
+    # si pas fini apres 3min00, on abandonne :
+    ( sleep 180;killall multiepg; ) >/dev/null 2>&1 &
+    ${STORAGEDIR}/multiepg -p ${STORAGEDIR}/${LOCAL} -n "|"
+    ${STORAGEDIR}/epgidx ${STORAGEDIR}/${LOCAL}/epg.dat
+   ;;
+  'xhttp' )
+    mkdir ${LOCAL}
+    cd ${LOCAL}
+    export an=`date +%Y`
+    export mois=`date +%m`
+    export jour0=`date +%d`
+    export jour=$jour0
+    cpt=0
+    if [ $6 = "f" ]
+    then
+      wget "${REMOTE}${3}${4}"
+    else
+      days=$5
+      while [ $cpt -lt $days ]
+      do
+        jour=$(( $jour0+$cpt ))
+        if [ $jour -lt 10 ]
+        then
+          echo            "${mois}0${jour}1200$an" 
+          ladate=`date -d "${mois}0${jour}1200$an" +%Y%m%d`
+        else
+          echo            "$mois${jour}1200$an" 
+          ladate=`date -d "$mois${jour}1200$an" +%Y%m%d`
+        fi
+        echo wget ${REMOTE}${3}${ladate}${4}
+        wget "${REMOTE}${3}${ladate}${4}"
+        cpt=$(( $cpt+1 ))
+        echo cpt=$cpt
+      done
+    fi
+    cd ${STORAGEDIR}
+    ;;
+esac
+}
+
+chargeEpg $L0 $R0 $P0 $A0 $D0 $T0
+chargeEpg $L1 $R1 $P1 $A1 $D1 $T1
+chargeEpg $L2 $R2 $P2 $A2 $D2 $T2
+chargeEpg $L3 $R3 $P3 $A3 $D3 $T3
+chargeEpg $L4 $R4 $P4 $A4 $D4 $T4
+
+wget -Y off -q -O /dev/null "http://root:${PASS}@127.0.0.1:${PORT}/cgi-bin/zapTo?path=$CURRCHAN" 2>/dev/null
+
+RECORDINGSTATUS=`wget -Y off -O- -q "http://root:${PASS}@127.0.0.1:${PORT}/cgi-bin/status" | grep "Recording:" | sed 's/.*<td>\(.*\)<\/td.*/\1/' | sed 's/ON/On/g' | sed 's/OFF/Off/g'`
+# Si en veille et pas d enregistrement : c est un bon moment pour redemarrer enigma
+# ce qui permet de vider la memoire de MV
+if [ $KILLENIGMA = "O" -a $RECORDINGSTATUS = "Off" -a $STANDBYSTATUS0 = "On" ]
+then
+ echo arret enigma
+ rm -f /hdd/epg.dat*
+ wget -Y off -q -O /dev/null "http://root:${PASS}@127.0.0.1:${PORT}/cgi-bin/admin?command=restart"
+# killall enigma
+ rm -f /hdd/epg.dat*
+ sleep 20
+ echo zap chaine initiale
+ wget -Y off -q -O /dev/null "http://root:${PASS}@127.0.0.1:${PORT}/cgi-bin/zapTo?path=$CURRCHAN" 2>/dev/null
+fi
+
+if [ $STANDBYSTATUS0 = "On" ]
+then
+ echo mise en standby
+ sleep 1
+ wget -Y off -q -O /dev/null "http://root:${PASS}@127.0.0.1:${PORT}/cgi-bin/admin?command=standby"
+fi
+
+#
+# The End
+#
+exit 0
+

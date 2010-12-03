@@ -1,0 +1,558 @@
+<!--
+	This file defines mappings from channel names, as they
+	appear in the user bouquet, to .png images to use as
+	icons for the channel. 
+
+	Important: this file and the images mentioned are
+        only loaded the FIRST TIME the plugin is run after
+        every restart of the dreambox.
+
+	See http://mv.dinglisch.net/userguide.html#icons for
+        e.g. information how to convert icons for use with the
+        dreambox.
+-->
+
+<eskin>
+
+
+<!-- 
+	**************** Section One **********************
+
+	Define each icon (PNG) and give it a name here.
+        Do NOT put different names pointing to the same PNG.
+-->
+
+
+<images basepath="/var/tuxbox/config/mv/icons" target="fb">
+
+	<!-- GENERIC -->
+
+	<!--img name="EURONEWS"	        src="euronews.png" /-->
+	<!--img name="Eurosport"	src="eurosport.png" /-->
+	<!--img name="MGM"		src="mgm.png" /-->
+	<!--img name="MTV"              src="mtv.png" /-->
+	<!--img name="MTV2 Pop Channel" src="mtv2pop.png" /-->
+	<!--imt name="QVC"		src="qvc.png" /-->
+	<img name="Discovery"	        src="discovery.png" />
+	<!--img name="DISNEY CHANNEL"   src="disney.png" /-->
+	<!--img name="DISNEY CH. +1"	src="disneyplus1.png" /-->
+	<!--img name="Fox Kids"	        src="foxkids.png" /-->
+	<!--img name="National Geographic"  src="natgeo.png" /-->
+	<img name="CARTOON NET."        src="es.d+.cartoon.png" />
+
+	<!-- AT -->
+
+	<img name="ORF 1"	     	src="at.orf1.png" />
+	<img name="ORF 2"	     	src="at.orf2.png" />
+	<!--img name="SF1"		src="at.sf1.png" /-->
+	<!--img name="SF2"		src="at.sf2.png" /-->
+	<!--img name="ATV+"	        src="at.atvplus.png" /-->
+
+	<!-- DE -->
+
+	<img name="3sat"	     src="de.3sat.png" />
+	<img name="Das Erste"	     src="de.ard.png" />
+	<img name="EInsMuXx"	     src="de.1muxx.png" />
+	<img name="EinsExtra"        src="de.1extra.png" />
+	<img name="ARTE"	     src="de.arte.png" />
+	<img name="Bayerisches FS"   src="de.bayern.png" />
+	<img name="BR-alpha"	     src="de.bralpha.png" />
+	<!--img name="DSF"	     src="de.dsf.png" /-->
+	<img name="EinsFestival"     src="de.einsfest.png" />
+	<img name="KABEL1"	     src="de.kabel1.png" />
+	<!--img name="JUNIOR"	     src="de.junior.png" /-->
+	<img name="KiKa"	     src="de.kika.png" />
+	<img name="MDR FERNSEHEN"    src="de.mdr.png" />
+	<!--img name="N24"           src="de.n24.png" /-->
+	<!--img name="NDR FS HH"     src="de.ndr.png" /-->
+	<img name="Phoenix"	     src="de.phoenix.png" />
+	<!--img name="PLANET"	     src="de.planet.png" /-->
+	<img name="ProSieben"	     src="de.pro7.png" />
+	<img name="rbb Berlin"	     src="de.rbb.png" />
+	<img name="RTL"		     src="de.rtl.png" />
+	<img name="RTL2"	     src="de.rtl2.png" />
+	<!--img name="RTL Shop"	     src="de.rtlshop.png" /-->
+	<img name="S RTL"	     src="de.superrtl.png" />
+	<img name="SAT.1"	     src="de.sat1.png" />
+	<img name="TV.BERLIN"	     src="de.tvberlin.png" />
+	<!--img name="VIVA"	     src="de.viva.png" /-->
+	<!--img name="VIVA PLUS"     src="de.vivaplus.png" /-->
+	<img name="VOX"		     src="de.vox.png" />
+	<img name="WDR"		     src="de.wdr.png" />
+	<!--img name="TELE 5"	     src="de.tele5.png" /-->
+	<img name="ZDF"		     src="de.zdf.png" />
+	<img name="hessen fernsehen" src="de.hr.png" />
+	<img name="SAT.1"            src="de.sat1.png" />
+
+	<!--img name="lastmin"          src="de.lastmin.png" /-->
+	<!--img name="ONTV"	        src="de.ontv.png" /-->
+	<!--img name="SFi"              src="de.sfinfo.png" /-->
+	<!--img name="SR Fernsehen Südwest"    src="de.sr.png" /-->
+	<!--img name="SÜDWEST BW"       src="de.swfbw.png" /-->
+	<!--img name="RNF"              src="de.rnfplus.png" /-->
+	<!--img name="HSE24"            src="de.homeshopeurope.png" /-->
+	<!--img name="XXP"              src="de.xxp.png" /-->
+	<!--img name="PREM 2"           src="de.pw2.png" /-->
+	<!--img name="PREM 1"           src="de.pw1.png" /-->
+	<!--img name="PREM 3"           src="de.pw3.png" /-->
+	<!--img name="PREM 4"           src="de.pw4.png" /-->
+	<!--img name="START"            src="de.pwstart.png" /-->
+	<!--img name="PREM 5"           src="de.pw5.png" /-->
+	<!--img name="PREM 6"           src="de.pw6.png" /-->
+	<!--img name="PREM 7"           src="de.pw7.png" /-->
+	<!--img name="SPORT 1"          src="de.sport1.png" /-->
+	<!--img name="SPORT 2"          src="de.sport2.png" /-->
+	<!--img name="SERIE"            src="de.serie.png" /-->
+	<!--img name="13 TH"            src="de.13street.png" /-->
+	<!--img name="SCI FI"           src="de.scifi.png" /-->
+	<!--img name="KRIMI"            src="de.krimi.png" /-->
+	<!--img name="GOLDSTAR"         src="de.gold.png" /-->
+	<!--img name="HEIMAT"           src="de.heimat.png" /-->
+	<!--img name="B-UHSE"           src="de.beate.png" /-->
+	<!--img name="NOSTALGIE"        src="de.nostalgie.png" /-->
+	<!--img name="BROTHER"          src="de.bigbrother.png" /-->
+	<!--img name="BTV"              src="de.btv.png" /-->
+	<!--img name="NEUN LIVE"        src="de.9live.png" /-->
+	<!--img name="rhein main tv"    src="de.rhein.png" /-->
+	<!--img name="FSAT"             src="de.frankensat.png" /-->
+	<!--img name="n-tv"             src="de.ntv.png" /-->
+	<!--img name="HIT24"            src="de.hit24.png" /-->
+	<!--img name="ANIMAL"           src="de.animal.png" /-->
+
+	<!-- DK -->
+
+	<!--img name="3 +"              src="dk.3plus.png" /-->
+	<!--img name="DR1"              src="dk.dr1.png" /-->
+	<!--img name="DR2"              src="dk.dr2.png" /-->
+
+	<!-- ES -->
+
+        <img name="CANAL+"              src="es.d+.canal+.png" />
+        <img name="CANAL+ 2"            src="es.d+.canal+2.png" />
+        <!--img name="CANAL+ ...30"        src="es.d+.canal+30.png" /-->
+        <!--img name="C+ CINE 1"           src="es.d+.canal+c1.png" /-->
+        <!--img name="C+ CINE 2"           src="es.d+.canal+c2.png" /-->
+        <!--img name="C+ CINE 3"           src="es.d+.canal+c3.png" /-->
+        <!--img name="C+ DEPORTE 1"        src="es.d+.canal+d1.png" /-->
+        <!--img name="C+ DEPORTE 2"        src="es.d+.canal+d2.png" /-->
+        <!--img name="C+ DEPORTE 3"        src="es.d+.canal+d3.png" /-->
+
+	<!--img name="CINEMANÍA"	   src="es.d+.cinemania.png" /-->
+        <!--img name="CINEMANÍA 2"         src="es.d+.cinemania2.png" /-->
+	<!--img name="CINEMANÍA ...30"     src="es.d+.cinemania30.png" /-->
+
+        <!--img name="CINEM. CLÁSICO"      src="es.d+.cinemaniac.png" /-->
+        <!--img name="DCINE ESPAÑOL"       src="es.d+.dcineesp.png" /-->
+        <!--img name="TCM"                 src="es.d+.tcm.png" /-->
+        <!--img name="HOLLYWOOD"           src="es.d+.hollywood.png" /-->
+
+        <!--img name="CALLE 13"            src="es.d+.calle13.png" /-->
+        <!--img name="FOX"                 src="es.d+.fox.png" /-->
+        <!--img name="AXN"                 src="es.d+.axn.png" /-->
+        <!--img name="NICK-PARAMOUNT"      src="es.d+.paramount.png" /-->
+	<!--img name="FDF"   	   	   src="es.d+.fdf.png" /-->
+        <!--img name="COSMOPOLITAN"        src="es.d+.cosmo.png" /-->
+        <!--img name="PEOPLE+ARTS"         src="es.d+.people+arts.png" /-->
+        <!--img name="TELENOVELAS"         src="es.d+.telenovelas.png" /-->
+        <!--img name="GRAN HERMANO"        src="es.d+.granhermano.png" /-->
+
+
+        <!--img name="PLAYHOUSE"           src="es.d+.disneyp.png" /-->
+        <!--img name="TOON DISNEY"         src="es.d+.disneyt.png" /-->
+        <!--img name="FOX KIDS"            src="es.d+.foxkids.png" /-->
+
+        <!--img name="40 TV"               src="es.d+.40tv.png" /-->
+        <!--img name="40 LATINO"           src="es.d+.40latino.png" /-->
+        <!--img name="MTV ESP"             src="es.d+.mtvesp.png" /-->
+        <!--img name="VH1"                 src="es.d+.vh1.png" /-->
+        <!--img name="MEZZO"               src="es.d+.mezzo.png" /-->
+        <!--img name="CLÁSICO"             src="es.d+.clasico.png" /-->
+
+        <!--img name="SPORTMANÍA"          src="es.d+.sportmania.png" /-->
+        <!--img name="GOLF+"               src="es.d+.golf+.png" /-->
+        <!--img name="EUROSPORT"           src="es.d+.eurosport.png" /-->
+        <!--img name="TELEDEPORTE"         src="es.d+.teledeporte.png" /-->
+        <!--img name="REAL MADRID TV"      src="es.d+.realmadrid.png" /-->
+        <!--img name="BARÇA TV"            src="es.d+.barcelona.png" /-->
+
+        <!--img name="DOCUMANÍA"           src="es.d+.documania.png" /-->
+        <!--img name="NAT GEOGRAPHIC"      src="es.d+.natgeo.png" /-->
+        <!--img name="DISCOVERY"           src="es.d+.discovery.png" /-->
+        <!--img name="VIAJAR"              src="es.d+.viajar.png" /-->
+        <!--img name="CANAL COCINA"        src="es.d+.cocina.png" /-->
+        <!--img name="CANAL HISTORIA"      src="es.d+.historia.png" /-->
+        <!--img name="CAZA Y PESCA"        src="es.d+.aypesca.png" /-->
+
+        <!--img name="CNN+"                src="es.d+.cnn+.png" /-->
+        <!--img name="24 HORAS"            src="es.d+.24horas.png" /-->
+        <!--img name="EXPANSIÓN TV"        src="es.d+.expansion.png" /-->
+        <!--img name="BLOOMBERG"           src="es.d+.bloomberg.png" /-->
+        <!--img name="EURONEWS"            src="es.d+.euronews.png" /-->
+        <!--img name="CNN Int."            src="es.d+.cnn.png" /-->
+        <!--img name="FOX NEWS"            src="es.d+.foxnews.png" /-->
+        <!--img name="MÉTEO"               src="es.d+.meteo.png" /-->
+
+        <!--img name="TELECINCO"           src="es.d+.tele5.png" /-->
+
+        <!--img name="ANDALUCÍA TV"        src="es.d+.andalucia.png" /-->
+        <!--img name="TM SAT/LAOTRA"       src="es.d+.telemadrid.png" /-->
+        <!--img name="CCVALENCIANA"        src="es.d+.ccv.png" /-->
+        <!--img name="TVC INT."            src="es.d+.tvc.png" /-->
+        <!--img name="TV GALICIA"          src="es.d+.tvg.png" /-->
+        <!--img name="EUSKADI TV"          src="es.d+.etb.png" /-->
+        <!--img name="TV CANARIA"          src="es.d+.tvcanaria.png" /-->
+        <!--img name="GALAVISIÓN"          src="es.d+.galavision.png" /-->
+        <!--img name="TV 5"                src="es.d+.tv5.png" /-->
+
+        <!--img name="PLAYBOY TV"          src="es.d+.playboy.png" /-->
+
+        <img name="TAQUILLA 1"             src="es.d+.taquillacine.png" />
+
+        <!--img name="TAQUILLA X1"         src="es.d+.taquillax.png" /-->
+
+        <!--img name="OK PLUS"             src="es.d+.okplus.png" /-->
+
+	<!-- FI -->
+
+	<!--img name="MTV3"	     src="fi.mtv3.png" /-->
+	<!--img name="Nelonen"	     src="fi.nelonen.png" /-->
+	<!--img name="subtv"	     src="fi.subtv.png" /-->
+
+     	<!-- FR -->
+
+	<!-- CSAT and TPS mapping by ZeGuigui - Icons from lyngsat -->
+
+	<img name="13EME RUE"		src="fr.13rue-fs8.png" />
+ 	<img name="AB1"        		src="fr.ab1-fs8.png" />
+ 	<img name="ACTION"     		src="fr.action_fr-fs8.png" />
+ 	<img name="ANIMAUX"    		src="fr.animaux-fs8.png" />
+ 	<img name="BBC Prime"  		src="fr.bbc_prime-fs8.png" />
+	<img name="Best of Shopping"	src="fr.best_of_shopping-fs8.png" />
+ 	<img name="Bloomberg"         	src="fr.bloomberg-fs8.png" />
+ 	<img name="Boomerang"         	src="fr.boomerang_it-fs8.png" />
+ 	<img name="Berbère Télévision"	src="fr.brtv-fs8.png" />
+ 	<img name="BVN"               	src="fr.bvn-fs8.png" />
+	<img name="CANAL J"           	src="fr.canalj-fs8.png" />
+ 	<img name="CANAL+"            	src="fr.canalplus-fs8.png" />
+ 	<img name="CANAL+ CINEMA"     	src="fr.canalplus_cinema-fs8.png" />
+ 	<img name="CANAL+ DECALE"     	src="fr.canalplus_decale-fs8.png" />
+ 	<img name="CANAL+ HI-TECH"    	src="fr.canalplus_hitech-fs8.png" />
+	<img name="CANAL+ SPORT"      	src="fr.canalplus_sport-fs8.png" />
+	<img name="Cartoon Network"     src="cartoonnet.png" />
+ 	<img name="CCTV9"             	src="fr.cctv09-fs8.png" />
+    <!-- bug : can't use & for "CHASSE & PECHE" -->
+	<img name="CHASSE _ PECHE"	src="fr.chassepeche.png" />
+ 	<img name="CINE FX"           	src="fr.cinebox_fx-fs8.png" />
+ 	<img name="CINE POLAR"        	src="fr.cinebox_polar-fs8.png" />
+ 	<img name="C CINEMA AUTEUR"   	src="fr.cinecinema_auteur-fs8.png" />
+	<img name="C CINEMA CLASSIC"  	src="fr.cinecinema_classic-fs8.png" />
+ 	<img name="C CINEMA EMOTION"  	src="fr.cinecinema_emotion-fs8.png" />
+ 	<img name="C CINEMA FAMIZ"    	src="fr.cinecinema_famiz-fs8.png" />
+ 	<img name="C CINEMA FRISSON"  	src="fr.cinecinema_frisson-fs8.png" />
+ 	<img name="C CINEMA INFO"     	src="fr.cinecinema_info-fs8.png" />
+	<img name="C CINEMA PREMIER"  	src="fr.cinecinema_premier-fs8.png" />
+ 	<img name="C CINEMA 16/9"     	src="fr.cinecinema_premier_169-fs8.png" />
+	<img name="CNN"			src="fr.cnn.png" />
+ 	<img name="COMEDIE !"         	src="fr.comedie-fs8.png" />
+ 	<img name="CUISINE.TV"        	src="fr.cuisinetv_france-fs8.png" />
+ 	<img name="DEMAIN!"           	src="fr.demain-fs8.png" />
+	<img name="DISCOVERY"         	src="fr.discovery-fs8.png" />
+ 	<img name="DISNEY CHANNEL"    	src="fr.disney_channel-fs8.png" />
+ 	<img name="PLAYHOUSE DISNEY"  	src="fr.disney_playhouse-fs8.png" />
+ 	<img name="DISNEY CHANNEL+1"  	src="fr.disney_plus1-fs8.png" />
+ 	<img name="TOON DISNEY"       	src="fr.disney_toon-fs8.png" />
+	<img name="E! ENTERTAINMENT"  	src="fr.e-fs8.png" />
+ 	<img name="ENCYCLOPEDIA"      	src="fr.encyclopedia-fs8.png" />
+ 	<img name="EQUIDIA"           	src="fr.equidia-fs8.png" />
+ 	<img name="L'EQUIPE TV"       	src="fr.equipetv-fs8.png" />
+ 	<img name="ESCALES"           	src="fr.escales-fs8.png" />
+	<img name="ESPN CLASSIC" 	src="fr.espnclassic_sport-fs8.png" />
+ 	<img name="Eureka"           	src="fr.eureka-fs8.png" />
+ 	<img name="EURONEWS"          	src="fr.euronews-fs8.png" />
+ 	<img name="EUROSPORT 2"       	src="fr.eurosport2-fs8.png" />
+ 	<img name="EUROSPORT"         	src="fr.eurosportfrance-fs8.png" />
+	<img name="EXTREME SPORTS"    	src="fr.extremesports-fs8.png" />
+ 	<img name="FILLES TV"         	src="fr.filles_tv-fs8.png" />
+ 	<img name="FRANCE Ô"          	src="fr.france_o-fs8.png" />
+ 	<img name="FRANCE 2"          	src="fr.france2-fs8.png" />
+ 	<img name="FRANCE 3"          	src="fr.france3-fs8.png" />
+	<img name="FRANCE 4"          	src="fr.france4-fs8.png" />
+ 	<img name="FRANCE 5"          	src="fr.france5-fs8.png" />
+ 	<img name="Fun TV"            	src="fr.funtv-fs8.png" />
+ 	<img name="GAME ONE"          	src="fr.gameone-fs8.png" />
+ 	<img name="GOD Channel"       	src="fr.godchannel-fs8.png" />
+	<img name="HISTOIRE"          	src="fr.histoire_tps-fs8.png" />
+ 	<img name="I TELE"            	src="fr.i_tele-fs8.png" />
+ 	<img name="Infosport"         	src="fr.infosport-fs8.png" />
+ 	<img name="JETIX"             	src="fr.jetix-fs8.png" />
+ 	<img name="JIMMY"             	src="fr.jimmy-fs8.png" />
+	<img name="KIOSQUE"           	src="fr.kiosque-fs8.png" />
+ 	<img name="KTO"               	src="fr.kto-fs8.png" />
+ 	<img name="LA CHAINE METEO"   	src="fr.lachainemeteo-fs8.png" />
+ 	<img name="LCI"               	src="fr.lci-fs8.png" />
+ 	<img name="LCP"               	src="fr.lcp_an_fr-fs8.png" />
+	<img name="LIVE 1"            	src="fr.live1-fs8.png" />
+ 	<img name="M6"                	src="fr.m6-fs8.png" />
+ 	<img name="M6 Music Black"    	src="fr.m6_black-fs8.png" />
+ 	<img name="M6 Boutique"       	src="fr.m6_boutique_la_chaine-fs8.png" />
+ 	<img name="M6 Music Hits"     	src="fr.m6_music_hits-fs8.png" />
+	<img name="M6 Music Rock"     	src="fr.m6_rock-fs8.png" />
+ 	<img name="MA PLANETE"        	src="fr.ma_planete-fs8.png" />
+ 	<img name="MANGAS"            	src="fr.mangas-fs8.png" />
+ 	<img name="MATCH TV"          	src="fr.matchtv-fs8.png" />
+ 	<img name="MCM"               	src="fr.mcm-fs8.png" />
+	<img name="MCM POP"           	src="fr.mcm_pop-fs8.png" />
+ 	<img name="MCM TOP"           	src="fr.mcm_top-fs8.png" />
+ 	<img name="MEZZO"             	src="fr.mezzo-fs8.png" />
+ 	<img name="AB MOTEURS"        	src="fr.moteurs_absat-fs8.png" />
+ 	<img name="MOTORS TV"         	src="fr.motorstv-fs8.png" />
+	<img name="MULTIVISION"       	src="fr.multivision_france-fs8.png" />
+ 	<img name="NATIONAL GEO"      	src="fr.natgeochannel_fr-fs8.png" />
+ 	<img name="NBA+"              	src="fr.nba_plus-fs8.png" />
+ 	<img name="NT1"               	src="fr.nt1-fs8.png" />
+ 	<img name="Odyssée"           	src="fr.odyssee-fs8.png" />
+	<img name="OL TV"             	src="fr.ol_tv-fs8.png" />
+ 	<img name="OM'TV"             	src="fr.omtv-fs8.png" />
+ 	<img name="PARIS PREMIERE"    	src="fr.paris_premiere-fs8.png" />
+ 	<img name="PINK TV"           	src="fr.pinktv-fs8.png" />
+ 	<img name="Piwi"              	src="fr.piwi-fs8.png" />
+	<img name="PLANETE"           	src="fr.planete-fs8.png" />
+ 	<img name="PLANETE CHOC"      	src="fr.planete_choc-fs8.png" />
+ 	<img name="PLANETE THALASSA"  	src="fr.planete_thalassa-fs8.png" />
+ 	<img name="PLAYBOY TV"        	src="fr.playboy-fs8.png" />
+ 	<img name="RTL9"              	src="fr.rtl9-fs8.png" />
+	<img name="RTR"               	src="fr.rtr_planeta-fs8.png" />
+ 	<img name="SEASONS"           	src="fr.seasons-fs8.png" />
+ 	<img name="Série Club"        	src="fr.serieclub-fs8.png" />
+ 	<img name="SIC"               	src="fr.sic_int_port-fs8.png" />
+ 	<img name="SPORT+"            	src="fr.sport_plus-fs8.png" />
+	<img name="TCHATCHE TV"       	src="fr.tchatche_tv-fs8.png" />
+  <img name="TCM"									src="fr.tcm-fs8.png"										 />
+ 	<img name="TELE MELODY"       	src="fr.telemelody-fs8.png" />
+ 	<img name="Télétoon"          	src="fr.teletoon-fs8.png" />
+ 	<img name="Télétoon+1"        	src="fr.teletoon_plus1-fs8.png" />
+ 	<img name="TERRA NOVA"        	src="fr.terra_nova-fs8.png" />
+	<img name="TEVA"              	src="fr.teva-fs8.png" />
+ 	<img name="TF1"               	src="fr.tf1-fs8.png" />
+ 	<img name="TF6"               	src="fr.tf6_france-fs8.png" />
+ 	<img name="TFJ"               	src="fr.tfj-fs8.png" />
+ 	<img name="TFOU"              	src="fr.tfou_tv-fs8.png" />
+	<img name="TiJi"              	src="fr.tiji_france-fs8.png" />
+ 	<img name="TMC"               	src="fr.tmc-fs8.png" />
+ 	<img name="toute L'HISTOIRE"  	src="fr.toute_histoire-fs8.png" />
+ 	<img name="TPS Cinéculte"     	src="fr.tps_cineculte-fs8.png" />
+ 	<img name="TPS Cinefamily"    	src="fr.tps_cinefamily-fs8.png" />
+	<img name="TPS Cinéstar"      	src="fr.tps_cinestar-fs8.png" />
+ 	<img name="TPS Cinétoile"     	src="fr.tps_cinetoile-fs8.png" />
+ 	<img name="TPS Cinextreme"    	src="fr.tps_cinextreme-fs8.png" />
+ 	<img name="TPS Foot"          	src="fr.tps_foot-fs8.png" />
+ 	<img name="TPS Homecinéma"    	src="fr.tps_homecinema-fs8.png" />
+ 	<img name="TPS star"          	src="fr.tps_star-fs8.png" />
+ 	<img name="TRACE TV"          	src="fr.trace-fs8.png" />
+	<img name="TV5 Europe"		src="fr.tv5.png" />
+	<img name="TV BREIZH"         	src="fr.tv_breizh-fs8.png" />
+ 	<img name="USHUAIA TV"        	src="fr.ushuaia-fs8.png" />
+ 	<img name="VOYAGE"            	src="fr.voyage-fs8.png" />
+ 	<img name="W9"                	src="fr.w9-fs8.png" />
+ 	<img name="XXL"               	src="fr.xxl_absat-fs8.png" />
+
+    	<!--img name="TPS Cinefamily"    src="fr.tps.cinefam.png" /-->
+     	<!--img name="TPS Homecinéma" src="fr.tps.cinehome.png" /-->
+     	<!--img name="TPS Cinécult"   src="fr.tps.cinecult.png" /-->
+     	<!--img name="TPS Cinéstar"   src="fr.tps.cinestar.png" /-->
+
+     	<!-- NL -->
+
+     	<img name="NED1"	     src="nl.ned1.png" />
+     	<img name="NED2"	     src="nl.ned2.png" />
+     	<img name="NED3"	     src="nl.ned3.png" />
+     	<img name="NET5"	     src="nl.net5.png" />
+     	<img name="RTL4"	     src="nl.rtl4.png" />
+     	<img name="RTL5"	     src="nl.rtl5.png" />
+     	<img name="SBS6"	     src="nl.sbs6.png" />
+     	<img name="Veronica/FoxKids" src="nl.veronica.png" />
+     	<img name="Yorin"	     src="nl.yorin.png" />
+
+     	<!-- NO -->
+
+     	<!-- img name="TV2 Norge"        src="no.2.1.png" /-->
+     	<!-- img name="A1"               src="no.a1.png" /-->
+     	<!-- img name="Adventure 1"      src="no.adventure1.png" /-->
+     	<!-- img name="Barnkanalen"	     src="no.barnkanalen.png" /-->
+     	<!-- img name="CINEMA 1"	     src="no.cinema.png" /-->
+     	<img name="NRK 1"	     src="no.nrk1.png" />
+     	<img name="NRK 2"	     src="no.nrk2.png" />
+     	<!-- img name="TV1000 1"	     src="no.tv1000.png" /-->
+     	<img name="TVNorge"	     src="no.tvnorge.1.png" />
+     	<img name="ZTV Norge"	     src="no.z.png" />
+     	<!-- img name="C+"	             src="no.canalplus.png" /-->
+
+     	<!-- UK -->
+
+     	<img name="BBC 1 NE &amp; C" src="uk.bbc1.png" />
+     	<img name="BBC 2 England"    src="uk.bbc2.png" />
+     	<img name="BBC THREE"	     src="uk.bbc3.png" />
+     	<img name="BBC FOUR"	     src="uk.bbc4.png" />
+     	<img name="BBC World"	     src="uk.bbcworld.png" />
+     	<img name="BBC Prime"	     src="uk.bbcprime.png" />
+     	<img name="CBeebies"	     src="uk.cbeebies.png" />
+     	<img name="Hallmark"	     src="uk.hallmark.png" />
+     	<img name="Nickelodeon"	     src="uk.nickleodeon.png" />
+     	<img name="VH1"		     src="uk.vh1.png" />
+     	<img name="VH1 Classic"	     src="uk.vh1classic.png" />
+</images>
+
+<!-- 
+	**************** Section Two **********************
+
+	If a channel icon has several possible names, 
+	put all the other ones here, NOT including
+        the one you mentioned above pointing to the PNG.
+-->
+
+<imagealias>
+
+	<!-- GENERIC -->
+	
+	<!--map name="EuroNews"	     img="EURONEWS" /-->
+	<!--map name="EUROSPORT"     img="Eurosport" /-->
+	<!--map name="QVC GERMANY"   img="QVC" /-->
+	<!--map name="FOX KIDS"	     img="Fox Kids" /-->
+	<map name="FOXKIDS"          img="Fox Kids" />
+	<!--map name="DISNEY"	     img="DISNEY CHANNEL" /-->
+     	<!--map name="Disney Channel" img="DISNEY CHANNEL" /-->
+	<map name="DISCOVERY"        img="Discovery" />
+	<map name="Discovery (S)"    img="Discovery" />
+	<map name="Discovery (D)"    img="Discovery" />
+	<map name="Discov Tra&amp;Adv" img="Discovery" />
+	<map name="Discov Civil"     img="Discovery" />
+	<map name="Discov Science"   img="Discovery" />
+
+	<!-- DE -->
+
+	<map name="Super RTL"	     img="S RTL" />
+	<!--map name="WDR Köln"	     img="WDR" /-->
+	<!--map name="MDR S-ANHALT"     img="MDR FERNSEHEN" /-->
+	<map name="arte"	     img="ARTE" />
+	<!--map name="NDR FS MV"     img="NDR FS HH" /-->
+	<!--map name="NDR FS NDS"    img="NDR FS HH" /-->
+	<!--map name="NDR FS SH"     img="NDR FS HH" /-->
+	<map name="Super RTL"	     img="S RTL" />
+	<map name="WDR Essen"	     img="WDR" />
+	<map name="ZDFinfokanal"     img="ZDF" />
+	<map name="ZDFdokukanal"     img="ZDF" />
+	<map name="ZDFtheaterkanal"  img="ZDF" />
+	<map name="QVC Deutschland"  img="QVC" />
+
+	<!-- ES -->
+
+        <!--map name="CINEMANÍA ...30 " img="CINEMANÍA ...30" /-->
+        <!--map name="CINEMANÍA EXTRA"  img="CINEMANÍA" /-->
+	<map name="Cartoon Network"        img="CARTOON NET." />
+
+        <map name="TAQUILLA 2"          img="TAQUILLA 1" />
+        <map name="TAQUILLA 3"          img="TAQUILLA 1" />
+        <map name="TAQUILLA 4"          img="TAQUILLA 1" />
+        <map name="TAQUILLA 5"          img="TAQUILLA 1" />
+        <map name="TAQUILLA 6"          img="TAQUILLA 1" />
+        <map name="TAQUILLA 7"          img="TAQUILLA 1" />
+        <map name="TAQUILLA 8"          img="TAQUILLA 1" />
+        <map name="TAQUILLA 9"          img="TAQUILLA 1" />
+        <map name="TAQUILLA 10"         img="TAQUILLA 1" />
+        <map name="TAQUILLA 12"         img="TAQUILLA 1" />
+        <map name="TAQUILLA 13"         img="TAQUILLA 1" />
+        <map name="TAQUILLA 14"         img="TAQUILLA 1" />
+
+        <!--map name="TAQUILLA X2"      img="TAQUILLA X1" /-->
+        <!--map name="TAQUILLA X"       img="TAQUILLA X1" /-->
+        <!--map name="TAQUILLA  X"      img="TAQUILLA X1" /-->
+        <!--map name="TAQUILLA XX"      img="TAQUILLA X1" /-->        
+        <!--map name="TAQUILLA XY"      img="TAQUILLA X1" /-->
+
+	<!-- FR -->
+	<map name="AB 1"		img="AB1" />
+	<map name="CANAL+ HI-TECH."	img="CANAL+ HI-TECH" />
+	<map name="DEMAIN !"		img="DEMAIN!" />
+	<map name="DEMAIN"		img="DEMAIN!" />
+	<map name="DISCOVERY CHANNEL"	img="DISCOVERY" />
+	<map name="Discovery"		img="DISCOVERY" />
+	<map name="ESPN CLASSIC SPORT"	img="ESPN CLASSIC" />
+	<map name="Euronews france"	img="EURONEWS" />
+	<map name="EuroNews"		img="EURONEWS" />
+	<map name="EurosportNews"	img="EUROSPORT" />
+	<map name="EUROSPORTNEWS"	img="EUROSPORT" />
+	<map name="Eurosport"		img="EUROSPORT" />
+	<map name="Extreme Sports"	img="EXTREME SPORTS" />
+	<map name="France Ô"		img="FRANCE Ô" />
+	<map name="Game One"		img="GAME ONE" />
+	<map name="God TV"		img="GOD Channel" />
+	<map name="I&gt;TELE"		img="I TELE" />
+	<map name="Jetix"		img="JETIX" />
+	<map name="Jimmy"		img="JIMMY" />
+	<map name="LA CHAINE PARLEMENTAIRE"	img="LCP" />
+	<map name="M6 Boutique La Chaîne"	img="M6 Boutique" />
+	<map name="MCM Europe"		img="MCM" />
+	<map name="Motors TV"		img="MOTORS TV" />
+	<map name="Multivision NOOS"	img="MULTIVISION" />
+	<map name="Nat. Geo"		img="NATIONAL GEO" />
+	<map name="NationalGeo"		img="NATIONAL GEO" />
+	<map name="NAT GEOGRAPHIC"	img="NATIONAL GEO" />
+	<map name="Nat Geo"		img="NATIONAL GEO" />
+	<map name="Playboy"		img="PLAYBOY TV" />
+	<map name="Télé Mélody"		img="TELE MELODY" />
+	<map name="Teva"		img="TEVA" />
+	<map name="TPS Cinéstar "	img="TPS Cinéstar" />
+	
+	<!-- Kiosque et Multivision -->
+	<map name="KIOSQUE 1" 		img="KIOSQUE" />
+	<map name="KIOSQUE 2" 		img="KIOSQUE" />
+	<map name="KIOSQUE 3" 		img="KIOSQUE" />
+	<map name="KIOSQUE 4" 		img="KIOSQUE" />
+	<map name="KIOSQUE 5" 		img="KIOSQUE" />
+	<map name="KIOSQUE 6" 		img="KIOSQUE" />
+	<map name="KIOSQUE 7" 		img="KIOSQUE" />
+	<map name="KIOSQUE 8" 		img="KIOSQUE" />
+	<map name="KIOSQUE 9" 		img="KIOSQUE" />
+	<map name="KIOSQUE 10"		img="KIOSQUE" />
+	<map name="KIOSQUE 11"		img="KIOSQUE" />
+	<map name="KIOSQUE 12"		img="KIOSQUE" />
+	<map name="KIOSQUE 13"		img="KIOSQUE" />
+	<map name="KIOSQUE 14"		img="KIOSQUE" />
+	<map name="MULTIVISION 1"	img="MULTIVISION" />
+	<map name="MULTIVISION 2"	img="MULTIVISION" />
+	<map name="MULTIVISION 3"	img="MULTIVISION" />
+	<map name="MULTIVISION 4"	img="MULTIVISION" />
+	<map name="MULTIVISION 5"	img="MULTIVISION" />
+	<map name="MULTIVISION 6"	img="MULTIVISION" />
+	<map name="MULTIVISION 7"	img="MULTIVISION" />
+
+	<!-- NO -->
+
+	<map name="CINEMA 2"	        img="CINEMA 1" />
+	<map name="CINEMA 3"	        img="CINEMA 1" />
+	<map name="TV1000 2"	        img="TV1000 1" />
+	<map name="TV1000 3"	        img="TV1000 1" />
+        <map name="CANAL+ FILM1"        img="CANAL+" />
+        <map name="CANAL+ FILM2"        img="CANAL+ 2" />
+     	<map name="CANAL+ (N)"	        img="C+" />
+
+	<!-- SE -->
+
+	<!--map name="ZTV Sverige"	img="ZTV Norge" /-->
+
+	<!-- UK -->
+
+	<map name="BBC WORLD"	        img="BBC World" />
+	<map name="VH1."	        img="VH1" />
+     	<map name="BBC PRIME"           img="BBC Prime" />
+
+
+</imagealias>
+
+<!-- MV internal flag, don't touch! -->
+ 
+<values>
+	<value name="mvIconsLoadedFlag" value="1" />
+</values>
+
+</eskin>

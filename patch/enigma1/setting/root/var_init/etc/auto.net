@@ -1,0 +1,3 @@
+#cd     -fstype=auto,ro         :/dev/cdroms/cdrom0
+#nfs    -fstype=nfs,rw,soft,udp,nolock 192.168.0.100:/mnt/share
+#cifs   -fstype=cifs,rw,soft,user=root,password=dreambox ://192.168.0.100/hdd

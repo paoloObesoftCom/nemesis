@@ -1,0 +1,58 @@
+#!/bin/sh 
+# goepg 1.1 2004.10.30 by tCC 
+# modifications by Pent Vaer 20041030, 20041127
+
+# What's the service ID that broadcasts
+# MHWEPG data ?
+# You can find channel names and service IDs in
+# /var/tuxbox/config/enigma/services
+
+serviceID=1:0:1:fac:451:35:c00000:0:0:0:
+
+# Where to put the MHW output ?
+# Warning: advise disabling auto-dirs in MVs
+# Input Config screen
+
+mvdir=`/var/bin/mvdatadir`
+base=$mvdir/mhw-nl
+
+# Where's the mhwepg binary ?
+
+mhwepg=/var/bin/mhwepg
+
+# --------------- END OF CONFIGURATION ------------------ #
+ 
+# Get the current stream information 
+wget -O /tmp/goepg.channel -q http://127.0.0.1/cgi-bin/streaminfo > /dev/null 2>&1
+
+# Pick out the current service reference so we can return
+# to it
+sed 's/<tr>/\n/g' /tmp/goepg.channel | \
+	grep 'Service ref' |\
+	sed -e 's/<td>Service reference.*<td>//' -e 's/<\/td>.*$//' \
+	> /tmp/goepg.channel
+ 
+# Switch to mhwepg channel if we're not there already
+#
+if [ "`cat /tmp/goepg.channel`" != "$serviceID" ]; then
+	wget -O /dev/null -q http://127.0.0.1/cgi-bin/zapTo?path=$serviceID > /dev/null 2>&1
+fi
+ 
+# Check mhwepg directory exists
+if [ ! -e $base ]; then mkdir $base ;fi 
+ 
+# Update EPG information 
+wget -O /dev/null -q "http://127.0.0.1/cgi-bin/xmessage?timeout=5&caption=Please+wait&body=Updating+EPG+information..." > /dev/null 2>&1
+$mhwepg -p $base
+# Too dependent on image version, put timeout on notification instead
+#wget -O /dev/null -q "http://127.0.0.1/cgi-bin/rc?1" 
+ 
+# Checking previous channel and zapping back 
+if [ "`cat /tmp/goepg.channel`" != "$serviceID" ]; then
+	wget -O /dev/null -q http://127.0.0.1/cgi-bin/zapTo?path="`cat /tmp/goepg.channel`" > /dev/null 2>&1
+fi
+wget -O /dev/null -q "http://127.0.0.1/cgi-bin/xmessage?timeout=5&caption=Ready&body=EPG+information+updated." > /dev/null 2>&1
+ 
+# Removing temporary files 
+rm /tmp/goepg.channel
+ 

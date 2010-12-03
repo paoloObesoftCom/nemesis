@@ -1,0 +1,60 @@
+echo 4 > /proc/progress
+[ -e /dev/dbox/oled0 ] && ln -s /dev/dbox/oled0 /dev/dbox/lcd0
+
+echo 16 > /proc/progress
+
+mount -at nonfs,nosmbfs,noncpfs,nocifs
+echo 22 > /proc/progress
+
+swapon -a
+echo 24 > /proc/progress
+
+tar xzf /etc/var.tar.gz -C /
+echo 28 > /proc/progress
+
+echo 32 > /proc/progress
+
+echo 34 > /proc/progress
+
+# accustic management
+hdparm -M128 /dev/sda
+
+echo 44 > /proc/progress
+for mod in xilleon dreambox_keyboard fp rfmod; do
+	modprobe $mod
+done
+
+echo 50 > /proc/progress
+
+echo 54 > /proc/progress
+[ -e /etc/ssh/ssh_host_rsa_key ] && /usr/bin/showiframe /boot/bootlogo.mvi || /usr/bin/showiframe /boot/bootlogo_wait.mvi
+
+echo 62 > /proc/progress
+hostname -F /etc/hostname
+
+echo 66 > /proc/progress
+
+echo 70 > /proc/progress
+
+echo 78 > /proc/progress
+
+echo 82 > /proc/progress
+[ -e "/etc/sysctl.conf" ] && /sbin/sysctl -p "/etc/sysctl.conf"
+
+echo 86 > /proc/progress
+ldconfig
+
+echo 90 > /proc/progress
+
+if [ -e "/etc/nemesis.modules" ]; then
+	for mod in `cat /etc/nemesis.modules`; do
+		modprobe $mod
+	done
+fi
+
+
+echo 94 > /proc/progress
+
+#Start device usb
+#mount /dev/scsi/host0/bus0/target0/lun0/part1 /media/usb || mount /dev/scsi/host0/bus0/target0/lun0/disc /media/usb
+

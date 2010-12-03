@@ -1,0 +1,23 @@
+#!/bin/sh
+
+remove_tmp () {
+	rm -rf /tmp/ecm.info
+}
+
+[ -e /usr/bin/emuactive ] && export EMUACTIVE=$(cat /usr/bin/emuactive)
+[ -e /usr/bin/csactive ] && export SRVACTIVE=$(cat /usr/bin/csactive)
+
+remove_tmp
+
+[ -e /var/bin/csactive ] && /usr/script/${SRVACTIVE}_cs.sh start
+[ -e /var/bin/emuactive ] && /usr/script/${EMUACTIVE}_em.sh start
+
+exit 0
+
+
+
+
+
+
+
+

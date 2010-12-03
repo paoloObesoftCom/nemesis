@@ -1,0 +1,46 @@
+#!/bin/sh
+
+#Stop syslog
+/etc/init.d/syslog stop
+
+#Stop dropbear
+/etc/init.d/dropbear stop
+
+#create swap
+if [ -e /var/etc/.swapcreate.sh ]; then
+	/usr/bin/showiframe /boot/bootlogo_swap.mvi
+	/var/etc/.swapcreate.sh
+	rm -f /var/etc/.swapcreate.sh
+	/usr/bin/showiframe /boot/bootlogo_wait.mvi
+fi
+
+[ -e /usr/script/mount.sh ] && /usr/script/mount.sh
+[ -e /usr/bin/nemesisd ] && /usr/bin/nemesisd &
+
+#Start tihrd-part at boot
+list=`ls /var/etc/*_startup.sh`
+for item in $list
+	do
+		${item} start
+	done
+
+#Start inadyn at boot
+if [ -e /var/etc/inadynpar.conf ]; then
+	[ ! -e /var/etc/.dont_start_inadyn ] && /var/script/inadyn_script.sh start
+fi
+
+#Start syslogd
+if [ ! -e /var/etc/.dont_start_syslog ]; then
+	export SYSLOG_PAR='-O /tmp/log/messsages'
+	[ -e /var/etc/syslog.par ] && export SYSLOG_PAR=$(cat /var/etc/syslog.par)
+	mkdir /tmp/log
+	/sbin/syslogd ${SYSLOG_PAR}
+	touch /tmp/.syslogstarted
+fi
+
+#Start Firewall
+if [ ! -e /var/etc/.dont_start_firewall ]; then
+	/var/script/firewall.sh start
+	touch /tmp/.firewallstarted
+fi
+

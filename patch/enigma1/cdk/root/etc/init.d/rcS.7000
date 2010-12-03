@@ -1,0 +1,225 @@
+#!/bin/sh
+
+/bin/mount -n -t proc proc /proc
+/bin/mount -n -t devpts devpts /dev/pts
+export INSMOD="/sbin/insmod"
+export RMMOD="/sbin/rmmod"
+export MODDIR="/lib/modules/"$(uname -r)
+export LD_LIBRARY_PATH=/tmp:/var/lib:/lib:$LD_LIBRARY_PATH
+export PATH=/tmp:/var/bin:$PATH
+#export TZ=CET-1CEST,M3.5.0/2,M10.5.0/3
+/etc/init.d/init1
+
+#set environment variables ( mID )
+. /proc/bus/dbox.sh
+[ $mID -eq 09 ] && mID=05
+
+mount -t ramfs none /tmp
+
+# check if no DM500
+if [ $mID -ne 07 ] ; then
+	init=0
+	/bin/boot || init=1
+	if [ $init -eq 1 ] ; then
+		/bin/eraseall /dev/mtd/1
+	fi
+fi
+
+# do not mount jffs2 when not booting from flash
+if [ ! -e /root/platform/kernel/bild ] ; then
+	mount -t jffs2 /dev/mtdblock/1 /var
+fi
+
+# if dm 7000
+if [ $mID -eq 05 ] ; then
+	if [ ! -e /root/platform/kernel/bild ] ; then
+		mount -t cramfs /dev/mtdblock/6 /root -o loop
+		/bin/showlogo /root/root/platform/kernel/bild
+		umount /root
+	else
+		/bin/showlogo /root/platform/kernel/bild
+	fi
+fi
+
+init=0
+
+if [ ! -e /var/.init ]; then
+    if [ -e /var/tmp/init ]; then
+	touch /var/.init
+	rm -rf /var/tmp
+	ln -sf /tmp /var/tmp
+    else
+	init=1
+    fi
+fi
+
+if [ $init -eq 1 ] ; then 
+	cp -a /var_init/* /var
+	touch /var/.init
+	sync
+	umount /var
+	/bin/mount -t jffs2 /dev/mtdblock/1 /var
+fi
+
+/bin/showlogo /bin/bild1
+
+mkdir /dev/ost
+ln -s /dev/dvb/card0/demux0 /dev/ost/demux0
+ln -sf ca0 /dev/ca1
+ln -sf sound/dsp /dev/dsp
+ln -sf fb/0 /dev/fb0
+ln -s /dev/input/mice /dev/psaux 
+ln -s /dev/input/mice /dev/mouse 
+
+if [ ! -e /var/etc/hostname ] ; then
+	cp /var_init/etc/hostname /var/etc/hostname
+fi
+
+if [ ! -e /var/tuxbox/config/encoding.conf ] ; then
+	cp /var_init/tuxbox/config/enigma/enigma.conf /var/tuxbox/config/enigma
+fi
+
+/bin/hostname -F /var/etc/hostname
+
+/sbin/ifconfig lo 127.0.0.1 netmask 255.0.0.0 up
+
+/sbin/inetd &
+
+if [ -r /var/etc/dropbear/dropbear_dss_host_key -a -r /var/etc/dropbear/dropbear_rsa_host_key ]; then
+	/sbin/dropbear
+fi
+
+#change into folder in RAM ( ramfs )
+cd /tmp
+
+if [ $mID -eq 05 ] ; then
+	if [ ! -e /var/etc/.no_corefiles ] ; then
+		# enable corefiles (for debugging)
+		echo "/hdd/%e-sig-%s.core" > /proc/sys/kernel/core_pattern
+		ulimit -c unlimited
+	fi
+
+	if [ ! -e /var/etc/.dont_mount_hdd ] ; then
+		if [ -e /proc/ide/hdb ] && [ ! -e /dev/cdroms/cdrom0 ] ; then
+			mount /dev/ide/host0/bus0/target0/lun0/part1 /var/mnt/cf -osync
+			HD=1
+		else
+			HD=0
+		fi
+		mount /dev/ide/host0/bus0/target${HD}/lun0/part1 /hdd
+		export HDD_TIMEOUT=120
+		export HDD_ACOUSTIC=128
+		[ -e /var/etc/.timeout.hd ] && export HDD_TIMEOUT=$(cat /var/etc/.timeout.hd)
+		[ -e /var/etc/.acoustic.hd ] && export HDD_ACOUSTIC=$(cat /var/etc/.acoustic.hd)
+		hdparm -S ${HDD_TIMEOUT} /dev/ide/host0/bus0/target${HD}/lun0/disc
+		hdparm -M ${HDD_ACOUSTIC} /dev/ide/host0/bus0/target${HD}/lun0/disc
+	fi
+
+	if [ ! -e /var/etc/.dont_mount_usb ] ; then	
+		mount -n -t usbfs usbfs /proc/bus/usb
+		mount /dev/scsi/host0/bus0/target0/lun0/part1 /mnt/usb
+		mount /dev/scsi/host0/bus0/target0/lun0/disc /mnt/usb
+	fi
+fi
+
+if [ -e /proc/ide/hdc ] ; then
+		mount /dev/ide/host1/bus0/target0/lun0/disc /var/mnt/cf -osync || mount /dev/ide/host1/bus0/target0/lun0/part1 /var/mnt/cf -osync	
+fi
+
+if [ -e /var/etc/init ] ; then
+	. /var/etc/init
+fi
+
+# Nemesis-Project
+[ -e /bin/enigmanet ] && /bin/enigmanet
+
+export VAR_PATH=""
+[ -e /var/etc/.vardir ] && export VAR_PATH=$(cat /var/etc/.vardir)
+
+if [  "$VAR_PATH"  != "" ] ; then
+	umount /var
+	/bin/mount -o bind $VAR_PATH /var
+fi
+
+if [ -e /var/etc/.swapcreate.sh ]; then
+	/bin/showlogo /bin/swap
+	/var/etc/.swapcreate.sh
+	rm -f /var/etc/.swapcreate.sh
+	if [ $mID -eq 05 ] ; then
+		if [ ! -e /root/platform/kernel/bild ] ; then
+			/bin/showlogo /root/root/platform/kernel/bild
+		else
+			/bin/showlogo /root/platform/kernel/bild
+		fi
+	fi
+fi
+
+[ -e /bin/nemesisd ] && /bin/nemesisd &
+
+[ -e /var/script/mount.sh ] && /var/script/mount.sh
+
+#Start tihrd-part at boot
+list=`ls /var/etc/*_startup.sh`
+for item in $list
+	do
+		${item} start
+	done
+
+#Start inadyn at boot
+if [ -e /var/etc/inadynpar.conf ]; then
+	[ ! -e /var/etc/.dont_start_inadyn ] && /var/script/inadyn_script.sh start
+fi
+
+#Start syslogd
+if [ ! -e /var/etc/.dont_start_syslog ]; then
+	export SYSLOG_PAR='-O /tmp/log/messsages'
+	[ -e /var/etc/syslog.par ] && export SYSLOG_PAR=$(cat /var/etc/syslog.par)
+	mkdir /tmp/log
+	/sbin/syslogd ${SYSLOG_PAR}
+	touch /tmp/.syslogstarted
+fi
+
+#Start Firewall
+if [ ! -e /var/etc/.dont_start_firewall ]; then
+	/var/script/firewall.sh start
+	touch /tmp/.firewallstarted
+fi
+
+/bin/showlogo /bin/bild2
+
+rm /var/etc/.dont_restart_enigma
+touch /tmp/.enigma
+while [ -e /tmp/.enigma ]
+do
+	if [ ! -e /var/etc/.dont_restart_enigma ] ; then
+		/bin/enigma
+		ret=$?
+		echo "enigma returned with "$ret
+		case $ret in
+		0)
+			echo "Shutdown"
+			rm /tmp/.enigma
+			/sbin/halt
+			;;
+		3)	    
+			echo "Reboot Flash"
+			rm /tmp/.enigma
+			umount /var
+			umount /hdd
+			/bin/flashtool
+			;;
+		4)
+			echo "Reboot"
+			rm /tmp/.enigma
+			/sbin/reboot
+			;;
+		*)	echo "Restart"
+			;;
+		esac
+		killall -9 udhcpc
+	else
+		sleep 1
+	fi
+done
+
+exit 0

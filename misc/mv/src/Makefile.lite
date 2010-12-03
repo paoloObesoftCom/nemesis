@@ -1,0 +1,15 @@
+include Makefile.head
+
+.cpp.o: $(HEADERS)
+	$(CXX) -DMVLITE $(CFLAGS) -c -o $@ $<
+
+all: $(LITE_NAME).so
+
+$(LITE_NAME).so: $(LITE_OBJECTS) $(HEADERS)
+	$(CXX) $(LINK_OPTIONS) -DMVLITE -o $(LITE_NAME).so  $(LITE_OBJECTS)
+	$(STRIP) -s $(LITE_NAME).so
+
+install: all 
+	ncftpput -V -u root -p dreambox db.local /var/tuxbox/plugins/ $(LITE_NAME).so
+
+include Makefile.tail

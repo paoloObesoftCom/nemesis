@@ -1,0 +1,15 @@
+# openvpn config per server p2p
+# serverp2p.conf
+#
+# imposta la porta di comunicazione sulla porta 1194
+port 1194
+# assegna al server l'ip 10.8.0.1 e al client 10.8.0.2
+ifconfig 10.8.0.1 10.8.0.2
+#assegnamo il tipo di dettaglio della log
+verb 5
+#assegnamo tun come device per la vpn
+dev tun0
+# file si autenticazione
+secret /var/etc/openvpn/keys/prova.key
+#crea un file di log
+log-append  /var/etc/openvpn/openvpn.log

@@ -1,0 +1,801 @@
+diff -Naur enigma_org/po/POTFILES.in enigma/po/POTFILES.in
+--- enigma_org/po/POTFILES.in	2004-06-25 14:56:47.000000000 +0200
++++ enigma/po/POTFILES.in	2007-10-04 15:06:23.000000000 +0200
+@@ -119,6 +119,7 @@
+ ./src/satconfig.cpp
+ ./src/satfind.cpp
+ ./src/scan.cpp
++./src/cb_scan.cpp
+ ./src/setup_extra.cpp
+ ./src/setup_harddisk.cpp
+ ./src/setup_lcd.cpp
+diff -Naur enigma_org/src/cb_scan.cpp enigma/src/cb_scan.cpp
+--- enigma_org/src/cb_scan.cpp	1970-01-01 01:00:00.000000000 +0100
++++ enigma/src/cb_scan.cpp	2007-10-04 15:23:12.000000000 +0200
+@@ -0,0 +1,513 @@
++#include "cb_scan.h"
++
++#include <lib/dvb/frontend.h>
++#include <lib/system/econfig.h>
++#include <lib/system/info.h>
++
++extern void showScanPic();
++
++static struct
++{
++	int def;
++	const char *val, *str;
++	int n;
++} bands[]=
++	{
++	{1, "/elitedvb/bscan/DVBC_BAND_EU_VHF_I", "EU VHF-I", 1<<0},
++	{1, "/elitedvb/bscan/DVBC_BAND_EU_MID", "EU MID", 1<<1},
++	{1, "/elitedvb/bscan/DVBC_BAND_EU_VHF_III", "EU VHF-III", 1<<2},
++	{1, "/elitedvb/bscan/DVBC_BAND_EU_SUPER", "EU SUPER", 1<<3},
++	{1, "/elitedvb/bscan/DVBC_BAND_EU_HYPER", "EU HYPER", 1<<4},
++	{1, "/elitedvb/bscan/DVBC_BAND_EU_UHF_IV", "EU UHF-IV", 1<<5},
++	{1, "/elitedvb/bscan/DVBC_BAND_EU_UHF_V", "EU UHF-V", 1<<6},
++	{0, "/elitedvb/bscan/DVBC_BAND_US_LO", "US LO", 1<<7},
++	{0, "/elitedvb/bscan/DVBC_BAND_US_MID", "US MID", 1<<8},
++	{0, "/elitedvb/bscan/DVBC_BAND_US_HI", "US HI", 1<<9},
++	{0, "/elitedvb/bscan/DVBC_BAND_US_SUPER", "US SUPER", 1<<10},
++	{0, "/elitedvb/bscan/DVBC_BAND_US_HYPER", "US HYPER", 1<<11}
++	};
++	
++static struct
++{
++	int def;
++	const char *val, *str, *n;
++} modulation[]=
++	{
++	{0, "/elitedvb/bscan/mod016", "QAM 16", " --mod 16"},
++	{0, "/elitedvb/bscan/mod032", "QAM 32", " --mod 32"},
++	{1, "/elitedvb/bscan/mod064", "QAM 64", " --mod 64"},
++	{1, "/elitedvb/bscan/mod128", "QAM 128", " --mod 128"},
++	{1, "/elitedvb/bscan/mod256", "QAM 256", " --mod 256"}
++	};
++	
++static struct
++{
++	int def;
++	const char *val, *str, *n;
++} symbol_rate[]=
++	{
++	{1, "/elitedvb/bscan/sym6900", "6900 (KSymb/s)", " --sr 6900000"},
++	{1, "/elitedvb/bscan/sym6875", "6875 (KSymb/s)", " --sr 6875000"},
++	{0, "/elitedvb/bscan/sym_ext1", _("user defined symbol rate 1"), " --sr "},
++	{0, "/elitedvb/bscan/sym_ext2", _("user defined symbol rate 2"), " --sr "}
++	};
++
++static int getFECInt(const char *fec_str)
++{
++	if(! strcmp(fec_str,"FEC_1_2"))		return FEC_1_2;
++	else if(! strcmp(fec_str,"FEC_2_3"))	return FEC_2_3;
++	else if(! strcmp(fec_str,"FEC_3_4"))	return FEC_3_4;
++	else if(! strcmp(fec_str,"FEC_5_6"))	return FEC_5_6;
++	else if(! strcmp(fec_str,"FEC_7_8"))	return FEC_7_8;
++	else if(! strcmp(fec_str,"FEC_NONE"))	return FEC_NONE;
++	return FEC_AUTO;
++}
++
++static int getModInt(const char *str)
++{
++	if(! strcmp(str,"QAM16"))		return QAM_16;
++	else if(! strcmp(str,"QAM32"))	return QAM_32;
++	else if(! strcmp(str,"QAM64"))	return QAM_64;
++	else if(! strcmp(str,"QAM128"))	return QAM_128;
++	else if(! strcmp(str,"QAM256"))	return QAM_256;
++	return QAM_AUTO;
++}
++
++static int getInvInt(const char *str)
++{
++	if(! strcmp(str,"INVERSION_OFF"))	return INVERSION_OFF;
++	else if(! strcmp(str,"INVERSION_ON"))	return INVERSION_ON;
++	return INVERSION_AUTO;
++}
++
++//--------------------------------------------------------------------
++
++CableBScan::CableBScan(): eWindow(0), scan(0)
++{
++	setText(_("Transponder Scan"));
++	cmove(ePoint(130, 110));
++	cresize(eSize(460, 400));
++
++	int fd = eSkin::getActive()->queryValue("fontsize",20);
++	foundTp = 0;
++	cur_tp = 0;
++	
++	int scantype=0;
++	eConfig::getInstance()->getKey("/elitedvb/bscan/scantype", scantype);
++	int freqstep=1000;
++	eConfig::getInstance()->getKey("/elitedvb/bscan/freqstep", freqstep);
++	
++	setDefaultValues();
++	
++	l_s=new eLabel(this);
++	l_s->move(ePoint(5, 10));
++	l_s->resize(eSize(190, fd+10));
++	l_s->setText(_("Scan type:"));
++
++	scan_type=new eComboBox(this, 3);
++	scan_type->move(ePoint(205, 5));
++	scan_type->resize(eSize(250, fd+15));
++	scan_type->loadDeco();
++	CONNECT(scan_type->selchanged, CableBScan::scan_type_Changed );
++	
++	new eListBoxEntryText( *scan_type, _("Simple/Default"),(void*)0);
++	new eListBoxEntryText( *scan_type, _("Frequency Bands"),(void*)1);
++	new eListBoxEntryText( *scan_type, _("Frequency Steps"),(void*)2);
++	scan_type->setCurrent(scantype);
++
++	b_band=new eButton(this);
++	b_band->move(ePoint(5, 60));
++	b_band->resize(eSize(clientrect.width()-10, fd+15));
++	b_band->loadDeco();
++	b_band->setText( _("Choose Frequency Bands"));
++	CONNECT_2_1(b_band->selected, CableBScan::b_sel, 0);
++	
++	l_f=new eLabel(this);
++	l_f->move(ePoint(5, 60));
++	l_f->resize(eSize(300, fd+10));
++	l_f->setText(_("Frequency steps (kHz):"));
++	
++	freq_step=new eNumber(this, 1, 0, 10000, 5, &freqstep);
++	freq_step->move(ePoint(310, 60));
++	freq_step->resize(eSize(90, fd+10));
++	freq_step->setFlags(eNumber::flagDrawPoints);
++	freq_step->loadDeco();
++	
++	b_mod=new eButton(this);
++	b_mod->move(ePoint(5, 110));
++	b_mod->resize(eSize(clientrect.width()-10, fd+15));
++	b_mod->loadDeco();
++	b_mod->setText( _("Choose Modulations"));
++	CONNECT_2_1(b_mod->selected, CableBScan::b_sel, 1);
++	
++	b_sr=new eButton(this);
++	b_sr->move(ePoint(5, 160));
++	b_sr->resize(eSize(clientrect.width()-10, fd+15));
++	b_sr->loadDeco();
++	b_sr->setText( _("Choose SymbolRates"));
++	CONNECT_2_1(b_sr->selected, CableBScan::b_sel, 2);
++	
++	c_onlyFree=new eCheckbox(this, 0);
++	c_onlyFree->move(ePoint(5, 210));
++	c_onlyFree->resize(eSize(220, fd+5));
++	c_onlyFree->setText(_("only Free"));
++	
++	c_networkscan=new eCheckbox(this, 1);
++	c_networkscan->move(ePoint(235, 210));
++	c_networkscan->resize(eSize(220, fd+5));
++	c_networkscan->setText(_("Network search"));
++	
++	b_start=new eButton(this);
++	b_start->move(ePoint(5, 250));
++	b_start->resize(eSize(220, fd+15));
++	b_start->loadDeco();
++	b_start->setText( _("start"));
++	b_start->setShortcut("green");
++	b_start->setShortcutPixmap("green");
++	CONNECT(b_start->selected, CableBScan::b_start_sel);
++	
++	b_stop=new eButton(this);
++	b_stop->move(ePoint(235, 250));
++	b_stop->resize(eSize(220, fd+15));
++	b_stop->setShortcut("red");
++	b_stop->setShortcutPixmap("red");
++	b_stop->loadDeco();
++	b_stop->setText(_("abort"));
++	CONNECT(b_stop->selected, CableBScan::onCancel);
++	b_stop->hide();
++	
++	l_st=new eLabel(this);
++	l_st->move(ePoint(5, clientrect.height()-70));
++	l_st->resize(eSize(clientrect.width()-10, fd+10));
++	l_st->setText(_("Frequency steps (1-10 MHz):"));
++	l_st->hide();
++	
++	progress=new eProgress(this);
++	progress->move(ePoint(5, clientrect.height()-40));
++	progress->resize(eSize( clientrect.width()-10, 25));
++	progress->hide();
++	
++	scan_type_Changed(scan_type->getCurrent());
++}
++
++CableBScan::~CableBScan()
++{
++	if(scan)
++		delete scan;
++}
++
++void CableBScan::b_sel(int val)
++{
++	hide();
++	CBsetup dlg(val);
++#ifndef DISABLE_LCD
++	dlg.setLCD(LCDTitle, LCDElement);
++#endif
++	dlg.show();
++	dlg.exec();
++	dlg.hide();
++	show();
++	
++	switch(val)
++	{
++		case 0: setFocus(b_band); break;
++		case 1: setFocus(b_mod); break;
++		case 2: setFocus(b_sr); break;
++	}
++}
++
++void CableBScan::setDefaultValues()
++{
++	int tmp;
++	for (unsigned int i=0; i< sizeof(bands)/sizeof(*bands); ++i)
++	{
++		if(eConfig::getInstance()->getKey(bands[i].val, tmp))
++			eConfig::getInstance()->setKey(bands[i].val, bands[i].def);
++	}
++	for (unsigned int i=0; i< sizeof(modulation)/sizeof(*modulation); ++i)
++	{
++		if(eConfig::getInstance()->getKey(modulation[i].val, tmp))
++			eConfig::getInstance()->setKey(modulation[i].val, modulation[i].def);
++	}
++	for (unsigned int i=0; i< sizeof(symbol_rate)/sizeof(*symbol_rate); ++i)
++	{
++		if(eConfig::getInstance()->getKey(symbol_rate[i].val, tmp))
++			eConfig::getInstance()->setKey(symbol_rate[i].val, symbol_rate[i].def);
++	}
++}
++
++void CableBScan::scan_type_Changed(eListBoxEntryText *ent)
++{
++	if(ent)
++	{
++		switch((int)ent->getKey())
++		{
++			case 0:
++				setDefaultValues();
++				b_mod->hide();
++				b_sr->hide();
++				b_band->hide();
++				l_f->hide();
++				freq_step->hide();
++				break;
++			case 1:
++				b_mod->show();
++				b_sr->show();
++				b_band->show();
++				l_f->hide();
++				freq_step->hide();
++				break;
++			case 2:
++				b_mod->show();
++				b_sr->show();
++				b_band->hide();
++				l_f->show();
++				freq_step->show();
++				break;
++		}
++	}
++}
++
++void CableBScan::b_start_sel()
++{
++	eString cmd = "tda1002x --init --scan --verbose --wakeup --inv 2 ";
++	
++	if((int)scan_type->getCurrent()->getKey() > 1)
++	{
++		cmd += "--scan-stepsize ";
++		if(freq_step->getNumber() < 1000)
++			cmd += "1000";
++		else
++			cmd += eString().setNum(freq_step->getNumber());
++
++		last_freq = 886000;
++	}
++	else
++	{
++		cmd += "--scan-bands ";
++		int val=0;
++		for (unsigned int i=0; i< sizeof(bands)/sizeof(*bands); ++i)
++		{
++			int tmp=0;
++			eConfig::getInstance()->getKey(bands[i].val, tmp);
++			if(tmp)	val |= bands[i].n;
++		}
++		cmd += eString().setNum(val);
++
++		last_freq = 858000;
++	}
++	
++	for (unsigned int i=0; i< sizeof(modulation)/sizeof(*modulation); ++i)
++	{
++		int tmp=0;
++		eConfig::getInstance()->getKey(modulation[i].val, tmp);
++		if(tmp) cmd += modulation[i].n;
++	}
++	
++	for (unsigned int i=0; i< sizeof(symbol_rate)/sizeof(*symbol_rate); ++i)
++	{
++		int tmp=0;
++		eConfig::getInstance()->getKey(symbol_rate[i].val, tmp);
++		if(tmp == 1) cmd += symbol_rate[i].n;
++		if(tmp > 450) cmd += symbol_rate[i].n + eString().setNum(tmp) + "000";
++	}
++	
++	eDebug("[CableBlindScan] cmd=%s",cmd.c_str());
++	
++	progress->show();
++	progress->setPerc(0);
++	l_st->show();
++	l_st->setText("");
++	b_stop->show();
++	b_start->hide();
++	setFocus(b_stop);
++	
++	scan_time = 0;
++	if(foundTp)
++		delete foundTp;
++	foundTp = new tpPacket;
++	if(c_networkscan->isChecked())
++		foundTp->scanflags|=eDVBScanController::flagNetworkSearch;
++	else
++		foundTp->scanflags&=~eDVBScanController::flagNetworkSearch;
++
++	if(c_onlyFree->isChecked())
++		foundTp->scanflags |= eDVBScanController::flagOnlyFree;
++	else
++		foundTp->scanflags&=~eDVBScanController::flagOnlyFree;
++
++	scan = new eConsoleAppContainer(cmd);
++	if(scan)
++	{
++		if ( scan->running() )
++		{
++			CONNECT( scan->dataAvail, CableBScan::getData );
++			CONNECT( scan->appClosed, CableBScan::scanClosed );
++		}
++		else
++		{
++			eMessageBox msg( _("sorry, couldn't find tda1002x utility."), _("Error"), eMessageBox::btOK|eMessageBox::iconError);
++			msg.show();
++			msg.exec();
++			msg.hide();
++			close(-1);
++		}
++	}
++}
++
++int CableBScan::eventHandler(const eWidgetEvent &event)
++{
++	switch (event.type)
++	{
++	case eWidgetEvent::wantClose:
++		if(scan)
++			scan->kill();
++		eConfig::getInstance()->setKey("/elitedvb/bscan/scantype", (int)scan_type->getCurrent()->getKey());
++		if(freq_step->getNumber() < 1000)
++			eConfig::getInstance()->setKey("/elitedvb/bscan/freqstep", 1000);
++		else
++			eConfig::getInstance()->setKey("/elitedvb/bscan/freqstep", freq_step->getNumber());
++		if (event.parameter)
++		{
++			if (foundTp)
++				delete foundTp;
++		}
++		else if(foundTp->possibleTransponders.size())
++		{
++			foundTp->possibleTransponders.sort();
++			eDebug("[CableBlindScan] Transponders=%d ScanTime=%d sec",foundTp->possibleTransponders.size(), scan_time/1000);
++		}
++	default:
++		;
++	}
++	return eWindow::eventHandler(event);
++}
++
++void CableBScan::onCancel()
++{
++	if(scan)
++		scan->kill();
++	if(foundTp)
++		foundTp->possibleTransponders.clear();
++	scanClosed(-1);
++}
++
++void CableBScan::scanClosed(int bla)
++{
++	eDebug("scanClosed %d", bla);
++	if(scan)
++	{
++		delete scan;
++		scan=0;
++	}
++	progress->hide();
++	l_st->hide();
++	b_stop->hide();
++	b_start->show();
++	if (bla != -1)
++		close(0);
++}
++
++void CableBScan::getData( eString str)
++{
++	std::istringstream in(str.c_str());
++	std::string line;
++	char fec_str[10];
++	char mod_str[10];
++	char inv_str[15];
++	int frequency=0;
++	int symbolrate=0;
++	
++	while (getline(in, line, '\n'))
++	{
++		if (line.find("FAILED") != std::string::npos)
++		{
++			sscanf(line.c_str(),"FAILED %d", &frequency);
++			l_st->setText(eString(_("Frequency:")) + "  " + eString().setNum(frequency/1000) + " MHz failed");
++		}
++		else if (line.find("OK") != std::string::npos)
++		{
++			sscanf(line.c_str(),"OK %d %d %s %s %s", &frequency, &symbolrate, fec_str, mod_str, inv_str);
++			l_st->setText(eString(_("Frequency:")) + "  " + eString().setNum(frequency/1000) + " MHz ok");
++			eTransponder t(*eDVB::getInstance()->settings->getTransponders());
++			t.setCable(frequency, symbolrate, getInvInt(inv_str), getModInt(mod_str), getFECInt(inv_str));
++			foundTp->possibleTransponders.push_back(t);
++		}
++		
++		if (line.find("scan took") != std::string::npos)
++		{
++			int tmp;
++			sscanf(line.c_str(),"scan took %d", &tmp);
++			scan_time += tmp+1;
++		}
++		//eDebug("[CableBlindScan] %s",line.c_str());
++	}
++	
++	int perc=frequency*100 / last_freq;
++	progress->setPerc(perc);
++}
++
++//----------------------------------------------------------------------------------------
++
++CBsetup::CBsetup(int val) :eSetupWindow("", 6, 300)
++{
++	cmove(ePoint(210, 150));
++
++	switch(val)
++	{
++		case 0:
++			setText(_("Frequency bands"));
++			for (unsigned int i=0; i< sizeof(bands)/sizeof(*bands); ++i)
++				new eListBoxEntryCheck(&list, bands[i].str, bands[i].val, _("press ok to change"));
++			break;
++		case 1:
++			setText(_("Modulations"));
++			for (unsigned int i=0; i< sizeof(modulation)/sizeof(*modulation); ++i)
++				new eListBoxEntryCheck(&list, modulation[i].str, modulation[i].val, _("press ok to change"));
++			break;
++		case 2:
++			setText(_("Symbol Rates"));
++			new eListBoxEntryCheck(&list, symbol_rate[0].str, symbol_rate[0].val, _("press ok to change"));
++			new eListBoxEntryCheck(&list, symbol_rate[1].str, symbol_rate[1].val, _("press ok to change"));
++			CONNECT_2_1((new eListBoxEntryMenu(&list, symbol_rate[2].str, _("enter symbol rate")))->selected, CBsetup::ext, 2);
++			CONNECT_2_1((new eListBoxEntryMenu(&list, symbol_rate[3].str, _("enter symbol rate")))->selected, CBsetup::ext, 3);
++			break;
++	}
++}
++
++void CBsetup::ext(int what)
++{
++	hide();
++	extNumberWidget s(symbol_rate[what].val);
++	s.show();
++	s.exec();
++	s.hide();
++	show();
++}
++
++//----------------------------------------------------------------------------------------
++
++extNumberWidget::extNumberWidget(const char *key) :eWindow(0), m_key(key)
++{
++	setText(_("Symbol Rate:"));
++	move(ePoint(200, 140));
++	resize(eSize(280, 120));
++	
++	int tmp;
++	eConfig::getInstance()->getKey(key, tmp);
++
++	eLabel *label=new eLabel(this);
++	label->setText("KSymb/s");
++	label->move(ePoint(50, 15));
++	label->resize(eSize(110, eSkin::getActive()->queryValue("fontsize", 20)+4));
++
++	number=new eNumber(this, 1, 0, 7230, 4, 0, 1, label);
++	number->move(ePoint(160, 15));
++	number->resize(eSize(60, eSkin::getActive()->queryValue("fontsize", 20)+4));
++	number->setNumber(tmp);
++}
++
++extNumberWidget::~extNumberWidget()
++{
++	eConfig::getInstance()->setKey(m_key.c_str(), number->getNumber());
++}
+diff -Naur enigma_org/src/cb_scan.h enigma/src/cb_scan.h
+--- enigma_org/src/cb_scan.h	1970-01-01 01:00:00.000000000 +0100
++++ enigma/src/cb_scan.h	2007-10-04 15:09:29.000000000 +0200
+@@ -0,0 +1,61 @@
++#include <lib/gui/ewindow.h>
++#include <lib/gui/ebutton.h>
++#include <lib/gui/enumber.h>
++#include <lib/gui/echeckbox.h>
++#include <lib/gui/combobox.h>
++#include <lib/gui/emessage.h>
++#include <lib/gui/eprogress.h>
++#include <lib/base/console.h>
++#include <lib/dvb/dvb.h>
++#include <lib/dvb/dvbscan.h>
++#include <lib/dvb/decoder.h>
++#include <src/setup_window.h>
++#include <src/enigma_main.h>
++#include <src/scan.h>
++
++class extNumberWidget: public eWindow
++{
++	eString m_key;
++	eNumber *number;
++public:
++	extNumberWidget(const char *key);
++	~extNumberWidget();
++};
++
++class CBsetup: public eSetupWindow
++{
++	void ext(int what);
++public:
++	CBsetup(int val);
++};
++
++class CableBScan: public eWindow
++{
++	int scan_time;
++	int last_freq;
++	eTransponder *cur_tp;
++	eServiceReference cur_serv;
++	tpPacket *foundTp;
++
++	eLabel *l_s, *l_f, *l_st;
++	eButton *b_band, *b_mod, *b_sr, *b_start, *b_stop;
++	eComboBox *scan_type;
++	eNumber *freq_step;
++	eProgress *progress;
++	eCheckbox *c_onlyFree, *c_networkscan;
++	
++	eConsoleAppContainer *scan;
++	
++	void onCancel();
++	void scanClosed(int bla);
++	void getData( eString str);
++	void b_sel(int val);
++	void b_start_sel();
++	void scan_type_Changed(eListBoxEntryText *ent);
++	int eventHandler(const eWidgetEvent &event);
++	void setDefaultValues();
++public:
++	tpPacket *getPacket() { return foundTp; }
++	CableBScan();
++	~CableBScan();
++};
+diff -Naur enigma_org/src/Makefile.am enigma/src/Makefile.am
+--- enigma_org/src/Makefile.am	2005-11-05 15:59:53.000000000 +0100
++++ enigma/src/Makefile.am	2007-10-02 16:35:15.000000000 +0200
+@@ -19,7 +19,7 @@
+ 	enigma_dyn_mount.cpp enigma_dyn_utils.cpp enigma_dyn_wap.cpp enigma_dyn_conf.cpp \
+ 	enigma_dyn_flash.cpp enigma_dyn_xml.cpp enigma_streamer.cpp enigma_dyn_timer.cpp \
+ 	enigma_processutils.cpp enigma_picmanager.cpp enigma_dyn_misc.cpp enigma_dyn_pda.cpp \
+-	enigma_dyn_movieplayer.cpp enigma_dyn_boot.cpp rds_text.cpp setup_timeshift.cpp \
++	enigma_dyn_movieplayer.cpp enigma_dyn_boot.cpp rds_text.cpp setup_timeshift.cpp cb_scan.cpp \ 
+ 	setup_osd_extra.cpp enigma_tuxtxt.cpp epgsearch.cpp setup_epg.cpp enigma_ipkg.cpp \
+ 	np.cpp addons.cpp deamon.cpp emuinfo.cpp hdd.cpp inadyn.cpp setpath.cpp showfile.cpp swap.cpp \
+ 	sysinfo.cpp extra.cpp dbset.cpp userscript.cpp nemtool.cpp ecminfo.cpp osdinfo.cpp \
+diff -Naur enigma_org/src/scan.cpp enigma/src/scan.cpp
+--- enigma_org/src/scan.cpp	2007-08-24 15:20:41.000000000 +0200
++++ enigma/src/scan.cpp	2007-10-02 21:19:50.000000000 +0200
+@@ -1,5 +1,6 @@
+ #include <time.h>
+ #include <scan.h>
++#include <cb_scan.h>
+ #include <enigma.h>
+ 
+ #include <enigma_main.h>
+@@ -1140,33 +1141,83 @@
+ 				if ( service && service.path && service.type == eServiceReference::idDVB )
+ 					eServiceInterface::getInstance()->stop();
+ 			}
+-
+-			tsAutomatic automatic_scan(this);
++			if ( eSystemInfo::getInstance()->getFEType() == eSystemInfo::feCable )
++			{
++				eWindow::globalCancel(eWindow::ON);
++				eDVB::getInstance()->setMode(eDVB::controllerScan);
++				eDVBScanController *sapi=eDVB::getInstance()->getScanAPI();
++				hide();
++				CableBScan scan;
++				scan.show();
++				switch (scan.exec())
++				{
++				case 0:
++					remove_new_flags=true;
++					tpPacket *pkt = scan.getPacket();
++					if (pkt)
++					{
++						int cnt=0;
++						for (std::list<eTransponder>::iterator i(pkt->possibleTransponders.begin()); i != pkt->possibleTransponders.end(); ++i)
++						{
++							sapi->addTransponder(*i);
++							++cnt;
++						}
++						if (cnt > 0)
++						{
++							sapi->setUseONIT(0);
++							sapi->setUseBAT(0);
++							sapi->setNetworkSearch(pkt->scanflags & eDVBScanController::flagNetworkSearch);
++							sapi->setOnlyFree(pkt->scanflags & eDVBScanController::flagOnlyFree);
++							sapi->setSkipOtherOrbitalPositions(true);
++							sapi->setNoCircularPolarization(true);
++							state=stateScan;
++						}
++						else
++							state=stateDone;
++						delete pkt;
++					}
++					break;
++				default:
++				case 1:
++					if ( stateInitial == stateMenu )
++						state=stateMenu;
++					else
++						state=stateEnd;
++					break;
++				}
++				scan.hide();
++				show();
++				eWindow::globalCancel(eWindow::OFF);
++			}
++			else
++			{
++				tsAutomatic automatic_scan(this);
+ #ifndef DISABLE_LCD
+-			automatic_scan.setLCD( LCDTitle, LCDElement);
++				automatic_scan.setLCD( LCDTitle, LCDElement);
+ #endif
+-			automatic_scan.show();
+-			automatic_scan.openNetworkCombo();
+-			current = &automatic_scan;
++				automatic_scan.show();
++				automatic_scan.openNetworkCombo();
++				current = &automatic_scan;
+ 
+-			eDVB::getInstance()->setMode(eDVB::controllerScan);
++				eDVB::getInstance()->setMode(eDVB::controllerScan);
+ 
+-			switch (automatic_scan.exec())
+-			{
+-			case 0:
+-				remove_new_flags=true;
+-				state=stateScan;
+-				break;
+-			default:
+-			case 1:
+-				if ( stateInitial == stateMenu )
+-					state=stateMenu;
+-				else
+-					state=stateEnd;
+-				break;
++				switch (automatic_scan.exec())
++				{
++				case 0:
++					remove_new_flags=true;
++					state=stateScan;
++					break;
++				default:
++				case 1:
++					if ( stateInitial == stateMenu )
++						state=stateMenu;
++					else
++						state=stateEnd;
++					break;
++				}
++				automatic_scan.hide();
++				current=0;
+ 			}
+-			automatic_scan.hide();
+-			current=0;
+ 			break;
+ 		}
+ 		case stateMultiScan:
+diff -Naur enigma_org/po/de.po enigma/po/de.po
+--- enigma_org/po/de.po	2007-08-24 15:26:45.000000000 +0200
++++ enigma/po/de.po	2007-10-04 15:25:50.000000000 +0200
+@@ -5231,6 +5231,76 @@
+ msgid "show/enter values as decimal"
+ msgstr "Daten in dezimaler Schreibweise anzeigen"
+ 
++#: src/cb_scan.cpp:51
++msgid "user defined symbol rate 1"
++msgstr "Benutzerdefiniert 1"
++
++#: src/cb_scan.cpp:52
++msgid "user defined symbol rate 2"
++msgstr "Benutzerdefiniert 2"
++
++#: src/cb_scan.cpp:105
++msgid "Scan type:"
++msgstr "Scan Typ:"
++
++#: src/cb_scan.cpp:113
++msgid "Simple/Default"
++msgstr "Einfach/Standard"
++
++#: src/cb_scan.cpp:114
++msgid "Frequency Bands"
++msgstr "Frequenz Bänder"
++
++#: src/cb_scan.cpp:115
++msgid "Frequency Steps"
++msgstr "Frequenz Schritte"
++
++#: src/cb_scan.cpp:122
++msgid "Choose Frequency Bands"
++msgstr "Frequenz Bänder wählen"
++
++#: src/cb_scan.cpp:128
++msgid "Frequency steps (kHz):"
++msgstr "Frequenz Schritte (kHz):"
++
++#: src/cb_scan.cpp:140
++msgid "Choose Modulations"
++msgstr "Modulationen wählen"
++
++#: src/cb_scan.cpp:147
++msgid "Choose SymbolRates"
++msgstr "Symbolraten wählen"
++
++#: src/cb_scan.cpp:164
++msgid "start"
++msgstr "Starten"
++
++#: src/cb_scan.cpp:182
++msgid "Frequency steps (1-10 MHz):"
++msgstr "Frequenz Schritte (1-10 Mhz):"
++
++#: src/cb_scan.cpp:349
++msgid "sorry, couldn't find tda1002x utility."
++msgstr ""
++"Programm 'tda1002x' zum suchen der benutzen transponder konnte nicht "
++"gefunden werden."
++
++#: src/cb_scan.cpp:459
++msgid "Frequency bands"
++msgstr "Frequenz Bänder"
++
++#: src/cb_scan.cpp:464
++msgid "Modulations"
++msgstr "Modulationen"
++
++#: src/cb_scan.cpp:469
++msgid "Symbol Rates"
++msgstr "Symbolraten"
++
++#: src/cb_scan.cpp:472 src/cb_scan.cpp:473
++msgid "enter symbol rate"
++msgstr "Symbolrate eingeben (0..9, links, rechts)"
++
+ #: src/setup_extra.cpp:67
+ msgid "Communication Setup"
+ msgstr "Kommunikation/Netzwerk"

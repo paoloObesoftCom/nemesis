@@ -1,0 +1,409 @@
+# English language text file for MV
+#
+# -------------------------------------------------------- #
+#
+# Rules:
+#
+# - all lines which are not intended as a text must start
+# with a # or be completely (i.e. no spaces) blank
+# - the order of items cannot be changed.
+# - all items must be included.
+#
+# -------------------------------------------------------- #
+#
+# Version string
+
+MV B3.5.3
+
+# Welcome screen (shown once per version)
+
+Willkommen im MV, ein EPG fuer die Dreambox\nby PentVaer.\n\nEinige Sachen zum Testen:\n\n    druecke 1-9, HELP oder DREAM.\n\nHandbuch:\n\n    http://mv.dinglisch.net/userguide.html\n\nHoffe, es gefaellt dir!
+
+# Buttons
+
+Fertig
+Hinzufuegen
+Loeschen
+Bearbeiten
+Unbekannt
+Zugeordnet
+Ignoriere
+
+# - new Alex
+
+Allgemeine Funktionen
+Kanal-Funktionen
+Programm-Funktionen
+Status Bar-Funktionen
+Ansicht auswaehlen
+
+# Next view pulldown
+
+[1] Aktuelle Sendungen
+[2] Jetzt und naechstes
+[3] Info Bar
+[4] Kurzzeit-Raster
+[5] Langzeit-Raster
+[6] Programm anzeigen (1 Sender)
+[7] Filme anzeigen (alle Sender)
+[8] Favoriten anzeigen (alle Sender)
+[9] Programm anzeigen (alle Sender)
+
+# ----------- PRESENTATION MENU ---------- #
+
+Hintergrund
+Schriftgroesse
+Schriftart
+Zurueck 1
+Zurueck 2
+Laufend
+Film
+Favoriten
+
+# Pres menu labels
+
+Sender (Kopfzeile):
+Programm-Box:
+Fenster:
+
+# Pres menu test channel
+
+Sender
+Prog 1
+Prog 2
+Cursor
+Favoriten
+Film
+
+# --------------- MISC MENU -------------- #
+
+Timer Start Offset: 
+Timer Ende Offset:
+laufende Sendungen Offset:
+
+Seitenverhaeltnis:
+Wie Enigma
+Immer 16:9
+Immer 4:3
+
+Achtung: Diese Einstellung hat keine Wirkungen, wenn in Enigma das Seitenverhaeltnis nicht auf 16:9 gesetzt ist.
+
+# ------------- FEATURE MENU ------------ #
+
+# timebar labels
+
+Zeitanzeige:
+Aus
+15 Minuten
+30 Minuten
+1 Stunde
+2 Stunden
+
+# daybar labels
+
+Tagesanzeige:
+Aus
+Fix
+Popup
+
+# no cols
+
+Anzahl Spalten:
+
+# entries per col
+
+Eintraege/Spalte:
+Objekte/Sender:
+Proportional
+Alle
+
+# Channel shift type
+
+Sender-"Shift":
+1 Sender
+Halbe Seite
+Ganze Seite
+
+# Program shift type
+
+Programm-"Shift":
+1 Sendung
+Halbe Seite
+Ganze Seite
+
+# Program box flags
+
+Startzeit
+Endzeit
+Dauer (Minuten)
+Sendername
+Differenz von aktueller Zeit zur Startzeit
+Sendungsbeschreibung
+Senderlogo
+Horizontale Zentrierung des Sendungstitels
+
+# Status bar flags
+
+Zeige Status-Leiste
+Sendername
+Datum
+Startzeit
+Dauer (Minuten)
+Titel
+Beschreibung
+
+# Channel header
+
+Sendername in der Kopfzeile
+Senderlogo in der Kopfzeile
+Sendernummer in der Kopfzeile
+Satellitenposition in der Kopfzeile
+
+# Misc
+
+Bereits vorueber
+Vertikale Trennung
+Horizontale Trennung
+Zeige leere Sender
+Cursor zeigt leere Sender
+
+# start channel
+
+Start Kanal:
+Laufend
+Oben
+
+# next view
+
+Diese
+
+# sort types
+
+Sortieren nach:
+Bouquet Reihenfolge
+Alphabetisch
+Verbleibender Zeit
+Bouq/Startzeit
+Startzeit
+
+# --------------- INPUT MENU --------------- #
+
+# table headers
+
+Input
+Lokales Verzeichnis
+Downloaden
+
+# Network column labels
+
+Nein
+Ja
+Kein Netzwerk!
+
+# pre/post values
+
+Vor:
+Nach:
+Tmp Detailspeicher:
+Speicherverzeichnis:
+Auto Verz.
+Max. Sender:
+Auto Aktuali-\nsierung
+
+# ------------ FAV EDIT MENU ------------- #
+
+Titel:
+Irgendeiner
+Alle
+Alle, geordnet
+Keine
+
+Beschr:
+Sender:
+Zwischen:
+Ausserhalb von:
+und
+
+Benachrichtige
+
+# If user tries to exit when a download is going...
+
+Download am Laufen, bitte warten...
+
+# When user tries to change a channel or exit when
+# an MHW scan is going
+
+MHW Scan am Laufen, bitte warten...
+Konvertiere XMLTV Datei(en), bitte warten...
+
+# View mode help title/contents
+
+Graphische Ansichten-Steuerung
+1/2/3 - wechsle zur Listenansicht\n6/7/8/9 - zeige Sender/Filme/Fav./alle\n</> - waehle Tag\nBqUp/BqDn - waehle Zeit\n0 - Daten aktualisieren/Tagesanzeige auswaehlen\nSHIFT-ROT - zeige Timerliste\nSHIFT-GRUEN - zu Favoriten hinzufuegen\nAUDIO - Bouquet auswaehlen\nFarbtasten - Timer loeschen/DVR-/Ngrab-/Switch-Timer\nDREAM - Menu anzeigen\nOK - Cursor/Sender schauen/verlassen\nINFO - zeige Beschr./IMDB/Streaminfo\nTV/RADIO/TEXT - fuelle Bouquet-Cache mit Daten (Sender/akt. Sat./alle Sat.)\nVIDEO - Verstecke Fenster\nLAME - entferne Cursor/Exit
+
+# Edit mode help title/contents
+
+Bearbeitungsmodus Steuerung
+< - Zeitfenster verkleinern\n> - Zeitfenster strecken\nCURSOR TASTEN - Fenster verschieben\n2/4/6/8 - Fenstergroesse aendern\n0 - Focus Hauptfenster/Zeit/Status\nBouquet Up/Down - Senderhoehe\n7/9 - Sender-Kopfzeilen-Breite\nDREAM - Menu zeigen\nOK - Editieren beenden\nVIDEO = verstecke Fenster\nLAME - Exit
+
+# Program list view help title/contents
+
+Senderliste Steuerung
+INFO - zeige Bechreibung der aktuellen Sendung + IMDB (2x druecken)\n0 - Daten neuladen\nAUDIO - zeige Bouquet-Selektor\nSHIFT-ROT - zeige Timerliste\nROT - lösche Timer\nGRUEN - DVR-Timer\nGELB - Ngrab-Timer\nBLAU - Switch-Timer\nSHIFT-GRUEN - zu Favoriten hinzufuegen\nBOUQUET UP/DN - aktiviere Sender-Picker\n</> - EPG vorh./nachf. Sender\nOK - wechsle auf den ausgewaehlten Sender\nLAME - Exit
+
+# Program list edit help title/contents
+
+Senderlistebearbeitung Steuerung
+CURSOR TASTEN - Fenster verschieben\n2/4/6/8 - Fenstergroesse aendern\n0 - wechseln zwischen Hauptfenster/Status-Bar\nOK - Zum Ansichtsmodus zurueckkehren\nMENU - Menu zeigen\nLAME - Exit
+
+# About title/content
+
+By Pent Vaer, 2004.\n\nVielen Dank an meine Frau Sabrina fuer ihr geduldiges Warten waehrend dem n-ten Neustart des Abends.\n\nDanke an PLi fuer die mhwepg binary, fuer die Hilfe\nes in MV zu intergrieren und allgemeine\nKorrespondenz. Danke an Bjorn Hijmans fuer die Hilfe\nbei der Entwicklung und die zur Verfuegungstellung eines Servers fuer IMDB-Daten.\nDanke auch an Alex Shtol fuer diverse Hilfe,\nvor allem fuer die Neuerstellung des Funktionen-Menus.\n\nKeinen Dank an meine stoerenden Toechter,\nJade & Skye.
+
+# Feedback title/content
+
+MV Feedback
+Feedbacks bitte an folgenden Orten:\n\nhttp://sourceforge.net/projects/mv-plugin/
+
+# Tips title/content
+
+MV Tipps
+* Es gibt verschiedene HILFE-Screens fuer graphische\nAnsichten, Listen-Ansichten und den Bearbeitungsmodus\n fuer graphische Listen/Listen-Ansicht\n\n* druecken von INFO im Sendungsbeschreib-Fenster fragt die IMDB an (wenn die Box im Netzwerk ist)\n\n* ist die Tagesansicht aktiv, so koennen die Cursor-Tasten und OK benutzt werden\n\n* nach der Benutzung des Cursors, gehe zurueck\n zum schnellen Scrollen durch Druecken der LAME-Taste\n\n* Druecken von INFO waehrend MV versteckt ist, zeigt Informationen fuer die laufende Sendung an.
+
+# Daybar labels
+
+So
+Mo
+Di
+Mi
+Do
+Fr
+Sa
+
+# Main menu title/items
+
+MV Menu
+Load EPG data
+Ansicht editieren
+Schriftart/Farben editieren
+Funktionen editieren
+Datenquellen konfigurieren
+Alias Manager
+Favoriten Manager
+Diverse Einstellungen
+Ueber
+Tipps
+Feedback
+Konfiguration zuruecksetzen
+
+# Misc Menu title
+
+MV Diverse Einstellungen
+
+# Alias Manager title
+
+MV Alias Manager
+
+# Favourite Manager title
+
+MV Favoriten Manager
+
+# Favourite Edit window title
+
+MV Favoriten Editor
+
+# Features  window title
+
+MV Funktionen Editor
+
+# Inputs edit window title
+
+MV Datenquellen konfigurieren
+
+# Presentation editor window title
+
+MV Ansichtsoptionen
+
+# Channel picker window title
+
+Sender-Auswaehler
+
+# Program list window title prefix
+
+Sendungen: 
+
+# Title for user confirmation box
+# and various texts for that box too
+
+Bist du sicher?
+
+# Reset config confirmation
+
+Dies loescht alle Aenderungen, die du an der Konfiguration gemacht hast.
+
+# Set MyXMLTV input
+
+Fuer diese Quelle musst du die Daten selbst zur Verfuegung stellen\n z.B. indem du die Dateien auf deinem PC erstellst und via FTP zur Dreambox transferierst.\n\nSiehe http://mv.dinglisch.net/userguide.html#xmltv
+
+# IMDB
+
+Keine passenden IMDB-Datensaetze gefunden.
+Diese Sendung ist kein Film!
+
+# Numbers
+
+Eins
+Zwei
+Drei
+Vier
+Fuenf
+Sechs
+Sieben
+Acht
+Neun
+
+# 
+
+Loesche alte (schlechte) Konfiguartion
+Bitte warten, Download am Laufen
+
+# Error Messages
+
+Die Systemzeit ist nicht korrekt gesetzt.\nWenn du den Receiver grad angestellt hast, If you've just turned on the receiver, versuche es bitte nochmals sobald du im Display die Zeit siehst. Falls nicht, versuche den Sender zu wechseln und warte eine Minute. Vielleicht uebermittelt der aktuelle Sender keine korrekte Zeit.
+
+Kann die Konfiguartionsdatei nicht zum Schreiben oeffnen...
+Konfiguration konnte nicht geschrieben werden...
+Speicher voll; wahrscheinlich werde ich jetzt abstuerzen...
+Eine Netzwerkverbindung ist notwendig fuer diese Aktion...
+
+Schlechtes XML in der Datei:
+Keine XML-Datei, kein root node:
+Keine XML-Datei, schlechte root node:
+
+Download Fehler:
+Runtergeladenes tempfile konnte nicht umbenannt werden:
+Dateigroesse 0 nach dem Download:
+Datei existierte nach dem Download nicht:
+
+Fehler beim Loeschen der alten Dateien in
+Favoriten konnten nicht geschrieben werden nach
+Schlechte Favoriten Linie:
+Konnte die Datenquellen-Def.-Datein nicht zum Schreiben oeffnen:
+Konnte die Datenquellen-Definitionen nicht oeffnen:
+Schlechte Linie in Datenquellen-Definitionen:
+Fehler beim Schreiben der map-Datei.
+Cache-Verzeichnis konnte nicht erstellt werden:
+Achtung: Datenquellenname hat keine Definitionen:
+Falscher Datentyp fuer Datenquellen-Name:
+Falsches Datenquellen-Format definiert fuer die Datei:
+Konnte multiepg binary nicht finden in MV Verzeichnis
+Fehler beim multiepg starten:
+Konnte das konvertierte XMLTV tmpfile nicht verschieben nach:
+Verzeichnis konnte nicht erstellt werden:
+Alter Cache konnten nicht verschoben werden zum tempfile:
+Konnte die Cache-Backup-Datei nicht oeffnen:
+Fehler beim Loeschen des temp Cache-Backups:
+Konnte Aenderungszeit nicht setzen bei:
+Falsches Buchstaben-Encoding:
+
+Fehler beim Speichern der Sendungsbeschreibung im Detail-Cache (Speicehr voll?)

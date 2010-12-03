@@ -1,0 +1,566 @@
+<eskin>
+	<author>
+		<name>Black_matrix by MX</name>
+		<email></email>
+		<title>For Nemesis Genesi Project Black_matrix by MX</title>
+	</author>
+	<fonts>
+		<font file="md_khmurabi_10.ttf" name="Replacement" scale="78" replacement="yes" />
+		<font file="greg.ttf" scale = "76" name="Blue.Regular" /> 
+		<font file="greg.ttf" scale = "83" name="Blue.Bold" /> 
+		<font file="pakenham.ttf" name="lcd" /> 
+		<font file="bignumber.ttf" name="lcd1" /> 
+		<font file="ds-digital.ttf" name="LCD" /> 
+	</fonts>
+	<fontalias>
+		<map name="eServiceSelector.Entry.Description" font="Blue.Regular" size="26" />
+		<map name="eStatusBar" font="Blue.Regular" size="24" />
+		<map name="eChannelInfo" font="Blue.Regular" size="28" />
+		<map name="eWindow.TitleBar" font="Blue.Regular" size="28" />
+		<map name="eWindow.Childs" font="Blue.Regular" size="27" />
+		<map name="eListBox.EntryText.normal" font="Blue.Regular" size="28" />
+		<map name="eServiceSelector.singleColumn.Entry.Name" font="Blue.Regular" size="30" />
+		<map name ="eServiceSelector.singleColumn.Entry.Number" font ="Blue.Regular" size ="28"/>
+		<map name ="eServiceSelector.multiColumn.Entry.Number" font ="Blue.Regular" size ="26"/>
+		<map name ="eServiceSelector.multiColumn.Entry.Name" font ="Blue.Regular" size ="26"/>
+		<map name ="eServiceSelector.combiColumn.Entry.Number" font ="Blue.Regular" size ="26"/>
+		<map name ="eServiceSelector.combiColumn.Entry.Name" font ="Blue.Regular" size ="26"/>
+		<map name ="epg.time" font ="Blue.Regular" size ="25"/>
+		<map name ="epg.title" font ="Blue.Regular" size ="25"/>
+		<map name ="epg.description" font ="Blue.Regular" size ="25"/>
+		<map name="eEPGSelector.Entry.Description" font="Blue.Regular" size="28" />
+		<map name="eEPGSelector.Entry.DateTime" font="Blue.Bold" size="26" />
+		<map name="eventview.description" font="Blue.Regular" size="34" />
+		<map name="eventview.date" font="Blue.Regular" size="28" />
+		<map name="eventview.time" font="Blue.Regular" size="28" />
+		<map name="eventview.channel" font="Blue.Regular" size="28" />		
+		<map name="lcd.menu.title" font="lcd" size="24" />
+		<map name="lcd.menu.element" font="lcd" size="26" />
+		<map name="lcd.main.service_name" font="lcd" size="30" />
+		<map name="lcd.main.clock" font="lcd" size="28" />		
+		<map name="lcd.standby.clock" font="lcd1" size="65" />
+		<map name="global.normal" font="Blue.Regular" size="30" />
+		<map name="global.30" font="Blue.Regular" size="28" />
+		<map name="global.fixed" font="Blue.Regular" size="28" />
+		<map name="head" font="Blue.Regular" size="34" />
+	</fontalias>
+	<colors>	
+		<color name="red" color="#ff4A3C" />
+		<color name="transyellow" color="#12bab329" />
+		<color name="content" color="#46000000" />
+		<color name="white" color="#10ffffff" />
+		<color name="selected" color="#126e2105" />
+		<color name="progressBar" color="#22efc020" />
+		<color name="grey" color="#999999" /> 
+		<color name="green" color="#1260ee60" />
+		<color name="blue" color ="#000000ff"/>
+		<color name="yellow" color ="#FECC03"/>
+		<color name="black" color ="#00000000"/>
+	</colors>
+	<colorscheme>
+		<map name="eStatusBar.background" color="content" />
+		<map name="eStatusBar.foreground" color="white" />
+		<map name="global.normal.background" color="content" />
+		<map name="global.normal.foreground" color="white" />
+		<map name="button.normal.background" color="content" />
+		<map name="global.selected.background" color="selected" />
+		<map name="global.selected.foreground" color="white" />
+		<map name="global.disabled.background" color="content" />
+		<map name="global.disabled.foreground" color="selected" />
+		<map name="eWindow.titleBarFont" color="white" />
+		<map name="eProgress.border" color="white" />
+		<map name="eProgress.left" color="progressBar" />
+		<map name="eProgress.right" color="content" />
+		<map name="eSlider.activated.left" color="progressBar" />
+		<map name="eSlider.activated.right" color="selected" />
+		<map name="eServiceSelector.highlight.background" color="selected" /> 
+		<map name="eServiceSelector.highlight.foreground" color="white" />
+		<map name="volume_left" color="grey" />
+		<map name="volume_right" color="content" />
+	</colorscheme>
+	<values>
+		<value name="eComboBox.smallButton.decoWidth" value="25" />
+		<value name="eWindow.titleFontSize" value="22" />
+		<value name="eWindow.borderLeft" value="11" />
+		<value name="eWindow.borderRight" value="11" />
+		<value name="eWindow.borderBottom" value="12" />
+		<value name="eWindow.borderTop" value="30" />
+		<value name="eWindow.titleOffsetLeft" value="30" />
+		<value name="eWindow.titleOffsetTop" value="1" />
+		<value name="eWindow.titleOffsetRight" value="20" />
+		<value name="eWindow.titleHeight" value="0" />
+		<value name="fontsize" value="24" />
+		<value name="volume.grafik.pos.x" value ="248"/>
+		<value name="volume.grafik.pos.y" value ="360"/>
+		<value name="volume.slider.pos.x" value="43" />
+		<value name="volume.slider.pos.y" value="8" />
+                <value name="volume.egauge" value="0" /> 
+                <value name="volume.slider.width" value="180" />
+                <value name="volume.slider.height" value="24" />
+                <value name="volume.slider.start" value="100" />                                 	
+		<value name="mute.pos.x" 	value="70" />
+		<value name="mute.pos.y" 	value="75" />                
+                <value name="eMessageBox.pos.x" value="100" />
+                <value name="eMessageBox.pos.y" value="110" /> 
+	</values>
+	<images basepath="bm" target="fb">
+		<img name="info-bg" src="bm_s.png" />
+		<img name="ext-cc" src="ext_s.png" />
+	        <img name="mainmenu.background" src="mainmenu/background-fs8.png" />
+		<img name="listbox.separator" src="separator.png" />
+		<img name="icon_info" src="info.png" />
+		<img name="icon_question" src="question.png" />
+		<img name="icon_error" src="error.png" />
+		<img name="volume_grafik" src="volumeslider.png" />
+                <img name="volume_slider" src="volume_slider.png" />	
+		<img name="mute_symbol" src="mute.png" />
+		<img name="gkey_red" src="key-red.png" />
+		<img name="gkey_green" src="key-green.png" />
+		<img name="gkey_yellow" src="key-yellow.png" />
+		<img name="gkey_blue" src="key-blue.png" />
+		<img name="dreamlogo" src="logo.png" />
+		<img name="mainmenu.tv.sel"	src="mainmenu/tv_on.png" />
+		<img name="mainmenu.radio.sel" src="mainmenu/radio_on.png" />
+		<img name="mainmenu.file.sel" src="mainmenu/file_on.png" />
+		<img name="mainmenu.info.sel" src="mainmenu/info_on.png" />
+		<img name="mainmenu.shutdown.sel" src="mainmenu/shutdown_on.png" />
+		<img name="mainmenu.setup.sel" src="mainmenu/setup_on.png" />
+		<img name="mainmenu.games.sel" src="mainmenu/games_on.png" />
+		<img name="mainmenu.scart.sel" src="mainmenu/scart_on.png" />
+		<img name="mainmenu.timer.sel" src="mainmenu/rectime_on.png" />
+		<img name="mainmenu.tv" src="mainmenu/tv_on.png" />
+		<img name="mainmenu.radio" src="mainmenu/radio_on.png" />
+		<img name="mainmenu.file" src="mainmenu/file_on.png" />
+		<img name="mainmenu.info" src="mainmenu/info_on.png" />
+		<img name="mainmenu.shutdown" src="mainmenu/shutdown_on.png" />
+		<img name="mainmenu.setup" src="mainmenu/setup_on.png" />
+		<img name="mainmenu.games" src="mainmenu/games_on.png" />
+		<img name="mainmenu.scart" src="mainmenu/scart_on.png" />
+		<img name="mainmenu.timer" src="mainmenu/rectime_on.png" />
+		<img name="eComboBox.arrow" src="combo_arrow.png" />
+		<img name="eCheckbox.checked" src="checked.png" />
+		<img name="eCheckbox.unchecked" src="unchecked.png" />
+		<img name="button_red" src="button_red.png" />
+		<img name="button_red_no" src="button_red_no.png" />
+		<img name="button_green" src="button_green.png" />
+		<img name="button_green_no" src="button_green_no.png" />
+		<img name="button_yellow" src="g_ico_audio_on.png" />
+		<img name="button_yellow_off" src="g_ico_audio_off.png" />	
+		<img name="osd_txt_on" src="ico_txt_on.png" />
+		<img name="osd_txt_off" src="ico_txt_off.png" />	
+		<img name="rec_symbol" src="ico_disk_on.png" />
+		<img name="rec_symbol_off" src="ico_disk_off.png" />
+		<img name="osd_crypt_on" src="ico_crypt_on.png" />
+		<img name="osd_format_on" src="ico_format_on.png" />
+		<img name="osd_dolby_on" src="ico_dolby_on.png" />
+		<img name="osd_dolby_off" src="ico_dolby_off.png" />
+		<img name="sselect_folder" src="folder.png" />
+		<img name="dvrtable" src="dvr-fs8.png" />
+		<img name="osd_crypt_off" src="ico_crypt_off.png" />
+		<img name="osd_format_off" src="ico_format_off.png" />
+		<img name="lcd_enigma_logo" src="logo.png" nomerge="yes" />
+		<img name="lcd_menu" src="lcdmenu.png" nomerge="yes" />
+		<img name="lcd_scart" src="video.png" nomerge="yes" />
+		<img name="speaker" src="lcd-speaker.png" nomerge="yes" />
+		<img name="lcd-clock" src="lcd-clock.png" nomerge="yes" />		
+		<img name="eListBox.arrow.updown" src="lbarrow.png" />
+		<img name="eListBox.arrow.left" src="lbarrow_left.png" />
+		<img name="eListBox.arrow.right" src="lbarrow_right.png" />
+		<img name="eListBox.arrow.up" src="lbarrow_up.png" />
+		<img name="eListBox.arrow.down" src="lbarrow_down.png" />
+		<img name="eWindow.top" src="window/bs_t.png" />
+		<img name="eWindow.topLeft" src="window/bs_tl.png" />
+		<img name="eWindow.topRight" src="window/bs_tr.png" />
+		<img name="eWindow.left" src="window/bs_l.png" />
+		<img name="eWindow.right" src="window/bs_r.png" />
+		<img name="eWindow.bottomLeft" src="window/bs_bl.png" />
+		<img name="eWindow.bottom" src="window/bs_b.png" />
+		<img name="eWindow.bottomRight" src="window/bs_br.png" />
+		<img name="3DBorder.unselected.corner.light.swap" src="border/3D_border_unselected_corner_light_swap.png" />
+		<img name="3DBorder.unselected.corner.dark.swap" src="border/3D_border_unselected_corner_dark_swap.png" />
+		<img name="3DBorder.unselected.corner.lightDark.swap" src="border/3D_border_unselected_corner_lightDark_swap.png" />
+		<img name="3DBorder.unselected.corner.darkLight.swap" src="border/3D_border_unselected_corner_darkLight_swap.png" />
+		<img name="3DBorder.unselected.corner.light" src="border/3D_border_unselected_corner_light.png" />
+		<img name="3DBorder.unselected.corner.dark" src="border/3D_border_unselected_corner_dark.png" />
+		<img name="3DBorder.unselected.corner.lightDark" src="border/3D_border_unselected_corner_lightDark.png" />
+		<img name="3DBorder.unselected.corner.darkLight" src="border/3D_border_unselected_corner_darkLight.png" />
+		<img name="3DBorder.unselected.hor.dark" src="border/3D_border_unselected_hor_dark.png" />
+		<img name="3DBorder.unselected.hor.light" src="border/3D_border_unselected_hor_light.png" />
+		<img name="3DBorder.unselected.ver.dark" src="border/3D_border_unselected_ver_dark.png" />
+		<img name="3DBorder.unselected.ver.light" src="border/3D_border_unselected_ver_light.png" />
+		<img name="3DBorder.eButton.top" src="border/3D_border_eButton_top.png" />
+		<img name="3DBorder.eButton.bottom" src="border/3D_border_eButton_bottom.png" />
+		<img name="3DBorder.eButton.left" src="border/3D_border_eButton_left.png" />
+		<img name="3DBorder.eButton.right" src="border/3D_border_eButton_right.png" />
+		<img name="3DBorder.eButton.topLeft" src="border/3D_border_eButton_topLeft.png" />
+		<img name="3DBorder.eButton.topRight" src="border/3D_border_eButton_topRight.png" />
+		<img name="3DBorder.eButton.bottomLeft" src="border/3D_border_eButton_bottomLeft.png" />
+		<img name="3DBorder.eButton.bottomRight" src="border/3D_border_eButton_bottomRight.png" />
+		<img name="diseqc_0" src="diseqc_0-fs8.png" />
+		<img name="diseqc_1" src="diseqc_1-fs8.png" />
+		<img name="diseqc_2" src="diseqc_2-fs8.png" />
+		<img name="sig_bar" src="sig_bar.png" /> 
+		<img name="beta_emm" src="ency/beta_emm.png" />
+		<img name="beta_ecm" src="ency/beta_ecm.png" />
+		<img name="beta_no" src="ency/beta_no.png" />
+		<img name="irdeto_emm" src="ency/irdeto_emm.png" />
+		<img name="irdeto_ecm" src="ency/irdeto_ecm.png" />
+		<img name="irdeto_no" src="ency/irdeto_no.png" />
+		<img name="seca_emm" src="ency/seca_emm.png" />
+		<img name="seca_ecm" src="ency/seca_ecm.png" />
+		<img name="seca_no" src="ency/seca_no.png" />
+		<img name="via_emm" src="ency/via_emm.png" />
+		<img name="via_ecm" src="ency/via_ecm.png" />
+		<img name="via_no" src="ency/via_no.png" />
+		<img name="nagra_emm" src="ency/nagra_emm.png" />
+		<img name="nagra_ecm" src="ency/nagra_ecm.png" />
+		<img name="nagra_no" src="ency/nagra_no.png" />
+		<img name="cw_emm" src="ency/cw_emm.png" />
+		<img name="cw_ecm" src="ency/cw_ecm.png" />
+		<img name="cw_no" src="ency/cw_no.png" />
+		<img name="nds_emm" src="ency/nds_emm.png" /> 
+		<img name="nds_ecm" src="ency/nds_ecm.png" />
+		<img name="nds_no" src="ency/nds_no.png" />			
+		<img name="conax_emm" src="ency/conax_emm.png" /> 
+		<img name="conax_ecm" src="ency/conax_ecm.png" />
+		<img name="conax_no" src="ency/conax_no.png" />
+		<img name="dec_card" src="button_sc.png" />
+		<img name="dec_emu" src="button_int.png" />
+		<img name="dec_net" src="button_net.png" />
+		<img name="dec_no" src="button_nem.png" />	      
+	</images>
+	<imagealias>
+		<map name="eStatusBar.top" img="3DBorder.unselected.hor.light" />
+		<map name="eStatusBar.left" img="3DBorder.unselected.ver.light" />
+		<map name="eStatusBar.topLeft" img="3DBorder.unselected.corner.light" />
+		<map name="eStatusBar.bottom" img="3DBorder.unselected.hor.dark" />
+		<map name="eStatusBar.right" img="3DBorder.unselected.ver.dark" />
+		<map name="eStatusBar.bottomRight" img="3DBorder.unselected.corner.dark" />		
+		<map name="eStatusBar.topRight" img="3DBorder.unselected.corner.darkLight" />
+		<map name="eStatusBar.bottomLeft" img="3DBorder.unselected.corner.lightDark" />		
+
+		<map name="eComboBox.top" img="3DBorder.unselected.hor.dark" />
+		<map name="eComboBox.left" img="3DBorder.unselected.ver.dark" />
+		<map name="eComboBox.topLeft" img="3DBorder.unselected.corner.light.swap" />
+		<map name="eComboBox.bottom" img="3DBorder.unselected.hor.light" />
+		<map name="eComboBox.right" img="3DBorder.unselected.ver.light" />
+		<map name="eComboBox.bottomRight" img="3DBorder.unselected.corner.dark.swap" />
+		<map name="eComboBox.topRight" img="3DBorder.unselected.corner.darkLight.swap" />
+		<map name="eComboBox.bottomLeft" img="3DBorder.unselected.corner.lightDark.swap" />
+
+		<map name="eComboBox.listbox.bottom" img="3DBorder.unselected.hor.dark" />
+		<map name="eComboBox.listbox.right" img="3DBorder.unselected.ver.dark" />
+		<map name="eComboBox.listbox.bottomLeft" img="3DBorder.unselected.corner.dark.swap" />
+		<map name="eComboBox.listbox.top" img="3DBorder.unselected.hor.dark" />
+		<map name="eComboBox.listbox.left" img="3DBorder.unselected.ver.dark" />
+		<map name="eComboBox.listbox.topRight" img="3DBorder.unselected.corner.dark.swap" />
+		<map name="eComboBox.listbox.bottomRight" img="3DBorder.unselected.corner.dark.swap" />
+		<map name="eComboBox.listbox.topLeft" img="3DBorder.unselected.corner.dark.swap" />
+
+		<map name="eButton.top" img="3DBorder.eButton.top" />
+		<map name="eButton.left" img="3DBorder.eButton.left" />
+		<map name="eButton.topLeft" img="3DBorder.eButton.topLeft" />
+		<map name="eButton.bottom" img="3DBorder.eButton.bottom" />
+		<map name="eButton.right" img="3DBorder.eButton.right" />
+		<map name="eButton.bottomRight" img="3DBorder.eButton.bottomRight" />
+		<map name="eButton.topRight" img="3DBorder.eButton.topRight" />
+		<map name="eButton.bottomLeft" img="3DBorder.eButton.bottomLeft" />
+ 
+		<map name="eNumber.top" img="3DBorder.unselected.hor.dark" />
+		<map name="eNumber.left" img="3DBorder.unselected.ver.dark" />
+		<map name="eNumber.bottom" img="3DBorder.unselected.hor.light" />
+		<map name="eNumber.right" img="3DBorder.unselected.ver.light" />
+		<map name="eNumber.topLeft" img="3DBorder.unselected.corner.light.swap" />
+		<map name="eNumber.bottomRight" img="3DBorder.unselected.corner.dark.swap" />
+		<map name="eNumber.topRight" img="3DBorder.unselected.corner.darkLight.swap" />
+		<map name="eNumber.bottomLeft" img="3DBorder.unselected.corner.lightDark.swap" />
+
+		<map name="eListBox.top" img="3DBorder.unselected.hor.dark" />
+		<map name="eListBox.left" img="3DBorder.unselected.ver.dark" />
+		<map name="eListBox.topLeft" img="3DBorder.unselected.corner.light.swap" />
+		<map name="eListBox.bottom" img="3DBorder.unselected.hor.light" />
+		<map name="eListBox.right" img="3DBorder.unselected.ver.light" />
+		<map name="eListBox.bottomRight" img="3DBorder.unselected.corner.dark.swap" />
+		<map name="eListBox.topRight" img="3DBorder.unselected.corner.darkLight.swap" />
+		<map name="eListBox.bottomLeft" img="3DBorder.unselected.corner.darkLight.swap" />
+	</imagealias>
+	<object name="eZapMainMenu">
+		<eWidget position="170:300" size="380:200">
+			<eLabel pixmap="mainmenu.background" position="0:0" size="e:e" name="mainmenu.background" />
+			<eLabel position="145:20" size="120:30" font="Blue.Regular;30" foregroundColor="white" name="mtxt" text="Main Menu" />
+			<eLabel position="17:45"  size="100:100" name="l1" alphatest="on"  />
+			<eLabel position="135:45" size="100:100" name="m" alphatest="on"  />
+			<eLabel position="254:45" size="100:100" name="r1" alphatest="on" />
+			<eLabel position="25:152" size="330:24" align="center" font="Blue.Bold;27" foregroundColor="white" name="description" />	
+		</eWidget>
+	</object>
+	<object name="enigma_lcd_main">
+		<eZapLCDMain position="0:0" size="120:64">
+			<eLabel position="0:0" size="120:56" font="lcd.main.service_name" wrap="on" align="center" name="service_name" />
+			<eLabel position="74:42" size="46:23" font="lcd.main.clock" name="clock" align="right" />
+			<eLabel position="0:53" size="9:13" pixmap="speaker" />
+			<eLabel position="0:46" size="7:7" pixmap="lcd-clock" />
+			<eProgress position="9:56" size="64:8" name="volume_bar" foregroundColor="255" leftColor="255" rightColor="0" border="1" />
+			<eProgress position="9:46" size="64:9" name="progress_bar" foregroundColor="255" leftColor="255" rightColor="0" border="1" />
+		</eZapLCDMain>
+	</object>	
+	<object name="enigma_lcd_standby">
+		<eZapLCDStandby position="0:0" size="120:64">
+			<eLabel position="10:0" size="e:e" font="lcd.standby.clock" name="clock" />	
+		</eZapLCDStandby>
+	</object>
+	<object name="enigma_lcd_scart">
+		<eZapLCDScart position="0:0" size="120:64">
+			<eProgress position="7:2" size="65:6" name="volume_bar" foregroundColor="0" leftColor="0" rightColor="255" border="1" />
+			<eLabel position="0:0" size="120:17" pixmap="lcd_enigma_logo" />
+		  <eLabel position="4:20" size="112:38" pixmap="lcd_scart" />	
+		</eZapLCDScart>
+	</object>	
+	<object name="ezap_main">	
+		<eZapMain position="0:40" size="720:536">				
+			<eLabel position="0:370" size="720:130" pixmap="info-bg" name="info-bg" />
+			<eLabel position="185:370" size="370:26" font="Blue.Bold;27" name="ch_name" foregroundColor="white" align="center"  />
+			<eLabel position="130:371" size="55:25" font="Blue.Bold;25" name="ch_number" foregroundColor="white" align="center" />
+			<eLabel position="563:371" size="155:25" font="LCD;27" name="time" align="left" foregroundColor="white" />
+			<eLabel position="58:396" font="Blue.Bold;20" size="200:18" align="left" foregroundColor="transyellow"  name="pro_name" />
+			<eLabel position="60:372" size="65:20" align="left" font="Blue.Bold;22" foregroundColor="white" name="videoformat" />
+			<eLabel position="470:397" font="Blue.Bold;22" size="190:21" align="right" foregroundColor="transyellow" name="date" />
+			<eLabel position ="245:479" size ="234:18" name ="cam_info" font ="Blue.Bold;20" foregroundColor ="white" align ="center" />
+			<eProgress position="131:420" size="529:3" name="progress_bar" leftColor="progressBar" border="0" />		
+			<eLabel name="recStatus_off" position="606:482" size="25:16" pixmap="rec_symbol_off" />
+			<eLabel name="recStatus" position="606:482" size="25:16" pixmap="rec_symbol" /> 
+			<eLabel position="635:482" pixmap="dec_no" size="28:16" name="button_nem" alphatest="on" />  
+			<eLabel position="635:482" pixmap="dec_card" size="28:16" name="button_card" alphatest="on" />
+			<eLabel position="635:482" pixmap="dec_emu" size="28:16" name="button_emu" alphatest="on" />
+			<eLabel position="635:482" pixmap="dec_net" size="28:16" name="button_spider" alphatest="on" />
+			<eLabel name="description" />
+			<eWidget name="CH_Info" position="461:482" size="210:25" >				
+				<eLabel position="25:0" size="12:16" pixmap="button_yellow_off" name="button_yellow_disabled" />
+				<eLabel position="25:0" size="12:16" pixmap="button_yellow" name="button_yellow_enabled" />
+				<eLabel position="41:0" size="25:16" pixmap="osd_txt_on" name="button_blue_enabled" />
+				<eLabel position="41:0" size="25:16" pixmap="osd_txt_off" name="button_blue_disabled" />
+				<eLabel position="70:0" size="25:16" pixmap="osd_dolby_on" name="osd_dolby_on" />
+				<eLabel position="70:0" size="25:16" pixmap="osd_dolby_off" name="osd_dolby_off" />
+				<eLabel position="99:0" size="28:16" pixmap="osd_format_on" name="osd_format_on" />
+				<eLabel position="99:0" size="28:16" pixmap="osd_format_off" name="osd_format_off" />
+				<eLabel position="130:0" size="11:16" name="osd_crypt_off2" pixmap="osd_crypt_off" />
+				<eLabel position="130:0" size="11:16" name="osd_crypt_on" pixmap="osd_crypt_on" />
+			</eWidget>	
+			<eWidget name="ENCY_Info" position="56:480" size="150:20" > 
+				<eLabel position="0:0" size="16:17" pixmap="beta_emm" name="beta_emm" />
+				<eLabel position="0:0" size="16:17" pixmap="beta_ecm" name="beta_ecm" />
+				<eLabel position="0:0" size="16:17" pixmap="beta_no" name="beta_no" />
+				<eLabel position="15:0" size="16:17" pixmap="irdeto_emm" name="irdeto_emm" />
+				<eLabel position="15:0" size="16:17" pixmap="irdeto_ecm" name="irdeto_ecm" />
+				<eLabel position="15:0" size="16:17" pixmap="irdeto_no" name="irdeto_no" />
+				<eLabel position="30:0" size="16:17" pixmap="seca_emm" name="seca_emm" />
+				<eLabel position="30:0" size="16:17" pixmap="seca_ecm" name="seca_ecm" />
+				<eLabel position="30:0" size="16:17" pixmap="seca_no" name="seca_no" />
+				<eLabel position="45:0" size="16:17" pixmap="via_emm" name="via_emm" />
+				<eLabel position="45:0" size="16:17" pixmap="via_ecm" name="via_ecm" />
+				<eLabel position="45:0" size="16:17" pixmap="via_no" name="via_no" />
+				<eLabel position="60:0" size="16:17" pixmap="nagra_emm" name="nagra_emm" />
+				<eLabel position="60:0" size="16:17" pixmap="nagra_ecm" name="nagra_ecm" />
+				<eLabel position="60:0" size="16:17" pixmap="nagra_no" name="nagra_no" />
+				<eLabel position="75:0" size="22:17" pixmap="cw_emm" name="cw_emm" />
+				<eLabel position="75:0" size="22:17" pixmap="cw_ecm" name="cw_ecm" />
+				<eLabel position="75:0" size="22:17" pixmap="cw_no" name="cw_no" />
+				<eLabel position="96:0" size="22:17" pixmap="nds_emm" name="nds_emm" />
+				<eLabel position="96:0" size="22:17" pixmap="nds_ecm" name="nds_ecm" />
+				<eLabel position="96:0" size="22:17" pixmap="nds_no" name="nds_no" />
+				<eLabel position="117:0" size="22:17" pixmap="conax_emm" name="conax_emm" /> 
+				<eLabel position="117:0" size="22:17" pixmap="conax_ecm" name="conax_ecm" />
+				<eLabel position="117:0" size="22:17" pixmap="conax_no" name="conax_no" />
+			</eWidget>	
+			<eWidget name="C_Info" position="195:480" size="50:17" >
+				<eLabel position="0:0" size="24:16" pixmap="button_red_no" name="button_red_disabled"  />
+				<eLabel position="0:0" size="24:16" pixmap="button_red" name="button_red_enabled"  />
+				<eLabel position="25:0" size="25:16" pixmap="button_green_no" name="button_green_disabled" />
+				<eLabel position="25:0" size="25:16" pixmap="button_green" name="button_green_enabled" />
+			</eWidget>
+			<eWidget name="Tp_Info" position="270:397" size="200:20" >
+				<eLabel text="FQ" position="0:0" size="22:18" name="fq_text" font="Blue.Bold;20" foregroundColor ="transyellow"  />
+				<eLabel position="22:0" size="54:18" name="feq" font="Blue.Bold;20" foregroundColor ="transyellow"  />	
+				<eLabel position="64:0" size="10:18"  name="pol" font="Blue.Bold;20" foregroundColor ="transyellow"  />	
+				<eLabel text="SR" position="80:0" size="22:18" name="sr_text" font="Blue.Bold;20" foregroundColor ="transyellow"  />
+				<eLabel position="102:0" size="45:18" name="sr_snr" font="Blue.Bold;20" foregroundColor ="transyellow"  />
+				<eLabel text="FC" position="147:0" size="22:18" name="fc_text" font="Blue.Bold;20" foregroundColor ="transyellow"  />
+				<eLabel position="169:0" size="25:18" name="fc_fec" font="Blue.Bold;20" foregroundColor ="transyellow"  />
+			</eWidget>
+			<eLabel name="dvrInfoBar" position="60:425" size="453:44" pixmap="dvrtable" alphatest="on" >
+			        <eLabel position="2:1" size="70:53" name="picon_dvr"/>
+				<eLabel name="TimeLeft" position="400:20" size="125:39" backgroundColor="content" foregroundColor="white" align="center" font="Blue.Bold;24" wrap="on" />
+			</eLabel>			
+		        <eWidget name="dvbInfoBar" position="60:419" size="600:55" >
+				<eLabel position="1:5" size="70:53" name="picon"/> 
+				<eLabel position="77:7" size="50:24" font="Blue.Bold;24" name="e_now_time" foregroundColor="white" />
+				<eLabel position="77:32" size="50:24" font="Blue.Bold;24" name="e_next_time"  foregroundColor="white" />
+				<eLabel position="129:6" size="388:26" font="Blue.Bold;25" name="e_now_title"  foregroundColor="white" />
+				<eLabel position="129:31" size="388:26" font="Blue.Bold;25" name="e_next_title"  foregroundColor="white" />
+				<eLabel position="519:7" size="75:24" font="Blue.Bold;24" name="e_now_duration" align="right"  foregroundColor="white" />
+				<eLabel position="519:32" size="75:24" font="Blue.Bold;24" name="e_next_duration" align="right"  foregroundColor="white" />
+			</eWidget>
+			<eWidget name="fileInfoBar" position="137:428" size="453:44">
+				<eLabel position="5:0" size="e:e" font="Blue.Bold;24" name="fileinfos" backgroundColor="content" foregroundColor="white" align="left" wrap="on" />
+			</eWidget> 
+			<eWidget position="0:0" size="720:50" name="extraInfobar" > 
+				<eLabel position="0:0" size="720:50" name="ext-cc" pixmap="ext-cc" />
+				<eProgress position="93:5" size="67:6" name="snr_progress" rightColor="content" leftColor="green"  border="0" />
+				<eProgress position="327:5" size="67:6" name="agc_progress" rightColor="content" leftColor="progressBar"  border="0" />
+				<eProgress position="562:5" size="67:6" name="ber_progress" rightColor="content" leftColor="red"  border="0" />			
+				<eLabel name="prov_id" position="60:14" font="Blue.Bold;20" size="140:18" text ="PROV" align="center" foregroundColor="transyellow" />
+				<eLabel name="ca_id" position="200:14" font="Blue.Bold;20" size="320:18" text ="CA" align="center" foregroundColor="transyellow" />
+				<eLabel name="pid_id" position="535:14" font="Blue.Bold;20" size="125:18" text ="PID" align="center" foregroundColor="transyellow" />
+				<eLabel position="200:31" size="320:18" align="center" font="Blue.Bold;20" foregroundColor="transyellow" name="netcard_info" />
+				<eLabel position="60:31" size="140:18" align="center" font="Blue.Bold;20" foregroundColor="transyellow" name="ecm_time"/>
+				<eLabel position="535:31" size="125:18" align="center" font="Blue.Bold;20" foregroundColor="transyellow" name="hops" />
+				<eLabel position="60:1" size="33:16" font="Blue.Bold;16" foregroundColor="transyellow" name="snr_text" text ="SNR" />
+				<eLabel position="170:1" size="40:16" font="Blue.Bold;16" foregroundColor="transyellow" name="snr_num" />
+				<eLabel position="291:1" size="33:16" font="Blue.Bold;16" foregroundColor="transyellow" name="agc_text" text ="AGC" />
+				<eLabel position="404:1" size="40:16" font="Blue.Bold;16" foregroundColor="transyellow" name="agc_num" />
+				<eLabel position="524:1" size="40:16" font="Blue.Bold;16" foregroundColor="transyellow" name="ber_text" text ="BER" />
+				<eLabel position="639:1" size="40:16" font="Blue.Bold;16" foregroundColor="transyellow" name="ber_num" />			
+				<eLabel position="0:20" size="720:30" name="osd_crypt_off" backgroundColor="trans" /> 
+			</eWidget>
+			<eGauge position="0:600" size="0:0" name="hour_gauge" border="0" start="0" direction="1" />
+			<eGauge position="0:600" size="0:0" name="minutes_gauge" border="0" start="0" direction="1" />
+			<eGauge position="0:600" size="0:0" name="seconds_gauge" border="0" start="0" direction="1" />
+		</eZapMain>
+	</object>
+	<object name="ezap_lite">
+		<eZapLight position="0:40" size="720:536">				
+			<eLabel position="0:370" size="720:130" pixmap="info-bg" name="info-bg" />
+			<eLabel position="185:370" size="370:26" font="Blue.Bold;27" name="ch_name" foregroundColor="white" align="center"  />
+			<eLabel position="130:371" size="55:25" font="Blue.Bold;25" name="ch_number" foregroundColor="white" align="center" />
+			<eLabel position="563:371" size="155:25" font="LCD;27" name="time" align="left" foregroundColor="white" />
+			<eLabel position="58:396" font="Blue.Bold;20" size="200:18" align="left" foregroundColor="transyellow"  name="pro_name" />
+			<eLabel position="60:372" size="65:20" align="left" font="Blue.Bold;22" foregroundColor="white" name="videoformat" />
+			<eLabel position="470:397" font="Blue.Bold;22" size="190:21" align="right" foregroundColor="transyellow" name="date" />
+			<eLabel position ="245:479" size ="234:18" name ="cam_info" font ="Blue.Bold;20" foregroundColor ="white" align ="center" />
+			<eProgress position="131:420" size="529:3" name="progress_bar" leftColor="progressBar" border="0" />		
+			<eLabel name="recStatus_off" position="606:482" size="25:16" pixmap="rec_symbol_off" />
+			<eLabel name="recStatus" position="606:482" size="25:16" pixmap="rec_symbol" /> 
+			<eLabel position="635:482" pixmap="dec_no" size="28:16" name="button_nem" alphatest="on" />  
+			<eLabel position="635:482" pixmap="dec_card" size="28:16" name="button_card" alphatest="on" />
+			<eLabel position="635:482" pixmap="dec_emu" size="28:16" name="button_emu" alphatest="on" />
+			<eLabel position="635:482" pixmap="dec_net" size="28:16" name="button_spider" alphatest="on" />
+			<eLabel name="description" />
+			<eWidget name="CH_Info" position="461:482" size="210:25" >				
+				<eLabel position="25:0" size="12:16" pixmap="button_yellow_off" name="button_yellow_disabled" />
+				<eLabel position="25:0" size="12:16" pixmap="button_yellow" name="button_yellow_enabled" />
+				<eLabel position="41:0" size="25:16" pixmap="osd_txt_on" name="button_blue_enabled" />
+				<eLabel position="41:0" size="25:16" pixmap="osd_txt_off" name="button_blue_disabled" />
+				<eLabel position="70:0" size="25:16" pixmap="osd_dolby_on" name="osd_dolby_on" />
+				<eLabel position="70:0" size="25:16" pixmap="osd_dolby_off" name="osd_dolby_off" />
+				<eLabel position="99:0" size="28:16" pixmap="osd_format_on" name="osd_format_on" />
+				<eLabel position="99:0" size="28:16" pixmap="osd_format_off" name="osd_format_off" />
+				<eLabel position="130:0" size="11:16" name="osd_crypt_off2" pixmap="osd_crypt_off" />
+				<eLabel position="130:0" size="11:16" name="osd_crypt_on" pixmap="osd_crypt_on" />
+			</eWidget>	
+			<eWidget name="ENCY_Info" position="56:480" size="150:20" > 
+				<eLabel position="0:0" size="16:17" pixmap="beta_emm" name="beta_emm" />
+				<eLabel position="0:0" size="16:17" pixmap="beta_ecm" name="beta_ecm" />
+				<eLabel position="0:0" size="16:17" pixmap="beta_no" name="beta_no" />
+				<eLabel position="15:0" size="16:17" pixmap="irdeto_emm" name="irdeto_emm" />
+				<eLabel position="15:0" size="16:17" pixmap="irdeto_ecm" name="irdeto_ecm" />
+				<eLabel position="15:0" size="16:17" pixmap="irdeto_no" name="irdeto_no" />
+				<eLabel position="30:0" size="16:17" pixmap="seca_emm" name="seca_emm" />
+				<eLabel position="30:0" size="16:17" pixmap="seca_ecm" name="seca_ecm" />
+				<eLabel position="30:0" size="16:17" pixmap="seca_no" name="seca_no" />
+				<eLabel position="45:0" size="16:17" pixmap="via_emm" name="via_emm" />
+				<eLabel position="45:0" size="16:17" pixmap="via_ecm" name="via_ecm" />
+				<eLabel position="45:0" size="16:17" pixmap="via_no" name="via_no" />
+				<eLabel position="60:0" size="16:17" pixmap="nagra_emm" name="nagra_emm" />
+				<eLabel position="60:0" size="16:17" pixmap="nagra_ecm" name="nagra_ecm" />
+				<eLabel position="60:0" size="16:17" pixmap="nagra_no" name="nagra_no" />
+				<eLabel position="75:0" size="22:17" pixmap="cw_emm" name="cw_emm" />
+				<eLabel position="75:0" size="22:17" pixmap="cw_ecm" name="cw_ecm" />
+				<eLabel position="75:0" size="22:17" pixmap="cw_no" name="cw_no" />
+				<eLabel position="96:0" size="22:17" pixmap="nds_emm" name="nds_emm" />
+				<eLabel position="96:0" size="22:17" pixmap="nds_ecm" name="nds_ecm" />
+				<eLabel position="96:0" size="22:17" pixmap="nds_no" name="nds_no" />
+				<eLabel position="117:0" size="22:17" pixmap="conax_emm" name="conax_emm" /> 
+				<eLabel position="117:0" size="22:17" pixmap="conax_ecm" name="conax_ecm" />
+				<eLabel position="117:0" size="22:17" pixmap="conax_no" name="conax_no" />
+			</eWidget>	
+			<eWidget name="C_Info" position="195:480" size="50:17" >
+				<eLabel position="0:0" size="24:16" pixmap="button_red_no" name="button_red_disabled"  />
+				<eLabel position="0:0" size="24:16" pixmap="button_red" name="button_red_enabled"  />
+				<eLabel position="25:0" size="25:16" pixmap="button_green_no" name="button_green_disabled" />
+				<eLabel position="25:0" size="25:16" pixmap="button_green" name="button_green_enabled" />
+			</eWidget>
+			<eWidget name="Tp_Info" position="270:397" size="200:20" >
+				<eLabel text="FQ" position="0:0" size="22:18" name="fq_text" font="Blue.Bold;20" foregroundColor ="transyellow"  />
+				<eLabel position="22:0" size="54:18" name="feq" font="Blue.Bold;20" foregroundColor ="transyellow"  />	
+				<eLabel position="64:0" size="10:18"  name="pol" font="Blue.Bold;20" foregroundColor ="transyellow"  />	
+				<eLabel text="SR" position="80:0" size="22:18" name="sr_text" font="Blue.Bold;20" foregroundColor ="transyellow"  />
+				<eLabel position="102:0" size="45:18" name="sr_snr" font="Blue.Bold;20" foregroundColor ="transyellow"  />
+				<eLabel text="FC" position="147:0" size="22:18" name="fc_text" font="Blue.Bold;20" foregroundColor ="transyellow"  />
+				<eLabel position="169:0" size="25:18" name="fc_fec" font="Blue.Bold;20" foregroundColor ="transyellow"  />
+			</eWidget>
+			<eLabel name="dvrInfoBar" position="60:425" size="453:44" pixmap="dvrtable" alphatest="on" >
+			        <eLabel position="2:1" size="70:53" name="picon_dvr"/>
+				<eLabel name="TimeLeft" position="400:20" size="125:39" backgroundColor="content" foregroundColor="white" align="center" font="Blue.Bold;24" wrap="on" />
+			</eLabel>			
+		        <eWidget name="dvbInfoBar" position="60:419" size="600:55" >
+				<eLabel position="1:5" size="70:53" name="picon"/> 
+				<eLabel position="77:7" size="50:24" font="Blue.Bold;24" name="e_now_time" foregroundColor="white" />
+				<eLabel position="77:32" size="50:24" font="Blue.Bold;24" name="e_next_time"  foregroundColor="white" />
+				<eLabel position="129:6" size="388:26" font="Blue.Bold;25" name="e_now_title"  foregroundColor="white" />
+				<eLabel position="129:31" size="388:26" font="Blue.Bold;25" name="e_next_title"  foregroundColor="white" />
+				<eLabel position="519:7" size="75:24" font="Blue.Bold;24" name="e_now_duration" align="right"  foregroundColor="white" />
+				<eLabel position="519:32" size="75:24" font="Blue.Bold;24" name="e_next_duration" align="right"  foregroundColor="white" />
+			</eWidget>
+			<eWidget name="fileInfoBar" position="137:428" size="453:44">
+				<eLabel position="5:0" size="e:e" font="Blue.Bold;24" name="fileinfos" backgroundColor="content" foregroundColor="white" align="left" wrap="on" />
+			</eWidget> 
+			<eWidget position="0:600" size="0:0" name="extraInfobar" />
+			<eGauge position="0:600" size="0:0" name="hour_gauge" border="0" start="0" direction="1" />
+			<eGauge position="0:600" size="0:0" name="minutes_gauge" border="0" start="0" direction="1" />
+			<eGauge position="0:600" size="0:0" name="seconds_gauge" border="0" start="0" direction="1" />
+			</eZapLight>
+	</object>
+	<object name="eServiceSelector_singleColumn_buttons">
+		<eServiceSelector cposition="90:100" csize="560:420" text="Services">
+			<eLabel position="0:0" size="140:25" pixmap="gkey_red" alphatest="on" />
+			<eLabel position="140:0" size="140:25" pixmap="gkey_green" alphatest="on" />
+			<eLabel position="280:0" size="140:25" pixmap="gkey_yellow" alphatest="on" />
+			<eLabel position="420:0" size="140:25" pixmap="gkey_blue" alphatest="on" />
+			<eButton name="key_red" position="0:0" size="140:25" loadDeco="" font="epg.title" align="center" vcenter="on" alphatest="on"  />
+			<eButton name="key_green" position="140:0" size="140:25" loadDeco="" font="epg.title" align="center" vcenter="on" alphatest="on"  />
+			<eButton name="key_yellow" position="280:0" size="140:25" loadDeco="" font="epg.title" align="center" vcenter="on" alphatest="on"  />
+			<eButton name="key_blue" position="420:0" size="140:25" loadDeco="" font="epg.title" align="center" vcenter="on" alphatest="on"  />
+			<eListbox name="services" position="0:28" size="e:e-100" />
+			<eChannelInfo name="channelinfo" position="0:e-100" size="e:100" loadDeco="" />
+		</eServiceSelector>
+	</object>
+	<object name="eServiceSelector_multiColumn_buttons">
+		<eServiceSelector cposition="90:100" csize="560:420" text="Services"> 	
+			<eLabel position="0:0" size="140:25" pixmap="gkey_red" alphatest="on" />
+			<eLabel position="140:0" size="140:25" pixmap="gkey_green" alphatest="on" />
+			<eLabel position="280:0" size="140:25" pixmap="gkey_yellow" alphatest="on" />
+			<eLabel position="420:0" size="140:25" pixmap="gkey_blue" alphatest="on" />
+			<eButton name="key_red" position="0:0" size="140:25" loadDeco="" font="epg.title" align="center" vcenter="on" alphatest="on"  />
+			<eButton name="key_green" position="140:0" size="140:25" loadDeco="" font="epg.title" align="center" vcenter="on" alphatest="on"  />
+			<eButton name="key_yellow" position="280:0" size="140:25" loadDeco="" font="epg.title" align="center" vcenter="on" alphatest="on"  />
+			<eButton name="key_blue" position="420:0" size="140:25" loadDeco="" font="epg.title" align="center" vcenter="on" alphatest="on"  />
+			<eListbox name="services" columns="3" position="0:32" size="e:e-100" />
+			<eChannelInfo name="channelinfo" position="0:e-100" size="e:100" loadDeco="" />
+		</eServiceSelector>
+	</object>
+	<object name="eServiceSelector_combiColumn_buttons">
+		<eServiceSelector cposition="90:100" csize="560:420" text="Services">
+			<eLabel position="0:0" size="140:25" pixmap="gkey_red" alphatest="on" />
+			<eLabel position="140:0" size="140:25" pixmap="gkey_green" alphatest="on" />
+			<eLabel position="280:0" size="140:25" pixmap="gkey_yellow" alphatest="on" />
+			<eLabel position="420:0" size="140:25" pixmap="gkey_blue" alphatest="on" />
+			<eButton name="key_red" position="0:0" size="140:25" loadDeco="" font="epg.title" align="center" vcenter="on" alphatest="on"  />
+			<eButton name="key_green" position="140:0" size="140:25" loadDeco="" font="epg.title" align="center" vcenter="on" alphatest="on"  />
+			<eButton name="key_yellow" position="280:0" size="140:25" loadDeco="" font="epg.title" align="center" vcenter="on" alphatest="on"  />
+			<eButton name="key_blue" position="420:0" size="140:25" loadDeco="" font="epg.title" align="center" vcenter="on" alphatest="on"  />
+			<eListbox name="bouquets" position="5:35" size="150:e-100" loadDeco="" />
+			<eListbox name="services" columns="2" position="155:35" size="e-5:e-100" loadDeco="" />
+			<eChannelInfo name="channelinfo" position="0:e-100" size="e:100" loadDeco="" />
+		</eServiceSelector>
+	</object>
+</eskin>

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -e /etc/init.d/FW_mounthdd.sh ]; then
+	mount /dev/ide/host1/bus0/target0/lun0/part1 /mnt/cf
+	mount /dev/ide/host1/bus0/target0/lun0/disc /mnt/cf 
+	mount /dev/scsi/host0/bus0/target0/lun0/part1 /mnt/usb
+	mount /dev/scsi/host0/bus0/target0/lun0/disc /mnt/usb
+fi

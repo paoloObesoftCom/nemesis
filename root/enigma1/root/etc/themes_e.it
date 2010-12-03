@@ -1,0 +1,224 @@
+THM;1;20;Intrattenimento
+SUB;0;21;Intrattenimento: Fiction
+SUB;0;22;Intrattenimento: Sit Com
+SUB;0;23;Intrattenimento: Show
+SUB;0;24;Intrattenimento: Telefilm
+SUB;0;25;Intrattenimento: Soap Opera
+SUB;0;26;Intrattenimento: Telenovela
+SUB;0;27;Intrattenimento: Fantascienza
+SUB;0;28;Intrattenimento: Animazione
+SUB;0;29;Intrattenimento: Giallo
+SUB;0;2a;Intrattenimento: Drammatico
+SUB;0;2b;Intrattenimento: Romantico
+SUB;0;2c;Intrattenimento: Miniserie
+SUB;0;2d;Intrattenimento: Spettacolo
+SUB;0;2e;Intrattenimento: Quiz
+SUB;0;2f;Intrattenimento: Talk Show
+SUB;0;30;Intrattenimento: Varietà
+SUB;0;31;Intrattenimento: Festival
+SUB;0;32;Intrattenimento: Teatro
+SUB;0;33;Intrattenimento: Gioco
+SUB;0;34;34
+SUB;0;35;35
+SUB;0;36;36
+SUB;0;37;37
+SUB;0;38;38
+SUB;0;39;39
+SUB;0;3a;3a
+SUB;0;3b;3b
+SUB;0;3c;3c
+SUB;0;3d;3d
+SUB;0;3e;3e
+SUB;0;3f;3f
+THM;1;40;Sport
+SUB;0;41;Sport: Calcio
+SUB;0;42;Sport: Tennis
+SUB;0;43;Sport: Motori
+SUB;0;44;Sport: Altri
+SUB;0;45;Sport: Baseball
+SUB;0;46;Sport: Ciclismo
+SUB;0;47;Sport: Rugby
+SUB;0;48;Sport: Basket
+SUB;0;49;Sport: Boxe
+SUB;0;4a;Sport: Atletica
+SUB;0;4b;Sport: Football USA
+SUB;0;4c;Sport: Hockey
+SUB;0;4d;Sport: Sci
+SUB;0;4e;Sport: Equestri
+SUB;0;4f;Sport: Golf
+SUB;0;50;Sport: Nuoto
+SUB;0;51;Sport: Wrestling
+SUB;0;52;52
+SUB;0;53;53
+SUB;0;54;54
+SUB;0;55;55
+SUB;0;56;56
+SUB;0;57;57
+SUB;0;58;58
+SUB;0;59;59
+SUB;0;5a;5a
+SUB;0;5b;5b
+SUB;0;5c;5c
+SUB;0;5d;5d
+SUB;0;5e;5e
+SUB;0;5f;5f
+THM;1;60;Film
+SUB;0;61;Film: Drammatico
+SUB;0;62;Film: Commedia
+SUB;0;63;Film: Romantico
+SUB;0;64;Film: Azione
+SUB;0;65;Film: Fantascienza
+SUB;0;66;Film: Western
+SUB;0;67;Film: Comico
+SUB;0;68;Film: Fantastico
+SUB;0;69;Film: Avventura
+SUB;0;6a;Film: Poliziesco
+SUB;0;6b;Film: Guerra
+SUB;0;6c;Film: Horror
+SUB;0;6d;Film: Animazione
+SUB;0;6e;Film: Thriller
+SUB;0;6f;Film: Musicale
+SUB;0;70;Film: Corto
+SUB;0;71;Film: Cortometraggio
+SUB;0;72;72
+SUB;0;73;73
+SUB;0;74;74
+SUB;0;75;75
+SUB;0;76;76
+SUB;0;77;77
+SUB;0;78;78
+SUB;0;79;79
+SUB;0;7a;7a
+SUB;0;7b;7b
+SUB;0;7c;7c
+SUB;0;7d;7d
+SUB;0;7e;7e
+SUB;0;7f;7f
+THM;1;80;Mondo e Tendenze
+SUB;0;81;Mondo e Tendenze: Natura
+SUB;0;82;Mondo e Tendenze: Arte e Cultura
+SUB;0;83;Mondo e Tendenze: Lifestyle
+SUB;0;84;Mondo e Tendenze: Viaggi
+SUB;0;85;Mondo e Tendenze: Documentario
+SUB;0;86;Mondo e Tendenze: Società
+SUB;0;87;Mondo e Tendenze: Scienza
+SUB;0;88;Mondo e Tendenze: Storia
+SUB;0;89;Mondo e Tendenze: Sport
+SUB;0;8a;Mondo e Tendenze: Pesca
+SUB;0;8b;Mondo e Tendenze: Popoli
+SUB;0;8c;Mondo e Tendenze: Cinema
+SUB;0;8d;Mondo e Tendenze: Musica
+SUB;0;8e;Mondo e Tendenze: Hobby
+SUB;0;8f;Mondo e Tendenze: Caccia
+SUB;0;90;Mondo e Tendenze: Reportage
+SUB;0;91;Mondo e Tendenze: Magazine
+SUB;0;92;Mondo e Tendenze: Magazine Cultura
+SUB;0;93;Mondo e Tendenze: Magazine Scienza
+SUB;0;94;Mondo e Tendenze: Politica
+SUB;0;95;Mondo e Tendenze: Magazine Cinema
+SUB;0;96;Mondo e Tendenze: Magazine Sport
+SUB;0;97;Mondo e Tendenze: Attualità
+SUB;0;98;Mondo e Tendenze: Moda
+SUB;0;99;Mondo e Tendenze: Economia
+SUB;0;9a;Mondo e Tendenze: Magazine Caccia e Pesca
+SUB;0;9b;Mondo e Tendenze: Magazine Viaggi
+SUB;0;9c;Mondo e Tendenze: Magazine Natura
+SUB;0;9d;Mondo e Tendenze: Magazine Musica
+SUB;0;9e;Mondo e Tendenze: Religione
+SUB;0;9f;Mondo e Tendenze: Televendita
+THM;1;a0;Informazione
+SUB;0;a1;Informazione: Notiziario
+SUB;0;a2;Informazione: Sport
+SUB;0;a3;Informazione: Economia
+SUB;0;a4;a4
+SUB;0;a5;a5
+SUB;0;a6;a6
+SUB;0;a7;a7
+SUB;0;a8;a8
+SUB;0;a9;a9
+SUB;0;aa;aa
+SUB;0;ab;ab
+SUB;0;ac;ac
+SUB;0;ad;ad
+SUB;0;ae;ae
+SUB;0;af;af
+SUB;0;b0;b0
+SUB;0;b1;b1
+SUB;0;b2;b2
+SUB;0;b3;b3
+SUB;0;b4;b4
+SUB;0;b5;b5
+SUB;0;b6;b6
+SUB;0;b7;b7
+SUB;0;b8;b8
+SUB;0;b9;b9
+SUB;0;ba;ba
+SUB;0;bb;bb
+SUB;0;bc;bc
+SUB;0;bd;bd
+SUB;0;be;be
+SUB;0;bf;bf
+THM;1;c0;Ragazzi e Musica
+SUB;0;c1;Ragazzi e Musica: Bambini
+SUB;0;c2;Ragazzi e Musica: Ragazzi
+SUB;0;c3;Ragazzi e Musica: Cartoni Animati
+SUB;0;c4;Ragazzi e Musica: Musica
+SUB;0;c5;Ragazzi e Musica: Film Animazione
+SUB;0;c6;Ragazzi e Musica: Film
+SUB;0;c7;Ragazzi e Musica: Telefilm
+SUB;0;c8;Ragazzi e Musica: Magazine
+SUB;0;c9;c9
+SUB;0;ca;ca
+SUB;0;cb;cb
+SUB;0;cc;cc
+SUB;0;cd;cd
+SUB;0;ce;ce
+SUB;0;cf;cf
+SUB;0;d0;d0
+SUB;0;d1;Ragazzi e Musica: Live
+SUB;0;d2;d2
+SUB;0;d3;d3
+SUB;0;d4;Ragazzi e Musica: Danza
+SUB;0;d5;Ragazzi e Musica: Video Musicali
+SUB;0;d6;d6
+SUB;0;d7;d7
+SUB;0;d8;d8
+SUB;0;d9;d9
+SUB;0;da;da
+SUB;0;db;db
+SUB;0;dc;dc
+SUB;0;dd;dd
+SUB;0;de;de
+SUB;0;df;df
+THM;1;e0;Altri Programmi
+SUB;0;e1;Altri Programmi: Educational
+SUB;0;e2;Altri Programmi: Regionale
+SUB;0;e3;Altri Programmi: Shopping
+SUB;0;e4;e4
+SUB;0;e5;Altri Programmi: Inizio e Fine Trasmissioni
+SUB;0;e6;Altri Programmi: Eventi Speciali
+SUB;0;e7;Altri Programmi: Film per Adulti
+SUB;0;e8;e8
+SUB;0;e9;e9
+SUB;0;ea;ea
+SUB;0;eb;eb
+SUB;0;ec;ec
+SUB;0;ed;ed
+SUB;0;ee;ee
+SUB;0;ef;ef
+SUB;0;f0;f0
+SUB;0;f1;f1
+SUB;0;f2;f2
+SUB;0;f3;f3
+SUB;0;f4;f4
+SUB;0;f5;f5
+SUB;0;f6;f6
+SUB;0;f7;f7
+SUB;0;f8;f8
+SUB;0;f9;f9
+SUB;0;fa;fa
+SUB;0;fb;fb
+SUB;0;fc;fc
+SUB;0;fd;fd
+SUB;0;fe;fe
+SUB;0;ff;ff

@@ -1,0 +1,91 @@
+diff -Naur enigma/include/lib/dvb/edvb.h enigma_patched/include/lib/dvb/edvb.h
+--- enigma/include/lib/dvb/edvb.h	12 Jun 2005 19:55:44 -0000	1.37
++++ enigma/include/lib/dvb/edvb.h	12 Sep 2005 15:45:30 -0000
+@@ -196,6 +196,7 @@
+ //////////////////////////////Network Stuff////////////////////////////////////
+ public:
+ #ifndef DISABLE_NETWORK
++	void applyNetworkFix();
+ 	void configureNetwork();
+ 	void UDHCPC_DataAvail(eString);
+ 	void UDHCPC_Closed(int);
+diff -Naur enigma/lib/dvb/edvb.cpp enigma_patched/lib/dvb/edvb.cpp
+--- enigma/lib/dvb/edvb.cpp	24 Aug 2005 19:07:40 -0000	1.104
++++ enigma/lib/dvb/edvb.cpp	12 Sep 2005 15:45:34 -0000
+@@ -80,6 +80,7 @@
+ {
+ #ifndef DISABLE_NETWORK
+ // 	CONNECT(delayTimer.timeout, eDVB::restartSamba);
++	applyNetworkFix();
+ #ifndef DISABLE_NFS
+ 	CONNECT(delayTimer.timeout, eDVB::doMounts);
+ #endif
+@@ -773,6 +774,28 @@
+ 	}
+ }
+ 
++void eDVB::applyNetworkFix()
++{
++	if ( eSystemInfo::getInstance()->getHwType() == eSystemInfo::DM7020 )
++	{
++		int networkfix=0;
++		eConfig::getInstance()->getKey("/elitedvb/network/fix", networkfix);
++		struct stat s;
++		if ( !stat("/proc/net/dream_mode", &s) )
++		{
++			FILE *f = fopen("/proc/net/dream_mode", "w");
++			if (f)
++			{
++				const char *tmp = networkfix ? "1" : "0";
++				fwrite(tmp, 2, 1, f);
++				fclose(f);
++			}
++			else
++				eDebug("couldn't open /proc/net/dream_mode");
++		}
++	}
++}
++
+ void eDVB::configureNetwork()
+ {
+ #ifndef USE_IFUPDOWN
+
+diff -Naur enigma/src/setup_extra.h enigma_patched/src/setup_extra.h
+--- enigma/src/setup_extra.h	1 Sep 2005 22:33:22 -0000	1.12
++++ enigma/src/setup_extra.h	12 Sep 2005 15:48:46 -0000
+@@ -30,6 +30,7 @@
+ #ifndef TUXTXT_CFG_STANDALONE
+ 	void tuxtxtCachingChanged(bool);
+ #endif
++	void networkFixChanged(bool);
+ 	void reinitializeHTTPServer(bool);
+ 	void fastZappingChanged(bool b);
+ 	void init_eExpertSetup();
+
+diff -Naur enigma/src/setup_extra.cpp enigma_patched/src/setup_extra.cpp
+--- enigma/src/setup_extra.cpp	2006-01-10 21:14:49.000000000 +0100
++++ enigma/src/setup_extra.cpp	2006-01-11 12:10:27.000000000 +0100
+@@ -174,9 +174,8 @@
+ 	new eListBoxEntryCheck(&list, _("Auto bouquet change"), "/elitedvb/extra/autobouquetchange", _("change into next bouquet when end of current bouquet is reached"));
+ 	new eListBoxEntryCheck(&list, _("Auto reconnect cahandler"), "/elitedvb/extra/cahandlerReconnect", _("try to reconnect when an external cahandler connection was lost"));
+ #ifndef DISABLE_NETWORK
+-// 	if ( eSystemInfo::getInstance()->getHwType() == eSystemInfo::DM7000 ||
+-// 	    eSystemInfo::getInstance()->getHwType() == eSystemInfo::DM7020)
+-// 		new eListBoxEntryCheck(&list, _("Enable file sharing"), "/elitedvb/network/samba", _("start file sharing(samba) on startup"));
++	if ( eSystemInfo::getInstance()->getHwType() == eSystemInfo::DM7020 )
++		CONNECT((new eListBoxEntryCheck(&list, _("Enable network fix"), "/elitedvb/network/fix", _("enable this when your network is very slow(for testing)")))->selected, eExpertSetup::networkFixChanged );
+ #endif
+ #ifndef TUXTXT_CFG_STANDALONE
+ 	CONNECT((new eListBoxEntryCheck(&list, _("Disable teletext caching"), "/ezap/extra/teletext_caching", _("don't cache teletext pages in background")))->selected, eExpertSetup::tuxtxtCachingChanged );
+@@ -251,6 +252,11 @@
+ 	eZap::getInstance()->reconfigureHTTPServer();
+ }
+ 
++void eExpertSetup::networkFixChanged(bool b)
++{
++	eDVB::getInstance()->applyNetworkFix();
++}
++
+ void eExpertSetup::fastZappingChanged(bool b)
+ {
+ 	Decoder::setFastZap(b);

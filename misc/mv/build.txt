@@ -1,0 +1,6 @@
+1) cd src
+2) edit Makefile.head, set the variables: 
+	CDK_SRC CDKROOT BOXBIN ENIGMAVERSION
+3) build the standard version: make
+4) tidy up:                    make clean
+5) build the lite version:     make -f Makefile.lite

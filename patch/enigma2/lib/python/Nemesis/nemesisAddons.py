@@ -1,0 +1,541 @@
+from Screens.Screen import Screen
+from Screens.MessageBox import MessageBox
+from Screens.Standby import TryQuitMainloop
+from enigma import eTimer, eDVBDB, eConsoleAppContainer
+from Components.ActionMap import ActionMap
+from Components.Label import Label
+from Components.ProgressBar import ProgressBar
+from Components.ScrollLabel import ScrollLabel
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
+from Components.config import config
+from Components.PluginComponent import plugins
+from Components.Sources.StaticText import StaticText
+from Tools.LoadPixmap import LoadPixmap
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from os import system, remove, listdir, chdir, getcwd
+from nemesisTool import nemesisTool, ListboxE1, GetSkinPath , ListboxE3
+from nemesisConsole import nemesisConsole
+from nemesisDownloader import nemesisDownloader
+from Tools import Notifications
+import xml.etree.cElementTree as x
+
+t = nemesisTool()
+linkAddons = t.readAddonsUrl()
+linkExtra = t.readExtraUrl()
+
+class util:
+	
+	pluginIndex = -1
+	pluginType = ''
+	typeDownload = 'A'
+	addonsName = ''
+	filename = ''
+	dir = ''
+	size = -1
+	check = 0
+	
+	def removeSetting(self):
+		print "Remove settings"
+		#system("rm -f /etc/tuxbox/satellites.xml")
+		system("rm -f /etc/enigma2/*.radio")
+		system("rm -f /etc/enigma2/*.tv")
+		system("rm -f /etc/enigma2/lamedb")
+		system("rm -f /etc/enigma2/blacklist")
+		system("rm -f /etc/enigma2/whitelist")
+	
+	def reloadSetting(self):
+		print "Reload settings"
+		self.eDVBDB = eDVBDB.getInstance()
+		self.eDVBDB.reloadServicelist()
+		self.eDVBDB.reloadBouquets()
+
+u = util()
+
+class loadXml:
+	
+	tree_list = []
+	plugin_list = []
+	
+	def load(self,filename):
+		del self.tree_list[:]
+		del self.plugin_list[:]
+		tree = x.parse(filename)
+		root = tree.getroot()
+		c = 0
+		for tag in root.getchildren(): 
+			self.tree_list.append([c, tag.tag])
+			c1 = 0
+			for b in tree.find(tag.tag):
+				self.plugin_list.append([c,tag.tag,b.find("filename").text,b.find("desc").text,b.find("dir").text,b.find("size").text,b.find("check").text,c1])
+				c1 +=1
+			c +=1
+
+loadxml = loadXml()
+
+class loadTmpDir:
+	
+	tmp_list = []
+	
+	def load(self):
+		del self.tmp_list[:]
+		pkgs = listdir('/tmp')
+		count = 0
+		for fil in pkgs:
+			if (fil.find('.ipk') != -1 or fil.find('.tbz2') != -1):
+				self.tmp_list.append([count,fil])
+				count +=1
+
+loadtmpdir = loadTmpDir()
+
+class loadUniDir:
+	
+	uni_list = []
+	
+	def load(self):
+		del self.uni_list[:]
+		pkgs = listdir('/usr/uninstall')
+		count = 0
+		for fil in pkgs:
+			if (fil.find('_remove.sh') != -1 or fil.find('_delete.sh') != -1):
+				self.uni_list.append([count,fil])
+				count +=1
+
+loadunidir = loadUniDir()
+
+class NAddons(Screen):
+	__module__ = __name__
+	skin = """
+		<screen position="80,95" size="560,430" title="Addons">
+			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
+			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
+			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
+			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.list = []
+		self["title"] = Label(_("Addons Manager"))
+		self['list'] = ListboxE1(self.list)
+		self['conn'] = Label("")
+		self["key_red"] = Label(_("Cancel"))
+		self['conn'].hide()
+		self.container = eConsoleAppContainer()
+		self.container.appClosed.append(self.runFinished)
+		self.MenuList = [
+			('NAddons',_('Download Addons'),'icons/network.png',True),
+			('NExtra',_('Download Extra'),'icons/network.png',fileExists('/etc/extra.url')),
+			('NManual',_('Manual Package Install'),'icons/manual.png',True),
+			('NRemove',_('Remove Addons'),'icons/remove.png',True)
+			]
+		self['actions'] = ActionMap(['WizardActions','ColorActions'],
+		{
+			'ok': self.KeyOk,
+			"red": self.cancel,
+			'back': self.cancel
+		})
+		self.onLayoutFinish.append(self.updateList)
+		self.onShown.append(self.setWindowTitle)
+	
+	def setWindowTitle(self):
+		self.setTitle(_("Addons Manager"))
+
+	def KeyOk(self):
+		if not self.container.running():
+			self['conn'].setText(_("Connetting to addons server.\nPlease wait..."))
+			sel = self["list"].getCurrent()[0]
+			if (sel == "NAddons"):
+				self['conn'].show()
+				u.typeDownload = 'A'
+				self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + linkAddons + "/addons800.xml -O /tmp/addons.xml")
+			elif (sel == "NExtra"):
+				self['conn'].show()
+				u.typeDownload = 'E'
+				self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + linkExtra + "e2extra.xml -O /tmp/addons.xml")
+			elif (sel == "NManual"):
+				self.session.open(RManual)
+			elif (sel == "NRemove"):
+				self.session.open(RRemove)
+
+	def runFinished(self, retval):
+		if fileExists('/tmp/addons.xml'):
+			try:
+				loadxml.load('/tmp/addons.xml')
+				remove('/tmp/addons.xml')
+				self['conn'].hide()
+				self.session.open(RAddons)
+			except:
+				self['conn'].setText(_("File xml is not correctly formatted!."))
+		else:
+			self['conn'].setText(_("Server not found!\nPlease check internet connection."))
+	
+	def cancel(self):
+		if not self.container.running():
+			del self.container.appClosed[:]
+			del self.container
+			self.close()
+		else:
+			self.container.kill()
+			if fileExists('/tmp/addons.xml'):
+				remove('/tmp/addons.xml')
+			self['conn'].setText(_('Process Killed by user\nServer Not Connected!'))
+	
+	def updateList(self):
+		del self.list[:]
+		skin_path = GetSkinPath()
+		for i in self.MenuList:
+			if i[3]:
+				res = [i[0]]
+				res.append(MultiContentEntryText(pos=(50, 5), size=(300, 32), font=0, text=i[1]))
+				res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=LoadPixmap(skin_path + i[2])))
+				self.list.append(res)
+		self['list'].l.setList(self.list)
+	
+
+class	RAddons(Screen):
+	__module__ = __name__
+	skin = """
+		<screen position="80,95" size="560,430">
+			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
+			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
+			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.list = []
+		self.wtitle = {'A': _('Download Addons'),'E': _('Download Extra')}[u.typeDownload]
+		self['list'] = ListboxE1(self.list)
+		self["title"] = Label(self.wtitle)
+		self["key_red"] = Label(_("Cancel"))
+		self['actions'] = ActionMap(['WizardActions','ColorActions'],
+		{
+			'ok': self.KeyOk,
+			"red": self.close,
+			'back': self.close
+		})
+		self.onLayoutFinish.append(self.loadData)
+		self.onShown.append(self.setWindowTitle)
+	
+	def setWindowTitle(self):
+		self.setTitle(self.wtitle)
+
+	def KeyOk(self):
+		u.pluginType = self["list"].getCurrent()[0]
+		u.pluginIndex = self['list'].getSelectionIndex() 
+		self.session.open(RAddonsDown)
+	
+	def loadData(self):
+		del self.list[:]
+		for tag in loadxml.tree_list: 
+			res = [tag [1]]
+			res.append(MultiContentEntryText(pos=(0, 5), size=(340, 32), font=0, text=tag [1] ))
+			self.list.append(res)
+		self['list'].l.setList(self.list)
+
+class	RAddonsDown(Screen):
+	__module__ = __name__
+	skin = """
+		<screen position="80,95" size="560,530" title="Download">
+			<widget name="type" position="0,0" size="560,35" font="Regular;26" valign="center" halign="center" backgroundColor="#0064c7"/>
+			<widget name="list" position="10,40" size="540,420" scrollbarMode="showOnDemand" />
+			<widget source="conn" render="Label" position="0,460" size="560,50" font="Regular;20" halign="center" valign="center" backgroundColor="#0064c7" />
+			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+		</screen>"""
+	
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.list = []
+		self['list'] = ListboxE3(self.list)
+		self['conn'] = StaticText(_("Loading elements.\nPlease wait..."))
+		self['type'] = Label("")
+		self["key_red"] = Label(_("Cancel"))
+		self.container = eConsoleAppContainer()
+		self.container.appClosed.append(self.runFinished)
+		self['type'].setText(_("Download ") + str(u.pluginType))
+
+		self['actions'] = ActionMap(['WizardActions','ColorActions'],
+		{
+			'ok': self.KeyOk,
+			"red": self.cancel,
+			'back': self.cancel
+		})
+		self.onLayoutFinish.append(self.loadPlugin)
+		self.onShown.append(self.setWindowTitle)
+	
+	def setWindowTitle(self):
+		self.setTitle(_("Download ") + str(u.pluginType))
+	
+	def KeyOk(self):
+		if not self.container.running():
+			self.sel = self['list'].getSelectionIndex() 
+			if (u.size > t.getVarSpace() and u.check == 1):
+				msg = _('Not enough space!\nPlease delete addons before install new.')
+				self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
+				return
+			for tag in loadxml.plugin_list: 
+				if tag [0] == u.pluginIndex:
+					if tag [7] == self.sel:
+						u.addonsName = tag [3]
+						self.downloadAddons()
+						return
+			self.close()
+			
+	def loadPlugin(self):
+		del self.list[:]
+		for tag in loadxml.plugin_list: 
+			if tag [0] == u.pluginIndex:
+				res = [tag [3]]
+				res.append(MultiContentEntryText(pos=(0, 5), size=(340, 30), font=0, text=tag [3] ))
+				self.list.append(res)
+		self['list'].l.setList(self.list)
+		self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
+
+	def downloadAddons(self):
+		self.getAddonsPar()
+		url = {'E':linkExtra,'A':linkAddons}[u.typeDownload] + u.dir + "/" + u.filename 
+		if config.proxy.isactive.value:
+			cmd = "/var/etc/proxy.sh && wget %s -O /tmp/%s" % (url ,u.filename)
+			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Download: ') + u.filename)
+		else:
+			self.session.openWithCallback(self.executedScript, nemesisDownloader, url, "/tmp/", u.filename)
+		
+	def executedScript(self, *answer):
+		if answer[0] == nemesisConsole.EVENT_DONE:
+			if fileExists('/tmp/' + u.filename):
+				msg = _('Do you want install the addon:\n%s?') % u.addonsName
+				box = self.session.openWithCallback(self.installAddons, MessageBox, msg, MessageBox.TYPE_YESNO)
+				box.setTitle(_('Install Addon'))
+			else:
+				msg = _('File: %s not found!\nPlease check your internet connection.') % u.filename
+				self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
+		elif answer[0] == nemesisConsole.EVENT_KILLED:
+			self['conn'].text = _('Process Killed by user!\nAddon not downloaded.')
+	
+	def installAddons(self, answer):
+		if (answer is True):
+			self['conn'].text = _('Installing addons.\nPlease Wait...')
+			if (u.filename.find('.ipk') != -1):
+				self.container.execute("ipkg install /tmp/" + u.filename)
+			elif (u.filename.find('.tbz2') != -1):
+				if (u.pluginType == 'Settings') or (u.pluginType == 'e2Settings'):
+					self['conn'].text = _("Remove old Settings\nPlease wait...")
+					u.removeSetting()	
+				self.container.execute("tar -jxvf /tmp/" + u.filename + " -C /")
+			else:
+				self['conn'].text = _('File: %s\nis not a valid package!') % u.filename
+		else:
+			if fileExists('/tmp/' + u.filename):
+				remove("/tmp/" + u.filename)
+	
+	def runFinished(self, retval):
+		if fileExists('/tmp/' + u.filename):
+			remove("/tmp/" + u.filename)
+		if (u.pluginType == 'Settings') or (u.pluginType == 'e2Settings'):
+			self['conn'].text = _("Reload new Settings\nPlease wait...")
+			u.reloadSetting()
+		elif (u.pluginType == 'Plugins') or (u.pluginType == 'e2Plugins'):
+			self['conn'].text = _("Reload Plugins list\nPlease Wait...")
+			plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		self['conn'].text = _("Addon installed succesfully!")
+		if fileExists('/tmp/.restartE2'):
+			remove("/tmp/.restartE2")
+			msg = _('Enigma2 will be now hard restarted to complete package installation.\nDo You want restart enigma2 now?')
+			box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg , MessageBox.TYPE_YESNO)
+			box.setTitle(_('Restart Enigma2'))
+	
+	def cancel(self):
+		if not self.container.running():
+			del self.container.appClosed[:]
+			del self.container
+			self.close()
+		else:
+			self.container.kill()
+			self['conn'].text = _('Process Killed by user.\nAddon not installed correctly!')
+	
+	def restartEnigma2(self, answer):
+		if (answer is True):
+			system('killall -9 enigma2')
+	
+	def getAddonsPar(self):
+		for tag in loadxml.plugin_list: 
+			if tag [0] == u.pluginIndex:
+				if tag [3] == u.addonsName:
+					u.filename  = tag [2] 
+					u.dir  = tag [4] 
+					u.size  = tag [5] 
+					u.check  = tag [6] 
+
+class	RManual(Screen):
+	__module__ = __name__
+	skin = """
+		<screen position="80,95" size="560,430">
+			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
+			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
+			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
+			<widget name="key_red" position="0,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+			<widget name="key_yellow" position="280,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.list = []
+		self['list'] = ListboxE1(self.list)
+		self['conn'] = Label("")
+		self["title"] = Label(_("Manual Installation"))
+		self["key_red"] = Label(_("Cancel"))
+		self["key_yellow"] = Label(_("Reload /tmp"))
+		self['conn'].hide()
+		self.container = eConsoleAppContainer()
+		self.container.appClosed.append(self.runFinished)
+		self['actions'] = ActionMap(['WizardActions','ColorActions'],
+		{
+			'ok': self.KeyOk,
+			"yellow": self.readTmp,
+			"red": self.cancel,
+			'back': self.cancel
+		})
+		self.onLayoutFinish.append(self.readTmp)
+		self.onShown.append(self.setWindowTitle)
+	
+	def setWindowTitle(self):
+		self.setTitle(_("Manual Installation"))
+	
+	def readTmp(self):
+		del self.list[:]
+		loadtmpdir.load()
+		if len(loadtmpdir.tmp_list) > 0:
+			for fil in loadtmpdir.tmp_list: 
+				res = [fil]
+				res.append(MultiContentEntryText(pos=(0, 5), size=(340, 32), font=0, text=fil[1]))
+				self.list.append(res)
+		else:	
+			self['conn'].show()
+			self['conn'].setText(_("Put your plugin xxx.tbz2 or xxx.ipk\nvia FTP in /tmp."))
+		self['list'].l.setList(self.list)
+	
+	def KeyOk(self):
+		if not self.container.running():
+			if len(loadtmpdir.tmp_list) > 0:
+				self.sel = self['list'].getSelectionIndex() 
+				for p in loadtmpdir.tmp_list: 
+					if (p [0] == self.sel):
+						u.filename = p [1]
+				msg = _('Do you want install the addon:\n%s?') % u.filename
+				box = self.session.openWithCallback(self.installAddons, MessageBox, msg, MessageBox.TYPE_YESNO)
+				box.setTitle(_('Install Addon'))
+			else:
+				self.close()
+	
+	def installAddons(self, answer):
+		if (answer is True):
+			self['conn'].show()
+			self['conn'].setText(_('Installing: %s.\nPlease wait...') % u.filename)
+			if (u.filename.find('.ipk') != -1):
+				self.container.execute("ipkg install /tmp/" + u.filename)
+			elif (u.filename.find('.tbz2') != -1):
+				self.container.execute("tar -jxvf /tmp/" + u.filename + " -C /")
+			else:
+				self['conn'].setText(_('File: %s\nis not a valid package!') % u.filename)
+	
+	def runFinished(self, retval):
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		remove("/tmp/" + u.filename);
+		self['conn'].setText(_("Addon: %s\ninstalled succesfully!") % u.filename)
+		self.readTmp()
+		if fileExists('/tmp/.restartE2'):
+			remove('/tmp/.restartE2')
+			msg = 'Enigma2 will be now hard restarted to complete package installation.\nDo You want restart enigma2 now?'
+			box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg , MessageBox.TYPE_YESNO)
+			box.setTitle('Restart enigma')
+	
+	def cancel(self):
+		if not self.container.running():
+			del self.container.appClosed[:]
+			del self.container
+			self.close()
+		else:
+			self.container.kill()
+			self['conn'].setText(_('Process Killed by user.\nAddon not installed correctly!'))
+	
+	def restartEnigma2(self, answer):
+		if (answer is True):
+			self.session.open(TryQuitMainloop, 3)
+
+class	RRemove(Screen):
+	__module__ = __name__
+	skin = """
+		<screen position="80,95" size="560,430" title="Addons">
+			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
+			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
+			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
+			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.list = []
+		self['list'] = ListboxE1(self.list)
+		self['conn'] = Label("")
+		self["title"] = Label(_("Remove Addons"))
+		self["key_red"] = Label(_("Cancel"))
+		self['conn'].hide()
+		self.container = eConsoleAppContainer()
+		self.container.appClosed.append(self.runFinished)
+		self['actions'] = ActionMap(['WizardActions','ColorActions'],
+		{
+			'ok': self.KeyOk,
+			"red": self.cancel,
+			'back': self.cancel
+		})
+		self.onLayoutFinish.append(self.readTmp)
+		self.onShown.append(self.setWindowTitle)
+	
+	def setWindowTitle(self):
+		self.setTitle(_("Remove Addons"))
+
+	def readTmp(self):
+		loadunidir.load()
+		del self.list[:]
+		if len(loadunidir.uni_list) > 0:
+			for fil in loadunidir.uni_list: 
+				res = [fil]
+				res.append(MultiContentEntryText(pos=(0, 5), size=(340, 32), font=0, text=fil [1] [:-10]))
+				self.list.append(res)
+		else:
+			self['conn'].show()
+			self['conn'].setText(_("Nothing to uninstall!"))
+		self['list'].l.setList(self.list)
+	
+	def KeyOk(self):
+		if not self.container.running():
+			if len(loadunidir.uni_list) > 0:
+				self.sel = self['list'].getSelectionIndex() 
+				for p in loadunidir.uni_list: 
+					if (p [0] == self.sel):
+						u.filename = p [1]
+				msg = _('Do you want remove the addon:\n%s?') % u.filename[:-10]
+				box = self.session.openWithCallback(self.removeAddons, MessageBox, msg, MessageBox.TYPE_YESNO)
+				box.setTitle('Remove Addon')
+			else:
+				self.close()
+	
+	def removeAddons(self, answer):
+		if (answer is True):
+			self['conn'].show()
+			self['conn'].setText(_('Removing: %s.\nPlease wait...') % u.filename[:-10])
+			self.container.execute("/usr/uninstall/" + u.filename)
+	
+	def runFinished(self, retval):
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		self.readTmp()
+		self['conn'].setText(_('Addons: %s\nremoved succeffully.') % u.filename[:-10])
+
+	def cancel(self):
+		if not self.container.running():
+			del self.container.appClosed[:]
+			del self.container
+			self.close()
+		else:
+			self.container.kill()
+			self['conn'].setText(_('Process Killed by user.\nAddon not removed completly!'))

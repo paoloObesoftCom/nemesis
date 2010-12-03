@@ -1,0 +1,52 @@
+<scripts>
+	<script>
+		<name>Show Device Info</name>
+		<cmd>df -h</cmd>
+		<info>Show Device Information</info>
+	</script>
+	<script>
+		<name>Show RAM Info</name>
+		<cmd>free</cmd>
+		<info>Show RAM Info</info>
+	</script>
+	<script>
+		<name>Show Active process</name>
+		<cmd>ps</cmd>
+		<info>Show active process</info>
+	</script>
+	<script>
+		<name>Show LAN setting</name>
+		<cmd>ip addr</cmd>
+		<info>Show LAN setting</info>
+	</script>
+	<script>
+		<name>Show Internet connection</name>
+		<cmd>netstat -tn</cmd>
+		<info>Show Internet connection</info>
+	</script>
+	<script>
+		<name>Show TCP Network listener</name>
+		<cmd>netstat -tln</cmd>
+		<info>Show Network listener</info>
+	</script>
+	<script>
+		<name>Show UDP Network listener</name>
+		<cmd>netstat -uln</cmd>
+		<info>Show Network listener</info>
+	</script>
+	<script>
+		<name>Show Route Table</name>
+		<cmd>netstat -rn</cmd>
+		<info>Show Route Table</info>
+	</script>
+	<script>
+		<name>Show OpenVPN Log</name>
+		<cmd>more /var/etc/openvpn/openvpn.log</cmd>
+		<info>Show OpenVPN Log</info>
+	</script>
+	<script>
+		<name>Clear OpenVPN Log</name>
+		<cmd>rm -f /var/etc/openvpn/openvpn.log | touch /var/etc/openvpn/openvpn.log</cmd>
+		<info>Clear OpenVPN Log</info>
+	</script>
+</scripts>

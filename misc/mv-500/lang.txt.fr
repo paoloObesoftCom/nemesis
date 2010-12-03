@@ -1,0 +1,409 @@
+# English language text file for MV
+#
+# -------------------------------------------------------- #
+#
+# Rules:
+#
+# - all lines which are not intended as a text must start
+# with a # or be completely (i.e. no spaces) blank
+# - the order of items cannot be changed.
+# - all items must be included.
+#
+# -------------------------------------------------------- #
+#
+# Version string
+
+MV B3.5.3
+
+# Welcome screen (shown once per version)
+
+Bienvenue dans MV, un GEP pour la Dreambox\npar PentVaer.\n\nPour debuter :\n\n    touches 1-9, HELP ou DREAM (ou MENU).\n\nInternet:\n\n    http://mv.dinglisch.net/userguide.html\n\nJ'espere que vous aimerez!
+
+# Buttons
+
+Ok
+Ajouter
+Supprimer
+Editer
+Inconnu
+Associer
+Ignorer
+
+# - new Alex
+
+Reglages globaux
+Reglages Canaux
+Reglages Programmes
+Reglages barre d'etat
+Selection Vue suivante
+
+# Next view pulldown
+
+[1] Programmes en cours
+[2] Maintenant et juste apres
+[3] Barre d'info
+[4] grille courte
+[5] grille longue
+[6] Liste (une chaine)
+[7] Liste films (toutes chaines)
+[8] Liste favoris (toutes chaines)
+[9] Liste programmes (toutes chaines)
+
+# ----------- PRESENTATION MENU ---------- #
+
+Arriere-plan
+Taille police
+Type police
+Arriere 1
+Arriere 2
+En Cours
+Film
+Favori
+
+# Pres menu labels
+
+En-tete chaine:
+Boite Programme:
+Fenetre:
+
+# Pres menu test channel
+
+Chaine
+Prog 1
+Prog 2
+Curseur
+Favori
+Film
+
+# --------------- MISC MENU -------------- #
+
+Decalage debut: 
+Decalage fin:
+Decalage affichage:
+
+Rapport d'Affichage:
+Comme Enigma
+Toujours 16:9
+Toujours 4:3
+
+Attention : Ceci n'a d'effet que si le rapport d'affichage d'Enigma est '16:9'.
+
+# ------------- FEATURE MENU ------------ #
+
+# timebar labels
+
+barre Horaire:
+Aucune
+15 Minutes
+1/2 Heure
+Une Heure
+Deux Heures
+
+# daybar labels
+
+Barre Jour:
+Aucune
+Fixe
+Popup
+
+# no cols
+
+Nb de colonnes:
+
+# entries per col
+
+Entrees/Colonne:
+Entrees/Chaine:
+Proportionnel
+Toutes
+
+# Channel shift type
+
+Decalage Chaines:
+Une Chaine
+Demie Page
+Une Page
+
+# Program shift type
+
+Decalage Programme:
+Un Programme
+Demie Page
+Une Page
+
+# Program box flags
+
+Heure Debut
+Heure Fin
+Duree (Minutes)
+Nom Chaine
+Difference Heure actuelle-Heure debut
+Description Programme
+Icone Chaine
+Titre du programme centre
+
+# Status bar flags
+
+Montrer la barre de Statut
+Nom Chaine
+Date
+Heure debut
+Duree (minutes)
+Titre
+Description
+
+# Channel header
+
+Nom Chaine dans l'entete
+Icone Chaine dans l'entete
+Numero Chaine dans l'entete
+Position Satellite dans l'entete 
+
+# Misc
+
+Ecoule
+Separateurs Verticaux
+Separateurs Horizontaux
+Montrer les chaines vides
+Le curseur passe sur les chaines vides
+
+# start channel
+
+Chaine de depart:
+En cours
+La premiere
+
+# next view
+
+Celle-ci
+
+# sort types
+
+Trier par:
+Bouquet
+Alphabetique
+Temps Restant
+Bouq/Temps restant
+Heure debut
+
+# --------------- INPUT MENU --------------- #
+
+# table headers
+
+Entree
+Chemin
+Telecharger
+
+# Network column labels
+
+Non
+Oui
+Pas de reseau!
+
+# pre/post values
+
+Avant:
+Apres:
+Tmp Detail Store:
+Repertoire:
+Rep. Auto
+Nb max de Chaines
+Rechargement Auto
+
+# ------------ FAV EDIT MENU ------------- #
+
+Titre:
+Chacun
+Tous
+Tous, Dans l'ordre
+Aucun
+
+Descr:
+Chaine:
+Entre:
+Hors de:
+et
+
+Notifier
+
+# If user tries to exit when a download is going...
+
+Telechargement en cours, veuillez patienter...
+
+# When user tries to change a channel or exit when
+# an MHW scan is going
+
+Scan MHW en cours, veuillez patienter...
+Conversion de fichiers XMLTV en cours, veuillez patienter...
+
+# View mode help title/contents
+
+Controles du mode Visu
+1/2/3 - choisir affichage\n6/7/8/9 - liste chaine/films/favs/tout\n</> - choisir jour\nBqUp/BqDn - choisir heure\n0 - recharger donnees/choisir jour\nSHIFT-ROUGE - voir programmations\nSHIFT-VERT - ajouter programme favori\nAUDIO - choisir le bouquet\nCOULEURS - Efface/Enr./Ngrab/Enr. rep.\nMENU - affiche menu\nOK - curseur/activer service/sortir\nINFO - afficher description/IMDB/info chaine\nTV/RADIO/TEXT - remplir le cache (chaine/satellite/tous les sats)\nVIDEO - masquer la fenetre\nEXIT - supprimer le curseur/sortir
+
+# Edit mode help title/contents
+
+Controles du Mode Edition
+< - reduit l'echelle horaire\n> - agrandit l'echelle horaire\nTOUCHES FLECHES - deplacent la fenetre\n2/4/6/8 - taille fenetre\n0 - focus main window/time/status\nBouquet Up/Down - hauteur de ligne\n7/9 - largeur en-tete de chaine\nMENU - afficher le menu\nOK - fin d'edition\nVIDEO = masquer la fenetre\nEXIT - sortie
+
+# Program list view help title/contents
+
+Controles de la liste des Programmes
+INFO - Description du programme + IMDB (iappuer 2 fois)\n0 - mise a jour des donnees\nAUDIO - choix du bouquet\nSHIFT-ROUGE - afficher programmations\nROUGE - detruire une programmation\nVERT - Programmer\nJAUNE - Programmer (Ngrab)\nBLEU - switch channel timer event\nSHIFT-VERT - Ajouter aux favoris\nBOUQUET UP/DN - Activer la fenetre des chaines\n</> - chaine precedente/suivante GEP\nOK - Voir cette chaine\nEXIT - sortie
+
+# Program list edit help title/contents
+
+Controles du mode edition des listes
+FLECHES - deplacer le fenetre\n2/4/6/8 - taille fenetre\n0 - basculer mode fenetre/mode barre d'etat\nOK - retourner mode visu\nMENU - afficher le menu\nEXIT - exit
+
+# About title/content
+
+Par Pent Vaer, 2004.\n\nMerci a ma femme bien-aimee Sabrina pour sa patience durant le n-ieme reboot du soir.\n\nMerci a PLi pour mhwepg, et l'aide\npour l'integrer avec MV et tous les\ncourriers. Merci a Bjorn Hijmans pour l'aide\nen programmation et le serveur IMDB.\nMerci aussi a Shtol pour son aide,\nspecialement pour le menu des caracteristiques.\n\nPas de merci a mes pestes de filles,\nJade & Skye.
+
+# Feedback title/content
+
+Opinions sur MV
+Toutes les opinions sont bienvenues sur:\n\nhttp://sourceforge.net/projects/mv-plugin/
+
+# Tips title/content
+
+Astuces MV
+* il y a differents ecrans d'aide suivant le mode d'affichage\n, les listes et le mode d'edition\n\n* presser INFO une deuxieme fois sur la description interroge IMDB si vous etes en reseau\n\n* quand la barre du jour est active, vous pouvez utiliser les\ntouches de direction et le bouton OK\n\n* apres avoir utilise le curseur, retournez au scroll\nrapide en pressant le bouton EXIT\n\n* presser info quand MV est masque montre\nles infos du programme en cours
+
+# Daybar labels
+
+Dim
+Lun
+Mar
+Mer
+Jeu
+Ven
+Sam
+
+# Main menu title/items
+
+Menu principal MV
+Charger les donnees EPG
+Editer Geometrie affichage
+Editer Police/Couleur affichage
+Editer Reglage affichage
+Configuration
+Gestion des Alias
+Gestion des Favoris
+Reglages divers
+A Propos
+Astuces
+Retour d'opinion
+Reglages d'Origine
+
+# Misc Menu title
+
+Menu divers
+
+# Alias Manager title
+
+Gestion d'Alias MV
+
+# Favourite Manager title
+
+Gestion des Favoris MV
+
+# Favourite Edit window title
+
+Editeur des Favoris MV
+
+# Features  window title
+
+Editeur caracteristiques MV
+
+# Inputs edit window title
+
+Configuration Entrees MV
+
+# Presentation editor window title
+
+Polices/Couleurs MV
+
+# Channel picker window title
+
+Choix de la Chaine
+
+# Program list window title prefix
+
+Programmes : 
+
+# Title for user confirmation box
+# and various texts for that box too
+
+Certain ?
+
+# Reset config confirmation
+
+Ceci va annuler tous les changements que vous avez faits.
+
+# Set MyXMLTV input
+
+Pour cette entree, vous devez fournir le fichier vous-meme\n ien le creant sur votre PC et en le transferant par FTP.\n\nVoyez http://mv.dinglisch.net/userguide.html#xmltv
+
+# IMDB
+
+Pas d'enregistrement IMDB trouve.
+Ce programne n'est pas un film!
+
+# Numbers
+
+Un
+Deux
+Trois
+Quatre
+Cinq
+Six
+Sept
+Huit
+Neuf
+
+# 
+
+Supression vieille(mauvaise) configuration
+Veuillez patienter, telechargement en cours...
+
+# Error Messages
+
+L'heure systeme n'est pas reglee correctement.\nSi vous venez juste de brancher le recepteur,veuilez re-essayer quand l'heure sera correcte. Sinon, essayez de changer de chaine et attendez une minute, peut-etre que la chaine actuelle transmet une heure erronnee.
+
+Impossible d'ouvrir le fichier de config en ecriture
+L'ecriture de la config a echouee
+Depassement de memoire, je vais probablement crasher...
+Une connexion reseau est necessaire pour ceci.
+
+Erreur XML dans le fichier: 
+Ce n'est pas un fichier XML, pas de noeud racine: 
+Ce n'est pas un fichier XML, mauvais noeud racine: 
+
+Erreur telechargement: 
+Impossible de renommer le fichier temporaire: 
+Le fichier telecharge est vide: 
+Fichier inexistant apres transfert: 
+
+Erreur de suppression des vieux fichiers dans 
+Impossible d'ecrire les favoris vers 
+Mauvaise ligne de favoris: 
+Impossible d'ouvrir le fichier d'entree en ecriture: 
+Impossible d'ouvrir le fichier de definition des entrees: 
+Mauvaise ligne dans le fichier de definition des entrees: 
+Erreur d'ecriture du fichier map.
+Impossible de creer le repertoire tampon: 
+Attention: le nom d'entree n'a pas de definition: 
+Mauvais type pour l'entree: 
+Mauvais format pour le fichier:
+Impossible de trouver le logiciel multiepg dans le repertoire de MV.
+Erreur d'execution multiepg: 
+Impossible de deplacer le fichier XMLTV converti vers: 
+Impossible de creer le repertoire: 
+Impossible de deplacer le tampon vers le fichier temporaire: 
+Impossible d'ouvrir le fichier de sauvegarde du cache: 
+Erreur de supppression de la sauvegarde du cache: 
+Impossible de modifier l'heure de mise a jour de 
+Mauvais jeu de caracteres: 
+
+Erreur de sauvegarde de la description du programme dans le cache detaille (disque plein ?)

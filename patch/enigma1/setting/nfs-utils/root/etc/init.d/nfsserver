@@ -1,0 +1,111 @@
+#!/bin/sh
+
+test -r /etc/default/nfsd && . /etc/default/nfsd
+test -x "$NFS_MOUNTD" || NFS_MOUNTD=/sbin/mountd
+test -x "$NFS_NFSD" || NFS_NFSD=/sbin/nfsd
+test -x "$NFS_MOUNTD" || exit 0
+test -x "$NFS_NFSD" || exit 0
+test "$NFS_SERVERS" -gt 0 && test "$NFS_SERVERS" -lt 100 || NFS_SERVERS=8
+test -n "$NFS_STATEDIR" || NFS_STATEDIR=/var/lib/nfs
+LIB=/lib/modules/`uname -r`/kernel/fs
+
+create_directories(){
+	echo -n 'creating NFS state directory: '
+	mkdir -p "$NFS_STATEDIR"
+	(	cd "$NFS_STATEDIR"
+		umask 077
+		mkdir -p sm sm.bak
+		test -w sm/state || {
+			rm -f sm/state
+			:>sm/state
+		}
+		umask 022
+		for file in xtab etab smtab rmtab
+		do
+			test -w "$file" || {
+				rm -f "$file"
+				:>"$file"
+			}
+		done
+	)
+	echo done
+}
+#portmap
+start_portmap(){
+	echo -n "Starting portmap daemon:"
+	echo -n " portmap"
+	/sbin/portmap
+	echo "."
+	if [ -f /var/run/portmap.upgrade-state ]; then
+		echo -n "Restoring old RPC service information..."
+		sleep 1 # needs a short pause or pmap_set won't work. :(
+		pmap_set </var/run/portmap.upgrade-state
+		rm -f /var/run/portmap.upgrade-state
+		echo "done."
+	fi
+}
+
+stop_portmap(){
+	echo -n "Stopping portmap daemon:"
+	echo -n " portmap" ; killall -9  portmap
+	echo "."
+}
+#mountd
+start_mountd(){
+	echo -n 'starting mountd: '
+	$NFS_MOUNTD &
+	echo done
+}
+
+stop_mountd(){
+	echo -n 'stopping mountd: '
+	killall -9 mountd
+	echo done
+}
+#nfsd
+start_nfsd(){
+	if ! grep -qs exportfs /proc/modules ; then
+		insmod $LIB/exportfs/exportfs.ko
+	fi
+	if ! grep -qs nfsd /proc/modules ; then
+		insmod $LIB/nfsd/nfsd.ko
+	fi
+	if ! grep -qs /proc/fs/nfs /proc/mounts ; then
+			mount -t nfsd nfsd /proc/fs/nfsd
+	fi
+	echo -n "starting $1 nfsd kernel threads: "
+	$NFS_NFSD &
+	echo done
+}
+
+stop_nfsd(){
+	echo -n 'stopping nfsd: '
+	killall -9 nfsd
+	umount /proc/fs/nfsd
+	echo done
+}
+
+
+case "$1" in
+	start)	create_directories
+		start_portmap
+		sleep 1
+		start_nfsd "$NFS_SERVERS"
+		start_mountd
+		test -r /etc/exports && exportfs -a
+		;;
+	stop)	exportfs -ua
+		stop_mountd
+		stop_nfsd
+		stop_portmap
+		;;
+	reload)	
+		test -r /etc/exports && exportfs -r
+		;;
+	restart)
+		exportfs -ua
+		stop_mountd
+		start_mountd
+		test -r /etc/exports && exportfs -a
+		;;
+esac

@@ -1,0 +1,48 @@
+#ENIGMAVERSION=1074
+ENIGMAVERSION=1080
+
+# 1.09
+#CDK_SRC  = /home/dream/109
+#CDKROOT  =  /home/dream/109/root/cdkroot
+#BOXBIN = /home/dream/109/root/cdk/bin
+# 1.091d
+#CDK_SRC  = /home/dream/1091d
+#CDKROOT  =  /home/dream/1091d/root/cdkroot
+#BOXBIN = /home/dream/1091d/root/cdk/bin
+# 051114 from CVS
+CDK_SRC  = /e2/cvs/dm7000
+CDKROOT  =  /e2/cvs/dm7000/root/cdkroot
+BOXBIN = /e2/cvs/dm7000/root/cdk/bin
+# last from CVS
+#CDK_SRC  = /home/dream/last
+#CDKROOT  =  /home/dream/last/root/cdkroot
+#BOXBIN = /home/dream/last/root/cdk/bin
+
+#-----------------------------------------------#
+
+#-- IGNORE, I only have this because enigma cache doesn't
+#-- work with my 1.08 build.
+
+HAVECACHE=1
+
+CXX = $(BOXBIN)/powerpc-tuxbox-linux-gnu-g++ -g
+STRIP = $(BOXBIN)/powerpc-tuxbox-linux-gnu-strip
+
+INCLUDES = -I$(CDK_SRC)/driver/include -I$(CDK_SRC)/cdk/linux/include \
+				-I$(CDK_SRC)/apps/tuxbox/enigma/include -I$(CDKROOT)/include \
+				-I$(CDKROOT)/include/sigc++-1.2 -I$(CDKROOT)/lib/sigc++-1.2/include \
+				-I$(CDK_SRC)/apps/tuxbox/enigma -I$(CDK_SRC)/apps/misc/libs/libxmltree \
+				-I$(CDK_SRC)/apps/tuxbox/plugins/include -I$(CDKROOT)/include/freetype2 -I. \
+				-I$(CDK_SRC)/apps/tuxbox/enigma/src
+
+CFLAGS   = -DHAVECACHE=$(HAVECACHE) -DENIGMAVERSION=$(ENIGMAVERSION) -DEMU_PLUGIN $(INCLUDES) -fno-rtti -fno-exceptions -Wall -O2 -mcpu=823 -mmultiple -mstring -pipe
+
+LINK_OPTIONS = -shared -Wall -O2 -mcpu=823 -mmultiple -mstring -pipe -Xlinker -R -Xlinker /var/lib
+
+NAME=mv
+LITE_NAME=$(NAME)-lite
+
+#LITE_OBJECTS = mv.o util.o somain.o program.o channel.o timebar.o enigmacache.o extinfo.o detailcache.o text.o inputmanager.o channelmanager.o files.o  downloadcache.o downloader.o inputdefreader.o execthread.o daybar.o timepicker.o enigmautil.o xmltv.o filemap.o imdb.o imdblistentry.o
+LITE_OBJECTS = mv.o util.o somain.o program.o channel.o timebar.o enigmacache.o extinfo.o text.o inputmanager.o channelmanager.o files.o  downloadcache.o downloader.o inputdefreader.o execthread.o daybar.o timepicker.o enigmautil.o xmltv.o filemap.o imdb.o imdblistentry.o
+
+OBJECTS  = $(LITE_OBJECTS) inputmenu.o presentationmenu.o featuremenu.o miscmenu.o favmanager.o favedit.o favmanentry.o programlist.o proglistentry.o menu.o chanpicker.o 

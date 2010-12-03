@@ -1,0 +1,34 @@
+require v4l-dvb-modules.inc
+
+DEPENDS += " mercurial-native"
+
+SRCDATE = "20100904"
+SRCREV = "6e0befab696a"
+PV = "0.0+hg${SRCDATE}"
+PR = "r46"
+
+SRC_URI = "hg://linuxtv.org/hg/;module=v4l-dvb;rev=${SRCREV} \
+           file://defconfig \
+           file://v4l-dvb-compat.patch;patch=1 \
+           file://v4l-2.6.18-compat.patch;patch=1 \
+           file://fix-blocking-demux.patch;patch=1 \
+           file://basic-dvb-t2-support.patch;patch=1 \
+           file://localversion.patch;patch=1 \
+           file://fix-strip.patch;patch=1 \
+           file://build-fix.patch;patch=1 \
+           file://v4l-dvb-as102.patch;patch=1 \
+           file://v4l-dvb-a867.patch;patch=1 \
+           file://v4l-dvb-tua9001.patch;patch=1 \
+           file://v4l-dvb-af9033.patch;patch=1 \
+           file://v4l-dvb-mxl5007_fix_for_af9035.patch;patch=1 \
+           file://v4l-dvb-af9035.patch;patch=1 \
+           file://v4l-dvb-tda18218.patch;patch=1 \
+           file://v4l-dvb-af9013_fix_for_tda18218_tuner.patch;patch=1 \
+           file://v4l-dvb-af9015_fix_for_tda18218_tuner.patch;patch=1 \
+"
+
+S = "${WORKDIR}/v4l-dvb"
+
+# replace old a867 drivers handled by an external package
+RREPLACES_v4l-dvb-module-dvb-a867 += "v4l-dvb-module-a867"
+RCONFLICTS_v4l-dvb-module-dvb-a867 += "v4l-dvb-module-a867"

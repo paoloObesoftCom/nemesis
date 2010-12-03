@@ -1,0 +1,62 @@
+echo 4 > /proc/progress
+
+mount -t sysfs sysfs /sys
+echo 12 > /proc/progress
+
+depmod -Ae
+echo 16 > /proc/progress
+
+mount -at nonfs,nosmbfs,noncpfs,nocifs
+echo 18 > /proc/progress
+
+swapon -a
+echo 24 > /proc/progress
+
+tar xzf /etc/var.tar.gz -C /
+echo 28 > /proc/progress
+
+# sleep after 10min
+if [ -e /proc/ide/hdb ] ; then
+	HD=1
+else
+	HD=0
+fi
+export HDD_TIMEOUT=120
+export HDD_ACOUSTIC=128
+[ -e /var/etc/.timeout.hd ] && export HDD_TIMEOUT=$(cat /var/etc/.timeout.hd)
+[ -e /var/etc/.acoustic.hd ] && export HDD_ACOUSTIC=$(cat /var/etc/.acoustic.hd)
+hdparm -S${HDD_TIMEOUT} /dev/ide/host0/bus0/target${HD}/lun0/disc
+hdparm -M${HDD_ACOUSTIC} /dev/ide/host0/bus0/target${HD}/lun0/disc
+
+
+echo 44 > /proc/progress
+for mod in head dreambox_keyboard fp rfmod; do
+	modprobe $mod
+done
+
+echo 54 > /proc/progress
+[ -e /etc/ssh/ssh_host_rsa_key ] && /usr/bin/showiframe /boot/bootlogo.mvi || /usr/bin/showiframe /boot/bootlogo_wait.mvi
+
+echo 62 > /proc/progress
+hostname -F /etc/hostname
+
+echo 66 > /proc/progress
+#/usr/bin/wdog /usr/bin/dccamd -
+
+echo 70 > /proc/progress
+ifup -a
+
+echo 78 > /proc/progress
+
+echo 82 > /proc/progress
+[ -e "/etc/sysctl.conf" ] && /sbin/sysctl -p "/etc/sysctl.conf"
+
+echo 86 > /proc/progress
+ldconfig
+
+echo 90 > /proc/progress
+for mod in usbserial ftdi_sio; do
+	modprobe $mod
+done
+
+echo 94 > /proc/progress

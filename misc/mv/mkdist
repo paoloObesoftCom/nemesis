@@ -1,0 +1,23 @@
+rm -f *~
+cd src
+rm -f *~
+#make
+#make clean
+#make -f Makefile.lite
+#make clean
+#mv *.so epgidx multiepg mvccat ..
+make clean
+rm -f *.so
+cd ..
+mkdir -p ../tmp/mv
+cp -Rp * ../tmp/mv
+cd ../tmp
+tar zc --exclude mv/docs/.svn -f ../mv_docs.tgz mv/docs
+rm -rf mv/docs
+tar zc --exclude mv/src --exclude mv/.svn --exclude mv/icons/.svn --exclude mv/icons/unused -f ../inst_mv.tgz mv
+cp -p mv/epg_inst.sh mv/readme.txt ..
+rm -f mv/*.so mv/epgidx mv/multiepg mv/mvccat
+tar zc --exclude mv/.svn --exclude mv/src/.svn --exclude mv/icons/.svn --exclude mv/icons/unused -f ../mv-src.tgz mv
+rm -rf mv
+cd ..
+zip mv.zip epg_inst.sh readme.txt inst_mv.tgz

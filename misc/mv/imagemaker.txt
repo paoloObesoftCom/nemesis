@@ -1,0 +1,50 @@
+Info for Image Makers using MV
+
+1) mhwepg
+
+If you package MV with your image, please remember to include
+the mhwepg binary! I get lots of queries from people where
+they can find the binary...
+
+2) Including a conf.bin with image
+
+If you want to include an MV conf.bin with your image
+(i.e. deliver a pre-configured MV), make
+sure 'Auto' is set for the data directories in the Input Menu
+(accessed via the DREAM key).
+
+If you don't, MV will be unable to set it's data directories
+appropriate to each user's system, and they may get all
+sorts of errors e.g. complaining about e.g. "can't make
+directory /var/mnt/usb/mv"
+
+3) Default-configured downloads
+
+In order to allow image makers to configure download inputs
+as default, I've added code that ignores such configured
+inputs if no network is configured.
+
+4) Passing Arguments to MV
+
+MV reads a key in the enigma config on startup, allowing
+image makers to pass it arguments.
+
+You set the key like this:
+
+	eConfig::getInstance()->setKey("/elitedvb/mv/arg1", <VALUE> );
+
+<VALUE> is interpreted as follows:
+
+1-9:	Start in that view number
+	These allow e.g. always start with the program list
+	for the current channel if the red button is pressed
+	on the remote.
+	This argument overrides the config setting 'Next View'.
+
+Other values are ignored currently.
+	
+Important:
+
+The key will be set to 0 once it's been read, meaning
+you have to set it every time you want to pass an
+argument.

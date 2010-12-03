@@ -1,0 +1,1663 @@
+
+#: Nemesis np.cpp
+msgid "Select script to execute"
+msgstr "Scegli script da eseguire"
+
+msgid "Running.."
+msgstr "Esecuzione.."
+
+msgid " EDG-Nemesis News"
+msgstr " Notizie EDG-Nemesis"
+
+msgid "EDG-Nemesis News"
+msgstr "Notizie EDG-Nemesis"
+
+msgid "Choose emulator"
+msgstr "Scegli emulatore"
+
+msgid "Choose cardserver"
+msgstr "Scegli cardserver"
+
+msgid "Press OK to start/restart EMU or CS"
+msgstr "Premi OK per avviare/riavviare EMU o CS"
+
+msgid "Utility"
+msgstr "Utilità"
+
+msgid "Open utility panel"
+msgstr "Apri pannello Utilità"
+
+msgid " Extra tools"
+msgstr " Strumenti extra"
+
+msgid "Open Extra tools panel"
+msgstr "Apri pannello strumenti extra"
+
+msgid " Setup dreambox"
+msgstr " Configurazione dreambox"
+
+msgid "Open setup Dreambox Panel"
+msgstr "Apri pannello configurazione Dreambox"
+
+msgid " Start - Stop programs"
+msgstr " Avvio - Arresto programmi"
+
+msgid "Start - Stop external programs"
+msgstr "Start - Stop programmi esterni"
+
+msgid "Show EDG-Nemesis Group news"
+msgstr "Mostra News EDG-Nemesis Group"
+
+msgid " Unlock parental control"
+msgstr " Sblocca controllo parentale"
+
+msgid " Lock parental control"
+msgstr " Blocca controllo parentale"
+
+msgid "Lock,unlock (parental control)"
+msgstr "Sblocca,blocca (controllo parentale)"
+
+msgid " Set parental control"
+msgstr " Configura controllo parentale"
+
+msgid "Set parental control"
+msgstr "Configura controllo parentale"
+
+msgid " About Nemesis"
+msgstr " Info su Nemesis"
+
+msgid "About Nemsis-Project"
+msgstr "Info su Nemsis-Project"
+
+msgid " System information"
+msgstr " Informazione di sistema"
+
+msgid "Open system info panel"
+msgstr "Apri system info panel"
+
+msgid "Open Addons Panel"
+msgstr "Apri Addons Panel"
+
+msgid "Starting %s"
+msgstr "Avvio di %s"
+
+msgid "Stopping %s"
+msgstr "Arresto di %s"
+
+msgid ""
+"The emulator '%s' is started!\n"
+"Please stop it before start cardserver."
+msgstr ""
+"L'emulatore '%s' é avviato!\n"
+"Devi fermare l'emulatore, prima di avviare il cardserver."
+
+#: Nemesis enigma_dyn.cpp
+msgid "The emulator '%s' is started!<br>Please stop it before start cardserver."
+msgstr "L'emulatore '%s' é avviato!<br>Devi fermare l'emulatore, prima di avviare il cardserver."
+
+msgid "Nothing to do!"
+msgstr "Nessuna operazione da eseguire!"
+
+msgid "Starting Emulator"
+msgstr "Avvio Emulatore"
+
+msgid "Emulator %s is started!"
+msgstr "L'emulatore %s é ora avviato!"
+
+msgid "Stopping Emulator"
+msgstr "Arresto Emulatore"
+
+msgid "Emulator is now stopped!"
+msgstr "L'emulatore é ora arrestato!"
+
+msgid "Starting Cardserver"
+msgstr "Avvio Cardserver"
+
+msgid "Cardserver %s is started!"
+msgstr "Il cardserver %s é ora avviato!"
+
+msgid "Stopping Cardserver"
+msgstr "Arresto Cardserver"
+
+msgid "Cardserver is now stopped!"
+msgstr "Il cardserver é ora arrestato!"
+
+
+#: Nemesis addons.cpp
+msgid "Reload Settings...."
+msgstr "Ricarica Settings...."
+
+msgid "Configfile parse error"
+msgstr "Errore struttura Configfile"
+
+msgid "Invalid configfile"
+msgstr "Configfile invalido"
+
+msgid "User Abort"
+msgstr "Interruzione utente"
+
+msgid ""
+"Connetting to addons server.\n"
+"Please wait..."
+msgstr ""
+"Connessione al server addons.\n"
+"Prego attendere..."
+
+msgid ""
+"Server not found!\n"
+"Please check internet connection."
+msgstr ""
+"Server non trovato!\n"
+"Controlla la connessione ad internet."
+
+msgid "Connetting..."
+msgstr "Connessione..."
+
+msgid "Connetting to server: %s"
+msgstr "Connessione al server: %s"
+
+msgid "Download addons"
+msgstr "Scarica addons"
+
+msgid "Abort download"
+msgstr "Ferma download"
+
+msgid "Close"
+msgstr "Chiudi"
+
+msgid ""
+"Not enough space in /var!\n"
+"Please delete addons before install new."
+msgstr ""
+"Spazio in /var insufficiente!\n"
+"Cancella un addons prima di installarne uno nuovo."
+
+msgid "Download addon ...."
+msgstr "Scarica addon ...."
+
+msgid ""
+"Do you want install the addon:\n"
+"%s ?"
+msgstr ""
+"Vuoi installare l'addon:\n"
+"%s ?"
+
+msgid "Install Addon"
+msgstr "Installazione Addon"
+
+msgid "Install %s ..."
+msgstr "Installa %s ..."
+
+msgid "Addon installed."
+msgstr "Addon installato."
+
+msgid "Istallation aborted by user!."
+msgstr "Installazione cancellata dall'utente!."
+
+msgid ""
+"Addon not found!\n"
+"Please check internet connection."
+msgstr ""
+"Addon non trovato!\n"
+"Controllare la connessione ad internet."
+
+msgid "Downloading addon: %d/%d kb (%d%%)"
+msgstr "Scaricamento addon: %d/%d kb (%d%%)"
+
+msgid "Addon downloaded: %d kb"
+msgstr "Addon scaricato: %d kb"
+
+msgid "File downloaded correctly!"
+msgstr "File scaricato correttamente!"
+
+msgid "Nemesis download panel"
+msgstr "Pannello di download Nemesis"
+
+msgid " Download addons "
+msgstr " Scarica addons "
+
+msgid "Download addons from internet"
+msgstr "Scarica addons da internet"
+
+msgid " Download extra"
+msgstr " Scarica extra"
+
+msgid "Download extra from internet"
+msgstr "Scarica extra da internet"
+
+msgid " Delete addons"
+msgstr " Cancella addons"
+
+msgid "Delete addons"
+msgstr "Cancella addons"
+
+msgid " Manual install"
+msgstr " Installazione manuale"
+
+msgid "Manual install addons"
+msgstr "Installazione manuale addons"
+
+msgid "Read again /tmp"
+msgstr "Rileggi /tmp"
+
+msgid "Put your plugin (xxx.tbz2) via FTP in /tmp."
+msgstr "Metti il plugin (xxx.tbz2) in /tmp, via FTP."
+
+msgid " Setting internet parameter"
+msgstr " Configura parametri internet"
+
+msgid "Setting URL and proxy server"
+msgstr "Configurazione URL e server proxy"
+
+msgid "Free space in /var %i %% (%'i Kb)"
+msgstr "Spazio libero in /var %i %% (%'i Kb)"
+
+msgid "Free space %i %% (%'i Kb)"
+msgstr "Spazio libero %i %% (%'i Kb)"
+
+msgid ""
+"Do you want delete the addon:\n"
+"%s ?"
+msgstr ""
+"Vuoi cancellare l'addon:\n"
+"%s ?"
+
+msgid "Install addons"
+msgstr "Installa addons"
+
+msgid "Setting internet parameter"
+msgstr "Configura parametri internet"
+
+msgid "Extra server address to connect"
+msgstr "Indirizzo di connessione al server extra"
+
+msgid "Enter extra address"
+msgstr "Immetti inidrizzo extra"
+
+msgid "Use Proxy Server"
+msgstr "Usa Server proxy"
+
+msgid "Enable / Disable proxy"
+msgstr "Abilita / Disabilita proxy"
+
+msgid "Set Proxy server"
+msgstr "Configura server proxy"
+
+msgid "Proxy port:"
+msgstr "Porta proxy:"
+
+msgid "Set Proxy port"
+msgstr "Configura Proxy port"
+
+msgid "User name:"
+msgstr "Immetti nome utente:"
+
+msgid "Set User name"
+msgstr "Immetti nome utente"
+
+msgid "Set password"
+msgstr "Immetti password"
+
+msgid "Clear"
+msgstr "Cancella"
+
+msgid "Save"
+msgstr "Salva"
+
+msgid "You do enter a a valid URL!"
+msgstr "Devi immettere un URL valido!"
+
+msgid "You do enter a proxy server!"
+msgstr "Devi immettere un server proxy!"
+
+msgid "You do enter a proxy port!"
+msgstr "Devi immettere la porta del proxy!"
+
+msgid "Do you want delete all proxy setting ?"
+msgstr "Vuoi cancellare tutte le configurazioni del proxy?"
+
+msgid "Delete proxy setting"
+msgstr "Rimuovi configurazioni proxy"
+
+msgid "Install addons manually"
+msgstr "Installazione manuale addon"
+
+#: Nemesis extra.cpp
+
+msgid "Extra tools"
+msgstr "Strumenti Extra"
+
+msgid " Setting skin position"
+msgstr " Configura posizione skin"
+
+msgid "Setting OSD skin position"
+msgstr "Configura la posizione dello skin su OSD"
+
+msgid " Manage User's Scripts"
+msgstr " Gestione Scripts di utente"
+
+msgid "Open user sript panel"
+msgstr "Apri panello script utente"
+
+msgid " Manage /var folder"
+msgstr " Gestione cartella /var"
+
+msgid "Open manage /var panel"
+msgstr "Apri pannello gestione /var"
+
+msgid " Enable lite skin on zapping"
+msgstr " Abilita skin lite al cambio canale"
+
+msgid "Enable / Disable lite skin on zapping"
+msgstr "Ablita / Disabilita skin lite"
+
+msgid " Enable lite skin on OK press"
+msgstr " Abilita skin lite al tasto OK"
+
+msgid "Enable / Disable lite skin on OK press"
+msgstr "Ablita / Disabilita skin lite al tasto OK"
+
+msgid " Enable lite skin on INFO press"
+msgstr " Abilita skin lite al tasto INFO"
+
+msgid "Enable / Disable lite skin on INFO press"
+msgstr "Ablita / Disabilita skin lite al tasto INFO"
+
+msgid " EPG Control Center"
+msgstr " Centro di controllo EPG"
+
+msgid "Open EPG control center panel"
+msgstr " Apri pannello controllo EPG"
+
+msgid " AutoStandby Manager"
+msgstr " Gestione AutoStandby"
+
+msgid "Open AutoStandby panel"
+msgstr "Apri pannello gestione AutoStandby"
+
+msgid " Debugging Manager"
+msgstr " Gestione Debugging"
+
+msgid "Open Debugging panel"
+msgstr "Apri pannello gestione Debugging"
+
+msgid " Firewall Manager"
+msgstr " Gestione Firewall"
+
+msgid "Open Firewall panel"
+msgstr "Apri pannello gestione Firewall"
+
+msgid " Clear zapping playlist"
+msgstr " Cancella lo storico zapping"
+
+msgid "Clear channel history playlist"
+msgstr "Cancella lo storico dello zapping"
+
+msgid "Do you want delete the playlist.epl file too?"
+msgstr "Vuoi cancellare anche il file playlist.epl?"
+
+msgid "Clear playlist"
+msgstr "Cancella playlist"
+
+msgid ""
+"Cleaning in progress.\n"
+"Please Wait..."
+msgstr ""
+"Cancellazione in esecuzione.\n"
+"Prego attendere..."
+
+msgid ""
+"You have to restart enigma to apply the new remote setting\n"
+"Restart now?"
+msgstr ""
+"È necessario riavviare enigma per applicare la nuova configurazione\n"
+"Riavviare ora?"
+
+#: Nemesis boot.cpp
+
+msgid "Select bootlogo"
+msgstr "Scelta logo di avvio"
+
+msgid "Boot logo 1"
+msgstr "Logo di avvio 1"
+
+msgid "Boot logo 2"
+msgstr "Logo di avvio 2"
+
+msgid "Reboot Dreambox"
+msgstr "Riavvia Dreambox"
+
+#: Nemesis dbset.cpp
+
+msgid " Can handle two services"
+msgstr " Trattare due canali"
+
+msgid "Dreambox setting"
+msgstr "Configurazione dreambox"
+
+msgid " Setting Inadyn (DynDNS)"
+msgstr " Configurazione Inadyn (DynDNS)"
+
+msgid "Open Inadyn panel"
+msgstr "Apri pannelllo Inadyn"
+
+msgid " Setting path"
+msgstr " Configurazione percorsi"
+
+msgid "Open Setting path panel"
+msgstr "Apri pannello Configurazione percorsi"
+
+msgid " Setting SWAP file"
+msgstr " Configurazione file di SWAP"
+
+msgid "Open swap file panel"
+msgstr "Apri panello file di SWAP"
+
+msgid " Setting Harddisk parameter"
+msgstr " Configurazione parametri Harddisk"
+
+msgid "Open Harddisk manager"
+msgstr "Apri gestione Harddisk"
+
+msgid " Enable DM7000 remote"
+msgstr " Abilita telecomando DM7000"
+
+msgid "Use DM7000 remote"
+msgstr "Usa telecomando DM7000"
+
+msgid " Enable PVR Mode"
+msgstr " Abilita modo PVR"
+
+msgid "Use Help key for PVR"
+msgstr "Usa Tasto help per PVR"
+
+msgid " Select boot logo"
+msgstr " Scelta logo di avvio"
+
+msgid "Open boot logo panel"
+msgstr "Apri panello logo di avvio"
+
+msgid " Hide ECM info in OSD"
+msgstr " Nascondi info ECM nell'OSD"
+
+msgid "Hide ECM info in infobar"
+msgstr "Nascondi info ECM dalla barra info"
+
+msgid " Hide Network info in OSD"
+msgstr " Nascondi info Rete nell'OSD"
+
+msgid "Hide Network info in infobar"
+msgstr "Nascondi info Rete dalla barra info"
+
+msgid " Show DreamCrypt as Irdeto in OSD"
+msgstr " Mostra DreamCrypt come Irdeto sull'OSD"
+
+msgid "Show DreamCrypt as Irdeto in OSD"
+msgstr "Mostra DreamCrypt come Irdeto sulla barra info"
+
+msgid " Show Provider with Channel in OSD"
+msgstr " Mostra Provider con il canale in OSD"
+
+msgid "Show Provider name with Channel in OSD"
+msgstr "Mostra nome provider con il canale in OSD"
+
+msgid " Show long month Date in OSD"
+msgstr " Mostra data con mese lungo in OSD"
+
+msgid "Show long month Date in OSD"
+msgstr "Mostra data con mese lungo in OSD"
+
+msgid " Save dreambox conf"
+msgstr " Salva configurazioni dreambox"
+
+msgid "Save configuration"
+msgstr "Salva configurazioni in memoria"
+
+msgid " Show buttons border"
+msgstr " Mostra bordi nei pulsanti"
+
+msgid "Show buttons border"
+msgstr "Mostra bordi nei pulsanti"
+
+msgid " Show Channell icons (Picon)"
+msgstr " Mostra icone canali (Picon)"
+
+msgid "Show Channell icons (Picon)"
+msgstr "Mostra icone canali (Picon)"
+
+msgid " Use Picon by Channel Name"
+msgstr " Usa Picon con Nome Canale"
+
+msgid "Use Picon by Channel Name"
+msgstr "Usa Picon con Nome Canale"
+
+msgid " Enable EPG Blacklist"
+msgstr " Abilita EPG Blacklist"
+
+msgid "Enable EPG Blacklist"
+msgstr "Abilita EPG Blacklist"
+
+msgid ""
+"The Picon function is actvated!\n"
+"You do configure the Picon image folder.\n"
+"Do you want configure it now?"
+msgstr ""
+"La funzione Picon é sata attivata!\n"
+"Devi configurare la cartella immagini Picon.\n"
+"Vuoi configurarla adesso?"
+
+msgid " Disable Blu Panel's programs at boot"
+msgstr " Disabilita programmi Blu Panel al boot"
+
+msgid "Disable start blu panel's programs at system boot"
+msgstr "Disabilita l'avvio dei programmi del blu panel al riavvio"
+
+#: Nemesis deamon.cpp
+
+msgid "Start - Stop programs"
+msgstr "Avvio - Arresto programmi"
+
+msgid "(%d) Start/Stop  %s"
+msgstr "(%d) Abilita/Disabilita  %s"
+
+msgid ""
+"Starting program: %s.\n"
+"Please Wait..."
+msgstr ""
+"Avvio programma: %s.\n"
+"Attendere prego..."
+
+msgid ""
+"Stopping program: %s.\n"
+"Please Wait..."
+msgstr ""
+"Arresto programma: %s.\n"
+"Attendere prego..."
+
+msgid "Enable %s"
+msgstr "Abilita %s"
+
+#: Nemesis hdd.cpp
+
+msgid "Status:"
+msgstr "Stato:"
+
+msgid "Model:"
+msgstr "Modello:"
+
+msgid "Capacity:"
+msgstr "Capacità:"
+
+msgid "Bus type:"
+msgstr "Tipo bus:"
+
+msgid "Sleep timeout:"
+msgstr "Timeout arresto:"
+
+msgid "Press OK to enter setup timeout"
+msgstr "Premi OK per modificare il parametro"
+
+msgid "Set timeout 0-60 min"
+msgstr "Tempo 0-60 min"
+
+msgid "Acoustics:"
+msgstr "Rumorosità:"
+
+msgid "Press OK to enter setup acoustics"
+msgstr "Premi OK per modificare il parametro"
+
+msgid "Set acoustics 0-254, 128: quiet, 254: fast"
+msgstr "Rumorosita 0-254, 128: silenzioso, 254: rumoroso"
+
+msgid "Close Harddisk panel"
+msgstr "Chiudi gestione Harddisk"
+
+msgid "Save and set Harddisk parameter"
+msgstr "Salva e configura parametri harddisk"
+
+msgid "Set"
+msgstr "Salva"
+
+msgid "Start Harddisk"
+msgstr "Avvio Harddisk"
+
+msgid "Start HDD"
+msgstr "Avvio HDD"
+
+msgid "Stop Harddisk"
+msgstr "Arresto harddisk"
+
+msgid "Stop HDD"
+msgstr "Ferma HDD"
+
+msgid "Bad timeout parameter!"
+msgstr "Parametri di timeout errati!"
+
+msgid "Bad acoustics parameter!"
+msgstr "Parametri di rumorosità errati!"
+
+msgid ""
+"Setting HD parameter.\n"
+"Please Wait..."
+msgstr ""
+"Configurazione parametri harddisk.\n"
+"Attendere prego..."
+
+msgid "Set sleep timeout before!"
+msgstr "Prima devi configurare il timeout!"
+
+msgid "Set acoustic before!"
+msgstr "Prima devi configurare la rumorosità!"
+
+msgid ""
+"Start HDD.\n"
+"Please Wait..."
+msgstr ""
+"Avvio harddisk.\n"
+"Attendere prego..."
+
+msgid ""
+"Stop HDD.\n"
+"Please Wait..."
+msgstr ""
+"Arresto harddisk.\n"
+"Attendere prego..."
+
+#: Nemesis inadyn.cpp
+
+msgid "Status Inadyn: stopped"
+msgstr "Stato Inadyn: arrestato"
+
+msgid "Status Inadyn: started"
+msgstr "Stato Inadyn: avviato"
+
+msgid "Setting Inadyn"
+msgstr "Configuarzione Inadyn"
+
+msgid "Username:"
+msgstr "Nome utente:"
+
+msgid "Set user name"
+msgstr "Configura nome utente"
+
+msgid "Set domain name to update"
+msgstr "Configura nome dominio da aggiornare"
+
+msgid "Period:"
+msgstr "Periodo:"
+
+msgid "Set update period time in sec"
+msgstr "configura tempo di aggiornamento in sec"
+
+msgid "System:"
+msgstr "Sistema:"
+
+msgid "Set dyndns system type"
+msgstr "Configura tipo di sistema DynDNS"
+
+msgid "Close inadyn manager"
+msgstr "Chiudi gestione inadyn"
+
+msgid "Save parameter"
+msgstr "Salva parametri"
+
+msgid "Start"
+msgstr "Avvio"
+
+msgid "Start inadyn"
+msgstr "Avvio inadyn"
+
+msgid "Stop"
+msgstr "Arresta"
+
+msgid "Stop Inadyn"
+msgstr "Arresto inadyn"
+
+msgid "Show log file"
+msgstr "Mostra file di log"
+
+msgid "Show inaDyn log"
+msgstr "Mostra log di inaDyn"
+
+msgid "Enable log file"
+msgstr "Abilita file di log"
+
+msgid "Enable / Disable log file"
+msgstr "Abilita / Disabilita file di log"
+
+msgid ""
+"Stop inadyn in progress.\n"
+"Please Wait..."
+msgstr ""
+"Arresto inadyn in esecuzione.\n"
+"Attendere prego.."
+
+msgid ""
+"Start Inadyn in progress.\n"
+"Please Wait..."
+msgstr ""
+"Avvio inadyn in esecuzione.\n"
+"Attendere prego.."
+
+msgid ""
+"File '/var/etc/inadynpar.conf' don't exists.\n"
+"Please save config first"
+msgstr ""
+"File '/var/etc/inadynpar.conf' non esiste.\n"
+"Dovete prima salvare la configurazione."
+
+msgid ""
+"Save parameter in progress.\n"
+"Please Wait..."
+msgstr ""
+"Salvataggio parametri in esecuzione.\n"
+"Attendere prego.."
+
+#: Nemesis setpath.cpp
+
+msgid "Setting path"
+msgstr "Configurazione percorsi"
+
+msgid "PVR movie folder:"
+msgstr "Cartella per film:"
+
+msgid "Set PVR movie folder path"
+msgstr "Immetti il percorso cartella movie"
+
+msgid "Recover list"
+msgstr "Ripristina elenco"
+
+msgid "Recover Movie list"
+msgstr "Ripristina elenco film"
+
+msgid "Picon images folder:"
+msgstr "Cartella Picon:"
+
+msgid "Select Picon images path"
+msgstr "Scegli il percorso delle immagini Picon"
+
+msgid "Set default parameter"
+msgstr "Ripristina valori di default"
+
+msgid ""
+"Saving folder parameter.\n"
+"Please Wait..."
+msgstr ""
+"Salvataggio parametri.\n"
+"Attendere prego.."
+
+msgid ""
+"The folder '%s' does not exist.\n"
+"Do you want continue and save anyway?"
+msgstr ""
+"La cartella '%s' non esiste.\n"
+"Volerte continuare e salvare lo stesso?"
+
+msgid "Folder error"
+msgstr "Errore cartella"
+
+msgid "You do enter a valid path!"
+msgstr "Devi immettre il percorso corretto"
+
+msgid ""
+"Recover movie list.\n"
+"Please Wait..."
+msgstr ""
+"Ricostruzione elenco film.\n"
+"Attendere prego.."
+
+#: Nemesis swap.cpp
+
+msgid " Disable from HD (%'i Kb)"
+msgstr " Disabilita da HD (%'i Kb)"
+
+msgid " Enable swap on HD drive"
+msgstr " Abilita swap su HD drive"
+
+msgid " Disable from CF (%'i Kb)"
+msgstr " Disabilita da CF (%'i Kb)"
+
+msgid " Enable swap on CF card"
+msgstr " Abilita swap su CF card"
+
+msgid " Disable from USB (%'i Kb)"
+msgstr " Disabilita da USB (%'i Kb)"
+
+msgid " Enable swap on USB stick"
+msgstr " Abilita swap su penna USB"
+
+msgid "Enable / Disable Swap on USB"
+msgstr "Abilita / Disabilita Swap su USB"
+
+msgid "Enable / Disable Swap on CF"
+msgstr "Abilita / Disabilita Swap su CF"
+
+msgid "Enable / Disable Swap on HDD"
+msgstr "Abilita / Disabilita Swap su HDD"
+
+msgid "Setting Swap file"
+msgstr "Configura file di Swap"
+
+msgid "Select swap file size:"
+msgstr "Scegli file di swap:"
+
+msgid "No External device Found!"
+msgstr "Nessun device esterno trovato!"
+
+msgid "Do you want delete all SWAP device?"
+msgstr "Volete cancellare tutti i device SWAP?"
+
+msgid "Delete SWAP device"
+msgstr "Cancella SWAP device"
+
+msgid "Delete all SWAP device. Please wait.."
+msgstr "Cancellazione SWAP device. Attendere prego.."
+
+msgid "Deactivating SWAP file. Please wait.."
+msgstr "Disattivazione file SWAP. Attendere prego.."
+
+msgid "Formatting SWAP file. Please wait.."
+msgstr "Formattazione file SWAP. Attendere prego.."
+
+msgid "Activating SWAP file. Please wait.."
+msgstr "Attivazione file SWAP. Attendere prego.."
+
+msgid ""
+"SWAP device '%s' not found!\n"
+"You need restart dreambox to create it.\n"
+"Do you want restart now?"
+msgstr ""
+"Device di SWAP '%s' non trovato!\n"
+"Dovete riavviare la dreambox per crearlo.\n"
+"Volete riavviare adesso?"
+
+msgid "Create SWAP device"
+msgstr "Creazione device SWAP"
+
+msgid "No swap file active."
+msgstr "Nessun file di swap attivo."
+
+msgid "Active in: %s"
+msgstr "Attivo su: %s"
+
+#: Nemesis sysinfo.cpp
+
+msgid "System information"
+msgstr "Informazioni di sistema"
+
+#: Nemesis userscript.cpp
+
+msgid "Manage User's Scripts"
+msgstr "Gestione scripts di utente"
+
+msgid ""
+"No Users Scripts Found!\n"
+"\n"
+"You can place xxxxx_user.sh /var/bin"
+msgstr ""
+"Users Scripts non trovati!\n"
+"\n"
+"Potete mettere gli script xxxxx_user.sh in /var/bin"
+
+msgid "Exit user scripts"
+msgstr "Chiudi user scripts"
+
+msgid "Run in kernel mode"
+msgstr "Esegui in kernel mode"
+
+msgid "Run script in linux mode"
+msgstr "Esegui gli script in linux mode"
+
+msgid "Confirm execution"
+msgstr "Conferma esecuzione"
+
+msgid "Confirm script execution"
+msgstr "Conferma l'esxecuzione dello script"
+
+msgid "Show output window"
+msgstr "Mostra finestra di output"
+
+msgid "Show result output window"
+msgstr "Mostra i risultati in una finestra"
+
+msgid "Save selected user script"
+msgstr "Salve lo script selezionato"
+
+msgid "Execute"
+msgstr "Esegui"
+
+msgid "Execute selected user script"
+msgstr "Esegui lo script selezionato"
+
+msgid "Delete"
+msgstr "Elimina"
+
+msgid "Delete user scripts"
+msgstr "Elimina lo script selezionato"
+
+msgid "Advanced user scripts"
+msgstr "Script utente"
+
+msgid "Choose user scripts"
+msgstr "Scegli lo script"
+
+msgid "Save '%s' in progress..."
+msgstr "Salvataggio di '%s' in esecuzione..."
+
+msgid ""
+"Do you want execute the script :\n"
+"%s?"
+msgstr ""
+"Vuoi eseguire lo script :\n"
+"%s?"
+
+msgid "Execute script"
+msgstr "Esecuzione script"
+
+msgid "Script %s is running..."
+msgstr "Script %s in esecuzione..."
+
+msgid ""
+"Do you want delete the script:\n"
+"%s?"
+msgstr ""
+"Vuoi cancellare lo script :\n"
+"%s?"
+
+msgid "You cannot delete this file!"
+msgstr "Non potete cancellare lo script!"
+
+#: Nemesis ecminfo.cpp
+
+msgid "ECM Information"
+msgstr "Informazioni ECM"
+
+msgid "PID Information"
+msgstr "Informazioni PID"
+
+msgid "EMM Information"
+msgstr "Informazioni EMM"
+
+#: Nemesis emuinfo.cpp
+
+msgid "Emulator/Cardserver Information"
+msgstr "Informazioni Emulatore/Cardserver"
+
+msgid "Open G-Box Center"
+msgstr "Apri G-Box Center"
+
+msgid "Open CCcam Info"
+msgstr "Apri CCcam Info"
+
+msgid ""
+"Information is reading.\n"
+"Please wait a moment.."
+msgstr ""
+"Lettura informazioni.\n"
+"Prego attendere un momento.."
+
+#: Nemesis movevar.cpp
+
+msgid " Restore /var from HDD to flash"
+msgstr " Ripristina /var da HDD in flash"
+
+msgid " Restore /var from MMC to flash"
+msgstr " Ripristina /var da MMC in flash"
+
+msgid " Restore /var from USB to flash"
+msgstr " Ripristina /var da USB in flash"
+
+msgid "Restore /var to flash"
+msgstr "Ripristina /var in flash"
+
+msgid " Move /var on HD drive"
+msgstr " Sposta la /var in HD drive"
+
+msgid " Move /var on MMC card"
+msgstr " Sposta la /var nella MMC"
+
+msgid " Move /var on USB stick"
+msgstr " Sposta la /var sulla penna USB"
+
+msgid "Move /var to HDD"
+msgstr "Sposta la /var in HDD"
+
+msgid "Move /var to MMC"
+msgstr "Sposta la /var nella MMC"
+
+msgid "Move /var to USB"
+msgstr "Sposta la /var nella USB"
+
+msgid "Manage /var folder"
+msgstr "Gestisci la cartella /var"
+
+msgid "Copy /var data to new folder"
+msgstr "Copia i dati /var nella nuova cartella"
+
+msgid "Enable copy /var data"
+msgstr "Abilita copia dati della /var"
+
+msgid "Do you want move /var on %s?"
+msgstr "Vuoi spostare la /var in %s?"
+
+msgid "Moving /var folder"
+msgstr "Spoatamento della cartella /var"
+
+msgid ""
+"The folder %s is not empty!\n"
+"Do you want delete it before move /var?"
+msgstr ""
+"La cartella %s non é vuota!\n"
+"Vuoi cancellarla prima di spostare la /var?"
+
+msgid "Folder not empty"
+msgstr "La cartella non é vuota"
+
+msgid "Cannot create %s folder!"
+msgstr "Non é possibile creare la cartella %s!"
+
+msgid "Do you want restore /var folder in flash?"
+msgstr "Voui ripristinare la cartella /var in flash?"
+
+msgid "Restoring /var folder"
+msgstr "Ripristino della cartella /var"
+
+msgid "/var folder is in flash!"
+msgstr "La cartella /var é in flash!"
+
+msgid "/var folder is moved in: %s"
+msgstr "La cartella /var é spostata su: %s" 
+
+msgid "Restore /var.."
+msgstr "Ripristina /var.."
+
+msgid "Copy /var to new folder.."
+msgstr "Copia /var nella nuova cartella.."
+
+msgid "Creating new /var folder.."
+msgstr "Creazione nuova cartella /var.."
+
+msgid "Deleting folder.."
+msgstr "Cancellazine cartella.."
+
+msgid ""
+"The 'Copy' option is enable.\n"
+"Do you want copy /var folder data to %s/ folder?"
+msgstr ""
+"L'opzione 'Copia dati' é abilitata.\n"
+"Vuoi copiare i dati della cartella /var nella cartella %s/?"
+
+msgid "Copy data"
+msgstr "Copia dati"
+
+#: Nemesis enigma_main.cpp
+
+msgid "open plugin panel"
+msgstr "apri pannello Plugin"
+
+msgid "open Nemesis Panel"
+msgstr "apri pannello Nemesis"
+
+msgid "restart Enigma"
+msgstr "riavvia Enigma"
+
+#: Nemesis osdinfo.cpp
+
+msgid "Jan"
+msgstr "Gen"
+
+msgid "Feb"
+msgstr "Feb"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "Apr"
+msgstr "Apr"
+
+msgid "may"
+msgstr "Mag"
+
+msgid "Jun"
+msgstr "Giu"
+
+msgid "Jul"
+msgstr "Lug"
+
+msgid "Aug"
+msgstr "Ago"
+
+msgid "Sep"
+msgstr "Set"
+
+msgid "Oct"
+msgstr "Ott"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "Dec"
+msgstr "Dic"
+
+msgid "Enable network fix"
+msgstr "Abilita Network fix"
+
+msgid "enable this when your network is very slow(for testing)"
+msgstr "Abilita il fix solo se la rete é eccessivamente lenta"
+
+#: Nemesis epgmanager.cpp
+
+msgid ""
+"OpenTV EPG Loader plugin not found!\n"
+"Please install it, for fully functionality.\n"
+"Download it by Addons."
+msgstr ""
+"Plugin OpenTV EPG Loader non trovato!\n"
+"Prego installatelo per aver le funzionalita complete\n"
+"Scaricatelo dagli addons, sezione Plugins."
+
+msgid "EPG Control Center"
+msgstr "Centro di controllo EPG"
+
+msgid "EPG cache folder:"
+msgstr "Cartella cache EPG:"
+
+msgid "Set EPG cache folder path"
+msgstr "Definisci cartella EPG cache"
+
+msgid "Select MHW Channel:"
+msgstr "Seleziona canale MHW:"
+
+msgid "Select MHW Channel to update EPG"
+msgstr "Scelgli canale MHW per aggiornamento EPG"
+
+msgid "Stop emu before update"
+msgstr "Arresta emu prima di aggiornare"
+
+msgid " Download EPG cache"
+msgstr " Scarica dati per EPG cache"
+
+msgid " Download EPGui data"
+msgstr " Scarica dati per EPGui"
+
+msgid " Download WeekEPG data"
+msgstr " Scarica dati per WeekEPG"
+
+msgid " Download MvEPG data"
+msgstr " Scarica dati per MvEPG"
+
+msgid "Download data for EPG cache now"
+msgstr "Scarica dati aggiornati per EPG cache"
+
+msgid "Download data for EPGui now"
+msgstr "Scarica dati aggiornati per EPGui"
+
+msgid "Download data for WeekEPG now"
+msgstr "Scarica dati aggiornati per WeekEPG"
+
+msgid "Download data for MvEPG now"
+msgstr "Scarica dati aggiornati per MvEPG"
+
+msgid "Close EPG manager"
+msgstr "Chiudi EPG manager"
+
+msgid "Setting Timer"
+msgstr "Configura timer"
+
+msgid "Open Timer setting panel"
+msgstr "Apri pannello configurazione Timer"
+
+msgid "Create EPG Download event to Timerlist"
+msgstr "Crea evento download EPG nella Timerlist"
+
+msgid ""
+"Download Data for EPG cache...\n"
+"Please wait.\n"
+"Press Cancel to abort."
+msgstr ""
+"Aggiornamento dati per cache EPG in corso...\n"
+"Prego attendere.\n"
+"Premi Cancella per annullare l'operazione."
+
+msgid "Download Data for EPGui"
+msgstr "Aggiornamento dati per EPGui"
+
+msgid "Download Data for WeekEPG"
+msgstr "Aggiornamento dati per WeekEPG"
+
+msgid "Download Data for MvEPG"
+msgstr "Aggiornamento dati per MvEPG"
+
+msgid ""
+"Saving EPG cache in %s/epg.dat...\n"
+"Please wait."
+msgstr ""
+"Salvataggio cache EPG in %s/epg.dat...\n"
+"Prego attendere."
+
+msgid "Function not still implemented!"
+msgstr "Funzione non ancora disponibile!"
+
+msgid "EPG update timeout:"
+msgstr "Timeout update EPG:"
+
+msgid "Set timeout for epg cache download"
+msgstr "Timeout per il download della cache EPG"
+
+msgid "You do enter a valid timeout!"
+msgstr "Devi immettre un valore di timeout corretto!"
+
+msgid ""
+"Incorret Timeout valor!\n"
+"Please enter a valor betwenn 60 and 240 second."
+msgstr ""
+"Valore di timeout non valido!\n"
+"Prego immettere un valore compreso tra 60 e 240 secondi."
+
+msgid "Setting daily EPG Timer"
+msgstr "Configura Timer Giornaliero EPG"
+
+msgid "Selected MHW Channel: %s"
+msgstr "Canale MHW selezionato: %s"
+
+msgid "Enable update EPG cache"
+msgstr "Abilita aggiornamento EPG cache"
+
+msgid "Enable update EPGui"
+msgstr "Abilita aggiornamento EPGui"
+
+msgid "Enable update WeekEPG"
+msgstr "Abilita aggiornamento WeekEPG"
+
+msgid "Enable update MvEPG"
+msgstr "Abilita aggiornamento MvEPG"
+
+msgid "Enable / Disable timer update EPG cache"
+msgstr "Abilita / Disabilita aggiornamento EPG cache via timer"
+
+msgid "Enable / Disable timer update EPGui"
+msgstr "Abilita / Disabilita aggiornamento EPGui via timer"
+
+msgid "Enable / Disable timer update WeekEPG"
+msgstr "Abilita / Disabilita aggiornamento WeekEPG via timer"
+
+msgid "Enable / Disable timer update MvEPG"
+msgstr "Abilita / Disabilita aggiornamento MvEPG via timer"
+
+msgid "Create event"
+msgstr "Crea evento"
+
+msgid "Open Timer panel"
+msgstr "Apri pannello Timer"
+
+msgid ""
+"EPGui data file found\n"
+"Do you want use it, and create a symbolic link?"
+msgstr ""
+"Trovato EPGui data file\n"
+"Vuoi usare quello e creare un link simbolico?"
+
+msgid ""
+"Create Symblic link, and create index for MVEpg...\n"
+"Please wait."
+
+msgstr ""
+"Creazione del link simbolico e degli indici per MVEpg..\n"
+"Attendere prego."
+
+msgid "Channels"
+msgstr "Canali"
+
+msgid "Apply Channels filter"
+msgstr "Attiva filtro canali"
+
+msgid "Download only selected channels"
+msgstr "Scaricare solo i canali selezionati"
+
+msgid "Select TV channels to download EPG"
+msgstr "Scegli i canali per il download dell'EPG"
+
+msgid "EPG Channel Filter"
+msgstr "Filtro canali EPG"
+
+msgid "Enable move Channel"
+msgstr "Abilita spostamento canali"
+
+msgid "Disable move Channel"
+msgstr "Disabilita spostamento canali"
+
+msgid "Update channel list from sat"
+msgstr "Aggiorna lista canali dal sat"
+
+msgid "Update channel list"
+msgstr "Aggiornamento lista canali"
+
+msgid ""
+"Do you want refresh the channel list\n"
+"from Satellite data?"
+msgstr ""
+"Vuoi aggiornare la lista canali\n"
+"dai dati del Satellite?"
+
+msgid "Update Channels"
+msgstr "Aggiorna Canali"
+
+msgid "%d channel in list SKY-IT, %d selected."
+msgstr "%d canali nella lista SKY-IT, %d selezionati."
+
+msgid "%d channel in list SKY-UK, %d selected."
+msgstr "%d canali nella lista SKY-UK, %d selezionati."
+
+#: Nemesis autostandby.cpp
+
+msgid "AutoStandby Manager"
+msgstr "Gestione AutoStandby"
+
+msgid "Go to standby after (unwanted) reboot"
+msgstr "Vai in standby dopo un reboot non gestito"
+
+msgid "Shutdown after (unwanted) reboot"
+msgstr "Spegni dopo un reboot non gestito"
+
+#: Nemesis setsyslog.cpp
+
+msgid "Debugging Manager"
+msgstr "Gestione Debugging"
+
+msgid "Syslog message folder:"
+msgstr "Cartella messaggi Syslog:"
+
+msgid "Set syslog messages folder path"
+msgstr "Scegli percorso cartella messaggi Syslog"
+
+msgid "Start / Stop Syslogd"
+msgstr "Avvio / Arresto Syslogd"
+
+msgid "Status Syslogd: stopped"
+msgstr "Stato Syslogd: arrestato"
+
+msgid "Status Syslogd: started"
+msgstr "Stato Syslogd: avviato"
+
+msgid "Log Enigma to Syslog"
+msgstr "Scrivi Enigma in Syslog"
+
+msgid "Log Enigma debug messages to Syslog"
+msgstr "Scrivi messaggi di debug Enigma in Syslog"
+
+msgid "Enable Syslog at boot"
+msgstr "Abilita Syslog al boot"
+
+msgid "Enable Syslog daemon at boot"
+msgstr "Abilita il demone Syslog al boot"
+
+msgid "Enable MARK lines"
+msgstr "Abilita MARK lines"
+
+msgid "Enter MARK time in MIN (0 = off)"
+msgstr "Immetti MARK time in MIN (0 = off)"
+
+msgid "Enable log rotate"
+msgstr "Abilita log rotate"
+
+msgid "Log to a circular buffer"
+msgstr "Abilita rotazione file di log"
+
+msgid "Enter log size in Kb"
+msgstr "Immetti dimensione log in Kb"
+
+msgid "Enable Remote Syslog"
+msgstr "Abilita Syslog remoto"
+
+msgid "Enter remote IP Address (0..9, <, >)"
+msgstr "Immetti indirzzo IP remoto (0..9, <, >)"
+
+msgid "Port:"
+msgstr "Porta:"
+
+msgid "Enter remote port (default 514/UDP)"
+msgstr "Immetti porta remota (default 514/UDP)"
+
+msgid "Close Debbugging"
+msgstr "Chiudi Debbugging"
+
+msgid "Show log"
+msgstr "Mostra log"
+
+msgid "Show Syslog events"
+msgstr "Mostra eventi Syslog"
+
+msgid "Delete Syslog events file"
+msgstr "Cancella file eventi Syslog"
+
+msgid ""
+"Do you want delete Syslog file:\n"
+"'%s'?"
+msgstr ""
+"Vuoi cancellare il file di Syslog:\n"
+"'%s'?"
+
+msgid ""
+"Syslogd is running!\n"
+"Please stop it before change setting."
+msgstr ""
+"Syslogd é in esecuzione!\n"
+"Devi arrestarlo, prima di cambiare impostazioni."
+
+msgid "Syslog file '%s' not found!"
+msgstr "File di Syslog '%s' non trovato!"
+
+msgid "Do you want reboot the dreambox now?"
+msgstr "Vuoi riavviare adesso?"
+
+#: Nemesis setiptable.cpp
+
+msgid "Firewall Manager"
+msgstr "Gestione Firewall"
+
+msgid "Start / Stop Firewall"
+msgstr "Avvio / Arresto Firewall"
+
+msgid "Status Firewall: stopped"
+msgstr "Stato Firewall: arrestato"
+
+msgid "Status Firewall: started"
+msgstr "Stato Firewall: avviato"
+
+msgid "Permit Input LAN Traffic"
+msgstr "Permetti il traffico dalla LAN"
+
+msgid "Permit traffic to dreambox from LAN"
+msgstr "Permetti traffico dalla LAN verso la dreambox"
+
+msgid "Enable Firewall at boot"
+msgstr "Abilita il Firewall al boot"
+
+msgid "Enter User IP address"
+msgstr "Immetti indirzzo ip User"
+
+msgid "Enter User comment"
+msgstr "Immetti commento user"
+
+msgid "Close Firewall"
+msgstr "Chiudi Firewall"
+
+msgid "Add"
+msgstr "Aggiungi"
+
+msgid "Add user"
+msgstr "Aggiungi user"
+
+msgid "Delete user"
+msgstr "Cancella user"
+
+msgid ""
+"Firewall is running!\n"
+"Please stop it before change setting."
+msgstr ""
+"Firewall é in esecuzione!\n"
+"Devi arrestarlo, prima di cambiare impostazioni."
+
+msgid ""
+"Starting Firewall.\n"
+"Please Wait..."
+msgstr ""
+"Avvio Firewall.\n"
+"Attemdere prego..."
+
+msgid ""
+"Stopping Firewall.\n"
+"Please Wait..."
+msgstr ""
+"Arresto Firewall.\n"
+"Attemdere prego..."
+
+msgid "Show Firewall status"
+msgstr "Mostra stato Firewall"
+
+msgid "Access setup"
+msgstr "Configurazione accessi"
+
+msgid ""
+"Do you want delete the access:\n"
+"'%s'?"
+msgstr ""
+"Vuoi cancellare l'accesso:\n"
+"'%s'?"
+
+msgid ""
+"Remove access entry:'%s'\n"
+"Please Wait..."
+msgstr ""
+"Rimozione accesso:'%s'\n"
+"Attemdere prego..."
+
+msgid "You do enter a valid domain name!"
+msgstr "Devi immettere un nome dominio valido!"
+
+msgid "Domain name:"
+msgstr "Nome Dominio:"
+
+msgid "IP Address:"
+msgstr "Indirizzo IP:"
+
+msgid "Enter a domain name (Ex: www.google.com)"
+msgstr "Immetti il nome dominio (Ex: www.google.com)"
+
+msgid "Use IP address"
+msgstr "Usa Indirzzo IP"
+
+msgid "Use Domain name"
+msgstr "Usa nome Dominio"
+
+msgid "Add Access"
+msgstr "Aggiungi Accesso"
+
+msgid "Comment:"
+msgstr "Commento:"
+
+msgid ""
+"New Access '%s'\n"
+"added succefully!"
+msgstr ""
+"Nuovo accesso '%s'\n"
+"aggiunto con successo!"
+
+msgid ""
+"Access '%s'\n"
+"not added!"
+msgstr ""
+"Accesso '%s'\n"
+"non aggiunto!"
+
+msgid "Enter a comment (Def = FW Rule)"
+msgstr "Aggiungi commento (Def = FW Rule)"
+
+#: Nemesis setosdpos.cpp
+msgid "Setting skin Position"
+msgstr "Configura posizione skin"
+
+msgid "Horizontal offset"
+msgstr "Spostamento orizzontale"
+
+msgid "change the horizontal position"
+msgstr "cambia posizione orizzontale"
+
+msgid "Vertical offset"
+msgstr "Spostamento verticale"
+
+msgid "change the vertical position"
+msgstr "cambia posizione verticale"
+
+msgid "Test lite skin"
+msgstr "Prova skin lite"
+
+msgid "Test lite skin infobar"
+msgstr "Prova OSD skin lite"
+
+msgid "Test skin position"
+msgstr "Prova posizione skin"
+
+msgid "Save skin position"
+msgstr "Salva posizione skin"
+
+#: enigma setup_lcd.cpp
+msgid "Vision:"
+msgstr "Visione:"
+
+msgid "set LCD brightness when for vision mode ( left / right )"
+msgstr "imposta luminosità LCD per modalità visione (sinistra/destra)"
+
+msgid "Vision: "
+msgstr "Visione: "
+
+msgid "enable/disable brightness vision mode (ok)"
+msgstr "attiva/disattiva LCD in modalità visione (OK)"
+
+msgid "Show Device Info"
+msgstr "Mostra Info Dispositivo"
+
+msgid "Show RAM Info"
+msgstr "Mostra Info RAM"
+
+msgid "Show Active process"
+msgstr "Mostra Processi Attivi"
+
+msgid "Show LAN setting"
+msgstr "Mostra Settaggi LAN"
+
+msgid "Show Internet connection"
+msgstr "Mostra connessione Internet"
+
+msgid "Show TCP Network listener"
+msgstr "Mostra Rete TCP"
+
+msgid "Show UDP Network listener"
+msgstr "Mostra Rete UDP"
+
+msgid "Show Route Table"
+msgstr "Mostra Tabella Routing"
+
+msgid "(1) Show Device Information"
+msgstr "(1) Mostra informazioni dispositivo"
+
+msgid "(2) Show RAM Info"
+msgstr "(2) Mostra informazioni RAM"
+
+msgid "(3) Show active process"
+msgstr "(3) Mostra processi attivi"
+
+msgid "(4) Show LAN setting"
+msgstr "(4) Mostra settaggi LAN"
+
+msgid "(5) Show Internet connection"
+msgstr "(5) Mostra connessione Internet"
+
+msgid "(6) Show Network listener"
+msgstr "(6) Mostra rete in ascolto"
+
+msgid "(7) Show Network listener"
+msgstr "(7) Mostra rete in ascolto"
+
+msgid "(8) Show Route Table"
+msgstr "(9) Mostra tabella routing"

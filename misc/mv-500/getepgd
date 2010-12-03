@@ -1,0 +1,34 @@
+# parametres :
+heure0=0630
+LIT_AU_BOOT=N
+
+
+/var/bin/mvccat >/tmp/getepg.tmp
+. /tmp/getepg.tmp
+
+if [ $LIT_AU_BOOT = "O" ]
+then
+ sleep 10
+ ${STORAGEDIR}/getepg
+fi
+
+# attendre 5 minutes pour que l heure soit OK
+sleep 300
+
+while true
+do
+ hhh=`date +%H%M`
+ if [ $hhh -lt $heure0 ]
+ then
+  HHH=$(( ( 1$heure0 / 100  - 1$hhh / 100 ) ))
+  MMM=$(( (1$heure0-(1$heure0/100)*100)-(1$hhh-(1$hhh/100)*100) ))
+  www=$(( $HHH*3600 +$MMM*60 ))
+ else
+  HHH=$(( ( 1$heure0 / 100 + 24 - 1$hhh / 100 ) ))
+  MMM=$(( (1$heure0-(1$heure0/100)*100)-(1$hhh-(1$hhh/100)*100) ))
+  www=$(( $HHH*3600 +$MMM*60 ))
+ fi
+ sleep $www
+ ${STORAGEDIR}/getepg
+done
+

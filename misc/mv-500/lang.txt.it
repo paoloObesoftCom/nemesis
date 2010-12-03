@@ -1,0 +1,410 @@
+# Italian language text file for MV 3.5.3
+# Translated by _TeRmInEt_ (http://www.satnews.tv.it/vbforum/forumdisplay.php?f=17)
+# -------------------------------------------------------- #
+#
+# Rules:
+#
+# - all lines which are not intended as a text must start
+# with a # or be completely (i.e. no spaces) blank
+# - the order of items cannot be changed.
+# - all items must be included.
+#
+# -------------------------------------------------------- #
+#
+# Version string
+
+MV B3.5.3
+
+# Benvenuto screen (mostrato una volta per versione)
+
+Benvenuto in MV, una guida EPG per il Dreambox\nby PentVaer.\n\nAlcuni comandi in breve:\n\n    tasti 1-9, HELP o DREAM.\n\nGuida utente:\n\n    http://mv.dinglisch.net/userguide.html\n\nSpero che vi piaccia!\n\n    Traduzione by _TeRmInEt_    
+
+# Buttons
+
+Ok
+Aggiungi
+Cancella
+Modifica
+Ignoto
+Associato
+Ignorato
+
+
+# - new Alex
+
+Impostazioni generale
+Impostazioni canale
+Impostazioni programma
+Impostazioni barra di stato
+Selezione programma seguente
+
+# Next view pulldown
+
+[1] Programmi in corso
+[2] Adesso e dopo
+[3] Barra informazioni
+[4] Griglia compressa
+[5] Griglia estesa
+[6] Lista (un canale)
+[7] Lista films(tutti i canali)
+[8] Lista favoriti (tutti i canali)
+[9] Lista programmi (tutti i canali)
+
+# ----------- PRESENTATION MENU ---------- #
+
+Sfondo
+Dim. font
+Tipo font
+Dietro 1
+Dietro 2
+In corso
+Film
+Favorito
+
+# Pres menu labels
+
+Intestazione canali:
+Cella programma:
+Finestra:
+
+# Pres menu test channel
+
+Canale
+Prog 1
+Prog 2
+Frecce
+Favorito
+Film
+
+# --------------- MISC MENU -------------- #
+
+Spostamento inizio timer: 
+Spostamento fine timer:
+Spostamento vista:
+
+Formato:
+come Enigma
+Sempre 16:9
+Sempre 4:3
+
+Attenzione: questa impostazione non ha effetto se Enigma è impostato a '16:9'
+
+# ------------- FEATURE MENU ------------ #
+
+# timebar labels
+
+Barra temporale:
+Nessuna
+15 Minuti
+Mezz'ora
+Un ora
+Due ore
+
+# daybar labels
+
+Barra giornaliera:
+Nessuna
+Fissa
+Popup
+
+# no cols
+
+Numero colonne:
+
+# entries per col
+
+Entrate/Colonna:
+Entrate/Canale:
+Proporzionale
+Tutto
+
+# Channel shift type
+
+Spostamento canale:
+Un canale
+Mezza pagina
+Una pagina
+
+# Program shift type
+
+Spostamento programma:
+Un programma
+Mezza pagina
+Una pagina
+
+# Program box flags
+
+Ora Inizio
+Ora Fine
+Durata (Minuti)
+Nome Canale
+Differenza tra l'ora attuale e l'orario d'inizio
+Descrizione Programma
+Icona Canale
+Titolo del programma centrale
+
+# Status bar flags
+
+Mostra Barra di Stato
+Nome Canale
+Data
+Orario d'inizio
+Durata (minuti)
+Titolo
+Descrizione
+
+# Channel header
+
+Nome Canale in Testa
+Icona Canale in Testa
+Numero Canale in Testa
+Posizione Orbitale Satellite in Testa
+
+# Misc
+
+Tempo trascorso
+Separatori Verticale
+Separatori Orizzontale
+Mostra Canali Vuoti
+Il cursore passa sui canali vuoti
+
+# start channel
+
+Canale d'inizio:
+In corso
+Il primo
+
+# next view
+
+Questo
+
+# sort types
+
+Ordinato per:
+Bouquet
+Alfabetico
+Tempo rimanente
+Bouq/Tempo rimanente
+Orario d'inizio
+
+# --------------- INPUT MENU --------------- #
+
+# table headers
+
+Input
+Percorso
+Download
+
+# Network column labels
+
+No
+Si
+Nessun network!
+
+# pre/post values
+
+Pre:
+Post:
+Archivio temp:
+Archivio:
+Auto Dirs
+Canali massimi
+Auto Caricamento
+
+# ------------ FAV EDIT MENU ------------- #
+
+Titolo:
+Ognuno
+Tutti
+Tutti, In Ordine
+Nessuno
+
+Descr:
+Canale:
+Fra:
+All'esterno di:
+e
+
+Notifica
+
+# If user tries to exit when a download is going...
+
+Download in corso, attendere...
+
+# When user tries to change a channel or exit when
+# an MHW scan is going
+
+MHW Scan in corso, attendere...
+Conversione XMLTV file(s), attendere...
+
+# View mode help title/contents
+
+Controlli Vista Grafica
+1/2/3 - cambio vista\n6/7/8/9 - lista canale/films/favs/tutti\n</> - scelta giorno\nBqUp/BqDn - scelta ora\n0 - ricarica data/scelta giorno\nSHIFT-ROSSO - mostra lista timer\nSHIFT-VERDE - aggiungi ai favoriti\nAUDIO - selezione bouquet\nCOLOUR - cancella/Regista/Ngrab/Cambia programmazione\nDREAM - mostra menu\nOK - cursore/servizio attivo/exit\nINFO - mostra descr./IMDB/info canale\nTV/RADIO/TEXT - riempi la cache(canale/satellite/tutti isats)\nVIDEO - nascondi finestra\nLAME - rimuovi cursore/exit
+
+# Edit mode help title/contents
+
+Controlli Modifica
+< - modifica scala oraria\n> - aumenta scala orario\nFRECCE CURSORE - muovi finestra\n2/4/6/8 - modifica dimensione finestra\n0 - modifica finestra principale/intestazione/status\nBouquet Su/Giù - Dimensione canale\n7/9 - larghezza canale in testa\nDREAM - mostra menu\nOK - fine modifica\nVIDEO = nascondi finestra\nLAME - exit
+
+# Program list view help title/contents
+
+Controlli della lista dei programmi
+INFO - mostra descrizione programma corrente + IMDB (premendo due volte)\n0 - ricarica data\nAUDIO - selezione bouquet\nSHIFT-ROSSO - mostra timer list\nROSSO - cancella l'evento timer\nVERDE - reg. evento timer\nGIALLO -  Ngrab evento timer\nBLU - cambia canale evento timer\nSHIFT-VERDE - aggiungi ai favoriti\nBOUQUET Su/Giù - attiva la finestra dei programmi\n</> - pre/suc EPG Canale\nOK - Visiona programma selezionato\nLAME - exit
+
+# Program list edit help title/contents
+
+Controlli modifica lista programmi
+Frecce cursore - muovi finestra\n2/4/6/8 - restringi finestra\n0 - commuta finestra principale/barra di status\nOK - ritorno alla modalità Vista\nMENU - mostra menu\nLAME - exit
+
+# About title/content
+
+By Pent Vaer, 2004.\n\nGrazie a Sabrina, mia amorosa moglie, per la sua pazienza durante gli infiniti reboot della giornata.\n\nGrazie a PLi per il codice sorgente di mhwepg e per avermi aiutato nella sua integrazione in MV. Grazie a Bjorn Hijmans per l'aiuto nello sviluppo e per il server IMDB data.\nGrazie anche a Alex Shtol per il suo aiuto,\nspecialmente per aver rielaborato il menu delle caratteristiche.\n\nNessun ringraziamento alle mie figlie Jade & Skye per il loro continuo interferire.\n\nTraduzione a cura di _TeRmInEt_
+
+# Feedback title/content
+
+MV Feedback
+Potete lasciare un feedback qua:\n\nForum Tedesco:\nhttp://www.sat4all.com/, forum dreambox\n\nInglese/Tedesco:\nhttp://dream-multimedia.tv/\n\nItaliano:\nhttp://www.satnews.tv.it/vbforum/forumdisplay.php?f=17\n\nInglese:\nhttp://www.satnews.tv.it/vbforum/forumdisplay.php?f=49
+
+# Tips title/content
+
+MV Aiuti
+* ci sono differenti finestre di help per la vista\ngrafica, lista viste e modifica grafica\n\n* premendo INFO nuovamente nella finestra di\n descrizione farà una chiamata al IMDB\n\n* una volta che la barra e' attiva, puoi usare\nle frecce e OK\n\n* dopo aver usato le frecce, puoi tornare alla\nmodalita' di scorrimento veloce premendo LAME\n\n* premendo info quando MV e' nascosto mostrera' le informazioni del programma in esecuzione
+
+# Daybar labels
+
+Dom
+Lun
+Mar
+Mer
+Gio
+Ven
+Sab
+
+# Main menu title/items
+
+MV Menu
+Carica EPG data
+Modifica Geometria
+Modifica Font/Colore
+Modifica Caratteristiche
+Configurazione Input
+Gestione Alias
+Gestione Favoriti
+Impostazioni varie
+About
+Aiuti
+Feedback
+Reset Config
+
+# Misc Menu title
+
+MV Menu Varie
+
+# Alias Manager title
+
+MV Gestione Alias
+
+# Favourite Manager title
+
+MV Gestione Favoriti
+
+# Favourite Edit window title
+
+MV Modifica Favoriti
+
+# Features  window title
+
+MV Modifica Caratteristiche
+
+# Inputs edit window title
+
+MV Configurazione Input
+
+# Presentation editor window title
+
+MV Fonts/Colori
+
+# Channel picker window title
+
+Scelta del Canale
+
+# Program list window title prefix
+
+Lista Programmi: 
+
+# Title for user confirmation box
+# and various texts for that box too
+
+Sicuro ?
+
+# Reset config confirmation
+
+Questo cancellerà tutte le configurazioni precedenti.
+
+# Set MyXMLTV input
+
+Per questo tipo d'input devi fornire i dati\n\nGuarda in http://mv.dinglisch.net/userguide.html#xmltv
+
+# IMDB
+
+Nessun records IMDB trovato.
+Questo programma non è un film!
+
+# Numbers
+
+Uno
+Due
+Tre
+Quattro
+Cinque
+Sei
+Sette
+Otto
+Nove
+
+# 
+
+Cancellazione vecchia (errata) configurazione
+Attendere, download in corso...
+
+# Error Messages
+
+L'orario di sistema non è ben configurato.\nSe hai appena acceso il ricevitore, prova quando l'orario appare nel display, se non accade, cambia canale e attendi, sicuramente il canale precedente non stava trasmettendo l'orario corretto.
+
+Non riesco a scrivere sul file di configurazione
+Scrittura configurazione fallita
+Out of memory, probabilmente crasherò
+Una connessione di rete è richiesta per questa azione.
+
+Errato XML nel file:
+Non è un XML file, nessun nodo radice: 
+Non è un XML file, errato nodo radice:
+
+Download Errore: 
+Fallito rinominare il file nel tempfile:
+Dimensione zero dopo il download:
+Il file non esiste dopo il download: 
+
+Fallito la cancellazione dei vecchi files
+Fallito la scrittura dei favoriti in
+Errata linea dei favoriti:
+Non riesco ad aprire per la scrittura l'input def:
+Non riesco a aprire l'input def:
+Errata linea nel l'input def:
+Errore scrittura del file map.
+Non riesco a scrivere la cache dir: 
+Attenzione: l'input non ha definizione:
+Errato tipo nel file d'input:
+Errato formato specificato nel file:
+Non riesco a trovare i binari di multiepg in MV directory
+Errore esecuzione multiepg: 
+Non riesco a convertire XMLTV tmpfile in:
+Fallito scrittura directory:
+Fallito lo spostamento della vecchia cache al tempfile:
+Fallito l'apertura della cache di backup:
+Errata cancellazione della cache di backup:
+Non riesco a modificare l'orario di 
+Errata codifica del carattere:
+
+Errato archiviazione della descrizione del programma nella cache (archivio pieno?)

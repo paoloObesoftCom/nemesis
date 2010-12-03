@@ -1,0 +1,9 @@
+clean:
+	rm -rf *.o *~ *.so epgidx multiepg mvccat
+
+install_cfg:
+	cd .. && ncftpput -V -u root -p dreambox db.local /var/tuxbox/plugins/ $(NAME).cfg $(LITE_NAME).cfg
+
+backup: clean
+	mkdir -p /home/lee/dream/mvback/`date "+%b-%d-%H-%M"`/src
+	cp -Rf * /home/lee/dream/mvback/`date "+%b-%d-%H-%M"`/src
