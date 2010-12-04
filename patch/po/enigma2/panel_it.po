@@ -355,11 +355,11 @@ msgstr "Errore di salvataggio"
 msgid "EPG Search (enigma2)"
 msgstr "Ricerca EPG (enigma2)"
 
-msgid "EPG Search (EDG)"
-msgstr "Ricerca EPG (EDG)"
+msgid "EPG Search (NewDE)"
+msgstr "Ricerca EPG (NewDE)"
 
-msgid "EPG Search History (EDG)"
-msgstr "Storico ricerca EPG (EDG)"
+msgid "EPG Search History (NewDE)"
+msgstr "Storico ricerca EPG (NewDE)"
 
 msgid "Download EPG with CrossEPG"
 msgstr "Scaricare EPG con CrossEPG"
@@ -422,8 +422,8 @@ msgstr "Stato Occupazione Device"
 msgid "Enigma Setting Info"
 msgstr "Info Configurazione Enigma"
 
-msgid "EDG-Nemesis Firmware Info"
-msgstr "Info firmware EDG-Nemesis"
+msgid "New Dream-Elite Firmware Info"
+msgstr "Info firmware New Dream-Elite"
 
 msgid "Compact Flash Not Found"
 msgstr "Compact Flash Non Trovata"

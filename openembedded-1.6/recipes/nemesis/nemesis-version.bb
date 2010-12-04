@@ -1,9 +1,9 @@
-DESCRIPTION = "Nemesis version"
+DESCRIPTION = "dream-elite version"
 LICENSE = "GPL"
 
-REV = "166"
-PR = "r0"
-PV = "2.0-svn-${REV}"
+REV = "2"
+PR = "r1"
+PV = "1.0-svn-${REV}"
 
 S = "${WORKDIR}/"
 PACKAGE_ARCH := "${MACHINE_ARCH}"
@@ -18,8 +18,8 @@ do_install() {
 	echo "comment=${DISTRO_NAME}" >> ${S}image-version
 	echo "target=9" >> ${S}image-version
 	echo "creator=Gianathem" >> ${S}image-version
-	echo "url=http://www.edg-nemesis.tv/" >> ${S}image-version
-	echo "catalog=http://ops.edg-nemesis.tv/" >> ${S}image-version
+	echo "url=http://www.dream-elite.net/" >> ${S}image-version
+	echo "catalog=http://www.dream-elite.net/" >> ${S}image-version
 
 	install -d "${D}/etc/"
 	install -m 644 "${WORKDIR}/image-version" "${D}/etc"

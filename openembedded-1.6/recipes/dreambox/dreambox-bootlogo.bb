@@ -15,19 +15,15 @@ BINARY_VERSION_dm7020hd = "4"
 BINARY_VERSION_dm8000 = "6"
 
 PV = "${BINARY_VERSION}.${IMAGES_VERSION}"
-PR = "r4"
+PR = "r5"
 
 SRC_URI = "http://sources.dreamboxupdate.com/download/7020/bootlogo-${MACHINE}-${BINARY_VERSION}.elf \
-	file://bootlogo-${MACHINE}-${IMAGES_VERSION}.mvi \
-	file://bootlogo_wait-${MACHINE}-${IMAGES_VERSION}.mvi \
-	file://backdrop-${MACHINE}-${IMAGES_VERSION}.mvi"
+	file://bootlogo.mvi \
+	file://bootlogo_wait.mvi \
+	file://backdrop.mvi \
+	file://bootlogo.jpg"
 
-SRC_URI_append_dm8000 = " file://bootlogo-${MACHINE}-${IMAGES_VERSION}.jpg"
-SRC_URI_append_dm500hd = " file://bootlogo-${MACHINE}-${IMAGES_VERSION}.jpg"
-SRC_URI_append_dm800se = " file://bootlogo-${MACHINE}-${IMAGES_VERSION}.jpg"
-SRC_URI_append_dm7020hd = " file://bootlogo-${MACHINE}-${IMAGES_VERSION}.jpg"
-SRC_URI_append_dm800 = " file://bootlogo-${MACHINE}-${IMAGES_VERSION}.jpg \
-	file://switchoff-${MACHINE}-${IMAGES_VERSION}.mvi"
+SRC_URI_append_dm800 = " file://switchoff.mvi"
 
 S = "${WORKDIR}/"
 

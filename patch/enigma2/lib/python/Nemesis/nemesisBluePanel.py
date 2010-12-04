@@ -41,9 +41,9 @@ class nemesisBluePanel(Screen):
 		<widget name="ecmtext" position="50,460" size="340,240" font="Regular;18" zPosition="2" backgroundColor="#333333" transparent="1"/>
 	</screen>"""
 	
-	NEMESISVER = "2.0 (e2) Beta/OE 1.6"
-	NEMESISVERDATE = "07-04-2010"
-	CVSDATE = "Exp 07-04-2010"
+	NEMESISVER = "1.0 (e2) Experimental/OE 1.6"
+	NEMESISVERDATE = "04-12-2010"
+	CVSDATE = "Experimental 04-12-2010"
 	
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -55,9 +55,9 @@ class nemesisBluePanel(Screen):
 		self["key_yellow"] = Label(_("System Settings"))
 		self["key_green"] = Label(_("System Information"))
 		self["key_red"] = Label(_("System Utility"))
-		self["key_1"] = Label(_("EDG-Nemesis News"))
+		self["key_1"] = Label(_("New Dream-Elite News"))
 		self["key_2"] = Label(_("Parental Control Setup"))
-		self["key_3"] = Label(_("About Nemesis"))
+		self["key_3"] = Label(_("About NewDE"))
 		self["info_use"] = Label(_("Use arrows < > to select"))
 		self["actions"] = NumberActionMap(["ColorActions", "CiSelectionActions","WizardActions","SetupActions"],
 			{
@@ -83,7 +83,7 @@ class nemesisBluePanel(Screen):
 		self.onShown.append(self.setWindowTitle)
 	
 	def setWindowTitle(self):
-		self.setTitle(_("Nemesis Blue Panel"))
+		self.setTitle(_("NewDE Blue Panel"))
 	
 	def loadEmuList(self):
 		emu = []
@@ -134,13 +134,13 @@ class nemesisBluePanel(Screen):
 	def keyNumberGlobal(self, number):
 		if number == 1:
 			cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + t.readAddonsUrl() + "info.txt -O /tmp/info.txt"
-			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Downloading Nemesis info...'))
+			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Downloading NewDE info...'))
 		elif number == 2:
 			self.session.open(ParentalControlSetup)
 		elif number == 3:
-			self.message = "EDG-Nemesis Version " +  self.NEMESISVER + "\nBased on cvs from " +  self.CVSDATE + " (Fixed by Gianathem)\n(c) " + self.NEMESISVERDATE + " by EDG-Nemesis Group\n\nhttp://www.edg-nemesis.tv/"
+			self.message = "New Dream-Elite Version " +  self.NEMESISVER + "\nBased on cvs from " +  self.CVSDATE + " (Fixed by Gianathem)\n(c) " + self.NEMESISVERDATE + " by New Dream-Elite Team\n\nhttp://www.dream-elite.net/"
 			self.mbox = self.session.open(MessageBox, self.message, MessageBox.TYPE_INFO)
-			self.mbox.setTitle("About EDG-Nemesis " + self.NEMESISVER)
+			self.mbox.setTitle("About New Dream-Elite " + self.NEMESISVER)
 	
 	def executedScript(self, *answer):
 		self.session.open(nemesisShowPanel, "/tmp/info.txt" ,_('Nemesis Info'))
