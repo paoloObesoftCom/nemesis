@@ -34,7 +34,7 @@ do_install() {
 	install -d ${D}/boot
 	install -m 0755 ${S}/bootlogo-${MACHINE}-${BINARY_VERSION}.elf ${D}/boot/bootlogo.elf
 	for i in ${MVI}; do
-		install -m 0755 ${S}/$i-${MACHINE}-${IMAGES_VERSION}.mvi ${D}/boot/$i.mvi;
+		install -m 0755 ${S}/$i.mvi ${D}/boot/$i.mvi;
 	done;
 }
 
@@ -42,9 +42,9 @@ do_install_dm800() {
 	install -d ${D}/boot
 	install -d ${D}/usr/share
 	install -m 0755 ${S}/bootlogo-${MACHINE}-${BINARY_VERSION}.elf ${D}/boot/bootlogo.elf
-	install -m 0755 ${S}/bootlogo-${MACHINE}-${IMAGES_VERSION}.jpg ${D}/boot/bootlogo.jpg
+	install -m 0755 ${S}/bootlogo.jpg ${D}/boot/bootlogo.jpg
 	for i in ${MVI}; do
-		install -m 0755 ${S}/$i-${MACHINE}-${IMAGES_VERSION}.mvi ${D}/usr/share/$i.mvi;
+		install -m 0755 ${S}/$i.mvi ${D}/usr/share/$i.mvi;
 		ln -sf /usr/share/$i.mvi ${D}/boot/$i.mvi;
 	done;
 }

@@ -2150,9 +2150,27 @@ class InfoBarCueSheetSupport:
 		else:
 			self.cut_list = cue.getCutList()
 
+class InfoBarSummarySE(Screen):
+	skin = """
+	<screen position="0,0" size="96,64" id="2">
+		<widget source="session.CurrentService" render="Label" position="0,0" size="96,28" font="Regular;16" halign="center" valign="center" foregroundColor="green">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Progress" position="0,30" size="96,8" borderWidth="1" backgroundColor="dark">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="0,38" size="96,26" font="Regular;32" halign="center" valign="center" foregroundColor="yellow" backgroundColor="#000000" >
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text=" " position="0,38" zPosition="1" size="96,26">
+			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+	</screen>"""
+
 class InfoBarSummary(Screen):
 	skin = """
-	<screen position="0,0" size="132,64">
+	<screen position="0,0" size="132,64" id="1">
 		<widget source="global.CurrentTime" render="Label" position="62,46" size="82,18" font="Regular;16" >
 			<convert type="ClockToText">WithSeconds</convert>
 		</widget>
@@ -2166,6 +2184,14 @@ class InfoBarSummary(Screen):
 		<widget source="session.Event_Now" render="Progress" position="6,46" size="46,18" borderWidth="1" >
 			<convert type="EventTime">Progress</convert>
 		</widget>
+	</screen>"""
+
+class OledInfoBarSummary(Screen):
+	skin = """
+	<screen position="0,0" size="96,64" id="2">
+		<widget source="session.CurrentService" render="Picon" position="0,0" size="96,64" path="picon_oled" >
+			<convert type="ServiceName">Reference</convert>
+		</widget>	
 	</screen>"""
 
 class LcdInfoBarSummary(Screen):
@@ -2191,9 +2217,15 @@ class InfoBarSummarySupport:
 
 	def createSummary(self):
 		if config.nemesis.piconlcd.value:
-			return LcdInfoBarSummary
+			if HardwareInfo().get_device_name() != 'dm800se':
+				return LcdInfoBarSummary
+			else:
+				return OledInfoBarSummary
 		else:
-			return InfoBarSummary
+			if HardwareInfo().get_device_name() != 'dm800se':
+				return InfoBarSummary
+			else:
+				return InfoBarSummarySE
 
 class InfoBarMoviePlayerSummary(Screen):
 	skin = """

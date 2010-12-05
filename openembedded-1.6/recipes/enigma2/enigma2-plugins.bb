@@ -13,9 +13,9 @@ SRCDATE = "20101112"
 TAG = ""
 PV = "experimental-cvs${SRCDATE}"
 
-PR = "r3"
+PR = "r4"
 
-SRC_URI = "file://../../../../sources/enigma2-plugins_cvs.schwerkraft.elitedvb.net__Nemesis.tar.gz"
+SRC_URI = "file://../../../../sources/enigma2-plugins_cvs.schwerkraft.elitedvb.net__NDE.tar.gz"
 
 FILES_${PN} += " /usr/share/enigma2 /usr/share/fonts "
 FILES_${PN}-meta = "${datadir}/meta"

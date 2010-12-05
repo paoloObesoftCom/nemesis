@@ -1,9 +1,10 @@
-DESCRIPTION = "dream-elite version"
+DESCRIPTION = "nemesis version"
 LICENSE = "GPL"
 
-REV = "2"
+REV = "200"
+SVN = "003"
 PR = "r1"
-PV = "1.0-svn-${REV}"
+PV = "2.0-svn-${SVN}"
 
 S = "${WORKDIR}/"
 PACKAGE_ARCH := "${MACHINE_ARCH}"
@@ -11,7 +12,7 @@ FILES_${PN} = "/"
 
 do_install() {
 
-	IMAGE_VERSION="${REV}"
+	IMAGE_VERSION="${SVN}"
 	IMAGE_DATE="$(date +%Y%m%d%H%M)"
 	IMAGE_TYPE="1"
 	echo "version=${IMAGE_TYPE}${IMAGE_VERSION}${IMAGE_DATE}" > ${S}image-version

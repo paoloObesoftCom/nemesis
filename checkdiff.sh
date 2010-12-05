@@ -102,7 +102,6 @@ check_enigma2()
 
 	kompare $e2_cvssrc/main/Makefile.am patch/enigma2/main/Makefile.am
 	kompare $e2_cvssrc/main/enigma.cpp patch/enigma2/main/enigma.cpp
-	kompare $e2_cvssrc/main/version_info.cpp patch/enigma2/main/version_info.cpp
 
 	kompare $e2_cvssrc/lib/dvb/epgcache.h patch/enigma2/lib/dvb/epgcache.h
 	kompare $e2_cvssrc/lib/dvb/epgcache.cpp patch/enigma2/lib/dvb/epgcache.cpp
