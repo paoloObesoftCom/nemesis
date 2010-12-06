@@ -2153,13 +2153,13 @@ class InfoBarCueSheetSupport:
 class InfoBarSummarySE(Screen):
 	skin = """
 	<screen position="0,0" size="96,64" id="2">
-		<widget source="session.CurrentService" render="Label" position="0,0" size="96,28" font="Regular;16" halign="center" valign="center" foregroundColor="green">
+		<widget source="session.CurrentService" render="Label" position="0,0" size="96,28" font="Regular;16" halign="center" valign="center" foregroundColor="#11f911">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Progress" position="0,30" size="96,8" borderWidth="1" backgroundColor="dark">
+		<widget source="session.Event_Now" render="Progress" pixmap="skin_default/slider/slider_main.png" position="0,30" size="96,8" borderWidth="1" borderColor="#3366cc" backgroundColor="dark">
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="0,38" size="96,26" font="Regular;32" halign="center" valign="center" foregroundColor="yellow" backgroundColor="#000000" >
+		<widget source="global.CurrentTime" render="Label" position="0,38" size="96,26" font="Regular;32" halign="center" valign="center" foregroundColor="#f6ff00" backgroundColor="#000000" >
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" text=" " position="0,38" zPosition="1" size="96,26">
@@ -2229,7 +2229,7 @@ class InfoBarSummarySupport:
 
 class InfoBarMoviePlayerSummary(Screen):
 	skin = """
-	<screen position="0,0" size="132,64">
+	<screen position="0,0" size="132,64" id="1">
 		<widget source="global.CurrentTime" render="Label" position="62,46" size="64,18" font="Regular;16" halign="right" >
 			<convert type="ClockToText">WithSeconds</convert>
 		</widget>
@@ -2245,13 +2245,34 @@ class InfoBarMoviePlayerSummary(Screen):
 		</widget>
 	</screen>"""
 
+class InfoBarMoviePlayerSummaryOled(Screen):
+	skin = """
+	<screen position="0,0" size="96,64" id="2">
+		<widget source="session.CurrentService" render="Label" position="0,0" size="96,28" font="Regular;16" halign="center" valign="center" foregroundColor="#11f911">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Progress" pixmap="skin_default/slider/slider_main.png" position="0,30" size="96,8" borderWidth="1" borderColor="#3366cc" backgroundColor="dark">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="0,38" size="96,26" font="Regular;32" halign="center" valign="center" foregroundColor="#f6ff00" backgroundColor="#000000" >
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text=" " position="0,38" zPosition="1" size="96,26">
+			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+	</screen>"""
+
 class InfoBarMoviePlayerSummarySupport:
 	def __init__(self):
 		pass
 
 	def createSummary(self):
-		return InfoBarMoviePlayerSummary
-
+		if HardwareInfo().get_device_name() != 'dm800se':
+			return InfoBarMoviePlayerSummary
+		else:
+			return InfoBarMoviePlayerSummaryOled
+			
 class InfoBarTeletextPlugin:
 	def __init__(self):
 		self.teletext_plugin = None

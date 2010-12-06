@@ -63,6 +63,7 @@
 			<pixmap pos="bpBottom" filename="skin_default/h-white.png"/>
 		</borderset>
 	</windowstyle>
+	<!-- Main screen colors (id=1 LCD) -->
 	<windowstyle type="skinned" id="1">
 		<color name="Background" color="#000000"/>
 		<color name="LabelForeground" color="#ffffff"/>
@@ -77,6 +78,21 @@
 		<color name="WindowTitleForeground" color="#ffffff"/>
 		<color name="WindowTitleBackground" color="#000000"/>
 	</windowstyle>
+	<!-- Main screen colors (id=2 Color OLED (dm800se)) -->
+	<windowstyle type="skinned" id="2">
+		<color name="Background" color="#000000" />
+		<color name="LabelForeground" color="#ffffff" />
+		<color name="ListboxBackground" color="#000000" />
+		<color name="ListboxForeground" color="#ffffff" />
+		<color name="ListboxSelectedBackground" color="#000000" />
+		<color name="ListboxSelectedForeground" color="#ffffff" />
+		<color name="ListboxMarkedBackground" color="#000000" />
+		<color name="ListboxMarkedForeground" color="#ffffff" />
+		<color name="ListboxMarkedAndSelectedBackground" color="#000000" />
+		<color name="ListboxMarkedAndSelectedForeground" color="#ffffff" />
+		<color name="WindowTitleForeground" color="#ffffff" />
+		<color name="WindowTitleBackground" color="#000000" />
+	</windowstyle>
 	<!-- Subtitle effects -->
 	<subtitles>
 		<sub name="Subtitle_TTX" font="Regular;52" foregroundColor="#ffffff" shadowColor="#40101010" shadowOffset="3,3" />
@@ -85,6 +101,23 @@
 		<sub name="Subtitle_Italic" font="Regular;52" foregroundColor="#DCAAAA" shadowColor="#40101010" shadowOffset="3,3" />
 		<!-- omitting foregroundColor attribute will enable auto-assignment of color -->
 	</subtitles>
+	
+	<!-- Color OLED screen (ChannelSelection) -->
+	<screen name="ChannelSelection_summary" position="0,0" size="96,64" id="2">
+		<widget source="session.CurrentService" render="Label" position="0,0" size="96,28" font="Regular;16" halign="center" valign="center" foregroundColor="#11f911">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Progress" pixmap="skin_default/slider/slider_main.png" position="0,30" size="96,8" borderWidth="1" borderColor="#3366cc" backgroundColor="dark">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="0,38" size="96,26" font="Regular;32" halign="center" valign="center" foregroundColor="#f6ff00" backgroundColor="#000000" >
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text=" " position="0,38" zPosition="1" size="96,26">
+			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+	</screen>
 	
 	<screen name="InfoBar" 	position="0,4" size="1280,720" title="InfoBar" backgroundColor="transparent" flags="wfNoBorder">
 		<ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="skin_default/general/infobar.png"/>
@@ -759,8 +792,7 @@
 		<widget name="key_yellow" 	position="570,325" 	size="250,30" font="Regular;24" halign="center" valign="center" foregroundColor="yellow" />
 		<widget name="key_blue" 	position="840,325" 	size="250,30" font="Regular;24" halign="center" valign="center" foregroundColor="blue" />
 	</screen>
-	<screen name="ChoiceBox"				position="150,100"	size="550,400"	title="Input">
-<!-- 		<eLabel position="0,0" 		size="1100,2" backgroundColor="#3366cc" /> -->
+	<screen name="ChoiceBox" position="150,100"	size="550,400"	title="Input">
 		<widget name="text" position="10,10" size="550,25" font="Regular;20" />
 		<widget name="list" position="0,30" size="550,335" scrollbarMode="showOnDemand" />
 		<applet type="onLayoutFinish">
@@ -1314,7 +1346,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 			<convert type="RdsInfo">RadioText</convert>
 		</widget>
 	</screen>
-	<screen name="RdsInfoDisplay" 			position="0,0" 		size="1280,720" zPosition="-2" backgroundColor="transparent" flags="wfNoBorder">
+	<screen name="RdsInfoDisplay" position="0,0" 		size="1280,720" zPosition="-2" backgroundColor="transparent" flags="wfNoBorder">
 		<widget name="RassLogo" pixmap="skin_default/icons/rass_logo.png" position="100,585" size="50,21" />
 		<widget name="RadioText" position="100,620" size="1080,30" font="Regular;24" noWrap="1" backgroundColor="transpBlack" />
 		<widget name="RtpText" position="100,650" size="1080,30" font="Regular;24" halign="right" noWrap="1" backgroundColor="transpBlack" />
