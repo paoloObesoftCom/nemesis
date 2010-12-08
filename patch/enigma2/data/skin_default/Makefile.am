@@ -35,6 +35,7 @@ dist_install_DATA = \
 	b_tl.png \
 	b_t.png \
 	b_tr.png \
+	bar_se.png \
 	channel.png \
 	chan_p_bar.png \
 	default_wizard.png \

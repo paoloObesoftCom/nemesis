@@ -2186,7 +2186,7 @@ class InfoBarSummary(Screen):
 		</widget>
 	</screen>"""
 
-class OledInfoBarSummary(Screen):
+class OledInfoBarSummaryPicon(Screen):
 	skin = """
 	<screen position="0,0" size="96,64" id="2">
 		<widget source="session.CurrentService" render="Picon" position="0,0" size="96,64" path="picon_oled" >
@@ -2194,7 +2194,7 @@ class OledInfoBarSummary(Screen):
 		</widget>	
 	</screen>"""
 
-class LcdInfoBarSummary(Screen):
+class LcdInfoBarSummaryPicon(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
 		<widget source="session.CurrentService" render="Picon" zPosition="1" position="31,0" size="70,40" path="piconlcd" >
@@ -2218,9 +2218,9 @@ class InfoBarSummarySupport:
 	def createSummary(self):
 		if config.nemesis.piconlcd.value:
 			if HardwareInfo().get_device_name() != 'dm800se':
-				return LcdInfoBarSummary
+				return LcdInfoBarSummaryPicon
 			else:
-				return OledInfoBarSummary
+				return OledInfoBarSummaryPicon
 		else:
 			if HardwareInfo().get_device_name() != 'dm800se':
 				return InfoBarSummary

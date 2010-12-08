@@ -13,7 +13,7 @@ SRCDATE = "20101112"
 TAG = ""
 PV = "experimental-cvs${SRCDATE}"
 
-PR = "r4"
+PR = "r5"
 
 SRC_URI = "file://../../../../sources/enigma2-plugins_cvs.schwerkraft.elitedvb.net__NDE.tar.gz"
 

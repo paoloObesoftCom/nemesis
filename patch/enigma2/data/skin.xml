@@ -104,10 +104,10 @@
 	
 	<!-- Color OLED screen (ChannelSelection) -->
 	<screen name="ChannelSelection_summary" position="0,0" size="96,64" id="2">
-		<widget source="session.CurrentService" render="Label" position="0,0" size="96,28" font="Regular;16" halign="center" valign="center" foregroundColor="#11f911">
+		<widget source="session.CurrentService" render="Label" position="0,0" size="96,28" font="Regular;16" halign="center" valign="center" foregroundColor="#ff0400">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Progress" pixmap="skin_default/slider/slider_main.png" position="0,30" size="96,8" borderWidth="1" borderColor="#3366cc" backgroundColor="dark">
+		<widget source="session.Event_Now" render="Progress" pixmap="skin_default/bar_se.png" position="0,28" size="96,10" borderWidth="1" borderColor="#FFFFFF" backgroundColor="dark">
 			<convert type="EventTime">Progress</convert>
 		</widget>
 		<widget source="global.CurrentTime" render="Label" position="0,38" size="96,26" font="Regular;32" halign="center" valign="center" foregroundColor="#f6ff00" backgroundColor="#000000" >
@@ -119,6 +119,59 @@
 		</widget>
 	</screen>
 	
+	<screen  name="OledInfoBarSummaryPicon" position="0,0" size="96,64" id="2">
+		<widget source="session.CurrentService" render="Picon" position="0,0" size="96,64" path="picon_oled" >
+			<convert type="ServiceName">Reference</convert>
+		</widget>	
+	</screen>
+
+	<screen name="InfoBarSummarySE" position="0,0" size="96,64" id="2">
+		<widget source="session.CurrentService" render="Label" position="0,0" size="96,28" font="Regular;16" halign="center" valign="center" foregroundColor="#ff0400">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Progress" pixmap="skin_default/bar_se.png" position="0,28" size="96,10" borderWidth="1" borderColor="#FFFFFF" backgroundColor="dark">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="0,38" size="96,26" font="Regular;32" halign="center" valign="center" foregroundColor="#f6ff00" backgroundColor="#000000" >
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text=" " position="0,38" zPosition="1" size="96,26">
+			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+	</screen>
+
+	<screen name="InfoBarMoviePlayerSummaryOled" position="0,0" size="96,64" id="2">
+		<widget source="session.CurrentService" render="Label" position="0,0" size="96,28" font="Regular;16" halign="center" valign="center" foregroundColor="#ff0400">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Progress" pixmap="skin_default/bar_se.png" position="0,28" size="96,10" borderWidth="1" borderColor="#FFFFFF" backgroundColor="dark">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="0,38" size="96,26" font="Regular;32" halign="center" valign="center" foregroundColor="#f6ff00" backgroundColor="#000000" >
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text=" " position="0,38" zPosition="1" size="96,26">
+			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+	</screen>
+
+	<screen name="LcdInfoBarSummaryPicon" position="0,0" size="132,64">
+		<widget source="session.CurrentService" render="Picon" zPosition="1" position="31,0" size="70,40" path="piconlcd" >
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text="R" position="110,10" size="20,20" font="Regular;20" >
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Progress" position="3,42" size="126,4" borderWidth="1" >
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="0,46" size="132,18" font="LCD;20" halign="center" >
+			<convert type="ClockToText">WithSeconds</convert>
+		</widget>
+	</screen>
+
 	<screen name="InfoBar" 	position="0,4" size="1280,720" title="InfoBar" backgroundColor="transparent" flags="wfNoBorder">
 		<ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="skin_default/general/infobar.png"/>
 		<widget source="session.CurrentService" render="Label" position="215,488" size="80,35"  font="Regular;28" halign="left" transparent="1" backgroundColor="transpBlack" zPosition="2" >
