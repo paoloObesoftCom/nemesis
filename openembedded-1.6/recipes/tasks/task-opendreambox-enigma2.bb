@@ -1,7 +1,7 @@
 DESCRIPTION = "OpenDreambox: Enigma2 Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 inherit task
 
@@ -57,13 +57,10 @@ RDEPENDS_task-opendreambox-enigma2_append_dm500hd = "\
   enigma2-plugin-extensions-genuinedreambox \
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-tempfancontrol \
-  enigma2-plugin-extensions-autotimer \
   enigma2-plugin-systemplugins-setpasswd \
   enigma2-plugin-extensions-vlcplayer \
   enigma2-plugin-systemplugins-networkbrowser \
-  enigma2-plugin-extensions-imdb \
   enigma2-plugin-extensions-epgsearch \
-  enigma2-plugin-systemplugins-autoresolution \
   enigma2-plugin-systemplugins-videoenhancement \
   enigma2-plugin-extensions-mytube \
   enigma2-plugin-extensions-moviecut \
@@ -75,14 +72,11 @@ RDEPENDS_task-opendreambox-enigma2_append_dm500hd = "\
 RDEPENDS_task-opendreambox-enigma2_append_dm800 = "\
   enigma2-plugin-extensions-genuinedreambox \
   enigma2-plugin-systemplugins-videomode \
-  enigma2-plugin-extensions-autotimer \
   enigma2-plugin-systemplugins-setpasswd \
   enigma2-plugin-extensions-vlcplayer \
   enigma2-plugin-systemplugins-networkbrowser \
-  enigma2-plugin-extensions-imdb \
   enigma2-plugin-extensions-epgsearch \
   enigma2-plugin-extensions-dvdbackup \
-  enigma2-plugin-systemplugins-autoresolution \
   enigma2-plugin-systemplugins-videoenhancement \
   enigma2-plugin-extensions-mytube \
   enigma2-plugin-extensions-moviecut \
@@ -95,14 +89,11 @@ RDEPENDS_task-opendreambox-enigma2_append_dm800se = "\
   enigma2-plugin-extensions-genuinedreambox \
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-tempfancontrol \
-  enigma2-plugin-extensions-autotimer \
   enigma2-plugin-systemplugins-setpasswd \
   enigma2-plugin-extensions-vlcplayer \
   enigma2-plugin-systemplugins-networkbrowser \
-  enigma2-plugin-extensions-imdb \
   enigma2-plugin-extensions-epgsearch \
   enigma2-plugin-extensions-dvdbackup \
-  enigma2-plugin-systemplugins-autoresolution \
   enigma2-plugin-systemplugins-videoenhancement \
   enigma2-plugin-extensions-mytube \
   enigma2-plugin-extensions-moviecut \
@@ -117,14 +108,11 @@ RDEPENDS_task-opendreambox-enigma2_append_dm8000 = "\
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-nfiflash \
   enigma2-plugin-systemplugins-tempfancontrol \
-  enigma2-plugin-extensions-autotimer \
   enigma2-plugin-systemplugins-setpasswd \
   enigma2-plugin-extensions-vlcplayer \
   enigma2-plugin-systemplugins-networkbrowser \
-  enigma2-plugin-extensions-imdb \
   enigma2-plugin-extensions-epgsearch \
   enigma2-plugin-extensions-dvdbackup \
-  enigma2-plugin-systemplugins-autoresolution \
   enigma2-plugin-systemplugins-videoenhancement \
   enigma2-plugin-extensions-mytube \
   enigma2-plugin-extensions-moviecut \
@@ -137,11 +125,7 @@ RDEPENDS_task-opendreambox-enigma2_append_dm7025 = "\
   enigma2-plugin-systemplugins-commoninterfaceassignment \
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-networkbrowser \
-  enigma2-plugin-extensions-imdb \
-  enigma2-plugin-systemplugins-autoresolution \
   enigma2-plugin-systemplugins-videoenhancement \
-  enigma2-plugin-extensions-moviecut \
-  enigma2-plugin-extensions-movieretitle \
   enigma2-plugin-extensions-socketmmi \
 "
 
@@ -151,14 +135,11 @@ RDEPENDS_task-opendreambox-enigma2_append_dm7020hd = "\
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-nfiflash \
   enigma2-plugin-systemplugins-tempfancontrol \
-  enigma2-plugin-extensions-autotimer \
   enigma2-plugin-systemplugins-setpasswd \
   enigma2-plugin-extensions-vlcplayer \
   enigma2-plugin-systemplugins-networkbrowser \
-  enigma2-plugin-extensions-imdb \
   enigma2-plugin-extensions-epgsearch \
   enigma2-plugin-extensions-dvdbackup \
-  enigma2-plugin-systemplugins-autoresolution \
   enigma2-plugin-systemplugins-videoenhancement \
   enigma2-plugin-extensions-mytube \
   enigma2-plugin-extensions-moviecut \
