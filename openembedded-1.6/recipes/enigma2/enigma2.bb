@@ -61,7 +61,7 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r16"
+PR = "r17"
 
 SRCDATE = "20101204"
 #SRCDATE is NOT used by git to checkout a specific revision

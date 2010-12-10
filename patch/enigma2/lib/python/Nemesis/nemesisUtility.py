@@ -338,6 +338,8 @@ class NModule(Screen):
 			('ftdi_sio','USB Serial (FTDI Smargo)'),
 			('pl2303','USB Serial (PL2303)'),
 			('tun','TUN (OpenVPN)'),
+			('rt73','WLAN Usb Adapter RT73'),
+			('zd1211b','WLAN Usb Adapter ZD1211B'),
 			('isofs','ISOFS (CD/DVD)'),
 			('cdfs','CDFS (Audio-CD)'),
 			('udf','UDF (CD/DVD)'),

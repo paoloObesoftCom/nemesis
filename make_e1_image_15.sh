@@ -6,11 +6,11 @@ dmver=`grep "MACHINE=" ../make_init.sh | cut -d "=" -f 2`
 dmdir=`grep "OE_BASE=" env.source | cut -d "=" -f 2`/
 patchdir=$envpath/nemesis
 
-ver='5.0'
+ver='1.0'
 enigmaver='1'
 subver=''
 data=`date +'%d-%m-%Y-%H-%M'`
-imagename="EDG-Nemesis-${ver}${subver}-${dmver}-e${enigmaver}_${data}"
+imagename="NewDE-${ver}${subver}-${dmver}-e${enigmaver}_${data}"
 
 rebuild_nemesis()
 {
