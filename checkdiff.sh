@@ -130,6 +130,11 @@ check_oe_16()
 	kompare $oesrc16/openembedded/conf/machine/dm7020hd.conf openembedded-1.6/conf/machine/dm7020hd.conf
 	kompare $oesrc16/openembedded/conf/machine/dm8000.conf openembedded-1.6/conf/machine/dm8000.conf
 	kompare $oesrc16/openembedded/recipes/base-files/base-files/opendreambox/profile openembedded-1.6/recipes/base-files/base-files/opendreambox/profile
+	kompare $oesrc16/openembedded/recipes/base-files/base-files/dm500hd/fstab openembedded-1.6/recipes/base-files/base-files/dm500hd/fstab
+	kompare $oesrc16/openembedded/recipes/base-files/base-files/dm800/fstab openembedded-1.6/recipes/base-files/base-files/dm800/fstab
+	kompare $oesrc16/openembedded/recipes/base-files/base-files/dm800se/fstab openembedded-1.6/recipes/base-files/base-files/dm800se/fstab
+	kompare $oesrc16/openembedded/recipes/base-files/base-files/dm8000/fstab openembedded-1.6/recipes/base-files/base-files/dm8000/fstab
+	kompare $oesrc16/openembedded/recipes/base-files/base-files/dm7020hd/fstab openembedded-1.6/recipes/base-files/base-files/dm7020hd/fstab
 	kompare $oesrc16/openembedded/recipes/base-passwd/base-passwd_3.5.20.bb openembedded-1.6/recipes/base-passwd/base-passwd_3.5.20.bb
 	kompare $oesrc16/openembedded/recipes/busybox/busybox-1.15.3/opendreambox/defconfig openembedded-1.6/recipes/busybox/busybox-1.15.3/opendreambox/defconfig
 	kompare $oesrc16/openembedded/recipes/dreambox/dreambox-dccamd.bb openembedded-1.6/recipes/dreambox/dreambox-dccamd.bb

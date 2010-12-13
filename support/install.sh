@@ -270,7 +270,7 @@ if [ -d $INIT_DIR/src/enigma2-plugins/.git ];then
 else
 	echo "Download enigma2-plugins from branch master"
 	[ -d $INIT_DIR/src/enigma2-plugins ] && rm -rf $INIT_DIR/src/enigma2-plugins
-	git clone git://git.opendreambox.org/git/obi/enigma2-plugins.git
+	git clone git://schwerkraft.elitedvb.net/enigma2-plugins/enigma2-plugins.git
 	if ( test $? -ne 0 ) then
 		echo -e $ANSI_RED"Fehler beim downloaden von enigma2-plugins source"$ANSI_RESET2
 		exit 72		#Code für: wichtige Systemdatei fehlt

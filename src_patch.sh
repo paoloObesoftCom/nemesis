@@ -117,24 +117,24 @@ enigma2_16()
 {
 	# Prepare enigma2 OE 1.6 package
 	if [ -e $e2_cvssrc ]; then
-		echo -n "Remove $srcpatchedpath/git... "
-		[ -e $srcpatchedpath/git ] && rm -r $srcpatchedpath/git
+		echo -n "Remove $srcpatchedpath/enigma2... "
+		[ -e $srcpatchedpath/enigma2 ] && rm -r $srcpatchedpath/enigma2
 		echo 'Removed!'
-		mkdir $srcpatchedpath/git
-		echo -n "Copy $e2_cvssrc/* $srcpatchedpath/git... "
-		cp -r $e2_cvssrc/* $srcpatchedpath/git  && echo 'Copied!'
-		echo -n "Copy patch/enigma2/* to $srcpatchedpath/git... "
-		cp -r patch/enigma2/* $srcpatchedpath/git  && echo 'Copied!'
-		echo -n "Copy patch/po/enigma2/it.po to $srcpatchedpath/git/po... "
-		cp -r patch/po/enigma2/it.po $srcpatchedpath/git/po  && echo 'Copied!'
-		echo -n "Copy patch/po/enigma2/Makefile.am to $srcpatchedpath/git/po... "
-		cp -r patch/po/enigma2/Makefile.am $srcpatchedpath/git/po  && echo 'Copied!'
-		echo -n "Merge patch/po/enigma2/panel_it.po in $srcpatchedpath/git/po/it.po... "
-		cat patch/po/enigma2/panel_it.po >> $srcpatchedpath/git/po/it.po  && echo 'Merged!'
+		mkdir $srcpatchedpath/enigma2
+		echo -n "Copy $e2_cvssrc/* $srcpatchedpath/enigma2... "
+		cp -r $e2_cvssrc/* $srcpatchedpath/enigma2  && echo 'Copied!'
+		echo -n "Copy patch/enigma2/* to $srcpatchedpath/enigma2... "
+		cp -r patch/enigma2/* $srcpatchedpath/enigma2  && echo 'Copied!'
+		echo -n "Copy patch/po/enigma2/it.po to $srcpatchedpath/enigma2/po... "
+		cp -r patch/po/enigma2/it.po $srcpatchedpath/enigma2/po  && echo 'Copied!'
+		echo -n "Copy patch/po/enigma2/Makefile.am to $srcpatchedpath/enigma2/po... "
+		cp -r patch/po/enigma2/Makefile.am $srcpatchedpath/enigma2/po  && echo 'Copied!'
+		echo -n "Merge patch/po/enigma2/panel_it.po in $srcpatchedpath/enigma2/po/it.po... "
+		cat patch/po/enigma2/panel_it.po >> $srcpatchedpath/enigma2/po/it.po  && echo 'Merged!'
 		cd $srcpatchedpath
-		find git/ -name ".svn" | xargs rm -rf
+		find enigma2/ -name ".svn" | xargs rm -rf
 		echo -n "Create $e2_arc_16 archive... "
-		tar -zcf $e2_arc_16 git/  && echo 'Created!'
+		tar -zcf $e2_arc_16 enigma2/  && echo 'Created!'
 		echo -n "Move $e2_arc_16 to $sourcespath... "
 		mv $e2_arc_16 $sourcespath  && echo 'Moved!'
 	else

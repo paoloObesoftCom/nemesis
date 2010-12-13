@@ -3,18 +3,13 @@ MAINTAINER = "Felix Domke <tmbinc@elitedvb.net>"
 
 PACKAGES_DYNAMIC = "enigma2-plugin-*"
 
-SRCDATE = "20101112"
-
-# if you want the 2.7.0 release, use
-#TAG = ";tag=enigma2-plugins_rel27"
-#PV = "2.7cvs${SRCDATE}"
-
 # if you want experimental, use:
-TAG = ""
-PV = "experimental-cvs${SRCDATE}"
+SRCREV=""
+SRCDATE="20101211"
+BRANCH="master"
+PV = "experimental-git${SRCDATE}"
 
-PR = "r5"
-
+PR = "r1"
 SRC_URI = "file://../../../../sources/enigma2-plugins_cvs.schwerkraft.elitedvb.net__NDE.tar.gz"
 
 FILES_${PN} += " /usr/share/enigma2 /usr/share/fonts "

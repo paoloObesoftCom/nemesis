@@ -5,7 +5,7 @@ model=`grep "MODEL=" ../make_init.sh | cut -d "=" -f 2`
 envdir=`grep "OEROOT=" ../make_init.sh | cut -d "=" -f 2`
 patchdir=$envdir/nemesis
 data=`date +'%d-%m-%Y-%H-%M'`
-ver='5.0'
+ver='1.0'
 subver='.beta'
 
 move_image()

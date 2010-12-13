@@ -3,15 +3,10 @@ Show Active Process:ps -ef
 Show Memory:free  
 Show Cpu:more /proc/cpuinfo
 Show USB Devices:lsusb
+Show IP Address:ip addr sh
 Show TCP Network Connection:netstat -tn
 Show UDP Network Connection:netstat -un
 Show TCP Listener:netstat -tln
 Show UDP Listener:netstat -uln
 Show Route Table:netstat -rn
 Show Loaded Kernel Modules:lsmod
-Show NewCS Info:(echo ''; sleep 1; echo 'version'; sleep 1; echo 'uptime'; sleep 1; echo 'quit') | nc 127.0.0.1 3001
-Show NewCS User Info:(echo ''; sleep 1; echo 'users'; sleep 1; echo 'quit') | nc 127.0.0.1 3001
-Show NewCS Card Info:(echo ''; sleep 1; echo 'cards'; sleep 1; echo 'quit') | nc 127.0.0.1 3001
-Show NewCS Subscrition Info:(echo ''; sleep 1; echo 'sub -1'; sleep 1; echo 'quit') | nc 127.0.0.1 3001
-Show MGcamd info:cat /tmp/mgstat.info
-Show MGcamd share:cat /tmp/mgshare.info
