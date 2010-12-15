@@ -1247,7 +1247,7 @@ msgstr "Canada"
 
 #
 msgid "Cancel"
-msgstr "Annull."
+msgstr "Annullare"
 
 #
 msgid "Capacity: "
@@ -7852,7 +7852,7 @@ msgstr "Annullare inst."
 
 #
 msgid "Undo uninstall"
-msgstr "Annull. rimoz."
+msgstr "Annullare rimoz."
 
 msgid "UnhandledKey"
 msgstr "Tasto non gestito"

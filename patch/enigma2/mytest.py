@@ -67,7 +67,7 @@ config.misc.epgcache_filename = ConfigSelection(default = "/media/usb", choices 
 
 def setEPGCachePath(configElement):
 	eEPGCache.getInstance().setCacheFile("%s/epg.dat" % configElement.value)
-config.misc.epgcache_filename.addNotifier(setEPGCachePath)
+
 
 #demo code for use of standby enter leave callbacks
 #def leaveStandby():
@@ -484,6 +484,8 @@ def runScreenTest():
 			session.openWithCallback(boundFunction(runNextScreen, session, screensToRun[1:]), screen, *args)
 		else:
 			session.open(screen, *args)
+
+	config.misc.epgcache_filename.addNotifier(setEPGCachePath)
 
 	runNextScreen(session, screensToRun)
 

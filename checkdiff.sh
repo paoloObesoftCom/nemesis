@@ -79,11 +79,14 @@ check_enigma2()
 	kompare $e2_cvssrc/lib/python/enigma_python.i patch/enigma2/lib/python/enigma_python.i
 	kompare $e2_cvssrc/lib/python/Makefile.am patch/enigma2/lib/python/Makefile.am
 	
+	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py patch/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py
+
 	kompare $e2_cvssrc/lib/python/Screens/AudioSelection.py patch/enigma2/lib/python/Screens/AudioSelection.py
 	kompare $e2_cvssrc/lib/python/Screens/InfoBar.py patch/enigma2/lib/python/Screens/InfoBar.py
 	kompare $e2_cvssrc/lib/python/Screens/InfoBarGenerics.py patch/enigma2/lib/python/Screens/InfoBarGenerics.py
 	kompare $e2_cvssrc/lib/python/Screens/TimerEntry.py patch/enigma2/lib/python/Screens/TimerEntry.py
 	
+	kompare $e2_cvssrc/lib/python/Components/Ipkg.py patch/enigma2/lib/python/Components/Ipkg.py
 	kompare $e2_cvssrc/lib/python/Components/About.py patch/enigma2/lib/python/Components/About.py
 	kompare $e2_cvssrc/lib/python/Components/UsageConfig.py patch/enigma2/lib/python/Components/UsageConfig.py
 	kompare $e2_cvssrc/lib/python/Components/Lcd.py patch/enigma2/lib/python/Components/Lcd.py

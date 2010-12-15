@@ -829,3 +829,10 @@ msgstr "Abilta lo scarico di EPG con il Timer"
 
 msgid "No Delay"
 msgstr "Nessuno"
+
+msgid "Force overwrite on upgrade ?"
+msgstr "Forza aggiornamento?"
+
+msgid "Overwrite all package during upgrade operation?"
+msgstr "Sovrascrivi tutti i pacchetti durante l'aggiornamento?"
+
