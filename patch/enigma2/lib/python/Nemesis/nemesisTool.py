@@ -1,6 +1,7 @@
 from Components.MenuList import MenuList
 from Tools.Directories import fileExists
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
+from Tools.HardwareInfo import HardwareInfo
 from enigma import eListboxPythonMultiContent, eListbox, gFont
 from Components.config import config
 from os import system, statvfs
@@ -93,8 +94,12 @@ def parse_ecm(filename):
 					addr = x[1].strip()
 			elif line.find('slot-1') >= 0:
 				source = 4
+				if HardwareInfo().get_device_name() == 'dm800se':
+					source = 5
 			elif line.find('slot-2') >= 0:
 				source = 5
+				if HardwareInfo().get_device_name() == 'dm800se':
+					source = 4
 			elif line.find('decode:') >= 0:
 				if line.find('Internal') >= 0:
 					source = 1
@@ -102,8 +107,12 @@ def parse_ecm(filename):
 					source = 2
 				elif line.find('/dev/sci0') >= 0:
 					source = 4
+					if HardwareInfo().get_device_name() == 'dm800se':
+						source = 5
 				elif line.find('/dev/sci1') >= 0:
 					source = 5
+					if HardwareInfo().get_device_name() == 'dm800se':
+						source = 4
 				else:
 					source = 2
 					x = line.split(':')

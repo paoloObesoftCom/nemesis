@@ -42,11 +42,12 @@ class IpkgComponent:
 			self.runCmd("update")
 		elif cmd == self.CMD_UPGRADE:
 			append = ""
+			fow = ""
 			if args["test_only"]:
 				append = " -test"
 			if args["Force_Overwrite"]:
-				append += " --force-overwrite"
-			self.runCmd("upgrade" + append)
+				fow = "--force-overwrite "
+			self.runCmd(fow + "upgrade" + append)
 		elif cmd == self.CMD_LIST:
 			self.fetchedList = []
 			if args['installed_only']:

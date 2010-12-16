@@ -9,7 +9,7 @@ SRCDATE="20101211"
 BRANCH="master"
 PV = "experimental-git${SRCDATE}"
 
-PR = "r1"
+PR = "r2"
 SRC_URI = "file://../../../../sources/enigma2-plugins_cvs.schwerkraft.elitedvb.net__NDE.tar.gz"
 
 FILES_${PN} += " /usr/share/enigma2 /usr/share/fonts "

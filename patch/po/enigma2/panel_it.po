@@ -831,8 +831,16 @@ msgid "No Delay"
 msgstr "Nessuno"
 
 msgid "Force overwrite on upgrade ?"
-msgstr "Forza aggiornamento?"
+msgstr "Forza aggiornamento pacchetti?"
 
 msgid "Overwrite all package during upgrade operation?"
 msgstr "Sovrascrivi tutti i pacchetti durante l'aggiornamento?"
 
+msgid "Setup Software Manager"
+msgstr "Configurazione Software Manager"
+
+msgid "Overwrite configuration files"
+msgstr "Sovrascrivere i file di configurazione"
+
+msgid "Force overwrite on upgrade"
+msgstr "Forza aggiornamento pacchetti"

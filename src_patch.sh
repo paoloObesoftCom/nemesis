@@ -118,12 +118,12 @@ enigma2_16()
 	# Prepare enigma2 OE 1.6 package
 	if [ -e $e2_cvssrc ]; then
 		echo -n "Remove $srcpatchedpath/enigma2... "
-		[ -e $srcpatchedpath/enigma2 ] && rm -r $srcpatchedpath/enigma2
+		[ -e $srcpatchedpath/enigma2 ] && rm -rf $srcpatchedpath/enigma2
 		echo 'Removed!'
 		mkdir $srcpatchedpath/enigma2
-		echo -n "Copy $e2_cvssrc/* $srcpatchedpath/enigma2... "
-		cp -r $e2_cvssrc/* $srcpatchedpath/enigma2  && echo 'Copied!'
-		echo -n "Copy patch/enigma2/* to $srcpatchedpath/enigma2... "
+		echo -n "Copy $e2_cvssrc $srcpatchedpath/... "
+		cp -r $e2_cvssrc $srcpatchedpath  && echo 'Copied!'
+		echo -n "Copy patch/enigma2/* to $srcpatchedpath/enigma2/... "
 		cp -r patch/enigma2/* $srcpatchedpath/enigma2  && echo 'Copied!'
 		echo -n "Copy patch/po/enigma2/it.po to $srcpatchedpath/enigma2/po... "
 		cp -r patch/po/enigma2/it.po $srcpatchedpath/enigma2/po  && echo 'Copied!'

@@ -74,6 +74,7 @@ check_enigma2()
 
 	kompare $e2_cvssrc/RecordTimer.py patch/enigma2/RecordTimer.py
 	kompare $e2_cvssrc/mytest.py patch/enigma2/mytest.py
+	kompare $e2_cvssrc/skin.py patch/enigma2/skin.py
 	kompare $e2_cvssrc/configure.ac patch/enigma2/configure.ac
 	
 	kompare $e2_cvssrc/lib/python/enigma_python.i patch/enigma2/lib/python/enigma_python.i

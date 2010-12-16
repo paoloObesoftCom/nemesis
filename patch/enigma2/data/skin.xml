@@ -93,14 +93,6 @@
 		<color name="WindowTitleForeground" color="#ffffff" />
 		<color name="WindowTitleBackground" color="#000000" />
 	</windowstyle>
-	<!-- Subtitle effects -->
-	<subtitles>
-		<sub name="Subtitle_TTX" font="Regular;52" foregroundColor="#ffffff" shadowColor="#40101010" shadowOffset="3,3" />
-		<sub name="Subtitle_Regular" font="Regular;52" foregroundColor="#DCDCDC" shadowColor="#40101010" shadowOffset="3,3" />
-		<sub name="Subtitle_Bold" font="Replacement;52" foregroundColor="#DCDCDC" shadowColor="#40101010" shadowOffset="3,3" />
-		<sub name="Subtitle_Italic" font="Regular;52" foregroundColor="#DCAAAA" shadowColor="#40101010" shadowOffset="3,3" />
-		<!-- omitting foregroundColor attribute will enable auto-assignment of color -->
-	</subtitles>
 
 <!--  Nemesis Panels  -->
 	<!-- Extended Info Bar panel	 -->

@@ -17,4 +17,7 @@ dist_pkgdata_DATA = \
 	startwizard.xml \
 	nemesis.xml \
 	tutorialwizard.xml \
+	skin_sub.xml \
+	skin_lcd.xml \
+	skin_oled.xml \
 	unicable.xml
