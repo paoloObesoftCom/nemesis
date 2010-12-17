@@ -151,11 +151,9 @@ enigma2_plugins()
 	if [ -e $srcpath/enigma2-plugins ]; then
 		echo 'Prepare enigma2 plugins package...'
 		echo -n "Remove $srcpatchedpath/enigma2-plugins/... "
-		[ -e $srcpatchedpath/enigma2-plugins ] && rm -r $srcpatchedpath/enigma2-plugins
+		[ -e $srcpatchedpath/enigma2-plugins ] && rm -rf $srcpatchedpath/enigma2-plugins
 		echo 'Removed!'
 		cp -r $srcpath/enigma2-plugins $srcpatchedpath/
-		echo -n "Remove $srcpatchedpath/enigma2-plugins/.git... "
-		rm -rf $srcpatchedpath/enigma2-plugins/.git && echo 'Removed!'
 		cp -r patch/enigma2-plugins/* $srcpatchedpath/enigma2-plugins/
 		cd $srcpatchedpath
 		find . -name ".svn" | xargs rm -rf

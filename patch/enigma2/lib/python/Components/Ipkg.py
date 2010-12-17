@@ -46,7 +46,7 @@ class IpkgComponent:
 			if args["test_only"]:
 				append = " -test"
 			if args["Force_Overwrite"]:
-				fow = "--force-overwrite "
+				fow = "--force-overwrite --force-defaults "
 			self.runCmd(fow + "upgrade" + append)
 		elif cmd == self.CMD_LIST:
 			self.fetchedList = []
@@ -55,7 +55,10 @@ class IpkgComponent:
 			else:
 				self.runCmd("list")
 		elif cmd == self.CMD_INSTALL:
-			self.runCmd("install " + args['package'])
+			fowi = ""
+			if args["Force_Overwrite"]:
+				fowi = "--force-overwrite --force-defaults "
+			self.runCmd(fowi + "install " + args['package'])
 		elif cmd == self.CMD_REMOVE:
 			self.runCmd("remove " + args['package'])
 		self.setCurrentCommand(cmd)

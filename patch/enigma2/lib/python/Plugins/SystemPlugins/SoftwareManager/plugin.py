@@ -911,14 +911,14 @@ class PluginManager(Screen, DreamInfoHandler):
 					else:
 						if self.packagefiles:
 							for package in self.packagefiles[:]:
-								self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": package["name"] }))
+								self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": package["name"], "Force_Overwrite": {'Y': True,'N': False}[config.plugins.SoftwareManager.overwriteUpgrade.value] }))
 						else:
-							self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": plugin[2] }))
+							self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": plugin[2], "Force_Overwrite": {'Y': True,'N': False}[config.plugins.SoftwareManager.overwriteUpgrade.value] }))
 				else:
 					if plugin[1] == 'installed':
 						self.cmdList.append((IpkgComponent.CMD_REMOVE, { "package": plugin[2] }))
 					else:
-						self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": plugin[2] }))
+						self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": plugin[2], "Force_Overwrite": {'Y': True,'N': False}[config.plugins.SoftwareManager.overwriteUpgrade.value] }))
 
 	def runExecute(self, result = None):
 		if result is not None:

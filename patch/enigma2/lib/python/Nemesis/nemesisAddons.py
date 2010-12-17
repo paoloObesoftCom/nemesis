@@ -316,7 +316,7 @@ class	RAddonsDown(Screen):
 		if (answer is True):
 			self['conn'].text = _('Installing addons.\nPlease Wait...')
 			if (u.filename.find('.ipk') != -1):
-				args = {'Y': '--force-overwrite ','N': ''}[config.plugins.SoftwareManager.overwriteUpgrade.value]
+				args = {'Y': '--force-overwrite --force-defaults ','N': ''}[config.plugins.SoftwareManager.overwriteUpgrade.value]
 				self.container.execute("ipkg " + args + "install /tmp/" + u.filename)
 			elif (u.filename.find('.tbz2') != -1):
 				if (u.pluginType == 'Settings') or (u.pluginType == 'e2Settings'):
@@ -433,7 +433,8 @@ class	RManual(Screen):
 			self['conn'].show()
 			self['conn'].setText(_('Installing: %s.\nPlease wait...') % u.filename)
 			if (u.filename.find('.ipk') != -1):
-				self.container.execute("ipkg install /tmp/" + u.filename)
+				args = {'Y': '--force-overwrite --force-defaults ','N': ''}[config.plugins.SoftwareManager.overwriteUpgrade.value]
+				self.container.execute("ipkg " + args + "install /tmp/" + u.filename)
 			elif (u.filename.find('.tbz2') != -1):
 				self.container.execute("tar -jxvf /tmp/" + u.filename + " -C /")
 			else:

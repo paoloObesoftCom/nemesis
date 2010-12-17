@@ -238,8 +238,8 @@ msgstr "Usa le frecce < > per selezionare"
 msgid "SoftCam (%s) :"
 msgstr "Emulatori (%s) :"
 
-msgid "Downloading Nemesis info..."
-msgstr "Ricezione Nemesis info..."
+msgid "Downloading NewDE info..."
+msgstr "Ricezione NewDE info..."
 
 #, python-format
 msgid "Stopping %s and starting %s."
@@ -837,7 +837,7 @@ msgid "Overwrite all package during upgrade operation?"
 msgstr "Sovrascrivi tutti i pacchetti durante l'aggiornamento?"
 
 msgid "Setup Software Manager"
-msgstr "Configurazione Software Manager"
+msgstr "Configura Software Manager"
 
 msgid "Overwrite configuration files"
 msgstr "Sovrascrivere i file di configurazione"

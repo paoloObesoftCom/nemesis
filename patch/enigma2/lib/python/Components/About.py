@@ -31,11 +31,11 @@ class About:
 					if image_type == '0':
 						image_type = "Release"
 						version = ''.join((major, minor, revision))
-						return ' '.join((image_type, "SVN(%s)" % version, date))
+						return ' '.join((image_type, "SVN(%s)," % version, date))
 					else:
 						image_type = "Experimental"
 						version = ''.join((major, minor, revision))
-						return ' '.join((image_type, "SVN(%s)" % version, date))
+						return ' '.join(("Release SVN(%s)," % version, date))
 			file.close()
 		except IOError:
 			pass
@@ -49,6 +49,16 @@ class About:
 		try:
 			result = popen("uname -r","r").read().strip("\n").split('-')
 			kernel_version = result[0]
+			return kernel_version
+		except:
+			pass
+
+		return "unknown"
+
+	def getKernelVersionStringL(self):
+		try:
+			result = popen("uname -r","r").read().strip("\n")
+			kernel_version = result
 			return kernel_version
 		except:
 			pass
