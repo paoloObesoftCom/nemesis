@@ -44,4 +44,17 @@ dist_install_DATA = \
 	setup.png \
 	shutdown.png \
 	subtitles.png \
-	timer.png
+	timer.png \
+	box-2.png \
+	default.png \
+	dvd_player_m.png \
+	factory.png \
+	hdd.png \
+	lock.png \
+	manage.png \
+	restart-e2.png \
+	restart.png \
+	sat.png \
+	search.png \
+	standby.png \
+	system.png

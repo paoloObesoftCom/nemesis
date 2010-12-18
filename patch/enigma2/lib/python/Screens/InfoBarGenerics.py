@@ -30,8 +30,6 @@ from Screens.UnhandledKey import UnhandledKey
 from ServiceReference import ServiceReference
 from Tools.HardwareInfo import HardwareInfo
 
-from Nemesis.nemesisExtraInfoBar import nemesisEI
-
 from Tools import Notifications
 from Tools.Directories import fileExists
 
@@ -93,7 +91,10 @@ class InfoBarShowHide:
 	STATE_SHOWN = 3
 
 	def __init__(self):
+		from Nemesis.nemesisExtraInfoBar import nemesisEI
 		self.InfoBarExtraDialog = self.session.instantiateDialog(nemesisEI)
+		self.activityTimer = eTimer()
+		self.activityTimer.timeout.get().append(self.showEInfo)
 		self["ShowHideActions"] = ActionMap( ["InfobarShowHideActions"] ,
 			{
 				"toggleShow": self.toggleShow,
@@ -107,10 +108,7 @@ class InfoBarShowHide:
 
 		self.__state = self.STATE_SHOWN
 		self.__locked = 0
-		self.__stateExtra = self.STATE_HIDDEN
-		
-		self.activityTimer = eTimer()
-		self.activityTimer.timeout.get().append(self.showEInfo)
+		self.__stateExtra = self.STATE_HIDDEN		
 
 		self.hideTimer = eTimer()
 		self.hideTimer.callback.append(self.doTimerHide)
@@ -127,7 +125,7 @@ class InfoBarShowHide:
 	def __onShow(self):
 		self.__state = self.STATE_SHOWN
 		self.startHideTimer()
-			
+
 		if HardwareInfo().get_device_name() != 'dm500hd':
 			idx = config.lcd.bright.value
 			if idx < 1:
@@ -136,12 +134,16 @@ class InfoBarShowHide:
 			eDBoxLCD.getInstance().setLCDBrightness(idx)
 		
 		if config.nemesis.einfo.value:
+			self.instance.hide()
 			self.activityTimer.start(config.nemesis.einfotimeout.value, True)
 	
 	def showEInfo(self):
-		if self.isTvService():
+		if self.TunerTest():
+			self.instance.hide()
 			self.InfoBarExtraDialog.show()
 			self.__stateExtra = self.STATE_SHOWN
+		else:
+			self.instance.show()
 	
 	def hideEInfo(self):
 		self.__stateExtra = self.STATE_HIDDEN
@@ -173,10 +175,44 @@ class InfoBarShowHide:
 	def doTimerHide(self):
 		self.hideTimer.stop()
 		if self.__state == self.STATE_SHOWN:
+			if config.plugins.FadeSet.par1.value:
+				self.transStep = 20
+				self.transScrtimer = eTimer()
+				self.transScrtimer.callback.append(self.transScrtimerEvent)
+				self.transScrtimer.start(5, True)
+			else:
+				self.hide()
+
+	def transScrtimerEvent(self):
+		self.transScrtimer.stop()
+		if self.transStep != 0:
+			f=open("/proc/stb/video/alpha","w")
+			f.write("%i" % (config.av.osd_alpha.value*self.transStep/20))
+			f.close()
+			self.transStep -= 1
+			self.transScrtimer.start((config.plugins.FadeSet.par2.value * 6), True)
+		else:
 			self.hide()
+			self.transScrtimer = eTimer()
+			self.transScrtimer.timeout.get().append(self.transRestore)
+			self.transScrtimer.start(300, True)
+
+	def transRestore(self):
+			f=open("/proc/stb/video/alpha","w")
+			f.write("%i" % (config.av.osd_alpha.value))
+			f.close()
+
+	def transScrtimerEvent2(self):
+		self.transScrtimer2.stop()
+		if self.transStep2 != 21:
+			f=open("/proc/stb/video/alpha","w")
+			f.write("%i" % (config.av.osd_alpha.value*self.transStep2/20))
+			f.close()
+			self.transStep2 += 1
+			self.transScrtimer2.start((config.plugins.FadeSet.par2.value * 6), True)
 
 	def toggleShow(self):
-		if self.__state == self.STATE_SHOWN and not self.isTvService():
+		if self.__state == self.STATE_SHOWN and not self.TunerTest():
 			self.hide()
 		elif self.__state == self.STATE_SHOWN and self.__stateExtra == self.STATE_SHOWN:
 			self.hide()
@@ -184,7 +220,17 @@ class InfoBarShowHide:
 		elif self.__state == self.STATE_SHOWN and self.__stateExtra == self.STATE_HIDDEN:
 			self.showEInfo()
 		elif self.__state == self.STATE_HIDDEN:
-			self.show()
+			if config.plugins.FadeSet.par1.value:
+				f=open("/proc/stb/video/alpha","w")
+				f.write("%i" % (config.av.osd_alpha.value-config.av.osd_alpha.value))
+				f.close()
+				self.show()
+				self.transStep2 = 0
+				self.transScrtimer2 = eTimer()
+				self.transScrtimer2.timeout.get().append(self.transScrtimerEvent2)
+				self.transScrtimer2.start(250, True)
+			else:
+				self.show()
 
 	def lockShow(self):
 		self.__locked = self.__locked + 1
@@ -197,15 +243,15 @@ class InfoBarShowHide:
 		if self.execing:
 			self.startHideTimer()
 
-	def isTvService(self):
+	def TunerTest(self):
 		service = self.session.nav.getCurrentService()
 		if service is not None:
 			frontendInfo = service.frontendInfo()
 			if frontendInfo is not None:
 				frontendData = frontendInfo and frontendInfo.getAll(True)
 				if frontendData is not None:
-					ttype = frontendData.get("tuner_type", "None")
-					if ttype == "DVB-S" or ttype == "DVB-S2" or ttype == "DVB-C" or ttype == "DVB-T":
+					isSatTuner = frontendData.get("tuner_type", "None")
+					if isSatTuner == "DVB-S" or isSatTuner == "DVB-S2" or isSatTuner == "DVB-C" or isSatTuner == "DVB-T":
 						return True
 		return False
 
@@ -2263,7 +2309,7 @@ class InfoBarMoviePlayerSummarySupport:
 
 	def createSummary(self):
 		return InfoBarMoviePlayerSummary
-			
+
 class InfoBarTeletextPlugin:
 	def __init__(self):
 		self.teletext_plugin = None

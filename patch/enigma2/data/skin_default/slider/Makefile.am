@@ -39,4 +39,5 @@ dist_install_DATA = \
 	slider_20.png \
 	slider_gauge_bg.png \
 	slider_gauge_fg.png \
-	slider_main.png
+	slider_main.png \
+	slider_tv.png

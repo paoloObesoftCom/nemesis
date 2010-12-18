@@ -125,5 +125,59 @@ dist_install_DATA = \
 	wizard.png \
 	selectioncross.png \
 	unlock.png \
-	unlockBouquet.png
-
+	unlockBouquet.png \
+	bar.png \
+	bar_back.png \
+	betecm-fs8.png \
+	betemm-fs8.png \
+	bisecm-fs8.png \
+	bisemm-fs8.png \
+	bulecm-fs8.png \
+	bulemm-fs8.png \
+	conecm-fs8.png \
+	conemm-fs8.png \
+	crdnew-fs8.png \
+	crwecm-fs8.png \
+	crwemm-fs8.png \
+	drcecm-fs8.png \
+	drcemm-fs8.png \
+	dreecm-fs8.png \
+	dreemm-fs8.png \
+	irdecm-fs8.png \
+	irdemm-fs8.png \
+	emunew-fs8.png \
+	frame.png \
+	ftanew-fs8.png \
+	i_cryptw.png \
+	i_dolby_now.png \
+	i_dolbyw.png \
+	i_format_now.png \
+	i_formats.png \
+	i_formatw.png \
+	i_hdw.png \
+	i_rec-n.png \
+	i_sdw.png \
+	i_subw.png \
+	i_txt_now.png \
+	i_txtw.png \
+	icon_aw-g.png \
+	icon_aw-y.png \
+	icon_aw.png \
+	icon_bw-g.png \
+	icon_bw-y.png \
+	icon_bw.png \
+	icon_cw-g.png \
+	icon_cw-y.png \
+	icon_cw.png \
+	icon_dw-g.png \
+	icon_dw-y.png \
+	icon_dw.png \
+	nagecm-fs8.png \
+	nagemm-fs8.png \
+	ndsecm-fs8.png \
+	ndsemm-fs8.png \
+	netnew-fs8.png \
+	sececm-fs8.png \
+	secemm-fs8.png \
+	viaecm-fs8.png \
+	viaemm-fs8.png

@@ -1,0 +1,43 @@
+#######################################################################
+#
+#    Renderer for Nemesis
+#    Coded by shamann (c)2010
+#
+#    This program is free software; you can redistribute it and/or
+#    modify it under the terms of the GNU General Public License
+#    as published by the Free Software Foundation; either version 2
+#    of the License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#    
+#######################################################################
+
+from Renderer import Renderer
+from enigma import eLabel
+from Components.VariableText import VariableText
+
+class NemesisEmptyEpg(VariableText, Renderer):
+
+	def __init__(self):
+		Renderer.__init__(self)
+		VariableText.__init__(self)
+		
+	GUI_WIDGET = eLabel
+
+	def connect(self, source):
+		Renderer.connect(self, source)
+		self.changed((self.CHANGED_DEFAULT,))
+		
+	def changed(self, what):
+		if what[0] == self.CHANGED_CLEAR:
+			self.text = ""
+		else:
+			self.text = self.source.text
+			if len(self.text) > 25:
+				self.text = self.text[:29] + "..."
+			elif self.text == "":
+				self.text = "No EPG data available"
+

@@ -81,6 +81,8 @@ check_enigma2()
 	kompare $e2_cvssrc/lib/python/Makefile.am patch/enigma2/lib/python/Makefile.am
 	
 	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py patch/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py
+	kompare $e2_cvssrc/lib/python/Plugins/Extensions/Makefile.am patch/enigma2/lib/python/Plugins/Extensions/Makefile.am
+	kompare $e2_cvssrc/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py patch/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py
 
 	kompare $e2_cvssrc/lib/python/Screens/AudioSelection.py patch/enigma2/lib/python/Screens/AudioSelection.py
 	kompare $e2_cvssrc/lib/python/Screens/InfoBar.py patch/enigma2/lib/python/Screens/InfoBar.py
@@ -95,10 +97,12 @@ check_enigma2()
 	
 	kompare $e2_cvssrc/lib/python/Components/Converter/Makefile.am patch/enigma2/lib/python/Components/Converter/Makefile.am
 	kompare $e2_cvssrc/lib/python/Components/Converter/ServiceName.py patch/enigma2/lib/python/Components/Converter/ServiceName.py
+	kompare $e2_cvssrc/lib/python/Components/Converter/ClockToText.py patch/enigma2/lib/python/Components/Converter/ClockToText.py
 
 	kompare $e2_cvssrc/lib/python/Components/Renderer/Picon.py patch/enigma2/lib/python/Components/Renderer/Picon.py
 	
 	kompare $e2_cvssrc/data/Makefile.am patch/enigma2/data/Makefile.am
+	kompare $e2_cvssrc/data/encoding.conf patch/enigma2/data/encoding.conf
 	kompare $e2_cvssrc/data/keymap.xml patch/enigma2/data/keymap.xml
 	kompare $e2_cvssrc/data/setup.xml patch/enigma2/data/setup.xml
 	kompare $e2_cvssrc/data/menu.xml patch/enigma2/data/menu.xml

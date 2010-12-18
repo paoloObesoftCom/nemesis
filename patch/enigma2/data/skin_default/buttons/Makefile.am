@@ -53,4 +53,23 @@ dist_install_DATA = \
 	prev_200x40_blue_on.png \
 	red-big.png \
 	red.png \
-	yellow.png
+	yellow.png \
+	button_blue.png \
+	button_red.png \
+	button_green.png \
+	button_yellow.png \
+	button_blue_yu.png \
+	button_green_yu.png \
+	button_red_yu.png \
+	button_yellow_yu.png \
+	select_media-1.png \
+	select_media-2.png \
+	select_b.png \
+	select_p.png \
+	select_tv.png \
+	selected-1.png \
+	selected-2.png \
+	smediaplayer.png
+
+
+

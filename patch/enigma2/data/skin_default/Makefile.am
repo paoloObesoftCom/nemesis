@@ -154,4 +154,9 @@ dist_install_DATA = \
 	volume.png \
 	v-white.png \
 	white.png \
-	wizard.png
+	wizard.png \
+	celserviceeventprogressbar.png \
+	clk1.png \
+	mpslider-m.png \
+	unhandled-key.png \
+	prev.png

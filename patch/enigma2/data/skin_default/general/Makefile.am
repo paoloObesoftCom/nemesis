@@ -13,6 +13,7 @@ dist_install_DATA = \
 	b_trs.png \
 	b_ts.png \
 	infobar.png \
+	infobar-ex.png \
 	mute.png \
 	no_coverArt.png \
 	picon_movie.png \
