@@ -740,8 +740,8 @@ msgstr "Ritardo prima della chiusura Console (sec)"
 msgid "Enable VirtualKeyBoard (Experimental)"
 msgstr "Abilitare la VirtualKeyBoard (Sperimentale)"
 
-msgid "Setup Display LCD"
-msgstr "Configura Display LCD"
+msgid "Setup Display LCD/OLED"
+msgstr "Configura Display LCD/OLED"
 
 msgid "Brightness on vision"
 msgstr "Luminosità in visione"
@@ -844,3 +844,19 @@ msgstr "Sovrascrivere i file di configurazione"
 
 msgid "Force overwrite on upgrade"
 msgstr "Forza aggiornamento pacchetti"
+
+msgid "Setup Fading"
+msgstr "Configura Fading"
+
+msgid " Enable fade in/out of infobar:"
+msgstr " Abilita dissolvenza infobar:"
+
+msgid " Speed for fade in/out of infobar (1-10):"
+msgstr " Velocità dissolvenza infobar (1-10):"
+
+msgid "Enable fade in/out of infobar"
+msgstr "Abilita dissolvenza infobar"
+
+msgid "Speed for fade in/out of infobar (1-10)"
+msgstr "Velocità dissolvenza infobar (1-10)"
+

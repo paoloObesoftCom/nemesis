@@ -14,8 +14,10 @@
 		<item level="0" text="EMM Info delay (msec)">config.nemesis.emminfodelay</item>
 		<item level="0" text="ECM Info delay (msec)">config.nemesis.ecminfodelay</item>
 		<item level="0" text="Set InfoBar Picon type">config.nemesis.picontype</item>
+		<item level="0" text="Enable fade in/out of infobar">config.plugins.FadeSet.par1</item>
+		<item level="0" text="Speed for fade in/out of infobar (1-10)">config.plugins.FadeSet.par2</item>
 	</setup>
-	<setup key="lcd" title="Setup Display LCD">
+	<setup key="lcd" title="Setup Display LCD/OLED">
 		<item level="0" text="Brightness">config.lcd.bright</item>
 		<item level="0" text="Brightness on vision">config.lcd.lcdbri</item>
 		<item level="0" text="Contrast">config.lcd.contrast</item>

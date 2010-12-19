@@ -45,8 +45,8 @@ class FadeSetScreenSetup(Screen, ConfigListScreen):
 		}, -2)
 
 		FadeSetConfigList = []
-		FadeSetConfigList.append(getConfigListEntry(" Enable fade in/out of infobar:", config.plugins.FadeSet.par1))
-		FadeSetConfigList.append(getConfigListEntry(" Speed for fade in/out of infobar (1-10):", config.plugins.FadeSet.par2))
+		FadeSetConfigList.append(getConfigListEntry(_(" Enable fade in/out of infobar:"), config.plugins.FadeSet.par1))
+		FadeSetConfigList.append(getConfigListEntry(_(" Speed for fade in/out of infobar (1-10):"), config.plugins.FadeSet.par2))
 		ConfigListScreen.__init__(self, FadeSetConfigList, session)
         
 	def save(self):
