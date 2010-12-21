@@ -12,10 +12,10 @@ config.plugins.FadeSet.par2 = ConfigInteger(5, (1,10)) # fade in/out value
 def startSetup(menuid, **kwargs):
 	if menuid != "system":
 		return [ ]
-	return [("Setup Fading", main, None, None)]
+	return [(_("Setup Fading"), main, None, None)]
 
 def Plugins(path, **kwargs):
-	return [ PluginDescriptor(name="Setup Fading", description=_("Setup Fading"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup) ]
+	return [ PluginDescriptor(name=_("Setup Fading"), description=_("Setup Fading"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup) ]
 
 def main(session,**kwargs):
 	session.open(FadeSetScreenSetup)

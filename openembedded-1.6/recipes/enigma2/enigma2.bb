@@ -61,7 +61,7 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r29"
+PR = "r33"
 
 SRCDATE = "20101204"
 #SRCDATE is NOT used by git to checkout a specific revision
@@ -76,7 +76,7 @@ PV = "experimental-git${SRCDATE}"
 SRCREV = ""
 ####################################################
 
-SRC_URI = "file://../../../../sources/git_git.opendreambox.org.git.enigma2.git_NDE_16.tar.gz"
+SRC_URI = "file://../../../../sources/enigma2_NDE_16.tar.gz"
 
 S = "${WORKDIR}/enigma2"
 
@@ -95,7 +95,9 @@ EXTRA_OECONF = " \
 "
 
 do_install_append() {
-	rm -f ${D}/usr/lib/enigma2/python/Nemesis/*.py
+	mv ${D}/usr/lib/enigma2/python/mytest.py ${D}/usr/lib/enigma2/python/mytest.pykeep
+	find ${D}/usr/lib/enigma2/python/ -name "*.py" | xargs rm -rf
+	mv ${D}/usr/lib/enigma2/python/mytest.pykeep ${D}/usr/lib/enigma2/python/mytest.py
 }
 
 python populate_packages_prepend () {

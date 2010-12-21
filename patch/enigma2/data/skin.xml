@@ -237,7 +237,7 @@
     </widget>
     <ePixmap pixmap="skin_default/icons/bar_back.png" position="760,591" size="5,75" zPosition="1" backgroundColor="background" alphatest="on" />
     <widget source="session.FrontendStatus" render="Progress" position="884,591" size="5,75" zPosition="4" pixmap="skin_default/icons/bar.png" orientation="orBottomToTop" transparent="1">
-      <convert type="FrontendInfo">SNR</convert>
+      <convert type="FrontendInfo">BER</convert>
     </widget>
     <ePixmap pixmap="skin_default/icons/bar_back.png" position="884,591" size="5,75" zPosition="1" backgroundColor="background" alphatest="on" />
     <eLabel text="Snr:" position="778,596" size="45,20" font="Regular;18" foregroundColor="white" backgroundColor="backgroundf" transparent="1" />
@@ -597,7 +597,7 @@
   <screen name="menu_mainmenu" position="center,175" size="710,412" backgroundColor="background" title="Main menu">
     <ePixmap position="388,50" size="300,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
     <widget source="title" render="Label" position="20,30" size="350,30" font="Regular;28" halign="center" transparent="1" foregroundColor="grey" shadowColor="#1A58A6" shadowOffset="-2,-1" />
-    <widget source="menu" render="Listbox" position="20,80" size="350,216" zPosition="3" enableWrapAround="2" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showNever" transparent="1">
+    <widget source="menu" render="Listbox" position="20,80" size="350,280" zPosition="3" enableWrapAround="2" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showOnDemand" transparent="1">
       <convert type="TemplatedMultiContent">
 				{"template": [ MultiContentEntryText(pos = (10, 5), size = (340, 25), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Regular", 22)],
@@ -647,7 +647,7 @@
     <ePixmap position="388,50" size="300,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
     <ePixmap position="431,80" size="202,41" pixmap="skin_default/menu/information.png" alphatest="on" />
     <widget source="title" render="Label" position="20,30" size="350,30" font="Regular;28" halign="center" transparent="1" foregroundColor="grey" shadowColor="#1A58A6" shadowOffset="-2,-1" />
-    <widget source="menu" render="Listbox" position="20,80" size="350,216" zPosition="3" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showNever" transparent="1">
+    <widget source="menu" render="Listbox" position="20,80" size="350,280" zPosition="3" enableWrapAround="2" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showOnDemand" transparent="1">
       <convert type="TemplatedMultiContent">
 				{"template": [ MultiContentEntryText(pos = (10, 5), size = (340, 25), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Regular", 22)],
@@ -659,7 +659,7 @@
   <screen name="menu_setup" position="center,175" size="710,412" backgroundColor="background" title="Main menu">
     <ePixmap position="388,50" size="300,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
     <widget source="title" render="Label" position="20,30" size="350,30" font="Regular;28" halign="center" transparent="1" foregroundColor="grey" shadowColor="#1A58A6" shadowOffset="-2,-1" />
-    <widget source="menu" render="Listbox" position="20,80" size="350,216" zPosition="3" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showNever" transparent="1">
+    <widget source="menu" render="Listbox" position="20,80" size="350,280" zPosition="3" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showOnDemand" transparent="1">
       <convert type="TemplatedMultiContent">
 				{"template": [ MultiContentEntryText(pos = (10, 5), size = (340, 25), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Regular", 22)],
@@ -700,7 +700,7 @@
     <ePixmap position="388,50" size="300,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
     <ePixmap position="431,80" size="202,41" pixmap="skin_default/menu/sat.png" alphatest="on" />
     <widget source="title" render="Label" position="20,30" size="350,30" font="Regular;28" halign="center" transparent="1" foregroundColor="grey" shadowColor="#1A58A6" shadowOffset="-2,-1" />
-    <widget source="menu" render="Listbox" position="20,80" size="350,216" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showNever" transparent="1">
+    <widget source="menu" render="Listbox" position="20,80" size="350,280" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showOnDemand" transparent="1">
       <convert type="TemplatedMultiContent">
 				{"template": [ MultiContentEntryText(pos = (10, 6), size = (340, 25), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Regular", 21)],
@@ -713,7 +713,7 @@
     <ePixmap position="388,50" size="300,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
     <ePixmap position="431,80" size="202,41" pixmap="skin_default/menu/system.png" alphatest="on" />
     <widget source="title" render="Label" position="20,30" size="350,30" font="Regular;28" halign="center" transparent="1" foregroundColor="grey" shadowColor="#1A58A6" shadowOffset="-2,-1" />
-    <widget source="menu" render="Listbox" position="20,80" size="350,216" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showNever" transparent="1">
+    <widget source="menu" render="Listbox" position="20,80" size="350,280" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showOnDemand" transparent="1">
       <convert type="TemplatedMultiContent">
 				{"template": [ MultiContentEntryText(pos = (10, 5), size = (340, 25), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Regular", 22)],
@@ -726,7 +726,7 @@
     <ePixmap position="388,50" size="300,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
     <ePixmap position="431,80" size="202,41" pixmap="skin_default/menu/hdd.png" alphatest="on" />
     <widget source="title" render="Label" position="20,30" size="350,30" font="Regular;28" halign="center" transparent="1" foregroundColor="grey" shadowColor="#1A58A6" shadowOffset="-2,-1" />
-    <widget source="menu" render="Listbox" position="20,80" size="350,216" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showNever" transparent="1">
+    <widget source="menu" render="Listbox" position="20,80" size="350,280" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showOnDemand" transparent="1">
       <convert type="TemplatedMultiContent">
 				{"template": [ MultiContentEntryText(pos = (10, 5), size = (340, 25), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Regular", 22)],
@@ -738,7 +738,7 @@
   <screen name="menu_shutdown" position="center,175" size="710,412" backgroundColor="background" title="Main menu">
     <ePixmap position="388,50" size="300,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
     <widget source="title" render="Label" position="20,30" size="350,30" font="Regular;28" halign="center" transparent="1" foregroundColor="grey" shadowColor="#1A58A6" shadowOffset="-2,-1" />
-    <widget source="menu" render="Listbox" position="20,80" size="350,216" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showNever" transparent="1">
+    <widget source="menu" render="Listbox" position="20,80" size="350,280" selectionPixmap="skin_default/buttons/selected-1.png" scrollbarMode="showOnDemand" transparent="1">
       <convert type="TemplatedMultiContent">
 				{"template": [ MultiContentEntryText(pos = (10, 5), size = (340, 25), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Regular", 22)],
@@ -2189,6 +2189,13 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
     <widget source="key_yellow" render="Label" position="560,531" zPosition="2" size="250,38" font="Regular;24" halign="center" valign="center" foregroundColor="yellow" backgroundColor="darkgrey" transparent="1" />
     <widget source="key_blue" render="Label" position="830,531" zPosition="2" size="250,38" font="Regular;24" halign="center" valign="center" foregroundColor="blue" backgroundColor="darkgrey" transparent="1" />
   </screen>
+	<screen name="RecordPathsSettings" position="160,150" size="600,200" title="Recording paths">
+		<ePixmap pixmap="skin_default/buttons/red.png" position="10,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/green.png" position="300,0" size="140,40" alphatest="on" />
+		<widget source="key_red" render="Label" position="10,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+		<widget source="key_green" render="Label" position="300,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget name="config" position="10,44" size="580,146" />
+	</screen>
   <!-- NetworkWizard -->
   <screen name="NetworkWizard" position="0,0" size="720,576" title="Welcome..." flags="wfNoBorder">
     <widget name="text" position="153,40" size="340,330" font="Regular;22" />

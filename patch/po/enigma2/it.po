@@ -2758,7 +2758,7 @@ msgstr ""
 
 #
 msgid "Factory reset"
-msgstr "Reset configurazioni di fabbrica"
+msgstr "Reset conf. di fabbrica"
 
 #
 msgid "Failed"
@@ -6966,7 +6966,7 @@ msgstr "Taiwan"
 
 #
 msgid "Temperature and Fan control"
-msgstr "Controllo temperatura e ventola"
+msgstr "Controllo temp. e ventola"
 
 #
 msgid "Terrestrial"

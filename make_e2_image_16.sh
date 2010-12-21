@@ -11,7 +11,7 @@ patchdir=$envpath/nemesis
 ver='1.0'
 enigmaver='2'
 oever='1.6'
-subver='-Experimental'
+subver='-Final'
 data=`date +'%d-%m-%Y-%H-%M'`
 imagename="NewDE-${ver}${subver}-${dmver}-e${enigmaver}-OE(${oever})_${data}"
 

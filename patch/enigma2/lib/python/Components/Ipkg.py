@@ -1,5 +1,6 @@
 from enigma import eConsoleAppContainer
 from Tools.Directories import fileExists
+from Components.config import config
 
 class IpkgComponent:
 	EVENT_INSTALL = 0
@@ -45,7 +46,7 @@ class IpkgComponent:
 			fow = ""
 			if args["test_only"]:
 				append = " -test"
-			if args["Force_Overwrite"]:
+			if config.plugins.SoftwareManager.overwriteUpgrade.value:
 				fow = "--force-overwrite --force-defaults "
 			self.runCmd(fow + "upgrade" + append)
 		elif cmd == self.CMD_LIST:
@@ -56,8 +57,10 @@ class IpkgComponent:
 				self.runCmd("list")
 		elif cmd == self.CMD_INSTALL:
 			fowi = ""
-			if args["Force_Overwrite"]:
+			if config.plugins.SoftwareManager.overwriteUpgrade.value:
 				fowi = "--force-overwrite --force-defaults "
+			if config.plugins.SoftwareManager.forceReInstall.value:
+				fowi = "--force-reinstall --force-defaults "
 			self.runCmd(fowi + "install " + args['package'])
 		elif cmd == self.CMD_REMOVE:
 			self.runCmd("remove " + args['package'])

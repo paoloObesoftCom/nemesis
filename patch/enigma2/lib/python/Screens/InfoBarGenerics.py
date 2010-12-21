@@ -126,17 +126,20 @@ class InfoBarShowHide:
 		self.__state = self.STATE_SHOWN
 		self.startHideTimer()
 
+		if config.nemesis.einfo.value:
+			self.instance.hide()
+			if config.nemesis.einfotimeout.value > 0:
+				self.activityTimer.start(config.nemesis.einfotimeout.value, True)
+			else:
+				self.showEInfo()
+
 		if HardwareInfo().get_device_name() != 'dm500hd':
 			idx = config.lcd.bright.value
 			if idx < 1:
 				idx = 10
 			idx = (idx * 255) /10
 			eDBoxLCD.getInstance().setLCDBrightness(idx)
-		
-		if config.nemesis.einfo.value:
-			self.instance.hide()
-			self.activityTimer.start(config.nemesis.einfotimeout.value, True)
-	
+			
 	def showEInfo(self):
 		if self.TunerTest():
 			self.instance.hide()
@@ -186,9 +189,7 @@ class InfoBarShowHide:
 	def transScrtimerEvent(self):
 		self.transScrtimer.stop()
 		if self.transStep != 0:
-			f=open("/proc/stb/video/alpha","w")
-			f.write("%i" % (config.av.osd_alpha.value*self.transStep/20))
-			f.close()
+			self.alphaChange(config.av.osd_alpha.value*self.transStep/20)
 			self.transStep -= 1
 			self.transScrtimer.start((config.plugins.FadeSet.par2.value * 6), True)
 		else:
@@ -198,16 +199,12 @@ class InfoBarShowHide:
 			self.transScrtimer.start(300, True)
 
 	def transRestore(self):
-			f=open("/proc/stb/video/alpha","w")
-			f.write("%i" % (config.av.osd_alpha.value))
-			f.close()
+		self.alphaChange(config.av.osd_alpha.value)
 
 	def transScrtimerEvent2(self):
 		self.transScrtimer2.stop()
 		if self.transStep2 != 21:
-			f=open("/proc/stb/video/alpha","w")
-			f.write("%i" % (config.av.osd_alpha.value*self.transStep2/20))
-			f.close()
+			self.alphaChange(config.av.osd_alpha.value*self.transStep2/20)
 			self.transStep2 += 1
 			self.transScrtimer2.start((config.plugins.FadeSet.par2.value * 6), True)
 
@@ -221,9 +218,7 @@ class InfoBarShowHide:
 			self.showEInfo()
 		elif self.__state == self.STATE_HIDDEN:
 			if config.plugins.FadeSet.par1.value:
-				f=open("/proc/stb/video/alpha","w")
-				f.write("%i" % (config.av.osd_alpha.value-config.av.osd_alpha.value))
-				f.close()
+				self.alphaChange(config.av.osd_alpha.value-config.av.osd_alpha.value)
 				self.show()
 				self.transStep2 = 0
 				self.transScrtimer2 = eTimer()
@@ -242,6 +237,11 @@ class InfoBarShowHide:
 		self.__locked = self.__locked - 1
 		if self.execing:
 			self.startHideTimer()
+
+	def alphaChange(self, alphastate):
+		f=open("/proc/stb/video/alpha","w")
+		f.write("%i" % (alphastate))
+		f.close()
 
 	def TunerTest(self):
 		service = self.session.nav.getCurrentService()

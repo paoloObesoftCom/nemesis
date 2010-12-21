@@ -54,8 +54,13 @@ config.plugins.SoftwareManager.overwriteConfigFiles = ConfigSelection(
 				], "Y")
 config.plugins.SoftwareManager.overwriteUpgrade = ConfigSelection(
 				[
-				 ("Y", _("Yes, always")),
-				 ("N", _("No, never"))
+				 ("Y", _("Yes")),
+				 ("N", _("No"))
+				], "N")
+config.plugins.SoftwareManager.forceReInstall = ConfigSelection(
+				[
+				 ("Y", _("Yes")),
+				 ("N", _("No"))
 				], "N")
 
 def write_cache(cache_file, cache_data):
@@ -347,6 +352,7 @@ class SoftwareManagerSetup(Screen, ConfigListScreen):
 		self.setup_title = _("Software manager setup")
 		self.overwriteConfigfilesEntry = None
 		self.overwriteUpgradeEntry = None
+		self.forceReInstallEntry = None
 
 		self.list = [ ]
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
@@ -375,6 +381,8 @@ class SoftwareManagerSetup(Screen, ConfigListScreen):
 		self.list.append(self.overwriteConfigfilesEntry)	
 		self.overwriteUpgradeEntry = getConfigListEntry(_("Force overwrite on upgrade ?"), config.plugins.SoftwareManager.overwriteUpgrade)
 		self.list.append(self.overwriteUpgradeEntry)	
+		self.forceReInstallEntry = getConfigListEntry(_("Force reinstall on install ?"), config.plugins.SoftwareManager.forceReInstall)
+		self.list.append(self.forceReInstallEntry)	
 		self["config"].list = self.list
 		self["config"].l.setSeperation(400)
 		self["config"].l.setList(self.list)
@@ -387,6 +395,8 @@ class SoftwareManagerSetup(Screen, ConfigListScreen):
 			self["introduction"].setText(_("Overwrite configuration files during software upgrade?"))
 		elif self["config"].getCurrent() == self.overwriteUpgradeEntry:
 			self["introduction"].setText(_("Overwrite all package during upgrade operation?"))
+		elif self["config"].getCurrent() == self.forceReInstallEntry:
+			self["introduction"].setText(_("Force reinstall package during install operation?"))
 		else:
 			self["introduction"].setText("")
 
@@ -891,7 +901,7 @@ class PluginManager(Screen, DreamInfoHandler):
 	def prepareInstall(self):
 		self.cmdList = []
 		if iSoftwareTools.available_updates > 0:
-			self.cmdList.append((IpkgComponent.CMD_UPGRADE, { "test_only": False, "Force_Overwrite": {'Y': True,'N': False}[config.plugins.SoftwareManager.overwriteUpgrade.value] }))
+			self.cmdList.append((IpkgComponent.CMD_UPGRADE, { "test_only": False }))
 		if self.selectedFiles and len(self.selectedFiles):
 			for plugin in self.selectedFiles:
 				detailsfile = iSoftwareTools.directory[0] + "/" + plugin[0]
@@ -911,14 +921,14 @@ class PluginManager(Screen, DreamInfoHandler):
 					else:
 						if self.packagefiles:
 							for package in self.packagefiles[:]:
-								self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": package["name"], "Force_Overwrite": {'Y': True,'N': False}[config.plugins.SoftwareManager.overwriteUpgrade.value] }))
+								self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": package["name"] }))
 						else:
-							self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": plugin[2], "Force_Overwrite": {'Y': True,'N': False}[config.plugins.SoftwareManager.overwriteUpgrade.value] }))
+							self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": plugin[2] }))
 				else:
 					if plugin[1] == 'installed':
 						self.cmdList.append((IpkgComponent.CMD_REMOVE, { "package": plugin[2] }))
 					else:
-						self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": plugin[2], "Force_Overwrite": {'Y': True,'N': False}[config.plugins.SoftwareManager.overwriteUpgrade.value] }))
+						self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": plugin[2] }))
 
 	def runExecute(self, result = None):
 		if result is not None:
@@ -1438,7 +1448,7 @@ class UpdatePlugin(Screen):
 		elif event == IpkgComponent.EVENT_DONE:
 			if self.updating:
 				self.updating = False
-				self.ipkg.startCmd(IpkgComponent.CMD_UPGRADE, args = { "test_only": False, "Force_Overwrite": {'Y': True,'N': False}[config.plugins.SoftwareManager.overwriteUpgrade.value]})
+				self.ipkg.startCmd(IpkgComponent.CMD_UPGRADE, args = {'test_only': False})
 			elif self.error == 0:
 				self.slider.setValue(4)
 				

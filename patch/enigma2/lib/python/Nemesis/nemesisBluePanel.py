@@ -85,7 +85,7 @@ class nemesisBluePanel(Screen):
 		self.onShown.append(self.setWindowTitle)
 	
 	def setWindowTitle(self):
-		self.setTitle(_("NewDE\nBlue Panel"))
+		self.setTitle(_("NewDE Blue Panel"))
 	
 	def loadEmuList(self):
 		emu = []
@@ -142,6 +142,7 @@ class nemesisBluePanel(Screen):
 		elif number == 3:
 			self.message = "\nNew Dream Elite Version: " +  self.NEWDEVER
 			self.message += "\n\nImage version: " + self.IMAGEVER
+			self.message += "\nBuild by Gianathem using Nemesis source"
 			self.message += "\nBased on Enigma Version: " +  self.ENIGMAVER
 			self.message += "\nKernel version: " + self.KERNELVER
 			self.message += "\n\nFor support visit: http://www.dream-elite.net/"

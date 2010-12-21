@@ -9,8 +9,8 @@ SRCDATE="20101217"
 BRANCH="master"
 PV = "experimental-git${SRCDATE}"
 
-PR = "r1"
-SRC_URI = "file://../../../../sources/enigma2-plugins_cvs.schwerkraft.elitedvb.net__NDE.tar.gz"
+PR = "r2"
+SRC_URI = "file://../../../../sources/enigma2-plugins_NDE.tar.gz"
 
 EXTRA_OECONF = " \
         BUILD_SYS=${BUILD_SYS} \

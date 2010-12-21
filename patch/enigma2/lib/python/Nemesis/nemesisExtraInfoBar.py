@@ -392,12 +392,13 @@ class nemesisEI(Screen):
 					tmpline = "Cam: " + typecam[:-1]
 				if caid != "..............\n":
 					tmpline = tmpline + ", Caid: " + caid[:-1]
-				if adress != "..............\n":
-					tmpline = tmpline + ", Source: " + adress[:-1]
-				if using != "..............\n" and adress == "..............\n":
-					tmpline = tmpline + ", Source: " + using[:-1]
-				if using != "..............\n" and typecam == "OScam\n":
-					tmpline = tmpline + ", Using: " + using[:-1]
+				if config.nemesis.shownetdet.value:
+					if adress != "..............\n":
+						tmpline = tmpline + ", Source: " + adress[:-1]
+					if using != "..............\n" and adress == "..............\n":
+						tmpline = tmpline + ", Source: " + using[:-1]
+					if using != "..............\n" and typecam == "OScam\n":
+						tmpline = tmpline + ", Using: " + using[:-1]
 				if provid != "..............\n" and typecam == "Gbox\n":
 					tmpline = tmpline + ", ProvId: " + provid[:-1]
 				if provider != "..............\n" and typecam == "Gbox\n":

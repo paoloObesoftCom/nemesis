@@ -29,8 +29,8 @@ oe_e2_15_path=$oepath15/openembedded/packages/enigma2
 oe_e2_16_path=$oepath16/openembedded/recipes/enigma2
 e2_cvssrc=$srcpath/enigma2
 
-e2_arc_16=git_git.opendreambox.org.git.enigma2.git_NDE_16.tar.gz
-e2_plugins=enigma2-plugins_cvs.schwerkraft.elitedvb.net__NDE.tar.gz
+e2_arc_16=enigma2_NDE_16.tar.gz
+e2_plugins=enigma2-plugins_NDE.tar.gz
 
 oe_package_15()
 {

@@ -6,7 +6,7 @@ def InitNemesisConfig():
 #system
 	config.nemesis = ConfigSubsection();
 	config.nemesis.einfo = ConfigYesNo(default = True)
-	config.nemesis.einfotimeout = ConfigNumber(default = 500)
+	config.nemesis.einfotimeout = ConfigNumber(default = 0)
 	config.nemesis.shownetdet = ConfigYesNo(default = True)
 	config.nemesis.emminfodelay = ConfigNumber(default = 400)
 	config.nemesis.ecminfodelay = ConfigNumber(default = 1000)
