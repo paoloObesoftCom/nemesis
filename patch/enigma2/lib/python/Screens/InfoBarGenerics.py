@@ -35,6 +35,7 @@ from Tools.Directories import fileExists
 
 from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, \
 	iPlayableService, eServiceReference, eEPGCache, eActionMap, eDBoxLCD
+from Nemesis.nemesisExtraInfoBar import nemesisEI
 
 from time import time, localtime, strftime
 from os import stat as os_stat
@@ -44,6 +45,17 @@ from RecordTimer import RecordTimerEntry, RecordTimer
 
 # hack alert!
 from Menu import MainMenu, mdom
+
+def displayBriChange(idx):
+	if idx < 1:
+		idx = 3
+	idx = ((idx * 255) /10)
+	eDBoxLCD.getInstance().setLCDBrightness(idx)
+
+def alphaChange(alphastate):
+	f=open("/proc/stb/video/alpha","w")
+	f.write("%i" % (alphastate))
+	f.close()
 
 class InfoBarDish:
 	def __init__(self):
@@ -91,10 +103,7 @@ class InfoBarShowHide:
 	STATE_SHOWN = 3
 
 	def __init__(self):
-		from Nemesis.nemesisExtraInfoBar import nemesisEI
 		self.InfoBarExtraDialog = self.session.instantiateDialog(nemesisEI)
-		self.activityTimer = eTimer()
-		self.activityTimer.timeout.get().append(self.showEInfo)
 		self["ShowHideActions"] = ActionMap( ["InfobarShowHideActions"] ,
 			{
 				"toggleShow": self.toggleShow,
@@ -110,6 +119,16 @@ class InfoBarShowHide:
 		self.__locked = 0
 		self.__stateExtra = self.STATE_HIDDEN		
 
+		self.activityTimer = eTimer()
+		self.activityTimer.timeout.get().append(self.showEInfo)
+		self.showTimer = eTimer()
+		self.showTimer.timeout.get().append(self.doShow)
+
+		self.fadeTimerOff = eTimer()
+		self.fadeTimerOff.timeout.get().append(self.fadeTimerOffEvent)
+		self.fadeTimerOn = eTimer()
+		self.fadeTimerOn.timeout.get().append(self.fadeTimerOnEvent)
+
 		self.hideTimer = eTimer()
 		self.hideTimer.callback.append(self.doTimerHide)
 		self.hideTimer.start(5000, True)
@@ -117,36 +136,33 @@ class InfoBarShowHide:
 		self.onShow.append(self.__onShow)
 		self.onHide.append(self.__onHide)
 
+		alphaChange(config.av.osd_alpha.value)
+
 	def serviceStarted(self):
 		if self.execing:
-			if config.usage.show_infobar_on_zap.value:
-				self.doShow()
+			if config.usage.show_infobar_on_zap.value and (not self.showTimer.isActive()):
+				self.showTimer.start(config.nemesis.eiinfobardelayonzap.value,True)
 
 	def __onShow(self):
 		self.__state = self.STATE_SHOWN
 		self.startHideTimer()
-
+		if config.plugins.FadeSet.fadeIn.value:
+			alphaChange(0)
+			self.fadeStepOn = 0
+			self.fadeTimerOn.start(50, True)
+		if HardwareInfo().get_device_name() != 'dm500hd':
+			displayBriChange(config.lcd.bright.value)
 		if config.nemesis.einfo.value:
-			self.instance.hide()
 			if config.nemesis.einfotimeout.value > 0:
 				self.activityTimer.start(config.nemesis.einfotimeout.value, True)
 			else:
 				self.showEInfo()
-
-		if HardwareInfo().get_device_name() != 'dm500hd':
-			idx = config.lcd.bright.value
-			if idx < 1:
-				idx = 10
-			idx = (idx * 255) /10
-			eDBoxLCD.getInstance().setLCDBrightness(idx)
 			
 	def showEInfo(self):
 		if self.TunerTest():
+			self.__stateExtra = self.STATE_SHOWN
 			self.instance.hide()
 			self.InfoBarExtraDialog.show()
-			self.__stateExtra = self.STATE_SHOWN
-		else:
-			self.instance.show()
 	
 	def hideEInfo(self):
 		self.__stateExtra = self.STATE_HIDDEN
@@ -165,48 +181,25 @@ class InfoBarShowHide:
 		if self.__stateExtra == self.STATE_SHOWN:
 			self.hideEInfo()
 		if HardwareInfo().get_device_name() != 'dm500hd':
-			idx = config.lcd.lcdbri.value
-			if idx < 1:
-				idx = 3
-			idx = ((idx * 255) /10)
-			eDBoxLCD.getInstance().setLCDBrightness(idx)
+			displayBriChange(config.lcd.lcdbri.value)
+		if self.fadeTimerOff.isActive():
+			self.fadeTimerOff.stop()
+		alphaChange(config.av.osd_alpha.value)
 
 	def doShow(self):
+		if self.showTimer.isActive():
+			self.showTimer.stop()
 		self.show()
 		self.startHideTimer()
 
 	def doTimerHide(self):
 		self.hideTimer.stop()
 		if self.__state == self.STATE_SHOWN:
-			if config.plugins.FadeSet.par1.value:
-				self.transStep = 20
-				self.transScrtimer = eTimer()
-				self.transScrtimer.callback.append(self.transScrtimerEvent)
-				self.transScrtimer.start(5, True)
+			if config.plugins.FadeSet.fadeOut.value:
+				self.fadeStepOff = 20
+				self.fadeTimerOff.start(50, True)
 			else:
 				self.hide()
-
-	def transScrtimerEvent(self):
-		self.transScrtimer.stop()
-		if self.transStep != 0:
-			self.alphaChange(config.av.osd_alpha.value*self.transStep/20)
-			self.transStep -= 1
-			self.transScrtimer.start((config.plugins.FadeSet.par2.value * 6), True)
-		else:
-			self.hide()
-			self.transScrtimer = eTimer()
-			self.transScrtimer.timeout.get().append(self.transRestore)
-			self.transScrtimer.start(300, True)
-
-	def transRestore(self):
-		self.alphaChange(config.av.osd_alpha.value)
-
-	def transScrtimerEvent2(self):
-		self.transScrtimer2.stop()
-		if self.transStep2 != 21:
-			self.alphaChange(config.av.osd_alpha.value*self.transStep2/20)
-			self.transStep2 += 1
-			self.transScrtimer2.start((config.plugins.FadeSet.par2.value * 6), True)
 
 	def toggleShow(self):
 		if self.__state == self.STATE_SHOWN and not self.TunerTest():
@@ -217,15 +210,7 @@ class InfoBarShowHide:
 		elif self.__state == self.STATE_SHOWN and self.__stateExtra == self.STATE_HIDDEN:
 			self.showEInfo()
 		elif self.__state == self.STATE_HIDDEN:
-			if config.plugins.FadeSet.par1.value:
-				self.alphaChange(config.av.osd_alpha.value-config.av.osd_alpha.value)
-				self.show()
-				self.transStep2 = 0
-				self.transScrtimer2 = eTimer()
-				self.transScrtimer2.timeout.get().append(self.transScrtimerEvent2)
-				self.transScrtimer2.start(250, True)
-			else:
-				self.show()
+			self.show()
 
 	def lockShow(self):
 		self.__locked = self.__locked + 1
@@ -238,10 +223,21 @@ class InfoBarShowHide:
 		if self.execing:
 			self.startHideTimer()
 
-	def alphaChange(self, alphastate):
-		f=open("/proc/stb/video/alpha","w")
-		f.write("%i" % (alphastate))
-		f.close()
+	def fadeTimerOffEvent(self):
+		self.fadeTimerOff.stop()
+		if self.fadeStepOff != 0:
+			alphaChange(config.av.osd_alpha.value*self.fadeStepOff/20)
+			self.fadeStepOff -= 1
+			self.fadeTimerOff.start((config.plugins.FadeSet.timeout.value * 6), True)
+		else:
+			self.hide()
+
+	def fadeTimerOnEvent(self):
+		self.fadeTimerOn.stop()
+		if self.fadeStepOn != 21:
+			alphaChange(config.av.osd_alpha.value*self.fadeStepOn/20)
+			self.fadeStepOn += 1
+			self.fadeTimerOn.start((config.plugins.FadeSet.timeout.value * 6), True)
 
 	def TunerTest(self):
 		service = self.session.nav.getCurrentService()
@@ -481,11 +477,7 @@ class InfoBarMenu:
 
 	def mainMenu(self):
 		if HardwareInfo().get_device_name() != 'dm500hd':
-			idx = config.lcd.bright.value
-			if idx < 1:
-				idx = 10
-			idx = (idx * 255) /10
-			eDBoxLCD.getInstance().setLCDBrightness(idx)
+			displayBriChange(config.lcd.bright.value)
 		print "loading mainmenu XML..."
 		menu = mdom.getroot()
 		assert menu.tag == "menu", "root element in menu must be 'menu'!"
@@ -498,11 +490,7 @@ class InfoBarMenu:
 
 	def mainMenuClosed(self, *val):
 		if HardwareInfo().get_device_name() != 'dm500hd':
-			idx = config.lcd.lcdbri.value
-			if idx < 1:
-				idx = 3
-			idx = ((idx * 255) /10)
-			eDBoxLCD.getInstance().setLCDBrightness(idx)
+			displayBriChange(config.lcd.lcdbri.value)
 		self.session.infobar = None
 
 class InfoBarSimpleEventView:

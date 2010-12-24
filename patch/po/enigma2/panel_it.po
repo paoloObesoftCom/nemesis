@@ -713,6 +713,9 @@ msgstr "Mostra Extended Info in modo permanente"
 msgid "Extended Infobar delay (msec)"
 msgstr "Ritardo Extended Infobar (msec)"
 
+msgid "Extended Infobar delay on zap (msec)"
+msgstr "Ritardo Extended Infobar su zap (msec)"
+
 msgid "Use Picture in Extended Infobar? (Need GUI Restart)"
 msgstr "Usa Immagini in Extended Infobar? (Necessario riavvio GUI)"
 
@@ -857,14 +860,20 @@ msgstr "Forza re-installazione dei pacchetti"
 msgid "Setup Fading"
 msgstr "Configura Fading"
 
-msgid " Enable fade in/out of infobar:"
-msgstr " Abilita dissolvenza infobar:"
+msgid " Enable fade in of infobar:"
+msgstr " Abilita dissolvenza apertura infobar:"
+
+msgid " Enable fade out of infobar:"
+msgstr " Abilita dissolvenza chiusura infobar:"
 
 msgid " Speed for fade in/out of infobar (1-10):"
 msgstr " Velocità dissolvenza infobar (1-10):"
 
-msgid "Enable fade in/out of infobar"
-msgstr "Abilita dissolvenza infobar"
+msgid "Enable fade in of infobar"
+msgstr "Abilita dissolvenza apertura infobar"
+
+msgid "Enable fade out of infobar"
+msgstr "Abilita dissolvenza chiusura infobar"
 
 msgid "Speed for fade in/out of infobar (1-10)"
 msgstr "Velocità dissolvenza infobar (1-10)"

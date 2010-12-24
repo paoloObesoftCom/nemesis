@@ -8,6 +8,7 @@ def InitNemesisConfig():
 	config.nemesis.einfo = ConfigYesNo(default = True)
 	config.nemesis.einfotimeout = ConfigNumber(default = 0)
 	config.nemesis.shownetdet = ConfigYesNo(default = True)
+	config.nemesis.eiinfobardelayonzap = ConfigNumber(default = 400)
 	config.nemesis.emminfodelay = ConfigNumber(default = 400)
 	config.nemesis.ecminfodelay = ConfigNumber(default = 1000)
 	config.nemesis.picontype = ConfigSelection(default = "Reference", choices = [ ("Name","Name"), ("Reference","Reference") ])

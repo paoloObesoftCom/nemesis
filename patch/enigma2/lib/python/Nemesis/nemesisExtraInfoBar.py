@@ -129,8 +129,8 @@ class nemesisEI(Screen):
 		info = (service and service.info())
 		if info:
 			self.setTunerInfo(service)
-			self.runChkTimer.start(750)
-			self.emm_timer.start(700)
+			self.runChkTimer.start(config.nemesis.ecminfodelay.value)
+			self.emm_timer.start(config.nemesis.emminfodelay.value)
 
 	def __updateEMM(self):
 		self.emm_timer.stop()

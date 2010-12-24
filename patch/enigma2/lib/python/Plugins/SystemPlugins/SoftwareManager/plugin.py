@@ -56,12 +56,12 @@ config.plugins.SoftwareManager.overwriteUpgrade = ConfigSelection(
 				[
 				 ("Y", _("Yes")),
 				 ("N", _("No"))
-				], "N")
+				], "Y")
 config.plugins.SoftwareManager.forceReInstall = ConfigSelection(
 				[
 				 ("Y", _("Yes")),
 				 ("N", _("No"))
-				], "N")
+				], "Y")
 
 def write_cache(cache_file, cache_data):
 	#Does a cPickle dump

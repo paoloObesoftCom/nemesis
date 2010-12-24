@@ -350,8 +350,8 @@ class manageDttDevice(Screen):
 		if self.devList:
 			for dev in self.devList:
 				res = [dev[1]]
-				res.append(MultiContentEntryText(pos=(5, 5), size=(300, 32), font=0, text=dev[2]))
+				res.append(MultiContentEntryText(pos=(0, 5), size=(400, 32), font=0, text=dev[2]))
 				png = LoadPixmap({ True:skin_path + 'menu/menu_on.png',False:skin_path + 'menu/menu_off.png' }[self.devstatus.get(dev[1])])
-				res.append(MultiContentEntryPixmapAlphaTest(pos=(260, 6), size=(80, 23), png=png))
+				res.append(MultiContentEntryPixmapAlphaTest(pos=(420, 6), size=(80, 23), png=png))
 				self.list.append(res)
 			self['list'].l.setList(self.list)

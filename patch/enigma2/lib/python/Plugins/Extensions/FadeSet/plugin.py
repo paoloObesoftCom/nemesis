@@ -6,8 +6,9 @@ from Components.ConfigList import ConfigListScreen, ConfigList
 from Plugins.Plugin import PluginDescriptor
 
 config.plugins.FadeSet = ConfigSubsection()
-config.plugins.FadeSet.par1 = ConfigYesNo(default = True) # fade in/out enable
-config.plugins.FadeSet.par2 = ConfigInteger(5, (1,10)) # fade in/out value
+config.plugins.FadeSet.fadeIn = ConfigYesNo(default = True) # fade in enable
+config.plugins.FadeSet.fadeOut = ConfigYesNo(default = True) # fade out enable
+config.plugins.FadeSet.timeout = ConfigInteger(5, (1,10)) # fade in/out value
 
 def startSetup(menuid, **kwargs):
 	if menuid != "system":
@@ -45,8 +46,9 @@ class FadeSetScreenSetup(Screen, ConfigListScreen):
 		}, -2)
 
 		FadeSetConfigList = []
-		FadeSetConfigList.append(getConfigListEntry(_(" Enable fade in/out of infobar:"), config.plugins.FadeSet.par1))
-		FadeSetConfigList.append(getConfigListEntry(_(" Speed for fade in/out of infobar (1-10):"), config.plugins.FadeSet.par2))
+		FadeSetConfigList.append(getConfigListEntry(_(" Enable fade in of infobar:"), config.plugins.FadeSet.fadeIn))
+		FadeSetConfigList.append(getConfigListEntry(_(" Enable fade out of infobar:"), config.plugins.FadeSet.fadeOut))
+		FadeSetConfigList.append(getConfigListEntry(_(" Speed for fade in/out of infobar (1-10):"), config.plugins.FadeSet.timeout))
 		ConfigListScreen.__init__(self, FadeSetConfigList, session)
         
 	def save(self):

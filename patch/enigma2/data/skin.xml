@@ -378,7 +378,7 @@
     
   </screen>
   <!-- Blue panels	 -->
-  <screen name="nemesisBluePanel" position="center,145" size="800,470">
+  <screen name="nemesisBluePanel" position="center,center" size="800,470">
     <widget name="info_use" position="33,10" zPosition="2" size="359,30" valign="center" halign="center" font="Regular;22" transparent="1" backgroundColor="un353e575e" shadowColor="#1A58A6" shadowOffset="-2,-1" />
     <widget name="config" position="53,50" size="319,50" zPosition="2" transparent="1" />
     <ePixmap name="1" position="53,120" zPosition="1" size="30,30" pixmap="skin_default/buttons/key_1.png" transparent="1" alphatest="on" />
@@ -406,7 +406,7 @@
     <eLabel text="Emu decode info:" position="428,10" size="319,30" valign="center" halign="center" font="Regular;22" transparent="1" backgroundColor="un353e575e" shadowColor="#1A58A6" shadowOffset="-2,-1" />
   </screen>
   <!-- Show panel	 -->
-  <screen name="nemesisShowPanel" position="200,85" size="900,600">
+  <screen name="nemesisShowPanel" position="center,center" size="900,600">
     <widget source="list" render="Listbox" position="10,30" size="880,510" scrollbarMode="showOnDemand" transparent="1">
       <convert type="StringList" />
     </widget>
@@ -424,125 +424,125 @@
     <widget name="oktext" position="0,600" zPosition="1" size="900,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
   </screen>
   <!-- Setup panel	 -->
-  <screen name="NSetupSum" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-    <widget name="conn" position="20,400" size="470,50" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="un10172e" />
+  <screen name="NSetupSum" position="center,center" size="510,550">
+    <widget name="list" position="50,30" size="410,400" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="195,460" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+    <widget name="conn" position="20,490" size="470,50" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="un10172e" />
   </screen>
-  <screen name="NSetup" position="330,120" size="620,320">
-    <widget name="config" position="10,20" size="590,260" scrollbarMode="showOnDemand" />
-    <widget name="canceltext" position="10,280" zPosition="1" size="300,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-    <widget name="oktext" position="310,280" zPosition="1" size="300,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
+  <screen name="NSetup" position="center,center" size="620,380">
+    <widget name="config" position="10,10" size="600,300" scrollbarMode="showOnDemand" />
+    <widget name="canceltext" position="10,320" zPosition="1" size="300,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+    <widget name="oktext" position="310,320" zPosition="1" size="300,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
   </screen>
   <!-- 	EPG Control Center-->
-  <screen name="nemesisEpgPanel" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+  <screen name="nemesisEpgPanel" position="center,center" size="510,500">
+    <widget name="list" position="50,30" size="410,400" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="195,460" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
   </screen>
   <!-- 	Addons panels-->
-  <screen name="NAddons" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-    <widget name="conn" position="20,400" size="470,50" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="un10172e" />
+  <screen name="NAddons" position="center,center" size="510,550">
+    <widget name="list" position="50,30" size="410,400" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="195,460" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+    <widget name="conn" position="20,490" size="470,50" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="un10172e" />
   </screen>
-  <screen name="RAddons" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+  <screen name="RAddons" position="center,center" size="510,550">
+    <widget name="list" position="50,30" size="410,450" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="195,510" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
   </screen>
-  <screen name="RAddonsDown" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-    <widget source="conn" render="Label" position="20,400" size="470,50" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="un10172e" />
+  <screen name="RAddonsDown" position="center,center" size="510,550">
+    <widget name="list" position="50,30" size="410,400" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="195,460" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+    <widget name="conn" position="20,490" size="470,50" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="un10172e" />
   </screen>
-  <screen name="RManual" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="0,378" size="255,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-    <widget name="key_yellow" position="255,378" size="255,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="yellow" transparent="1" />
-    <widget name="conn" position="20,400" size="470,50" font="Regular;16" halign="center" valign="center" foregroundColor="white" backgroundColor="un10172e" />
+  <screen name="RManual" position="center,center" size="510,550">
+    <widget name="list" position="50,30" size="410,400" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="0,460" size="255,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+    <widget name="key_yellow" position="255,460" size="255,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="yellow" transparent="1" />
+    <widget name="conn" position="20,490" size="470,50" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="un10172e" />
   </screen>
-  <screen name="RRemove" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-    <widget name="conn" position="20,400" size="470,50" font="Regular;16" halign="center" valign="center" foregroundColor="white" backgroundColor="un10172e" />
+  <screen name="RRemove" position="center,center" size="510,550">
+    <widget name="list" position="50,30" size="410,400" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="195,460" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+    <widget name="conn" position="20,490" size="470,50" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="un10172e" />
   </screen>
   <!-- manage device panels -->
-  <screen name="manageDevice" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="red" transparent="1" />
+  <screen name="manageDevice" position="center,center" size="510,500">
+    <widget name="list" position="50,30" size="410,400" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="195,460" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
   </screen>
-  <screen name="HDDInfo" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="red" transparent="1" />
+  <screen name="HDDInfo" position="center,center" size="510,500">
+    <widget name="list" position="50,30" size="410,400" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="195,460" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
   </screen>
   <screen name="USBSetup" position="center,center" size="510,590">
     <widget name="model" position="50,35" size="320,200" font="Regular;20" foregroundColor="yellow" backgroundColor="transpBlack" transparent="1" />
     <widget name="list" position="85,245" size="340,300" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
     <widget name="key_red" position="197,559" size="120,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="red" transparent="1" />
   </screen>
-  <screen name="CFSetup" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="red" transparent="1" />
+  <screen name="CFSetup" position="center,center5" size="510,500">
+    <widget name="list" position="50,30" size="410,400" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="195,460" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
   </screen>
-  <screen name="HDDSetup" position="330,160" size="620,440">
+  <screen name="HDDSetup" position="center,center" size="620,440">
     <widget name="config" position="20,20" size="580,330" scrollbarMode="showOnDemand" />
     <widget name="conn" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="un6565ff" />
     <widget name="canceltext" position="20,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
     <widget name="oktext" position="310,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
   </screen>
   <!-- Utility panels -->
-  <screen name="NUtility" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+  <screen name="NUtility" position="center,center" size="510,500">
+    <widget name="list" position="50,30" size="410,400" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="195,460" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
   </screen>
-  <screen name="NServicesLog" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="0,378" size="255,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-    <widget name="key_yellow" position="255,378" size="255,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="yellow" transparent="1" />
-  </screen>
-  <screen name="NServices" position="385,145" size="510,470">
+  <screen name="NServicesLog" position="center,center" size="510,470">
     <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
     <widget name="key_red" position="0,378" size="255,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
     <widget name="key_yellow" position="255,378" size="255,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="yellow" transparent="1" />
   </screen>
-  <screen name="NModule" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-  </screen>
-  <screen name="manageDttDevice" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-  </screen>
-  <screen name="NCommand" position="385,145" size="510,470">
+  <screen name="NServices" position="center,center" size="510,470">
     <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
     <widget name="key_red" position="0,378" size="255,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
     <widget name="key_yellow" position="255,378" size="255,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="yellow" transparent="1" />
   </screen>
-  <screen name="NUserScript" position="385,145" size="510,470">
+  <screen name="NModule" position="center,center" size="510,470">
     <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
     <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
   </screen>
-  <screen name="NSwap" position="330,160" size="620,440">
+  <screen name="manageDttDevice" position="center,center" size="610,470">
+    <widget name="list" position="50,30" size="510,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="245,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+  </screen>
+  <screen name="NCommand" position="center,center" size="510,470">
+    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="0,378" size="255,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+    <widget name="key_yellow" position="255,378" size="255,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="yellow" transparent="1" />
+  </screen>
+  <screen name="NUserScript" position="center,center" size="510,470">
+    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+  </screen>
+  <screen name="NSwap" position="center,center" size="620,440">
     <widget name="config" position="20,20" size="580,330" scrollbarMode="showOnDemand" />
     <widget name="conn" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="un6565ff" />
     <widget name="canceltext" position="20,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
     <widget name="oktext" position="310,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
   </screen>
-  <screen name="deleteLog" position="330,160" size="620,440" title="Delete log files">
+  <screen name="deleteLog" position="center,center" size="620,440" title="Delete log files">
     <widget name="config" position="20,20" size="580,330" scrollbarMode="showOnDemand" />
     <widget name="conn" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="un6565ff" />
     <widget name="canceltext" position="20,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
     <widget name="oktext" position="310,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
   </screen>
-  <screen name="NServicesSetup" position="330,160" size="620,440" title="Manage Startup">
+  <screen name="NServicesSetup" position="center,center" size="620,440" title="Manage Startup">
     <widget name="config" position="20,20" size="580,330" scrollbarMode="showOnDemand" />
     <widget name="conn" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="un6565ff" />
     <widget name="canceltext" position="20,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
     <widget name="oktext" position="310,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
   </screen>
   <!-- System Info panels	 -->
-  <screen name="NInfo" position="385,145" size="510,470">
-    <widget name="list" position="50,30" size="410,325" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="key_red" position="195,378" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+  <screen name="NInfo" position="center,center" size="510,500">
+    <widget name="list" position="50,30" size="410,400" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="key_red" position="195,460" size="120,20" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
   </screen>
   <screen name="showDevSpaceInfo" position="center,120" size="700,510">
     <widget name="flsp" position="20,25" pixmap="skin_default/slider/slider_main.png" size="100,15" borderWidth="2" borderColor="un3366cc" transparent="1" />
@@ -1138,7 +1138,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/(count &gt; 7 and 2 or 3
 			</convert>
     </widget>
   </screen>
-  <screen name="MessageBox" position="350,center" size="600,10" title="Message">
+  <screen name="MessageBox" position="center,center" size="600,10" title="Message">
     <widget name="text" position="65,20" size="520,0" font="Regular;22" />
     <widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="5,20" size="53,53" alphatest="on" />
     <widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="5,20" size="53,53" alphatest="on" />
