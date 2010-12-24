@@ -128,6 +128,8 @@ class InfoBarShowHide:
 		self.fadeTimerOff.timeout.get().append(self.fadeTimerOffEvent)
 		self.fadeTimerOn = eTimer()
 		self.fadeTimerOn.timeout.get().append(self.fadeTimerOnEvent)
+		self.alphaTimerRestore = eTimer()
+		self.alphaTimerRestore.timeout.get().append(self.alphaRestore)
 
 		self.hideTimer = eTimer()
 		self.hideTimer.callback.append(self.doTimerHide)
@@ -141,8 +143,11 @@ class InfoBarShowHide:
 	def serviceStarted(self):
 		if self.execing:
 			if config.usage.show_infobar_on_zap.value and (not self.showTimer.isActive()):
-				self.showTimer.start(config.nemesis.eiinfobardelayonzap.value,True)
-
+				if config.nemesis.eiinfobardelayonzap.value > 0:
+					self.showTimer.start(config.nemesis.eiinfobardelayonzap.value,True)
+				else:
+					self.doShow()
+				
 	def __onShow(self):
 		self.__state = self.STATE_SHOWN
 		self.startHideTimer()
@@ -183,8 +188,7 @@ class InfoBarShowHide:
 		if HardwareInfo().get_device_name() != 'dm500hd':
 			displayBriChange(config.lcd.lcdbri.value)
 		if self.fadeTimerOff.isActive():
-			self.fadeTimerOff.stop()
-		alphaChange(config.av.osd_alpha.value)
+			self.fadeStepOff = 0
 
 	def doShow(self):
 		if self.showTimer.isActive():
@@ -231,7 +235,11 @@ class InfoBarShowHide:
 			self.fadeTimerOff.start((config.plugins.FadeSet.timeout.value * 6), True)
 		else:
 			self.hide()
+			self.alphaTimerRestore.start(100, True)
 
+	def alphaRestore(self): 
+		alphaChange(config.av.osd_alpha.value) 
+		
 	def fadeTimerOnEvent(self):
 		self.fadeTimerOn.stop()
 		if self.fadeStepOn != 21:

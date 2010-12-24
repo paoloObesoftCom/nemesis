@@ -413,12 +413,12 @@
     <widget name="close" position="0,560" zPosition="1" size="900,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
   </screen>
   <!-- nemesis Console -->
-  <screen name="nemesisConsole" position="340,200" size="600,350">
+  <screen name="nemesisConsole" position="center,center" size="600,350">
     <widget name="text" position="20,20" size="560,270" font="Regular;18" />
     <widget name="canceltext" position="0,310" zPosition="1" size="600,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
     <widget name="oktext" position="0,310" zPosition="1" size="600,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
   </screen>
-  <screen name="nemesisConsoleL" position="200,65" size="900,640">
+  <screen name="nemesisConsoleL" position="center,center" size="900,640">
     <widget name="text" position="10,10" size="880,580" font="Regular;18" />
     <widget name="canceltext" position="0,600" zPosition="1" size="900,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
     <widget name="oktext" position="0,600" zPosition="1" size="900,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />

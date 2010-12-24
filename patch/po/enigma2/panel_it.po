@@ -861,19 +861,19 @@ msgid "Setup Fading"
 msgstr "Configura Fading"
 
 msgid " Enable fade in of infobar:"
-msgstr " Abilita dissolvenza apertura infobar:"
+msgstr " Abilita dissolvenza su apertura infobar:"
 
 msgid " Enable fade out of infobar:"
-msgstr " Abilita dissolvenza chiusura infobar:"
+msgstr " Abilita dissolvenza su chiusura infobar:"
 
 msgid " Speed for fade in/out of infobar (1-10):"
 msgstr " Velocità dissolvenza infobar (1-10):"
 
 msgid "Enable fade in of infobar"
-msgstr "Abilita dissolvenza apertura infobar"
+msgstr "Abilita dissolvenza su apertura infobar"
 
 msgid "Enable fade out of infobar"
-msgstr "Abilita dissolvenza chiusura infobar"
+msgstr "Abilita dissolvenza su chiusura infobar"
 
 msgid "Speed for fade in/out of infobar (1-10)"
 msgstr "Velocità dissolvenza infobar (1-10)"
