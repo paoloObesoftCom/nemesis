@@ -34,10 +34,10 @@ af9015)
 	insmod $DRVDIR/mc44s803.ko
 	insmod $DRVDIR/mt2060.ko
 	insmod $DRVDIR/qt1010.ko
-	insmod $DRVDIR/tda18218.ko
 	insmod $DRVDIR/tda18271.ko
-	insmod $DRVDIR/af9013.ko
+	insmod $DRVDIR/tda18218.ko
 	insmod $DRVDIR/dvb-usb.ko
+	insmod $DRVDIR/af9013.ko
 	insmod $DRVDIR/dvb-pll.ko
 	sleep 1
 	insmod $DRVDIR/dvb-usb-af9015.ko

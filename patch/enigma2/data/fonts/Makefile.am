@@ -6,4 +6,5 @@ dist_install_DATA = \
 	md_khmurabi_10.ttf \
 	nmsbd.ttf \
 	nmsbd2.ttf \
-	tuxtxt.ttf
+	tuxtxt.ttf \
+	prive2.ttf

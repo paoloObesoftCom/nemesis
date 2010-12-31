@@ -61,7 +61,7 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r36"
+PR = "r39"
 
 SRCDATE = "20101204"
 #SRCDATE is NOT used by git to checkout a specific revision
@@ -95,9 +95,7 @@ EXTRA_OECONF = " \
 "
 
 do_install_append() {
-	mv ${D}/usr/lib/enigma2/python/mytest.py ${D}/usr/lib/enigma2/python/mytest.pykeep
-	find ${D}/usr/lib/enigma2/python/ -name "*.py" | xargs rm -rf
-	mv ${D}/usr/lib/enigma2/python/mytest.pykeep ${D}/usr/lib/enigma2/python/mytest.py
+	find ${D}/usr/lib/enigma2/python/Nemesis -name "*.py" | xargs rm -f
 }
 
 python populate_packages_prepend () {

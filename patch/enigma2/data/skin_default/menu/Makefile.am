@@ -57,4 +57,12 @@ dist_install_DATA = \
 	sat.png \
 	search.png \
 	standby.png \
+	cross.png \
+	db.png \
+	db2.png \
+	dvd.png \
+	glogo.png \
+	menuback.png \
+	none.png \
+	youtube.png \
 	system.png

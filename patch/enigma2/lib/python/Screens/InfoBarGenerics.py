@@ -101,7 +101,7 @@ class InfoBarShowHide:
 	STATE_HIDING = 1
 	STATE_SHOWING = 2
 	STATE_SHOWN = 3
-
+	
 	def __init__(self):
 		self.InfoBarExtraDialog = self.session.instantiateDialog(nemesisEI)
 		self["ShowHideActions"] = ActionMap( ["InfobarShowHideActions"] ,
@@ -117,8 +117,9 @@ class InfoBarShowHide:
 
 		self.__state = self.STATE_SHOWN
 		self.__locked = 0
-		self.__stateExtra = self.STATE_HIDDEN		
-
+		self.__stateExtra = self.STATE_HIDDEN
+		self.__isZappping = False
+		
 		self.activityTimer = eTimer()
 		self.activityTimer.timeout.get().append(self.showEInfo)
 		self.showTimer = eTimer()
@@ -143,6 +144,7 @@ class InfoBarShowHide:
 	def serviceStarted(self):
 		if self.execing:
 			if config.usage.show_infobar_on_zap.value and (not self.showTimer.isActive()):
+				self.__isZappping = True
 				if config.nemesis.eiinfobardelayonzap.value > 0:
 					self.showTimer.start(config.nemesis.eiinfobardelayonzap.value,True)
 				else:
@@ -152,9 +154,15 @@ class InfoBarShowHide:
 		self.__state = self.STATE_SHOWN
 		self.startHideTimer()
 		if config.plugins.FadeSet.fadeIn.value:
-			alphaChange(0)
 			self.fadeStepOn = 0
-			self.fadeTimerOn.start(50, True)
+			if self.__isZappping:
+				if config.plugins.FadeSet.fadeInOnZap.value:
+					alphaChange(0)
+					self.fadeTimerOn.start(100, True)
+			else:
+				alphaChange(0)
+				self.fadeTimerOn.start(100, True)
+				
 		if HardwareInfo().get_device_name() != 'dm500hd':
 			displayBriChange(config.lcd.bright.value)
 		if config.nemesis.einfo.value:
@@ -181,6 +189,7 @@ class InfoBarShowHide:
 
 	def __onHide(self):
 		self.__state = self.STATE_HIDDEN
+		self.__isZappping = False
 		if self.activityTimer.isActive():
 			self.activityTimer.stop()
 		if self.__stateExtra == self.STATE_SHOWN:

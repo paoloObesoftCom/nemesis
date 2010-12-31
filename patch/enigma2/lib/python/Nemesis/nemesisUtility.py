@@ -6,6 +6,7 @@ from Screens.Console import Console
 from Components.FileList import FileList
 from Components.ActionMap import ActionMap
 from Components.Label import Label
+from Components.Sources.List import List
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists
 from Components.ConfigList import ConfigListScreen
@@ -45,9 +46,18 @@ class NUtility(Screen):
 	__module__ = __name__
 	skin = """
 		<screen position="80,95" size="560,430">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (50, 2), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
+							],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 35
+					}
+				</convert>
+			</widget>
+			<widget name="key_red" position="0,400" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -67,7 +77,7 @@ class NUtility(Screen):
 			]
 			
 		self["title"] = Label(_("System Utility"))
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
@@ -123,27 +133,32 @@ class NUtility(Screen):
 		del self.list[:]
 		skin_path = GetSkinPath()
 		for men in self.menuList:
-			res = [men[0]]
-			res.append(MultiContentEntryText(pos=(50, 5), size=(300, 32), font=0, text=men[1]))
-			res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=LoadPixmap(skin_path + men[2])))
-			self.list.append(res)
-		self['list'].l.setList(self.list)
+			self.list.append((men[0],men[1],LoadPixmap(skin_path + men[2])))
+		self['list'].setList(self.list)
 
 class NCommand(Screen):
 	__module__ = __name__
 	skin = """
 		<screen position="80,95" size="560,430">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,65" size="540,340" scrollbarMode="showOnDemand"/>
-			<widget name="key_red" position="0,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-			<widget name="key_yellow" position="280,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 0), size = (340, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+						],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 30
+					}
+				</convert>
+			</widget>
+			<widget name="key_red" position="0,400" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+			<widget name="key_yellow" position="280,400" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
 		self["title"] = Label(_("Execute commands"))
-		self['list'] = ListboxE4(self.list)
+		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self["key_yellow"] = Label(_("Custom"))
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
@@ -169,14 +184,10 @@ class NCommand(Screen):
 			f = open('/etc/custom_command', 'r')
 			for line in f.readlines():
 				a = line.split(":")
-				res = [a[1].strip()]
-				res.append(MultiContentEntryText(pos=(0, 0), size=(340, 25), font=0, text=a[0].strip()))
-				self.list.append(res)
+				self.list.append((a[1].strip(), a[0].strip()))
 		else:
-			res = ["None"]
-			res.append(MultiContentEntryText(pos=(0, 0), size=(340, 25), font=0, text=_("File /etc/custom_command  not found!")))
-			self.list.append(res)
-		self['list'].l.setList(self.list)
+			self.list.append(("None", _("File /etc/custom_command  not found!")))
+		self['list'].setList(self.list)
 
 	def openCustom(self):
 		if config.nemesis.usevkeyboard.value:
@@ -192,16 +203,24 @@ class NUserScript(Screen):
 	__module__ = __name__
 	skin = """
 		<screen position="80,95" size="560,430">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,65" size="540,340" scrollbarMode="showOnDemand"/>
-			<widget name="key_red" position="0,510" size="510,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 0), size = (340, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+						],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 30
+					}
+				</convert>
+			</widget>
+			<widget name="key_red" position="0,400" size="510,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
 		self["title"] = Label(_("Execute Users Scripts"))
-		self['list'] = ListboxE4(self.list)
+		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
@@ -225,15 +244,10 @@ class NUserScript(Screen):
 		filelist = FileList("/usr/script", matchingPattern = "_user.sh")
 		for x in filelist.getFileList():
 			if x[0][1] != True:
-				scriptName = t.getScriptName(x[0][0][:-8]) 
-				res = [x[0][0][:-8]]
-				res.append(MultiContentEntryText(pos=(0, 0), size=(340, 25), font=0, text=scriptName))
-				self.list.append(res)
+				self.list.append((x[0][0][:-8], t.getScriptName(x[0][0][:-8])))
 		if len(self.list) == 0:
-			res = ["None"]
-			res.append(MultiContentEntryText(pos=(0, 0), size=(340, 25), font=0, text=_("No Users Script Found!")))
-			self.list.append(res)
-		self['list'].l.setList(self.list)
+			self.list.append(("None", _("No Users Script Found!")))
+		self['list'].setList(self.list)
 
 	def runCommand(self, cmd):
 		if cmd is not None:
@@ -241,13 +255,21 @@ class NUserScript(Screen):
 
 class NServices(Screen):
 	__module__ = __name__
-
 	skin = """
 		<screen position="80,95" size="560,430">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,65" size="540,340" scrollbarMode="showOnDemand" />
-			<widget name="key_red" position="0,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-			<widget name="key_yellow" position="280,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 0), size = (400, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+							MultiContentEntryPixmapAlphaTest(pos=(405, 6), size=(80, 23), png=png),
+						],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 30
+					}
+				</convert>
+			</widget>
+			<widget name="key_red" position="0,400" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+			<widget name="key_yellow" position="400,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -270,7 +292,7 @@ class NServices(Screen):
 		self["title"] = Label(_("Manage Services"))
 		self["key_red"] = Label(_("Exit"))
 		self["key_yellow"] = Label(_("Setup"))
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
@@ -314,21 +336,27 @@ class NServices(Screen):
 		del self.list[:]
 		skin_path = GetSkinPath() + 'menu/'
 		for ser in self.servicesList:
-			res = [ser[0]]
-			res.append(MultiContentEntryText(pos=(5, 5), size=(250, 32), font=0, text={False: _('Start'),True: _('Stop')}[self.servicestatus.get(ser[0])] + ' ' + ser[3]))
 			png = LoadPixmap({ True:skin_path + 'menu_on.png',False:skin_path + 'menu_off.png' }[self.servicestatus.get(ser[0])])
-			res.append(MultiContentEntryPixmapAlphaTest(pos=(260, 6), size=(80, 23), png=png))
-			self.list.append(res)
-		self['list'].l.setList(self.list)
+			self.list.append((ser[0],{False: _('Start'),True: _('Stop')}[self.servicestatus.get(ser[0])] + ' ' + ser[3], png ))
+		self['list'].setList(self.list)
 
 class NModule(Screen):
 	__module__ = __name__
 
 	skin = """
 		<screen position="80,95" size="560,430">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,65" size="540,340" scrollbarMode="showOnDemand" />
-			<widget name="key_red" position="0,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 0), size = (400, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+							MultiContentEntryPixmapAlphaTest(pos=(405, 6), size=(80, 23), png=png),
+						],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 30
+					}
+				</convert>
+			</widget>
+			<widget name="key_red" position="0,400" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -350,7 +378,7 @@ class NModule(Screen):
 		self.list = []
 		self["title"] = Label(_("Manage Modules"))
 		self["key_red"] = Label(_("Exit"))
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
@@ -397,13 +425,9 @@ class NModule(Screen):
 		del self.list[:]
 		skin_path = GetSkinPath()
 		for mod in self.modules:
-			res = [mod[0]]
-			res.append(MultiContentEntryText(pos=(5, 5), size=(250, 32), font=0, text=mod[1]))
 			png = LoadPixmap({ True:skin_path + 'menu/menu_on.png',False:skin_path + 'menu/menu_off.png' }[self.modstatus.get(mod[0])])
-			res.append(MultiContentEntryPixmapAlphaTest(pos=(260, 6), size=(80, 23), png=png))
-			self.list.append(res)
-		
-		self['list'].l.setList(self.list)
+			self.list.append((mod[0], mod[1], png))
+		self['list'].setList(self.list)
 
 class NServicesSetup(Screen, ConfigListScreen):
 	__module__ = __name__
@@ -480,8 +504,17 @@ class NServicesLog(Screen):
 	__module__ = __name__
 	skin = """
 		<screen position="80,95" size="560,430" title="Addons">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (50, 2), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
+							],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 35
+					}
+				</convert>
+			</widget>
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 			<widget name="key_yellow" position="280,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
@@ -497,7 +530,7 @@ class NServicesLog(Screen):
 			('openvpn','/etc/openvpn/openvpn.log',_('Show OpenVPN Log'))
 			]
 		self["title"] = Label(_("Services Logs"))
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self["key_yellow"] = Label(_("Clear log"))
 		self.updateList()
@@ -528,11 +561,8 @@ class NServicesLog(Screen):
 		del self.list[:]
 		skin_path = GetSkinPath()
 		for log in self.logsList:
-			res = [log[0]]
-			res.append(MultiContentEntryText(pos=(50, 5), size=(300, 32), font=0, text=log[2]))
-			res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=LoadPixmap(skin_path + 'icons/log.png')))
-			self.list.append(res)
-		self['list'].l.setList(self.list)
+			self.list.append((log[0], log[2], LoadPixmap(skin_path + 'icons/log.png')))
+		self['list'].setList(self.list)
 
 class deleteLog(Screen, ConfigListScreen):
 	__module__ = __name__

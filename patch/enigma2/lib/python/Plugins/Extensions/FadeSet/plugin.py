@@ -8,6 +8,7 @@ from Plugins.Plugin import PluginDescriptor
 config.plugins.FadeSet = ConfigSubsection()
 config.plugins.FadeSet.fadeIn = ConfigYesNo(default = True) # fade in enable
 config.plugins.FadeSet.fadeOut = ConfigYesNo(default = True) # fade out enable
+config.plugins.FadeSet.fadeInOnZap = ConfigYesNo(default = False) # fade in enable on Zap
 config.plugins.FadeSet.timeout = ConfigInteger(5, (1,10)) # fade in/out value
 
 def startSetup(menuid, **kwargs):
@@ -24,13 +25,10 @@ def main(session,**kwargs):
 class FadeSetScreenSetup(Screen, ConfigListScreen):
 
 	skin = """
-	<screen name="FadeSetSetup" position="center,center" size="630,170" title="FadeSet" backgroundColor="#31000000" >
-
-			<widget name="config" position="30,70" size="570,60" zPosition="1" transparent="0" backgroundColor="#31000000" scrollbarMode="showOnDemand" />
-
-			<widget name="key_green" position="335,120" zPosition="3" size="265,44" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
-			<widget name="key_red" position="30,120" zPosition="3" size="265,44" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
-
+	<screen name="FadeSetSetup" position="center,center" size="620,300" title="FadeSet" backgroundColor="#31000000" >
+		<widget name="config" position="20,20" size="580,280" zPosition="1" transparent="0" backgroundColor="#31000000" scrollbarMode="showOnDemand" />
+		<widget name="key_green" position="330,260" zPosition="3" size="270,40" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
+		<widget name="key_red" position="20,260" zPosition="3" size="270,40" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
 	</screen>"""
 
 	def __init__(self, session):
@@ -48,6 +46,7 @@ class FadeSetScreenSetup(Screen, ConfigListScreen):
 		FadeSetConfigList = []
 		FadeSetConfigList.append(getConfigListEntry(_(" Enable fade in of infobar:"), config.plugins.FadeSet.fadeIn))
 		FadeSetConfigList.append(getConfigListEntry(_(" Enable fade out of infobar:"), config.plugins.FadeSet.fadeOut))
+		FadeSetConfigList.append(getConfigListEntry(_(" Enable fade in of infobar on Zap:"), config.plugins.FadeSet.fadeInOnZap))
 		FadeSetConfigList.append(getConfigListEntry(_(" Speed for fade in/out of infobar (1-10):"), config.plugins.FadeSet.timeout))
 		ConfigListScreen.__init__(self, FadeSetConfigList, session)
         

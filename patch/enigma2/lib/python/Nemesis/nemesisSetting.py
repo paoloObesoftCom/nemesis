@@ -6,6 +6,7 @@ from Components.SystemInfo import SystemInfo
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
+from Components.Sources.List import List
 from nemesisTool import ListboxE1, GetSkinPath, createProxy, createInadynConf, createIpupdateConf
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Tools.LoadPixmap import LoadPixmap
@@ -20,7 +21,23 @@ setupfile.close()
 configfile = ConfigFile()
 
 class NSetupSum(Screen):
-	
+	skin = """
+		<screen position="80,95" size="560,430" title="Addons">
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (50, 5), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
+							],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 40
+					}
+				</convert>
+			</widget>
+			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
+			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+		</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
@@ -32,15 +49,11 @@ class NSetupSum(Screen):
 		xmldata = setupdom.getroot()
 		self.model = HardwareInfo().get_device_name()
 		for x in xmldata.findall("setup"):
-			res = [x.get("key")]
-			if self.model == 'dm500hd' and res[0] == 'lcd':
+			if self.model == 'dm500hd' and x.get("key")[0] == 'lcd':
 				continue
-			res.append(MultiContentEntryText(pos=(50, 5), size=(300, 32), font=0, text=_(x.get("title", "").encode("UTF-8"))))
-			png = LoadPixmap(skin_path + 'icons/setup.png')
-			res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=png))
-			self.list.append(res)
+			self.list.append((x.get("key"), _(x.get("title", "").encode("UTF-8")), LoadPixmap(skin_path + 'icons/setup.png')))
 			
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self["actions"] = ActionMap(['WizardActions','ColorActions'],
 		{
 			"ok": self.okbuttonClick,

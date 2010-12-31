@@ -7,6 +7,7 @@ from Screens.TimerEntry import TimerEntry
 from Screens.TimerEdit import TimerSanityConflict, TimerEditList
 from Components.ActionMap import ActionMap,NumberActionMap
 from Components.Label import Label
+from Components.Sources.List import List
 from Components.TimerSanityCheck import TimerSanityCheck
 from Components.config import config, ConfigNothing, ConfigFile
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
@@ -42,9 +43,18 @@ class nemesisEpgPanel(Screen):
 	__module__ = __name__
 	skin = """
 		<screen position="80,95" size="560,430">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (50, 2), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
+							],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 35
+					}
+				</convert>
+			</widget>
+			<widget name="key_red" position="0,400" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
 	def getPlugins(self):
@@ -73,7 +83,7 @@ class nemesisEpgPanel(Screen):
 		self.ref = None
 		self.downIMode = False
 		self["title"] = Label(_("EPG Control Center"))
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self.e2loadepgpgname = ''
 		self.e2Loader = self.getE2loader()
@@ -117,11 +127,8 @@ class nemesisEpgPanel(Screen):
 		del self.list[:]
 		for i in self.epgMenuList:
 			if i[3]:
-				res = [i[0]]
-				res.append(MultiContentEntryText(pos=(50, 5), size=(300, 32), font=0, text=i[1]))
-				res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=LoadPixmap(skin_path + i[2])))
-				self.list.append(res)
-		self['list'].l.setList(self.list)
+				self.list.append((i[0], i[1], LoadPixmap(skin_path + i[2])))
+		self['list'].setList(self.list)
 	
 	def checkDevice(self):
 		system('touch ' + config.misc.epgcache_filename.value + '/test.test')

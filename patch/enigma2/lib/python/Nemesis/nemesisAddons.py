@@ -4,6 +4,7 @@ from Screens.Standby import TryQuitMainloop
 from enigma import eTimer, eDVBDB, eConsoleAppContainer
 from Components.ActionMap import ActionMap
 from Components.Label import Label
+from Components.Sources.List import List
 from Components.ProgressBar import ProgressBar
 from Components.ScrollLabel import ScrollLabel
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
@@ -106,8 +107,17 @@ class NAddons(Screen):
 	__module__ = __name__
 	skin = """
 		<screen position="80,95" size="560,430" title="Addons">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (50, 5), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
+							],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 40
+					}
+				</convert>
+			</widget>
 			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
@@ -116,7 +126,7 @@ class NAddons(Screen):
 		Screen.__init__(self, session)
 		self.list = []
 		self["title"] = Label(_("Addons Manager"))
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self['conn'] = Label("")
 		self["key_red"] = Label(_("Cancel"))
 		self['conn'].hide()
@@ -185,19 +195,24 @@ class NAddons(Screen):
 		skin_path = GetSkinPath()
 		for i in self.MenuList:
 			if i[3]:
-				res = [i[0]]
-				res.append(MultiContentEntryText(pos=(50, 5), size=(300, 32), font=0, text=i[1]))
-				res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=LoadPixmap(skin_path + i[2])))
-				self.list.append(res)
-		self['list'].l.setList(self.list)
+				self.list.append((i[0], i[1], LoadPixmap(skin_path + i[2])))
+		self['list'].setList(self.list)
 	
 
 class	RAddons(Screen):
 	__module__ = __name__
 	skin = """
 		<screen position="80,95" size="560,430">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 0), size = (340, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+						],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 35
+					}
+				</convert>
+			</widget>
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
@@ -205,7 +220,7 @@ class	RAddons(Screen):
 		Screen.__init__(self, session)
 		self.list = []
 		self.wtitle = {'A': _('Download Addons'),'E': _('Download Extra')}[u.typeDownload]
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self["title"] = Label(self.wtitle)
 		self["key_red"] = Label(_("Cancel"))
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
@@ -222,31 +237,38 @@ class	RAddons(Screen):
 
 	def KeyOk(self):
 		u.pluginType = self["list"].getCurrent()[0]
-		u.pluginIndex = self['list'].getSelectionIndex() 
+		u.pluginIndex = self['list'].getIndex() 
 		self.session.open(RAddonsDown)
 	
 	def loadData(self):
 		del self.list[:]
 		for tag in loadxml.tree_list: 
-			res = [tag [1]]
-			res.append(MultiContentEntryText(pos=(0, 5), size=(340, 32), font=0, text=tag [1] ))
-			self.list.append(res)
-		self['list'].l.setList(self.list)
+			self.list.append((tag [1], tag [1]))
+		self['list'].setList(self.list)
 
 class	RAddonsDown(Screen):
 	__module__ = __name__
 	skin = """
-		<screen position="80,95" size="560,530" title="Download">
-			<widget name="type" position="0,0" size="560,35" font="Regular;26" valign="center" halign="center" backgroundColor="#0064c7"/>
-			<widget name="list" position="10,40" size="540,420" scrollbarMode="showOnDemand" />
-			<widget source="conn" render="Label" position="0,460" size="560,50" font="Regular;20" halign="center" valign="center" backgroundColor="#0064c7" />
+		<screen position="80,95" size="560,530" title="Addons">
+			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (5, 0), size = (530, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+							],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 30
+					}
+				</convert>
+			</widget>
+			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
-		self['list'] = ListboxE3(self.list)
+		self['list'] = List(self.list)
 		self['conn'] = StaticText(_("Loading elements.\nPlease wait..."))
 		self['type'] = Label("")
 		self["key_red"] = Label(_("Cancel"))
@@ -268,7 +290,7 @@ class	RAddonsDown(Screen):
 	
 	def KeyOk(self):
 		if not self.container.running():
-			self.sel = self['list'].getSelectionIndex() 
+			self.sel = self['list'].getIndex() 
 			if (u.size > t.getVarSpace() and u.check == 1):
 				msg = _('Not enough space!\nPlease delete addons before install new.')
 				self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
@@ -285,10 +307,8 @@ class	RAddonsDown(Screen):
 		del self.list[:]
 		for tag in loadxml.plugin_list: 
 			if tag [0] == u.pluginIndex:
-				res = [tag [3]]
-				res.append(MultiContentEntryText(pos=(0, 5), size=(340, 30), font=0, text=tag [3] ))
-				self.list.append(res)
-		self['list'].l.setList(self.list)
+				self.list.append((tag [3], tag [3]))
+		self['list'].setList(self.list)
 		self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
 
 	def downloadAddons(self):
@@ -373,7 +393,16 @@ class	RManual(Screen):
 	skin = """
 		<screen position="80,95" size="560,430">
 			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
+			<widget source="list" render="Listbox" position="50,20" size="400,390" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 0), size = (410, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+							],
+					"fonts": [gFont("Prive2", 20)],
+					"itemHeight": 30
+					}
+				</convert>
+			</widget>
 			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
 			<widget name="key_red" position="0,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 			<widget name="key_yellow" position="280,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
@@ -382,7 +411,7 @@ class	RManual(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self['conn'] = Label("")
 		self["title"] = Label(_("Manual Installation"))
 		self["key_red"] = Label(_("Cancel"))
@@ -408,18 +437,16 @@ class	RManual(Screen):
 		loadtmpdir.load()
 		if len(loadtmpdir.tmp_list) > 0:
 			for fil in loadtmpdir.tmp_list: 
-				res = [fil]
-				res.append(MultiContentEntryText(pos=(0, 5), size=(340, 32), font=0, text=fil[1]))
-				self.list.append(res)
+				self.list.append((fil[1], fil[1]))
 		else:	
 			self['conn'].show()
 			self['conn'].setText(_("Put your plugin xxx.tbz2 or xxx.ipk\nvia FTP in /tmp."))
-		self['list'].l.setList(self.list)
+		self['list'].setList(self.list)
 	
 	def KeyOk(self):
 		if not self.container.running():
 			if len(loadtmpdir.tmp_list) > 0:
-				self.sel = self['list'].getSelectionIndex() 
+				self.sel = self['list'].getIndex() 
 				for p in loadtmpdir.tmp_list: 
 					if (p [0] == self.sel):
 						u.filename = p [1]
@@ -471,7 +498,16 @@ class	RRemove(Screen):
 	skin = """
 		<screen position="80,95" size="560,430" title="Addons">
 			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
+			<widget source="list" render="Listbox" position="50,20" size="400,390" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 0), size = (410, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+							],
+					"fonts": [gFont("Prive2", 20)],
+					"itemHeight": 30
+					}
+				</convert>
+			</widget>
 			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
@@ -479,7 +515,7 @@ class	RRemove(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self['conn'] = Label("")
 		self["title"] = Label(_("Remove Addons"))
 		self["key_red"] = Label(_("Cancel"))
@@ -503,18 +539,16 @@ class	RRemove(Screen):
 		del self.list[:]
 		if len(loadunidir.uni_list) > 0:
 			for fil in loadunidir.uni_list: 
-				res = [fil]
-				res.append(MultiContentEntryText(pos=(0, 5), size=(340, 32), font=0, text=fil [1] [:-10]))
-				self.list.append(res)
+				self.list.append((fil[1], fil[1] [:-10]))
 		else:
 			self['conn'].show()
 			self['conn'].setText(_("Nothing to uninstall!"))
-		self['list'].l.setList(self.list)
+		self['list'].setList(self.list)
 	
 	def KeyOk(self):
 		if not self.container.running():
 			if len(loadunidir.uni_list) > 0:
-				self.sel = self['list'].getSelectionIndex() 
+				self.sel = self['list'].getIndex() 
 				for p in loadunidir.uni_list: 
 					if (p [0] == self.sel):
 						u.filename = p [1]

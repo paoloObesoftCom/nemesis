@@ -866,6 +866,9 @@ msgstr " Abilita dissolvenza su apertura infobar:"
 msgid " Enable fade out of infobar:"
 msgstr " Abilita dissolvenza su chiusura infobar:"
 
+msgid " Enable fade in of infobar on Zap:"
+msgstr " Abilita dissolvenza infobar su Zap:"
+
 msgid " Speed for fade in/out of infobar (1-10):"
 msgstr " Velocità dissolvenza infobar (1-10):"
 
@@ -874,6 +877,9 @@ msgstr "Abilita dissolvenza su apertura infobar"
 
 msgid "Enable fade out of infobar"
 msgstr "Abilita dissolvenza su chiusura infobar"
+
+msgid "Enable fade in of infobar on Zap"
+msgstr "Abilita dissolvenza infobar su Zap"
 
 msgid "Speed for fade in/out of infobar (1-10)"
 msgstr "Velocità dissolvenza infobar (1-10)"
