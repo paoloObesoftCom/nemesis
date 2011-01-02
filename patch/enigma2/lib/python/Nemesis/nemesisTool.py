@@ -316,7 +316,7 @@ class nemesisTool:
 			f.close()
 			return line [:-1]
 		except:
-			return "http://www.dream-elite.net/DreamElite/"
+			return "http://www.edg-nemesis.tv/ADDONS/Nemesis/"
 
 	def readExtraUrl(self):	
 		try:

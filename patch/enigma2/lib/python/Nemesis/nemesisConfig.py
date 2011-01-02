@@ -22,6 +22,12 @@ def InitNemesisConfig():
 		("6", "6 " + _("seconds")),("7", "7 " + _("seconds")),("8", "8 " + _("seconds"))])
 	config.nemesis.usepiconinhdd = ConfigYesNo(default = False)
 	config.nemesis.forceumount = ConfigYesNo(default = False)
+#Fadeset
+	config.plugins.FadeSet = ConfigSubsection()
+	config.plugins.FadeSet.fadeIn = ConfigYesNo(default = True) # fade in enable
+	config.plugins.FadeSet.fadeOut = ConfigYesNo(default = True) # fade out enable
+	config.plugins.FadeSet.fadeInOnZap = ConfigYesNo(default = False) # fade in enable on Zap
+	config.plugins.FadeSet.timeout = ConfigInteger(5, (1,10)) # fade in/out value
 #inadyn
 	config.inadyn = ConfigSubsection();
 	config.inadyn.user = ConfigText(default = "myuser", fixed_size = False)

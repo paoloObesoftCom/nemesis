@@ -1,7 +1,7 @@
 DESCRIPTION = "OpenDreambox: Enigma2 Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PR = "r10"
+PR = "r11"
 
 inherit task
 
@@ -23,7 +23,6 @@ RDEPENDS_task-opendreambox-enigma2 = "\
   dreambox-blindscan-utils \
   enigma2 \
   enigma2-defaultservices \
-  enigma2-plugin-extensions-fadeset \
   enigma2-plugin-extensions-mediascanner \
   enigma2-plugin-systemplugins-frontprocessorupgrade \
   enigma2-plugin-systemplugins-hotplug \

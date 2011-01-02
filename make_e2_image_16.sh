@@ -8,12 +8,12 @@ git_dir=`grep "OE_ROOT=" env.source | cut -d "=" -f 2`/1.6/openembedded/conf
 patchdir=$envpath/nemesis
 
 [ -e $git_dir/checksums.ini ] && rm -f $git_dir/checksums.ini
-ver='1.0'
+ver='2.1'
 enigmaver='2'
 oever='1.6'
-subver='-Final'
+subver='-Beta'
 data=`date +'%d-%m-%Y-%H-%M'`
-imagename="NewDE-${ver}${subver}-${dmver}-e${enigmaver}-OE(${oever})_${data}"
+imagename="EDG-${ver}${subver}-${dmver}-e${enigmaver}-OE(${oever})_${data}"
 
 rebuild_enigma()
 {

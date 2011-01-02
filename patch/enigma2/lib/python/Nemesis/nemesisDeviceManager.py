@@ -128,8 +128,16 @@ class HDDInfo(Screen):
 	__module__ = __name__
 	skin = """
 		<screen position="80,95" size="560,430">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 0), size = (340, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+						],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 30
+					}
+				</convert>
+			</widget>
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 	
@@ -146,7 +154,7 @@ class HDDInfo(Screen):
 			('FSCK',_('File System Check'),'/usr/script/format_utils.sh hdd_filecheck',False)
 			]
 		self["title"] = Label(_("Hard Disk Informations"))
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
@@ -163,10 +171,8 @@ class HDDInfo(Screen):
 	def updateList(self):
 		del self.list[:]
 		for men in self.menuList:
-			res = [men[0]]
-			res.append(MultiContentEntryText(pos=(0, 0), size=(340, 25), font=0, text=men[1]))
-			self.list.append(res)
-		self['list'].l.setList(self.list)
+			self.list.append((men[0], men[1]))
+		self['list'].setList(self.list)
 	
 	def KeyOk(self):
 		if (self["list"].getCurrent()[0]):
@@ -189,9 +195,17 @@ class USBSetup(Screen):
 	__module__ = __name__
 	skin = """
 		<screen position="80,95" size="560,540">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="model" position="10,60" size="320,200" font="Regular;22" foregroundColor="yellow" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,260" size="540,240" scrollbarMode="showOnDemand" />
+			<widget name="model" position="10,10" size="540,200" font="Regular;22" foregroundColor="yellow" backgroundColor="transpBlack" transparent="1"/>
+			<widget source="list" render="Listbox" position="10,220" size="540,300" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 0), size = (340, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+						],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 30
+					}
+				</convert>
+			</widget>
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
@@ -202,7 +216,7 @@ class USBSetup(Screen):
 		self.list = []
 		self["title"] = Label(_("USB-Pen Setup") + " (%s)" % (self.host))
 		self["model"] = Label('')
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
@@ -253,10 +267,8 @@ class USBSetup(Screen):
 		del self.list[:]
 		for men in self.menuList:
 			if men[4]:
-				res = [men[0]]
-				res.append(MultiContentEntryText(pos=(0, 0), size=(340, 25), font=0, text=men[1]))
-				self.list.append(res)
-		self['list'].l.setList(self.list)
+				self.list.append((men[0], men[1]))
+		self['list'].setList(self.list)
 	
 	def KeyOk(self):
 		self.res = self["list"].getCurrent()[0]

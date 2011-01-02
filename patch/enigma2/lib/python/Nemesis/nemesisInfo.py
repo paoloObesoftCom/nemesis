@@ -6,6 +6,7 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from Components.ScrollLabel import ScrollLabel
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
+from Components.Sources.List import List
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists
 from os import system, remove
@@ -26,10 +27,20 @@ def getSize(a,b,c):
 class NInfo(Screen):
 	__module__ = __name__
 	skin = """
-		<screen position="80,95" size="560,430">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#ff2525" backgroundColor="#9f1313" transparent="1" />
+		<screen position="80,95" size="560,430" title="Addons">
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (50, 5), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
+							],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 40
+					}
+				</convert>
+			</widget>
+			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
+			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
 	def getPlugins(self):
@@ -46,7 +57,7 @@ class NInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self["title"] = Label(_("System Information"))
 		self.cccmaplugyn = self.gboxplugyn = ''
@@ -80,11 +91,8 @@ class NInfo(Screen):
 		skin_path = GetSkinPath()
 		for i in self.infoMenuList:
 			if i[3]:
-				res = [i[0]]
-				res.append(MultiContentEntryText(pos=(50, 5), size=(300, 32), font=0, text=i[1]))
-				res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=LoadPixmap(skin_path + i[2])))
-				self.list.append(res)
-		self['list'].l.setList(self.list)
+				self.list.append((i[0], i[1], LoadPixmap(skin_path + i[2])))
+		self['list'].setList(self.list)
 
 	def KeyOk(self):
 		self.sel = self["list"].getCurrent()[0]

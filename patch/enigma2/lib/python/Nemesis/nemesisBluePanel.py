@@ -42,7 +42,7 @@ class nemesisBluePanel(Screen):
 		<widget name="ecmtext" position="50,460" size="340,240" font="Regular;18" zPosition="2" backgroundColor="#333333" transparent="1"/>
 	</screen>"""
 	
-	NEWDEVER = "1.0 (OE 1.6)"
+	NEWDEVER = "2.1 (OE 1.6)"
 	IMAGEVER = about.getImageVersionString()
 	ENIGMAVER = about.getEnigmaVersionString()
 	KERNELVER = about.getKernelVersionStringL()
@@ -51,15 +51,15 @@ class nemesisBluePanel(Screen):
 		Screen.__init__(self, session)
 		self.list = []
 		self['config'] = ConfigList(self.list)
-		self["title"] = Label(_("NewDE Panel"))
+		self["title"] = Label(_("Nemesis Blue Panel"))
 		self["ecmtext"] = ScrollLabel("")
 		self["key_blue"] = Label(_("Addons Manager"))
 		self["key_yellow"] = Label(_("System Settings"))
 		self["key_green"] = Label(_("System Information"))
 		self["key_red"] = Label(_("System Utility"))
-		self["key_1"] = Label(_("New Dream-Elite News"))
+		self["key_1"] = Label(_("Images News"))
 		self["key_2"] = Label(_("Parental Control Setup"))
-		self["key_3"] = Label(_("About NewDE"))
+		self["key_3"] = Label(_("About Image"))
 		self["info_use"] = Label(_("Use arrows < > to select"))
 		self["actions"] = NumberActionMap(["ColorActions", "CiSelectionActions","WizardActions","SetupActions"],
 			{
@@ -85,7 +85,7 @@ class nemesisBluePanel(Screen):
 		self.onShown.append(self.setWindowTitle)
 	
 	def setWindowTitle(self):
-		self.setTitle(_("NewDE Blue Panel"))
+		self.setTitle(_("EDG-Nemesis Blue Panel"))
 	
 	def loadEmuList(self):
 		emu = []
@@ -140,17 +140,17 @@ class nemesisBluePanel(Screen):
 		elif number == 2:
 			self.session.open(ParentalControlSetup)
 		elif number == 3:
-			self.message = "\nNew Dream Elite Version: " +  self.NEWDEVER
+			self.message = "\nEDG-Nemesis Version: " +  self.NEWDEVER
 			self.message += "\n\nImage version: " + self.IMAGEVER
-			self.message += "\nBuild by Gianathem using Nemesis source"
+			self.message += "\nBuild by Gianathem"
 			self.message += "\nBased on Enigma Version: " +  self.ENIGMAVER
 			self.message += "\nKernel version: " + self.KERNELVER
-			self.message += "\n\nFor support visit: http://www.dream-elite.net/"
+			self.message += "\n\nFor support visit: http://edg-nemesis.tv/"
 			self.mbox = self.session.open(MessageBox, self.message, MessageBox.TYPE_INFO)
-			self.mbox.setTitle("About NewDE " + self.NEWDEVER)
+			self.mbox.setTitle("About EDG-Nemesis " + self.NEWDEVER)
 	
 	def executedScript(self, *answer):
-		self.session.open(nemesisShowPanel, "/tmp/info.txt" ,_('NewDE Info'))
+		self.session.open(nemesisShowPanel, "/tmp/info.txt" ,_('EDG-Nemesis Info'))
 		
 	def naddons(self):
 		self.session.openWithCallback(self.loadEmuList, NAddons)
