@@ -165,17 +165,16 @@ class InfoBarShowHide:
 				
 		if HardwareInfo().get_device_name() != 'dm500hd':
 			displayBriChange(config.lcd.bright.value)
-		if config.nemesis.einfo.value:
+		if config.nemesis.einfo.value and self.TunerTest():
 			if config.nemesis.einfotimeout.value > 0:
 				self.activityTimer.start(config.nemesis.einfotimeout.value, True)
 			else:
 				self.showEInfo()
 			
 	def showEInfo(self):
-		if self.TunerTest():
-			self.__stateExtra = self.STATE_SHOWN
-			self.instance.hide()
-			self.InfoBarExtraDialog.show()
+		self.__stateExtra = self.STATE_SHOWN
+		self.instance.hide()
+		self.InfoBarExtraDialog.show()
 	
 	def hideEInfo(self):
 		self.__stateExtra = self.STATE_HIDDEN
@@ -198,6 +197,7 @@ class InfoBarShowHide:
 			displayBriChange(config.lcd.lcdbri.value)
 		if self.fadeTimerOff.isActive():
 			self.fadeStepOff = 0
+		self.alphaTimerRestore.start(1000, True)
 
 	def doShow(self):
 		if self.showTimer.isActive():
@@ -220,7 +220,7 @@ class InfoBarShowHide:
 		elif self.__state == self.STATE_SHOWN and self.__stateExtra == self.STATE_SHOWN:
 			self.hide()
 			self.hideTimer.stop()
-		elif self.__state == self.STATE_SHOWN and self.__stateExtra == self.STATE_HIDDEN:
+		elif self.__state == self.STATE_SHOWN and self.__stateExtra == self.STATE_HIDDEN  and self.TunerTest():
 			self.showEInfo()
 		elif self.__state == self.STATE_HIDDEN:
 			self.show()
@@ -244,7 +244,6 @@ class InfoBarShowHide:
 			self.fadeTimerOff.start((config.plugins.FadeSet.timeout.value * 6), True)
 		else:
 			self.hide()
-			self.alphaTimerRestore.start(100, True)
 
 	def alphaRestore(self): 
 		alphaChange(config.av.osd_alpha.value) 

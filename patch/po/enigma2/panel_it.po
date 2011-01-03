@@ -235,11 +235,11 @@ msgid "Use arrows < > to select"
 msgstr "Usa le frecce < > per selezionare"
 
 #, python-format
-msgid "SoftCam (%s) :"
+msgid "SoftCams (%s) :"
 msgstr "Emulatori (%s) :"
 
-msgid "Downloading NewDE info..."
-msgstr "Ricezione NewDE info..."
+msgid "Downloading EDG-Nemesis info..."
+msgstr "Ricezione EDG-Nemesis info..."
 
 #, python-format
 msgid "Stopping %s and starting %s."
@@ -355,11 +355,11 @@ msgstr "Errore di salvataggio"
 msgid "EPG Search (enigma2)"
 msgstr "Ricerca EPG (enigma2)"
 
-msgid "EPG Search (NewDE)"
-msgstr "Ricerca EPG (NewDE)"
+msgid "EPG Search (EDG-Nemesis)"
+msgstr "Ricerca EPG (EDG-Nemesis)"
 
-msgid "EPG Search History (NewDE)"
-msgstr "Storico ricerca EPG (NewDE)"
+msgid "EPG Search History (EDG-Nemesis)"
+msgstr "Storico ricerca EPG (EDG-Nemesis)"
 
 msgid "Download EPG with CrossEPG"
 msgstr "Scaricare EPG con CrossEPG"

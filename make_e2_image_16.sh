@@ -13,7 +13,7 @@ enigmaver='2'
 oever='1.6'
 subver='-Beta'
 data=`date +'%d-%m-%Y-%H-%M'`
-imagename="EDG-${ver}${subver}-${dmver}-e${enigmaver}-OE(${oever})_${data}"
+imagename="EDG-Nemesis${ver}${subver}-${dmver}-e${enigmaver}-OE(${oever})_${data}"
 
 rebuild_enigma()
 {

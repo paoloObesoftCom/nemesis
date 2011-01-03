@@ -5,12 +5,12 @@ model=`grep "MODEL=" ../make_init.sh | cut -d "=" -f 2`
 envdir=`grep "OEROOT=" ../make_init.sh | cut -d "=" -f 2`
 patchdir=$envdir/nemesis
 data=`date +'%d-%m-%Y-%H-%M'`
-ver='1.0'
-subver='.beta'
+ver='5.0'
+subver=''
 
 move_image()
 {
-	imagename="NewDE-${ver}${subver}-${model}_${data}"
+	imagename="EDG-Nemesis-${ver}${subver}-${model}_${data}"
 	mv ../root/cdkflash/complete.img ${HOME}/${imagename}.img
 	cd ${HOME}
 	zip ${imagename}.zip ${imagename}.img

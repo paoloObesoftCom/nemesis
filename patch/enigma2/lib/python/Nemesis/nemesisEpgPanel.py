@@ -91,8 +91,8 @@ class nemesisEpgPanel(Screen):
 		self.getPlugins()
 		self.epgMenuList = [
 			('searchEPGe2',_('EPG Search (enigma2)'),'icons/search.png',self.epgserchplugin),
-			('searchEPG',_('EPG Search (NewDE)'),'icons/search.png',True),
-			('searchEPGLast',_('EPG Search History (NewDE)'),'icons/search.png',True),
+			('searchEPG',_('EPG Search (EDG-Nemesis)'),'icons/search.png',True),
+			('searchEPGLast',_('EPG Search History (EDG-Nemesis)'),'icons/search.png',True),
 			('downloadEPG',_('Download EPG with CrossEPG'),'icons/get.png',True),
 			('e2LoaderEpg',_('Start e2_loadepg (background)'),'icons/get.png',self.e2Loader),
 			('e2LoaderEpgI',_('Start e2_loadepg (interactive)'),'icons/get.png',self.e2Loader),

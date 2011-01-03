@@ -7,7 +7,7 @@ from Components.FileList import FileList
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.ConfigList import ConfigList
-from Components.config import ConfigSelection, getConfigListEntry, KEY_LEFT, KEY_RIGHT, KEY_OK
+from Components.config import ConfigSelection, getConfigListEntry, ConfigNothing, KEY_LEFT, KEY_RIGHT, KEY_OK
 from Components.Pixmap import Pixmap
 from nemesisTool import *
 from nemesisShowPanel import nemesisShowPanel
@@ -31,10 +31,7 @@ class nemesisBluePanel(Screen):
 	<screen name="nemesisBluePanel" position="0,0" size="500,720" flags="wfNoBorder">
 		<widget name="title" position="50,40" size="300,32" font="Regular;40" halign="center" foregroundColor="#53a9ff" backgroundColor="transpBlack" transparent="1"/>
 		<widget name="info_use" position="50,110" zPosition="2" size="340,30" valign="center" halign="center" font="Regular;21" transparent="1" backgroundColor="#1f771f" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="config" position="50,150" size="340,50" zPosition="2" />
-		<widget name="key_1" position="50,220" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;21" transparent="1" backgroundColor="#9f1313" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_2" position="50,250" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;21" transparent="1" backgroundColor="#9f1313" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_3" position="50,280" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;21" transparent="1" backgroundColor="#9f1313" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="config" position="50,150" size="340,125" zPosition="2" />
 		<widget name="key_blue" position="50,320" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;22" transparent="1" foregroundColor="#6565ff" backgroundColor="#1f771f" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_yellow" position="50,350" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;22" transparent="1" foregroundColor="#bab329" backgroundColor="#1f771f" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_green" position="50,380" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;22" transparent="1" foregroundColor="#389416" backgroundColor="#1f771f" shadowColor="black" shadowOffset="-1,-1" />
@@ -57,9 +54,6 @@ class nemesisBluePanel(Screen):
 		self["key_yellow"] = Label(_("System Settings"))
 		self["key_green"] = Label(_("System Information"))
 		self["key_red"] = Label(_("System Utility"))
-		self["key_1"] = Label(_("Images News"))
-		self["key_2"] = Label(_("Parental Control Setup"))
-		self["key_3"] = Label(_("About Image"))
 		self["info_use"] = Label(_("Use arrows < > to select"))
 		self["actions"] = NumberActionMap(["ColorActions", "CiSelectionActions","WizardActions","SetupActions"],
 			{
@@ -70,23 +64,25 @@ class nemesisBluePanel(Screen):
 				"yellow": self.nsetting,
 				"red": self.nutility,
 				"ok": self.ok_pressed,
-				"back": self.close,
-				"1": self.keyNumberGlobal,
-				"2": self.keyNumberGlobal,
-				"3": self.keyNumberGlobal
+				"back": self.close
 			},-1)
 		self.console = Console()
 		self.nemPortNumber = t.readPortNumber()
 		self.ecmTimer = eTimer()
 		self.ecmTimer.timeout.get().append(self.readEcmInfo)
-		self.ecmTimer.start(10000, True)
+		self.ecmTimer.start(10000, False)
 		self.readEcmInfo()
 		self.onLayoutFinish.append(self.loadEmuList)
 		self.onShown.append(self.setWindowTitle)
+		self.onClose.append(self.__onClose)
 	
 	def setWindowTitle(self):
 		self.setTitle(_("EDG-Nemesis Blue Panel"))
 	
+	def __onClose(self):
+		if self.ecmTimer.isActive():
+			self.ecmTimer.stop()
+
 	def loadEmuList(self):
 		emu = []
 		crd = []
@@ -114,8 +110,11 @@ class nemesisBluePanel(Screen):
 		cardserver = ConfigSelection(default = t.readSrvName(t.readSrvActive()), choices = crd)
 		
 		del self.list[:]
-		self.list.append(getConfigListEntry(_('SoftCam (%s) :') % str(len(emu)-1), softcam))
-		self.list.append(getConfigListEntry(_('CardServer (%s) :') % str(len(crd)-1), cardserver))
+		self.list.append(getConfigListEntry(_('SoftCams (%s) :') % str(len(emu)-1), softcam))
+		self.list.append(getConfigListEntry(_('CardServers (%s) :') % str(len(crd)-1), cardserver))
+		self.list.append(getConfigListEntry(_("EDG-Nemesis News"), ConfigNothing()))
+		self.list.append(getConfigListEntry(_("Parental Control Setup"), ConfigNothing()))
+		self.list.append(getConfigListEntry(_("About EDG-Nemesis"), ConfigNothing()))
 		self['config'].list = self.list
 		self['config'].l.setList(self.list)
 	
@@ -126,20 +125,19 @@ class nemesisBluePanel(Screen):
 		self["config"].handleKey(KEY_RIGHT)
 	
 	def ok_pressed(self):
-		if self["config"].getCurrentIndex() == 0:
+		self.sel = self["config"].getCurrentIndex()
+		if self.sel == 0:
 			self.newemu = self.emu_list[self["config"].getCurrent()[1].getText()]
 			self.ss_sc()
-		else:
+		elif self.sel == 1:
 			self.newsrv = self.crd_list[self["config"].getCurrent()[1].getText()]
 			self.ss_srv()
-	
-	def keyNumberGlobal(self, number):
-		if number == 1:
+		elif self.sel == 2:
 			cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + t.readAddonsUrl() + "info.txt -O /tmp/info.txt"
-			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Downloading NewDE info...'))
-		elif number == 2:
+			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Downloading EDG-Nemesis info...'))
+		elif self.sel == 3:
 			self.session.open(ParentalControlSetup)
-		elif number == 3:
+		elif self.sel == 4:
 			self.message = "\nEDG-Nemesis Version: " +  self.NEWDEVER
 			self.message += "\n\nImage version: " + self.IMAGEVER
 			self.message += "\nBuild by Gianathem"

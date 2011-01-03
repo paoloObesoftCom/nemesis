@@ -95,9 +95,9 @@
 	</screen>
 	<!-- Color OLED screen (setup) -->
 	<screen name="SetupSummary" position="0,0" size="96,64" id="2">
-		<widget source="SetupTitle" render="Label" position="0,0" size="96,16" font="oledDisplay;10" foregroundColor="#0036ff" />
-		<widget source="SetupEntry" render="Label" position="0,16" size="96,32" font="oledDisplay;10" foregroundColor="#ff0078" />
-		<widget source="SetupValue" render="Label" position="0,48" size="96,16" font="oledDisplay;10" foregroundColor="#85ff77" />
+		<widget source="SetupTitle" render="Label" position="0,0" size="96,16" halign="left" font="oledDisplay;10" foregroundColor="#0036ff" />
+		<widget source="SetupEntry" render="Label" position="0,16" size="96,32" halign="center" font="oledDisplay;10" foregroundColor="#ff0078" />
+		<widget source="SetupValue" render="Label" position="0,48" size="96,16" halign="right" font="oledDisplay;10" foregroundColor="#85ff77" />
 	</screen>
 	<!-- Color OLED screen (misc) -->
 	<screen name="SimpleSummary" position="0,0" size="96,64" id="2">
