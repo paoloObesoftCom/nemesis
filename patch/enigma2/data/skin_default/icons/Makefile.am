@@ -180,4 +180,7 @@ dist_install_DATA = \
 	sececm-fs8.png \
 	secemm-fs8.png \
 	viaecm-fs8.png \
-	viaemm-fs8.png
+	viaemm-fs8.png \
+	extensions.png \
+	update.png \
+	package.png

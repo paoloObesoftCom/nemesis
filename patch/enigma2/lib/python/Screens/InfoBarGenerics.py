@@ -118,7 +118,8 @@ class InfoBarShowHide:
 		self.__state = self.STATE_SHOWN
 		self.__locked = 0
 		self.__stateExtra = self.STATE_HIDDEN
-		self.__isZappping = False
+		self.fadeStepOff = 0
+		self.fadeStepOn = 0
 		
 		self.activityTimer = eTimer()
 		self.activityTimer.timeout.get().append(self.showEInfo)
@@ -144,7 +145,8 @@ class InfoBarShowHide:
 	def serviceStarted(self):
 		if self.execing:
 			if config.usage.show_infobar_on_zap.value and (not self.showTimer.isActive()):
-				self.__isZappping = True
+				if config.plugins.FadeSet.fadeInOnZap.value:
+					self.fadeInStart()
 				if config.nemesis.eiinfobardelayonzap.value > 0:
 					self.showTimer.start(config.nemesis.eiinfobardelayonzap.value,True)
 				else:
@@ -153,16 +155,6 @@ class InfoBarShowHide:
 	def __onShow(self):
 		self.__state = self.STATE_SHOWN
 		self.startHideTimer()
-		if config.plugins.FadeSet.fadeIn.value:
-			self.fadeStepOn = 0
-			if self.__isZappping:
-				if config.plugins.FadeSet.fadeInOnZap.value:
-					alphaChange(0)
-					self.fadeTimerOn.start(100, True)
-			else:
-				alphaChange(0)
-				self.fadeTimerOn.start(100, True)
-				
 		if HardwareInfo().get_device_name() != 'dm500hd':
 			displayBriChange(config.lcd.bright.value)
 		if config.nemesis.einfo.value and self.TunerTest():
@@ -172,10 +164,17 @@ class InfoBarShowHide:
 				self.showEInfo()
 			
 	def showEInfo(self):
-		self.__stateExtra = self.STATE_SHOWN
-		self.instance.hide()
-		self.InfoBarExtraDialog.show()
-	
+		if self.fadeStepOff == 0:
+			self.__stateExtra = self.STATE_SHOWN
+			self.instance.hide()
+			if self.hideTimer.isActive():
+				self.hideTimer.stop()
+				self.hideTimer.start(config.usage.infobar_timeout.index * 1000)
+			self.InfoBarExtraDialog.show()
+		else:
+			self.hide()
+			self.hideTimer.stop()
+			
 	def hideEInfo(self):
 		self.__stateExtra = self.STATE_HIDDEN
 		self.InfoBarExtraDialog.hide()
@@ -188,16 +187,14 @@ class InfoBarShowHide:
 
 	def __onHide(self):
 		self.__state = self.STATE_HIDDEN
-		self.__isZappping = False
 		if self.activityTimer.isActive():
 			self.activityTimer.stop()
 		if self.__stateExtra == self.STATE_SHOWN:
 			self.hideEInfo()
 		if HardwareInfo().get_device_name() != 'dm500hd':
 			displayBriChange(config.lcd.lcdbri.value)
-		if self.fadeTimerOff.isActive():
+		if self.fadeStepOff != 0:
 			self.fadeStepOff = 0
-		self.alphaTimerRestore.start(1000, True)
 
 	def doShow(self):
 		if self.showTimer.isActive():
@@ -220,9 +217,11 @@ class InfoBarShowHide:
 		elif self.__state == self.STATE_SHOWN and self.__stateExtra == self.STATE_SHOWN:
 			self.hide()
 			self.hideTimer.stop()
-		elif self.__state == self.STATE_SHOWN and self.__stateExtra == self.STATE_HIDDEN  and self.TunerTest():
+		elif self.__state == self.STATE_SHOWN and self.__stateExtra == self.STATE_HIDDEN and self.TunerTest():
 			self.showEInfo()
 		elif self.__state == self.STATE_HIDDEN:
+			if config.plugins.FadeSet.fadeIn.value:
+				self.fadeInStart()
 			self.show()
 
 	def lockShow(self):
@@ -236,6 +235,18 @@ class InfoBarShowHide:
 		if self.execing:
 			self.startHideTimer()
 
+	def fadeInStart(self):
+		alphaChange(0)
+		self.fadeStepOn = 0
+		self.fadeTimerOn.start(100, True)
+
+	def fadeTimerOnEvent(self):
+		self.fadeTimerOn.stop()
+		if self.fadeStepOn != 21:
+			alphaChange(config.av.osd_alpha.value*self.fadeStepOn/20)
+			self.fadeStepOn += 1
+			self.fadeTimerOn.start((config.plugins.FadeSet.timeout.value * 6), True)
+
 	def fadeTimerOffEvent(self):
 		self.fadeTimerOff.stop()
 		if self.fadeStepOff != 0:
@@ -244,17 +255,11 @@ class InfoBarShowHide:
 			self.fadeTimerOff.start((config.plugins.FadeSet.timeout.value * 6), True)
 		else:
 			self.hide()
+			self.alphaTimerRestore.start(100, True)
 
 	def alphaRestore(self): 
 		alphaChange(config.av.osd_alpha.value) 
 		
-	def fadeTimerOnEvent(self):
-		self.fadeTimerOn.stop()
-		if self.fadeStepOn != 21:
-			alphaChange(config.av.osd_alpha.value*self.fadeStepOn/20)
-			self.fadeStepOn += 1
-			self.fadeTimerOn.start((config.plugins.FadeSet.timeout.value * 6), True)
-
 	def TunerTest(self):
 		service = self.session.nav.getCurrentService()
 		if service is not None:

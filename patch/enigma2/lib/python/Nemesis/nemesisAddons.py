@@ -20,6 +20,28 @@ from nemesisDownloader import nemesisDownloader
 from Tools import Notifications
 import xml.etree.cElementTree as x
 
+isPluginManager = True
+isPacketManager = True
+isUpdatePLugin = True
+
+if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
+	try:
+		from Plugins.SystemPlugins.SoftwareManager.plugin import PluginManager
+	except:
+		isPluginManager = False
+	try:
+		from Plugins.SystemPlugins.SoftwareManager.plugin import PacketManager
+	except:
+		isPacketManager = False
+	try:
+		from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePlugin
+	except:
+		isUpdatePLugin = False
+else:
+	isPluginManager = False
+	isPacketManager = False
+	isUpdatePLugin = False
+
 t = nemesisTool()
 linkAddons = t.readAddonsUrl()
 linkExtra = t.readExtraUrl()
@@ -132,11 +154,15 @@ class NAddons(Screen):
 		self['conn'].hide()
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
+			
 		self.MenuList = [
 			('NAddons',_('Download Addons'),'icons/network.png',True),
 			('NExtra',_('Download Extra'),'icons/network.png',fileExists('/etc/extra.url')),
 			('NManual',_('Manual Package Install'),'icons/manual.png',True),
-			('NRemove',_('Remove Addons'),'icons/remove.png',True)
+			('NRemove',_('Remove Addons'),'icons/remove.png',True),
+			('NExtension',_('Manage extensions'),'icons/extensions.png',isPluginManager),
+			('NPacket',_('Packet management'),'icons/package.png',isPacketManager),
+			('NUpdate',_('Software update'),'icons/update.png',isUpdatePLugin)
 			]
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
@@ -166,6 +192,19 @@ class NAddons(Screen):
 				self.session.open(RManual)
 			elif (sel == "NRemove"):
 				self.session.open(RRemove)
+			elif (sel == "NExtension"):
+				self.session.openWithCallback(self.PluginClosed, PluginManager)
+			elif (sel == "NPacket"):
+				self.session.open(PacketManager, GetSkinPath())
+			elif (sel == "NUpdate"):
+				self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want to update your Dreambox?")+"\n"+_("\nAfter pressing OK, please wait!"))
+
+	def runUpgrade(self, result):
+		if result:
+			self.session.open(UpdatePlugin, GetSkinPath())
+
+	def PluginClosed(self):
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 
 	def runFinished(self, retval):
 		if fileExists('/tmp/addons.xml'):
