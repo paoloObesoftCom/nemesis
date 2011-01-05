@@ -12,15 +12,24 @@ from Tools.Directories import fileExists
 from Components.ConfigList import ConfigListScreen
 from Components.config import getConfigListEntry, ConfigYesNo, NoSave, config, ConfigFile, ConfigNothing, ConfigSelection
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from os import system, remove as os_remove
-from nemesisTool import ListboxE1, GetSkinPath, ListboxE4, nemesisTool
+from nemesisTool import  GetSkinPath, nemesisTool
 from nemesisConsole import nemesisConsole
 from nemesisShowPanel import nemesisShowPanel
 from nemesisDeviceManager import manageDevice
 from nemesisDttManager import manageDttDevice
 from enigma import eTimer
-from Tools.Directories import fileExists
 from Tools.HardwareInfo import HardwareInfo
+
+isNetworkPlugin = True
+if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/plugin.py")):
+	try:
+		from Plugins.SystemPlugins.NetworkBrowser.NetworkBrowser import NetworkBrowser
+	except:
+		isNetworkPlugin = False
+else:
+	isNetworkPlugin = False
 
 t = nemesisTool()
 configfile = ConfigFile()
@@ -64,16 +73,17 @@ class NUtility(Screen):
 		Screen.__init__(self, session)
 		self.list = []
 		self.menuList = [
-			('Services',_('Start/Stop Services'),'icons/enigma.png'),
-			('Module',_('Manage Kernel Modules'),'icons/module.png'),
-			('Ssetup',_('Manage Startup Services'),'icons/log.png'),
-			('Slog',_('View Services Logs'),'icons/setup.png'),
-			('Ccommand',_('Execute commands'),'icons/terminal.png'),
-			('NUserScript',_('Execute Users Scripts'),'icons/user.png'),
-			('NSwap',_('Manage Swap File'),'icons/swapsettings.png'),
-			('NDevice',_('Manage Devices'),'icons/device.png'),
-			('DttDevice',_('Manage DVB-T/C Adapter'),'icons/device.png'),
-			('Csave',_('Save Enigma Setting'),'icons/save.png')
+			('Services',_('Start/Stop Services'),'icons/enigma.png',True),
+			('Module',_('Manage Kernel Modules'),'icons/module.png',True),
+			('Ssetup',_('Manage Startup Services'),'icons/log.png',True),
+			('Slog',_('View Services Logs'),'icons/setup.png',True),
+			('NetBrowser',_('Network Browser'),'icons/network.png',isNetworkPlugin),
+			('Ccommand',_('Execute commands'),'icons/terminal.png',True),
+			('NUserScript',_('Execute Users Scripts'),'icons/user.png',True),
+			('NSwap',_('Manage Swap File'),'icons/swapsettings.png',True),
+			('NDevice',_('Manage Devices'),'icons/device.png',True),
+			('DttDevice',_('Manage DVB-T/C Adapter'),'icons/device.png',True),
+			('Csave',_('Save Enigma Setting'),'icons/save.png',True)
 			]
 			
 		self["title"] = Label(_("System Utility"))
@@ -118,6 +128,8 @@ class NUtility(Screen):
 				confBox.setTitle(_("Swap Error"))
 			else:
 				self.session.open(NSwap)
+		elif (self.sel == "NetBrowser"):
+			self.session.open(NetworkBrowser, None, GetSkinPath())
 		elif (self.sel == "Csave"):
 			msg = _('Saving Enigma Setting\nPlease Wait...')
 			self.confBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, enable_input = False)
@@ -133,7 +145,8 @@ class NUtility(Screen):
 		del self.list[:]
 		skin_path = GetSkinPath()
 		for men in self.menuList:
-			self.list.append((men[0],men[1],LoadPixmap(skin_path + men[2])))
+			if men[3]:
+				self.list.append((men[0],men[1],LoadPixmap(skin_path + men[2])))
 		self['list'].setList(self.list)
 
 class NCommand(Screen):

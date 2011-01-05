@@ -14,7 +14,7 @@ from Components.Sources.StaticText import StaticText
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from os import system, remove, listdir, chdir, getcwd
-from nemesisTool import nemesisTool, ListboxE1, GetSkinPath , ListboxE3
+from nemesisTool import nemesisTool, GetSkinPath
 from nemesisConsole import nemesisConsole
 from nemesisDownloader import nemesisDownloader
 from Tools import Notifications

@@ -1,12 +1,4 @@
 <setupxml>
-	<setup key="swman" title="Setup Software Manager">
-		<item level="0" text="Overwrite configuration files">config.plugins.SoftwareManager.overwriteConfigFiles</item>
-		<item level="0" text="Force overwrite on upgrade">config.plugins.SoftwareManager.overwriteUpgrade</item>
-		<item level="0" text="Force reinstall on install">config.plugins.SoftwareManager.forceReInstall</item>
-	</setup>
-	<setup key="dev" title="Setup Device">
-		<item level="0" text="Force Umount before Format">config.nemesis.forceumount</item>
-	</setup>
 	<setup key="osd" title="Setup InfoBar OSD">
 		<item level="0" text="Show Extended Info Permanent">config.nemesis.einfo</item>
 		<item level="0" text="Extended Infobar delay (msec)">config.nemesis.einfotimeout</item>
@@ -20,6 +12,14 @@
 		<item level="0" text="Enable fade out of infobar">config.plugins.FadeSet.fadeOut</item>
 		<item level="0" text="Enable fade in of infobar on Zap">config.plugins.FadeSet.fadeInOnZap</item>
 		<item level="0" text="Speed for fade in/out of infobar (1-10)">config.plugins.FadeSet.timeout</item>
+	</setup>
+	<setup key="swman" title="Setup Software Manager">
+		<item level="0" text="Overwrite configuration files">config.plugins.SoftwareManager.overwriteConfigFiles</item>
+		<item level="0" text="Force overwrite on upgrade">config.plugins.SoftwareManager.overwriteUpgrade</item>
+		<item level="0" text="Force reinstall on install">config.plugins.SoftwareManager.forceReInstall</item>
+	</setup>
+	<setup key="dev" title="Setup Device">
+		<item level="0" text="Force Umount before Format">config.nemesis.forceumount</item>
 	</setup>
 	<setup key="lcd" title="Setup Display LCD/OLED">
 		<item level="0" text="Brightness">config.lcd.bright</item>

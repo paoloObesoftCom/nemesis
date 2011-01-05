@@ -764,7 +764,7 @@
 		<widget name="psinfo" position="20,60" size="560,320" font="Prive2;18" />
 	</screen>
 	<screen name="showEnigmaInfo" position="center,100" size="800,560">
-		<widget name="infotext" position="10,10" size="780,390" font="Prive2;22" />
+		<widget name="infotext" position="10,10" size="780,540" font="Prive2;22" />
 	</screen>
 	<!-- EpgSearch -->
 	<screen name="NEpgSearch" position="center,100" size="700,560" title="EPG Search">
@@ -1393,15 +1393,15 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 				}
 				</convert>
 		</widget>
-		<widget name="author" position="60,220" size="300,20" zPosition="1" font="Prive2;20" transparent="1" halign="left" valign="top" />
-		<widget name="duration" position="370,220" size="200,20" zPosition="1" font="Prive2;20" transparent="1" halign="left" valign="top" />
-		<widget name="published" position="60,245" size="300,20" zPosition="1" font="Prive2;20" transparent="1" halign="left" valign="top" />
-		<widget name="views" position="370,245" size="200,20" zPosition="1" font="Prive2;20" transparent="1" halign="left" valign="top" />
-		<widget name="tags" position="60,270" size="600,20" zPosition="1" font="Prive2;20" transparent="1" halign="left" valign="top" />
-		<widget name="detailtext" position="60,300" size="610,200" zPosition="1" font="Prive2;20" transparent="1" halign="left" valign="top" />
-		<ePixmap position="100,500" size="100,40" zPosition="0" pixmap="~/plugin.png" alphatest="on" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="220,498" size="140,44" zPosition="1" alphatest="on" />
-		<widget name="key_red" position="220,500" zPosition="2" size="140,40" valign="center" halign="center" font="Prive2;20" transparent="1" foregroundColor="red" />
+		<widget name="author" position="60,220" size="300,30" zPosition="1" font="Prive2;20" transparent="1" halign="left" valign="top" />
+		<widget name="duration" position="370,220" size="200,30" zPosition="1" font="Prive2;20" transparent="1" halign="left" valign="top" />
+		<widget name="published" position="60,255" size="300,30" zPosition="1" font="Prive2;20" transparent="1" halign="left" valign="top" />
+		<widget name="views" position="370,255" size="200,30" zPosition="1" font="Prive2;20" transparent="1" halign="left" valign="top" />
+		<widget name="tags" position="60,290" size="600,30" zPosition="1" font="Prive2;20" transparent="1" halign="left" valign="top" />
+		<widget name="detailtext" position="60,325" size="610,200" zPosition="1" font="Prive2;20" transparent="1" halign="left" valign="top" />
+		<ePixmap position="100,528" size="100,40" zPosition="0" pixmap="~/plugin.png" alphatest="on" transparent="1" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="220,526" size="140,44" zPosition="1" alphatest="on" />
+		<widget name="key_red" position="220,528" zPosition="2" size="140,40" valign="center" halign="center" font="Prive2;20" transparent="1" foregroundColor="red" />
 		<widget name="thumbnail" position="0,0" size="130,98" alphatest="on" /> # fake entry for dynamic thumbnail resizing, currently there is no other way doing this.
 		</screen>
 	<screen name="MyTubeVideoHelpScreen" position="center,92" size="720,576" title="MyTubePlayerMainScreen...">
@@ -1969,7 +1969,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 			<convert type="ServiceName">Name</convert>
 		</widget>
 	</screen>
-	<screen name="SubtitleDisplay" position="100,20" size="1080,680" zPosition="-1" flags="wfNoBorder" backgroundColor="transparent" />
+	<screen name="SubtitleDisplay" position="50,40" size="1180,680" zPosition="-1" flags="wfNoBorder" backgroundColor="transparent" />
 	<screen name="TimerEdit" position="90,100" size="1100,560" title="Timer Edit">
 		<widget name="description" position="10,10" size="1080,40" font="Prive2;25" />
 		<widget name="lbegin" position="605,102" size="103,30" font="Prive2;25" foregroundColor="red" />
@@ -2149,23 +2149,23 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="key_blue" render="Label" position="545,460" transparent="1"  zPosition="2" size="170,28" font="Prive2;20" halign="center" valign="center" foregroundColor="blue" />
 	</screen>
 	<screen name="PluginManager" position="center,130" size="720,500" title="Extensions management" >
-		<widget source="list" render="Listbox" position="5,5" size="710,380" scrollbarMode="showOnDemand">
+		<widget source="list" render="Listbox" position="5,5" size="710,385" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">
 			{"templates":
-				{"default": (51,[
-						MultiContentEntryText(pos = (0, 1), size = (630, 24), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
-						MultiContentEntryText(pos = (0, 25), size = (630, 24), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
-						MultiContentEntryPixmapAlphaTest(pos = (635, 0), size = (48, 48), png = 5), # index 5 is the status pixmap
-						MultiContentEntryPixmapAlphaTest(pos = (0, 49), size = (710, 2), png = 6), # index 6 is the div pixmap
+				{"default": (55,[
+						MultiContentEntryText(pos = (0, 0), size = (630, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (0, 28), size = (630, 25), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 2), # index 2 is the description
+						MultiContentEntryPixmapAlphaTest(pos = (635, 3), size = (48, 48), png = 5), # index 5 is the status pixmap
+						MultiContentEntryPixmapAlphaTest(pos = (0, 53), size = (710, 2), png = 6), # index 6 is the div pixmap
 					]),
-				"category": (40,[
-						MultiContentEntryText(pos = (30, 0), size = (660, 22), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
-						MultiContentEntryText(pos = (30, 22), size = (660, 16), font=2, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the description
-						MultiContentEntryPixmapAlphaTest(pos = (0, 38), size = (660, 2), png = 3), # index 3 is the div pixmap
+				"category": (55,[
+						MultiContentEntryText(pos = (30, 0), size = (660, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (30, 28), size = (660, 25), font=2, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1), # index 1 is the description
+						MultiContentEntryPixmapAlphaTest(pos = (0, 53), size = (660, 2), png = 3), # index 3 is the div pixmap
 					])
 				},
 				"fonts": [gFont("Prive2", 18),gFont("Prive2", 16),gFont("Prive2", 14)],
-				"itemHeight": 52
+				"itemHeight": 55
 			}
 			</convert>
 		</widget>
@@ -2180,16 +2180,16 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="key_blue" render="Label" position="545,460" transparent="1"  zPosition="2" size="170,28" font="Prive2;20" halign="center" valign="center" foregroundColor="blue" />
 	</screen>
 	<screen name="PluginManagerInfo" position="center,130" size="720,500" title="Plugin manager activity information" >
-		<widget source="list" render="Listbox" position="5,5" size="710,380" scrollbarMode="showOnDemand" selectionDisabled="1">
+		<widget source="list" render="Listbox" position="5,5" size="710,385" scrollbarMode="showOnDemand" selectionDisabled="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (50, 0), size = (150, 26), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
-						MultiContentEntryText(pos = (50, 27), size = (700, 23), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the state
-						MultiContentEntryPixmapAlphaTest(pos = (0, 1), size = (48, 48), png = 2), # index 2 is the status pixmap
-						MultiContentEntryPixmapAlphaTest(pos = (0, 48), size = (710, 2), png = 3), # index 3 is the div pixmap
+						MultiContentEntryText(pos = (50, 0), size = (150, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (50, 28), size = (700, 25), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1), # index 1 is the state
+						MultiContentEntryPixmapAlphaTest(pos = (0, 3), size = (48, 48), png = 2), # index 2 is the status pixmap
+						MultiContentEntryPixmapAlphaTest(pos = (0, 53), size = (710, 2), png = 3), # index 3 is the div pixmap
 					],
 				"fonts": [gFont("Prive2", 20),gFont("Prive2", 18)],
-				"itemHeight": 50
+				"itemHeight": 55
 				}
 			</convert>
 		</widget>
@@ -2200,16 +2200,16 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="key_green" render="Label" position="185,460" transparent="1"  zPosition="2" size="170,28" font="Prive2;20" halign="center" valign="center" foregroundColor="green"  />
 	</screen>
 	<screen name="PluginManagerHelp"  position="center,130" size="720,500" title="Plugin manager help" >
-		<widget source="list" render="Listbox" position="5,5" size="710,380" scrollbarMode="showOnDemand" selectionDisabled="1">
+		<widget source="list" render="Listbox" position="5,5" size="710,385" scrollbarMode="showOnDemand" selectionDisabled="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (50, 0), size = (600, 26), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
-						MultiContentEntryText(pos = (50, 27), size = (600, 23), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the state
-						MultiContentEntryPixmapAlphaTest(pos = (0, 1), size = (48, 48), png = 2), # index 2 is the status pixmap
-						MultiContentEntryPixmapAlphaTest(pos = (0, 48), size = (610, 2), png = 3), # index 3 is the div pixmap
+						MultiContentEntryText(pos = (50, 0), size = (600, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (50, 28), size = 25), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1), # index 1 is the state
+						MultiContentEntryPixmapAlphaTest(pos = (0, 3), size = (48, 48), png = 2), # index 2 is the status pixmap
+						MultiContentEntryPixmapAlphaTest(pos = (0, 53), size = (610, 2), png = 3), # index 3 is the div pixmap
 					],
 				"fonts": [gFont("Prive2", 20),gFont("Prive2", 18)],
-				"itemHeight": 50
+				"itemHeight": 55
 				}
 			</convert>
 		</widget>
@@ -2267,16 +2267,16 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="key_green" render="Label" position="215,157" transparent="1"  zPosition="2" size="200,28" font="Prive2;20" halign="center" valign="center" foregroundColor="green"  />
 	</screen>
 	<screen name="PacketManager" position="center,130" size="720,500" title="Packet manager" >
-		<widget source="list" render="Listbox" position="5,5" size="710,380" scrollbarMode="showOnDemand">
+		<widget source="list" render="Listbox" position="5,5" size="710,385" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (5, 1), size = (630, 28), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
-						MultiContentEntryText(pos = (5, 26), size = (630, 20), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
-						MultiContentEntryPixmapAlphaTest(pos = (635, 2), size = (48, 48), png = 4), # index 4 is the status pixmap
-						MultiContentEntryPixmapAlphaTest(pos = (5, 50), size = (700, 2), png = 5), # index 4 is the div pixmap
+						MultiContentEntryText(pos = (5, 0), size = (630, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (5, 28), size = (630, 25), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 2), # index 2 is the description
+						MultiContentEntryPixmapAlphaTest(pos = (635, 3), size = (48, 48), png = 4), # index 4 is the status pixmap
+						MultiContentEntryPixmapAlphaTest(pos = (5, 53), size = (700, 2), png = 5), # index 4 is the div pixmap
 					],
 				"fonts": [gFont("Prive2", 18),gFont("Prive2", 14)],
-				"itemHeight": 52
+				"itemHeight": 55
 				}
 			</convert>
 		</widget>

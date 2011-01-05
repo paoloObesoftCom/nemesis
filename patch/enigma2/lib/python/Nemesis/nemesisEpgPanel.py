@@ -15,7 +15,7 @@ from Components.MenuList import MenuList
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists
 from os import system, remove as os_remove
-from nemesisTool import ListboxE1, GetSkinPath, ListboxE2
+from nemesisTool import GetSkinPath, ListboxE2
 from nemesisConsole import nemesisConsole
 from nemesisSetting import NSetup
 from nemesisShowPanel import nemesisShowPanel
