@@ -747,7 +747,7 @@ msgid "Setup Display LCD/OLED"
 msgstr "Configura Display LCD/OLED"
 
 msgid "Brightness on vision"
-msgstr "Luminosità in visione"
+msgstr "Lumin. in visione"
 
 msgid "Show Picon on LCD? (Need GUI Restart)"
 msgstr "Mostra Picon in LCD? (Necessario riavvio GUI)"

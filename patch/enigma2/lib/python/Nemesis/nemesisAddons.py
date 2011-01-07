@@ -193,7 +193,7 @@ class NAddons(Screen):
 			elif (sel == "NRemove"):
 				self.session.open(RRemove)
 			elif (sel == "NExtension"):
-				self.session.openWithCallback(self.PluginClosed, PluginManager)
+				self.session.open(PluginManager, GetSkinPath())
 			elif (sel == "NPacket"):
 				self.session.open(PacketManager, GetSkinPath())
 			elif (sel == "NUpdate"):
@@ -202,9 +202,6 @@ class NAddons(Screen):
 	def runUpgrade(self, result):
 		if result:
 			self.session.open(UpdatePlugin, GetSkinPath())
-
-	def PluginClosed(self):
-		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 
 	def runFinished(self, retval):
 		if fileExists('/tmp/addons.xml'):

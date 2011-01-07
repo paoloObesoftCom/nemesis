@@ -89,6 +89,7 @@
 		<setup key="lcd" title="Display Setup" requires="FrontpanelDisplay">
 			<item level="0" text="Brightness">config.lcd.bright</item>
 			<item level="0" text="Contrast">config.lcd.contrast</item>
+			<item level="0" text="Brightness on vision">config.lcd.lcdbri</item>
 			<item level="0" text="Standby">config.lcd.standby</item>
 		</setup>
 		<setup key="satconfig" title="Sat / Dish Setup">

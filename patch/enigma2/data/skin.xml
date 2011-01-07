@@ -699,7 +699,7 @@
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="46,400" size="240,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="334,400" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="canceltext" position="46,402" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
-		<widget name="oktext" position="334,402" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" transparent="1" />
+		<widget name="oktext" position="334,402" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="green" transparent="1" />
 	</screen>
 	<screen name="deleteLog" position="center,155" size="620,450" title="Delete log files">
 		<widget name="config" position="20,20" size="580,310" scrollbarMode="showOnDemand" />
@@ -707,7 +707,7 @@
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="46,400" size="240,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="334,400" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="canceltext" position="46,402" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
-		<widget name="oktext" position="334,402" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" transparent="1" />
+		<widget name="oktext" position="334,402" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="green" transparent="1" />
 	</screen>
 	<screen name="NServicesSetup" position="center,155" size="620,450" title="Manage Startup">
 		<widget name="config" position="20,20" size="580,310" scrollbarMode="showOnDemand" />
@@ -715,7 +715,7 @@
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="46,400" size="240,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="334,400" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="canceltext" position="46,402" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
-		<widget name="oktext" position="334,402" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" transparent="1" />
+		<widget name="oktext" position="334,402" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="green" transparent="1" />
 	</screen>
 	<!-- System Info panels	 -->
 	<screen name="NInfo" position="center,105" size="510,550">
@@ -2160,11 +2160,11 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 					]),
 				"category": (55,[
 						MultiContentEntryText(pos = (30, 0), size = (660, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0), # index 0 is the name
-						MultiContentEntryText(pos = (30, 28), size = (660, 25), font=2, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1), # index 1 is the description
+						MultiContentEntryText(pos = (30, 28), size = (660, 25), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1), # index 1 is the description
 						MultiContentEntryPixmapAlphaTest(pos = (0, 53), size = (660, 2), png = 3), # index 3 is the div pixmap
 					])
 				},
-				"fonts": [gFont("Prive2", 18),gFont("Prive2", 16),gFont("Prive2", 14)],
+				"fonts": [gFont("Prive2", 20),gFont("Prive2", 18),gFont("Prive2", 14)],
 				"itemHeight": 55
 			}
 			</convert>
@@ -2204,7 +2204,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 			<convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos = (50, 0), size = (600, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0), # index 0 is the name
-						MultiContentEntryText(pos = (50, 28), size = 25), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1), # index 1 is the state
+						MultiContentEntryText(pos = (50, 28), size =(600, 25), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1), # index 1 is the state
 						MultiContentEntryPixmapAlphaTest(pos = (0, 3), size = (48, 48), png = 2), # index 2 is the status pixmap
 						MultiContentEntryPixmapAlphaTest(pos = (0, 53), size = (610, 2), png = 3), # index 3 is the div pixmap
 					],
@@ -2275,7 +2275,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 						MultiContentEntryPixmapAlphaTest(pos = (635, 3), size = (48, 48), png = 4), # index 4 is the status pixmap
 						MultiContentEntryPixmapAlphaTest(pos = (5, 53), size = (700, 2), png = 5), # index 4 is the div pixmap
 					],
-				"fonts": [gFont("Prive2", 18),gFont("Prive2", 14)],
+				"fonts": [gFont("Prive2", 20),gFont("Prive2", 18)],
 				"itemHeight": 55
 				}
 			</convert>
@@ -2388,21 +2388,35 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="key_yellow" render="Label" position="600,573" size="200,28" zPosition="2" font="Prive2;22" halign="left" foregroundColor="yellow" transparent="1" />
 		<widget source="key_blue" render="Label" position="880,573" size="200,28" zPosition="2" font="Prive2;22" halign="left" foregroundColor="blue" transparent="1" />
 	</screen>
-	<screen name="TitleCutter" position="0,0" size="1280,720" title="Cutlist editor" flags="wfNoBorder">
-		<eLabel position="80,125" size="300,420" zPosition="1" backgroundColor="grey" />
-		<eLabel position="81,126" size="298,418" zPosition="2" backgroundColor="black" />
-		<widget name="Cutlist" position="90,135" size="280,400" zPosition="3" scrollbarMode="showOnDemand" />
-		<eLabel position="479,124" zPosition="3" size="696,377" backgroundColor="transparent2" />
-		<widget name="Video" position="270,100" zPosition="-10" size="1000,562" />
-		<widget source="session.CurrentService" render="Label" position="450,510" size="790,30" zPosition="3" font="Prive2;24" halign="center" valign="center" backgroundColor="black" transparent="1">
+	<screen name="CutListEditor" position="0,0" size="1280,720" title="Cutlist editor" flags="wfNoBorder">
+		<eLabel text="Cutlist editor" position="50,60" size="200,25" font="Regular;20" halign="center" />
+		<widget source="global.CurrentTime" render="Label" position="268,60" size="960,20" font="Regular;20" valign="center" halign="center">
+			<convert type="ClockToText">Format:%A %B %d, %H:%M</convert>
+		</widget>
+		<eLabel position="268,98" size="964,544" backgroundColor="#505555" />
+		<widget name="Video" position="270,100" zPosition="1" size="960,540" backgroundColor="transparent" />
+		<widget source="session.CurrentService" render="Label" position="135,405" size="660,50" font="Regular;22" halign="center" valign="center">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Label" position="450,550" size="790,25" zPosition="3" font="Prive2;20" halign="center" valign="center" backgroundColor="black" transparent="1">
+		<widget source="session.CurrentService" render="Label" position="320,660" zPosition="1" size="420,25" font="Regular;20" halign="left" valign="center">
 			<convert type="ServicePosition">Position,Detailed</convert>
 		</widget>
-		<widget name="Timeline" position="479,587" size="696,20" zPosition="3" backgroundColor="un808888" pointer="skin_default/position_arrow.png:3,5" foregroundColor="black" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="1060,623" size="1440,44" zPosition="1" alphatest="on" />
-		<eLabel text="OK = Menu" position="1060,630" size="140,28" zPosition="2" font="Prive2;22" backgroundColor="black" transparent="1" />
+		<widget name="SeekState" position="210,660" zPosition="1" size="100,25" halign="right" font="Regular;20" valign="center" />
+		<eLabel position="48,98" size="204,274" backgroundColor="#505555" />
+		<eLabel position="50,100" size="200,270" backgroundColor="#000000" />
+		<widget source="cutlist" position="50,100" zPosition="1" size="200,270" scrollbarMode="showOnDemand" transparent="1" render="Listbox" >
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(size=(125, 20), text = 1, backcolor = MultiContentTemplateColor(3)),
+						MultiContentEntryText(pos=(125,0), size=(50, 20), text = 2, flags = RT_HALIGN_RIGHT, backcolor = MultiContentTemplateColor(3))
+					],
+				 "fonts": [gFont("Regular", 18)],
+				 "itemHeight": 20
+				}
+			</convert>
+		</widget>
+		<widget name="Timeline" position="50,685" size="615,20" backgroundColor="#505555" pointer="skin_default/position_arrow.png:3,5" foregroundColor="black" />
+		<ePixmap pixmap="skin_default/icons/mp_buttons.png" position="700,515" size="109,13" alphatest="on" />
 	</screen>
 	<screen name="TitleProperties" position="90,100" size="1100,560" title="Properties of current title">
 		<widget name="thumbnail" position="20,20" size="260,160" alphatest="on" />

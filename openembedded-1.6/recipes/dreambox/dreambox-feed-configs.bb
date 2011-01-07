@@ -1,8 +1,8 @@
 DESCRIPTION = "Configuration files for online package repositories aka feeds"
-PR = "r1"
+PR = "r2"
 
 DISTRO_FEED_PREFIX ?= "official"
-DISTRO_FEED_URI ?= "http://sources.dreamboxupdate.com/${DISTRO}/${DISTRO_VERSION}"
+DISTRO_FEED_URI ?= "http://osp.edg-nemesis.tv/1.6/EDG/${MACHINE}"
 
 do_compile() {
     mkdir -p ${S}/${sysconfdir}/opkg

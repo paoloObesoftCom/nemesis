@@ -5,26 +5,12 @@ OPENDREAMBOX_COMMON = "\
 	task-opendreambox-base \
 	task-opendreambox-dvbapi \
 	task-opendreambox-ui \
-"
-
-NEMESIS_COMMON = "\
-	nfs-utils \
-	usbutils \
-	openvpn \
-	ez-ipupdate \
-	bzip2 \
-	libcap \
-	ntp \
-	ntpdate \
-	python-gdata \
-	dreambox-tuner-usb \
-	dreambox-nemesis \
-	nemesis-version \
+	task-opendreambox-nemesis \
 "
 
 # add bootstrap stuff
 DEPENDS = "${OPENDREAMBOX_COMMON}"
-IMAGE_INSTALL = "${OPENDREAMBOX_COMMON} ${NEMESIS_COMMON}"
+IMAGE_INSTALL = "${OPENDREAMBOX_COMMON}"
 
 # we don't want any locales, at least not in the common way.
 IMAGE_LINGUAS = " "
@@ -48,7 +34,7 @@ export NFO = '${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.nfo'
 
 generate_nfo() {
     VER=`grep Version: "${IMAGE_ROOTFS}/usr/lib/ipkg/info/enigma2.control" | cut -b 10-12`
-    echo "Enigma2: EDG-Nemesis Experimental ${VER}" > ${NFO}
+    echo "Enigma2: EDG-Nemesis ${VER}" > ${NFO}
     echo "Machine: Dreambox ${MACHINE}" >> ${NFO}
     DATE=`date +%Y-%m-%d' '%H':'%M`
     echo "Date: ${DATE}" >> ${NFO}
