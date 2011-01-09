@@ -166,7 +166,7 @@ class InfoBarShowHide:
 	def showEInfo(self):
 		if self.fadeStepOff == 0:
 			self.__stateExtra = self.STATE_SHOWN
-			self.instance.hide()
+			#self.instance.hide()
 			if self.hideTimer.isActive():
 				self.hideTimer.stop()
 				self.hideTimer.start(config.usage.infobar_timeout.index * 1000)

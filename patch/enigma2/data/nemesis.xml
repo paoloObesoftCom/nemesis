@@ -4,6 +4,9 @@
 		<item level="0" text="Extended Infobar delay (msec)">config.nemesis.einfotimeout</item>
 		<item level="0" text="Extended Infobar delay on zap (msec)">config.nemesis.eiinfobardelayonzap</item>
 		<item level="0" text="Infobar timeout (sec)">config.usage.infobar_timeout</item>
+		<item level="0" text="Show infobar on channel change">config.usage.show_infobar_on_zap</item>
+		<item level="0" text="Show infobar on skip forward/backward">config.usage.show_infobar_on_skip</item>
+		<item level="0" text="Show infobar on event change">config.usage.show_infobar_on_event_change</item>
 		<item level="0" text="Show decode network details">config.nemesis.shownetdet</item>
 		<item level="0" text="EMM Info delay (msec)">config.nemesis.emminfodelay</item>
 		<item level="0" text="ECM Info delay (msec)">config.nemesis.ecminfodelay</item>
