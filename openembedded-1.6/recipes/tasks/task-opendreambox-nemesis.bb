@@ -1,7 +1,7 @@
 DESCRIPTION = "OpenDreambox: Nemesis task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PR = "r03"
+PR = "r05"
 
 inherit task
 
@@ -13,6 +13,12 @@ PACKAGES = "\
 # task-opendreambox-nemesis
 #
 DESCRIPTION_task-opendreambox-nemesis = "OpenDreambox: Nemesis Dependencies"
+DEPENDS_task-opendreambox-nemesis = "\
+	task-opendreambox-cdplayer \
+	task-opendreambox-dvdplayer \
+	task-opendreambox-dvdburn \
+	dreambox-tuner-usb \
+"
 RDEPENDS_task-opendreambox-nemesis = "\
 	dvdbackup \
 	ccid \
@@ -35,34 +41,6 @@ RRECOMMENDS_task-opendreambox-nemesis = "\
 	enigma2-plugin-extensions-epgsearch \
 	enigma2-plugin-extensions-easymedia \
 	enigma2-plugin-extensions-socketmmi \
-"
-
-RECOMMENDS_task-opendreambox-nemesis_append_dm800 = "\
-	task-opendreambox-cdplayer \
-	task-opendreambox-dvdplayer \
-  task-opendreambox-dvdburn \
-	dreambox-tuner-usb \
-"
-
-RRECOMMENDS_task-opendreambox-nemesis_append_dm800se = "\
-	task-opendreambox-cdplayer \
-	task-opendreambox-dvdplayer \
-  task-opendreambox-dvdburn \
-	dreambox-tuner-usb \
-"
-
-RECOMMENDS_task-opendreambox-nemesis_append_dm500hd = "\
-	task-opendreambox-cdplayer \
-	task-opendreambox-dvdplayer \
-  task-opendreambox-dvdburn \
-	dreambox-tuner-usb \
-"
-
-RECOMMENDS_task-opendreambox-nemesis_append_dm7020hd = "\
-	task-opendreambox-cdplayer \
-	task-opendreambox-dvdplayer \
-  task-opendreambox-dvdburn \
-	dreambox-tuner-usb \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

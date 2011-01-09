@@ -118,6 +118,8 @@ data/skin_default/spinner/Makefile
 data/skin_default/frame/Makefile
 data/skin_default/general/Makefile
 data/skin_default/slider/Makefile
+data/piconProv/Makefile
+data/piconSat/Makefile
 include/Makefile
 lib/Makefile
 lib/actions/Makefile

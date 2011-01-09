@@ -280,11 +280,11 @@
 			<convert type="ServiceName">Provider</convert>
 		</widget>
 		<eLabel text="Video size: " font="Regular;16" position="10,120" size="90,20" halign="left" transparent="1"/>
-		<widget source="session.CurrentService" render="Label"	font="Regular;16" position="100,120" size="42,20" halign="left" transparent="1">
+		<widget source="session.CurrentService" render="Label"	font="Regular;16" position="100,120" size="42,20" halign="right" transparent="1">
 			<convert type="ServiceInfo">VideoWidth</convert>
 		</widget>
-		<eLabel text="x" font="Regular;16" position="142,120" size="11,20" halign="center"  backgroundColor="transpBlack" transparent="1"/>
-		<widget source="session.CurrentService" render="Label" 	font="Regular;16" position="153,120" size="42,20" halign="left" transparent="1">
+		<eLabel text="x" font="Regular;16" position="142,120" size="13,20" halign="center"  backgroundColor="transpBlack" transparent="1"/>
+		<widget source="session.CurrentService" render="Label" 	font="Regular;16" position="155,120" size="42,20" halign="left" transparent="1">
 			<convert type="ServiceInfo">VideoHeight</convert>
 		</widget>
 		<widget name="SatInfo" position="10,140" size="400,20" halign="left" font="Regular;16" transparent="1" foregroundColor="#cccccc"/>	

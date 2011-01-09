@@ -59,7 +59,7 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r49"
+PR = "r52"
 
 SRCDATE = "20101204"
 #SRCDATE is NOT used by git to checkout a specific revision
@@ -78,7 +78,7 @@ SRC_URI = "file://../../../../sources/enigma2_16.tar.gz"
 
 S = "${WORKDIR}/enigma2"
 
-FILES_${PN} += "${datadir}/fonts ${datadir}/keymaps"
+FILES_${PN} += "${datadir}/fonts ${datadir}/keymaps ${datadir}/piconProv ${datadir}/piconSat "
 FILES_${PN}-meta = "${datadir}/meta"
 PACKAGES += "${PN}-meta"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -94,6 +94,11 @@ EXTRA_OECONF = " \
 
 do_install_append() {
 	find ${D}/usr/lib/enigma2/python/Nemesis -name "*.py" | xargs rm -f
+	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/Nemesis*.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ServiceSat.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ServiceNumber.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/Nemesis*.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/PiconName.py
 }
 
 python populate_packages_prepend () {
