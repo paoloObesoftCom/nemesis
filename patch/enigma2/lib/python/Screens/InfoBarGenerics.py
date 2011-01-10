@@ -255,7 +255,7 @@ class InfoBarShowHide:
 			self.fadeTimerOff.start((config.plugins.FadeSet.timeout.value * 6), True)
 		else:
 			self.hide()
-			self.alphaTimerRestore.start(100, True)
+			self.alphaTimerRestore.start(300, True)
 
 	def alphaRestore(self): 
 		alphaChange(config.av.osd_alpha.value) 

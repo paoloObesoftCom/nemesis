@@ -148,18 +148,7 @@ dist_install_DATA = \
 	emunew-fs8.png \
 	frame.png \
 	ftanew-fs8.png \
-	i_cryptw.png \
-	i_dolby_now.png \
-	i_dolbyw.png \
-	i_format_now.png \
-	i_formats.png \
-	i_formatw.png \
-	i_hdw.png \
 	i_rec-n.png \
-	i_sdw.png \
-	i_subw.png \
-	i_txt_now.png \
-	i_txtw.png \
 	icon_aw-g.png \
 	icon_aw-y.png \
 	icon_aw.png \

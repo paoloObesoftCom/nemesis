@@ -22,6 +22,72 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/frontends/af9013.c v4l-dvb/linux/
  
  		while (if_sample_freq > (adc_freq / 2))
  			if_sample_freq = if_sample_freq - adc_freq;
+@@ -1199,45 +1199,49 @@
+ 	u8 tmp;
+ 	*status = 0;
+ 
+-	/* TPS lock */
+-	ret = af9013_read_reg_bits(state, 0xd330, 3, 1, &tmp);
+-	if (ret)
+-		goto error;
+-	if (tmp)
+-		*status |= FE_HAS_VITERBI | FE_HAS_CARRIER | FE_HAS_SIGNAL;
+-
+ 	/* MPEG2 lock */
+ 	ret = af9013_read_reg_bits(state, 0xd507, 6, 1, &tmp);
+ 	if (ret)
+ 		goto error;
+ 	if (tmp)
+-		*status |= FE_HAS_SYNC | FE_HAS_LOCK;
++		*status |= FE_HAS_SIGNAL | FE_HAS_CARRIER | FE_HAS_VITERBI |
++			FE_HAS_SYNC | FE_HAS_LOCK;
+ 
+-	if (!(*status & FE_HAS_SIGNAL)) {
+-		/* AGC lock */
+-		ret = af9013_read_reg_bits(state, 0xd1a0, 6, 1, &tmp);
++	if (!*status) {
++		/* TPS lock */
++		ret = af9013_read_reg_bits(state, 0xd330, 3, 1, &tmp);
+ 		if (ret)
+ 			goto error;
+ 		if (tmp)
+-			*status |= FE_HAS_SIGNAL;
++			*status |= FE_HAS_SIGNAL | FE_HAS_CARRIER |
++				FE_HAS_VITERBI;
+ 	}
+ 
+-	if (!(*status & FE_HAS_CARRIER)) {
++	if (!*status) {
+ 		/* CFO lock */
+ 		ret = af9013_read_reg_bits(state, 0xd333, 7, 1, &tmp);
+ 		if (ret)
+ 			goto error;
+ 		if (tmp)
+-			*status |= FE_HAS_CARRIER;
++			*status |= FE_HAS_SIGNAL | FE_HAS_CARRIER;
+ 	}
+ 
+-	if (!(*status & FE_HAS_CARRIER)) {
++	if (!*status) {
+ 		/* SFOE lock */
+ 		ret = af9013_read_reg_bits(state, 0xd334, 6, 1, &tmp);
+ 		if (ret)
+ 			goto error;
+ 		if (tmp)
+-			*status |= FE_HAS_CARRIER;
++			*status |= FE_HAS_SIGNAL | FE_HAS_CARRIER;
++	}
++
++	if (!*status) {
++		/* AGC lock */
++		ret = af9013_read_reg_bits(state, 0xd1a0, 6, 1, &tmp);
++		if (ret)
++			goto error;
++		if (tmp)
++			*status |= FE_HAS_SIGNAL;
+ 	}
+ 
+ 	ret = af9013_update_statistics(fe);
 @@ -1390,6 +1404,7 @@
  		init = tuner_init_mt2060_2;
  		break;
@@ -30,6 +96,30 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/frontends/af9013.c v4l-dvb/linux/
  		len = ARRAY_SIZE(tuner_init_tda18271);
  		init = tuner_init_tda18271;
  		break;
+@@ -1590,7 +1590,7 @@
+ {
+ 	int ret;
+ 	struct af9013_state *state = NULL;
+-	u8 buf[3], i;
++	u8 buf[4], i;
+ 
+ 	/* allocate memory for the internal state */
+ 	state = kzalloc(sizeof(struct af9013_state), GFP_KERNEL);
+@@ -1623,12 +1623,12 @@
+ 	}
+ 
+ 	/* firmware version */
+-	for (i = 0; i < 3; i++) {
++	for (i = 0; i < 4; i++) {
+ 		ret = af9013_read_reg(state, 0x5103 + i, &buf[i]);
+ 		if (ret)
+ 			goto error;
+ 	}
+-	info("firmware version:%d.%d.%d", buf[0], buf[1], buf[2]);
++	info("firmware version:%d.%d.%d.%d", buf[0], buf[1], buf[2], buf[3]);
+ 
+ 	/* settings for mp2if */
+ 	if (state->config.output_mode == AF9013_OUTPUT_MODE_USB) {
 diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/frontends/af9013_priv.h v4l-dvb/linux/drivers/media/dvb/frontends/af9013_priv.h
 --- v4l-dvb.orig/linux/drivers/media/dvb/frontends/af9013_priv.h	2010-09-09 14:38:50.000000000 +0200
 +++ v4l-dvb/linux/drivers/media/dvb/frontends/af9013_priv.h	2010-11-14 22:58:22.695438000 +0100

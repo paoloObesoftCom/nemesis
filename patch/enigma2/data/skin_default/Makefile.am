@@ -73,7 +73,6 @@ dist_install_DATA = \
 	ico_txt_on.png \
 	info-bg_mp.png \
 	info-bg.png \
-	i_rec.png \
 	key-blue.png \
 	key-green_big.png \
 	key-green.png \

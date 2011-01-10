@@ -26,7 +26,7 @@ class nemesisEI(Screen):
 		return t.readSrvName(csActive)
 	
 	def showEmuName(self):
-		self["emuname"].setText("Using: " + self.readEmuName())
+		self["emuname"].setText(self.readEmuName())
 		csName = self.readCsName()
 		if csName != 'None':
 			self["emuname"].setText(self["emuname"].getText() + " / " + csName )
@@ -63,8 +63,8 @@ class nemesisEI(Screen):
 		self["netcard"] = Label()
 		self["emuname"] = Label()
 		self["hops"] = Label()
+		self["reader"] = Label()
 		
-		self.count = 0
 		self.ecm_timer = eTimer()
 		self.ecm_timer.timeout.get().append(self.__updateEmuInfo)
 		self.emm_timer = eTimer()
@@ -78,12 +78,20 @@ class nemesisEI(Screen):
 				iPlayableService.evTunedIn: self.__evTunedIn,
 			})
 	
+		self.onHide.append(self.__onHide)
+		self.onShow.append(self.__evTunedIn)
+
+	def __onHide(self):
+		if self.emm_timer.isActive():
+			self.emm_timer.stop()
+		if self.ecm_timer.isActive():
+			self.ecm_timer.stop()
+
 	def __evStart(self):
 		if self.emm_timer.isActive():
 			self.emm_timer.stop()
 		if self.ecm_timer.isActive():
 			self.ecm_timer.stop()
-		self.count = 0
 		self.displayClean()	
 		
 	def __evTunedIn(self):
@@ -92,8 +100,10 @@ class nemesisEI(Screen):
 		if info is not None:
 			if info.getInfo(iServiceInformation.sIsCrypted):
 				self.showEmuName()
-			self.emm_timer.start(config.nemesis.emminfodelay.value)
-			self.ecm_timer.start(config.nemesis.ecminfodelay.value)
+			if not self.emm_timer.isActive():
+				self.emm_timer.start(config.nemesis.emminfodelay.value)
+			if not self.ecm_timer.isActive():
+				self.ecm_timer.start(config.nemesis.ecminfodelay.value)
 	
 	def __updateEMMInfo(self):
 		self.emm_timer.stop()
@@ -105,12 +115,10 @@ class nemesisEI(Screen):
 	def __updateEmuInfo(self):
 		service = self.session.nav.getCurrentService()
 		info = service and service.info()
+		self.cleandecInfo()
 		if info is not None:
 			if info.getInfo(iServiceInformation.sIsCrypted):
-				if self.count < 4:
-					self.count = self.count + 1
-				else:
-					self.ecm_timer.changeInterval(10000)
+				self.ecm_timer.changeInterval(11000)
 				info = parse_ecm(self.readEcmFile())
 				#print info
 				if info != 0:
@@ -126,30 +134,19 @@ class nemesisEI(Screen):
 					protocol = info[9]
 					
 					if ecmtime > 0:
-						self["ecmtime"].setText("ECM Time: " + str(ecmtime) + " msec")
+						self["ecmtime"].setText("ECM Time: %s msec" % str(ecmtime))
 					
 					if provid !='':
-						self["EmuInfo"].setText("Provider ID: " + provid + " ")
+						self["EmuInfo"].setText("ProvID: %s " % provid)
 					else:
 						self["EmuInfo"].setText("")
 					
 					if pid !='':
-						self["EmuInfo"].setText(self["EmuInfo"].getText() + "Pid: " + pid)
+						self["EmuInfo"].setText("%sPID: %s " % (self["EmuInfo"].getText(), pid))
 					
 					if caid !='':
-						self["EmuInfo"].setText(self["EmuInfo"].getText() + " Ca ID:" + caid)
+						self["EmuInfo"].setText("%sCaID: %s" % (self["EmuInfo"].getText(), caid))
 						self.showECM(caid)
-					
-					try:
-						self["b_fta"].hide()
-						self["b_card"].hide()
-						self["b_emu"].hide()
-						self["b_spider"].hide()
-					except:
-						self["b_emu_p"].hide()
-						self["b_fta_p"].hide()
-						self["b_card_p"].hide()
-						self["b_spider_p"].hide()
 					
 					if source == 0:
 						self["netcard"].setText("Decode: Unsupported!")
@@ -173,16 +170,20 @@ class nemesisEI(Screen):
 								except:
 									self["b_spider_p"].show()
 								if config.nemesis.shownetdet.value:
-										if port !='':
-											self["netcard"].setText("Source: " + addr + ":" + port)
-										else:
-											self["netcard"].setText("Source: " + addr)
-										if hops > 0:
-											self["hops"].setText("Hops: " + str(hops))
-										if protocol !='':
-											self["netcard"].setText(self["netcard"].getText() + " Protocol: " + str(protocol))
-										if reader !='':
-											self["netcard"].setText(self["netcard"].getText() + " Reader: " + str(reader))
+									if port !='':
+										self["netcard"].setText("Source: %s:%s" % (addr, port))
+									else:
+										self["netcard"].setText("Source: %s" % addr)
+									if hops > 0:
+										self["hops"].setText("Hops: %s" % str(hops))
+									if protocol !='':
+										self["reader"].setText("Protocol: %s " % str(protocol))
+									if reader !='' and protocol !='':
+										self["reader"].setText("%sReader: %s" % (self["reader"].getText(), str(reader)))
+									elif reader !='':
+										self["reader"].setText("Reader: %s" % str(reader))
+								else:
+									self["netcard"].setText("Decode: Network")
 						else:
 							try:
 								self["b_spider"].show()
@@ -194,7 +195,7 @@ class nemesisEI(Screen):
 							self["b_card"].show()
 						except:
 							self["b_card_p"].show()
-						self["netcard"].setText("Decode: " + str(reader))
+						self["netcard"].setText("Decode: %s" % str(reader))
 					elif source == 4:
 						try:
 							self["b_card"].show()
@@ -208,9 +209,12 @@ class nemesisEI(Screen):
 							self["b_card_p"].show()
 						self["netcard"].setText("Decode: slot-2")
 			else:
+				self["hops"].setText("")
+				self["emuname"].setText("")
 				self["EmuInfo"].setText("")
 				self["ecmtime"].setText("")
 				self["netcard"].setText("")
+				self["reader"].setText("")
 				try:
 					self["b_fta"].show()
 				except:
@@ -255,8 +259,21 @@ class nemesisEI(Screen):
 							self["%s_no_p" % system].hide()
 							self["%s_emm_p" % system].show()
 	
+	def cleandecInfo(self):
+		try:
+			self["b_fta"].hide()
+			self["b_card"].hide()
+			self["b_emu"].hide()
+			self["b_spider"].hide()
+		except:
+			self["b_emu_p"].hide()
+			self["b_fta_p"].hide()
+			self["b_card_p"].hide()
+			self["b_spider_p"].hide()
+
 	def displayClean(self):
 		self["hops"].setText("")
+		self["reader"].setText("")
 		self["emuname"].setText("")
 		self["EmuInfo"].setText("")
 		self["ecmtime"].setText("")

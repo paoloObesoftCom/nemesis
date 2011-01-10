@@ -1,7 +1,7 @@
 diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/drivers/media/dvb/dvb-usb/af9035.c
 --- v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c	1970-01-01 01:00:00.000000000 +0100
 +++ v4l-dvb/linux/drivers/media/dvb/dvb-usb/af9035.c	2010-11-13 18:11:09.699695000 +0100
-@@ -0,0 +1,1050 @@
+@@ -0,0 +1,1133 @@
 +/*
 + * Afatech AF9035 DVB USB driver
 + *
@@ -31,6 +31,7 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +#include "af9033.h"
 +#include "tua9001.h"
 +#include "mxl5007t.h"
++#include "tda18218.h"
 +
 +static int dvb_usb_af9035_debug = 0;
 +module_param_named(debug, dvb_usb_af9035_debug, int, 0644);
@@ -46,9 +47,11 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +static struct af9033_config af9035_af9033_config[] = {
 +	{
 +		.demod_address = 0,
++		.tuner_address = 0,
 +		.output_mode = AF9033_TS_MODE_USB,
 +	}, {
 +		.demod_address = 0,
++		.tuner_address = 0,
 +		.output_mode = AF9033_TS_MODE_SERIAL,
 +	}
 +};
@@ -143,7 +146,7 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +	return ret;
 +}
 +
-+static int af9035_write_regs(struct dvb_usb_device *d, u8 mbox, u16 reg,
++static int af9035_write_regs_bis(struct usb_device *d, u8 mbox, u16 reg,
 +u8 *val, u8 len)
 +{
 +	u8 wbuf[6+len];
@@ -156,51 +159,74 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +	wbuf[4] = reg >> 8;
 +	wbuf[5] = reg & 0xff;
 +	memcpy(&wbuf[6], val, len);
-+	return af9035_rw_udev(d->udev, &req);
++	return af9035_rw_udev(d, &req);
 +}
 +
-+static int af9035_read_regs(struct dvb_usb_device *d, u8 mbox, u16 reg, u8 *val,
++static int af9035_write_regs(struct dvb_usb_device *d, u8 mbox, u16 reg,
++u8 *val, u8 len)
++{
++	return af9035_write_regs_bis(d->udev, mbox, reg, val, len);
++}
++
++static int af9035_read_regs_bis(struct usb_device *d, u8 mbox, u16 reg, u8 *val,
 +	u8 len)
 +{
 +	u8 wbuf[] = {len, 2, 0, 0, reg >> 8, reg & 0xff};
 +	struct af9035_req req = {CMD_REG_DEMOD_READ, mbox, sizeof(wbuf), wbuf,
 +		len, val};
-+	return af9035_rw_udev(d->udev, &req);
++	return af9035_rw_udev(d, &req);
++}
++
++static int af9035_read_regs(struct dvb_usb_device *d, u8 mbox, u16 reg, u8 *val,
++	u8 len)
++{
++	return af9035_read_regs_bis(d->udev, mbox, reg, val, len);
++}
++
++static int af9035_write_reg_bis(struct usb_device *d, u8 mbox, u16 reg, u8 val)
++{
++	return af9035_write_regs_bis(d, mbox, reg, &val, 1);
 +}
 +
 +static int af9035_write_reg(struct dvb_usb_device *d, u8 mbox, u16 reg, u8 val)
 +{
-+	return af9035_write_regs(d, mbox, reg, &val, 1);
++	return af9035_write_regs_bis(d->udev, mbox, reg, &val, 1);
 +}
 +
-+static int af9035_read_reg(struct dvb_usb_device *d, u8 mbox, u16 reg, u8 *val)
++static int af9035_read_reg_bis(struct usb_device *d, u8 mbox, u16 reg, u8 *val)
 +{
-+	return af9035_read_regs(d, mbox, reg, val, 1);
++	return af9035_read_regs_bis(d, mbox, reg, val, 1);
 +}
 +
-+static int af9035_write_reg_bits(struct dvb_usb_device *d, u8 mbox, u16 reg,
++static int af9035_write_reg_bits_bis(struct usb_device *d, u8 mbox, u16 reg,
 +	u8 pos, u8 len, u8 val)
 +{
 +	int ret;
 +	u8 tmp, mask;
 +
-+	ret = af9035_read_reg(d, mbox, reg, &tmp);
++	ret = af9035_read_reg_bis(d, mbox, reg, &tmp);
 +	if (ret)
 +		return ret;
 +
 +	mask = regmask[len - 1] << pos;
 +	tmp = (tmp & ~mask) | ((val << pos) & mask);
 +
-+	return af9035_write_reg(d, mbox, reg, tmp);
++	return af9035_write_reg_bis(d, mbox, reg, tmp);
 +}
 +
-+static int af9035_read_reg_bits(struct dvb_usb_device *d, u8 mbox, u16 reg,
++static int af9035_write_reg_bits(struct dvb_usb_device *d, u8 mbox, u16 reg,
++	u8 pos, u8 len, u8 val)
++{
++	return af9035_write_reg_bits_bis(d->udev, mbox, reg, pos, len, val);
++}
++
++static int af9035_read_reg_bits_bis(struct usb_device *d, u8 mbox, u16 reg,
 +	u8 pos, u8 len, u8 *val)
 +{
 +	int ret;
 +	u8 tmp;
 +
-+	ret = af9035_read_reg(d, mbox, reg, &tmp);
++	ret = af9035_read_reg_bis(d, mbox, reg, &tmp);
 +	if (ret)
 +		return ret;
 +	*val = (tmp >> pos) & regmask[len - 1];
@@ -243,7 +269,8 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +					msg[i].addr = af9035_af9033_config[0].tuner_address;
 +					req.mbox += 0x10;
 +				}
-+				wbuf[0] = msg[i + 1].len; /* read len */				wbuf[1] = msg[i].addr; /* tuner i2c addr */
++				wbuf[0] = msg[i + 1].len; /* read len */
++				wbuf[1] = msg[i].addr; /* tuner i2c addr */
 +				wbuf[2] = 0x01; /* reg width */
 +				wbuf[3] = 0x00; /* reg MSB */
 +				wbuf[4] = msg[i].buf[0]; /* reg LSB */
@@ -678,6 +705,9 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +		case AF9033_TUNER_MXL5007t:
 +			af9035_af9033_config[i].rf_spec_inv = 1;
 +			break;
++                case AF9033_TUNER_TDA18218:
++			af9035_af9033_config[i].rf_spec_inv = 1;
++			break;
 +		default:
 +			warn("tuner ID:%d not supported, please report!", val);
 +			return -ENODEV;
@@ -692,14 +722,49 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +		err("eeprom read failed:%d", ret);
 +
 +	if (le16_to_cpu(udev->descriptor.idVendor) == USB_VID_AVERMEDIA &&
-+	    le16_to_cpu(udev->descriptor.idProduct) == USB_PID_AVERMEDIA_A825) {
-+		deb_info("%s: AverMedia A825: overriding config\n", __func__);
++	    (le16_to_cpu(udev->descriptor.idProduct) == USB_PID_AVERMEDIA_A825 ||
++              le16_to_cpu(udev->descriptor.idProduct) == USB_PID_AVERMEDIA_A835 ||
++              le16_to_cpu(udev->descriptor.idProduct) == USB_PID_AVERMEDIA_B835)) {
++		deb_info("%s: AverMedia A825/A835/B835: overriding config\n", __func__);
 +		/* set correct IF */
 +		for (i = 0; i < af9035_properties[0].num_adapters; i++) {
 +			af9035_af9033_config[i].if_freq = 4570000;
 +		}
 +	}
 +
++	return ret;
++}
++
++static int af9035_aux_init(struct usb_device *d)
++{
++	int ret;
++	u8 tmp, i;
++
++	/* get demod crystal and ADC freqs */
++	ret = af9035_read_reg_bits_bis(d, LINK,
++		r_io_mux_pwron_clk_strap, io_mux_pwron_clk_strap_pos,
++		io_mux_pwron_clk_strap_len, &tmp);
++	if (ret)
++		goto error;
++
++	for (i = 0; i < af9035_properties[0].num_adapters; i++) {
++		af9035_af9033_config[i].crystal_clock =
++			clock_table[tmp].crystal;
++		af9035_af9033_config[i].adc_clock =
++			clock_table[tmp].adc;
++	}
++
++	/* write 2nd demod I2C address to device */
++	ret = af9035_write_reg_bis(d, LINK, 0x417f,
++		af9035_af9033_config[1].demod_address);
++	if (ret)
++		goto error;
++
++	/* enable / disable clock out for 2nd demod for power saving */
++	ret = af9035_write_reg_bis(d, LINK, p_reg_top_clkoen,
++		af9035_config.dual_mode);
++
++error:
 +	return ret;
 +}
 +
@@ -730,45 +795,11 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +
 +static int af9035_af9033_frontend_attach(struct dvb_usb_adapter *adap)
 +{
-+	int ret;
-+	u8 tmp, i;
-+
-+	if (adap->id == 0) {
-+		/* get demod crystal and ADC freqs */
-+		ret = af9035_read_reg_bits(adap->dev, LINK,
-+			r_io_mux_pwron_clk_strap, io_mux_pwron_clk_strap_pos,
-+			io_mux_pwron_clk_strap_len, &tmp);
-+		if (ret)
-+			goto error;
-+
-+		for (i = 0; i < af9035_properties[0].num_adapters; i++) {
-+			af9035_af9033_config[i].crystal_clock =
-+				clock_table[tmp].crystal;
-+			af9035_af9033_config[i].adc_clock =
-+				clock_table[tmp].adc;
-+		}
-+
-+		/* write 2nd demod I2C address to device */
-+		ret = af9035_write_reg(adap->dev, LINK, 0x417f,
-+			af9035_af9033_config[1].demod_address);
-+		if (ret)
-+			goto error;
-+
-+		/* enable / disable clock out for 2nd demod for power saving */
-+		ret = af9035_write_reg(adap->dev, LINK, p_reg_top_clkoen,
-+			af9035_config.dual_mode);
-+		if (ret)
-+			goto error;
-+	}
-+
 +	/* attach demodulator */
 +	adap->fe = dvb_attach(af9033_attach, &af9035_af9033_config[adap->id],
 +		&adap->dev->i2c_adap);
 +
 +	return adap->fe == NULL ? -ENODEV : 0;
-+
-+error:
-+	return ret;
 +}
 +
 +static struct tua9001_config af9035_tua9001_config[] = {
@@ -797,6 +828,11 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +	}
 +};
 +
++static struct tda18218_config af9035_tda18218_config = {
++        .i2c_address = 0xc0,
++        .i2c_wr_max = 17,
++};
++
 +static int af9035_tuner_attach(struct dvb_usb_adapter *adap)
 +{
 +	int ret;
@@ -821,21 +857,22 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +			ret = af9035_write_reg_bits(adap->dev, LINK,
 +				p_reg_top_gpiot3_on, reg_top_gpiot3_on_pos,
 +				reg_top_gpiot3_on_len, 1);
-+	
++
 +			/* reset tuner */
 +			ret = af9035_write_reg_bits(adap->dev, LINK, p_reg_top_gpiot3_o,
 +				 reg_top_gpiot3_o_pos, reg_top_gpiot3_o_len, 0);
 +			msleep(1);
 +			ret = af9035_write_reg_bits(adap->dev, LINK, p_reg_top_gpiot3_o,
 +				 reg_top_gpiot3_o_pos, reg_top_gpiot3_o_len, 1);
-+	
++
 +			/* activate tuner - TODO: do that like I2C gate control */
 +			ret = af9035_write_reg_bits(adap->dev, LINK, p_reg_top_gpiot2_o,
 +				 reg_top_gpiot2_o_pos, reg_top_gpiot2_o_len, 1);
 +		}
-+		
++
 +		ret = dvb_attach(tua9001_attach, adap->fe, &adap->dev->i2c_adap,
 +			&af9035_tua9001_config[adap->id]) == NULL ? -ENODEV : 0;
++
 +		break;
 +	case AF9033_TUNER_MXL5007t:
 +		af9035_af9033_config[adap->id].tuner_address = 0xc0;
@@ -889,8 +926,42 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +		ret = dvb_attach(mxl5007t_attach, adap->fe, &adap->dev->i2c_adap,
 +			af9035_af9033_config[adap->id].tuner_address,
 +			&af9035_mxl5007t_config[adap->id]) == NULL ? -ENODEV : 0;
-+				
++
 +		break;
++          case AF9033_TUNER_TDA18218:
++                  af9035_af9033_config[adap->id].tuner_address = af9035_tua9001_config[adap->id].i2c_address;
++                  af9035_af9033_config[adap->id].tuner_address += adap->id;
++                  if (adap->id == 0) {
++                  /* gpiot3 TUA9001 RESETN
++                  gpiot2 TUA9001 RXEN */
++                  ret = af9035_write_reg_bits(adap->dev, LINK,
++                          p_reg_top_gpiot2_en, reg_top_gpiot2_en_pos,
++                          reg_top_gpiot2_en_len, 1);
++                  ret = af9035_write_reg_bits(adap->dev, LINK,
++                          p_reg_top_gpiot2_on, reg_top_gpiot2_on_pos,
++                          reg_top_gpiot2_on_len, 1);
++                  ret = af9035_write_reg_bits(adap->dev, LINK,
++                          p_reg_top_gpiot3_en, reg_top_gpiot3_en_pos,
++                          reg_top_gpiot3_en_len, 1);
++                  ret = af9035_write_reg_bits(adap->dev, LINK,
++                          p_reg_top_gpiot3_on, reg_top_gpiot3_on_pos,
++                          reg_top_gpiot3_on_len, 1);
++
++                  /* reset tuner */
++                  ret = af9035_write_reg_bits(adap->dev, LINK, p_reg_top_gpiot3_o,
++                          reg_top_gpiot3_o_pos, reg_top_gpiot3_o_len, 0);
++                  msleep(1);
++                  ret = af9035_write_reg_bits(adap->dev, LINK, p_reg_top_gpiot3_o,
++                          reg_top_gpiot3_o_pos, reg_top_gpiot3_o_len, 1);
++
++                   /* activate tuner - TODO: do that like I2C gate control */
++                   ret = af9035_write_reg_bits(adap->dev, LINK, p_reg_top_gpiot2_o,
++                           reg_top_gpiot2_o_pos, reg_top_gpiot2_o_len, 1);
++                   }
++
++                   ret = dvb_attach(tda18218_attach, adap->fe, &adap->dev->i2c_adap,
++                           &af9035_tda18218_config) == NULL ? -ENODEV : 0;
++                   break;
 +	default:
 +		ret = -ENODEV;
 +		err("unknown tuner ID:%d",
@@ -907,8 +978,10 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +	{USB_DEVICE(USB_VID_AFATECH,   USB_PID_AFATECH_AF9035_1003)},
 +	{USB_DEVICE(USB_VID_AFATECH,   USB_PID_AFATECH_AF9035_9035)},
 +/*  5 */{USB_DEVICE(USB_VID_TERRATEC,  USB_PID_TERRATEC_CINERGY_T_STICK)},
-+/*  6 */{USB_DEVICE(USB_VID_TERRATEC,  USB_PID_TERRATEC_CINERGY_T_STICK_2)},
++    {USB_DEVICE(USB_VID_TERRATEC,  USB_PID_TERRATEC_CINERGY_T_STICK_2)},
 +/*  7 */{USB_DEVICE(USB_VID_AVERMEDIA, USB_PID_AVERMEDIA_A825)},
++/*  8 */{USB_DEVICE(USB_VID_AVERMEDIA, USB_PID_AVERMEDIA_A835)},
++        {USB_DEVICE(USB_VID_AVERMEDIA, USB_PID_AVERMEDIA_B835)},
 +	{0},
 +};
 +
@@ -958,7 +1031,7 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +
 +		.i2c_algo = &af9035_i2c_algo,
 +
-+		.num_device_descs = 3,
++		.num_device_descs = 4,
 +		.devices = {
 +			{
 +				.name = "Afatech AF9035 DVB-T USB2.0 stick",
@@ -980,6 +1053,12 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +				.name = "Avermedia TwinStar",
 +				.cold_ids = {&af9035_usb_table[7], NULL},
 +				.warm_ids = {NULL},
++            },
++            {
++                .name = "Avermedia AverTV Volar HD Team Bob/Chip (A825/A835/B835)",
++                .cold_ids = {&af9035_usb_table[8],
++                &af9035_usb_table[9], NULL},
++                .warm_ids = {NULL},
 +			},
 +		}
 +	},
@@ -1000,6 +1079,10 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.c v4l-dvb/linux/dr
 +	   interface 1 is for remote controller (HID) */
 +	if (intf->cur_altsetting->desc.bInterfaceNumber == 0) {
 +		ret = af9035_read_config(udev);
++		if (ret)
++			return ret;
++
++		ret = af9035_aux_init(udev);
 +		if (ret)
 +			return ret;
 +
@@ -1245,18 +1328,23 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/af9035.h v4l-dvb/linux/dr
 diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/dvb-usb-ids.h v4l-dvb/linux/drivers/media/dvb/dvb-usb/dvb-usb-ids.h
 --- v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/dvb-usb-ids.h	2010-09-09 14:38:50.000000000 +0200
 +++ v4l-dvb/linux/drivers/media/dvb/dvb-usb/dvb-usb-ids.h	2010-11-12 23:21:04.381387000 +0100
-@@ -197,6 +197,7 @@
+@@ -196,7 +201,12 @@
+ #define USB_PID_AVERMEDIA_A309				0xa309
  #define USB_PID_AVERMEDIA_A310				0xa310
  #define USB_PID_AVERMEDIA_A850				0x850a
++#define USB_PID_AVERMEDIA_A850T                        0x850b
  #define USB_PID_AVERMEDIA_A805				0xa805
++#define USB_PID_AVERMEDIA_A815M	                0x815a
 +#define USB_PID_AVERMEDIA_A825				0x0825
++#define USB_PID_AVERMEDIA_A835                         0xa835
++#define USB_PID_AVERMEDIA_B835                         0xb835
  #define USB_PID_TECHNOTREND_CONNECT_S2400               0x3006
  #define USB_PID_TECHNOTREND_CONNECT_CT3650		0x300d
  #define USB_PID_TERRATEC_CINERGY_DT_XS_DIVERSITY	0x005a
 diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/dvb-usb-terratec-ids.h v4l-dvb/linux/drivers/media/dvb/dvb-usb/dvb-usb-terratec-ids.h
 --- v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/dvb-usb-terratec-ids.h	1970-01-01 01:00:00.000000000 +0100
 +++ v4l-dvb/linux/drivers/media/dvb/dvb-usb/dvb-usb-terratec-ids.h	2009-09-26 20:47:13.000000000 +0200
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,8 @@
 +#define USB_PID_AFATECH_AF9035_1000			0x1000
 +#define USB_PID_AFATECH_AF9035_1001			0x1001
 +#define USB_PID_AFATECH_AF9035_1002			0x1002
@@ -1264,6 +1352,7 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/dvb-usb-terratec-ids.h v4
 +#define USB_PID_AFATECH_AF9035_9035			0x9035
 +#define USB_PID_TERRATEC_CINERGY_T_STICK		0x0093
 +#define USB_PID_TERRATEC_CINERGY_T_STICK_2		0x00AA
++#define USB_PID_TERRATEC_CINERGY_T_STICK_DUAL_RC        0x0099
 diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/Kconfig v4l-dvb/linux/drivers/media/dvb/dvb-usb/Kconfig
 --- v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/Kconfig	2010-09-09 14:38:50.000000000 +0200
 +++ v4l-dvb/linux/drivers/media/dvb/dvb-usb/Kconfig	2010-11-12 23:16:56.304663000 +0100
@@ -1274,7 +1363,7 @@ diff -ruN v4l-dvb.orig/linux/drivers/media/dvb/dvb-usb/Kconfig v4l-dvb/linux/dri
 +config DVB_USB_AF9035
 +	tristate "Afatech AF9035 DVB-T USB2.0 support"
 +	depends on DVB_USB
-+	select DVB_AF9013
++	select DVB_AF9033 
 +	select DVB_PLL              if !DVB_FE_CUSTOMISE
 +	select MEDIA_TUNER_MT2060   if !MEDIA_TUNER_CUSTOMISE
 +	select MEDIA_TUNER_QT1010   if !MEDIA_TUNER_CUSTOMISE

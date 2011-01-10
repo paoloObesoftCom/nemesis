@@ -7,11 +7,14 @@ class ServiceName(Converter, object):
 	NAME = 0
 	PROVIDER = 1
 	REFERENCE = 2
+	PROVIDER_EXT = 3
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
 		if type == "Provider":
 			self.type = self.PROVIDER
+		elif type == "ProviderExt":
+			self.type = self.PROVIDER_EXT
 		elif type == "Reference":
 			self.type = self.REFERENCE
 		else:
@@ -45,6 +48,8 @@ class ServiceName(Converter, object):
 			return name.replace('\xc2\x86', '').replace('\xc2\x87', '')
 		elif self.type == self.PROVIDER:
 			return self.getServiceInfoValue(info, iServiceInformation.sProvider, ref)
+		elif self.type == self.PROVIDER_EXT:
+			return "Provider: %s" % self.getServiceInfoValue(info, iServiceInformation.sProvider, ref)
 		elif self.type == self.REFERENCE:
 			return self.getServiceInfoValue(info, iServiceInformation.sServiceref, ref)
 

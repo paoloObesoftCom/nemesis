@@ -6,7 +6,7 @@ def InitNemesisConfig():
 #system
 	config.nemesis = ConfigSubsection();
 	config.nemesis.einfo = ConfigYesNo(default = True)
-	config.nemesis.einfotimeout = ConfigNumber(default = 500)
+	config.nemesis.einfotimeout = ConfigNumber(default = 800)
 	config.nemesis.shownetdet = ConfigYesNo(default = True)
 	config.nemesis.eiinfobardelayonzap = ConfigNumber(default = 100)
 	config.nemesis.emminfodelay = ConfigNumber(default = 400)
@@ -27,7 +27,7 @@ def InitNemesisConfig():
 	config.plugins.FadeSet.fadeIn = ConfigYesNo(default = True) # fade in enable
 	config.plugins.FadeSet.fadeOut = ConfigYesNo(default = True) # fade out enable
 	config.plugins.FadeSet.fadeInOnZap = ConfigYesNo(default = False) # fade in enable on Zap
-	config.plugins.FadeSet.timeout = ConfigInteger(5, (1,10)) # fade in/out value
+	config.plugins.FadeSet.timeout = ConfigInteger(3, (1,10)) # fade in/out value
 #inadyn
 	config.inadyn = ConfigSubsection();
 	config.inadyn.user = ConfigText(default = "myuser", fixed_size = False)

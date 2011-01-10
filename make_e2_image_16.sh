@@ -33,7 +33,12 @@ rebuild_image()
 {
 	. ./env.source
 	rm -f tmp/deploy/images/*
-	bitbake dreambox-image
+	bitbake \
+	task-opendreambox-cdplayer \
+	task-opendreambox-dvdplayer \
+	task-opendreambox-dvdburn \
+	dreambox-tuner-usb \
+	dreambox-image
 }
 
 move_image()

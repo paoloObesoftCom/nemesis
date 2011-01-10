@@ -1,7 +1,7 @@
 DESCRIPTION = "OpenDreambox: Nemesis task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PR = "r05"
+PR = "r07"
 
 inherit task
 

@@ -1,6 +1,9 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
+from Screens.Ipkg import Ipkg
+from Components.Sources.List import List
+from Components.Ipkg import IpkgComponent
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
@@ -266,9 +269,20 @@ class manageDttDevice(Screen):
 	
 	skin = """
 		<screen position="80,95" size="560,430">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,65" size="540,340" scrollbarMode="showOnDemand" />
-			<widget name="key_red" position="0,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+			<widget name="conn" position="10,10" size="540,340" font="Regular;20" halign="center" />
+			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 0), size = (400, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+							MultiContentEntryPixmapAlphaTest(pos=(405, 6), size=(80, 23), png=png),
+						],
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 30
+					}
+				</convert>
+			</widget>
+			<widget name="key_red" position="0,400" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
+			<widget name="key_yellow" position="400,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -276,15 +290,22 @@ class manageDttDevice(Screen):
 		self.list = []
 		self.devList = checkDev()
 		self.devstatus = {}
-		self["title"] = Label(_("Manage Dtt Adapter"))
-		self['list'] = ListboxE1(self.list)
+		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
+		self["key_yellow"] = Label(_("Install"))
+		self["key_yellow"].hide()
+		self['conn'] = Label("")
+		self["conn"].hide()
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
-			"red": self.close,
+			'yellow': self.modulesInstall,
+			'red': self.close,
 			'back': self.close
 		})
+		self.cmdList = []
+		self.ipkg = IpkgComponent()
+		self.ipkg.addCallback(self.ipkgCallback)
 		self.onLayoutFinish.append(self.updateList)
 		self.onShown.append(self.setWindowTitle)
 	
@@ -344,14 +365,36 @@ class manageDttDevice(Screen):
 		out.close()
 	
 	def updateList(self):
-		self.readStatus()
 		del self.list[:]
-		skin_path = GetSkinPath()
-		if self.devList:
-			for dev in self.devList:
-				res = [dev[1]]
-				res.append(MultiContentEntryText(pos=(0, 5), size=(400, 32), font=0, text=dev[2]))
-				png = LoadPixmap({ True:skin_path + 'menu/menu_on.png',False:skin_path + 'menu/menu_off.png' }[self.devstatus.get(dev[1])])
-				res.append(MultiContentEntryPixmapAlphaTest(pos=(420, 6), size=(80, 23), png=png))
-				self.list.append(res)
-			self['list'].l.setList(self.list)
+		if fileExists('/usr/script/loaddttmodules.sh'):
+			self["key_yellow"].hide()
+			self['conn'].hide()
+			self.readStatus()
+			skin_path = GetSkinPath()
+			if self.devList:
+				for dev in self.devList:
+					res = [dev[1]]
+					png = LoadPixmap({ True:skin_path + 'menu/menu_on.png',False:skin_path + 'menu/menu_off.png' }[self.devstatus.get(dev[1])])
+					self.list.append((dev[1], dev[2], png))
+			self['list'].setList(self.list)
+		else:
+			self["key_yellow"].show()
+			self['conn'].show()
+			self['conn'].setText(_("Modules for support\nUSB DVB-T\C adapter\nare not installed!\n\nPress yellow button\nto install it."))
+
+	def modulesInstall(self):
+		self.cmdList = []
+		self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": "dreambox-tuner-usb" }))
+		if len(self.cmdList):
+			self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want to install the support\npackages, for DVB-T/C adapters?") + _("\nAfter pressing OK, please wait!"), MessageBox.TYPE_YESNO )
+			
+	def runUpgrade(self, result):
+		if result:
+			self.ipkg.startCmd(IpkgComponent.CMD_UPDATE)
+
+	def ipkgCallback(self, event, param):
+		if event == IpkgComponent.EVENT_ERROR:
+			self.session.open(MessageBox, _("Server not found!\nPlease check internet connection."), MessageBox.TYPE_ERROR )
+		elif event == IpkgComponent.EVENT_DONE:
+			self.session.openWithCallback(self.updateList, Ipkg, cmdList = self.cmdList)
+		pass
