@@ -49,7 +49,8 @@ class NSetupSum(Screen):
 		xmldata = setupdom.getroot()
 		self.model = HardwareInfo().get_device_name()
 		for x in xmldata.findall("setup"):
-			if self.model == 'dm500hd' and x.get("key")[0] == 'lcd':
+			print "%s: %s" % (self.model,x.get("key"))
+			if self.model == 'dm500hd' and x.get("key") == 'lcd':
 				continue
 			self.list.append((x.get("key"), _(x.get("title", "").encode("UTF-8")), LoadPixmap(skin_path + 'icons/setup.png')))
 			
@@ -108,7 +109,7 @@ class NSetup(ConfigListScreen, Screen):
 			if x.get("key") != self.setup:
 				continue
 			self.addItems(list, x);
-			self.setup_title = x.get("title", "").encode("UTF-8")
+			self.setup_title = _(x.get("title", "").encode("UTF-8"))
 
 	def __init__(self, session, setup):
 		Screen.__init__(self, session)

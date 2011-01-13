@@ -380,21 +380,24 @@ class manageDttDevice(Screen):
 		else:
 			self["key_yellow"].show()
 			self['conn'].show()
-			self['conn'].setText(_("Modules for support\nUSB DVB-T\C adapter\nare not installed!\n\nPress yellow button\nto install it."))
+			self['conn'].setText(_("Modules for support\nUSB DVB-T/C adapter\nare not installed!\n\nPress yellow button\nto install it."))
 
 	def modulesInstall(self):
-		self.cmdList = []
-		self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": "dreambox-tuner-usb" }))
-		if len(self.cmdList):
-			self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want to install the support\npackages, for DVB-T/C adapters?") + _("\nAfter pressing OK, please wait!"), MessageBox.TYPE_YESNO )
+		self['conn'].setText(_("Connetting to addons server.\nPlease wait..."))
+		self.ipkg.startCmd(IpkgComponent.CMD_UPDATE)
 			
 	def runUpgrade(self, result):
 		if result:
-			self.ipkg.startCmd(IpkgComponent.CMD_UPDATE)
-
+			self.session.openWithCallback(self.updateList, Ipkg, cmdList = self.cmdList)
+		else:
+			self['conn'].setText(_("Modules for support\nUSB DVB-T/C adapter\nare not installed!\n\nPress yellow button\nto install it."))
+			
 	def ipkgCallback(self, event, param):
 		if event == IpkgComponent.EVENT_ERROR:
-			self.session.open(MessageBox, _("Server not found!\nPlease check internet connection."), MessageBox.TYPE_ERROR )
+			self['conn'].setText(_("Server not found!\nPlease check internet connection."))
 		elif event == IpkgComponent.EVENT_DONE:
-			self.session.openWithCallback(self.updateList, Ipkg, cmdList = self.cmdList)
+			self.cmdList = []
+			self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": "dreambox-tuner-usb" }))
+			if len(self.cmdList):
+				self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want to install the support\npackages, for DVB-T/C adapters?") + _("\nAfter pressing OK, please wait!"), MessageBox.TYPE_YESNO )
 		pass

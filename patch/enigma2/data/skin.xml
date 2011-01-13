@@ -291,7 +291,7 @@
 		<widget name="SatInfo" position="10,123" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="unb2e0b4"/>	
 		<widget name="TunerInfo" position="10,146" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="unb2e0b4"/>	
 
-		<ePixmap pixmap="skin_default/div-h.png" 	position="10,173"  size="400,2" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/div-h.png" 	position="10,175"  size="400,2" zPosition="1" alphatest="on" />
 
 		<widget name="EmuInfo" position="10,184" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="un99bad6" />
 		<widget name="netcard" position="10,209" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="un99bad6" />
@@ -798,12 +798,12 @@
 		<widget name="key_red" position="180,288" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
 	<!-- end Nemesis Panels-->
-	<screen name="Volume" position="863,70" zPosition="1" size="355,28" title="Volume" flags="wfNoBorder">
-		<ePixmap pixmap="skin_default/vol_back.png" position="0,0" size="355,28" />
-		<widget name="Volume" pixmap="skin_default/vol.png" position="26,5" zPosition="1" size="312,18" transparent="1" />
+	<screen name="Volume" position="1215,70" zPosition="1" size="28,355" title="Volume" flags="wfNoBorder">
+		<ePixmap pixmap="skin_default/vol_back.png" position="0,0" size="28,355" />
+		<widget name="Volume" pixmap="skin_default/volume.png" position="5,5" zPosition="1" orientation="orBottomToTop" size="18,328" transparent="1" />
 	</screen>               
-	<screen name="Mute" position="863,70" zPosition="10" size="355,28" title="Mute"  backgroundColor="transparent2" flags="wfNoBorder">
-		<ePixmap position="0,0" size="355,28" pixmap="skin_default/vol_back.png" transparent="1" />
+	<screen name="Mute" position="1215,70" zPosition="10" size="28,355" title="Mute"  backgroundColor="transparent2" flags="wfNoBorder">
+		<ePixmap position="0,0" size="28,355" pixmap="skin_default/vol_back.png" transparent="1" />
 	</screen>	
 	<screen name="menu_mainmenu" position="90,100" size="1105,562" backgroundColor="background" title="Main menu">
 		<widget source="title" render="Label" position="5,20" size="540,40" font="Prive2;34" halign="center" transparent="1" foregroundColor="grey" shadowColor="#1A58A6" shadowOffset="-2,-1" />
@@ -3211,7 +3211,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget name="blue" position="830,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 	</screen>
 	<!-- Timeshift state -->
-	<screen name="TimeshiftState" position="1060,70" zPosition="2" size="150,60" backgroundColor="transpBlack" flags="wfNoBorder">
+	<screen name="TimeshiftState" position="1000,70" zPosition="2" size="150,60" backgroundColor="transpBlack" flags="wfNoBorder">
 		<widget name="state" position="0,0" size="150,30" font="Regular;25" halign="center" backgroundColor="transpBlack" />
 		<widget source="session.CurrentService" render="Label" position="0,30" size="150,30" font="Regular;25" halign="center" foregroundColor="white" backgroundColor="transpBlack">
 			<convert type="ServicePosition">Remaining</convert>

@@ -158,7 +158,7 @@ class nemesisEI(Screen):
 						self["netcard"].setText("Decode: Internal")
 					elif source == 2:
 						if addr !='':
-							if (addr.find('127.0.0.1') or addr.find('localhost')) >= 0:
+							if addr.find('127.0.0.1') != -1 or addr.find('localhost') != -1:
 								self["netcard"].setText("Decode: Internal")
 								try:
 									self["b_card"].show()

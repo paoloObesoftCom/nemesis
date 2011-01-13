@@ -149,7 +149,6 @@ dist_install_DATA = \
 	vkey_space.png \
 	vkey_text.png \
 	vol_back.png \
-	vol.png \
 	volume.png \
 	v-white.png \
 	white.png \
