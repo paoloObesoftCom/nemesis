@@ -149,7 +149,7 @@ class InfoBarShowHide:
 					self.hide()
 				if config.plugins.FadeSet.fadeInOnZap.value:
 					self.fadeInStart()
-				if config.nemesis.eiinfobardelayonzap.value == 0 or config.nemesis.replaceinfobar.value:
+				if config.nemesis.eiinfobardelayonzap.value == 0:
 					self.doShow()
 				else:
 					self.showTimer.start(config.nemesis.eiinfobardelayonzap.value,True)
@@ -160,10 +160,10 @@ class InfoBarShowHide:
 		if HardwareInfo().get_device_name() != 'dm500hd':
 			displayBriChange(config.lcd.bright.value)
 		if config.nemesis.einfo.value and self.TunerTest():
-			if config.nemesis.einfotimeout.value > 0:
-				self.activityTimer.start(config.nemesis.einfotimeout.value, True)
-			else:
+			if config.nemesis.einfotimeout.value == 0  or config.nemesis.replaceinfobar.value:
 				self.showEInfo()
+			else:
+				self.activityTimer.start(config.nemesis.einfotimeout.value, True)
 			
 	def showEInfo(self):
 		if self.fadeStepOff == 0:
