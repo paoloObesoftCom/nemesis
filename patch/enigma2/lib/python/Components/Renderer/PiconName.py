@@ -7,11 +7,6 @@ from enigma import ePixmap, eEnv
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 
 class PiconName(Renderer):
-	if config.nemesis.usepiconinhdd.value:
-		searchPaths = (eEnv.resolve('${datadir}/%s/'),'/media/cf/%s/','/media/usb/%s/','/media/hdd/%s/')
-	else:
-		searchPaths = (eEnv.resolve('${datadir}/%s/'),'/media/cf/%s/','/media/usb/%s/')
-
 	def __init__(self):
 		Renderer.__init__(self)
 		self.path = "picon"
@@ -55,7 +50,12 @@ class PiconName(Renderer):
 				self.pngname = pngname
 
 	def findPicon(self, serviceName):
-		for path in self.searchPaths:
+		if config.nemesis.usepiconinhdd.value:
+			searchPaths = (eEnv.resolve('${datadir}/%s/'),'/media/cf/%s/','/media/usb/%s/','/media/hdd/%s/')
+		else:
+			searchPaths = (eEnv.resolve('${datadir}/%s/'),'/media/cf/%s/','/media/usb/%s/')
+
+		for path in searchPaths:
 			pngname = (path % self.path) + serviceName + ".png"
 			if fileExists(pngname):
 				return pngname

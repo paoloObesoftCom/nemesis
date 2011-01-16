@@ -707,17 +707,17 @@ msgstr "Forza umount prima di formattare"
 msgid "Setup InfoBar OSD"
 msgstr "Configura InfoBar OSD"
 
-msgid "Show Extended Info Permanent"
-msgstr "Mostra Extended Info in modo permanente"
+msgid "Show Extended InfoBar Permanent"
+msgstr "Mostra Extended InfoBar in modo permanente"
 
-msgid "Extended Infobar delay (msec)"
-msgstr "Ritardo Extended Infobar (msec)"
+msgid "Replace InfoBar with Extended InfoBar"
+msgstr "Sostituisci InfoBar con Extended InfoBar"
 
-msgid "Extended Infobar delay on zap (msec)"
-msgstr "Ritardo Extended Infobar su zap (msec)"
+msgid "Extended InfoBar delay (msec)"
+msgstr "Ritardo Extended InfoBar (msec)"
 
-msgid "Use Picture in Extended Infobar? (Need GUI Restart)"
-msgstr "Usa Immagini in Extended Infobar? (Necessario riavvio GUI)"
+msgid "Extended InfoBar delay on zap (msec)"
+msgstr "Ritardo Extended InfoBar su zap (msec)"
 
 msgid "Show decode network details"
 msgstr "Mostra dettagli decodifica in rete"
@@ -857,17 +857,17 @@ msgstr "Forza re-installazione dei pacchetti durante install?"
 msgid "Force reinstall on install"
 msgstr "Forza re-installazione dei pacchetti"
 
-msgid "Enable fade in of infobar"
-msgstr "Abilita dissolvenza su apertura infobar"
+msgid "Enable fade in of InfoBar"
+msgstr "Abilita dissolvenza su apertura InfoBar"
 
-msgid "Enable fade out of infobar"
-msgstr "Abilita dissolvenza su chiusura infobar"
+msgid "Enable fade out of InfoBar"
+msgstr "Abilita dissolvenza su chiusura InfoBar"
 
-msgid "Enable fade in of infobar on Zap"
-msgstr "Abilita dissolvenza infobar su Zap"
+msgid "Enable fade in of InfoBar on Zap"
+msgstr "Abilita dissolvenza InfoBar su Zap"
 
-msgid "Speed for fade in/out of infobar (1-10)"
-msgstr "Velocità dissolvenza infobar (1-10)"
+msgid "Speed for fade in/out of InfoBar (1-10)"
+msgstr "Velocità dissolvenza InfoBar (1-10)"
 
 msgid "Manage DVB-T/C Adapter)"
 msgstr "Gestione DVB-T/C Adapter"

@@ -119,7 +119,7 @@ class InfoBarShowHide:
 		self.__locked = 0
 		self.__stateExtra = self.STATE_HIDDEN
 		self.fadeStepOff = 0
-		self.fadeStepOn = 0
+		self.fadeStepOn = 21
 		
 		self.activityTimer = eTimer()
 		self.activityTimer.timeout.get().append(self.showEInfo)
@@ -145,12 +145,14 @@ class InfoBarShowHide:
 	def serviceStarted(self):
 		if self.execing:
 			if config.usage.show_infobar_on_zap.value and (not self.showTimer.isActive()):
+				if self.fadeStepOff != 0:
+					self.hide()
 				if config.plugins.FadeSet.fadeInOnZap.value:
 					self.fadeInStart()
-				if config.nemesis.eiinfobardelayonzap.value > 0:
-					self.showTimer.start(config.nemesis.eiinfobardelayonzap.value,True)
-				else:
+				if config.nemesis.eiinfobardelayonzap.value == 0 or config.nemesis.replaceinfobar.value:
 					self.doShow()
+				else:
+					self.showTimer.start(config.nemesis.eiinfobardelayonzap.value,True)
 				
 	def __onShow(self):
 		self.__state = self.STATE_SHOWN
@@ -166,7 +168,8 @@ class InfoBarShowHide:
 	def showEInfo(self):
 		if self.fadeStepOff == 0:
 			self.__stateExtra = self.STATE_SHOWN
-			#self.instance.hide()
+			if config.nemesis.replaceinfobar.value:
+				self.instance.hide()
 			if self.hideTimer.isActive():
 				self.hideTimer.stop()
 				self.hideTimer.start(config.usage.infobar_timeout.index * 1000)
@@ -255,10 +258,14 @@ class InfoBarShowHide:
 			self.fadeTimerOff.start((config.plugins.FadeSet.timeout.value * 6), True)
 		else:
 			self.hide()
-			self.alphaTimerRestore.start(300, True)
-
+			restoreDelay = 150
+			if HardwareInfo().get_device_name() == 'dm800':
+				restoreDelay = 300
+			self.alphaTimerRestore.start(restoreDelay, True)
+		
 	def alphaRestore(self): 
-		alphaChange(config.av.osd_alpha.value) 
+		if self.fadeStepOn == 21:
+			alphaChange(config.av.osd_alpha.value) 
 		
 	def TunerTest(self):
 		service = self.session.nav.getCurrentService()

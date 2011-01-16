@@ -798,12 +798,12 @@
 		<widget name="key_red" position="180,288" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
 	<!-- end Nemesis Panels-->
-	<screen name="Volume" position="1215,70" zPosition="1" size="28,355" title="Volume" flags="wfNoBorder">
-		<ePixmap pixmap="skin_default/vol_back.png" position="0,0" size="28,355" />
+	<screen name="Volume" position="1190,70" zPosition="1" size="28,338" title="Volume" flags="wfNoBorder">
+		<ePixmap pixmap="skin_default/vol_back.png" position="0,0" size="28,338" />
 		<widget name="Volume" pixmap="skin_default/volume.png" position="5,5" zPosition="1" orientation="orBottomToTop" size="18,328" transparent="1" />
 	</screen>               
-	<screen name="Mute" position="1215,70" zPosition="10" size="28,355" title="Mute"  backgroundColor="transparent2" flags="wfNoBorder">
-		<ePixmap position="0,0" size="28,355" pixmap="skin_default/vol_back.png" transparent="1" />
+	<screen name="Mute" position="1170,70" zPosition="10" size="48,48" title="Mute"  backgroundColor="transparent2" flags="wfNoBorder">
+		<ePixmap position="0,0" size="48,48" pixmap="skin_default/mute.png" transparent="1" />
 	</screen>	
 	<screen name="menu_mainmenu" position="90,100" size="1105,562" backgroundColor="background" title="Main menu">
 		<widget source="title" render="Label" position="5,20" size="540,40" font="Prive2;34" halign="center" transparent="1" foregroundColor="grey" shadowColor="#1A58A6" shadowOffset="-2,-1" />

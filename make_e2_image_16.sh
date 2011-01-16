@@ -33,12 +33,20 @@ rebuild_image()
 {
 	. ./env.source
 	rm -f tmp/deploy/images/*
-	bitbake \
-	task-opendreambox-cdplayer \
-	task-opendreambox-dvdplayer \
-	task-opendreambox-dvdburn \
-	dreambox-tuner-usb \
-	dreambox-image
+	if [ $dmver == 'dm800' ]; then
+		bitbake \
+		task-opendreambox-cdplayer \
+		task-opendreambox-dvdplayer \
+		dreambox-tuner-usb \
+		dreambox-image
+	else
+		bitbake \
+		task-opendreambox-cdplayer \
+		task-opendreambox-dvdplayer \
+		task-opendreambox-dvdburn \
+		dreambox-tuner-usb \
+		dreambox-image
+	fi
 }
 
 move_image()
@@ -123,11 +131,15 @@ case "$1" in
 	tuner)
 		rebuild_tuner_usb
 		;;
+	clean)
+		. ./env.source
+		bitbake -cclean dreambox-image
+			;;
 	all)
 		rebuild_image
 		;;
 	*)
-		echo $"Usage for $dmver: $0 {patch|enigma2|plugins|feed|all|logo|move|kernel|nemesis|tuner}"
+		echo $"Usage for $dmver: $0 {patch|enigma2|plugins|feed|all|logo|move|kernel|nemesis|tuner|clean}"
 		;;
 esac
 

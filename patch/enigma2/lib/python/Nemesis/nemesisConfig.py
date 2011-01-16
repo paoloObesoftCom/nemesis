@@ -6,6 +6,7 @@ def InitNemesisConfig():
 #system
 	config.nemesis = ConfigSubsection();
 	config.nemesis.einfo = ConfigYesNo(default = True)
+	config.nemesis.replaceinfobar = ConfigYesNo(default = False)
 	config.nemesis.einfotimeout = ConfigNumber(default = 800)
 	config.nemesis.shownetdet = ConfigYesNo(default = True)
 	config.nemesis.eiinfobardelayonzap = ConfigNumber(default = 100)
