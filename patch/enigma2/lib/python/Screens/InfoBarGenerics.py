@@ -170,9 +170,9 @@ class InfoBarShowHide:
 			self.__stateExtra = self.STATE_SHOWN
 			if config.nemesis.replaceinfobar.value:
 				self.instance.hide()
-			if self.hideTimer.isActive():
-				self.hideTimer.stop()
-				self.hideTimer.start(config.usage.infobar_timeout.index * 1000)
+			else:
+				if not self.__locked:
+					self.hideTimer.changeInterval(config.usage.infobar_timeout.index * 1000)
 			self.InfoBarExtraDialog.show()
 		else:
 			self.hide()
@@ -190,14 +190,14 @@ class InfoBarShowHide:
 
 	def __onHide(self):
 		self.__state = self.STATE_HIDDEN
+		if self.fadeStepOff != 0:
+			self.fadeStepOff = 0
 		if self.activityTimer.isActive():
 			self.activityTimer.stop()
 		if self.__stateExtra == self.STATE_SHOWN:
 			self.hideEInfo()
 		if HardwareInfo().get_device_name() != 'dm500hd':
 			displayBriChange(config.lcd.lcdbri.value)
-		if self.fadeStepOff != 0:
-			self.fadeStepOff = 0
 
 	def doShow(self):
 		if self.showTimer.isActive():

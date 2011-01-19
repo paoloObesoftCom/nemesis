@@ -69,7 +69,7 @@ class NInfo(Screen):
 			('PInfo',_('Show Active Process'),'icons/process.png',True),
 			('SInfo',_('Show Service Info'),'icons/service.png',True),
 			('EInfo',_('Show Enigma Settings'),'icons/enigma.png',True),
-			('About',_('New Dream-Elite Firmware Info'),'icons/about.png',True)
+			('About',_('EDG-Nemesis Firmware Info'),'icons/about.png',True)
 			]
 		c = eConsoleAppContainer()
 		c.execute('df > /tmp/info_df.tmp && free > /tmp/info_mem.tmp')

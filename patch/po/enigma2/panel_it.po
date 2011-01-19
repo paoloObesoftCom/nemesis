@@ -422,8 +422,8 @@ msgstr "Stato Occupazione Device"
 msgid "Enigma Setting Info"
 msgstr "Info Configurazione Enigma"
 
-msgid "New Dream-Elite Firmware Info"
-msgstr "Info firmware New Dream-Elite"
+msgid "EDG-Nemesis Firmware Info"
+msgstr "Info firmware EDG-Nemesis"
 
 msgid "Compact Flash Not Found"
 msgstr "Compact Flash Non Trovata"
@@ -869,7 +869,7 @@ msgstr "Abilita dissolvenza InfoBar su Zap"
 msgid "Speed for fade in/out of InfoBar (1-10)"
 msgstr "Velocità dissolvenza InfoBar (1-10)"
 
-msgid "Manage DVB-T/C Adapter)"
+msgid "Manage DVB-T/C Adapter"
 msgstr "Gestione DVB-T/C Adapter"
 
 msgid "Modules for support"

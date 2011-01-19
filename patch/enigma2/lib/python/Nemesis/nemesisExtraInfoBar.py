@@ -98,8 +98,6 @@ class nemesisEI(Screen):
 		service = self.session.nav.getCurrentService()
 		info = service and service.info()
 		if info is not None:
-			if info.getInfo(iServiceInformation.sIsCrypted):
-				self.showEmuName()
 			if not self.emm_timer.isActive():
 				self.emm_timer.start(config.nemesis.emminfodelay.value)
 			if not self.ecm_timer.isActive():
@@ -118,6 +116,7 @@ class nemesisEI(Screen):
 		self.cleandecInfo()
 		if info is not None:
 			if info.getInfo(iServiceInformation.sIsCrypted):
+				self.showEmuName()
 				self.ecm_timer.changeInterval(11000)
 				info = parse_ecm(self.readEcmFile())
 				#print info
