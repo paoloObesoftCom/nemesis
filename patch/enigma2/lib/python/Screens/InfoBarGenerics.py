@@ -171,8 +171,9 @@ class InfoBarShowHide:
 			if config.nemesis.replaceinfobar.value:
 				self.instance.hide()
 			else:
-				if not self.__locked:
-					self.hideTimer.changeInterval(config.usage.infobar_timeout.index * 1000)
+				if not self.__locked and self.hideTimer.isActive():
+					self.hideTimer.stop()
+					self.hideTimer.start(config.usage.infobar_timeout.index * 1000)
 			self.InfoBarExtraDialog.show()
 		else:
 			self.hide()

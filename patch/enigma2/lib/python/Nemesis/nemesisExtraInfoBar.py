@@ -1,10 +1,11 @@
 from Screens.Screen import Screen
-from Components.Label import Label
+from Components.Label import Label, MultiColorLabel
 from Components.Pixmap import Pixmap
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.config import config
-from enigma import eTimer, iServiceInformation, iPlayableService, eDVBFrontendParametersSatellite, eDVBFrontendParametersCable, eDVBFrontendParametersTerrestrial
+from enigma import eTimer, eEnv, iServiceInformation, iPlayableService, eDVBFrontendParametersSatellite, eDVBFrontendParametersCable, eDVBFrontendParametersTerrestrial
 from nemesisTool import nemesisTool, parse_ecm
+from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 import os
 import re
 
@@ -12,7 +13,7 @@ t = nemesisTool()
 
 class nemesisEI(Screen):
 	__module__ = __name__
-	
+
 	def readEcmFile(self):
 		emuActive = t.readEmuActive()
 		return t.readEcmInfoFile(emuActive)
@@ -35,27 +36,27 @@ class nemesisEI(Screen):
 		Screen.__init__(self, session)
 		
 		self.systemCod = [
-				"beta_no", "beta_emm", "beta_ecm",
-				"seca_no", "seca_emm", "seca_ecm",
-				"irdeto_no", "irdeto_emm", "irdeto_ecm",
-				"cw_no", "cw_emm", "cw_ecm",
-				"nagra_no", "nagra_emm", "nagra_ecm",
-				"nds_no", "nds_emm", "nds_ecm",
-				"via_no", "via_emm", "via_ecm",
-				"conax_no", "conax_emm", "conax_ecm",
-				"b_fta" , "b_card", "b_emu", "b_spider"
+				"beta", "bis", "bul", "dream", "dre", "conax",
+				"cw", "irdeto", "nagra", "nds", "seca", "via"
 				]
 		
+		self.systemState = [
+				"b_fta" , "b_card", "b_emu", "b_spider"
+				]
+
 		self.systemCaids = {
 				"06" : "irdeto", "01" : "seca", "18" : "nagra",
 				"05" : "via", "0B" : "conax", "17" : "beta",
-				"0D" : "cw", "4A" : "irdeto", "09" : "nds",
-				"4AE0" : "dre", "4AE1" : "dre", "55" : "bul", "26" : "bis"
+				"0D" : "cw", "4A" : "dream", "09" : "nds",
+				"4AE0" : "dre", "4AE1" : "dre", 
+				"55" : "bul", "26" : "bis"
 				}
 		
 		for x in self.systemCod:
+			self[x] = MultiColorLabel()
+		for x in self.systemState:
 			self[x] = Label()
-			self["%s_p" % x] = Pixmap()
+		self["ecm_pict"] = Pixmap()
 		self["TunerInfo"] = Label()
 		self["SatInfo"] = Label()
 		self["EmuInfo"] = Label()
@@ -65,6 +66,8 @@ class nemesisEI(Screen):
 		self["hops"] = Label()
 		self["reader"] = Label()
 		
+		self.path = "piconSys"
+
 		self.ecm_timer = eTimer()
 		self.ecm_timer.timeout.get().append(self.__updateEmuInfo)
 		self.emm_timer = eTimer()
@@ -148,26 +151,19 @@ class nemesisEI(Screen):
 						self.showECM(caid)
 					
 					if source == 0:
-						self["netcard"].setText("Decode: Unsupported!")
+						self["EmuInfo"].setText("Decode: Unsupported!")
+						self["ecm_pict"].show()
+						self["ecm_pict"].instance.setPixmapFromFile(self.findPicon("unknown"))
 					elif source == 1:
-						try:
-							self["b_emu"].show()
-						except:
-							self["b_emu_p"].show()
+						self["b_emu"].show()
 						self["netcard"].setText("Decode: Internal")
 					elif source == 2:
 						if addr !='':
 							if addr.find('127.0.0.1') != -1 or addr.find('localhost') != -1:
 								self["netcard"].setText("Decode: Internal")
-								try:
-									self["b_card"].show()
-								except:
-									self["b_card_p"].show()
+								self["b_card"].show()
 							else:
-								try:
-									self["b_spider"].show()
-								except:
-									self["b_spider_p"].show()
+								self["b_spider"].show()
 								if config.nemesis.shownetdet.value:
 									if port !='':
 										self["netcard"].setText("Source: %s:%s" % (addr, port))
@@ -184,29 +180,21 @@ class nemesisEI(Screen):
 								else:
 									self["netcard"].setText("Decode: Network")
 						else:
-							try:
-								self["b_spider"].show()
-							except:
-								self["b_spider_p"].show()
+							self["b_spider"].show()
 							self["netcard"].setText("Decode: Network")
 					elif source == 3:
-						try:
-							self["b_card"].show()
-						except:
-							self["b_card_p"].show()
+						self["b_card"].show()
 						self["netcard"].setText("Decode: %s" % str(reader))
 					elif source == 4:
-						try:
-							self["b_card"].show()
-						except:
-							self["b_card_p"].show()
+						self["b_card"].show()
 						self["netcard"].setText("Decode: slot-1")
 					elif source == 5:
-						try:
-							self["b_card"].show()
-						except:
-							self["b_card_p"].show()
+						self["b_card"].show()
 						self["netcard"].setText("Decode: slot-2")
+				else:
+					self["EmuInfo"].setText("Decode: Unsupported!")
+					self["ecm_pict"].show()
+					self["ecm_pict"].instance.setPixmapFromFile(self.findPicon("unknown"))
 			else:
 				self["hops"].setText("")
 				self["emuname"].setText("")
@@ -214,11 +202,13 @@ class nemesisEI(Screen):
 				self["ecmtime"].setText("")
 				self["netcard"].setText("")
 				self["reader"].setText("")
-				try:
-					self["b_fta"].show()
-				except:
-					self["b_fta_p"].show()
+				self["b_fta"].show()
+				self["ecm_pict"].show()
+				self["ecm_pict"].instance.setPixmapFromFile(self.findPicon("fta"))
 
+	def int2hex(self, int):
+		return "%x" % int
+	
 	def showECM(self, caid):
 		caid = caid.lower()
 		if caid.__contains__("x"):
@@ -230,15 +220,12 @@ class nemesisEI(Screen):
 			caid = caid.upper()
 			if self.systemCaids.has_key(caid):
 				system = self.systemCaids.get(caid)
-				try:
-					self["%s_emm" % system].hide()
-					self["%s_ecm" % system].show()
-				except:
-					self["%s_emm_p" % system].hide()
-					self["%s_ecm_p" % system].show()
-	
-	def int2hex(self, int):
-		return "%x" % int
+				self[system].setForegroundColorNum(2)
+				pngname = self.findPicon(system)
+				if pngname == "":
+					pngname = self.findPicon("unknown")
+				self["ecm_pict"].show()
+				self["ecm_pict"].instance.setPixmapFromFile(pngname)
 	
 	def showEMM(self, caids):
 		if caids:
@@ -250,43 +237,38 @@ class nemesisEI(Screen):
 					caid = caid[:2]
 					caid = caid.upper()
 					if self.systemCaids.has_key(caid):
-						system = self.systemCaids.get(caid)
-						try:
-							self["%s_no" % system].hide()
-							self["%s_emm" % system].show()
-						except:
-							self["%s_no_p" % system].hide()
-							self["%s_emm_p" % system].show()
+						self[self.systemCaids.get(caid)].setForegroundColorNum(1)
 	
+	def findPicon(self, codName):
+		if config.nemesis.usepiconinhdd.value:
+			searchPaths = ('/media/hdd/%s/', eEnv.resolve('${datadir}/%s/'),'/media/usb/%s/','/media/cf/%s/')
+		else:
+			searchPaths = (eEnv.resolve('${datadir}/%s/'),'/media/usb/%s/','/media/cf/%s/')
+
+		for path in searchPaths:
+			pngname = (path % self.path) + codName + ".png"
+			if fileExists(pngname):
+				return pngname
+		return ""
+
 	def cleandecInfo(self):
-		try:
-			self["b_fta"].hide()
-			self["b_card"].hide()
-			self["b_emu"].hide()
-			self["b_spider"].hide()
-		except:
-			self["b_emu_p"].hide()
-			self["b_fta_p"].hide()
-			self["b_card_p"].hide()
-			self["b_spider_p"].hide()
+		self["b_fta"].hide()
+		self["b_card"].hide()
+		self["b_emu"].hide()
+		self["b_spider"].hide()
 
 	def displayClean(self):
+		self["ecm_pict"].hide()
 		self["hops"].setText("")
 		self["reader"].setText("")
 		self["emuname"].setText("")
 		self["EmuInfo"].setText("")
 		self["ecmtime"].setText("")
 		self["netcard"].setText("")
+		for x in self.systemState:
+			self[x].hide()
 		for x in self.systemCod:
-			try:
-				self[x].hide()
-			except:
-				self["%s_p" % x].hide()
-			if x.find('_no') >= 0:
-				try:
-					self[x].show()
-				except:
-					self["%s_p" % x].show()
+			self[x].setForegroundColorNum(0)
 
 	def __evUpdatedInfo(self):
 		self["TunerInfo"].setText("")
@@ -366,6 +348,7 @@ class nemesisEI(Screen):
 								eDVBFrontendParametersTerrestrial.FEC_5_6 : "5/6",
 								eDVBFrontendParametersTerrestrial.FEC_7_8 : "7/8"
 							}[frontendData.get("code_rate_lp", eDVBFrontendParametersTerrestrial.FEC_Auto)]
-				self["TunerInfo"].setText( "Freq: " + freq + " MHz, Const: " + pol + ", Fec: " + fec + ", SR: " + sr )
+				self["TunerInfo"].setText( "Freq: " + freq + " MHz, Fec: " + fec + ", SR: " + sr )
+				self["SatInfo"].setText( "Constellation: " + pol )
 			else:
 				self["TunerInfo"].setText( "Freq: " + freq + " MHz, SR: " + sr )

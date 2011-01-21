@@ -66,6 +66,9 @@
 		<color name="unff2525" value="#00ff2525" />
 		<color name="white" value="#00ffffff" />
 		<color name="yellow" value="#00bab329" />
+		<color name="fta" value="#0056da" />
+		<color name="emm" value="#C21A1A" />
+		<color name="ecm" value="green" />
 	</colors>
 	<fonts>
 		<font filename="lcd.ttf" name="LCD" scale="100" />
@@ -271,116 +274,93 @@
 	<!--  Nemesis Panels  -->
 	<!-- Extended Info Bar panel	 -->
 <!-- 	<screen name="nemesisEI" position="798,91" size="420,410" title="Extended InfoBar" > -->
-	<screen name="nemesisEI" position="62,91" size="420,410" title="Extended InfoBar" >
-		<ePixmap position="10,10" size="126,82" pixmap="skin_default/frame_hd.png" zPosition="1" alphatest="on" />
+	<screen name="nemesisEI" position="62,71" size="420,430" title="Extended InfoBar" >
+		<ePixmap position="10,5" size="126,82" pixmap="skin_default/frame_hd.png" zPosition="1" alphatest="on" />
 		<widget source="session.CurrentService" render="Picon" position="23,21" size="100,60" zPosition="2" transparent="1" alphatest="on">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
-		<ePixmap position="147,10" size="126,82" pixmap="skin_default/frame_hd.png" zPosition="1" alphatest="on" />
+		<ePixmap position="147,5" size="126,82" pixmap="skin_default/frame_hd.png" zPosition="1" alphatest="on" />
 		<widget source="session.CurrentService" render="PiconName" path="piconProv" position="160,21" size="100,60" zPosition="2" transparent="1" alphatest="on">
 			<convert type="ServiceName">Provider</convert>
 		</widget>
-		<ePixmap position="284,10" size="126,82" pixmap="skin_default/frame_hd.png" zPosition="1" alphatest="on" />
+		<ePixmap position="284,5" size="126,82" pixmap="skin_default/frame_hd.png" zPosition="1" alphatest="on" />
 		<widget source="session.CurrentService" render="PiconName" path="piconSat" position="297,21" size="100,60" zPosition="2" transparent="1" alphatest="on">
 			<convert type="ServiceSat">Sat</convert>
 		</widget>
 
-		<widget source="session.CurrentService" render="Label" position="10,100" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="unb2e0b4" >
+		<widget source="session.CurrentService" render="Label" position="10,95" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="unb2e0b4" >
 			<convert type="ServiceName">ProviderExt</convert>
 		</widget>
-		<widget name="SatInfo" position="10,123" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="unb2e0b4"/>	
-		<widget name="TunerInfo" position="10,146" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="unb2e0b4"/>	
+		<widget name="SatInfo" position="10,118" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="unb2e0b4"/>	
+		<widget name="TunerInfo" position="10,141" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="unb2e0b4"/>	
 
-		<ePixmap pixmap="skin_default/div-h.png" 	position="10,175"  size="400,2" zPosition="1" alphatest="on" />
-
-		<widget name="EmuInfo" position="10,184" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="un99bad6" />
-		<widget name="netcard" position="10,209" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="un99bad6" />
-		<widget name="ecmtime" position="10,232" size="250,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="un99bad6" />
-		<widget name="hops" position="260,232" size="150,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="un99bad6" />
-		<widget name="reader" position="10,255" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="un99bad6" />
-		<widget name="emuname" position="10,282" size="400,25" valign="center" halign="center" font="Prive2;17" transparent="1" foregroundColor="#0064ff" />
+		<ePixmap pixmap="skin_default/icons/icon_sys_no.png" 	position="10,170"  size="48,48" zPosition="2" alphatest="on" />
+		<widget name="b_fta" position="17,177" size="36,18" halign="center" text="FTA" font="Prive2;15" transparent="1" foregroundColor="green" valign="center" zPosition="3" />
+		<widget name="b_card" position="17,177" size="36,18" halign="center" text="CRD" font="Prive2;15" transparent="1" foregroundColor="#0064ff" valign="center" zPosition="3" />
+		<widget name="b_emu" position="17,177" size="36,18" halign="center" text="EMU" font="Prive2;15" transparent="1" foregroundColor="#1A58A6" valign="center" zPosition="3" />
+		<widget name="b_spider" position="17,177" size="36,18" halign="center" text="NET" font="Prive2;15" transparent="1" foregroundColor="#C21A1A" valign="center" zPosition="3" />
 		
-		<ePixmap pixmap="skin_default/icons/icon_sys_no.png" 	position="10,310"  size="48,48" zPosition="2" alphatest="on" />
-		<widget name="b_fta" position="17,317" size="36,18" halign="center" text="FTA" font="Prive2;15" transparent="1" foregroundColor="green" valign="center" zPosition="3" />
-		<widget name="b_card" position="17,317" size="36,18" halign="center" text="CRD" font="Prive2;15" transparent="1" foregroundColor="#0064ff" valign="center" zPosition="3" />
-		<widget name="b_emu" position="17,317" size="36,18" halign="center" text="EMU" font="Prive2;15" transparent="1" foregroundColor="#1A58A6" valign="center" zPosition="3" />
-		<widget name="b_spider" position="17,317" size="36,18" halign="center" text="NET" font="Prive2;15" transparent="1" foregroundColor="#C21A1A" valign="center" zPosition="3" />
-		
-		<ePixmap pixmap="skin_default/icons/i_dolby_no.png" position="110,310"  size="48,48" zPosition="1" alphatest="on" />
-    <widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/i_dolby.png"	position="110,310" size="48,48" zPosition="2" alphatest="on">
+		<ePixmap pixmap="skin_default/icons/i_dolby_no.png" position="110,170"  size="48,48" zPosition="1" alphatest="on" />
+    <widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/i_dolby.png"	position="110,170" size="48,48" zPosition="2" alphatest="on">
 			<convert type="ServiceInfo">IsMultichannel</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<ePixmap pixmap="skin_default/icons/i_format_no.png" position="160,310" size="48,48" zPosition="1" alphatest="on" />
-    <widget source="session.CurrentService" render="Pixmap" 	pixmap="skin_default/icons/i_format.png"	position="160,310" size="48,48" zPosition="2" alphatest="on">
+		<ePixmap pixmap="skin_default/icons/i_format_no.png" position="160,170" size="48,48" zPosition="1" alphatest="on" />
+    <widget source="session.CurrentService" render="Pixmap" 	pixmap="skin_default/icons/i_format.png"	position="160,170" size="48,48" zPosition="2" alphatest="on">
 			<convert type="ServiceInfo">IsWidescreen</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<ePixmap pixmap="skin_default/icons/i_txt_no.png" position="210,310" size="48,48" zPosition="1" alphatest="on" />
-    <widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/i_txt.png" position="210,310" size="48,48" zPosition="2" alphatest="on">
+		<ePixmap pixmap="skin_default/icons/i_txt_no.png" position="210,170" size="48,48" zPosition="1" alphatest="on" />
+    <widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/i_txt.png" position="210,170" size="48,48" zPosition="2" alphatest="on">
 			<convert type="ServiceInfo">HasTelext</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<ePixmap pixmap="skin_default/icons/i_crypt_no.png" position="260,310"  size="48,48" zPosition="1" alphatest="on" />
-    <widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/i_crypt.png" position="260,310" size="48,48" zPosition="2" alphatest="on">
+		<ePixmap pixmap="skin_default/icons/i_crypt_no.png" position="260,170"  size="48,48" zPosition="1" alphatest="on" />
+    <widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/i_crypt.png" position="260,170" size="48,48" zPosition="2" alphatest="on">
 			<convert type="ServiceInfo">IsCrypted</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<ePixmap pixmap="skin_default/icons/i_sub_no.png" position="310,310" size="48,48" zPosition="1" alphatest="on" />
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/i_sub.png" position="310,310" size="48,48" zPosition="2" alphatest="on" >
+		<ePixmap pixmap="skin_default/icons/i_sub_no.png" position="310,170" size="48,48" zPosition="1" alphatest="on" />
+		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/i_sub.png" position="310,170" size="48,48" zPosition="2" alphatest="on" >
 			<convert type="ServiceInfo">SubservicesAvailable</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/i_sd.png" position="360,310" size="48,48" zPosition="2" alphatest="on">
+		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/i_sd.png" position="360,170" size="48,48" zPosition="2" alphatest="on">
 			<convert type="ServiceInfo">VideoWidth</convert>
 			<convert type="ValueRange">0,720</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/i_hd.png" position="360,310" size="48,48" zPosition="2" alphatest="on">
+		<widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/i_hd.png" position="360,170" size="48,48" zPosition="2" alphatest="on">
 			<convert type="ServiceInfo">VideoWidth</convert>
 			<convert type="ValueRange">721,1980</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
 
-		<ePixmap	pixmap="skin_default/icons/icon_sys_no.png" 	position="10,360"  size="48,48" zPosition="2" alphatest="on" />
-		<widget position="17,367" size="36,18" halign="center" text="B" font="Prive2;20" transparent="1" foregroundColor="#0064ff" name="beta_no" valign="center" zPosition="3" />
-		<widget position="17,367" size="36,18" halign="center" text="B" font="Prive2;20" transparent="1" foregroundColor="green" name="beta_emm" valign="center" zPosition="4" />
-		<widget position="17,367" size="36,18" halign="center" text="B" font="Prive2;20" transparent="1" foregroundColor="#C21A1A" name="beta_ecm" valign="center" zPosition="5" />
-		
-		<ePixmap	pixmap="skin_default/icons/icon_sys_no.png" 	position="60,360"  size="48,48" zPosition="2" alphatest="on" />
-		<widget position="67,367" size="36,18" halign="center" text="I" font="Prive2;20" transparent="1" foregroundColor="#0064ff" name="irdeto_no" valign="center" zPosition="3" />
-		<widget position="67,367" size="36,18" halign="center" text="I" font="Prive2;20" transparent="1" foregroundColor="green" name="irdeto_emm" valign="center" zPosition="4" />
-		<widget position="67,367" size="36,18" halign="center" text="I" font="Prive2;20" transparent="1" foregroundColor="#C21A1A" name="irdeto_ecm" valign="center" zPosition="5" />
-		
-		<ePixmap	pixmap="skin_default/icons/icon_sys_no.png" 	position="110,360"  size="48,48" zPosition="2" alphatest="on" />
-		<widget position="117,367" size="36,18" halign="center" text="S" font="Prive2;20" transparent="1" foregroundColor="#0064ff" name="seca_no" valign="center" zPosition="3" />
-		<widget position="117,367" size="36,18" halign="center" text="S" font="Prive2;20" transparent="1" foregroundColor="green" name="seca_emm" valign="center" zPosition="4" />
-		<widget position="117,367" size="36,18" halign="center" text="S" font="Prive2;20" transparent="1" foregroundColor="#C21A1A" name="seca_ecm" valign="center" zPosition="5" />
-		
-		<ePixmap	pixmap="skin_default/icons/icon_sys_no.png" 	position="160,360"  size="48,48" zPosition="2" alphatest="on" />
-		<widget position="167,367" size="36,18" halign="center" text="V" font="Prive2;20" transparent="1" foregroundColor="#0064ff" name="via_no" valign="center" zPosition="3" />
-		<widget position="167,367" size="36,18" halign="center" text="V" font="Prive2;20" transparent="1" foregroundColor="green" name="via_emm" valign="center" zPosition="4" />
-		<widget position="167,367" size="36,18" halign="center" text="V" font="Prive2;20" transparent="1" foregroundColor="#C21A1A" name="via_ecm" valign="center" zPosition="5" />
-		
-		<ePixmap	pixmap="skin_default/icons/icon_sys_no.png" 	position="210,360"  size="48,48" zPosition="2" alphatest="on" />
-		<widget position="217,367" size="36,18" halign="center" text="N" font="Prive2;20" transparent="1" foregroundColor="#0064ff" name="nagra_no" valign="center" zPosition="3" />
-		<widget position="217,367" size="36,18" halign="center" text="N" font="Prive2;20" transparent="1" foregroundColor="green" name="nagra_emm" valign="center" zPosition="4" />
-		<widget position="217,367" size="36,18" halign="center" text="N" font="Prive2;20" transparent="1" foregroundColor="#C21A1A" name="nagra_ecm" valign="center" zPosition="5" />
-		
-		<ePixmap	pixmap="skin_default/icons/icon_sys_no.png" 	position="260,360"  size="48,48" zPosition="2" alphatest="on" />
-		<widget position="267,367" size="36,18" halign="center" text="CW" font="Prive2;20" transparent="1" foregroundColor="#0064ff" name="cw_no" valign="center" zPosition="3" />
-		<widget position="267,367" size="36,18" halign="center" text="CW" font="Prive2;20" transparent="1" foregroundColor="green" name="cw_emm" valign="center" zPosition="4" />
-		<widget position="267,367" size="36,18" halign="center" text="CW" font="Prive2;20" transparent="1" foregroundColor="#C21A1A" name="cw_ecm" valign="center" zPosition="5" />  
-		
-		<ePixmap	pixmap="skin_default/icons/icon_sys_no.png" 	position="310,360"  size="48,48" zPosition="2" alphatest="on" />
-		<widget position="317,367" size="36,18" halign="center" text="ND" font="Prive2;20" transparent="1" foregroundColor="#0064ff" name="nds_no" valign="center" zPosition="3" />
-		<widget position="317,367" size="36,18" halign="center" text="ND" font="Prive2;20" transparent="1" foregroundColor="green" name="nds_emm" valign="center" zPosition="4" />
-		<widget position="317,367" size="36,18" halign="center" text="ND" font="Prive2;20" transparent="1" foregroundColor="#C21A1A" name="nds_ecm" valign="center" zPosition="5" />
-		
-		<ePixmap	pixmap="skin_default/icons/icon_sys_no.png" 	position="360,360"  size="48,48" zPosition="2" alphatest="on" />
-		<widget position="367,367" size="36,18" halign="center" text="CO" font="Prive2;20" transparent="1" foregroundColor="#0064ff" name="conax_no" valign="center" zPosition="3" />
-		<widget position="367,367" size="36,18" halign="center" text="CO" font="Prive2;20" transparent="1" foregroundColor="green" name="conax_emm" valign="center" zPosition="4" />
-		<widget position="367,367" size="36,18" halign="center" text="CO" font="Prive2;20" transparent="1" foregroundColor="#C21A1A" name="conax_ecm" valign="center" zPosition="5" />
+		<ePixmap pixmap="skin_default/div-h.png" 	position="10,220"  size="400,2" zPosition="2" alphatest="on" />
+
+		<widget name="EmuInfo" position="10,230" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="un99bad6" />
+		<widget name="netcard" position="10,253" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="un99bad6" />
+		<widget name="ecmtime" position="10,276" size="250,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="un99bad6" />
+		<widget name="hops" position="260,276" size="150,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="un99bad6" />
+		<widget name="reader" position="10,299" size="400,23" valign="center" halign="left" font="Prive2;16" transparent="1" foregroundColor="un99bad6" />
+		<widget name="emuname" position="10,322" size="400,25" valign="center" halign="center" font="Prive2;17" transparent="1" foregroundColor="#0064ff" />
+
+		<widget name="ecm_pict" position="250,345"  size="160,80" zPosition="1" alphatest="on" />
+
+		<widget position="10,347" size="50,25" halign="center" text="BET" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="beta" valign="center" zPosition="1" />
+		<widget position="70,347" size="50,25" halign="center" text="BIS" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="bis" valign="center" zPosition="1" />
+		<widget position="130,347" size="50,25" halign="center" text="BUL" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="bul" valign="center" zPosition="1" />
+		<widget position="190,347" size="50,25" halign="center" text="DRC" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="dream" valign="center" zPosition="1" />
+
+		<widget position="10,372" size="50,25" halign="center" text="DRE" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="dre" valign="center" zPosition="1" />
+		<widget position="70,372" size="50,25" halign="center" text="CON" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="conax" valign="center" zPosition="1" />
+		<widget position="130,372" size="50,25" halign="center" text="CRW" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="cw" valign="center" zPosition="1" />
+		<widget position="190,372" size="50,25" halign="center" text="IRD" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="irdeto" valign="center" zPosition="1" />
+
+		<widget position="10,397" size="50,25" halign="center" text="NAG" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="nagra" valign="center" zPosition="1" />
+		<widget position="70,397" size="50,25" halign="center" text="NDS" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="nds" valign="center" zPosition="1" />
+		<widget position="130,397" size="50,25" halign="center" text="SEC" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="seca" valign="center" zPosition="1" />
+		<widget position="190,397" size="50,25" halign="center" text="VIA" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="via" valign="center" zPosition="1" />
 	</screen>
 	<!-- Blue panels	 -->
 	<screen name="nemesisBluePanel" position="center,145" size="800,470">
@@ -574,7 +554,7 @@
 		<widget name="key_red" position="135,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
 	<screen name="USBSetup" position="center,105" size="510,550">
-		<widget name="model" position="50,0" size="410,246" font="Prive2;18" halign="left" valign="center" foregroundColor="yellow" />
+		<widget name="model" position="50,0" sizserviceNamee="410,246" font="Prive2;18" halign="left" valign="center" foregroundColor="yellow" />
 		<widget source="list" render="Listbox" position="50,250" size="410,210" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [

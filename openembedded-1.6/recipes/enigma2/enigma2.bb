@@ -59,7 +59,7 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r62"
+PR = "r63"
 
 SRCDATE = "20101204"
 #SRCDATE is NOT used by git to checkout a specific revision
@@ -78,7 +78,7 @@ SRC_URI = "file://../../../../sources/enigma2_16.tar.gz"
 
 S = "${WORKDIR}/enigma2"
 
-FILES_${PN} += "${datadir}/fonts ${datadir}/keymaps ${datadir}/piconProv ${datadir}/piconSat "
+FILES_${PN} += "${datadir}/fonts ${datadir}/keymaps ${datadir}/piconProv ${datadir}/piconSat ${datadir}/piconSys "
 FILES_${PN}-meta = "${datadir}/meta"
 PACKAGES += "${PN}-meta"
 PACKAGE_ARCH = "${MACHINE_ARCH}"

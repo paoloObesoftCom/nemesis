@@ -1,4 +1,4 @@
-SUBDIRS = countries fonts defaults extensions keymaps skin_default piconProv piconSat
+SUBDIRS = countries fonts defaults extensions keymaps skin_default piconProv piconSat piconSys
 
 dist_pkgdata_DATA = \
 	defaultsatlists.xml \

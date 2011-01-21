@@ -51,9 +51,9 @@ class PiconName(Renderer):
 
 	def findPicon(self, serviceName):
 		if config.nemesis.usepiconinhdd.value:
-			searchPaths = (eEnv.resolve('${datadir}/%s/'),'/media/cf/%s/','/media/usb/%s/','/media/hdd/%s/')
+			searchPaths = ('/media/hdd/%s/',eEnv.resolve('${datadir}/%s/'),'/media/cf/%s/','/media/usb/%s/')
 		else:
-			searchPaths = (eEnv.resolve('${datadir}/%s/'),'/media/cf/%s/','/media/usb/%s/')
+			searchPaths = (eEnv.resolve('${datadir}/%s/'),'/media/usb/%s/','/media/cf/%s/')
 
 		for path in searchPaths:
 			pngname = (path % self.path) + serviceName + ".png"
