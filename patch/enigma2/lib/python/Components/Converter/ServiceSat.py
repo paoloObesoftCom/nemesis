@@ -52,6 +52,12 @@ class ServiceSat(Converter, object):
 					return name
 				if self.type == self.NUMBER:
 					return frontendData.get("orbital_position", "None")
+			elif tuner_type == "DVB-C":
+				return "picon_cable"
+			elif tuner_type == "DVB-T":
+				return "picon_trs"
+			else:
+				return ""
 		return ""
 
 	text = property(getText)
