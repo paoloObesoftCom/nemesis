@@ -5,6 +5,7 @@ from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Sources.List import List
+from Components.Sources.StaticText import StaticText
 from Tools.LoadPixmap import LoadPixmap
 from Components.config import getConfigListEntry, config, ConfigFile
 from Components.ConfigList import ConfigListScreen
@@ -76,7 +77,7 @@ class HDDSetup(ConfigListScreen, Screen):
 		<screen position="330,160" size="620,440">
 			<eLabel position="0,0" size="620,2" backgroundColor="grey" zPosition="5"/>
 			<widget name="config" position="20,20" size="580,330" scrollbarMode="showOnDemand" />
-			<widget name="conn" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center"  foregroundColor="#ffffff" backgroundColor="#6565ff" />
+			<widget source="conn" render="Label" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center"  foregroundColor="#ffffff" transparent="1" />
 			<eLabel position="0,399" size="620,2" backgroundColor="grey" zPosition="5"/>
 			<widget name="canceltext" position="20,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
 			<widget name="oktext" position="310,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
@@ -91,10 +92,10 @@ class HDDSetup(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.list)
 		self["oktext"] = Label(_("OK"))
 		self["canceltext"] = Label(_("Exit"))
-		self['conn'] = Label(_('Status: HDD is active'))
+		self['conn'] = StaticText(_('Status: HDD is active'))
 		l = os.popen('hdparm -C /dev/sda', 'r').readlines()
 		if (l[2].find('standby') != -1):
-			self['conn'].setText(_('Status: HDD is in Standby'))
+			self['conn'].text = (_('Status: HDD is in Standby'))
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], 
 		{
 			"red": self.close,

@@ -7,7 +7,8 @@ from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.Sources.List import List
-from nemesisTool import ListboxE1, GetSkinPath, createProxy, createInadynConf, createIpupdateConf
+from Components.Sources.StaticText import StaticText
+from nemesisTool import GetSkinPath, createProxy, createInadynConf, createIpupdateConf
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Tools.LoadPixmap import LoadPixmap
 from Tools.HardwareInfo import HardwareInfo
@@ -34,7 +35,7 @@ class NSetupSum(Screen):
 					}
 				</convert>
 			</widget>
-			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
+			<widget source="conn" Render="Label" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" transparent="1" />
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
@@ -43,8 +44,7 @@ class NSetupSum(Screen):
 		self.list = []
 		self["title"] = Label(_("System Settings"))
 		self["key_red"] = Label(_("Exit"))
-		self['conn'] = Label("")
-		self['conn'].hide()
+		self['conn'] = StaticText("")
 		skin_path = GetSkinPath()
 		xmldata = setupdom.getroot()
 		self.model = HardwareInfo().get_device_name()
@@ -73,8 +73,7 @@ class NSetupSum(Screen):
 	
 	def saveConfig(self, *ret):
 		if ret:
-			self['conn'].show()
-			self['conn'].setText(_('Saving Setting.\nPlease wait...'))
+			self['conn'].text = (_('Saving Setting.\nPlease wait...'))
 			self.activityTimer.timeout.get().append(self.saveConf(ret[0]))
 			self.activityTimer.start(100, False)
 		
@@ -87,7 +86,7 @@ class NSetupSum(Screen):
 		elif ret == "ipupdate":
 			createIpupdateConf()
 		configfile.save()
-		self['conn'].hide()
+		self['conn'].text = ('')
 
 class NSetup(ConfigListScreen, Screen):
 

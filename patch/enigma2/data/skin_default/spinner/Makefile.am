@@ -1,12 +1,6 @@
 installdir = $(pkgdatadir)/skin_default/spinner
 
 dist_install_DATA = \
-	wait18.png \
-	wait17.png \
-	wait16.png \
-	wait15.png \
-	wait14.png \
-	wait13.png \
 	wait12.png \
 	wait11.png \
 	wait10.png \

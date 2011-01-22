@@ -109,6 +109,15 @@ msgstr ""
 "Ricarica nuovi Settings\n"
 "Attendere prego..."
 
+msgid "Reload Settings"
+msgstr "Ricarica Settings"
+
+msgid "Reload settings, please wait..."
+msgstr "Ricarica settings, attendere prego..."
+
+msgid "Settings reloaded succesfully!"
+msgstr "Settings ricaricati correttamente"
+
 msgid ""
 "Reload Plugins list\n"
 "Please Wait..."

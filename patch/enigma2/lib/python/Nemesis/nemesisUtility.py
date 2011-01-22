@@ -12,6 +12,7 @@ from Tools.Directories import fileExists
 from Components.ConfigList import ConfigListScreen
 from Components.config import getConfigListEntry, ConfigYesNo, NoSave, config, ConfigFile, ConfigNothing, ConfigSelection
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
+from Components.Sources.StaticText import StaticText
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from os import system, remove as os_remove
 from nemesisTool import  GetSkinPath, nemesisTool
@@ -365,7 +366,7 @@ class NModule(Screen):
 							MultiContentEntryPixmapAlphaTest(pos=(405, 6), size=(80, 23), png=png),
 						],
 					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 30
+					"itemHeight": 30Label
 					}
 				</convert>
 			</widget>
@@ -449,7 +450,7 @@ class NServicesSetup(Screen, ConfigListScreen):
 		<screen position="330,160" size="620,440">
 			<eLabel position="0,0" size="620,2" backgroundColor="grey" zPosition="5"/>
 			<widget name="config" position="20,20" size="580,330" scrollbarMode="showOnDemand" />
-			<widget name="conn" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center"  foregroundColor="#ffffff" backgroundColor="#6565ff" />
+			<widget source="conn" render="Label" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center"  foregroundColor="#ffffff" transparent="1" />
 			<eLabel position="0,399" size="620,2" backgroundColor="grey" zPosition="5"/>
 			<widget name="canceltext" position="20,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
 			<widget name="oktext" position="310,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
@@ -475,8 +476,7 @@ class NServicesSetup(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, self.list)
 		self["oktext"] = Label(_("OK"))
 		self["canceltext"] = Label(_("Exit"))
-		self['conn'] = Label("")
-		self['conn'].hide()
+		self['conn'] = StaticText("")
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], 
 		{
 			"red": self.close,
@@ -500,8 +500,7 @@ class NServicesSetup(Screen, ConfigListScreen):
 			self['config'].l.setList(self.list)
 	
 	def saveSetting(self):
-		self['conn'].show()
-		self['conn'].setText(_('Saving Setting. Please wait...'))
+		self['conn'].text = (_('Saving Setting. Please wait...'))
 		self.activityTimer = eTimer()
 		self.activityTimer.timeout.get().append(self.saveConf)
 		self.activityTimer.start(300, False)
@@ -584,7 +583,7 @@ class deleteLog(Screen, ConfigListScreen):
 		<screen position="330,160" size="620,440" title="Delete log files">
 			<eLabel position="0,0" size="620,2" backgroundColor="grey" zPosition="5"/>
 			<widget name="config" position="20,20" size="580,330" scrollbarMode="showOnDemand" />
-			<widget name="conn" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center"  foregroundColor="#ffffff" backgroundColor="#6565ff" />
+			<widget source="conn" render="Label" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" transparent="1" />
 			<eLabel position="0,399" size="620,2" backgroundColor="grey" zPosition="5"/>
 			<widget name="canceltext" position="20,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
 			<widget name="oktext" position="310,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
@@ -605,8 +604,7 @@ class deleteLog(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, self.list)
 		self["oktext"] = Label(_("Delete"))
 		self["canceltext"] = Label(_("Exit"))
-		self['conn'] = Label("")
-		self['conn'].hide()
+		self['conn'] = StaticText("")
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], 
 		{
 			"red": self.close,
@@ -628,8 +626,7 @@ class deleteLog(Screen, ConfigListScreen):
 			self['config'].l.setList(self.list)
 	
 	def delLog(self):
-		self['conn'].show()
-		self['conn'].setText(_('Deleting log files. Please wait...'))
+		self['conn'].text = (_('Deleting log files. Please wait...'))
 		self.activityTimer = eTimer()
 		self.activityTimer.timeout.get().append(self.DLog)
 		self.activityTimer.start(300, False)
@@ -648,7 +645,7 @@ class NSwap(Screen, ConfigListScreen):
 		<screen position="330,160" size="620,440">
 			<eLabel position="0,0" size="620,2" backgroundColor="grey" zPosition="5"/>
 			<widget name="config" position="20,20" size="580,330" scrollbarMode="showOnDemand" />
-			<widget name="conn" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center"  foregroundColor="#ffffff" backgroundColor="#6565ff" />
+			<widget source="conn" render="Label" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center"  foregroundColor="#ffffff" transparent="1" />
 			<eLabel position="0,399" size="620,2" backgroundColor="grey" zPosition="5"/>
 			<widget name="canceltext" position="20,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
 			<widget name="oktext" position="310,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
@@ -660,8 +657,7 @@ class NSwap(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, self.list)
 		self["oktext"] = Label(_("Save"))
 		self["canceltext"] = Label(_("Exit"))
-		self['conn'] = Label("")
-		self['conn'].hide()
+		self['conn'] = StaticText("")
 		self.active = False
 		self.loc = ''
 		self.size = 0
@@ -701,8 +697,7 @@ class NSwap(Screen, ConfigListScreen):
 		self['config'].l.setList(self.list)
 	
 	def saveSwap(self):
-		self['conn'].show()
-		self['conn'].setText(_('Saving swap config. Please wait...'))
+		self['conn'].text = (_('Saving swap config. Please wait...'))
 		self.activityTimer.timeout.get().append(self.Dsave)
 		self.activityTimer.start(500, False)
 		
@@ -733,13 +728,13 @@ class NSwap(Screen, ConfigListScreen):
 			cmd += 'rm -f ' + swapfile
 			self.session.openWithCallback(self.scriptReturn, nemesisConsole, cmd, _('Deleting Swap file...'))
 		else:
-			self['conn'].setText(_('Nothing to do!'))
+			self['conn'].text = (_('Nothing to do!'))
 	
 	def scriptReturn(self, *answer):
 		if answer[0] == nemesisConsole.EVENT_DONE:
-			self['conn'].setText(_('Swap process completed successfully!'))
+			self['conn'].text = (_('Swap process completed successfully!'))
 		else:
-			self['conn'].setText(_('Swap process killed by user!'))
+			self['conn'].text = (_('Swap process killed by user!'))
 		self.loadSetting()
 
 	def findSwap(self):

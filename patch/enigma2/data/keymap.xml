@@ -202,8 +202,8 @@
 			<key id="KEY_AUDIO" mapto="audioSelection" flags="m" />
 		</device>
 		<device name="dreambox advanced remote control (native)">
-			<key id="KEY_YELLOW" mapto="audioSelection" flags="l" />
-			<key id="KEY_YELLOW" mapto="nemesisOPlugins" flags="b" />
+			<key id="KEY_YELLOW" mapto="audioSelection" flags="b" />
+			<key id="KEY_YELLOW" mapto="nemesisOPlugins" flags="l" />
 		</device>
 	</map>
 
@@ -339,8 +339,8 @@
 
 	<map context="InfobarTimeshiftActions">
 		<device name="dreambox remote control (native)">
-			<key id="KEY_YELLOW" mapto="timeshiftStart" flags="l" />
-			<key id="KEY_YELLOW" mapto="nemesisOPlugins" flags="b" />
+			<key id="KEY_YELLOW" mapto="nemesisOPlugins" flags="l" />
+			<key id="KEY_YELLOW" mapto="timeshiftStart" flags="b" />
 			<key id="KEY_TV" mapto="timeshiftStop" flags="m" />
 		</device>
 		<device name="dreambox advanced remote control (native)">

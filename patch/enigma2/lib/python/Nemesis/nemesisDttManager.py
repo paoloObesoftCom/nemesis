@@ -7,6 +7,7 @@ from Components.Ipkg import IpkgComponent
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
+from Components.Sources.StaticText import StaticText
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists
 from nemesisTool import GetSkinPath
@@ -60,7 +61,7 @@ class manageDttDevice(Screen):
 	
 	skin = """
 		<screen position="80,95" size="560,430">
-			<widget name="conn" position="10,10" size="540,340" font="Regular;20" halign="center" />
+			<widget source="conn" render=Label position="10,10" size="540,340" font="Regular;20" halign="center" transparent="1" />
 			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
 				<convert type="TemplatedMultiContent">
 					{"template": [
@@ -85,8 +86,7 @@ class manageDttDevice(Screen):
 		self["key_red"] = Label(_("Exit"))
 		self["key_yellow"] = Label(_("Install"))
 		self["key_yellow"].hide()
-		self['conn'] = Label("")
-		self["conn"].hide()
+		self['conn'] = StaticText("")
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
@@ -159,7 +159,6 @@ class manageDttDevice(Screen):
 		del self.list[:]
 		if fileExists('/usr/script/loaddttmodules.sh'):
 			self["key_yellow"].hide()
-			self['conn'].hide()
 			self.readStatus()
 			skin_path = GetSkinPath()
 			if self.devList:
@@ -170,8 +169,7 @@ class manageDttDevice(Screen):
 			self['list'].setList(self.list)
 		else:
 			self["key_yellow"].show()
-			self['conn'].show()
-			self['conn'].setText(_("Modules for support\nUSB DVB-T/C adapter\nare not installed!\n\nPress yellow button\nto install it."))
+			self['conn'].text = (_("Modules for support\nUSB DVB-T/C adapter\nare not installed!\n\nPress yellow button\nto install it."))
 
 	def modulesInstall(self):
 		self['conn'].setText(_("Connetting to addons server.\nPlease wait..."))
@@ -181,11 +179,11 @@ class manageDttDevice(Screen):
 		if result:
 			self.session.openWithCallback(self.updateList, Ipkg, cmdList = self.cmdList)
 		else:
-			self['conn'].setText(_("Modules for support\nUSB DVB-T/C adapter\nare not installed!\n\nPress yellow button\nto install it."))
+			self['conn'].text = (_("Modules for support\nUSB DVB-T/C adapter\nare not installed!\n\nPress yellow button\nto install it."))
 			
 	def ipkgCallback(self, event, param):
 		if event == IpkgComponent.EVENT_ERROR:
-			self['conn'].setText(_("Server not found!\nPlease check internet connection."))
+			self['conn'].text = (_("Server not found!\nPlease check internet connection."))
 		elif event == IpkgComponent.EVENT_DONE:
 			self.cmdList = []
 			self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": "dreambox-tuner-usb" }))

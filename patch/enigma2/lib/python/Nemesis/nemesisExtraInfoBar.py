@@ -82,13 +82,20 @@ class nemesisEI(Screen):
 			})
 	
 		self.onHide.append(self.__onHide)
-		self.onShow.append(self.__evTunedIn)
+		self.onShow.append(self.__onShow)
 
 	def __onHide(self):
 		if self.emm_timer.isActive():
 			self.emm_timer.stop()
 		if self.ecm_timer.isActive():
 			self.ecm_timer.stop()
+
+	def __onShow(self):
+		service = self.session.nav.getCurrentService()
+		info = service and service.info()
+		if info is not None:
+			if not self.ecm_timer.isActive():
+				self.ecm_timer.start(config.nemesis.ecminfodelay.value)
 
 	def __evStart(self):
 		if self.emm_timer.isActive():

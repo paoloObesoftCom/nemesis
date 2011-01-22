@@ -140,7 +140,7 @@ class NAddons(Screen):
 					}
 				</convert>
 			</widget>
-			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
+			<widget source="conn" render="Label" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" transparent="1" />
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
@@ -149,17 +149,19 @@ class NAddons(Screen):
 		self.list = []
 		self["title"] = Label(_("Addons Manager"))
 		self['list'] = List(self.list)
-		self['conn'] = Label("")
+		self['conn'] = StaticText("")
 		self["key_red"] = Label(_("Cancel"))
-		self['conn'].hide()
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
+		self.reloadTimer = eTimer()
+		self.reloadTimer.timeout.get().append(self.relSetting)
 			
 		self.MenuList = [
 			('NAddons',_('Download Addons'),'icons/network.png',True),
 			('NExtra',_('Download Extra'),'icons/network.png',fileExists('/etc/extra.url')),
 			('NManual',_('Manual Package Install'),'icons/manual.png',True),
 			('NRemove',_('Remove Addons'),'icons/remove.png',True),
+			('NReload',_('Reload Settings'),'icons/enigma.png',True),
 			('NExtension',_('Manage extensions'),'icons/extensions.png',isPluginManager),
 			('NPacket',_('Packet management'),'icons/package.png',isPacketManager),
 			('NUpdate',_('Software update'),'icons/update.png',isUpdatePLugin)
@@ -177,15 +179,15 @@ class NAddons(Screen):
 		self.setTitle(_("Addons Manager"))
 
 	def KeyOk(self):
+		self['conn'].text = ('')
 		if not self.container.running():
-			self['conn'].setText(_("Connetting to addons server.\nPlease wait..."))
 			sel = self["list"].getCurrent()[0]
 			if (sel == "NAddons"):
-				self['conn'].show()
+				self['conn'].text = (_("Connetting to addons server.\nPlease wait..."))
 				u.typeDownload = 'A'
 				self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + linkAddons + "/addons800.xml -O /tmp/addons.xml")
 			elif (sel == "NExtra"):
-				self['conn'].show()
+				self['conn'].text = (_("Connetting to addons server.\nPlease wait..."))
 				u.typeDownload = 'E'
 				self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + linkExtra + "e2extra.xml -O /tmp/addons.xml")
 			elif (sel == "NManual"):
@@ -198,6 +200,13 @@ class NAddons(Screen):
 				self.session.open(PacketManager, GetSkinPath())
 			elif (sel == "NUpdate"):
 				self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want to update your Dreambox?")+"\n"+_("\nAfter pressing OK, please wait!"))
+			elif (sel == "NReload"):
+				self['conn'].text = _("Reload settings, please wait...")
+				self.reloadTimer.start(250, True)
+
+	def relSetting(self):
+		u.reloadSetting()
+		self['conn'].text = _("Settings reloaded succesfully!")
 
 	def runUpgrade(self, result):
 		if result:
@@ -208,12 +217,12 @@ class NAddons(Screen):
 			try:
 				loadxml.load('/tmp/addons.xml')
 				remove('/tmp/addons.xml')
-				self['conn'].hide()
+				self['conn'].text = ('')
 				self.session.open(RAddons)
 			except:
-				self['conn'].setText(_("File xml is not correctly formatted!."))
+				self['conn'].text = (_("File xml is not correctly formatted!."))
 		else:
-			self['conn'].setText(_("Server not found!\nPlease check internet connection."))
+			self['conn'].text = (_("Server not found!\nPlease check internet connection."))
 	
 	def cancel(self):
 		if not self.container.running():
@@ -224,7 +233,7 @@ class NAddons(Screen):
 			self.container.kill()
 			if fileExists('/tmp/addons.xml'):
 				remove('/tmp/addons.xml')
-			self['conn'].setText(_('Process Killed by user\nServer Not Connected!'))
+			self['conn'].text = (_('Process Killed by user\nServer Not Connected!'))
 	
 	def updateList(self):
 		del self.list[:]
@@ -297,7 +306,7 @@ class	RAddonsDown(Screen):
 					}
 				</convert>
 			</widget>
-			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
+			<widget source="conn" render="Label" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" transparent="1" />
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
@@ -439,7 +448,7 @@ class	RManual(Screen):
 					}
 				</convert>
 			</widget>
-			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
+			<widget source="conn" render="Label" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" transparent="1" />
 			<widget name="key_red" position="0,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 			<widget name="key_yellow" position="280,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
@@ -448,11 +457,10 @@ class	RManual(Screen):
 		Screen.__init__(self, session)
 		self.list = []
 		self['list'] = List(self.list)
-		self['conn'] = Label("")
+		self['conn'] = StaticText("")
 		self["title"] = Label(_("Manual Installation"))
 		self["key_red"] = Label(_("Cancel"))
 		self["key_yellow"] = Label(_("Reload /tmp"))
-		self['conn'].hide()
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
@@ -475,8 +483,7 @@ class	RManual(Screen):
 			for fil in loadtmpdir.tmp_list: 
 				self.list.append((fil[1], fil[1]))
 		else:	
-			self['conn'].show()
-			self['conn'].setText(_("Put your plugin xxx.tbz2 or xxx.ipk\nvia FTP in /tmp."))
+			self['conn'].text = (_("Put your plugin xxx.tbz2 or xxx.ipk\nvia FTP in /tmp."))
 		self['list'].setList(self.list)
 	
 	def KeyOk(self):
@@ -494,8 +501,7 @@ class	RManual(Screen):
 	
 	def installAddons(self, answer):
 		if (answer is True):
-			self['conn'].show()
-			self['conn'].setText(_('Installing: %s.\nPlease wait...') % u.filename)
+			self['conn'].text = (_('Installing: %s.\nPlease wait...') % u.filename)
 			if (u.filename.find('.ipk') != -1):
 				args = {True: '--force-overwrite --force-defaults ',False: ''}[config.plugins.SoftwareManager.overwriteUpgrade.value]
 				args = {True: '--force-reinstall --force-defaults ',False: ''}[config.plugins.SoftwareManager.forceReInstall.value]
@@ -503,12 +509,12 @@ class	RManual(Screen):
 			elif (u.filename.find('.tbz2') != -1):
 				self.container.execute("tar -jxvf /tmp/" + u.filename + " -C /")
 			else:
-				self['conn'].setText(_('File: %s\nis not a valid package!') % u.filename)
+				self['conn'].text = (_('File: %s\nis not a valid package!') % u.filename)
 	
 	def runFinished(self, retval):
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		remove("/tmp/" + u.filename);
-		self['conn'].setText(_("Addon: %s\ninstalled succesfully!") % u.filename)
+		self['conn'].text = (_("Addon: %s\ninstalled succesfully!") % u.filename)
 		self.readTmp()
 		if fileExists('/tmp/.restartE2'):
 			remove('/tmp/.restartE2')
@@ -523,7 +529,7 @@ class	RManual(Screen):
 			self.close()
 		else:
 			self.container.kill()
-			self['conn'].setText(_('Process Killed by user.\nAddon not installed correctly!'))
+			self['conn'].text = (_('Process Killed by user.\nAddon not installed correctly!'))
 	
 	def restartEnigma2(self, answer):
 		if (answer is True):
@@ -544,7 +550,7 @@ class	RRemove(Screen):
 					}
 				</convert>
 			</widget>
-			<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" />
+			<widget source="conn" render="Label" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" transparent="1" />
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
@@ -552,10 +558,9 @@ class	RRemove(Screen):
 		Screen.__init__(self, session)
 		self.list = []
 		self['list'] = List(self.list)
-		self['conn'] = Label("")
+		self['conn'] = StaticText("")
 		self["title"] = Label(_("Remove Addons"))
 		self["key_red"] = Label(_("Cancel"))
-		self['conn'].hide()
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
@@ -577,8 +582,7 @@ class	RRemove(Screen):
 			for fil in loadunidir.uni_list: 
 				self.list.append((fil[1], fil[1] [:-10]))
 		else:
-			self['conn'].show()
-			self['conn'].setText(_("Nothing to uninstall!"))
+			self['conn'].text = (_("Nothing to uninstall!"))
 		self['list'].setList(self.list)
 	
 	def KeyOk(self):
@@ -596,14 +600,13 @@ class	RRemove(Screen):
 	
 	def removeAddons(self, answer):
 		if (answer is True):
-			self['conn'].show()
-			self['conn'].setText(_('Removing: %s.\nPlease wait...') % u.filename[:-10])
+			self['conn'].text = (_('Removing: %s.\nPlease wait...') % u.filename[:-10])
 			self.container.execute("/usr/uninstall/" + u.filename)
 	
 	def runFinished(self, retval):
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.readTmp()
-		self['conn'].setText(_('Addons: %s\nremoved succeffully.') % u.filename[:-10])
+		self['conn'].text = (_('Addons: %s\nremoved succeffully.') % u.filename[:-10])
 
 	def cancel(self):
 		if not self.container.running():
@@ -612,4 +615,4 @@ class	RRemove(Screen):
 			self.close()
 		else:
 			self.container.kill()
-			self['conn'].setText(_('Process Killed by user.\nAddon not removed completly!'))
+			self['conn'].text = (_('Process Killed by user.\nAddon not removed completly!'))
