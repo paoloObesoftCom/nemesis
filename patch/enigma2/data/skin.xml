@@ -66,10 +66,10 @@
 		<color name="unff2525" value="#00ff2525" />
 		<color name="white" value="#00ffffff" />
 		<color name="yellow" value="#00bab329" />
-		<color name="fta" value="#0056da" />
-		<color name="emm" value="#C21A1A" />
-		<color name="ecm" value="green" />
-		<color name="conncol" value="#0064ff" />
+		<color name="fta" value="blue" />
+		<color name="emm" value="#ff0000" />
+		<color name="ecm" value="#00ff00" />
+		<color name="conncol" value="#00b2e0b4" />
 	</colors>
 	<fonts>
 		<font filename="lcd.ttf" name="LCD" scale="100" />
@@ -419,7 +419,7 @@
 				}
 			</convert>
 		</widget>
-		<widget source="conn" render="Label" position="10,440" size="490,50" font="Prive2;16" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
+		<widget source="conn" render="Label" position="10,440" size="490,50" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="135,500" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="key_red" position="135,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
@@ -459,7 +459,7 @@
 				}
 			</convert>
 		</widget>
-		<widget source="conn" render="Label" position="10,440" size="490,50" font="Prive2;16" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
+		<widget source="conn" render="Label" position="10,440" size="490,50" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="135,500" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="key_red" position="135,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
@@ -488,7 +488,7 @@
 				}
 			</convert>
 		</widget>
-		<widget source="conn" render="Label" position="10,440" size="490,50" font="Prive2;16" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
+		<widget source="conn" render="Label" position="10,440" size="490,50" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="135,500" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="key_red" position="135,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
@@ -503,7 +503,7 @@
 				}
 			</convert>
 		</widget>
-		<widget source="conn" render="Label" position="10,440" size="490,50" font="Prive2;16" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
+		<widget source="conn" render="Label" position="10,440" size="490,50" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="10,500" size="240,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="260,500" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="key_red" position="10,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
@@ -520,7 +520,7 @@
 				}
 			</convert>
 		</widget>
-		<widget source="conn" render="Label" position="10,440" size="490,50" font="Prive2;16" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
+		<widget source="conn" render="Label" position="10,440" size="490,50" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="135,500" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="key_red" position="135,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
@@ -576,7 +576,7 @@
 	</screen>
 	<screen name="HDDSetup" position="center,105" size="510,550">
 		<widget name="config" position="50,30" size="410,400" zPosition="2" scrollbarMode="showOnDemand" transparent="1" />
-		<widget source="conn" render="Label" position="10,440" size="490,50" font="Prive2;16" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
+		<widget source="conn" render="Label" position="10,440" size="490,50" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="10,500" size="240,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="260,500" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="canceltext" position="10,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
@@ -648,7 +648,7 @@
 		<widget name="key_red" position="135,507" size="240,28" zPosition="2" font="Prive2;22" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
 	<screen name="manageDttDevice" position="center,105" size="510,550">
-		<widget source="conn" render="Label" position="20,20" size="470,490" font="Prive2;22" halign="center" valign="center" foregroundColor="conncol" />
+		<widget source="conn" render="Label" position="20,20" size="470,490" font="Prive2;22" halign="center" foregroundColor="conncol" />
 		<widget source="list" render="Listbox" position="20,20" size="470,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
@@ -697,7 +697,7 @@
 	</screen>
 	<screen name="NSwap" position="center,155" size="620,450">
 		<widget name="config" position="20,20" size="580,310" scrollbarMode="showOnDemand" />
-		<widget source="conn" render="Label" position="10,340" size="580,50" font="Prive2;16" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
+		<widget source="conn" render="Label" position="10,340" size="580,50" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="46,400" size="240,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="334,400" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="canceltext" position="46,402" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
@@ -705,7 +705,7 @@
 	</screen>
 	<screen name="deleteLog" position="center,155" size="620,450" title="Delete log files">
 		<widget name="config" position="20,20" size="580,310" scrollbarMode="showOnDemand" />
-		<widget source="conn" render="Label" position="10,340" size="580,50" font="Prive2;16" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
+		<widget source="conn" render="Label" position="10,340" size="580,50" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="46,400" size="240,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="334,400" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="canceltext" position="46,402" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
@@ -713,7 +713,7 @@
 	</screen>
 	<screen name="NServicesSetup" position="center,155" size="620,450" title="Manage Startup">
 		<widget name="config" position="20,20" size="580,310" scrollbarMode="showOnDemand" />
-		<widget source="conn" render="Label" position="10,340" size="580,50" font="Prive2;16" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
+		<widget source="conn" render="Label" position="10,340" size="580,50" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="46,400" size="240,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="334,400" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="canceltext" position="46,402" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
