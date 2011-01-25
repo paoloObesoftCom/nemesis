@@ -2,7 +2,7 @@ DESCRIPTION = "USB DVB-T/C Tuner Support Files"
 LICENSE = "GPL"
 DEPENDS += " v4l-dvb-modules"
 
-PR = "r16"
+PR = "r18"
 
 SRC_URI = "file://vtuner \
            file://restartDtt.sh \

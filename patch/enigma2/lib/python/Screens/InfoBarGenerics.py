@@ -101,7 +101,7 @@ class InfoBarShowHide:
 	STATE_HIDING = 1
 	STATE_SHOWING = 2
 	STATE_SHOWN = 3
-	
+
 	def __init__(self):
 		self.InfoBarExtraDialog = self.session.instantiateDialog(nemesisEI)
 		self["ShowHideActions"] = ActionMap( ["InfobarShowHideActions"] ,

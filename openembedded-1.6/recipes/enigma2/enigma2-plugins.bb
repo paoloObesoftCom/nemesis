@@ -9,7 +9,7 @@ SRCDATE="20101217"
 BRANCH="master"
 PV = "experimental-git${SRCDATE}"
 
-PR = "r13"
+PR = "r15"
 SRC_URI = "file://../../../../sources/enigma2-plugins_16.tar.gz"
 
 EXTRA_OECONF = " \
@@ -26,7 +26,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit autotools
 
-S = "${WORKDIR}/enigma2-plugins"
+S = "${WORKDIR}/git"
 
 DEPENDS = "python-pyopenssl python-gdata streamripper python-mutagen python-daap"
 DEPENDS += "enigma2"
@@ -60,7 +60,7 @@ python populate_packages_prepend () {
 			if line.startswith('Maintainer: '):
 				bb.data.setVar('MAINTAINER_' + full_package, line[12:], d)
 
-	mydir = bb.data.getVar('D', d, 1) + "/../enigma2-plugins/"
+	mydir = bb.data.getVar('D', d, 1) + "/../git/"
 	for package in bb.data.getVar('PACKAGES', d, 1).split():
 		getControlLines(mydir, d, package.split('-')[-1])
 }

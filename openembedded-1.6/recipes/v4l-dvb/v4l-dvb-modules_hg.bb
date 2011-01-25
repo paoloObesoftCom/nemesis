@@ -5,7 +5,7 @@ DEPENDS += " mercurial-native"
 SRCDATE = "20100904"
 SRCREV = "6e0befab696a"
 PV = "0.0+hg${SRCDATE}"
-PR = "r52"
+PR = "r55"
 
 SRC_URI = "hg://linuxtv.org/hg/;module=v4l-dvb;rev=${SRCREV} \
            file://defconfig \
@@ -27,10 +27,8 @@ SRC_URI = "hg://linuxtv.org/hg/;module=v4l-dvb;rev=${SRCREV} \
            file://v4l-dvb-af9015_fix_for_tda18218_tuner.patch;patch=1 \
            file://v4l-dvb-af9013_add_firmware5.1.patch;patch=1 \
            file://v4l-dvb-af9015_fix_for_A815M.patch;patch=1 \
+           file://v4l-dvb-em28xx_fix.patch;patch=1 \
+           file://v4l-dvb-af9015_add_a850red.patch;patch=1 \
 "
 
 S = "${WORKDIR}/v4l-dvb"
-
-# replace old a867 drivers handled by an external package
-RREPLACES_v4l-dvb-module-dvb-a867 += "v4l-dvb-module-a867"
-RCONFLICTS_v4l-dvb-module-dvb-a867 += "v4l-dvb-module-a867"

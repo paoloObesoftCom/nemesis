@@ -120,23 +120,24 @@ enigma2_16()
 		echo -n "Remove $srcpatchedpath/enigma2... "
 		[ -e $srcpatchedpath/enigma2 ] && rm -rf $srcpatchedpath/enigma2
 		echo 'Removed!'
-		mkdir $srcpatchedpath/enigma2
-		echo -n "Copy $e2_cvssrc $srcpatchedpath/... "
-		cp -r $e2_cvssrc $srcpatchedpath  && echo 'Copied!'
-		echo -n "Copy patch/enigma2/* to $srcpatchedpath/enigma2/... "
-		cp -r patch/enigma2/* $srcpatchedpath/enigma2  && echo 'Copied!'
-		echo -n "Copy patch/po/enigma2/it.po to $srcpatchedpath/enigma2/po... "
-		cp -r patch/po/enigma2/it.po $srcpatchedpath/enigma2/po  && echo 'Copied!'
-		echo -n "Copy patch/po/enigma2/Makefile.am to $srcpatchedpath/enigma2/po... "
-		cp -r patch/po/enigma2/Makefile.am $srcpatchedpath/enigma2/po  && echo 'Copied!'
-		echo -n "Merge patch/po/enigma2/panel_it.po in $srcpatchedpath/enigma2/po/it.po... "
-		cat patch/po/enigma2/panel_it.po >> $srcpatchedpath/enigma2/po/it.po  && echo 'Merged!'
-		cd $srcpatchedpath
-		find enigma2/ -name ".svn" | xargs rm -rf
+		mkdir -p $srcpatchedpath/enigma2
+		echo -n "Copy $e2_cvssrc/enigma2 $srcpatchedpath/enigma2... "
+		cp -r $e2_cvssrc $srcpatchedpath/enigma2/  && echo 'Copied!'
+		mv $srcpatchedpath/enigma2/enigma2 $srcpatchedpath/enigma2/git
+		echo -n "Copy patch/enigma2/* to $srcpatchedpath/enigma2/git/... "
+		cp -r patch/enigma2/* $srcpatchedpath/enigma2/git/  && echo 'Copied!'
+		echo -n "Copy patch/po/enigma2/it.po to $srcpatchedpath/enigma2/git/po... "
+		cp -r patch/po/enigma2/it.po $srcpatchedpath/enigma2/git/po  && echo 'Copied!'
+		echo -n "Copy patch/po/enigma2/Makefile.am to $srcpatchedpath/enigma2/git/po... "
+		cp -r patch/po/enigma2/Makefile.am $srcpatchedpath/enigma2/git/po  && echo 'Copied!'
+		echo -n "Merge patch/po/enigma2/panel_it.po in $srcpatchedpath/enigma2/git/po/it.po... "
+		cat patch/po/enigma2/panel_it.po >> $srcpatchedpath/enigma2/git/po/it.po  && echo 'Merged!'
+		cd $srcpatchedpath/enigma2
+		find git/ -name ".svn" | xargs rm -rf
 		echo -n "Create $e2_arc_16 archive... "
-		tar -zcf $e2_arc_16 enigma2/  && echo 'Created!'
+		tar -zcf $e2_arc_16 git/  && echo 'Created!'
 		echo -n "Move $e2_arc_16 to $sourcespath... "
-		mv $e2_arc_16 $sourcespath  && echo 'Moved!'
+		mv $e2_arc_16 ../$sourcespath  && echo 'Moved!'
 	else
 		echo "$e2_cvssrc not Found!"
 		echo "Please run the command './install.sh' in your env path!"
@@ -150,16 +151,18 @@ enigma2_plugins()
 	# prepare enigma2 plugins package
 	if [ -e $srcpath/enigma2-plugins ]; then
 		echo 'Prepare enigma2 plugins package...'
-		echo -n "Remove $srcpatchedpath/enigma2-plugins/... "
+		echo -n "Remove $srcpatchedpath/enigma2-plugins... "
 		[ -e $srcpatchedpath/enigma2-plugins ] && rm -rf $srcpatchedpath/enigma2-plugins
 		echo 'Removed!'
-		cp -r $srcpath/enigma2-plugins $srcpatchedpath/
-		cp -r patch/enigma2-plugins/* $srcpatchedpath/enigma2-plugins/
-		cd $srcpatchedpath
-		find . -name ".svn" | xargs rm -rf
+		mkdir -p $srcpatchedpath/enigma2-plugins/
+		cp -r $srcpath/enigma2-plugins $srcpatchedpath/enigma2-plugins/
+		mv $srcpatchedpath/enigma2-plugins/enigma2-plugins/ $srcpatchedpath/enigma2-plugins/git
+		cp -r patch/enigma2-plugins $srcpatchedpath/enigma2-plugins/git
+		cd $srcpatchedpath/enigma2-plugins/
+		find git/ -name ".svn" | xargs rm -rf
 		echo -n "Create $e2_plugins archive... "
-		tar -zcf $e2_plugins enigma2-plugins/ && echo 'Created!'
-		mv $e2_plugins $sourcespath
+		tar -zcf $e2_plugins git/ && echo 'Created!'
+		mv $e2_plugins ../$sourcespath
 		cd $curdir
 	else
 		echo "$srcpath/enigma2-plugins not Found!"

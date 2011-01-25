@@ -101,7 +101,6 @@ check_enigma2()
 	kompare $e2_cvssrc/lib/python/Components/Renderer/Picon.py patch/enigma2/lib/python/Components/Renderer/Picon.py
 	
 	kompare $e2_cvssrc/data/Makefile.am patch/enigma2/data/Makefile.am
-	kompare $e2_cvssrc/data/encoding.conf patch/enigma2/data/encoding.conf
 	kompare $e2_cvssrc/data/keymap.xml patch/enigma2/data/keymap.xml
 	kompare $e2_cvssrc/data/setup.xml patch/enigma2/data/setup.xml
 	kompare $e2_cvssrc/data/menu.xml patch/enigma2/data/menu.xml

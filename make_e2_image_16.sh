@@ -33,20 +33,7 @@ rebuild_image()
 {
 	. ./env.source
 	rm -f tmp/deploy/images/*
-	if [ $dmver == 'dm800' ]; then
-		bitbake \
-		task-opendreambox-cdplayer \
-		task-opendreambox-dvdplayer \
-		dreambox-tuner-usb \
-		dreambox-image
-	else
-		bitbake \
-		task-opendreambox-cdplayer \
-		task-opendreambox-dvdplayer \
-		task-opendreambox-dvdburn \
-		dreambox-tuner-usb \
-		dreambox-image
-	fi
+	bitbake dreambox-image
 }
 
 move_image()

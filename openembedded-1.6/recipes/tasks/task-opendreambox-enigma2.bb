@@ -1,7 +1,7 @@
 DESCRIPTION = "OpenDreambox: Enigma2 Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PR = "r12"
+PR = "r13"
 
 inherit task
 
@@ -31,6 +31,16 @@ RDEPENDS_task-opendreambox-enigma2 = "\
   enigma2-plugin-systemplugins-videotune \
   enigma2-streamproxy \
   tuxbox-tuxtxt-32bpp \
+  enigma2-plugin-extensions-stayup \
+  enigma2-plugin-systemplugins-crossepg \
+  enigma2-plugin-extensions-audiosync \
+  enigma2-plugin-systemplugins-networkbrowser \
+  enigma2-plugin-extensions-epgsearch \
+  enigma2-plugin-extensions-easymedia \
+  enigma2-plugin-extensions-socketmmi \
+  enigma2-meta \
+  enigma2-plugins-meta \
+  enigma2-skins-meta \
 "
 
 RRECOMMENDS_task-opendreambox-enigma2 = "\
