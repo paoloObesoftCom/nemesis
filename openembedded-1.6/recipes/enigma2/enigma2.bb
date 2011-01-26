@@ -19,15 +19,15 @@ GST_RTSP_RDEPENDS = "gst-plugin-udp gst-plugin-rtsp gst-plugin-rtp gst-plugin-rt
 GST_ALSA_RDEPENDS = "gst-plugin-alsa alsa-conf"
 GST_MISC_RDEPENDS = "gst-plugin-matroska gst-plugin-qtdemux gst-plugin-vorbis gst-plugin-audioparsersbad"
 GST_DVD_RDEPENDS = "gst-plugin-cdxaparse gst-plugin-cdio gst-plugin-vcdsrc"
-GST_BASE_RDEPENDS = "${GST_ALSA_RDEPENDS} ${GST_MISC_RDEPENDS} ${GST_RTSP_RDEPENDS}"
+GST_BASE_RDEPENDS = "${GST_ALSA_RDEPENDS} ${GST_MISC_RDEPENDS} ${GST_RTSP_RDEPENDS} gst-plugin-mpeg4videoparse gst-plugin-h264parse"
 
 RDEPENDS_append_dm7020 = " gst-plugin-ossaudio gst-plugin-ivorbisdec"
 RDEPENDS_append_dm7025 = " ${GST_ALSA_RDEPENDS} gst-plugin-ivorbisdec"
-RDEPENDS_append_dm800 = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-ivorbisdec gst-plugin-mpeg4videoparse gst-plugin-h264parse"
-RDEPENDS_append_dm8000 = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi gst-plugin-mpeg4videoparse gst-plugin-h264parse"
-RDEPENDS_append_dm500hd = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi gst-plugin-mpeg4videoparse gst-plugin-h264parse"
-RDEPENDS_append_dm800se = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi gst-plugin-mpeg4videoparse gst-plugin-h264parse"
-RDEPENDS_append_dm7020hd = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi gst-plugin-mpeg4videoparse gst-plugin-h264parse"
+RDEPENDS_append_dm800 = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-ivorbisdec"
+RDEPENDS_append_dm8000 = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi"
+RDEPENDS_append_dm500hd = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi"
+RDEPENDS_append_dm800se = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi"
+RDEPENDS_append_dm7020hd = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi"
 
 # 'forward depends' - no two providers can have the same PACKAGES_DYNAMIC, however both
 # enigma2 and enigma2-plugins produce enigma2-plugin-*.
@@ -59,9 +59,9 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r68"
+PR = "r2"
 
-SRCDATE = "20101204"
+SRCDATE = "20110126"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
 #when you like to checkout a specific revision of e2 you need
@@ -74,7 +74,7 @@ PV = "experimental-git${SRCDATE}"
 SRCREV = ""
 ####################################################
 
-SRC_URI = "file://../../../../sources/enigma2_16.tar.gz"
+SRC_URI = "file://../../../../sources/git_git.opendreambox.org.git.enigma2.git_EDG_16.tar.gz"
 
 S = "${WORKDIR}/git"
 

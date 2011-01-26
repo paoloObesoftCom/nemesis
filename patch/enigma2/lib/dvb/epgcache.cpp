@@ -381,6 +381,8 @@ void eEPGCache::DVBChannelRunning(iDVBChannel *chan)
 					messages.send(Message(Message::startChannel, chan));
 					// -> gotMessage -> changedService
 				}
+				else
+					data.state=-1;
 			}
 		}
 	}
@@ -1209,7 +1211,7 @@ void eEPGCache::save()
 
 eEPGCache::channel_data::channel_data(eEPGCache *ml)
 	:cache(ml)
-	,abortTimer(eTimer::create(ml)), zapTimer(eTimer::create(ml)), state(-1)
+	,abortTimer(eTimer::create(ml)), zapTimer(eTimer::create(ml)), state(-2)
 	,isRunning(0), haveData(0)
 #ifdef ENABLE_PRIVATE_EPG
 	,startPrivateTimer(eTimer::create(ml))

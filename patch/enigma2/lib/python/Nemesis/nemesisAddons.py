@@ -24,6 +24,8 @@ isPluginManager = True
 isPacketManager = True
 isUpdatePLugin = True
 
+t = nemesisTool()
+
 if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
 	try:
 		from Plugins.SystemPlugins.SoftwareManager.plugin import PluginManager
@@ -41,10 +43,6 @@ else:
 	isPluginManager = False
 	isPacketManager = False
 	isUpdatePLugin = False
-
-t = nemesisTool()
-linkAddons = t.readAddonsUrl()
-linkExtra = t.readExtraUrl()
 
 class util:
 	
@@ -89,7 +87,7 @@ class loadXml:
 			self.tree_list.append([c, tag.tag])
 			c1 = 0
 			for b in tree.find(tag.tag):
-				self.plugin_list.append([c,tag.tag,b.find("filename").text,b.find("desc").text,b.find("dir").text,b.find("size").text,b.find("check").text,c1])
+				self.plugin_list.append([c,tag.tag,b.find("Filename").text,b.find("Descr").text,b.find("Folder").text,b.find("Size").text,b.find("Check").text,c1])
 				c1 +=1
 			c +=1
 
@@ -153,9 +151,14 @@ class NAddons(Screen):
 		self["key_red"] = Label(_("Cancel"))
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
+		self.containerExtra = eConsoleAppContainer()
+		self.containerExtra.appClosed.append(self.runFinishedExtra)
 		self.reloadTimer = eTimer()
 		self.reloadTimer.timeout.get().append(self.relSetting)
 			
+		self.linkAddons = t.readAddonsUrl()
+		self.linkExtra = t.readExtraUrl()
+
 		self.MenuList = [
 			('NAddons',_('Download Addons'),'icons/network.png',True),
 			('NExtra',_('Download Extra'),'icons/network.png',fileExists('/etc/extra.url')),
@@ -185,11 +188,14 @@ class NAddons(Screen):
 			if (sel == "NAddons"):
 				self['conn'].text = (_("Connetting to addons server.\nPlease wait..."))
 				u.typeDownload = 'A'
-				self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + linkAddons + "/addons800.xml -O /tmp/addons.xml")
+				self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + self.linkAddons + "/addonsE2.xml -O /tmp/addons.xml")
 			elif (sel == "NExtra"):
 				self['conn'].text = (_("Connetting to addons server.\nPlease wait..."))
 				u.typeDownload = 'E'
-				self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + linkExtra + "e2extra.xml -O /tmp/addons.xml")
+				if self.linkExtra != None:
+					self.containerExtra.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + self.linkExtra + "iuregdoiuwqcdiuewq/tmp.tmp -O /tmp/tmp.tmp")
+				else:
+					self['conn'].text = (_("Server not found!\nPlease check internet connection."))
 			elif (sel == "NManual"):
 				self.session.open(RManual)
 			elif (sel == "NRemove"):
@@ -212,6 +218,18 @@ class NAddons(Screen):
 		if result:
 			self.session.open(UpdatePlugin, GetSkinPath())
 
+	def runFinishedExtra(self, retval):
+		if fileExists('/tmp/tmp.tmp'):
+			try:
+				f = open("/tmp/tmp.tmp", "r")
+				line = f.readline() [:-1]
+				f.close()
+				self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + self.linkExtra + "iuregdoiuwqcdiuewq/" + line + " -O /tmp/addons.xml")
+			except:
+				self['conn'].text = (_("Server not found!\nPlease check internet connection."))
+		else:
+			self['conn'].text = (_("Server not found!\nPlease check internet connection."))
+
 	def runFinished(self, retval):
 		if fileExists('/tmp/addons.xml'):
 			try:
@@ -225,14 +243,21 @@ class NAddons(Screen):
 			self['conn'].text = (_("Server not found!\nPlease check internet connection."))
 	
 	def cancel(self):
-		if not self.container.running():
+		if not self.container.running() and not self.containerExtra.running():
 			del self.container.appClosed[:]
 			del self.container
+			del self.containerExtra.appClosed[:]
+			del self.containerExtra
 			self.close()
 		else:
-			self.container.kill()
+			if self.container.running():
+				self.container.kill()
+			if self.containerExtra.running():
+				self.containerExtra.kill()
 			if fileExists('/tmp/addons.xml'):
 				remove('/tmp/addons.xml')
+			if fileExists('/tmp/tmp.tmp'):
+				remove('/tmp/tmp.tmp')
 			self['conn'].text = (_('Process Killed by user\nServer Not Connected!'))
 	
 	def updateList(self):
@@ -321,6 +346,9 @@ class	RAddonsDown(Screen):
 		self.container.appClosed.append(self.runFinished)
 		self['type'].setText(_("Download ") + str(u.pluginType))
 
+		self.linkAddons = t.readAddonsUrl()
+		self.linkExtra = t.readExtraUrl()
+
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
@@ -358,7 +386,7 @@ class	RAddonsDown(Screen):
 
 	def downloadAddons(self):
 		self.getAddonsPar()
-		url = {'E':linkExtra,'A':linkAddons}[u.typeDownload] + u.dir + "/" + u.filename 
+		url = {'E':self.linkExtra,'A':self.linkAddons}[u.typeDownload] + u.dir + "/" + u.filename 
 		if config.proxy.isactive.value:
 			cmd = "/var/etc/proxy.sh && wget %s -O /tmp/%s" % (url ,u.filename)
 			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Download: ') + u.filename)

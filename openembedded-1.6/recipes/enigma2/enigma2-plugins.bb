@@ -5,12 +5,12 @@ PACKAGES_DYNAMIC = "enigma2-plugin-*"
 
 # if you want experimental, use:
 SRCREV=""
-SRCDATE="20101217"
+SRCDATE="20110126"
 BRANCH="master"
 PV = "experimental-git${SRCDATE}"
 
-PR = "r15"
-SRC_URI = "file://../../../../sources/enigma2-plugins_16.tar.gz"
+PR = "r1"
+SRC_URI = "file://../../../../sources/git_schwerkraft.elitedvb.net.enigma2-plugins.enigma2-plugins.git_EDG_16.tar.gz"
 
 EXTRA_OECONF = " \
         BUILD_SYS=${BUILD_SYS} \

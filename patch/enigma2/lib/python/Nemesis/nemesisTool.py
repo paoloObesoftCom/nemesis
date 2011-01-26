@@ -322,11 +322,11 @@ class nemesisTool:
 		try:
 			#os.system("dos2unix /var/etc/extra.url");
 			f = open("/var/etc/extra.url", "r")
-			line = f.readline()
+			line = f.readline() [:-1]
 			f.close()
-			return line [:-1]
+			return line
 		except:
-			return ""
+			return None
 	
 	def getVarSpace(self):
 		free = -1
