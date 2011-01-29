@@ -23,6 +23,10 @@ def InitNemesisConfig():
 		("6", "6 " + _("seconds")),("7", "7 " + _("seconds")),("8", "8 " + _("seconds"))])
 	config.nemesis.usepiconinhdd = ConfigYesNo(default = False)
 	config.nemesis.forceumount = ConfigYesNo(default = False)
+#IPKG
+	config.nemesis.ipkg = ConfigSubsection();
+	config.nemesis.ipkg.overwriteUpgrade = ConfigYesNo(default = True)
+	config.nemesis.ipkg.forceReInstall = ConfigYesNo(default = False)
 #Fadeset
 	config.plugins.FadeSet = ConfigSubsection()
 	config.plugins.FadeSet.fadeIn = ConfigYesNo(default = True) # fade in enable
@@ -80,3 +84,4 @@ def InitNemesisConfig():
 	config.nemepg.clearcache = ConfigYesNo(default = True)
 	config.nemepg.clearbackup = ConfigYesNo(default = False)
 	config.nemepg.enatimer = ConfigEnableDisable(default = True)
+	

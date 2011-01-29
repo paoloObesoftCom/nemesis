@@ -17,10 +17,9 @@
 		<item level="0" text="Enable fade in of InfoBar on Zap">config.plugins.FadeSet.fadeInOnZap</item>
 		<item level="0" text="Speed for fade in/out of InfoBar (1-10)">config.plugins.FadeSet.timeout</item>
 	</setup>
-	<setup key="swman" title="Setup Software Manager">
-		<item level="0" text="Overwrite configuration files">config.plugins.SoftwareManager.overwriteConfigFiles</item>
-		<item level="0" text="Force overwrite on upgrade">config.plugins.SoftwareManager.overwriteUpgrade</item>
-		<item level="0" text="Force reinstall on install">config.plugins.SoftwareManager.forceReInstall</item>
+	<setup key="ipkgop" title="Setup OPKG Options">
+		<item level="0" text="Force overwrite on upgrade">config.nemesis.ipkg.overwriteUpgrade</item>
+		<item level="0" text="Force reinstall on install">config.nemesis.ipkg.forceReInstall</item>
 	</setup>
 	<setup key="dev" title="Setup Device">
 		<item level="0" text="Force Umount before Format">config.nemesis.forceumount</item>
