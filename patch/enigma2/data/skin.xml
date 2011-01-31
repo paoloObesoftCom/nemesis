@@ -367,6 +367,7 @@
 	<screen name="nemesisBluePanel" position="center,145" size="800,470">
 		<widget name="info_use" position="30,10" zPosition="2" size="360,30" halign="center" font="Prive2;20" />
 		<widget name="config" position="30,50" size="360,125" zPosition="2" transparent="1" />
+		<widget name="conn" position="30,180" size="360,165" font="Prive2;20" halign="center" valign="center" zPosition="2" foregroundColor="red" />
 		<ePixmap pixmap="skin_default/buttons/select_p.png" position="43,350" size="335,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_p.png" position="422,350" size="335,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_p.png" position="43,410" size="335,44" zPosition="1" alphatest="on" />
@@ -376,7 +377,6 @@
 		<widget name="key_yellow" position="422,352" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
 		<widget name="key_blue" position="422,412" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 		<ePixmap position="43,144" size="355,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
-		<widget source="conn" render="Label" position="30,144" size="360,206" font="Prive2;20" valign="center" transparent="1" zPosition="2" foregroundColor="yellow" />
 		<widget position="422,48" size="335,25" source="session.CurrentService" render="Label" font="Prive2;20" valign="bottom" halign="center" noWrap="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>

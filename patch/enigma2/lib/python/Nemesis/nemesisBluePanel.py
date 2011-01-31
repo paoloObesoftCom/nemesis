@@ -40,7 +40,7 @@ class nemesisBluePanel(Screen):
 		<widget name="key_green" position="50,380" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;22" transparent="1" foregroundColor="#389416" backgroundColor="#1f771f" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_red" position="50,410" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;22" transparent="1" foregroundColor="#ff2525" backgroundColor="#9f1313" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="ecmtext" position="50,460" size="340,240" font="Regular;18" zPosition="2" backgroundColor="#333333" transparent="1"/>
-		<widget source="conn" render="Label" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" transparent="1" />
+		<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" />
 	</screen>"""
 	
 	NEWDEVER = "2.1 (OE 1.6)"
@@ -54,7 +54,8 @@ class nemesisBluePanel(Screen):
 		self['config'] = ConfigList(self.list)
 		self["title"] = Label(_("Nemesis Blue Panel"))
 		self["ecmtext"] = ScrollLabel("")
-		self['conn'] = StaticText("")
+		self['conn'] = Label("")
+		self['conn'].hide()
 		self["key_blue"] = Label(_("Addons Manager"))
 		self["key_yellow"] = Label(_("System Settings"))
 		self["key_green"] = Label(_("System Information"))
@@ -103,7 +104,8 @@ class nemesisBluePanel(Screen):
 			f.close()
 			unlink(fileName)
 			if int(version) < int(newVer):
-				self['conn'].text = (_('Update is available!\nCurrent version: %s\nNew Version: %s\nPlease upgrade EDG firmware!') % (version, newVer))
+				self['conn'].show()
+				self['conn'].setText(_('Update is available!\nCurrent version: %s\nNew Version: %s\nPlease upgrade EDG firmware!') % (version, newVer))
 
 	def fetchFailed(self,string):
 		print "[BluePanel] fetch failed " + string.getErrorMessage()
