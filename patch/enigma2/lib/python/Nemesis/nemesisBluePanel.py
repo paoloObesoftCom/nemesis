@@ -9,6 +9,9 @@ from Components.ScrollLabel import ScrollLabel
 from Components.ConfigList import ConfigList
 from Components.config import ConfigSelection, getConfigListEntry, ConfigNothing, KEY_LEFT, KEY_RIGHT, KEY_OK
 from Components.Pixmap import Pixmap
+from Components.Sources.StaticText import StaticText
+from Tools.Directories import fileExists
+from Tools.HardwareInfo import HardwareInfo
 from nemesisTool import *
 from nemesisShowPanel import nemesisShowPanel
 from nemesisConsole import nemesisConsole
@@ -19,7 +22,7 @@ from nemesisAddons import NAddons
 from Components.Console import Console
 from Components.About import about
 import os
-
+from os import unlink
 from enigma import eTimer, eDVBCI_UI, nemTool,iServiceInformation
 
 t = nemesisTool()
@@ -37,6 +40,7 @@ class nemesisBluePanel(Screen):
 		<widget name="key_green" position="50,380" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;22" transparent="1" foregroundColor="#389416" backgroundColor="#1f771f" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_red" position="50,410" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;22" transparent="1" foregroundColor="#ff2525" backgroundColor="#9f1313" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="ecmtext" position="50,460" size="340,240" font="Regular;18" zPosition="2" backgroundColor="#333333" transparent="1"/>
+		<widget source="conn" render="Label" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" transparent="1" />
 	</screen>"""
 	
 	NEWDEVER = "2.1 (OE 1.6)"
@@ -50,6 +54,7 @@ class nemesisBluePanel(Screen):
 		self['config'] = ConfigList(self.list)
 		self["title"] = Label(_("Nemesis Blue Panel"))
 		self["ecmtext"] = ScrollLabel("")
+		self['conn'] = StaticText("")
 		self["key_blue"] = Label(_("Addons Manager"))
 		self["key_yellow"] = Label(_("System Settings"))
 		self["key_green"] = Label(_("System Information"))
@@ -72,10 +77,33 @@ class nemesisBluePanel(Screen):
 		self.ecmTimer.timeout.get().append(self.readEcmInfo)
 		self.ecmTimer.start(10000, False)
 		self.readEcmInfo()
+		self.checkVersion()
 		self.onLayoutFinish.append(self.loadEmuList)
 		self.onShown.append(self.setWindowTitle)
 		self.onClose.append(self.__onClose)
+
+	def checkVersion(self):
+		hwVersion = HardwareInfo().get_device_name()
+		fetchFile = "/tmp/ver%s.txt" % hwVersion
+		url = t.readAddonsUrl() + "ver%s.txt" % hwVersion
+		print "[BluePanel] downloading version file " + url + " to " + fetchFile
+		from twisted.web import client
+		from twisted.internet import reactor
+		client.downloadPage(url,fetchFile).addCallback(self.fetchFinished,fetchFile).addErrback(self.fetchFailed)
 	
+	def fetchFinished(self, string, fileName):
+		if fileExists(fileName):
+			version = about.getSvnVersionString()
+			f = open(fileName, "r")
+			newVer = f.readline() [:-1]
+			f.close()
+			unlink(fileName)
+			if int(version) < int(newVer):
+				self['conn'].text = (_('Update is available!\nCurrent version: %s\nNew Version: %s\nPlease upgrade EDG firmware!') % (version, newVer))
+
+	def fetchFailed(self,string):
+		print "[BluePanel] fetch failed " + string.getErrorMessage()
+
 	def setWindowTitle(self):
 		self.setTitle(_("EDG-Nemesis Blue Panel"))
 	

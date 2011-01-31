@@ -40,6 +40,22 @@ class About:
 		except IOError:
 			pass
 
+	def getSvnVersionString(self):
+		try:
+			file = open(resolveFilename(SCOPE_SYSETC, 'image-version'), 'r')
+			lines = file.readlines()
+			for x in lines:
+				splitted = x.split('=')
+				if splitted[0] == "version":
+					version = splitted[1]
+					major = version[1]
+					minor = version[2]
+					revision = version[3]
+					return ''.join((major, minor, revision))
+			file.close()
+		except IOError:
+			pass
+
 		return "unavailable"
 
 	def getEnigmaVersionString(self):

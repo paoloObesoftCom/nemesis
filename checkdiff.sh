@@ -168,6 +168,7 @@ check_oe_16()
 	kompare $oesrc16/openembedded/recipes/tasks/task-opendreambox-base.bb openembedded-1.6/recipes/tasks/task-opendreambox-base.bb
 	kompare $oesrc16/openembedded/recipes/tasks/task-opendreambox-dvdplayer.bb openembedded-1.6/recipes/tasks/task-opendreambox-dvdplayer.bb
 	kompare $oesrc16/openembedded/recipes/tasks/task-opendreambox-enigma2.bb openembedded-1.6/recipes/tasks/task-opendreambox-enigma2.bb
+	kompare $oesrc16/openembedded/recipes/tasks/task-opendreambox-wlan.bb openembedded-1.6/recipes/tasks/task-opendreambox-wlan.bb
 	kompare $oesrc16/openembedded/recipes/vsftpd/files/init openembedded-1.6/recipes/vsftpd/files/init
 	kompare $oesrc16/openembedded/recipes/vsftpd/files/opendreambox/vsftpd.conf openembedded-1.6/recipes/vsftpd/files/opendreambox/vsftpd.conf
 	kompare $oesrc16/openembedded/recipes/v4l-dvb/v4l-dvb-modules_hg.bb openembedded-1.6/recipes/v4l-dvb/v4l-dvb-modules_hg.bb

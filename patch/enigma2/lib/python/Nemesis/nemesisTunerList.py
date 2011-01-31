@@ -154,7 +154,7 @@ class tList:
 		('1164:1efc','dvb-usb-dib0700','YUAN High-Tech STK7700D'),
 		('1164:1e8c','dvb-usb-dib0700','YUAN High-Tech DiBcom STK7700D'),
 		('2304:0243','dvb-usb-dib0700','Pinnacle PCTV 73A'),
-		('2013:0245','dvb-usb-dib0700','"Pinnacle PCTV 73e SE"""'),
+		('2013:0245','dvb-usb-dib0700','Pinnacle PCTV 73e SE'),
 		('2013:0248','dvb-usb-dib0700','Pinnacle PCTV 282e'),
 		('10b8:1e80','dvb-usb-dib0700','DiBcom STK7770P reference design'),
 		('0ccd:00ab','dvb-usb-dib0700','Terratec Cinergy T USB XXS (HD)/ T3'),

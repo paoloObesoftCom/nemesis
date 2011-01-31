@@ -896,3 +896,13 @@ msgid "Do you want to install the support"
 "\npackages, for DVB-T/C adapters?"
 msgstr "Vuoi installare i pacchetti, per il supporto"
 "\ndegli adapter USB DVB-T/C?"
+
+msgid "Update is available!"
+"\nCurrent version: %s"
+"\nNew Version: %s"
+"\nPlease upgrade EDG firmware!"
+msgstr "Aggiornamento disponibile!"
+"\nVersione corrente: %s"
+"\nNuova Versione: %s"
+"\nAggiornare EDG firmware!"
+

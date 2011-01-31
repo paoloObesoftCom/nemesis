@@ -101,6 +101,9 @@ class InfoBarShowHide:
 	STATE_HIDING = 1
 	STATE_SHOWING = 2
 	STATE_SHOWN = 3
+	STATE_NOFADE = 4
+	STATE_FADEOFF = 5
+	STATE_FADEON = 6
 
 	def __init__(self):
 		self.InfoBarExtraDialog = self.session.instantiateDialog(nemesisEI)
@@ -118,6 +121,7 @@ class InfoBarShowHide:
 		self.__state = self.STATE_SHOWN
 		self.__locked = 0
 		self.__stateExtra = self.STATE_HIDDEN
+		self.__stateFade = self.STATE_NOFADE
 		self.fadeStepOff = 0
 		self.fadeStepOn = 21
 		
@@ -145,7 +149,7 @@ class InfoBarShowHide:
 	def serviceStarted(self):
 		if self.execing:
 			if config.usage.show_infobar_on_zap.value and (not self.showTimer.isActive()):
-				if self.fadeStepOff != 0:
+				if self.__stateFade == self.STATE_FADEOFF:
 					self.hide()
 				if config.plugins.FadeSet.fadeInOnZap.value:
 					self.fadeInStart()
@@ -190,6 +194,7 @@ class InfoBarShowHide:
 				self.hideTimer.start(idx*1000, True)
 
 	def __onHide(self):
+		self.__stateFade = self.STATE_NOFADE
 		self.__state = self.STATE_HIDDEN
 		if self.fadeStepOff != 0:
 			self.fadeStepOff = 0
@@ -210,6 +215,7 @@ class InfoBarShowHide:
 		self.hideTimer.stop()
 		if self.__state == self.STATE_SHOWN:
 			if config.plugins.FadeSet.fadeOut.value:
+				self.__stateFade = self.STATE_FADEOFF
 				self.fadeStepOff = 20
 				self.fadeTimerOff.start(50, True)
 			else:
@@ -226,7 +232,7 @@ class InfoBarShowHide:
 		elif self.__state == self.STATE_HIDDEN:
 			if config.plugins.FadeSet.fadeIn.value:
 				self.fadeInStart()
-			self.show()
+			self.doShow()
 
 	def lockShow(self):
 		self.__locked = self.__locked + 1
@@ -240,6 +246,7 @@ class InfoBarShowHide:
 			self.startHideTimer()
 
 	def fadeInStart(self):
+		self.__stateFade = self.STATE_FADEON
 		alphaChange(0)
 		self.fadeStepOn = 0
 		self.fadeTimerOn.start(100, True)
@@ -250,6 +257,8 @@ class InfoBarShowHide:
 			alphaChange(config.av.osd_alpha.value*self.fadeStepOn/20)
 			self.fadeStepOn += 1
 			self.fadeTimerOn.start((config.plugins.FadeSet.timeout.value * 6), True)
+		else:
+			self.__stateFade = self.STATE_NOFADE
 
 	def fadeTimerOffEvent(self):
 		self.fadeTimerOff.stop()
@@ -265,7 +274,7 @@ class InfoBarShowHide:
 			self.alphaTimerRestore.start(restoreDelay, True)
 		
 	def alphaRestore(self): 
-		if self.fadeStepOn == 21:
+		if self.__stateFade == self.STATE_NOFADE:
 			alphaChange(config.av.osd_alpha.value) 
 		
 	def TunerTest(self):

@@ -1,0 +1,13 @@
+diff -ruN rtl8187l_orig/ieee80211/ieee80211_softmac.c rtl8187l/ieee80211/ieee80211_softmac.c
+--- rtl8187l_orig/ieee80211/ieee80211_softmac.c	2011-01-02 18:14:30.735583000 +0100
++++ rtl8187l/ieee80211/ieee80211_softmac.c	2009-06-26 09:07:43.853534000 +0200
+@@ -274,8 +274,7 @@
+ void ieee80211_send_beacon(struct ieee80211_device *ieee)
+ {
+ 	struct sk_buff *skb;
+-	
+-	unsigned long flags;	
++		
+ 	
+ 	skb = ieee80211_get_beacon_(ieee);
+ 	if (skb){

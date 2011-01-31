@@ -375,7 +375,8 @@
 		<widget name="key_green" position="43,412" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="green" zPosition="2" transparent="1" />
 		<widget name="key_yellow" position="422,352" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
 		<widget name="key_blue" position="422,412" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
-		<ePixmap position="61,144" size="300,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
+		<ePixmap position="43,144" size="355,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
+		<widget source="conn" render="Label" position="30,144" size="360,206" font="Prive2;20" valign="center" transparent="1" zPosition="2" foregroundColor="yellow" />
 		<widget position="422,48" size="335,25" source="session.CurrentService" render="Label" font="Prive2;20" valign="bottom" halign="center" noWrap="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
@@ -779,7 +780,7 @@
 		<widget name="key_red" position="180,288" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
 	<!-- end Nemesis Panels-->
-	<screen name="Volume" position="1180,120" zPosition="1" size="28,338" title="Volume" flags="wfNoBorder">
+	<screen name="Volume" position="1180,165" zPosition="1" size="28,338" title="Volume" flags="wfNoBorder">
 		<ePixmap pixmap="skin_default/vol_back.png" position="0,0" size="28,338" />
 		<widget name="Volume" pixmap="skin_default/volume.png" position="5,5" zPosition="1" orientation="orBottomToTop" size="18,328" transparent="1" />
 	</screen>               
