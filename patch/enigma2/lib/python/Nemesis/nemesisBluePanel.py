@@ -83,9 +83,8 @@ class nemesisBluePanel(Screen):
 		self.onClose.append(self.__onClose)
 
 	def checkVersion(self):
-		hwVersion = HardwareInfo().get_device_name()
-		fetchFile = "/tmp/ver%s.txt" % hwVersion
-		url = t.readAddonsUrl() + "ver%s.txt" % hwVersion
+		fetchFile = "/tmp/ver.txt"
+		url = t.readAddonsUrl() + "ver.txt"
 		print "[BluePanel] downloading version file " + url + " to " + fetchFile
 		from twisted.web import client
 		from twisted.internet import reactor
@@ -93,9 +92,14 @@ class nemesisBluePanel(Screen):
 	
 	def fetchFinished(self, string, fileName):
 		if fileExists(fileName):
+			hwVersion = HardwareInfo().get_device_name()
 			version = about.getSvnVersionString()
+			newVer = version
 			f = open(fileName, "r")
-			newVer = f.readline() [:-1]
+			for line in f.readlines():
+				line = line.split('=')
+				if line[0] == hwVersion:
+					newVer = line[1][:-1]
 			f.close()
 			unlink(fileName)
 			if int(version) < int(newVer):
