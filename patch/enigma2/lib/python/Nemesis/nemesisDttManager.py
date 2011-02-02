@@ -158,6 +158,7 @@ class manageDttDevice(Screen):
 	def updateList(self):
 		del self.list[:]
 		if fileExists('/usr/script/loaddttmodules.sh'):
+			self['conn'].text = ''
 			self["key_yellow"].hide()
 			self.readStatus()
 			skin_path = GetSkinPath()

@@ -1,7 +1,7 @@
 DESCRIPTION = "OpenDreambox: Enigma2 Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PR = "r17"
+PR = "r18"
 
 inherit task
 
@@ -35,7 +35,6 @@ RDEPENDS_task-opendreambox-enigma2 = "\
   enigma2-plugin-systemplugins-networkbrowser \
   enigma2-meta \
   enigma2-plugins-meta \
-  enigma2-skins-meta \
 "
 
 RRECOMMENDS_task-opendreambox-enigma2 = "\

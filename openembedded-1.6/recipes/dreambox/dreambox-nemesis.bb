@@ -1,7 +1,7 @@
 DESCRIPTION = "Nemesis files"
 LICENSE = "GPL"
 
-PR = "r12"
+PR = "r13"
 
 S = "${WORKDIR}/"
 PACKAGE_ARCH := "${MACHINE_ARCH}"
@@ -12,7 +12,7 @@ do_install() {
 	srcpath=${DL_DIR}/../..
 
 	mkdir -p ${D}/usr/{log,scam,uninstall,scce,www,keys}
-	mkdir ${D}/etc/
+	mkdir -p ${D}/etc/init.d
 	mkdir ${D}/sbin/
 	mkdir -p ${D}/home/root/.ssh
 
