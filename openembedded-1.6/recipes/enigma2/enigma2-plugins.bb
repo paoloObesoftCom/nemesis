@@ -9,7 +9,7 @@ SRCDATE="20110203"
 BRANCH="master"
 PV = "experimental-git${SRCDATE}"
 
-PR = "r0"
+PR = "r1"
 SRC_URI = "file://../../../../sources/git_schwerkraft.elitedvb.net.enigma2-plugins.enigma2-plugins.git_EDG_16.tar.gz"
 
 EXTRA_OECONF = " \
