@@ -2,7 +2,7 @@ DESCRIPTION = "USB DVB-T/C Tuner Support Files"
 LICENSE = "GPL"
 DEPENDS += " v4l-dvb-modules"
 
-PR = "r20"
+PR = "r21"
 
 SRC_URI = "file://vtuner \
            file://restartDtt.sh \
@@ -31,6 +31,7 @@ do_install() {
 	install -m 0755 ${WORKDIR}/vtuner ${D}/usr/bin
 	install -m 0755 ${WORKDIR}/loaddttmodules.sh ${D}/usr/script
 	install -m 644 ${WORKDIR}/*.hex ${D}/lib/firmware
+	install -m 644 ${WORKDIR}/*.inp ${D}/lib/firmware
 	install -m 644 ${WORKDIR}/*.fw ${D}/lib/firmware
 	install -m 644 ${OE_BASE}/build/tmp/work/${MACHINE}-oe-linux/v4l-dvb-modules-0.0+hg${dvb_srcdate}-r${dvb_srcrev}/package/lib/modules/${KERNEL_VERSION}/kernel/drivers/media/common/tuners/*.ko  ${D}/lib/modules/dvbt
 	install -m 644 ${OE_BASE}/build/tmp/work/${MACHINE}-oe-linux/v4l-dvb-modules-0.0+hg${dvb_srcdate}-r${dvb_srcrev}/package/lib/modules/${KERNEL_VERSION}/kernel/drivers/media/dvb/a867/*.ko  ${D}/lib/modules/dvbt
