@@ -367,18 +367,24 @@
 	<screen name="nemesisBluePanel" position="center,130" size="800,500">
 		<widget name="info_use" position="30,10" zPosition="2" size="360,30" halign="center" font="Prive2;20" />
 		<widget name="config" position="30,50" size="360,125" zPosition="2" transparent="1" />
-		<widget name="ecmtext" position="30,190" size="360,185" font="Prive2;19" zPosition="2" halign="center" />
-		<widget source="session.VideoPicture" render="Pig" position="422,10" zPosition="0" size="335,200" backgroundColor="transparent" />
-		<widget name="conn" position="422,210" size="335,170" font="Prive2;19" halign="center" valign="center" zPosition="2" foregroundColor="red" />
-		<ePixmap position="440,165" size="300,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
-		<ePixmap pixmap="skin_default/buttons/select_p.png" position="43,380" size="335,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_p.png" position="422,380" size="335,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_p.png" position="43,440" size="335,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_p.png" position="422,440" size="335,44" zPosition="1" alphatest="on" />
-		<widget name="key_red" position="43,382" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="red" zPosition="2" transparent="1" />
-		<widget name="key_green" position="43,442" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="green" zPosition="2" transparent="1" />
-		<widget name="key_yellow" position="422,382" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
-		<widget name="key_blue" position="422,442" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
+		<widget name="conn" position="30,180" size="360,165" font="Prive2;20" halign="center" valign="center" zPosition="2" foregroundColor="red" />
+		<ePixmap pixmap="skin_default/buttons/select_p.png" position="43,350" size="335,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_p.png" position="422,350" size="335,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_p.png" position="43,410" size="335,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_p.png" position="422,410" size="335,44" zPosition="1" alphatest="on" />
+		<widget name="key_red" position="43,352" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="red" zPosition="2" transparent="1" />
+		<widget name="key_green" position="43,412" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="green" zPosition="2" transparent="1" />
+		<widget name="key_yellow" position="422,352" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
+		<widget name="key_blue" position="422,412" size="335,40" font="Prive2;22" valign="center" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
+		<ePixmap position="43,144" size="355,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
+		<widget position="422,48" size="335,25" source="session.CurrentService" render="Label" font="Prive2;20" valign="bottom" halign="center" noWrap="1">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="422,74" size="335,25" font="Prive2;19" halign="center">
+			<convert type="ServiceName">Provider</convert>
+		</widget>
+		<widget name="ecmtext" position="407,118" size="392,230" font="Prive2;19" zPosition="2" halign="center" />
+		<eLabel text="Emu decode info:" position="422,10" size="335,30" halign="center" font="Prive2;20" />
 	</screen>
 	<!-- Show panel	 -->
 	<screen name="nemesisShowPanel" position="center,80" size="900,600">
@@ -989,74 +995,77 @@
 	<screen name="ChannelContextMenu" position="center,230" size="600,300" title="Channellist menu">
 		<widget name="menu" position="20,20" size="560,260" scrollbarMode="showOnDemand" />
 	</screen>
-	<screen name="ChannelSelection" position="center,99" size="1105,562" title="Channel Selection" backgroundColor="background" >
-		<widget name="list" position="555,6" zPosition="3" size="537,459" enableWrapAround="1" selectionPixmap="skin_default/buttons/selected-2.png" foregroundColorServiceNotAvail="#666666" serviceItemHeight="27" serviceNumberFont="Prive2;21" serviceNameFont="Prive2;21" serviceInfoFont="Prive2;18" transparent="1" scrollbarMode="showOnDemand" />
-		<ePixmap position="5,2" size="126,82" pixmap="skin_default/frame_hd.png" zPosition="1" alphatest="on" />
-		<widget source="session.CurrentService" render="Picon" position="18,13" size="100,60" zPosition="2" transparent="1" alphatest="on">
+	<screen name="ChannelSelection" position="0,0" size="1280,720" title="Channel Selection" backgroundColor="black" flags="wfNoBorder" >
+		<widget name="list" position="645,40" zPosition="3" size="595,570" enableWrapAround="1" selectionPixmap="skin_default/buttons/selected-2.png" foregroundColorServiceNotAvail="#666666" serviceItemHeight="27" serviceNumberFont="Prive2;21" serviceNameFont="Prive2;21" serviceInfoFont="Prive2;18" transparent="1" scrollbarMode="showOnDemand" />
+		
+		<ePixmap position="40,40" size="126,82" pixmap="skin_default/frame_hd.png" zPosition="1" alphatest="on" />
+		<widget source="session.CurrentService" render="Picon" position="53,51" size="100,60" zPosition="2" transparent="1" alphatest="on">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
-		<ePixmap pixmap="skin_default/frame_hd.png" position="5,85" size="126,82" zPosition="1" alphatest="on" />
-		<widget source="ServiceEvent" render="NemesisRefTV" position="18,96" size="100,60" zPosition="2" transparent="1" alphatest="on" />
-		<widget position="140,4" size="300,30" source="session.CurrentService" render="Label" font="Prive2;21" valign="bottom" halign="left" noWrap="1" backgroundColor="backgroundf" transparent="1">
+		<widget position="175,42" size="300,30" source="session.CurrentService" render="Label" font="Prive2;21" valign="bottom" halign="left" noWrap="1" backgroundColor="backgroundf" transparent="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="457,4" size="73,30" font="Prive2;21" valign="bottom" halign="right" backgroundColor="backgroundf" transparent="1">
+		<widget source="global.CurrentTime" render="Label" position="562,42" size="73,30" font="Prive2;21" valign="bottom" halign="right" backgroundColor="backgroundf" transparent="1">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget position="140,33" size="70,20" source="session.Event_Now" render="Label" font="Prive2;18" valign="bottom" backgroundColor="backgroundf" transparent="1">
+		<widget position="175,71" size="70,20" source="session.Event_Now" render="Label" font="Prive2;18" valign="bottom" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget position="200,33" size="250,20" source="session.Event_Now" render="NemesisEmptyEpg" font="Prive2;18" valign="bottom" noWrap="1" backgroundColor="backgroundf" transparent="1">
+		<widget position="235,71" size="250,20" source="session.Event_Now" render="NemesisEmptyEpg" font="Prive2;18" valign="bottom" noWrap="1" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget position="450,33" size="80,20" source="session.Event_Now" render="Label" font="Prive2;18" valign="bottom" halign="right" backgroundColor="backgroundf" transparent="1">
+		<widget position="555,71" size="80,20" source="session.Event_Now" render="Label" font="Prive2;18" valign="bottom" halign="right" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">InMinutes</convert>
 		</widget>
-		<widget position="140,57" size="70,20" source="session.Event_Next" render="Label" font="Prive2;18" valign="bottom" foregroundColor="un777777" transparent="1">
+		<widget position="175,95" size="70,20" source="session.Event_Next" render="Label" font="Prive2;18" valign="bottom" foregroundColor="un777777" transparent="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget position="200,57" size="250,20" source="session.Event_Next" render="NemesisEmptyEpg" font="Prive2;18" valign="bottom" noWrap="1" foregroundColor="un777777" transparent="1">
+		<widget position="235,95" size="250,20" source="session.Event_Next" render="NemesisEmptyEpg" font="Prive2;18" valign="bottom" noWrap="1" foregroundColor="un777777" transparent="1">
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget position="450,57" size="80,20" source="session.Event_Next" render="Label" font="Prive2;18" valign="bottom" halign="right" foregroundColor="un777777" transparent="1">
+		<widget position="555,95" size="80,20" source="session.Event_Next" render="Label" font="Prive2;18" valign="bottom" halign="right" foregroundColor="un777777" transparent="1">
 			<convert type="EventTime">Duration</convert>
 			<convert type="ClockToText">InMinutes</convert>
 		</widget>
-		<widget source="ServiceEvent" render="Label" position="126,91" zPosition="1" size="412,22" font="Prive2;20" halign="center" backgroundColor="backgroundf" transparent="1">
+		
+		<ePixmap pixmap="skin_default/frame_hd.png" position="40,123" size="126,82" zPosition="1" alphatest="on" />
+		<widget source="ServiceEvent" render="NemesisRefTV" position="53,134" size="100,60" zPosition="2" transparent="1" alphatest="on" />
+		<widget source="ServiceEvent" render="Label" position="175,129" zPosition="1" size="460,22" font="Prive2;20" halign="center" backgroundColor="backgroundf" transparent="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="ServiceEvent" render="Label" position="126,137" zPosition="1" size="412,22" font="Prive2;18" halign="center" backgroundColor="backgroundf" transparent="1">
-			<convert type="EventName">Name</convert>
-		</widget>
-		<widget source="ServiceEvent" render="Label" position="134,114" zPosition="1" size="60,22" font="Prive2;18" halign="right" backgroundColor="backgroundf" transparent="1">
+		<widget source="ServiceEvent" render="Label" position="175,152" zPosition="1" size="60,22" font="Prive2;18" halign="right" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">
 			</convert>
 		</widget>
-		<widget source="ServiceEvent" render="Label" position="470,114" zPosition="1" size="60,22" font="Prive2;18" halign="left" backgroundColor="backgroundf" transparent="1">
+		<widget source="ServiceEvent" render="Label" position="575,152" zPosition="1" size="60,22" font="Prive2;18" halign="left" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText">
 			</convert>
 		</widget>
-		<widget source="ServiceEvent" render="Progress" position="208,123" zPosition="1" pixmap="skin_default/slider/slider_tv.png" size="248,8" borderWidth="1" borderColor="grey">
+		<widget source="ServiceEvent" render="Progress" position="281,161" zPosition="1" pixmap="skin_default/slider/slider_tv.png" size="248,8" borderWidth="1" borderColor="grey">
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="session.VideoPicture" render="Pig" position="28,170" zPosition="0" size="500,300" backgroundColor="transparent" />
-		<ePixmap pixmap="skin_default/buttons/selected-2.png" position="5,475" size="540,25" zPosition="1" alphatest="on" />
-		<widget position="5,476" size="540,25" source="ServiceEvent" render="ShowTP" font="Prive2;17" halign="center" foregroundColor="un6cbcf0" zPosition="2" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/selected-2.png" position="555,475" size="540,25" zPosition="1" alphatest="on" />
-		<widget position="555,476" size="540,25" source="ServiceEvent" render="NemesisShowReference" font="Prive2;17" halign="center" foregroundColor="un6cbcf0" zPosition="2" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="5,508" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="280,508" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="555,508" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="830,508" size="265,44" zPosition="1" alphatest="on" />
-		<widget name="key_red" position="5,518" size="265,28" font="Prive2;22" halign="center" foregroundColor="red" zPosition="2" transparent="1" />
-		<widget name="key_green" position="280,518" size="265,28" font="Prive2;22" halign="center" foregroundColor="green" zPosition="2" transparent="1" />
-		<widget name="key_yellow" position="555,518" size="265,28" font="Prive2;22" halign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
-		<widget name="key_blue" position="830,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
+		<widget source="ServiceEvent" render="Label" position="175,176" zPosition="1" size="460,22" font="Prive2;18" halign="center" backgroundColor="backgroundf" transparent="1">
+			<convert type="EventName">Name</convert>
+		</widget>
+		
+		<widget source="session.VideoPicture" render="Pig" position="48,220" zPosition="0" size="580,348" backgroundColor="transparent" />
+		
+		<widget position="40,580" size="595,25" source="ServiceEvent" render="NemesisShowReference" font="Prive2;17" foregroundColor="un6cbcf0" zPosition="2" transparent="1" />
+		<widget position="40,605" size="595,25" source="ServiceEvent" render="ShowTP" font="Prive2;17" foregroundColor="un6cbcf0" zPosition="2" transparent="1" />
+
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="40,636" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="351,636" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="667,636" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="975,636" size="265,44" zPosition="1" alphatest="on" />
+		<widget name="key_red" position="40,636" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="red" zPosition="2" transparent="1" />
+		<widget name="key_green" position="351,636" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="green" zPosition="2" transparent="1" />
+		<widget name="key_yellow" position="667,636" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
+		<widget name="key_blue" position="975,636" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 	</screen>
 	<screen name="ChannelSelectionRadio" position="center,100" size="1116,360" title="Channel Selection">
 		<widget name="list" position="10,8" size="1096,304" scrollbarMode="showOnDemand" foregroundColorServiceNotAvail="#666666" serviceNumberFont="Prive2;24" serviceNameFont="Prive2;24" serviceInfoFont="Prive2;22" transparent="1" />
@@ -1189,19 +1198,20 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/(count &gt; 7 and 2 or 3
 		<widget name="key_yellow" position="555,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
 		<widget name="key_blue" position="830,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 	</screen>
-	<screen name="EventView" position="center,100" size="1100,560" title="Eventview">
-		<widget name="channel" position="40,10" size="340,25" font="Prive2;22" backgroundColor="transpBlack" transparent="1" />
-		<widget name="datetime" position="380,10" size="340,25" font="Prive2;22" halign="center" backgroundColor="transpBlack" transparent="1" />
-		<widget name="duration" position="720,10" size="340,25" font="Prive2;22" halign="right" backgroundColor="transpBlack" transparent="1" />
-		<widget name="epg_description" position="40,60" size="1040,440" font="Prive2;26" backgroundColor="transpBlack" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="5,508" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="280,508" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="555,508" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="830,508" size="265,44" zPosition="1" alphatest="on" />
-		<widget name="key_red" position="5,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="red" zPosition="2" transparent="1" />
-		<widget name="key_green" position="280,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="green" zPosition="2" transparent="1" />
-		<widget name="key_yellow" position="555,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
-		<widget name="key_blue" position="830,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
+	<screen name="EventView" position="0,0" size="1280,720" title="Eventview" flags="wfNoBorder" backgroundColor="black">
+		<widget source="session.VideoPicture" render="Pig" position="40,40" zPosition="0" size="480,288" backgroundColor="transparent" />
+		<widget name="channel" position="40,400" size="480,25" font="Prive2;22" backgroundColor="transpBlack" transparent="1" />
+		<widget name="datetime" position="40,430" size="480,25" font="Prive2;22" backgroundColor="transpBlack" transparent="1" />
+		<widget name="duration" position="40,460" size="480,25" font="Prive2;22" backgroundColor="transpBlack" transparent="1" />
+		<widget name="epg_description" position="540,40" size="700,586" font="Prive2;25" backgroundColor="transpBlack" transparent="1" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="40,636" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="351,636" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="667,636" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="975,636" size="265,44" zPosition="1" alphatest="on" />
+		<widget name="key_red" position="40,636" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="red" zPosition="2" transparent="1" />
+		<widget name="key_green" position="351,636" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="green" zPosition="2" transparent="1" />
+		<widget name="key_yellow" position="667,636" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
+		<widget name="key_blue" position="975,636" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 	</screen>
 	<screen name="GraphMultiEPG" position="80,100" size="1120,560" title="Electronic Program Guide">
 		<widget name="timeline_text" position="0,10" size="800,30" />
@@ -1730,11 +1740,11 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget name="config" position="10,12" size="580,475" />
 	</screen>
 	<screen name="PluginBrowser" position="center,140" size="700,480" title="Plugin browser">
-	<widget name="list" position="10,10" size="680,400" scrollbarMode="showOnDemand" />
-	<ePixmap pixmap="skin_default/buttons/select_p.png" position="10,426" size="335,44" zPosition="1" alphatest="on" />
-	<ePixmap pixmap="skin_default/buttons/select_p.png" position="355,426" size="335,44" zPosition="1" alphatest="on" />
-	<widget name="red" position=" 10,433" size="335,28" font="Prive2;22" halign="center" foregroundColor="red" zPosition="2" transparent="1" />
-	<widget name="green" position="355,433" size="335,28" font="Prive2;22" halign="center" foregroundColor="green" zPosition="2" transparent="1" />
+		<widget name="list" position="10,10" size="680,400" scrollbarMode="showOnDemand" />
+		<ePixmap pixmap="skin_default/buttons/select_p.png" position="10,426" size="335,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_p.png" position="355,426" size="335,44" zPosition="1" alphatest="on" />
+		<widget name="red" position=" 10,433" size="335,28" font="Prive2;22" halign="center" foregroundColor="red" zPosition="2" transparent="1" />
+		<widget name="green" position="355,433" size="335,28" font="Prive2;22" halign="center" foregroundColor="green" zPosition="2" transparent="1" />
 	</screen>
 	<screen name="PluginDownloadBrowser" position="center,134" size="800,492" title="Downloadable plugins">
 		<widget name="text" position="20,30" size="760,50" font="Prive2;23" />

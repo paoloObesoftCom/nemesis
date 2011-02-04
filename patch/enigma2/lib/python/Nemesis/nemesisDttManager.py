@@ -82,6 +82,7 @@ class manageDttDevice(Screen):
 		self.list = []
 		self.devList = checkDev()
 		self.devstatus = {}
+		self.needInstall = False
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self["key_yellow"] = Label(_("Install"))
@@ -95,6 +96,7 @@ class manageDttDevice(Screen):
 			'back': self.close
 		})
 		self.cmdList = []
+		self.list_updating = True
 		self.ipkg = IpkgComponent()
 		self.ipkg.addCallback(self.ipkgCallback)
 		self.onLayoutFinish.append(self.updateList)
@@ -161,6 +163,7 @@ class manageDttDevice(Screen):
 			self['conn'].text = ''
 			self["key_yellow"].hide()
 			self.readStatus()
+			self.needInstall = False
 			skin_path = GetSkinPath()
 			if self.devList:
 				for dev in self.devList:
@@ -169,12 +172,15 @@ class manageDttDevice(Screen):
 					self.list.append((dev[1], dev[2], png))
 			self['list'].setList(self.list)
 		else:
+			self.needInstall = True
 			self["key_yellow"].show()
 			self['conn'].text = (_("Modules for support\nUSB DVB-T/C adapter\nare not installed!\n\nPress yellow button\nto install it."))
 
 	def modulesInstall(self):
-		self['conn'].setText(_("Connetting to addons server.\nPlease wait..."))
-		self.ipkg.startCmd(IpkgComponent.CMD_UPDATE)
+		if self.needInstall:
+			self['conn'].setText(_("Connetting to addons server.\nPlease wait..."))
+			self.list_updating = True
+			self.ipkg.startCmd(IpkgComponent.CMD_UPDATE)
 			
 	def runUpgrade(self, result):
 		if result:
@@ -184,10 +190,12 @@ class manageDttDevice(Screen):
 			
 	def ipkgCallback(self, event, param):
 		if event == IpkgComponent.EVENT_ERROR:
+			self.list_updating = False
 			self['conn'].text = (_("Server not found!\nPlease check internet connection."))
 		elif event == IpkgComponent.EVENT_DONE:
-			self.cmdList = []
-			self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": "dreambox-tuner-usb" }))
-			if len(self.cmdList):
-				self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want to install the support\npackages, for DVB-T/C adapters?") + _("\nAfter pressing OK, please wait!"), MessageBox.TYPE_YESNO )
+			if self.list_updating:
+				self.cmdList = []
+				self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": "dreambox-tuner-usb" }))
+				if len(self.cmdList):
+					self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want to install the support\npackages, for DVB-T/C adapters?") + _("\nAfter pressing OK, please wait!"), MessageBox.TYPE_YESNO )
 		pass
