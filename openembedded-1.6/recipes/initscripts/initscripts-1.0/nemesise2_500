@@ -25,6 +25,7 @@ if [ `ls -al /dev/sda | grep disk -c` -ne "0" ]; then
 	if [ -b /dev/sdc ]; then mount /dev/sdc1 /media/usb1 || mount /dev/sdc /media/usb1; fi
 	if [ -b /dev/sdd ]; then mount /dev/sdd1 /media/usb2 || mount /dev/sdd /media/usb2; fi
 else
+	umount /media/hdd
 	if [ -b /dev/sda ]; then mount /dev/sda1 /media/usb || mount /dev/sda /media/usb; fi
 	if [ -b /dev/sdb ]; then mount /dev/sdb1 /media/usb1 || mount /dev/sdb /media/usb; fi
 	if [ -b /dev/sdc ]; then mount /dev/sdc1 /media/usb2 || mount /dev/sdc /media/usb2; fi

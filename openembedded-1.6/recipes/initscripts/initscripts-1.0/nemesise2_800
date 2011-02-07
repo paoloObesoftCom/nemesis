@@ -21,12 +21,14 @@ for item in $list
 #Start device
 if [ `ls -al /dev/sda | grep disk -c` -ne "0" ]; then
 	mount /dev/sda1 /media/hdd || mount /dev/sda /media/hdd
-	if [ -b /dev/sdc ]; then mount /dev/sdc1 /media/usb || mount /dev/sdc /media/usb; fi
-	if [ -b /dev/sdd ]; then mount /dev/sdd1 /media/cf || mount /dev/sdd /media/cf; fi
+	if [ -b /dev/sdb ]; then mount /dev/sdb1 /media/usb || mount /dev/sdb /media/usb; fi
+	if [ -b /dev/sdc ]; then mount /dev/sdc1 /media/usb1 || mount /dev/sdc /media/usb1; fi
+	if [ -b /dev/sdd ]; then mount /dev/sdd1 /media/usb2 || mount /dev/sdd /media/usb2; fi
 else
 	umount /media/hdd
-	if [ -b /dev/sdc ]; then mount /dev/sdc1 /media/usb || mount /dev/sdc /media/usb; fi
-	if [ -b /dev/sdd ]; then mount /dev/sdd1 /media/cf || mount /dev/sdd /media/cf; fi
+	if [ -b /dev/sda ]; then mount /dev/sda1 /media/usb || mount /dev/sda /media/usb; fi
+	if [ -b /dev/sdb ]; then mount /dev/sdb1 /media/usb1 || mount /dev/sdb /media/usb; fi
+	if [ -b /dev/sdc ]; then mount /dev/sdc1 /media/usb2 || mount /dev/sdc /media/usb2; fi
 fi
 
 #Activate Swap
@@ -38,5 +40,3 @@ fi
 [ -e /media/cf/epg.dat.save ] && cp /media/cf/epg.dat.save /media/cf/epg.dat
 [ -e /media/hdd/epg.dat.save ] && cp /media/hdd/epg.dat.save /media/hdd/epg.dat
 [ -e /media/usb/epg.dat.save ] && cp /media/usb/epg.dat.save /media/usb/epg.dat
-
-

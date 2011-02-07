@@ -380,7 +380,7 @@ msgid "Start e2_loadepg (interactive)"
 msgstr "Avviare e2_loadepg (inter.)"
 
 msgid "Backup Enigma EPG cache"
-msgstr "Salavataggio cache EPG"
+msgstr "Salvataggio cache EPG"
 
 msgid "Load EPG in Enigma cache"
 msgstr "Caricare EPG nella cache"

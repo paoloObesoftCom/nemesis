@@ -83,6 +83,7 @@ class manageDttDevice(Screen):
 		self.devList = checkDev()
 		self.devstatus = {}
 		self.needInstall = False
+		self.list_updating = True
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self["key_yellow"] = Label(_("Install"))
@@ -96,7 +97,6 @@ class manageDttDevice(Screen):
 			'back': self.close
 		})
 		self.cmdList = []
-		self.list_updating = True
 		self.ipkg = IpkgComponent()
 		self.ipkg.addCallback(self.ipkgCallback)
 		self.onLayoutFinish.append(self.updateList)

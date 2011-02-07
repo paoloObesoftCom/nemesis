@@ -5,7 +5,7 @@ PRIORITY = "required"
 PROVIDES = "initscripts"
 RPROVIDES_${PN} = "initscripts"
 LICENSE = "GPL"
-PR = "r29"
+PR = "r30"
 
 FILESPATHPKG = "initscripts-${PV}:initscripts:files"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -26,7 +26,8 @@ SRC_URI = "file://halt \
            file://netmount.sh \
            file://var.tar.gz.default \
            file://nemesise1 \
-           file://nemesise2_800_500 \
+           file://nemesise2_500 \
+           file://nemesise2_800 \
            file://nemesise2_7025 \
            file://nemesise2_8000 \
            file://mountcfusb \
@@ -81,8 +82,12 @@ do_install () {
 		ln -sf ../init.d/mountcfusb ${D}${sysconfdir}/rcS.d/S36mountcfusb
 	fi
 
-	if [ "${MACHINE}" = "dm800" -o "${MACHINE}" = "dm500hd" -o "${MACHINE}" = "dm800se" -o "${MACHINE}" = "dm7020hd" ]; then
-		install -m 0755 ${WORKDIR}/nemesise2_800_500 ${D}${sysconfdir}/init.d/nemesis
+	if [ "${MACHINE}" = "dm800" -o "${MACHINE}" = "dm800se" -o "${MACHINE}" = "dm7020hd" ]; then
+		install -m 0755 ${WORKDIR}/nemesise2_800 ${D}${sysconfdir}/init.d/nemesis
+	fi
+
+	if [ "${MACHINE}" = "dm500hd" ]; then
+		install -m 0755 ${WORKDIR}/nemesise2_500 ${D}${sysconfdir}/init.d/nemesis
 	fi
 
 	if [ "${MACHINE}" = "dm7025" ]; then
