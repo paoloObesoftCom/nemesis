@@ -71,6 +71,7 @@ dist_install_DATA = \
 	selected-1.png \
 	selected-2.png \
 	selected-3.png \
+	selected-back.png \
 	selected-menu.png \
 	title_bar.png \
 	smediaplayer.png

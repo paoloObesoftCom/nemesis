@@ -1,4 +1,4 @@
-SUBDIRS = countries fonts defaults extensions keymaps skin_default piconProv piconSat piconSys skinLight
+SUBDIRS = countries fonts defaults extensions keymaps skin_default piconProv piconSat piconSys HD-Glass-15
 
 dist_pkgdata_DATA = \
 	defaultsatlists.xml \

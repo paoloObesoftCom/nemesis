@@ -5,7 +5,7 @@ DEPENDS += " mercurial-native"
 SRCDATE = "20100904"
 SRCREV = "6e0befab696a"
 PV = "0.0+hg${SRCDATE}"
-PR = "r56"
+PR = "r57"
 
 SRC_URI = "hg://linuxtv.org/hg/;module=v4l-dvb;rev=${SRCREV} \
            file://defconfig \
