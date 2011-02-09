@@ -381,6 +381,7 @@ class NModule(Screen):
 			('pl2303','USB Serial (PL2303)'),
 			('tun','TUN (OpenVPN)'),
 			('rt73','WLAN Usb Adapter RT73'),
+			('rtl8187','WLAN Usb Adapter RTL8187L'),
 			('zd1211b','WLAN Usb Adapter ZD1211B'),
 			('isofs','ISOFS (CD/DVD)'),
 			('cdfs','CDFS (Audio-CD)'),

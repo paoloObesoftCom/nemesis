@@ -1,7 +1,7 @@
 DESCRIPTION = "OpenDreambox: Enigma2 Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PR = "r18"
+PR = "r19"
 
 inherit task
 
@@ -90,12 +90,6 @@ RDEPENDS_task-opendreambox-enigma2_append_dm7020hd = "\
   enigma2-plugin-systemplugins-commoninterfaceassignment \
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-nfiflash \
-"
-
-RRECOMMENDS_task-opendreambox-enigma2_append_dm8000 = "\
-  task-opendreambox-cdplayer \
-  task-opendreambox-dvdplayer \
-  task-opendreambox-dvdburn \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

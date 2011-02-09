@@ -409,10 +409,10 @@
 	</screen>
 	<!-- Setup panel	 -->
 	<screen name="NSetupSum" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="50,20" size="400,410" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" position="25,20" selectionPixmap="skin_default/buttons/selected-4.png" size="455,410" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (50, 2), size = (350, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+						MultiContentEntryText(pos = (50, 2), size = (405, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 						MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
 						],
 				"fonts": [gFont("Prive2", 20)],
@@ -433,10 +433,10 @@
 	</screen>
 	<!-- 	EPG Control Center-->
 	<screen name="nemesisEpgPanel" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="50,20" size="400,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-4.png" position="25,20" size="455,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (50, 2), size = (350, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+						MultiContentEntryText(pos = (50, 2), size = (405, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 						MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
 						],
 				"fonts": [gFont("Prive2", 20)],
@@ -449,10 +449,10 @@
 	</screen>
 	<!-- 	Addons panels-->
 	<screen name="NAddons" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="50,20" size="400,410" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-4.png" position="25,20" size="455,410" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (50, 2), size = (350, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+						MultiContentEntryText(pos = (50, 2), size = (405, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 						MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
 						],
 				"fonts": [gFont("Prive2", 20)],
@@ -465,10 +465,10 @@
 		<widget name="key_red" position="135,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
 	<screen name="RAddons" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="50,20" size="410,450" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-5.png" position="25,20" size="460,450" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (0, 0), size = (410, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+						MultiContentEntryText(pos = (0, 0), size = (460, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 					],
 				"fonts": [gFont("Prive2", 20)],
 				"itemHeight": 30
@@ -479,10 +479,10 @@
 		<widget name="key_red" position="135,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
 	<screen name="RAddonsDown" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="50,20" size="400,390" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-5.png" position="25,20" size="460,390" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (0, 0), size = (410, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+						MultiContentEntryText(pos = (0, 0), size = (460, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
 						],
 				"fonts": [gFont("Prive2", 20)],
 				"itemHeight": 30
@@ -494,10 +494,10 @@
 		<widget name="key_red" position="135,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
 	<screen name="RManual" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="50,20" size="400,390" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-5.png" position="25,20" size="460,390" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (0, 0), size = (410, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+						MultiContentEntryText(pos = (0, 0), size = (460, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 						],
 				"fonts": [gFont("Prive2", 20)],
 				"itemHeight": 30
@@ -511,10 +511,10 @@
 		<widget name="key_yellow" position="260,502" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" transparent="1" />
 	</screen>
 	<screen name="RRemove" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="50,20" size="400,390" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-5.png" position="25,20" size="460,390" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (0, 0), size = (410, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+						MultiContentEntryText(pos = (0, 0), size = (460, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 						],
 				"fonts": [gFont("Prive2", 20)],
 				"itemHeight": 30
@@ -527,10 +527,10 @@
 	</screen>
 	<!-- manage device panels -->
 	<screen name="manageDevice" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="50,20" size="400,480" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-4.png" position="25,20" size="455,480" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (50, 2), size = (350, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+						MultiContentEntryText(pos = (50, 2), size = (405, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 						MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
 						],
 				"fonts": [gFont("Prive2", 20)],
@@ -542,10 +542,10 @@
 		<widget name="key_red" position="135,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
 	<screen name="HDDInfo" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="50,20" size="410,450" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-5.png" position="25,20" size="460,450" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (0, 0), size = (410, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+						MultiContentEntryText(pos = (0, 0), size = (460, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 					],
 				"fonts": [gFont("Prive2", 20)],
 				"itemHeight": 30
@@ -557,10 +557,10 @@
 	</screen>
 	<screen name="USBSetup" position="center,105" size="510,550">
 		<widget name="model" position="50,0" size="410,246" font="Prive2;18" halign="left" valign="center" foregroundColor="yellow" />
-		<widget source="list" render="Listbox" position="50,250" size="410,210" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-5.png" position="25,250" size="460,210" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (0, 0), size = (410, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+						MultiContentEntryText(pos = (0, 0), size = (460, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 					],
 				"fonts": [gFont("Prive2", 20)],
 				"itemHeight": 30
@@ -585,10 +585,10 @@
 	</screen>
 	<!-- Utility panels -->
 	<screen name="NUtility" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="50,20" size="400,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-4.png" position="25,20" size="455,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (50, 2), size = (350, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+						MultiContentEntryText(pos = (50, 2), size = (405, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 						MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
 						],
 				"fonts": [gFont("Prive2", 20)],
@@ -600,10 +600,10 @@
 		<widget name="key_red" position="135,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
 	<screen name="NServicesLog" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="20,20" size="470,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-4.png" position="25,20" size="455,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (50, 2), size = (400, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+						MultiContentEntryText(pos = (50, 2), size = (405, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 						MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
 						],
 				"fonts": [gFont("Prive2", 20)],
@@ -617,11 +617,11 @@
 		<widget name="key_yellow" position="260,502" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" transparent="1" />
 	</screen>
 	<screen name="NServices" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="20,20" size="470,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-5.png" position="20,20" size="470,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (0, 0), size = (380, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-						MultiContentEntryPixmapAlphaTest(pos=(385, 6), size=(80, 23), png=2),
+						MultiContentEntryText(pos = (0, 0), size = (385, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
+						MultiContentEntryPixmapAlphaTest(pos=(390, 6), size=(80, 23), png=2),
 						],
 				"fonts": [gFont("Prive2", 20)],
 				"itemHeight": 30
@@ -634,11 +634,11 @@
 		<widget name="key_yellow" position="260,502" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" transparent="1" />
 	</screen>
 	<screen name="NModule" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="20,20" size="470,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-6.png" position="20,20" size="470,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (0, 0), size = (380, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-						MultiContentEntryPixmapAlphaTest(pos=(385, 6), size=(80, 23), png=2),
+						MultiContentEntryText(pos = (0, 0), size = (385, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
+						MultiContentEntryPixmapAlphaTest(pos=(390, 6), size=(80, 23), png=2),
 						],
 				"fonts": [gFont("Prive2", 20)],
 				"itemHeight": 30
@@ -650,11 +650,11 @@
 	</screen>
 	<screen name="manageDttDevice" position="center,105" size="510,550">
 		<widget source="conn" render="Label" position="20,20" size="470,490" font="Prive2;22" halign="center" foregroundColor="conncol" />
-		<widget source="list" render="Listbox" position="20,20" size="470,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-6.png" position="20,20" size="470,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (0, 0), size = (380, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-						MultiContentEntryPixmapAlphaTest(pos=(385, 6), size=(80, 23), png=2),
+						MultiContentEntryText(pos = (0, 0), size = (385, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
+						MultiContentEntryPixmapAlphaTest(pos=(390, 6), size=(80, 23), png=2),
 						],
 				"fonts": [gFont("Prive2", 20)],
 				"itemHeight": 30
@@ -667,10 +667,10 @@
 		<widget name="key_yellow" position="260,502" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" transparent="1" />
 	</screen>
 	<screen name="NCommand" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="20,20" size="470,450" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-5.png" position="25,20" size="460,450" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (0, 0), size = (410, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+						MultiContentEntryText(pos = (0, 0), size = (460, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 					],
 				"fonts": [gFont("Prive2", 20)],
 				"itemHeight": 30
@@ -683,10 +683,10 @@
 		<widget name="key_yellow" position="260,502" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" transparent="1" />
 	</screen>
 	<screen name="NUserScript" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="20,20" size="470,450" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" re410nder="Listbox" selectionPixmap="skin_default/buttons/selected-5.png" position="25,20" size="460,450" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (0, 0), size = (410, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+						MultiContentEntryText(pos = (0, 0), size = (460, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 					],
 				"fonts": [gFont("Prive2", 20)],
 				"itemHeight": 30
@@ -722,10 +722,10 @@
 	</screen>
 	<!-- System Info panels	 -->
 	<screen name="NInfo" position="center,105" size="510,550">
-		<widget source="list" render="Listbox" position="50,20" size="400,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-4.png" position="25,20" size="455,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (50, 2), size = (350, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
+						MultiContentEntryText(pos = (50, 2), size = (405, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
 						MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
 						],
 				"fonts": [gFont("Prive2", 20)],
@@ -766,8 +766,8 @@
 		<widget name="titlebar" zPosition="2" position="20,10" size="560,30" font="Prive2;22" valign="center" transparent="1" foregroundColor="white" backgroundColor="white" />
 		<widget name="psinfo" position="20,60" size="560,320" font="Prive2;18" />
 	</screen>
-	<screen name="showEnigmaInfo" position="center,100" size="800,560">
-		<widget name="infotext" position="10,10" size="780,540" font="Prive2;22" />
+	<screen name="showEnigmaInfo" position="center,100" size="1000,560">
+		<widget name="infotext" position="10,10" size="980,540" font="Prive2;22" />
 	</screen>
 	<!-- EpgSearch -->
 	<screen name="NEpgSearch" position="center,100" size="700,560" title="EPG Search">
@@ -996,79 +996,80 @@
 		<widget name="menu" position="20,20" size="560,260" scrollbarMode="showOnDemand" />
 	</screen>
 	<screen name="ChannelSelection" position="0,0" size="1280,720" title="Channel Selection" backgroundColor="black" flags="wfNoBorder" >
-		<ePixmap position="20,35" size="1240,40" pixmap="skin_default/buttons/title_bar.png" zPosition="0" alphatest="on" />
-		<widget source="Title" render="Label" position="40,35" size="1200,40" foregroundColor="un6cbcf0" zPosition="1" valign="center" halign="center" font="Prive2;21" transparent="1"/>
-		<widget source="session.VideoPicture" render="Pig" position="48,80" zPosition="0" size="580,348" backgroundColor="transparent" />
+		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/back1.png" />
+		<ePixmap position="40,30" size="1200,40" pixmap="skin_default/buttons/title_bar.png" zPosition="0" alphatest="on" />
+		<widget source="Title" render="Label" position="40,30" size="1200,40" foregroundColor="un6cbcf0" zPosition="1" valign="center" halign="center" font="Prive2;21" transparent="1"/>
+		<widget source="session.VideoPicture" render="Pig" position="44,80" zPosition="0" size="588,352" backgroundColor="transparent" />
 		<widget name="list" position="645,80" zPosition="3" size="595,515" enableWrapAround="1" selectionPixmap="skin_default/buttons/selected-2.png" foregroundColorServiceNotAvail="#666666" serviceItemHeight="27" serviceNumberFont="Prive2;21" serviceNameFont="Prive2;21" serviceInfoFont="Prive2;18" transparent="1" scrollbarMode="showOnDemand" />
 		
-		<ePixmap position="40,435" size="126,82" pixmap="skin_default/frame_hd.png" zPosition="1" alphatest="on" />
-		<widget source="session.CurrentService" render="Picon" position="53,446" size="100,60" zPosition="2" transparent="1" alphatest="on">
+		<ePixmap position="40,440" size="126,82" pixmap="skin_default/frame_hd.png" zPosition="1" alphatest="on" />
+		<widget source="session.CurrentService" render="Picon" position="53,451" size="100,60" zPosition="2" transparent="1" alphatest="on">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
-		<widget position="175,437" size="390,30" source="session.CurrentService" render="Label" font="Prive2;21" valign="bottom" halign="left" noWrap="1" backgroundColor="backgroundf" transparent="1">
+		<widget position="175,442" size="390,30" source="session.CurrentService" render="Label" font="Prive2;21" valign="bottom" halign="left" noWrap="1" backgroundColor="backgroundf" transparent="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="562,437" size="73,30" font="Prive2;21" valign="bottom" halign="right" backgroundColor="backgroundf" transparent="1">
+		<widget  position="562,442" source="global.CurrentTime" render="Label" size="73,30" font="Prive2;21" valign="bottom" halign="right" backgroundColor="backgroundf" transparent="1">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget position="175,466" size="70,20" source="session.Event_Now" render="Label" font="Prive2;18" valign="bottom" backgroundColor="backgroundf" transparent="1">
+		<widget position="175,471" size="70,20" source="session.Event_Now" render="Label" font="Prive2;18" valign="bottom" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget position="235,466" size="310,20" source="session.Event_Now" render="NemesisEmptyEpg" font="Prive2;18" valign="bottom" noWrap="1" backgroundColor="backgroundf" transparent="1">
+		<widget position="235,471" size="310,20" source="session.Event_Now" render="NemesisEmptyEpg" font="Prive2;18" valign="bottom" noWrap="1" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget position="555,466" size="80,20" source="session.Event_Now" render="Label" font="Prive2;18" valign="bottom" halign="right" backgroundColor="backgroundf" transparent="1">
+		<widget position="555,471" size="80,20" source="session.Event_Now" render="Label" font="Prive2;18" valign="bottom" halign="right" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">InMinutes</convert>
 		</widget>
-		<widget position="175,490" size="70,20" source="session.Event_Next" render="Label" font="Prive2;18" valign="bottom" foregroundColor="un777777" transparent="1">
+		<widget position="175,495" size="70,20" source="session.Event_Next" render="Label" font="Prive2;18" valign="bottom" foregroundColor="un777777" transparent="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget position="235,490" size="310,20" source="session.Event_Next" render="NemesisEmptyEpg" font="Prive2;18" valign="bottom" noWrap="1" foregroundColor="un777777" transparent="1">
+		<widget position="235,495" size="310,20" source="session.Event_Next" render="NemesisEmptyEpg" font="Prive2;18" valign="bottom" noWrap="1" foregroundColor="un777777" transparent="1">
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget position="555,490" size="80,20" source="session.Event_Next" render="Label" font="Prive2;18" valign="bottom" halign="right" foregroundColor="un777777" transparent="1">
+		<widget position="555,495" size="80,20" source="session.Event_Next" render="Label" font="Prive2;18" valign="bottom" halign="right" foregroundColor="un777777" transparent="1">
 			<convert type="EventTime">Duration</convert>
 			<convert type="ClockToText">InMinutes</convert>
 		</widget>
 		
-		<ePixmap pixmap="skin_default/frame_hd.png" position="40,517" size="126,82" zPosition="1" alphatest="on" />
-		<widget source="ServiceEvent" render="NemesisRefTV" position="53,528" size="100,60" zPosition="2" transparent="1" alphatest="on" />
-		<widget source="ServiceEvent" render="Label" position="175,524" zPosition="1" size="460,22" font="Prive2;20" halign="center" backgroundColor="backgroundf" transparent="1">
+		<ePixmap pixmap="skin_default/frame_hd.png" position="40,522" size="126,82" zPosition="1" alphatest="on" />
+		<widget source="ServiceEvent" render="NemesisRefTV" position="53,533" size="100,60" zPosition="2" transparent="1" alphatest="on" />
+		<widget source="ServiceEvent" render="Label" position="175,529" zPosition="1" size="460,22" font="Prive2;20" halign="center" backgroundColor="backgroundf" transparent="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="ServiceEvent" render="Label" position="175,547" zPosition="1" size="60,22" font="Prive2;18" halign="right" backgroundColor="backgroundf" transparent="1">
+		<widget source="ServiceEvent" render="Label" position="175,552" zPosition="1" size="60,22" font="Prive2;18" halign="right" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">
 			</convert>
 		</widget>
-		<widget source="ServiceEvent" render="Label" position="575,547" zPosition="1" size="60,22" font="Prive2;18" halign="left" backgroundColor="backgroundf" transparent="1">
+		<widget source="ServiceEvent" render="Label" position="575,552" zPosition="1" size="60,22" font="Prive2;18" halign="left" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText">
 			</convert>
 		</widget>
-		<widget source="ServiceEvent" render="Progress" position="281,556" zPosition="1" pixmap="skin_default/slider/slider_tv.png" size="248,8" borderWidth="1" borderColor="grey">
+		<widget source="ServiceEvent" render="Progress" position="281,561" zPosition="1" pixmap="skin_default/slider/slider_tv.png" size="248,8" borderWidth="1" borderColor="grey">
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="ServiceEvent" render="Label" position="175,571" zPosition="1" size="460,22" font="Prive2;18" halign="center" backgroundColor="backgroundf" transparent="1">
+		<widget source="ServiceEvent" render="Label" position="175,576" zPosition="1" size="460,22" font="Prive2;18" halign="center" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventName">Name</convert>
 		</widget>
 		
-		<ePixmap position="40,605" size="575,25" pixmap="skin_default/buttons/selected-back.png" zPosition="0" alphatest="on" />
-		<widget position="40,606" size="575,25" source="ServiceEvent" render="NemesisShowReference" halign="center" font="Prive2;17" foregroundColor="un6cbcf0" zPosition="1" transparent="1" />
-		<ePixmap position="665,605" size="575,25" pixmap="skin_default/buttons/selected-back.png" zPosition="0" alphatest="on" />
-		<widget position="665,606" size="575,25" source="ServiceEvent" render="ShowTP" font="Prive2;17" halign="center" foregroundColor="un6cbcf0" zPosition="1" transparent="1" />
+		<ePixmap position="40,610" size="575,25" pixmap="skin_default/buttons/selected-back.png" zPosition="0" alphatest="on" />
+		<widget position="40,611" size="575,25" source="ServiceEvent" render="NemesisShowReference" halign="center" font="Prive2;17" foregroundColor="un6cbcf0" zPosition="1" transparent="1" />1
+		<ePixmap position="665,610" size="575,25" pixmap="skin_default/buttons/selected-back.png" zPosition="0" alphatest="on" />
+		<widget position="665,611" size="575,25" source="ServiceEvent" render="ShowTP" font="Prive2;17" halign="center" foregroundColor="un6cbcf0" zPosition="1" transparent="1" />
 
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="40,641" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="350,641" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="665,641" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="975,641" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="40,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="350,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="665,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="975,646" size="265,44" zPosition="1" alphatest="on" />
 		<widget name="key_red" position="40,641" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="red" zPosition="2" transparent="1" />
-		<widget name="key_green" position="350,641" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="green" zPosition="2" transparent="1" />
-		<widget name="key_yellow" position="665,641" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
-		<widget name="key_blue" position="975,641" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="blue" zPosition="2" transparent="1" />
+		<widget name="key_green" position="350,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="green" zPosition="2" transparent="1" />
+		<widget name="key_yellow" position="665,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
+		<widget name="key_blue" position="975,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 	</screen>
 	<screen name="ChannelSelectionRadio" position="center,100" size="1116,360" title="Channel Selection">
 		<widget name="list" position="10,8" size="1096,304" scrollbarMode="showOnDemand" foregroundColorServiceNotAvail="#666666" serviceNumberFont="Prive2;24" serviceNameFont="Prive2;24" serviceInfoFont="Prive2;22" transparent="1" />
@@ -1173,24 +1174,25 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/(count &gt; 7 and 2 or 3
 		<widget name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on" />
 	</screen>
 	<screen name="EPGSelection" position="0,0" size="1280,720" title="EPG Selection" flags="wfNoBorder" backgroundColor="black">
-		<ePixmap position="20,35" size="1240,40" pixmap="skin_default/buttons/title_bar.png" zPosition="0" alphatest="on" />
-		<widget source="Title" render="Label" position="40,35" size="1200,40" foregroundColor="un6cbcf0" zPosition="1" valign="center" halign="center" font="Prive2;21" transparent="1"/>
-		<widget source="session.VideoPicture" render="Pig" position="48,80" zPosition="0" size="580,348" backgroundColor="transparent" />
-		<widget position="48,435" size="580,30" source="Event" render="Label" font="Prive2;21" valign="bottom" halign="center" noWrap="1" backgroundColor="backgroundf" transparent="1" foregroundColor="un99bad6" >
+		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/back1.png" />
+		<ePixmap position="40,30" size="1200,40" pixmap="skin_default/buttons/title_bar.png" zPosition="0" alphatest="on" />
+		<widget source="Title" render="Label" position="40,30" size="1200,40" foregroundColor="un6cbcf0" zPosition="1" valign="center" halign="center" font="Prive2;21" transparent="1"/>
+		<widget source="session.VideoPicture" render="Pig" position="44,80" zPosition="0" size="588,352" backgroundColor="transparent" />
+		<widget position="48,440" size="580,30" source="Event" render="Label" font="Prive2;21" valign="bottom" halign="center" noWrap="1" backgroundColor="backgroundf" transparent="1" foregroundColor="un99bad6" >
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget source="Event" render="Label" position="48,470" zPosition="1" size="580,160" font="Prive2;18" transparent="1" foregroundColor="unb2e0b4">
+		<widget source="Event" render="Label" position="48,475" zPosition="1" size="580,160" font="Prive2;18" transparent="1" foregroundColor="unb2e0b4">
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 		<widget name="list" position="645,80" zPosition="3" size="595,530" selectionPixmap="skin_default/buttons/selected-2.png" transparent="1" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="40,641" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="350,641" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="665,641" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="975,641" size="265,44" zPosition="1" alphatest="on" />
-		<widget name="key_red" position="40,636" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="red" zPosition="2" transparent="1" />
-		<widget name="key_green" position="350,636" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="green" zPosition="2" transparent="1" />
-		<widget name="key_yellow" position="665,636" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
-		<widget name="key_blue" position="975,636" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="blue" zPosition="2" transparent="1" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="40,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="350,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="665,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="975,646" size="265,44" zPosition="1" alphatest="on" />
+		<widget name="key_red" position="40,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="red" zPosition="2" transparent="1" />
+		<widget name="key_green" position="350,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="green" zPosition="2" transparent="1" />
+		<widget name="key_yellow" position="665,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
+		<widget name="key_blue" position="975,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 	</screen>
 	<screen name="EPGSelectionMulti" position="center,100" size="1100,560" title="EPG Selection Multi">
 		<widget name="now_button_sel" pixmap="skin_default/epg_now.png" position="0,10" zPosition="3" size="1100,35" alphatest="on" />
@@ -1211,51 +1213,52 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/(count &gt; 7 and 2 or 3
 		<widget name="key_blue" position="830,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 	</screen>
 	<screen name="EventView" position="0,0" size="1280,720" title="Eventview" flags="wfNoBorder" backgroundColor="black">
-		<ePixmap position="20,35" size="1240,40" pixmap="skin_default/buttons/title_bar.png" zPosition="0" alphatest="on" />
-		<widget source="Title" render="Label" position="40,35" size="1200,40" foregroundColor="un6cbcf0" zPosition="1" valign="center" halign="center" font="Prive2;21" transparent="1"/>
-		<widget source="session.VideoPicture" render="Pig" position="48,80" zPosition="0" size="580,348" backgroundColor="transparent" />
-		<widget position="48,437" size="515,30" source="session.CurrentService" render="Label" font="Prive2;21" valign="bottom" halign="left" noWrap="1" backgroundColor="backgroundf" transparent="1">
+		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/back1.png" />
+		<ePixmap position="40,30" size="1200,40" pixmap="skin_default/buttons/title_bar.png" zPosition="0" alphatest="on" />
+		<widget source="Title" render="Label" position="40,30" size="1200,40" foregroundColor="un6cbcf0" zPosition="1" valign="center" halign="center" font="Prive2;21" transparent="1"/>
+		<widget source="session.VideoPicture" render="Pig" position="44,80" zPosition="0" size="588,352" backgroundColor="transparent" />
+		<widget position="48,442" size="515,30" source="session.CurrentService" render="Label" font="Prive2;21" valign="bottom" halign="left" noWrap="1" backgroundColor="backgroundf" transparent="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="562,437" size="73,30" font="Prive2;21" valign="bottom" halign="right" backgroundColor="backgroundf" transparent="1">
+		<widget source="global.CurrentTime" render="Label" position="562,442" size="73,30" font="Prive2;21" valign="bottom" halign="right" backgroundColor="backgroundf" transparent="1">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget position="48,466" size="70,20" source="session.Event_Now" render="Label" font="Prive2;18" valign="bottom" backgroundColor="backgroundf" transparent="1">
+		<widget position="48,471" size="70,20" source="session.Event_Now" render="Label" font="Prive2;18" valign="bottom" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget position="110,466" size="425,20" source="session.Event_Now" render="NemesisEmptyEpg" font="Prive2;18" valign="bottom" noWrap="1" backgroundColor="backgroundf" transparent="1">
+		<widget position="110,471" size="425,20" source="session.Event_Now" render="NemesisEmptyEpg" font="Prive2;18" valign="bottom" noWrap="1" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget position="555,466" size="80,20" source="session.Event_Now" render="Label" font="Prive2;18" valign="bottom" halign="right" backgroundColor="backgroundf" transparent="1">
+		<widget position="555,471" size="80,20" source="session.Event_Now" render="Label" font="Prive2;18" valign="bottom" halign="right" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">InMinutes</convert>
 		</widget>
-		<widget position="48,490" size="70,20" source="session.Event_Next" render="Label" font="Prive2;18" valign="bottom" foregroundColor="un777777" transparent="1">
+		<widget position="48,495" size="70,20" source="session.Event_Next" render="Label" font="Prive2;18" valign="bottom" foregroundColor="un777777" transparent="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget position="110,490" size="425,20" source="session.Event_Next" render="NemesisEmptyEpg" font="Prive2;18" valign="bottom" noWrap="1" foregroundColor="un777777" transparent="1">
+		<widget position="110,495" size="425,20" source="session.Event_Next" render="NemesisEmptyEpg" font="Prive2;18" valign="bottom" noWrap="1" foregroundColor="un777777" transparent="1">
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget position="555,490" size="80,20" source="session.Event_Next" render="Label" font="Prive2;18" valign="bottom" halign="right" foregroundColor="un777777" transparent="1">
+		<widget position="555,495" size="80,20" source="session.Event_Next" render="Label" font="Prive2;18" valign="bottom" halign="right" foregroundColor="un777777" transparent="1">
 			<convert type="EventTime">Duration</convert>
 			<convert type="ClockToText">InMinutes</convert>
 		</widget>
 
-		<widget name="channel" position="48,520" size="580,25" font="Prive2;22" halign="center" foregroundColor="un99bad6" backgroundColor="transpBlack" transparent="1" />
-		<widget name="datetime" position="48,550" size="580,25" font="Prive2;22" halign="center" foregroundColor="un99bad6" backgroundColor="transpBlack" transparent="1" />510
-		<widget name="duration" position="48,580" size="580,25" font="Prive2;22" halign="center" foregroundColor="un99bad6" backgroundColor="transpBlack" transparent="1" />
+		<widget name="channel" position="48,525" size="580,25" font="Prive2;22" halign="center" foregroundColor="un99bad6" backgroundColor="transpBlack" transparent="1" />
+		<widget name="datetime" position="48,555" size="580,25" font="Prive2;22" halign="center" foregroundColor="un99bad6" backgroundColor="transpBlack" transparent="1" />510
+		<widget name="duration" position="48,585" size="580,25" font="Prive2;22" halign="center" foregroundColor="un99bad6" backgroundColor="transpBlack" transparent="1" />
 		<widget name="epg_description" position="645,80" size="595,535" font="Prive2;25" backgroundColor="transpBlack" transparent="1" foregroundColor="unb2e0b4" />
 
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="40,641" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="350,641" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="665,641" size="265,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="975,641" size="265,44" zPosition="1" alphatest="on" />
-		<widget name="key_red" position="40,641" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="red" zPosition="2" transparent="1" />
-		<widget name="key_green" position="350,641" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="green" zPosition="2" transparent="1" />
-		<widget name="key_yellow" position="665,641" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
-		<widget name="key_blue" position="975,641" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="blue" zPosition="2" transparent="1" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="40,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="350,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="665,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="975,646" size="265,44" zPosition="1" alphatest="on" />
+		<widget name="key_red" position="40,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="red" zPosition="2" transparent="1" />
+		<widget name="key_green" position="350,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="green" zPosition="2" transparent="1" />
+		<widget name="key_yellow" position="665,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
+		<widget name="key_blue" position="975,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 	</screen>
 	<screen name="GraphMultiEPG" position="80,100" size="1120,560" title="Electronic Program Guide">
 		<widget name="timeline_text" position="0,10" size="800,30" />

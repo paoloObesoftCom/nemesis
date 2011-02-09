@@ -6,6 +6,7 @@ dist_install_DATA = \
 	agc_bar.png \
 	arrowdown.png \
 	arrowup.png \
+	back1.png \
 	back-main.png \
 	bar_ber.png \
 	bar_snr.png \
