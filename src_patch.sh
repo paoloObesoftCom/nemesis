@@ -156,8 +156,8 @@ enigma2_plugins()
 		echo 'Removed!'
 		mkdir -p $srcpatchedpath/enigma2-plugins/
 		cp -r $srcpath/enigma2-plugins $srcpatchedpath/enigma2-plugins/
+		cp -r patch/enigma2-plugins $srcpatchedpath/enigma2-plugins/
 		mv $srcpatchedpath/enigma2-plugins/enigma2-plugins/ $srcpatchedpath/enigma2-plugins/git
-		cp -r patch/enigma2-plugins $srcpatchedpath/enigma2-plugins/git
 		cd $srcpatchedpath/enigma2-plugins/
 		find git/ -name ".svn" | xargs rm -rf
 		echo -n "Create $e2_plugins archive... "

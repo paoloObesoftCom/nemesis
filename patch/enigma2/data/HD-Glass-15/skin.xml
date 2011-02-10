@@ -683,7 +683,7 @@
 		<widget name="key_yellow" position="260,502" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" transparent="1" />
 	</screen>
 	<screen name="NUserScript" position="center,105" size="510,550">
-		<widget source="list" re410nder="Listbox" selectionPixmap="skin_default/buttons/selected-5.png" position="25,20" size="460,450" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-5.png" position="25,20" size="460,450" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos = (0, 0), size = (460, 30), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
