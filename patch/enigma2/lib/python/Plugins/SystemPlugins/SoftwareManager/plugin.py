@@ -1350,6 +1350,8 @@ class UpdatePlugin(Screen):
 		self.activity = 0
 		self.activityTimer = eTimer()
 		self.activityTimer.callback.append(self.doActivityTimer)
+		self.timeoutTimer = eTimer()
+		self.timeoutTimer.callback.append(self.doTimeoutTimer)
 
 		self.ipkg = IpkgComponent()
 		self.ipkg.addCallback(self.ipkgCallback)
@@ -1373,6 +1375,7 @@ class UpdatePlugin(Screen):
 			if data <= 2:
 				self.updating = True
 				self.activityTimer.start(100, False)
+				self.timeoutTimer.start(config.nemesis.ipkg.updateTimeout.value * 1000)
 				self.package.setText(_("Package list update"))
 				self.status.setText(_("Upgrading Dreambox... Please wait"))
 				self.ipkg.startCmd(IpkgComponent.CMD_UPDATE)
@@ -1386,6 +1389,13 @@ class UpdatePlugin(Screen):
 			self.activity = 0
 		self.activityslider.setValue(self.activity)
 
+	def doTimeoutTimer(self):
+		if self.activityTimer.isActive():
+			self.activityTimer.stop()
+		self.activityslider.setValue(100)
+		self.status.setText(_("Error") +  " - " + _("Server connection timeout!\nPlease try again later."))
+		self.ipkg.stop()
+		
 	def ipkgCallback(self, event, param):
 		if event == IpkgComponent.EVENT_DOWNLOAD:
 			self.status.setText(_("Downloading"))
@@ -1425,6 +1435,8 @@ class UpdatePlugin(Screen):
 		elif event == IpkgComponent.EVENT_ERROR:
 			self.error += 1
 		elif event == IpkgComponent.EVENT_DONE:
+			if self.timeoutTimer.isActive():
+				self.timeoutTimer.stop()
 			if self.updating:
 				self.updating = False
 				self.ipkg.startCmd(IpkgComponent.CMD_UPGRADE, args = {'test_only': False})

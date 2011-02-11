@@ -20,6 +20,7 @@
 	<setup key="ipkgop" title="Setup OPKG Options">
 		<item level="0" text="Force overwrite on upgrade">config.nemesis.ipkg.overwriteUpgrade</item>
 		<item level="0" text="Force reinstall on install">config.nemesis.ipkg.forceReInstall</item>
+		<item level="0" text="OPKG Update connection timeout (20-60 sec)">config.nemesis.ipkg.updateTimeout</item>
 	</setup>
 	<setup key="dev" title="Setup Device">
 		<item level="0" text="Force Umount before Format">config.nemesis.forceumount</item>

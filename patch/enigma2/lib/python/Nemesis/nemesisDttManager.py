@@ -8,11 +8,13 @@ from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Sources.StaticText import StaticText
+from Components.config import config
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists
 from nemesisTool import GetSkinPath
 from nemesisConsole import nemesisConsole
 from nemesisTunerList import tList
+from enigma import eTimer
 from os import path as os_path, listdir, unlink
 import os
 
@@ -83,7 +85,7 @@ class manageDttDevice(Screen):
 		self.devList = checkDev()
 		self.devstatus = {}
 		self.needInstall = False
-		self.list_updating = True
+		self.updating = True
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self["key_yellow"] = Label(_("Install"))
@@ -93,15 +95,21 @@ class manageDttDevice(Screen):
 		{
 			'ok': self.KeyOk,
 			'yellow': self.modulesInstall,
-			'red': self.close,
-			'back': self.close
+			'red': self.exit,
+			'back': self.exit
 		})
 		self.cmdList = []
 		self.ipkg = IpkgComponent()
 		self.ipkg.addCallback(self.ipkgCallback)
+		self.timeoutTimer = eTimer()
+		self.timeoutTimer.callback.append(self.doTimeoutTimer)
 		self.onLayoutFinish.append(self.updateList)
 		self.onShown.append(self.setWindowTitle)
 	
+	def exit(self):
+		if not self.ipkg.isRunning():
+			self.close()
+		
 	def setWindowTitle(self):
 		self.setTitle(_("Manage DVB-T/C Adapter"))
 		
@@ -179,9 +187,14 @@ class manageDttDevice(Screen):
 	def modulesInstall(self):
 		if self.needInstall:
 			self['conn'].setText(_("Connetting to addons server.\nPlease wait..."))
-			self.list_updating = True
+			self.updating = True
+			self.timeoutTimer.start(config.nemesis.ipkg.updateTimeout.value * 1000)
 			self.ipkg.startCmd(IpkgComponent.CMD_UPDATE)
 			
+	def doTimeoutTimer(self):
+		self['conn'].text = _("Server connection timeout!\nPlease try again later.")
+		self.ipkg.stop()
+
 	def runUpgrade(self, result):
 		if result:
 			self.session.openWithCallback(self.updateList, Ipkg, cmdList = self.cmdList)
@@ -190,10 +203,12 @@ class manageDttDevice(Screen):
 			
 	def ipkgCallback(self, event, param):
 		if event == IpkgComponent.EVENT_ERROR:
-			self.list_updating = False
+			self.updating = False
 			self['conn'].text = (_("Server not found!\nPlease check internet connection."))
 		elif event == IpkgComponent.EVENT_DONE:
-			if self.list_updating:
+			if self.timeoutTimer.isActive():
+				self.timeoutTimer.stop()
+			if self.updating:
 				self.cmdList = []
 				self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": "dreambox-tuner-usb" }))
 				if len(self.cmdList):

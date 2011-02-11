@@ -906,3 +906,12 @@ msgstr "Aggiornamento disponibile!"
 "\nNuova Versione: %s"
 "\nAggiornare EDG firmware!"
 
+msgid ""
+"Server connection timeout!"
+"\nPlease try again later."
+msgstr ""
+"Timeout di connessione al Server!"
+"\nPrego riprovare più tardi."
+
+msgid "OPKG Update connection timeout (20-60 sec)"
+msgstr "Timeout di connessione OPKG update (20-60 sec)"
