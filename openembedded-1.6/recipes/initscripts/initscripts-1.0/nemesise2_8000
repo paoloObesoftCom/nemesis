@@ -20,13 +20,20 @@ for item in $list
 
 #Start device
 if [ `ls -al /dev/sda | grep disk -c` -ne "0" ]; then
-	mount /dev/sda1 /media/hdd || mount /dev/sda /media/hdd
-	if [ -b /dev/sdc ]; then mount /dev/sdc1 /media/usb || mount /dev/sdc /media/usb; fi
-	if [ -b /dev/sdd ]; then mount /dev/sdd1 /media/cf || mount /dev/sdd /media/cf; fi
+	if [ -b /dev/sdc && -b /dev/sdd ]; then 
+		mount /dev/sdc1 /media/usb || mount /dev/sdc /media/usb; 
+		mount /dev/sdd1 /media/cf || mount /dev/sdd /media/cf
+	else
+		if [ -b /dev/sdc ]; then mount /dev/sdc1 /media/cf || mount /dev/sdc /media/cf; fi
+	fi
 else
 	umount /media/hdd
-	if [ -b /dev/sdc ]; then mount /dev/sdc1 /media/usb || mount /dev/sdc /media/usb; fi
-	if [ -b /dev/sdd ]; then mount /dev/sdd1 /media/cf || mount /dev/sdd /media/cf; fi
+	if [ -b /dev/sdc && -b /dev/sdd ]; then 
+		mount /dev/sdc1 /media/usb || mount /dev/sdc /media/usb; 
+		mount /dev/sdd1 /media/cf || mount /dev/sdd /media/cf
+	else
+		if [ -b /dev/sdc ]; then mount /dev/sdc1 /media/cf || mount /dev/sdc /media/cf; fi
+	fi
 fi
 
 #Activate Swap

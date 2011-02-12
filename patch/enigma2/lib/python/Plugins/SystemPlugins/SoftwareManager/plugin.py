@@ -1435,9 +1435,9 @@ class UpdatePlugin(Screen):
 		elif event == IpkgComponent.EVENT_ERROR:
 			self.error += 1
 		elif event == IpkgComponent.EVENT_DONE:
-			if self.timeoutTimer.isActive():
-				self.timeoutTimer.stop()
 			if self.updating:
+				if self.timeoutTimer.isActive():
+					self.timeoutTimer.stop()
 				self.updating = False
 				self.ipkg.startCmd(IpkgComponent.CMD_UPGRADE, args = {'test_only': False})
 			elif self.error == 0:
@@ -1468,9 +1468,6 @@ class UpdatePlugin(Screen):
 			if self.packages != 0 and self.error == 0:
 				self.session.openWithCallback(self.exitAnswer, MessageBox, _("Upgrade finished.") +" "+_("Do you want to reboot your Dreambox?"))
 			else:
-				self.close()
-		else:
-			if not self.updating:
 				self.close()
 
 	def exitAnswer(self, result):

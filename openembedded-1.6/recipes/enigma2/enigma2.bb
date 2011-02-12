@@ -61,8 +61,8 @@ DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy s
 PN = "enigma2"
 PR = "r0"
 
-SRCDATE = "20110211"
-SRCREF = "f08a200f0909c0b98a60870d8d89de9f34467e2a"
+SRCDATE = "20110212"
+SRCREV = "f08a200f0909c0b98a60870d8d89de9f34467e2a"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
 #when you like to checkout a specific revision of e2 you need
@@ -100,6 +100,13 @@ do_install_append() {
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ServiceNumber.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/Nemesis*.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/PiconName.py
+	ln -s ${D}/usr/share/enigma2/skin_default/menu ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ${D}/usr/share/enigma2/skin_default/icons ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ${D}/usr/share/enigma2/skin_default/buttons ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ${D}/usr/share/enigma2/skin_default/spinner ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ${D}/usr/share/enigma2/skin_default/frame ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ${D}/usr/share/enigma2/skin_default/slider ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ${D}/usr/share/enigma2/skin_default/general ${D}/usr/share/enigma2/HD-Glass-15/
 }
 
 python populate_packages_prepend () {
