@@ -59,7 +59,7 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r0"
+PR = "r1"
 
 SRCDATE = "20110212"
 SRCREV = "f08a200f0909c0b98a60870d8d89de9f34467e2a"
@@ -100,13 +100,13 @@ do_install_append() {
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ServiceNumber.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/Nemesis*.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/PiconName.py
-	ln -s ${D}/usr/share/enigma2/skin_default/menu ${D}/usr/share/enigma2/HD-Glass-15/
-	ln -s ${D}/usr/share/enigma2/skin_default/icons ${D}/usr/share/enigma2/HD-Glass-15/
-	ln -s ${D}/usr/share/enigma2/skin_default/buttons ${D}/usr/share/enigma2/HD-Glass-15/
-	ln -s ${D}/usr/share/enigma2/skin_default/spinner ${D}/usr/share/enigma2/HD-Glass-15/
-	ln -s ${D}/usr/share/enigma2/skin_default/frame ${D}/usr/share/enigma2/HD-Glass-15/
-	ln -s ${D}/usr/share/enigma2/skin_default/slider ${D}/usr/share/enigma2/HD-Glass-15/
-	ln -s ${D}/usr/share/enigma2/skin_default/general ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ../skin_default/menu ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ../skin_default/icons ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ../skin_default/buttons ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ../skin_default/spinner ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ../skin_default/frame ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ../skin_default/slider ${D}/usr/share/enigma2/HD-Glass-15/
+	ln -s ../skin_default/general ${D}/usr/share/enigma2/HD-Glass-15/
 }
 
 python populate_packages_prepend () {
