@@ -98,6 +98,7 @@ check_enigma2()
 	kompare $e2_cvssrc/lib/python/Components/Converter/Makefile.am patch/enigma2/lib/python/Components/Converter/Makefile.am
 	kompare $e2_cvssrc/lib/python/Components/Converter/ServiceName.py patch/enigma2/lib/python/Components/Converter/ServiceName.py
 	kompare $e2_cvssrc/lib/python/Components/Converter/ClockToText.py patch/enigma2/lib/python/Components/Converter/ClockToText.py
+	kompare $e2_cvssrc/lib/python/Components/Converter/FrontendInfo.py patch/enigma2/lib/python/Components/Converter/FrontendInfo.py
 
 	kompare $e2_cvssrc/lib/python/Components/Renderer/Picon.py patch/enigma2/lib/python/Components/Renderer/Picon.py
 	
