@@ -40,7 +40,7 @@ class FrontendInfo(Converter, object):
 				return "N/A"
 		elif self.type == self.AGC:
 			percent = self.source.agc
-			if HardwareInfo().get_device_name() == 'dm800se' and percent is not None:
+			if (HardwareInfo().get_device_name() == 'dm800se' or HardwareInfo().get_device_name() == 'dm500hd') and percent is not None:
 				percent = min((percent * 10), 65536)
 			if percent is None:
 				percent = 0

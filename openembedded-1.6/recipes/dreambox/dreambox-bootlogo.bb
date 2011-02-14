@@ -4,7 +4,7 @@ PRIORITY = "required"
 LICENSE = "proprietary"
 MAINTAINER = "Felix Domke <tmbinc@elitedvb.net>"
 
-IMAGES_VERSION = "2"
+IMAGES_VERSION = "2.1"
 
 BINARY_VERSION = "1"
 BINARY_VERSION_dm500hd = "4"
@@ -15,7 +15,7 @@ BINARY_VERSION_dm7020hd = "4"
 BINARY_VERSION_dm8000 = "6"
 
 PV = "${BINARY_VERSION}.${IMAGES_VERSION}"
-PR = "r8"
+PR = "r0"
 
 SRC_URI = "http://sources.dreamboxupdate.com/download/7020/bootlogo-${MACHINE}-${BINARY_VERSION}.elf \
 	file://bootlogo.mvi \
