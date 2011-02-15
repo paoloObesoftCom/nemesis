@@ -364,7 +364,7 @@
 		<widget position="190,397" size="50,25" halign="center" text="VIA" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="via" valign="center" zPosition="1" />
 	</screen>
 	<!-- Blue panels	 -->
-	<screen name="nemesisBluePanel" position="center,130" size="800,500">
+	<screen name="nemesisBluePanel" position="center,145" size="800,470">
 		<widget name="info_use" position="30,10" zPosition="2" size="360,30" halign="center" font="Prive2;20" foregroundColor="unb2e0b4" />
 		<widget name="config" position="30,50" size="360,125" zPosition="2" transparent="1" foregroundColor="unb2e0b4" />
 		<widget name="conn" position="30,180" size="360,165" font="Prive2;20" halign="center" valign="center" zPosition="2" foregroundColor="red" />
