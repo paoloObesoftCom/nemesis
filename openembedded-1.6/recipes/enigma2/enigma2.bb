@@ -59,10 +59,10 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r0"
+PR = "r1"
 
-SRCDATE = "20110215"
-SRCREV = "f08a200f0909c0b98a60870d8d89de9f34467e2a"
+SRCDATE = "20110216"
+SRCREV = "6e860dd76f06031b31bac9280e9b85ab7abfdadf"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
 #when you like to checkout a specific revision of e2 you need
@@ -72,7 +72,7 @@ SRCREV = "f08a200f0909c0b98a60870d8d89de9f34467e2a"
 ####################################################
 BRANCH = "experimental"
 PV = "experimental-git${SRCDATE}"
-SRCREV = ""
+#SRCREV = ""
 ####################################################
 
 SRC_URI = "file://../../../../sources/git_git.opendreambox.org.git.enigma2.git_EDG_16.tar.gz"

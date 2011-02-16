@@ -563,6 +563,7 @@ class PluginManager(Screen, DreamInfoHandler):
 			self["list"].onSelectionChanged.append(self.selectionChanged)
 
 		self.currList = ""
+		self.packagefiles = None
 		self.currentSelectedTag = None
 		self.currentSelectedIndex = None
 		self.currentSelectedPackage = None
@@ -1134,6 +1135,7 @@ class PluginDetails(Screen, DreamInfoHandler):
 		self.skin_path = plugin_path
 		self.language = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
 		self.attributes = None
+		self.packagefiles = None
 		DreamInfoHandler.__init__(self, self.statusCallback, blocking = False)
 		self.directory = resolveFilename(SCOPE_METADIR)
 		if packagedata:

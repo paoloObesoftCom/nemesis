@@ -51,6 +51,7 @@ dvb-usb-af9005)
 	insmod $DRVDIR/dvb-usb-af9005.ko
 	;;
 dvb-usb-af9015)
+	insmod $DRVDIR/mxl5007t.ko
 	insmod $DRVDIR/mxl5005s.ko
 	insmod $DRVDIR/mc44s803.ko
 	insmod $DRVDIR/mt2060.ko
@@ -66,6 +67,7 @@ dvb-usb-af9015)
 dvb-usb-af9035)
 	insmod $DRVDIR/mxl5007t.ko
 	insmod $DRVDIR/tua9001.ko
+	insmod $DRVDIR/tda18218.ko
 	insmod $DRVDIR/af9033.ko
 	insmod $DRVDIR/dvb-usb.ko
 	sleep 1

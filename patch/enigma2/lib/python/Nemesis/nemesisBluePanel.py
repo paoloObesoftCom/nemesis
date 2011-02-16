@@ -85,7 +85,10 @@ class nemesisBluePanel(Screen):
 
 	def checkVersion(self):
 		fetchFile = "/tmp/ver.txt"
-		url = t.readAddonsUrl() + "ver.txt"
+		if fileExists("/etc/.testmode"):
+			url = t.readAddonsUrl() + "ver-test.txt"
+		else:
+			url = t.readAddonsUrl() + "ver.txt"
 		print "[BluePanel] downloading version file " + url + " to " + fetchFile
 		from twisted.web import client
 		from twisted.internet import reactor
