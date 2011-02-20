@@ -108,13 +108,13 @@ class nemesisBluePanel(Screen):
 			unlink(fileName)
 			if int(version) < int(newVer):
 				self['conn'].show()
-				self['conn'].setText(_('Update is available!\nCurrent version: %s\nNew Version: %s\nPlease upgrade EDG firmware!') % (version, newVer))
+				self['conn'].setText(_('Update is available!\nCurrent version: %s\nNew Version: %s\nPlease upgrade Nemesis firmware!') % (version, newVer))
 
 	def fetchFailed(self,string):
 		print "[BluePanel] fetch failed " + string.getErrorMessage()
 
 	def setWindowTitle(self):
-		self.setTitle(_("EDG-Nemesis Blue Panel"))
+		self.setTitle(_("Nemesis Blue Panel"))
 	
 	def __onClose(self):
 		if self.ecmTimer.isActive():
@@ -149,9 +149,9 @@ class nemesisBluePanel(Screen):
 		del self.list[:]
 		self.list.append(getConfigListEntry(_('SoftCams (%s) :') % str(len(emu)-1), softcam))
 		self.list.append(getConfigListEntry(_('CardServers (%s) :') % str(len(crd)-1), cardserver))
-		self.list.append(getConfigListEntry(_("EDG-Nemesis News"), ConfigNothing()))
+		self.list.append(getConfigListEntry(_("Nemesis News"), ConfigNothing()))
 		self.list.append(getConfigListEntry(_("Parental Control Setup"), ConfigNothing()))
-		self.list.append(getConfigListEntry(_("About EDG-Nemesis"), ConfigNothing()))
+		self.list.append(getConfigListEntry(_("About Nemesis"), ConfigNothing()))
 		self['config'].list = self.list
 		self['config'].l.setList(self.list)
 	
@@ -171,21 +171,21 @@ class nemesisBluePanel(Screen):
 			self.ss_srv()
 		elif self.sel == 2:
 			cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + t.readAddonsUrl() + "info.txt -O /tmp/info.txt"
-			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Downloading EDG-Nemesis info...'))
+			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Downloading Nemesis info...'))
 		elif self.sel == 3:
 			self.session.open(ParentalControlSetup)
 		elif self.sel == 4:
-			self.message = "\nEDG-Nemesis Version: " +  self.NEWDEVER
+			self.message = "\nNemesis Version: " +  self.NEWDEVER
 			self.message += "\n\nImage version: " + self.IMAGEVER
 			self.message += "\nBuild by Gianathem"
 			self.message += "\nBased on Enigma Version: " +  self.ENIGMAVER
 			self.message += "\nKernel version: " + self.KERNELVER
-			self.message += "\n\nFor support visit: http://edg-nemesis.tv/"
+			self.message += "\n\nFor support visit: http://www.genesi-project.it/"
 			self.mbox = self.session.open(MessageBox, self.message, MessageBox.TYPE_INFO)
-			self.mbox.setTitle("About EDG-Nemesis " + self.NEWDEVER)
+			self.mbox.setTitle("About Nemesis " + self.NEWDEVER)
 	
 	def executedScript(self, *answer):
-		self.session.open(nemesisShowPanel, "/tmp/info.txt" ,_('EDG-Nemesis Info'))
+		self.session.open(nemesisShowPanel, "/tmp/info.txt" ,_('Nemesis Info'))
 		
 	def naddons(self):
 		self.session.openWithCallback(self.loadEmuList, NAddons)

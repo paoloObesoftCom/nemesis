@@ -65,7 +65,7 @@ def setup(session,**kwargs):
 def Plugins(**kwargs):
 
 	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]	
-	list.append(PluginDescriptor(name="Setup Quickbutton (EDG Patched)", description=_("setup for Quickbutton"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup))
+	list.append(PluginDescriptor(name="Setup Quickbutton (Nemsis Patched)", description=_("setup for Quickbutton"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup))
 	return list
 
 def InfoBarPlugins__init__(self):

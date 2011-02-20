@@ -10,7 +10,7 @@ subver=''
 
 move_image()
 {
-	imagename="EDG-Nemesis-${ver}${subver}-${model}_${data}"
+	imagename="Nemesis-${ver}${subver}-${model}_${data}"
 	mv ../root/cdkflash/complete.img ${HOME}/${imagename}.img
 	cd ${HOME}
 	zip ${imagename}.zip ${imagename}.img

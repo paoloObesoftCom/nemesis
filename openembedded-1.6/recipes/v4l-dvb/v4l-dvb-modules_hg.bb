@@ -32,3 +32,4 @@ SRC_URI = "hg://linuxtv.org/hg/;module=v4l-dvb;rev=${SRCREV} \
 "
 
 S = "${WORKDIR}/v4l-dvb"
+

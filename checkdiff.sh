@@ -143,6 +143,7 @@ check_oe_16()
 	kompare $oesrc16/openembedded/recipes/busybox/busybox-1.15.3/opendreambox/defconfig openembedded-1.6/recipes/busybox/busybox-1.15.3/opendreambox/defconfig
 	kompare $oesrc16/openembedded/recipes/dreambox/dreambox-dccamd.bb openembedded-1.6/recipes/dreambox/dreambox-dccamd.bb
 	kompare $oesrc16/openembedded/recipes/dreambox/dreambox-bootlogo.bb openembedded-1.6/recipes/dreambox/dreambox-bootlogo.bb
+	kompare $oesrc16/openembedded/recipes/dreambox/dreambox-feed-configs.bb openembedded-1.6/recipes/dreambox/dreambox-feed-configs.bb
 	kompare $oesrc16/openembedded/recipes/enigma2/enigma2.bb openembedded-1.6/recipes/enigma2/enigma2.bb
 	kompare $oesrc16/openembedded/recipes/enigma2/enigma2-plugins.bb openembedded-1.6/recipes/enigma2/enigma2-plugins.bb
 	kompare $oesrc16/openembedded/recipes/ez-ipupdate/ez-ipupdate_3.0.10.bb openembedded-1.6/recipes/ez-ipupdate/ez-ipupdate_3.0.10.bb

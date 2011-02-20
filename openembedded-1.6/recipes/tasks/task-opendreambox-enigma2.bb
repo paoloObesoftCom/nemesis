@@ -1,7 +1,7 @@
 DESCRIPTION = "OpenDreambox: Enigma2 Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PR = "r19"
+PR = "r20"
 
 inherit task
 
@@ -12,6 +12,10 @@ PROVIDES = "\
 
 PACKAGES = "\
   task-opendreambox-enigma2 \
+"
+
+DEPENDS += "\
+  ${@base_contains("MACHINE_FEATURES", "dreambox-libpassthrough", "dreambox-libpassthrough", "", d)} \
 "
 
 #
@@ -59,6 +63,7 @@ RRECOMMENDS_task-opendreambox-enigma2 = "\
   enigma2-plugin-extensions-socketmmi \
   ${@base_contains("MACHINE_FEATURES", "wifi", "task-opendreambox-wlan", "", d)} \
   ${@base_contains("MACHINE_FEATURES", "modem", "task-opendreambox-modem", "", d)} \
+  ${@base_contains("MACHINE_FEATURES", "dreambox-libpassthrough", "libpassthrough", "", d)} \
 "
 
 RDEPENDS_task-opendreambox-enigma2_append_dm500hd = "\
