@@ -4,7 +4,7 @@ PRIORITY = "required"
 LICENSE = "proprietary"
 MAINTAINER = "Felix Domke <tmbinc@elitedvb.net>"
 
-IMAGES_VERSION = "2.1"
+IMAGES_VERSION = "2.2"
 
 BINARY_VERSION = "1"
 BINARY_VERSION_dm500hd = "4"

@@ -43,7 +43,7 @@ class nemesisBluePanel(Screen):
 		<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" />
 	</screen>"""
 	
-	NEWDEVER = "2.1 (OE 1.6)"
+	NEWDEVER = "2.2 (OE 1.6)"
 	IMAGEVER = about.getImageVersionString()
 	ENIGMAVER = about.getEnigmaVersionString()
 	KERNELVER = about.getKernelVersionStringL()

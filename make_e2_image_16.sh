@@ -8,7 +8,7 @@ git_dir=`grep "OE_ROOT=" env.source | cut -d "=" -f 2`/1.6/openembedded/conf
 patchdir=$envpath/nemesis
 
 [ -e $git_dir/checksums.ini ] && rm -f $git_dir/checksums.ini
-ver='2.1'
+ver='2.2'
 enigmaver='2'
 oever='1.6'
 subver=''

@@ -24,6 +24,7 @@ NEMESIS_COMMON = "\
 REQUIRE_COMMON = "\
 	task-opendreambox-cdplayer \
 	task-opendreambox-dvdplayer \
+	dreamdts \
 	dreambox-tuner-usb \
 "
 

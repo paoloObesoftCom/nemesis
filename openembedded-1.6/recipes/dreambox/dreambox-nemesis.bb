@@ -1,8 +1,8 @@
 DESCRIPTION = "Nemesis files"
 LICENSE = "GPL"
 
-PV = "2.1"
-PR = "r1"
+PV = "2.2"
+PR = "r0"
 
 S = "${WORKDIR}/"
 PACKAGE_ARCH := "${MACHINE_ARCH}"
@@ -10,7 +10,7 @@ FILES_${PN} = "/"
 
 do_install() {
 	
-	srcpath=${DL_DIR}/../..
+	srcpath=${OE_BASE}/../../..
 
 	mkdir -p ${D}/usr/{log,scam,uninstall,scce,www,keys}
 	mkdir -p ${D}/etc/init.d

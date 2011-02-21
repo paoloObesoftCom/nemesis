@@ -7,7 +7,7 @@ FILES_${PN} = "/"
 
 do_install() {
 	
-	srcpath=${DL_DIR}/../..
+	srcpath=${OE_BASE}/../../..
 
 	mkdir -p ${D}/usr/
 	mkdir -p ${D}/etc/
