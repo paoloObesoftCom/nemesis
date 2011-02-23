@@ -470,7 +470,7 @@ class NServicesSetup(Screen, ConfigListScreen):
 			('inadyn','S30inadyn',_('Activate InaDyn at boot?')),
 			('sshd','S09sshd',_('Activate Openssh (SSHD) at boot?')),
 			('vsftpd','S20vsftpd',_('Activate FTP Server at boot?')),
-			('busybox-cron','S99cron',_('Activate Crontab at boot?')),
+			('busybox-cron','S21cron',_('Activate Crontab at boot?')),
 			('pcscd','S19pcscd',_('Activate Omnikey Support at boot?'))
 			]
 		self.serviceconfig = {}

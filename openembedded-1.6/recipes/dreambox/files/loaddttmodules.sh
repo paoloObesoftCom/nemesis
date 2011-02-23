@@ -21,14 +21,14 @@ b2c2-flexcop-usb)
 	insmod $DRVDIR/stv0297.ko
 	insmod $DRVDIR/nxt200x.ko
 	insmod $DRVDIR/isl6421.ko
-	insmod $DRVDIR/tuner-simple.ko
-	insmod $DRVDIR/tuner-types.ko
 	insmod $DRVDIR/cx24113.ko
 	insmod $DRVDIR/mt312.ko
 	insmod $DRVDIR/cx24123.ko
 	insmod $DRVDIR/lgdt330x.ko
 	insmod $DRVDIR/stv0299.ko
 	insmod $DRVDIR/b2c2-flexcop.ko
+	insmod $DRVDIR/tuner-types.ko
+	insmod $DRVDIR/tuner-simple.ko
 	insmod $DRVDIR/dvb-pll.ko
 	sleep 2
 	insmod $DRVDIR/b2c2-flexcop-usb.ko
@@ -58,8 +58,8 @@ dvb-usb-af9015)
 	insmod $DRVDIR/qt1010.ko
 	insmod $DRVDIR/tda18271.ko
 	insmod $DRVDIR/tda18218.ko
-	insmod $DRVDIR/dvb-usb.ko
 	insmod $DRVDIR/af9013.ko
+	insmod $DRVDIR/dvb-usb.ko
 	insmod $DRVDIR/dvb-pll.ko
 	sleep 1
 	insmod $DRVDIR/dvb-usb-af9015.ko
@@ -114,12 +114,12 @@ dvb-usb-cxusb)
 	insmod $DRVDIR/mt352.ko
 	insmod $DRVDIR/tuner-xc2028.ko
 	insmod $DRVDIR/max2165.ko
-	insmod $DRVDIR/tuner-simple.ko
-	insmod $DRVDIR/tuner-types.ko
 	insmod $DRVDIR/mxl5005s.ko
 	insmod $DRVDIR/zl10353.ko
 	insmod $DRVDIR/lgdt330x.ko
 	insmod $DRVDIR/cx2270
+	insmod $DRVDIR/tuner-types.ko
+	insmod $DRVDIR/tuner-simple.ko
 	insmod $DRVDIR/dibx000-common.ko
 	insmod $DRVDIR/dib0070.ko
 	insmod $DRVDIR/dib7000p.ko
@@ -231,14 +231,14 @@ dvb-usb-gp8psk)
 	;;
 dvb-usb-m920x)
 	insmod $DRVDIR/mt352.ko
-	insmod $DRVDIR/tuner-simple.ko
-	insmod $DRVDIR/tuner-types.ko
 	insmod $DRVDIR/tda1004x.ko
 	insmod $DRVDIR/tda827x.ko
 	insmod $DRVDIR/qt1010.ko
+	insmod $DRVDIR/tuner-types.ko
+	insmod $DRVDIR/tuner-simple.ko
 	insmod $DRVDIR/dvb-usb.ko
 	sleep 2
-	insmod $DRVDIR/dvb-usb-920x.ko
+	insmod $DRVDIR/dvb-usb-m920x.ko
 	;;
 dvb-usb-nova-t-usb2)
 	insmod $DRVDIR/mt2060.ko

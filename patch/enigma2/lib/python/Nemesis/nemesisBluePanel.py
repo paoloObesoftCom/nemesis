@@ -23,7 +23,7 @@ from Components.Console import Console
 from Components.About import about
 import os
 from os import unlink
-from enigma import eTimer, eDVBCI_UI, nemTool,iServiceInformation
+from enigma import eTimer, eDVBCI_UI, nemTool, iServiceInformation, eConsoleAppContainer
 
 t = nemesisTool()
 tool = nemTool()
@@ -31,16 +31,28 @@ tool = nemTool()
 class nemesisBluePanel(Screen):
 	
 	skin = """
-	<screen name="nemesisBluePanel" position="0,0" size="500,720" flags="wfNoBorder">
-		<widget name="title" position="50,40" size="300,32" font="Regular;40" halign="center" foregroundColor="#53a9ff" backgroundColor="transpBlack" transparent="1"/>
-		<widget name="info_use" position="50,110" zPosition="2" size="340,30" valign="center" halign="center" font="Regular;21" transparent="1" backgroundColor="#1f771f" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="config" position="50,150" size="340,125" zPosition="2" />
-		<widget name="key_blue" position="50,320" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;22" transparent="1" foregroundColor="#6565ff" backgroundColor="#1f771f" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_yellow" position="50,350" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;22" transparent="1" foregroundColor="#bab329" backgroundColor="#1f771f" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" position="50,380" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;22" transparent="1" foregroundColor="#389416" backgroundColor="#1f771f" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_red" position="50,410" zPosition="2" size="300,30" valign="center" halign="left" font="Regular;22" transparent="1" foregroundColor="#ff2525" backgroundColor="#9f1313" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="ecmtext" position="50,460" size="340,240" font="Regular;18" zPosition="2" backgroundColor="#333333" transparent="1"/>
-		<widget name="conn" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" />
+	<screen name="nemesisBluePanel" position="center,130" size="800,500">
+		<widget name="info_use" position="30,10" zPosition="2" size="360,30" halign="center" font="Prive2;20" foregroundColor="unb2e0b4" />
+		<widget name="config" position="30,50" size="360,150" zPosition="2" transparent="1" foregroundColor="unb2e0b4" />
+		<widget name="conn" position="30,200" size="360,140" font="Prive2;20" halign="center" valign="center" zPosition="2" foregroundColor="red" />
+		<widget source="conninfo" render="Label" position="30,340" size="740,30" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
+		<ePixmap pixmap="skin_default/buttons/select_p.png" position="43,380" size="335,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_p.png" position="422,380" size="335,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_p.png" position="43,440" size="335,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_p.png" position="422,440" size="335,44" zPosition="1" alphatest="on" />
+		<widget name="key_red" position="43,380" size="335,44" font="Prive2;22" valign="center" halign="center" foregroundColor="red" zPosition="2" transparent="1" />
+		<widget name="key_green" position="43,440" size="335,44" font="Prive2;22" valign="center" halign="center" foregroundColor="green" zPosition="2" transparent="1" />
+		<widget name="key_yellow" position="422,380" size="335,44" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
+		<widget name="key_blue" position="422,440" size="335,44" font="Prive2;22" valign="center" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
+		<ePixmap position="43,164" size="355,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
+		<eLabel text="Emu decode info:" position="422,10" size="335,30" halign="center" font="Prive2;20" foregroundColor="unb2e0b4" />
+		<widget position="422,48" size="335,25" source="session.CurrentService" render="Label" font="Prive2;20" valign="bottom" halign="center" noWrap="1" foregroundColor="unb2e0b4">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="422,74" size="335,25" font="Prive2;19" halign="center" foregroundColor="unb2e0b4">
+			<convert type="ServiceName">Provider</convert>
+		</widget>
+		<widget name="ecmtext" position="407,118" size="392,230" font="Prive2;19" zPosition="2" halign="center" foregroundColor="un99bad6" />
 	</screen>"""
 	
 	NEWDEVER = "2.2 (OE 1.6)"
@@ -54,6 +66,7 @@ class nemesisBluePanel(Screen):
 		self['config'] = ConfigList(self.list)
 		self["title"] = Label(_("Nemesis Blue Panel"))
 		self["ecmtext"] = ScrollLabel("")
+		self['conninfo'] = StaticText('')
 		self['conn'] = Label("")
 		self['conn'].hide()
 		self["key_blue"] = Label(_("Addons Manager"))
@@ -70,55 +83,69 @@ class nemesisBluePanel(Screen):
 				"yellow": self.nsetting,
 				"red": self.nutility,
 				"ok": self.ok_pressed,
-				"back": self.close
+				"back": self.__onClose
 			},-1)
 		self.console = Console()
 		self.nemPortNumber = t.readPortNumber()
+		self.checkVersionTimer = eTimer()
+		self.checkVersionTimer.timeout.get().append(self.checkVersion)
+		self.checkVersionTimer.start(2000, True)
 		self.ecmTimer = eTimer()
 		self.ecmTimer.timeout.get().append(self.readEcmInfo)
 		self.ecmTimer.start(10000, False)
-		self.readEcmInfo()
-		self.checkVersion()
 		self.onLayoutFinish.append(self.loadEmuList)
 		self.onShown.append(self.setWindowTitle)
-		self.onClose.append(self.__onClose)
+		self.container = eConsoleAppContainer()
+		self.container.appClosed.append(self.runFinished)
+		self.checkVersionContainer = eConsoleAppContainer()
+		self.checkVersionContainer.appClosed.append(self.fetchFinished)
+		self.readEcmInfo()
 
 	def checkVersion(self):
-		fetchFile = "/tmp/ver.txt"
-		if fileExists("/etc/.testmode"):
-			url = t.readAddonsUrl() + "ver-test.txt"
-		else:
-			url = t.readAddonsUrl() + "ver.txt"
-		print "[BluePanel] downloading version file " + url + " to " + fetchFile
-		from twisted.web import client
-		from twisted.internet import reactor
-		client.downloadPage(url,fetchFile).addCallback(self.fetchFinished,fetchFile).addErrback(self.fetchFailed)
-	
-	def fetchFinished(self, string, fileName):
-		if fileExists(fileName):
+		url = t.readAddonsUrl() + {True:'ver-test.txt',False:'ver.txt'}[fileExists("/etc/.testmode")]
+		print "[BluePanel] downloading version file " + url
+		cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + url + " -O /tmp/ver.txt"
+		self.checkVersionContainer.execute(cmd)
+		
+	def fetchFinished(self, retval):
+		if fileExists('/tmp/ver.txt') and retval == 0 :
 			hwVersion = HardwareInfo().get_device_name()
 			version = about.getSvnVersionString()
 			newVer = version
-			f = open(fileName, "r")
-			for line in f.readlines():
-				line = line.split('=')
-				if line[0] == hwVersion:
-					newVer = line[1][:-1]
-			f.close()
-			unlink(fileName)
-			if int(version) < int(newVer):
-				self['conn'].show()
-				self['conn'].setText(_('Update is available!\nCurrent version: %s\nNew Version: %s\nPlease upgrade Nemesis firmware!') % (version, newVer))
-
-	def fetchFailed(self,string):
-		print "[BluePanel] fetch failed " + string.getErrorMessage()
+			try:
+				f = open('/tmp/ver.txt','r')
+				for line in f.readlines():
+					line = line.split('=')
+					if line[0] == hwVersion:
+						newVer = line[1][:-1]
+				f.close()
+				unlink('/tmp/ver.txt')
+				print version, newVer
+				if int(version) < int(newVer):
+					self['conn'].show()
+					self['conn'].setText(_('Update is available!\nCurrent version: %s\nNew Version: %s\nPlease upgrade Nemesis firmware!') % (version, newVer))
+			except:
+				pass
 
 	def setWindowTitle(self):
 		self.setTitle(_("Nemesis Blue Panel"))
 	
 	def __onClose(self):
-		if self.ecmTimer.isActive():
-			self.ecmTimer.stop()
+		if self.container.running():
+			self.container.kill()
+			self['conninfo'].text = (_('Process Killed by user, Server Not Connected!'))
+		else:
+			if self.checkVersionContainer.running():
+				self.checkVersionContainer.kill()
+			if self.ecmTimer.isActive():
+				self.ecmTimer.stop()
+			if self.checkVersionTimer.isActive():
+				self.checkVersionTimer.stop()
+			if fileExists('/tmp/ver.txt'):
+				unlink('/tmp/ver.txt')
+			if fileExists('/tmp/info.txt'):
+				unlink('/tmp/info.txt')
+			self.close()
 
 	def loadEmuList(self):
 		emu = []
@@ -150,6 +177,7 @@ class nemesisBluePanel(Screen):
 		self.list.append(getConfigListEntry(_('SoftCams (%s) :') % str(len(emu)-1), softcam))
 		self.list.append(getConfigListEntry(_('CardServers (%s) :') % str(len(crd)-1), cardserver))
 		self.list.append(getConfigListEntry(_("Nemesis News"), ConfigNothing()))
+		self.list.append(getConfigListEntry(_("Nemesis Timeline"), ConfigNothing()))
 		self.list.append(getConfigListEntry(_("Parental Control Setup"), ConfigNothing()))
 		self.list.append(getConfigListEntry(_("About Nemesis"), ConfigNothing()))
 		self['config'].list = self.list
@@ -162,6 +190,9 @@ class nemesisBluePanel(Screen):
 		self["config"].handleKey(KEY_RIGHT)
 	
 	def ok_pressed(self):
+		self['conninfo'].text = ('')
+		if self.container.running():
+			self.container.kill()
 		self.sel = self["config"].getCurrentIndex()
 		if self.sel == 0:
 			self.newemu = self.emu_list[self["config"].getCurrent()[1].getText()]
@@ -170,11 +201,18 @@ class nemesisBluePanel(Screen):
 			self.newsrv = self.crd_list[self["config"].getCurrent()[1].getText()]
 			self.ss_srv()
 		elif self.sel == 2:
-			cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + t.readAddonsUrl() + "info.txt -O /tmp/info.txt"
-			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Downloading Nemesis info...'))
+			if not self.container.running():
+				self['conninfo'].text = (_("Connetting to server. Please wait..."))
+				cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + t.readAddonsUrl() + "info.txt -O /tmp/info.txt"
+				self.container.execute(cmd)
 		elif self.sel == 3:
-			self.session.open(ParentalControlSetup)
+			if not self.container.running():
+				self['conninfo'].text = (_("Connetting to server. Please wait..."))
+				cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + t.readAddonsUrl() + "timeline.txt -O /tmp/info.txt"
+				self.container.execute(cmd)
 		elif self.sel == 4:
+			self.session.open(ParentalControlSetup)
+		elif self.sel == 5:
 			self.message = "\nNemesis Version: " +  self.NEWDEVER
 			self.message += "\n\nImage version: " + self.IMAGEVER
 			self.message += "\nBuild by Gianathem"
@@ -184,9 +222,14 @@ class nemesisBluePanel(Screen):
 			self.mbox = self.session.open(MessageBox, self.message, MessageBox.TYPE_INFO)
 			self.mbox.setTitle("About Nemesis " + self.NEWDEVER)
 	
-	def executedScript(self, *answer):
-		self.session.open(nemesisShowPanel, "/tmp/info.txt" ,_('Nemesis Info'))
-		
+	def runFinished(self, retval):
+		if fileExists('/tmp/info.txt') and retval == 0 :
+			self['conninfo'].text = ('')
+			self.session.open(nemesisShowPanel, "/tmp/info.txt" ,{2:_('Nemesis News'),3:_('Nemesis Timeline')}[self.sel])
+			unlink('/tmp/info.txt')
+		else:
+			self['conninfo'].text = (_("Server not found! Please check internet connection."))
+
 	def naddons(self):
 		self.session.openWithCallback(self.loadEmuList, NAddons)
 	
@@ -281,7 +324,7 @@ class nemesisBluePanel(Screen):
 			self.session.nav.playService(self.oldref)
 		self.mbox.close()
 		if self.panelClose:
-			self.close()
+			self.__onClose()
 		else:
 			self.show()
 

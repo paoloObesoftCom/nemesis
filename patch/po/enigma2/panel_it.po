@@ -9,6 +9,9 @@ msgstr ""
 "Connessione al server addons.\n"
 "Attendere prego..."
 
+msgid "Connetting to server. Please wait..."
+msgstr "Connessione al server. Attendere prego..."
+
 msgid "Download Addons"
 msgstr "Scaricare Addons"
 
@@ -25,12 +28,18 @@ msgstr ""
 "Server non trovato!\n"
 "Controlla il collegamento internet."
 
+msgid "Server not found! Please check internet connection."
+msgstr "Server non trovato! Controlla il collegamento internet."
+
 msgid ""
 "Process Killed by user\n"
 "Server Not Connected!"
 msgstr ""
 "Processo interrotto da utente\n"
 "Server non connesso!"
+
+msgid "Process Killed by user, Server Not Connected!"
+msgstr "Processo interrotto da utente, Server non connesso!"
 
 msgid "Manual Package Install"
 msgstr "Installazione Manuale"

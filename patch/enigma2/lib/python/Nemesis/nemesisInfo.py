@@ -10,7 +10,7 @@ from Components.Sources.List import List
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists
 from os import system, remove
-from nemesisTool import ListboxE1, GetSkinPath
+from nemesisTool import GetSkinPath
 from enigma import eConsoleAppContainer
 from Components.PluginComponent import plugins
 from Components.PluginList import *
@@ -235,32 +235,41 @@ class showDevSpaceInfo(Screen):
 						s = getSize(int(x[1]),int(x[2]),int(x[3]))
 						self['f2'].setText('Flash: %s\tUsed: %s\tFree: %s' % (s[0],s[1],s[2]))
 					elif x[len(x)-1] == '/media/cf':
-						cf[0] = int(x[4].replace('%', ''))
-						cf[1] = int(x[1])
-						cf[2] = int(x[2])
-						cf[3] = int(x[3])
-						s = getUnit(int(x[1]))
-						self['c1'].setText('CF: %s  in use: %s' % (s, x[4]))
-						s = getSize(int(x[1]),int(x[2]),int(x[3]))
-						self['c2'].setText('CF: %s\tUsed: %s\tFree: %s' % (s[0],s[1],s[2]))
+						try:
+							cf[0] = int(x[4].replace('%', ''))
+							cf[1] = int(x[1])
+							cf[2] = int(x[2])
+							cf[3] = int(x[3])
+							s = getUnit(int(x[1]))
+							g = getSize(int(x[1]),int(x[2]),int(x[3]))
+							self['c1'].setText('CF: %s  in use: %s' % (s, x[4]))
+							self['c2'].setText('CF: %s\tUsed: %s\tFree: %s' % (g[0],g[1],g[2]))
+						except:
+							cf = [0,0,0,0]
 					elif x[len(x)-1] == '/media/usb':
-						usb[0] = int(x[4].replace('%', ''))
-						usb[1] = int(x[1])
-						usb[2] = int(x[2])
-						usb[3] = int(x[3])
-						s = getUnit(int(x[1]))
-						self['u1'].setText('USB: %s  in use: %s' % (s, x[4]))
-						s = getSize(int(x[1]),int(x[2]),int(x[3]))
-						self['u2'].setText('USB: %s\tUsed: %s\tFree: %s' % (s[0],s[1],s[2]))
+						try:
+							usb[0] = int(x[4].replace('%', ''))
+							usb[1] = int(x[1])
+							usb[2] = int(x[2])
+							usb[3] = int(x[3])
+							s = getUnit(int(x[1]))
+							g = getSize(int(x[1]),int(x[2]),int(x[3]))
+							self['u1'].setText('USB: %s  in use: %s' % (s, x[4]))
+							self['u2'].setText('USB: %s\tUsed: %s\tFree: %s' % (g[0],g[1],g[2]))
+						except:
+							usb = [0,0,0,0]
 					elif x[len(x)-1] == '/media/hdd':
-						hdd[0] = int(x[4].replace('%', ''))
-						hdd[1] = int(x[1])
-						hdd[2] = int(x[2])
-						hdd[3] = int(x[3])
-						s = getUnit(int(x[1]))
-						self['h1'].setText('HDD: %s  in use: %s' % (s, x[4]))
-						s = getSize(int(x[1]),int(x[2]),int(x[3]))
-						self['h2'].setText('HDD: %s\tUsed: %s\tFree: %s' % (s[0],s[1],s[2]))
+						try:
+							hdd[0] = int(x[4].replace('%', ''))
+							hdd[1] = int(x[1])
+							hdd[2] = int(x[2])
+							hdd[3] = int(x[3])
+							s = getUnit(int(x[1]))
+							g = getSize(int(x[1]),int(x[2]),int(x[3]))
+							self['h1'].setText('HDD: %s  in use: %s' % (s, x[4]))
+							self['h2'].setText('HDD: %s\tUsed: %s\tFree: %s' % (g[0],g[1],g[2]))
+						except:
+							hdd = [0,0,0,0]
 				f.close()
 				tot[0] = cf[1] + usb[1] + hdd[1] # Total Memory
 				tot[1] = cf[2] + usb[2] + hdd[2] # Used Memory
