@@ -385,7 +385,7 @@
 		<widget source="session.CurrentService" render="Label" position="422,74" size="335,25" font="Prive2;19" halign="center" foregroundColor="unb2e0b4">
 			<convert type="ServiceName">Provider</convert>
 		</widget>
-		<widget name="ecmtext" position="407,118" size="392,230" font="Prive2;19" zPosition="2" halign="center" foregroundColor="un99bad6" />
+		<widget name="ecmtext" position="407,108" size="392,220" font="Prive2;19" zPosition="2" halign="center" foregroundColor="un99bad6" />
 	</screen>
 	<!-- Show panel	 -->
 	<screen name="nemesisShowPanel" position="center,80" size="900,600">

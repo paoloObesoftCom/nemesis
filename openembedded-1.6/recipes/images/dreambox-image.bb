@@ -33,6 +33,7 @@ DEPENDS = "${OPENDREAMBOX_COMMON} ${NEMESIS_COMMON} ${REQUIRE_COMMON}"
 DEPENDS_append_dm800se = "task-opendreambox-dvdburn"
 DEPENDS_append_dm8000 = "task-opendreambox-dvdburn"
 DEPENDS_append_dm500hd = "task-opendreambox-dvdburn"
+DEPENDS_append_dm7020hd = "task-opendreambox-dvdburn"
 IMAGE_INSTALL = "${OPENDREAMBOX_COMMON} ${NEMESIS_COMMON}"
 
 # we don't want any locales, at least not in the common way.
