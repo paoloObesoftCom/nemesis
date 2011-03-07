@@ -70,6 +70,7 @@ class nemesisEI(Screen):
 
 		self.ecm_timer = eTimer()
 		self.ecm_timer.timeout.get().append(self.__updateEmuInfo)
+		self.ecmTimeStep = 0
 		self.emm_timer = eTimer()
 		self.emm_timer.timeout.get().append(self.__updateEMMInfo)
 		self.__evStart()
@@ -95,6 +96,7 @@ class nemesisEI(Screen):
 		info = service and service.info()
 		if info is not None:
 			if not self.ecm_timer.isActive():
+				self.ecmTimeStep = 0
 				self.ecm_timer.start(config.nemesis.ecminfodelay.value)
 
 	def __evStart(self):
@@ -109,6 +111,7 @@ class nemesisEI(Screen):
 		info = service and service.info()
 		if info is not None:
 			if not self.emm_timer.isActive():
+				self.ecmTimeStep = 0
 				self.emm_timer.start(config.nemesis.emminfodelay.value)
 			if not self.ecm_timer.isActive():
 				self.ecm_timer.start(config.nemesis.ecminfodelay.value)
@@ -127,7 +130,11 @@ class nemesisEI(Screen):
 		if info is not None:
 			if info.getInfo(iServiceInformation.sIsCrypted):
 				self.showEmuName()
-				self.ecm_timer.changeInterval(11000)
+				print "[self.ecmTimeStep]",  self.ecmTimeStep
+				if self.ecmTimeStep >= 5:
+					self.ecm_timer.changeInterval(11000)
+				else:
+					self.ecmTimeStep += 1
 				info = parse_ecm(self.readEcmFile())
 				#print info
 				if info != 0:

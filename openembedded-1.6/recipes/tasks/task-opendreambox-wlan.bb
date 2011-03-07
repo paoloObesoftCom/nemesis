@@ -1,7 +1,8 @@
 DESCRIPTION = "OpenDreambox: W-LAN Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PR = "r4"
+PV = "2.2"
+PR = "r0"
 
 inherit task
 
@@ -42,6 +43,7 @@ WLAN_USB_MODULES = "\
 WLAN_USB_MODULES_LEGACY = "\
   zd1211b \
   wlan-rt73 \
+  r8712u \
   rtl8187l \
 "
 

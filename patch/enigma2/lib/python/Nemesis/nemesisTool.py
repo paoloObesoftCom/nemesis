@@ -337,6 +337,13 @@ class nemesisTool:
 		free = s.f_bfree/1024 * s.f_bsize/1024
 		return s.f_bfree/1024 * (s.f_bsize / 1024)	
 
+	def getVarSpaceKb(self):
+		try:
+			s = statvfs("/")
+		except OSError:
+			return 0,0
+		return float(s.f_bfree * (s.f_bsize / 1024)), float(s.f_blocks * (s.f_bsize / 1024))
+
 	def readEcmInfo(self):	
 		emuActive = self.readEmuActive()
 		info = parse_ecm(self.readEcmInfoFile(emuActive))

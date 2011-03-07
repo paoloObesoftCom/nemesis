@@ -52,7 +52,7 @@ class util:
 	addonsName = ''
 	filename = ''
 	dir = ''
-	size = -1
+	size = 0
 	check = 0
 	
 	def removeSetting(self):
@@ -179,7 +179,9 @@ class NAddons(Screen):
 		self.onShown.append(self.setWindowTitle)
 	
 	def setWindowTitle(self):
-		self.setTitle(_("Addons Manager"))
+		diskSpace = t.getVarSpaceKb()
+		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
+		self.setTitle("%s - Free: %d kB (%d%%)" % ( _("Addons Manager"), int(diskSpace[0]), percFree))
 
 	def KeyOk(self):
 		self['conn'].text = ('')
@@ -364,10 +366,6 @@ class	RAddonsDown(Screen):
 	def KeyOk(self):
 		if not self.container.running():
 			self.sel = self['list'].getIndex() 
-			if (u.size > t.getVarSpace() and u.check == 1):
-				msg = _('Not enough space!\nPlease delete addons before install new.')
-				self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
-				return
 			for tag in loadxml.plugin_list: 
 				if tag [0] == u.pluginIndex:
 					if tag [7] == self.sel:
@@ -386,6 +384,10 @@ class	RAddonsDown(Screen):
 
 	def downloadAddons(self):
 		self.getAddonsPar()
+		if int(u.size) > int(t.getVarSpaceKb()[0]) and int(u.check) != 0:
+			msg = _('Not enough space!\nPlease delete addons before install new.')
+			self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
+			return
 		url = {'E':self.linkExtra,'A':self.linkAddons}[u.typeDownload] + u.dir + "/" + u.filename 
 		if config.proxy.isactive.value:
 			cmd = "/var/etc/proxy.sh && wget %s -O /tmp/%s" % (url ,u.filename)

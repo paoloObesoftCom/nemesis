@@ -924,3 +924,6 @@ msgstr ""
 
 msgid "OPKG Update connection timeout (20-60 sec)"
 msgstr "Timeout di connessione OPKG update (20-60 sec)"
+
+msgid "Image Version"
+msgstr "Versione Immagine"

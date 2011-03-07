@@ -55,10 +55,12 @@ class nemesisBluePanel(Screen):
 		<widget name="ecmtext" position="407,118" size="392,230" font="Prive2;19" zPosition="2" halign="center" foregroundColor="un99bad6" />
 	</screen>"""
 	
-	NEWDEVER = "2.2 (OE 1.6)"
+	NEMESISVER = "2.2"
+	OEVER = "1.6"
 	IMAGEVER = about.getImageVersionString()
 	ENIGMAVER = about.getEnigmaVersionString()
 	KERNELVER = about.getKernelVersionStringL()
+	SVNVERSION = about.getSvnVersionString()
 	
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -89,7 +91,7 @@ class nemesisBluePanel(Screen):
 		self.nemPortNumber = t.readPortNumber()
 		self.checkVersionTimer = eTimer()
 		self.checkVersionTimer.timeout.get().append(self.checkVersion)
-		self.checkVersionTimer.start(2000, True)
+		self.checkVersionTimer.start(1000, True)
 		self.ecmTimer = eTimer()
 		self.ecmTimer.timeout.get().append(self.readEcmInfo)
 		self.ecmTimer.start(10000, False)
@@ -110,8 +112,7 @@ class nemesisBluePanel(Screen):
 	def fetchFinished(self, retval):
 		if fileExists('/tmp/ver.txt') and retval == 0 :
 			hwVersion = HardwareInfo().get_device_name()
-			version = about.getSvnVersionString()
-			newVer = version
+			newVer = self.SVNVERSION
 			try:
 				f = open('/tmp/ver.txt','r')
 				for line in f.readlines():
@@ -120,16 +121,15 @@ class nemesisBluePanel(Screen):
 						newVer = line[1][:-1]
 				f.close()
 				unlink('/tmp/ver.txt')
-				print version, newVer
-				if int(version) < int(newVer):
+				if int(self.SVNVERSION) < int(newVer):
 					self['conn'].show()
-					self['conn'].setText(_('Update is available!\nCurrent version: %s\nNew Version: %s\nPlease upgrade Nemesis firmware!') % (version, newVer))
+					self['conn'].setText(_('Update is available!\nCurrent version: %s\nNew Version: %s\nPlease upgrade Nemesis firmware!') % (self.SVNVERSION, newVer))
 			except:
 				pass
 
 	def setWindowTitle(self):
-		self.setTitle(_("Nemesis Blue Panel"))
-	
+		self.setTitle("%s - %s: %s SVN(%s)" % (_("Nemesis Blue Panel"), _("Image Version"), self.NEMESISVER, self.SVNVERSION))
+	 
 	def __onClose(self):
 		if self.container.running():
 			self.container.kill()
@@ -213,14 +213,14 @@ class nemesisBluePanel(Screen):
 		elif self.sel == 4:
 			self.session.open(ParentalControlSetup)
 		elif self.sel == 5:
-			self.message = "\nNemesis Version: " +  self.NEWDEVER
+			self.message = "\nNemesis Version: %s OE(%s)" % (self.NEMESISVER, self.OEVER)
 			self.message += "\n\nImage version: " + self.IMAGEVER
 			self.message += "\nBuild by Gianathem"
 			self.message += "\nBased on Enigma Version: " +  self.ENIGMAVER
 			self.message += "\nKernel version: " + self.KERNELVER
 			self.message += "\n\nFor support visit: http://www.genesi-project.it/"
 			self.mbox = self.session.open(MessageBox, self.message, MessageBox.TYPE_INFO)
-			self.mbox.setTitle("About Nemesis " + self.NEWDEVER)
+			self.mbox.setTitle("About Nemesis " + self.NEMESISVER)
 	
 	def runFinished(self, retval):
 		if fileExists('/tmp/info.txt') and retval == 0 :

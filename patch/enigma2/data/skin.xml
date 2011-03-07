@@ -366,8 +366,8 @@
 	<!-- Blue panels	 -->
 	<screen name="nemesisBluePanel" position="center,130" size="800,500">
 		<widget name="info_use" position="30,10" zPosition="2" size="360,30" halign="center" font="Prive2;20" foregroundColor="unb2e0b4" />
-		<widget name="config" position="30,50" size="360,150" zPosition="2" transparent="1" foregroundColor="unb2e0b4" />
-		<widget name="conn" position="30,200" size="360,140" font="Prive2;20" halign="center" valign="center" zPosition="2" foregroundColor="red" />
+		<widget name="config" position="30,50" size="360,150" zPosition="2" transparent="1" foregroundColor="white" />
+		<widget name="conn" position="30,200" size="360,170" font="Prive2;20" halign="center" valign="center" zPosition="2" foregroundColor="red" />
 		<widget source="conninfo" render="Label" position="30,340" size="740,30" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/select_p.png" position="43,380" size="335,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_p.png" position="422,380" size="335,44" zPosition="1" alphatest="on" />

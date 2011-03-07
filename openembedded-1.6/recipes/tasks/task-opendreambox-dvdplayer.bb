@@ -1,7 +1,8 @@
 DESCRIPTION = "OpenDreambox: DVD-Player Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PR = "r1"
+PV = "2.2"
+PR = "r0"
 
 inherit task
 

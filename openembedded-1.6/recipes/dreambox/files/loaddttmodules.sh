@@ -56,29 +56,30 @@ dvb-usb-af9015)
 	insmod $DRVDIR/mc44s803.ko
 	insmod $DRVDIR/mt2060.ko
 	insmod $DRVDIR/qt1010.ko
+	insmod $DRVDIR/af9013.ko
+	insmod $DRVDIR/dvb-pll.ko
 	insmod $DRVDIR/tda18271.ko
 	insmod $DRVDIR/tda18218.ko
-	insmod $DRVDIR/af9013.ko
 	insmod $DRVDIR/dvb-usb.ko
-	insmod $DRVDIR/dvb-pll.ko
-	sleep 1
+	sleep 2
 	insmod $DRVDIR/dvb-usb-af9015.ko
 	;;
 dvb-usb-af9035)
 	insmod $DRVDIR/mxl5007t.ko
+	insmod $DRVDIR/af9033.ko
+	insmod $DRVDIR/dvb-pll.ko
 	insmod $DRVDIR/tua9001.ko
 	insmod $DRVDIR/tda18218.ko
-	insmod $DRVDIR/af9033.ko
 	insmod $DRVDIR/dvb-usb.ko
-	sleep 1
+	sleep 2
 	insmod $DRVDIR/dvb-usb-af9035.ko
 	;;
 dvb-usb-anysee)
 	insmod $DRVDIR/mt352.ko
+	insmod $DRVDIR/dvb-pll.ko
 	insmod $DRVDIR/tda10023.ko
 	insmod $DRVDIR/zl10353.ko
 	insmod $DRVDIR/dvb-usb.ko
-	insmod $DRVDIR/dvb-pll.ko
 	sleep 2
 	insmod $DRVDIR/dvb-usb-anysee.ko
 	;;
@@ -112,6 +113,7 @@ dvb-usb-cxusb)
 	insmod $DRVDIR/atbm8830.ko
 	insmod $DRVDIR/lgs8gxx.ko
 	insmod $DRVDIR/mt352.ko
+	insmod $DRVDIR/dvb-pll.ko
 	insmod $DRVDIR/tuner-xc2028.ko
 	insmod $DRVDIR/max2165.ko
 	insmod $DRVDIR/mxl5005s.ko
@@ -123,7 +125,6 @@ dvb-usb-cxusb)
 	insmod $DRVDIR/dibx000-common.ko
 	insmod $DRVDIR/dib0070.ko
 	insmod $DRVDIR/dib7000p.ko
-	insmod $DRVDIR/dvb-pll.ko
 	insmod $DRVDIR/dvb-usb.ko
 	sleep 2
 	insmod $DRVDIR/dvb-usb-cxusb.ko
@@ -144,7 +145,7 @@ dvb-usb-dib0700)
 	insmod $DRVDIR/dib8000.ko
 	insmod $DRVDIR/dib3000mc.ko
 	insmod $DRVDIR/dvb-usb.ko
-	sleep 1
+	sleep 2
 	insmod $DRVDIR/dvb-usb-dib0700.ko
 	;;
 dvb-usb-dibusb-mb)
@@ -290,7 +291,7 @@ dvb-usb-vp7045)
 	;;
 smsusb)
 	insmod $DRVDIR/smsmdtv.ko
-	sleep 1
+	sleep 2
 	insmod $DRVDIR/smsdvb.ko
 	insmod $DRVDIR/smsusb.ko
 	;;

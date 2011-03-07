@@ -1,7 +1,9 @@
 DESCRIPTION = "OpenDreambox: Enigma2 Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PR = "r20"
+
+PV = "2.2"
+PR = "r0"
 
 inherit task
 
@@ -61,37 +63,31 @@ RRECOMMENDS_task-opendreambox-enigma2 = "\
   enigma2-plugin-extensions-epgsearch \
   enigma2-plugin-extensions-easymedia \
   enigma2-plugin-extensions-socketmmi \
-  ${@base_contains("MACHINE_FEATURES", "wifi", "task-opendreambox-wlan", "", d)} \
-  ${@base_contains("MACHINE_FEATURES", "modem", "task-opendreambox-modem", "", d)} \
+  enigma2-plugin-extensions-genuinedreambox \
   ${@base_contains("MACHINE_FEATURES", "dreambox-libpassthrough", "libpassthrough", "", d)} \
 "
 
 RDEPENDS_task-opendreambox-enigma2_append_dm500hd = "\
-  enigma2-plugin-extensions-genuinedreambox \
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-tempfancontrol \
 "
 
 RDEPENDS_task-opendreambox-enigma2_append_dm800 = "\
-  enigma2-plugin-extensions-genuinedreambox \
   enigma2-plugin-systemplugins-videomode \
 "
 
 RDEPENDS_task-opendreambox-enigma2_append_dm800se = "\
-  enigma2-plugin-extensions-genuinedreambox \
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-tempfancontrol \
 "
 
 RDEPENDS_task-opendreambox-enigma2_append_dm8000 = "\
-  enigma2-plugin-extensions-genuinedreambox \
   enigma2-plugin-systemplugins-commoninterfaceassignment \
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-nfiflash \
 "
 
 RDEPENDS_task-opendreambox-enigma2_append_dm7020hd = "\
-  enigma2-plugin-extensions-genuinedreambox \
   enigma2-plugin-systemplugins-commoninterfaceassignment \
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-nfiflash \
