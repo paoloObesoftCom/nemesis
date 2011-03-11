@@ -137,12 +137,11 @@ msgstr ""
 msgid "Addon installed succesfully!"
 msgstr "Addon installato correttamente!"
 
-msgid ""
-"Enigma2 will be now hard restarted to complete package installation.\n"
-"Do You want restart enigma2 now?"
-msgstr ""
-"Enigma2 deve essre riavviato per completare l'installazione.\n"
-"Vuoi riavvaire Enigma2 adesso?"
+msgid "Enigma2 will be now hard restarted to complete package installation."
+msgstr "Enigma2 deve essre riavviato per completare l'installazione."
+
+msgid "Do You want restart enigma2 now?"
+msgstr "Vuoi riavviare Enigma2 adesso?"
 
 msgid "Restart Enigma2"
 msgstr "Riavvio Enigma2"
@@ -927,3 +926,14 @@ msgstr "Timeout di connessione OPKG update (20-60 sec)"
 
 msgid "Image Version"
 msgstr "Versione Immagine"
+
+msgid ""
+"Not enough free space on flash to perform Upgrade!"
+"\nUpgrade require at least %d kB free on Flash."
+"\nPlease remove some addons or skins before upgrade."
+msgstr ""
+"Non c'é abbastanza spazio per eseguire l'aggiornamento!"
+"\nL'aggiornamento richiede almeno %d kB liberi in Flash."
+"\nRimuovere qualche addon o skin prima di aggiornare."
+
+

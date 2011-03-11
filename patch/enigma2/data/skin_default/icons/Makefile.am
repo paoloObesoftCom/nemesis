@@ -128,6 +128,8 @@ dist_install_DATA = \
 	unlockBouquet.png \
 	bar.png \
 	bar_back.png \
+	bar_1.png \
+	bar_back_1.png \
 	betecm-fs8.png \
 	betemm-fs8.png \
 	bisecm-fs8.png \

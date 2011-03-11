@@ -925,7 +925,7 @@ class PluginManager(Screen, DreamInfoHandler):
 		self.reloadPluginlist()
 		restartRequired = plugins.restartRequired
 		if restartRequired:
-			self.session.openWithCallback(self.ExecuteReboot, MessageBox, _("Install or remove finished.") +" "+_("Do you want to reboot your Dreambox?"), MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.ExecuteReboot, MessageBox, _("Install or remove finished.") +" "+_("Do You want restart enigma2 now?"), MessageBox.TYPE_YESNO)
 		else:
 			self.selectedFiles = []
 			self.detailsClosed(True)
@@ -1297,7 +1297,7 @@ class PluginDetails(Screen, DreamInfoHandler):
 		self.reloadPluginlist()
 		restartRequired = plugins.restartRequired
 		if restartRequired:
-			self.session.openWithCallback(self.UpgradeReboot, MessageBox, _("Installation finished.") +" "+_("Do you want to reboot your Dreambox?"), MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.UpgradeReboot, MessageBox, _("Installation finished.") +" "+_("Do You want restart enigma2 now?"), MessageBox.TYPE_YESNO)
 		else:
 			self.close(True)
 	def UpgradeReboot(self, result):
@@ -1824,7 +1824,7 @@ class PacketManager(Screen, NumericalTextInput):
 			self.session.openWithCallback(self.runRemoveFinished, Ipkg, cmdList = self.cmdList)
 
 	def runRemoveFinished(self):
-		self.session.openWithCallback(self.RemoveReboot, MessageBox, _("Remove finished.") +" "+_("Do you want to reboot your Dreambox?"), MessageBox.TYPE_YESNO)
+		self.session.openWithCallback(self.RemoveReboot, MessageBox, _("Remove finished.") +" "+_("Do You want restart enigma2 now?"), MessageBox.TYPE_YESNO)
 
 	def RemoveReboot(self, result):
 		if result is None:
@@ -1846,7 +1846,7 @@ class PacketManager(Screen, NumericalTextInput):
 			self.session.openWithCallback(self.runUpgradeFinished, Ipkg, cmdList = self.cmdList)
 
 	def runUpgradeFinished(self):
-		self.session.openWithCallback(self.UpgradeReboot, MessageBox, _("Upgrade finished.") +" "+_("Do you want to reboot your Dreambox?"), MessageBox.TYPE_YESNO)
+		self.session.openWithCallback(self.UpgradeReboot, MessageBox, _("Upgrade finished.") +" "+_("Do You want restart enigma2 now?"), MessageBox.TYPE_YESNO)
 		
 	def UpgradeReboot(self, result):
 		if result is None:

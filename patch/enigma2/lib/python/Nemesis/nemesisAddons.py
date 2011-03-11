@@ -142,12 +142,15 @@ class NAddons(Screen):
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
+	FREESPACENEEDUPGRADE = 4000
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
 		self["title"] = Label(_("Addons Manager"))
 		self['list'] = List(self.list)
 		self['conn'] = StaticText("")
+		self['spaceused'] = ProgressBar()
 		self["key_red"] = Label(_("Cancel"))
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
@@ -181,7 +184,9 @@ class NAddons(Screen):
 	def setWindowTitle(self):
 		diskSpace = t.getVarSpaceKb()
 		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
+		percUsed = int(((diskSpace[1] - diskSpace[0]) / diskSpace[1]) * 100)
 		self.setTitle("%s - Free: %d kB (%d%%)" % ( _("Addons Manager"), int(diskSpace[0]), percFree))
+		self["spaceused"].setValue(percUsed)
 
 	def KeyOk(self):
 		self['conn'].text = ('')
@@ -207,6 +212,10 @@ class NAddons(Screen):
 			elif (sel == "NPacket"):
 				self.session.open(PacketManager, GetSkinPath())
 			elif (sel == "NUpdate"):
+				if int(t.getVarSpaceKb()[0]) < self.FREESPACENEEDUPGRADE:
+					msg = _('Not enough free space on flash to perform Upgrade!\nUpgrade require at least %d kB free on Flash.\nPlease remove some addons or skins before upgrade.') % self.FREESPACENEEDUPGRADE
+					self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
+					return
 				self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want to update your Dreambox?")+"\n"+_("\nAfter pressing OK, please wait!"))
 			elif (sel == "NReload"):
 				self['conn'].text = _("Reload settings, please wait...")
@@ -431,13 +440,13 @@ class	RAddonsDown(Screen):
 		if (u.pluginType == 'Settings') or (u.pluginType == 'e2Settings'):
 			self['conn'].text = _("Reload new Settings\nPlease wait...")
 			u.reloadSetting()
-		elif (u.pluginType == 'Plugins') or (u.pluginType == 'e2Plugins'):
+		if (u.pluginType == 'Plugins') or (u.pluginType == 'e2Plugins'):
 			self['conn'].text = _("Reload Plugins list\nPlease Wait...")
 			plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self['conn'].text = _("Addon installed succesfully!")
 		if fileExists('/tmp/.restartE2'):
 			remove("/tmp/.restartE2")
-			msg = _('Enigma2 will be now hard restarted to complete package installation.\nDo You want restart enigma2 now?')
+			msg = _("Enigma2 will be now hard restarted to complete package installation.") + "\n" + _("Do You want restart enigma2 now?")
 			box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg , MessageBox.TYPE_YESNO)
 			box.setTitle(_('Restart Enigma2'))
 	

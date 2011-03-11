@@ -22,6 +22,9 @@ from nemesisDeviceManager import manageDevice
 from nemesisDttManager import manageDttDevice
 from enigma import eTimer
 from Tools.HardwareInfo import HardwareInfo
+from Components.About import about
+
+KERNELVER = about.getKernelVersionStringL()
 
 isNetworkPlugin = True
 if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/plugin.py")):
@@ -246,7 +249,7 @@ class NUserScript(Screen):
 		self.onShown.append(self.setWindowTitle)
 	
 	def setWindowTitle(self):
-		self.setTitle("Execute Users Scripts")
+		self.setTitle(_("Execute Users Scripts"))
 	
 	def KeyOk(self):
 		cmd = self["list"].getCurrent()[0]
@@ -376,18 +379,19 @@ class NModule(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.modules = [
-			('usbhid','USB Human Int. Device'),
-			('ftdi_sio','USB Serial (FTDI Smargo)'),
-			('pl2303','USB Serial (PL2303)'),
-			('tun','TUN (OpenVPN)'),
-			('rt73','WLAN Usb Adapter RT73'),
-			('rtl8187','WLAN Usb Adapter RTL8187L'),
-			('zd1211b','WLAN Usb Adapter ZD1211B'),
-			('isofs','ISOFS (CD/DVD)'),
-			('cdfs','CDFS (Audio-CD)'),
-			('udf','UDF (CD/DVD)'),
-			('ntfs','NTFS (Windows)'),
-			('smbfs','SMBFS (Windows)')
+			('usbhid','USB Human Int. Device',True),
+			('ftdi_sio','USB Serial (FTDI Smargo)',True),
+			('pl2303','USB Serial (PL2303)',True),
+			('tun','TUN (OpenVPN)',True),
+			('rt73','WLAN Usb Adapter RT73',fileExists('/lib/modules/%s/kernel/drivers/net/rt73.ko' % KERNELVER)),
+			('zd1211b','WLAN Usb Adapter ZD1211B',fileExists('/lib/modules/%s/kernel/drivers/net/zd1211b.ko' % KERNELVER)),
+			('rtl8187','WLAN Usb Adapter RTL8187L',fileExists('/lib/modules/%s/kernel/drivers/net/rtl8187.ko' % KERNELVER)),
+			('8712u','WLAN Usb Adapter R8712U',fileExists('/lib/modules/%s/extra/8712u.ko' % KERNELVER)),
+			('isofs','ISOFS (CD/DVD)',fileExists('/lib/modules/%s/kernel/fs/isofs/isofs.ko' % KERNELVER)),
+			('udf','UDF (CD/DVD)',fileExists('/lib/modules/%s/kernel/fs/udf/udf.ko' % KERNELVER)),
+			('cdfs','CDFS (Audio-CD)',fileExists('/lib/modules/%s/extra/cdfs.ko' % KERNELVER)),
+			('ntfs','NTFS (Windows)',True),
+			('smbfs','SMBFS (Windows)',True)
 			]
 		self.modstatus = {}
 		self.list = []
@@ -440,8 +444,9 @@ class NModule(Screen):
 		del self.list[:]
 		skin_path = GetSkinPath()
 		for mod in self.modules:
-			png = LoadPixmap({ True:skin_path + 'menu/menu_on.png',False:skin_path + 'menu/menu_off.png' }[self.modstatus.get(mod[0])])
-			self.list.append((mod[0], mod[1], png))
+			if mod[2]:
+				png = LoadPixmap({ True:skin_path + 'menu/menu_on.png',False:skin_path + 'menu/menu_off.png' }[self.modstatus.get(mod[0])])
+				self.list.append((mod[0], mod[1], png))
 		self['list'].setList(self.list)
 
 class NServicesSetup(Screen, ConfigListScreen):

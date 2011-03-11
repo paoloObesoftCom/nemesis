@@ -91,7 +91,7 @@ class nemesisBluePanel(Screen):
 		self.nemPortNumber = t.readPortNumber()
 		self.checkVersionTimer = eTimer()
 		self.checkVersionTimer.timeout.get().append(self.checkVersion)
-		self.checkVersionTimer.start(1000, True)
+		self.checkVersionTimer.start(100, True)
 		self.ecmTimer = eTimer()
 		self.ecmTimer.timeout.get().append(self.readEcmInfo)
 		self.ecmTimer.start(10000, False)
@@ -117,6 +117,8 @@ class nemesisBluePanel(Screen):
 				f = open('/tmp/ver.txt','r')
 				for line in f.readlines():
 					line = line.split('=')
+					if line[0] == "FreeSpaceNeed":
+						NAddons.FREESPACENEEDUPGRADE = int(line[1][:-1])
 					if line[0] == hwVersion:
 						newVer = line[1][:-1]
 				f.close()

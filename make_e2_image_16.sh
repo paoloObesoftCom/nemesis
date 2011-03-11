@@ -34,6 +34,7 @@ rebuild_image()
 	. ./env.source
 	rm -f tmp/deploy/images/*
 	bitbake dreambox-image
+	exit $?
 }
 
 move_image()
@@ -127,6 +128,7 @@ case "$1" in
 		;;
 	*)
 		echo $"Usage for $dmver: $0 {patch|enigma2|plugins|feed|all|logo|move|kernel|nemesis|tuner|clean}"
+		exit 1
 		;;
 esac
 

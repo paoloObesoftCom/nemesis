@@ -3,7 +3,7 @@ SECTION = "opendreambox/base"
 LICENSE = "MIT"
 
 PV = "2.2"
-PR = "r0"
+PR = "r1"
 
 inherit task
 
@@ -91,6 +91,10 @@ RDEPENDS_task-opendreambox-enigma2_append_dm7020hd = "\
   enigma2-plugin-systemplugins-commoninterfaceassignment \
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-nfiflash \
+"
+
+RRECOMMENDS_task-opendreambox-enigma2_append_dm8000 = "\
+  ${@base_contains("MACHINE_FEATURES", "wifi", "task-opendreambox-wlan", "", d)} \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

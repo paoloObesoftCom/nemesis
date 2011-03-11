@@ -8,7 +8,6 @@ OPENDREAMBOX_COMMON = "\
 "
 
 NEMESIS_COMMON = "\
-	dvdbackup \
 	ccid \
 	nfs-utils \
 	usbutils \
