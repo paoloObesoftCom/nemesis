@@ -59,9 +59,9 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r1"
+PR = "r0"
 
-SRCDATE = "20110311"
+SRCDATE = "20110318"
 SRCREV = "5e19a3f8a5e8ce8a4e2cb2b601a1b8ef3554e4be"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
@@ -112,8 +112,9 @@ do_install_append() {
 
 python populate_packages_prepend () {
 	enigma2_plugindir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)
-
 	do_split_packages(d, enigma2_plugindir, '(.*?/.*?)/.*', 'enigma2-plugin-%s', '%s ', recursive=True, match_path=True, prepend=True)
+	enigma2_podir = bb.data.expand('${datadir}/enigma2/po', d)
+	do_split_packages(d, enigma2_podir, '(.*?)/.*', 'enigma2-locale-%s', ' Enigma2 Language Pack %s', recursive=True, match_path=True, prepend=True, extra_depends='enigma2')
 }
 
 RCONFLICTS_${PN} = "dreambox-keymaps"

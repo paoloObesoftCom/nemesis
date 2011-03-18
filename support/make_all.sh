@@ -7,7 +7,7 @@ if [ $# -ne 0 ]; then
 	for arg in $@
 	do
 		if [ $arg = "patch" ]; then
-			echo "Patching enigma for dm'$distro' distro..."
+			echo "Patching enigma for all distro..."
 			cd $patchdir
 			./src_patch.sh oe_pack_16
 			./src_patch.sh enigma2

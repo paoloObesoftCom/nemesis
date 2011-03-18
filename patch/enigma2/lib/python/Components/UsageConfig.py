@@ -13,6 +13,8 @@ def InitUsageConfig():
 	config.usage = ConfigSubsection();
 	config.usage.showdish = ConfigYesNo(default = True)
 	config.usage.multibouquet = ConfigYesNo(default = True)
+	config.usage.multiepg_ask_bouquet = ConfigYesNo(default = False)
+
 	config.usage.quickzap_bouquet_change = ConfigYesNo(default = False)
 	config.usage.e1like_radio_mode = ConfigYesNo(default = False)
 	config.usage.infobar_timeout = ConfigSelection(default = "5", choices = [
@@ -127,6 +129,8 @@ def InitUsageConfig():
 		("play", _("Play")),
 		("step", _("Singlestep (GOP)")),
 		("last", _("Last speed")) ])
+
+	config.usage.timerlist_finished_timer_position = ConfigSelection(default = "beginning", choices = [("beginning", _("at beginning")), ("end", _("at end"))])
 
 	def updateEnterForward(configElement):
 		if not configElement.value:

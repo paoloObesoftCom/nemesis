@@ -20,29 +20,7 @@ from nemesisDownloader import nemesisDownloader
 from Tools import Notifications
 import xml.etree.cElementTree as x
 
-isPluginManager = True
-isPacketManager = True
-isUpdatePLugin = True
-
 t = nemesisTool()
-
-if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
-	try:
-		from Plugins.SystemPlugins.SoftwareManager.plugin import PluginManager
-	except:
-		isPluginManager = False
-	try:
-		from Plugins.SystemPlugins.SoftwareManager.plugin import PacketManager
-	except:
-		isPacketManager = False
-	try:
-		from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePlugin
-	except:
-		isUpdatePLugin = False
-else:
-	isPluginManager = False
-	isPacketManager = False
-	isUpdatePLugin = False
 
 class util:
 	
@@ -162,6 +140,10 @@ class NAddons(Screen):
 		self.linkAddons = t.readAddonsUrl()
 		self.linkExtra = t.readExtraUrl()
 
+		isPluginManager = False
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
+			isPluginManager = True
+
 		self.MenuList = [
 			('NAddons',_('Download Addons'),'icons/network.png',True),
 			('NExtra',_('Download Extra'),'icons/network.png',fileExists('/etc/extra.url')),
@@ -169,8 +151,8 @@ class NAddons(Screen):
 			('NRemove',_('Remove Addons'),'icons/remove.png',True),
 			('NReload',_('Reload Settings'),'icons/enigma.png',True),
 			('NExtension',_('Manage extensions'),'icons/extensions.png',isPluginManager),
-			('NPacket',_('Packet management'),'icons/package.png',isPacketManager),
-			('NUpdate',_('Software update'),'icons/update.png',isUpdatePLugin)
+			('NPacket',_('Packet management'),'icons/package.png',isPluginManager),
+			('NUpdate',_('Software update'),'icons/update.png',isPluginManager)
 			]
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
@@ -208,9 +190,19 @@ class NAddons(Screen):
 			elif (sel == "NRemove"):
 				self.session.open(RRemove)
 			elif (sel == "NExtension"):
-				self.session.open(PluginManager, GetSkinPath())
+				try:
+					from Plugins.SystemPlugins.SoftwareManager.plugin import PluginManager
+				except ImportError:
+					self.session.open(MessageBox, _("The Softwaremanagement extension is not installed!\nPlease install it."), type = MessageBox.TYPE_INFO,timeout = 10 )
+				else:
+					self.session.open(PluginManager, GetSkinPath())
 			elif (sel == "NPacket"):
-				self.session.open(PacketManager, GetSkinPath())
+				try:
+					from Plugins.SystemPlugins.SoftwareManager.plugin import PacketManager
+				except ImportError:
+					self.session.open(MessageBox, _("The Softwaremanagement extension is not installed!\nPlease install it."), type = MessageBox.TYPE_INFO,timeout = 10 )
+				else:
+					self.session.open(PacketManager, GetSkinPath())
 			elif (sel == "NUpdate"):
 				if int(t.getVarSpaceKb()[0]) < self.FREESPACENEEDUPGRADE:
 					msg = _('Not enough free space on flash to perform Upgrade!\nUpgrade require at least %d kB free on Flash.\nPlease remove some addons or skins before upgrade.') % self.FREESPACENEEDUPGRADE
@@ -227,7 +219,12 @@ class NAddons(Screen):
 
 	def runUpgrade(self, result):
 		if result:
-			self.session.open(UpdatePlugin, GetSkinPath())
+			try:
+				from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePlugin
+			except ImportError:
+				self.session.open(MessageBox, _("The Softwaremanagement extension is not installed!\nPlease install it."), type = MessageBox.TYPE_INFO,timeout = 10 )
+			else:
+				self.session.open(UpdatePlugin, GetSkinPath())
 
 	def runFinishedExtra(self, retval):
 		if fileExists('/tmp/tmp.tmp'):

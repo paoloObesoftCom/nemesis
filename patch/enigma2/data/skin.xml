@@ -255,6 +255,7 @@
 			<convert type="FrontendInfo">AGC</convert>
 		</widget>
 		<ePixmap pixmap="skin_default/icons/bar_back.png" position="879,599" size="5,75" zPosition="1" backgroundColor="background" alphatest="on" />
+
 		<eLabel text="Snr:" font="Prive2; 14" position="775,597" zPosition="2" size="40,20" halign="left" foregroundColor="un99bad6" />
 		<widget source="session.FrontendStatus" render="Label" font="Prive2; 14" position="817,597" zPosition="5" size="50,20" halign="left" foregroundColor="unb2e0b4">
 			<convert type="NemesisExtraSource">SnrdB</convert>

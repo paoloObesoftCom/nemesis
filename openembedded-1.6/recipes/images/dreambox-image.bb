@@ -25,8 +25,7 @@ REQUIRE_COMMON = "\
 	task-opendreambox-dvdplayer \
 	dreamdts \
 	dreambox-tuner-usb \
-  ${@base_contains("MACHINE_FEATURES", "wifi", "task-opendreambox-wlan", "", d)} \
-  ${@base_contains("MACHINE_FEATURES", "modem", "task-opendreambox-modem", "", d)} \
+	${@base_contains("MACHINE_FEATURES", "modem", "task-opendreambox-modem", "", d)} \
 "
 
 # add bootstrap stuff

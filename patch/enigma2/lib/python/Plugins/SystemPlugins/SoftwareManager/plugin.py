@@ -34,6 +34,8 @@ from os import path as os_path, system as os_system, unlink, stat, mkdir, popen,
 from time import time, gmtime, strftime, localtime
 from stat import ST_MTIME
 from datetime import date
+from twisted.web import client
+from twisted.internet import reactor
 
 from ImageWizard import ImageWizard
 from BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
@@ -1238,8 +1240,6 @@ class PluginDetails(Screen, DreamInfoHandler):
 			self.thumbnail = "/tmp/" + thumbnailUrl.split('/')[-1]
 			print "[PluginDetails] downloading screenshot " + thumbnailUrl + " to " + self.thumbnail
 			if iSoftwareTools.NetworkConnectionAvailable:
-				from twisted.web import client
-				from twisted.internet import reactor
 				client.downloadPage(thumbnailUrl,self.thumbnail).addCallback(self.setThumbnail).addErrback(self.fetchFailed)
 			else:
 				self.setThumbnail(noScreenshot = True)
