@@ -1,0 +1,22 @@
+VERSIONE = 1.0
+
+CDKBIN=/e2/cvs/dm7000/root/cdk/bin
+GCC=${CDKBIN}/powerpc-tuxbox-linux-gnu-gcc
+STRIP=${CDKBIN}/powerpc-tuxbox-linux-gnu-strip
+
+CFLAGS = -fno-rtti -fno-exceptions -Wall -O2 -mcpu=405 -msoft-float -mmultiple -mstring -meabi -g3 -gdwarf-2 -pipe
+
+all: nemesisd nemesisc
+
+nemesisd: nemesisd.c 
+	$(GCC) $(CFLAGS) -o nemesisd.ppc nemesisd.c
+	$(STRIP) -s nemesisd.ppc
+
+nemesisc: nemesisc.c 
+	$(GCC) $(CFLAGS) -o nemesisc.ppc nemesisc.c
+	$(STRIP) -s nemesisc.ppc
+
+clean:
+	-rm -rf nemesisc.ppc
+	-rm -rf nemesisd.ppc
+

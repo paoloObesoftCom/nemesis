@@ -7,13 +7,15 @@ dmdir=`grep "OE_BASE=" env.source | cut -d "=" -f 2`/
 git_dir=`grep "OE_ROOT=" env.source | cut -d "=" -f 2`/1.6/openembedded/conf
 patchdir=$envpath/nemesis
 
-[ -e $git_dir/checksums.ini ] && rm -f $git_dir/checksums.ini
+svn_ver=`grep -m 1 "SVN" ${envpath}/git/recipes/nemesis/nemesis-version.bb | cut -d "=" -f 2  | sed -e 's/[a-zA-Z" =]//g'`
 ver='2.2'
 enigmaver='2'
 oever='1.6'
 subver=''
 data=`date +'%d-%m-%Y-%H-%M'`
-imagename="Nemesis${ver}${subver}-${dmver}-e${enigmaver}-OE(${oever})_${data}"
+imagename="Nemesis${ver}${subver}-${dmver}-e${enigmaver}-OE(${oever})-SVN(${svn_ver})"
+
+[ -e $git_dir/checksums.ini ] && rm -f $git_dir/checksums.ini
 
 rebuild_enigma()
 {

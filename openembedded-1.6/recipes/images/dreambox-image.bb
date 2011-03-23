@@ -6,20 +6,6 @@ OPENDREAMBOX_COMMON = "\
 	task-opendreambox-dvbapi \
 	task-opendreambox-ui \
 "
-
-NEMESIS_COMMON = "\
-	ccid \
-	nfs-utils \
-	usbutils \
-	openvpn \
-	ez-ipupdate \
-	bzip2 \
-	libcap \
-	python-gdata \
-	dreambox-nemesis \
-	nemesis-version \
-"
- 
 REQUIRE_COMMON = "\
 	task-opendreambox-cdplayer \
 	task-opendreambox-dvdplayer \
@@ -29,12 +15,12 @@ REQUIRE_COMMON = "\
 "
 
 # add bootstrap stuff
-DEPENDS = "${OPENDREAMBOX_COMMON} ${NEMESIS_COMMON} ${REQUIRE_COMMON}"
+DEPENDS = "${OPENDREAMBOX_COMMON} ${REQUIRE_COMMON}"
 DEPENDS_append_dm800se = "task-opendreambox-dvdburn"
 DEPENDS_append_dm8000 = "task-opendreambox-dvdburn"
 DEPENDS_append_dm500hd = "task-opendreambox-dvdburn"
 DEPENDS_append_dm7020hd = "task-opendreambox-dvdburn"
-IMAGE_INSTALL = "${OPENDREAMBOX_COMMON} ${NEMESIS_COMMON}"
+IMAGE_INSTALL = "${OPENDREAMBOX_COMMON}"
 
 # we don't want any locales, at least not in the common way.
 IMAGE_LINGUAS = " "

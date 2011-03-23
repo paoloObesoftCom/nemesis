@@ -1,0 +1,23 @@
+VERSIONE = 1.0
+
+CDK_ROOT=/e2/800/build/tmp
+CDKBIN=${CDK_ROOT}/cross/mipsel/bin
+GCC=${CDKBIN}/mipsel-oe-linux-gcc
+STRIP=${CDKBIN}/mipsel-oe-linux-strip
+
+CFLAGS = -I${CDK_ROOT}/staging/mipsel-oe-linux/usr/include
+
+all: nemesisd nemesisc
+
+nemesisd: nemesisd.c 
+	$(GCC) $(CFLAGS) -o nemesisd.mipsel nemesisd.c
+	$(STRIP) -s nemesisd.mipsel
+
+nemesisc: nemesisc.c 
+	$(GCC) $(CFLAGS) -o nemesisc.mipsel nemesisc.c
+	$(STRIP) -s nemesisc.mipsel
+
+clean:
+	-rm -rf nemesisc.mipsel
+	-rm -rf nemesisd.mipsel
+

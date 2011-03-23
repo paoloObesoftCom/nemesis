@@ -88,7 +88,6 @@ check_enigma2()
 	kompare $e2_cvssrc/lib/python/Screens/InfoBar.py patch/enigma2/lib/python/Screens/InfoBar.py
 	kompare $e2_cvssrc/lib/python/Screens/InfoBarGenerics.py patch/enigma2/lib/python/Screens/InfoBarGenerics.py
 	kompare $e2_cvssrc/lib/python/Screens/TimerEntry.py patch/enigma2/lib/python/Screens/TimerEntry.py
-	kompare $e2_cvssrc/lib/python/Screens/TimerEdit.py patch/enigma2/lib/python/Screens/TimerEdit.py
 	
 	kompare $e2_cvssrc/lib/python/Components/Ipkg.py patch/enigma2/lib/python/Components/Ipkg.py
 	kompare $e2_cvssrc/lib/python/Components/About.py patch/enigma2/lib/python/Components/About.py
@@ -138,6 +137,7 @@ check_oe_16()
 	kompare $oesrc16/openembedded/conf/machine/dm800.conf openembedded-1.6/conf/machine/dm800.conf
 	kompare $oesrc16/openembedded/conf/machine/dm800se.conf openembedded-1.6/conf/machine/dm800se.conf
 	kompare $oesrc16/openembedded/conf/machine/dm7020hd.conf openembedded-1.6/conf/machine/dm7020hd.conf
+	kompare $oesrc16/openembedded/conf/machine/dm7025.conf openembedded-1.6/conf/machine/dm7025.conf
 	kompare $oesrc16/openembedded/conf/machine/dm8000.conf openembedded-1.6/conf/machine/dm8000.conf
 	kompare $oesrc16/openembedded/recipes/base-files/base-files/opendreambox/profile openembedded-1.6/recipes/base-files/base-files/opendreambox/profile
 	kompare $oesrc16/openembedded/recipes/base-passwd/base-passwd_3.5.20.bb openembedded-1.6/recipes/base-passwd/base-passwd_3.5.20.bb
@@ -211,6 +211,7 @@ check_language_e2()
 {
 	# Check po files
 	kompare $e2_cvssrc/po/it.po patch/po/enigma2/it.po
+	kompare $e2_cvssrc/po/lt.po patch/po/enigma2/lt.po
 	kompare $e2_cvssrc/po/Makefile.am patch/po/enigma2/Makefile.am
 }
 

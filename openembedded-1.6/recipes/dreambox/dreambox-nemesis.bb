@@ -2,7 +2,7 @@ DESCRIPTION = "Nemesis files"
 LICENSE = "GPL"
 
 PV = "2.2"
-PR = "r0"
+PR = "r1"
 
 S = "${WORKDIR}/"
 PACKAGE_ARCH := "${MACHINE_ARCH}"

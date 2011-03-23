@@ -2,7 +2,7 @@ DESCRIPTION = "OpenDreambox: Base Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
 PV = "2.2"
-PR = "r0"
+PR = "r1"
 
 inherit task
 
@@ -31,6 +31,20 @@ OPENDREAMBOX_BASE_ESSENTIAL = "\
   hdparm \
 "
 
+NEMESIS_COMMON = "\
+  ccid \
+  nfs-utils \
+  usbutils \
+  openvpn \
+  ez-ipupdate \
+  bzip2 \
+  libcap \
+  python-gdata \
+  dreambox-nemesis \
+  nemesis-socket \
+  nemesis-version \
+"
+ 
 OPENDREAMBOX_BASE_RECOMMENDS = "\
   openssh \
   openssh-sftp-server \
@@ -52,6 +66,7 @@ OPENDREAMBOX_BASE_OPTIONAL_RECOMMENDS = "\
 
 RDEPENDS_${PN} = "\
 	${OPENDREAMBOX_BASE_ESSENTIAL} \
+	${NEMESIS_COMMON} \
 "
 
 RRECOMMENDS_${PN} = "\

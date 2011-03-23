@@ -91,8 +91,8 @@ enigma1_15()
 		cp -r $srcpath/enigma $srcpatchedpath/ && echo 'Copied!'
 		echo -n "patch/enigma1/enigma/* to $srcpatchedpath/enigma... "
 		cp -r patch/enigma1/enigma/* $srcpatchedpath/enigma/ && echo 'Copied!'
-		echo -n "patch/po/enigma1/it.po to $srcpatchedpath/enigma/po... "
-		cp -r patch/po/enigma1/it.po $srcpatchedpath/enigma/po && echo 'Copied!'
+		echo -n "patch/po/enigma1/*.po to $srcpatchedpath/enigma/po... "
+		cp -r patch/po/enigma1/*.po $srcpatchedpath/enigma/po && echo 'Copied!'
 		echo -n "patch/po/enigma1/Makefile.am to $srcpatchedpath/enigma/po... "
 		cp -r patch/po/enigma1/Makefile.am $srcpatchedpath/enigma/po && echo 'Copied!'
 		echo -n "Merge patch/po/enigma1/panel_it.po in $srcpatchedpath/enigma/po/it.po... "
