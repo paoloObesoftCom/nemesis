@@ -3,7 +3,7 @@ SECTION = "opendreambox/base"
 LICENSE = "MIT"
 
 PV = "2.2"
-PR = "r3"
+PR = "r5"
 
 inherit task
 
@@ -42,6 +42,7 @@ RDEPENDS_task-opendreambox-enigma2 = "\
   enigma2-locale-en \
   enigma2-meta \
   enigma2-plugins-meta \
+  enigma2-drivers-meta \  
 "
 
 RRECOMMENDS_task-opendreambox-enigma2 = "\
@@ -65,6 +66,7 @@ RRECOMMENDS_task-opendreambox-enigma2 = "\
   enigma2-plugin-extensions-easymedia \
   enigma2-plugin-extensions-socketmmi \
   enigma2-plugin-extensions-genuinedreambox \
+  enigma2-plugin-systemplugins-lcnscanner \
   enigma2-locale-it \
   enigma2-locale-de \
   ${@base_contains("MACHINE_FEATURES", "dreambox-libpassthrough", "libpassthrough", "", d)} \

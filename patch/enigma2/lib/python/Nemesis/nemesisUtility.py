@@ -386,6 +386,7 @@ class NModule(Screen):
 			('rt73','WLAN Usb Adapter RT73',fileExists('/lib/modules/%s/kernel/drivers/net/rt73.ko' % KERNELVER)),
 			('zd1211b','WLAN Usb Adapter ZD1211B',fileExists('/lib/modules/%s/kernel/drivers/net/zd1211b.ko' % KERNELVER)),
 			('rtl8187','WLAN Usb Adapter RTL8187L',fileExists('/lib/modules/%s/kernel/drivers/net/rtl8187.ko' % KERNELVER)),
+			('rt3070','WLAN Usb Adapter RT3070',fileExists('/lib/modules/%s/drivers/net/wireless/rt3070sta.ko' % KERNELVER)),
 			('8712u','WLAN Usb Adapter R8712U',fileExists('/lib/modules/%s/extra/8712u.ko' % KERNELVER)),
 			('isofs','ISOFS (CD/DVD)',fileExists('/lib/modules/%s/kernel/fs/isofs/isofs.ko' % KERNELVER)),
 			('udf','UDF (CD/DVD)',fileExists('/lib/modules/%s/kernel/fs/udf/udf.ko' % KERNELVER)),

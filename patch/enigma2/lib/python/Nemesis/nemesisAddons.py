@@ -121,6 +121,7 @@ class NAddons(Screen):
 		</screen>"""
 
 	FREESPACENEEDUPGRADE = 4000
+	CANUPGRADE = False
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -204,6 +205,10 @@ class NAddons(Screen):
 				else:
 					self.session.open(PacketManager, GetSkinPath())
 			elif (sel == "NUpdate"):
+				if (not self.CANUPGRADE) and (not fileExists("/etc/.testmode")):
+					msg = _('No Upgrade available!\nYour decoder is up to date.')
+					self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
+					return
 				if int(t.getVarSpaceKb()[0]) < self.FREESPACENEEDUPGRADE:
 					msg = _('Not enough free space on flash to perform Upgrade!\nUpgrade require at least %d kB free on Flash.\nPlease remove some addons or skins before upgrade.') % self.FREESPACENEEDUPGRADE
 					self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)

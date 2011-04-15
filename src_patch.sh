@@ -126,8 +126,8 @@ enigma2_16()
 		mv $srcpatchedpath/enigma2/enigma2 $srcpatchedpath/enigma2/git
 		echo -n "Copy patch/enigma2/* to $srcpatchedpath/enigma2/git/... "
 		cp -r patch/enigma2/* $srcpatchedpath/enigma2/git/  && echo 'Copied!'
-		echo -n "Copy patch/po/enigma2/it.po to $srcpatchedpath/enigma2/git/po... "
-		cp -r patch/po/enigma2/it.po $srcpatchedpath/enigma2/git/po  && echo 'Copied!'
+		echo -n "Copy patch/po/enigma2/*.po to $srcpatchedpath/enigma2/git/po... "
+		cp -r patch/po/enigma2/*.po $srcpatchedpath/enigma2/git/po  && echo 'Copied!'
 		echo -n "Copy patch/po/enigma2/Makefile.am to $srcpatchedpath/enigma2/git/po... "
 		cp -r patch/po/enigma2/Makefile.am $srcpatchedpath/enigma2/git/po  && echo 'Copied!'
 		echo -n "Merge patch/po/enigma2/panel_it.po in $srcpatchedpath/enigma2/git/po/it.po... "

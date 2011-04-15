@@ -88,6 +88,7 @@ check_enigma2()
 	kompare $e2_cvssrc/lib/python/Screens/InfoBar.py patch/enigma2/lib/python/Screens/InfoBar.py
 	kompare $e2_cvssrc/lib/python/Screens/InfoBarGenerics.py patch/enigma2/lib/python/Screens/InfoBarGenerics.py
 	kompare $e2_cvssrc/lib/python/Screens/TimerEntry.py patch/enigma2/lib/python/Screens/TimerEntry.py
+	kompare $e2_cvssrc/lib/python/Screens/ServiceScan.py patch/enigma2/lib/python/Screens/ServiceScan.py
 	
 	kompare $e2_cvssrc/lib/python/Components/Ipkg.py patch/enigma2/lib/python/Components/Ipkg.py
 	kompare $e2_cvssrc/lib/python/Components/About.py patch/enigma2/lib/python/Components/About.py
@@ -113,8 +114,10 @@ check_enigma2()
 	kompare $e2_cvssrc/main/enigma.cpp patch/enigma2/main/enigma.cpp
 
 	kompare $e2_cvssrc/lib/dvb/epgcache.h patch/enigma2/lib/dvb/epgcache.h
+	kompare $e2_cvssrc/lib/dvb/scan.h patch/enigma2/lib/dvb/scan.h
 	kompare $e2_cvssrc/lib/dvb/epgcache.cpp patch/enigma2/lib/dvb/epgcache.cpp
 	kompare $e2_cvssrc/lib/dvb/eit.cpp patch/enigma2/lib/dvb/eit.cpp
+	kompare $e2_cvssrc/lib/dvb/scan.cpp patch/enigma2/lib/dvb/scan.cpp
 
 }
 

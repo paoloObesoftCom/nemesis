@@ -39,6 +39,8 @@
 		<item level="0" text="Enable VirtualKeyBoard (Experimental)">config.nemesis.usevkeyboard</item>
 	</setup>
 	<setup key="picon" title="Setup Picon">
+		<item level="0" text="Show Picon on LCD? (Need GUI Restart)">config.nemesis.piconlcd</item>
+		<item level="0" text="Set LCD Picon type">config.nemesis.piconlcdtype</item>
 		<item level="0" text="Set InfoBar Picon type">config.nemesis.picontype</item>
 		<item level="0" text="Can Install Picon in HDD?">config.nemesis.usepiconinhdd</item>
 	</setup>
@@ -77,5 +79,6 @@
 		<item level="0" text="Clear enigma cache before load EPG">config.nemepg.clearcache</item>
 		<item level="0" text="Clear Backup EPG after clear Enigma cache">config.nemepg.clearbackup</item>
 		<item level="0" text="Enable EPG Download via Timer">config.nemepg.enatimer</item>
+		<item level="0" text="Multi-EPG bouquet selection">config.usage.multiepg_ask_bouquet</item>
 	</setup>
 </setupxml>

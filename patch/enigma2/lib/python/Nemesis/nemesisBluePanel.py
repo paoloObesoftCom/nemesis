@@ -122,8 +122,10 @@ class nemesisBluePanel(Screen):
 					if line[0] == hwVersion:
 						newVer = line[1][:-1]
 				f.close()
+				NAddons.CANUPGRADE = False
 				unlink('/tmp/ver.txt')
 				if int(self.SVNVERSION) < int(newVer):
+					NAddons.CANUPGRADE = True
 					self['conn'].show()
 					self['conn'].setText(_('Update is available!\nCurrent version: %s\nNew Version: %s\nPlease upgrade Nemesis firmware!') % (self.SVNVERSION, newVer))
 			except:

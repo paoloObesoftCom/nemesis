@@ -936,4 +936,10 @@ msgstr ""
 "\nL'aggiornamento richiede almeno %d kB liberi in Flash."
 "\nRimuovere qualche addon o skin prima di aggiornare."
 
+msgid ""
+"No Upgrade available!\n"
+"Your decoder is up to date."
 
+msgstr ""
+"Nessun aggiornamento disponibile!\n"
+"Il vostro decoder é aggiornato."
