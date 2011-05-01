@@ -5,10 +5,10 @@ LICENSE = "BSD"
 DEPENDS = "libusb1"
 RDEPENDS = "libusb1"
 
-PV="1.7.2"
+PV="1.6.6"
 PR="r0"
 
-SRC_URI = "https://alioth.debian.org/frs/download.php/3533/pcsc-lite-1.7.2.tar.bz2 \
+SRC_URI = "https://alioth.debian.org/frs/download.php/3479/pcsc-lite-1.6.6.tar.bz2 \
 	file://pcscd.init "
 
 inherit autotools_stage
@@ -20,7 +20,6 @@ EXTRA_OECONF = " \
 	--disable-libhal \
 	--enable-libusb \
 	--enable-usbdropdir=${libdir}/pcsc/drivers \
-	--disable-libudev \
 	"
 
 do_install() {

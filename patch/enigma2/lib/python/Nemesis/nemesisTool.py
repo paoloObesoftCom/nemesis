@@ -207,6 +207,57 @@ class ListboxE4(MenuList):
 		self.l.setFont(1, gFont('Regular', 18))
 		self.l.setItemHeight(25)
 
+class editBlacklist:
+
+	EPGBLACKLIST = '/etc/enigma2/epg.blacklist'
+
+	def dec2hex(self,n):    
+		return "%X" % n 
+		
+	def hex2dec(self,s):  
+		return int(s, 16)
+		
+	def add(self,service):
+		s = service.split(":")
+		serv2add = "%d,%d,%d,%d" % (self.hex2dec(s[3]),self.hex2dec(s[4]),self.hex2dec(s[5]),self.hex2dec(s[2]))
+		try:
+			f = open(self.EPGBLACKLIST,'a')
+			f.write("%s\n" % serv2add)
+			f.close()
+			print "[EPGBlacklist] service %s added to Blacklist." % serv2add
+		except:
+			pass
+
+	def remove(self,service):
+		s = service.split(":")
+		serv2remove = "%d,%d,%d,%d" % (self.hex2dec(s[3]),self.hex2dec(s[4]),self.hex2dec(s[5]),self.hex2dec(s[2]))
+		try:
+			f = open(self.EPGBLACKLIST, 'r')
+			fileContent = f.readlines()
+			f.close()
+			f = open(self.EPGBLACKLIST, 'w')
+			for line in fileContent:
+				if line.find(serv2remove) == -1:
+					f.write(line)
+			f.close()
+			print "[EPGBlacklist] service %s removed form Blacklist." % serv2remove
+		except:
+			pass
+		
+	def check(self,service):
+		s = service.split(":")
+		serv2check = "%d,%d,%d,%d" % (self.hex2dec(s[3]),self.hex2dec(s[4]),self.hex2dec(s[5]),self.hex2dec(s[2]))
+		try:
+			f = open(self.EPGBLACKLIST, 'r')
+			for line in f.readlines():
+				if line.find(serv2check) >= 0:
+					f.close()
+					return True
+			f.close()
+			return False
+		except:
+			return False
+
 class nemesisTool:
 	
 	def readEmuName(self,emu):	

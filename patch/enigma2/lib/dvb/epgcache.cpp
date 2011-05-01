@@ -1464,6 +1464,7 @@ void eEPGCache::InitEPGBlock ()
 		while (fgets (line, sizeof(line), fd))
 		{
 			char* tmp;
+			block_list.clear();
 			epg_block_list_t block_item;
 			if (!(tmp = strtok (line, ","))) continue;
 			block_item.service_id = atoi (tmp);

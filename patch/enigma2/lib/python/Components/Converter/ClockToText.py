@@ -19,7 +19,7 @@ class ClockToText(Converter, object):
 	# (whatever you need!)
 
 	def readLocaleStrings(self):
-		self.lcMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+		self.lcMonths = [_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December")]
 		if os.path.isfile('/etc/lcstrings.list') is True:
 			myfile = open('/etc/lcstrings.list', 'r').readlines()
 			idx = language.getActiveLanguageIndex()
@@ -30,8 +30,8 @@ class ClockToText(Converter, object):
 					self.lcMonths[index] = self.lcMonths[index].strip()
 
 	def toLocale(self, s):
-		WeekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-		Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+		WeekDays = [_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday")]
+		Months = [_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December")]
 		for index, weekday in enumerate(WeekDays): 
 			if s.find(weekday) >= 0:
 				s = s.replace(weekday, _(weekday))

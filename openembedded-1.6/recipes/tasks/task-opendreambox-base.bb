@@ -2,7 +2,7 @@ DESCRIPTION = "OpenDreambox: Base Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
 PV = "2.2"
-PR = "r1"
+PR = "r2"
 
 inherit task
 
@@ -32,7 +32,6 @@ OPENDREAMBOX_BASE_ESSENTIAL = "\
 "
 
 NEMESIS_COMMON = "\
-  ccid \
   nfs-utils \
   usbutils \
   openvpn \
@@ -54,6 +53,7 @@ OPENDREAMBOX_BASE_RECOMMENDS = "\
 "
 
 OPENDREAMBOX_BASE_OPTIONAL_RECOMMENDS = "\
+  ccid \
   gdbserver \
   hddtemp \
   joe \

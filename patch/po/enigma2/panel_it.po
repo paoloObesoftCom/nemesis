@@ -654,7 +654,7 @@ msgid "Current Information"
 msgstr "Informazioni correnti"
 
 msgid "HDD Temperature"
-msgstr "Tempertura HDD"
+msgstr "Temperatura HDD"
 
 msgid "Stop Hard Disk"
 msgstr "Arresta Hard Disk"
@@ -943,3 +943,45 @@ msgid ""
 msgstr ""
 "Nessun aggiornamento disponibile!\n"
 "Il vostro decoder é aggiornato."
+
+msgid "Remove from EPG Blacklist"
+msgstr "Rimuovi dalla EPG Blacklist"
+
+msgid "Add to EPG Blacklist"
+msgstr "Aggiungi alla EPG Blacklist"
+
+msgid "January"
+msgstr "Gennaio"
+
+msgid "February"
+msgstr "Febbraio"
+
+msgid "March"
+msgstr "Marzo"
+
+msgid "April"
+msgstr "Aprile"
+
+msgid "May"
+msgstr "Maggio"
+
+msgid "June"
+msgstr "Giugno"
+
+msgid "July"
+msgstr "Luglio"
+
+msgid "August"
+msgstr "Agosto"
+
+msgid "September"
+msgstr "Settembre"
+
+msgid "October"
+msgstr "Ottobre"
+
+msgid "November"
+msgstr "Novembre"
+
+msgid "December"
+msgstr "Dicemnbre"

@@ -297,20 +297,30 @@ class nemesisEI(Screen):
 			if tuner_type == "DVB-S" or tuner_type == "DVB-S2":
 				try:
 					orb = {
-									3590:'Thor/Intelsat (1.0W)',3560:'Amos (4.0W)',3550:'Atlantic Bird (5.0W)',3530:'Nilesat/Atlantic Bird (7.0W)',
-									3520:'Atlantic Bird (8.0W)',3475:'Atlantic Bird (12.5W)',3460:'Express (14.0W)', 3450:'Telstar (15.0W)',
-									3420:'Intelsat (18.0W)',3380:'Nss (22.0W)',3355:'Intelsat (24.5W)', 3325:'Intelsat (27.5W)',3300:'Hispasat (30.0W)',
-									3285:'Intelsat (31.5W)',3170:'Intelsat (43.0W)',3150:'Intelsat (45.0W)',1560:'Optus (156.0E)',
-									750:'Abs (75.0E)',720:'Intelsat (72.0E)',705:'Eutelsat W5 (70.5E)',685:'Intelsat (68.5E)',620:'Intelsat 902 (62.0E)',
-									600:'Intelsat 904 (60.0E)',570:'Nss (57.0E)',530:'Express AM22 (53.0E)',480:'Eutelsat 2F2 (48.0E)',450:'Intelsat (45.0E)',
-									420:'Turksat 2A (42.0E)',400:'Express AM1 (40.0E)',390:'Hellas Sat 2 (39.0E)',380:'Paksat 1 (38.0E)',
-									360:'Eutelsat Sesat (36.0E)',335:'Astra 1M (33.5E)',330:'Eurobird 3 (33.0E)',	328:'Galaxy 11 (32.8E)',
-									315:'Astra 5A (31.5E)',310:'Turksat (31.0E)',305:'Arabsat (30.5E)',285:'Eurobird 1 (28.5E)',
-									284:'Eurobird/Astra (28.2E)',282:'Eurobird/Astra (28.2E)',
-									260:'Badr 3/4 (26.0E)',255:'Eurobird 2 (25.5E)',235:'Astra 1E (23.5E)',215:'Eutelsat (21.5E)',
-									216:'Eutelsat W6 (21.6E)',210:'AfriStar 1 (21.0E)',192:'Astra 1F (19.2E)',160:'Eutelsat W2 (16.0E)',
-									130:'Hot Bird 6,7A,8 (13.0E)',100:'Eutelsat W1 (10.0E)',90:'Eurobird 9 (9.0E)',70:'Eutelsat W3A (7.0E)',
-									50:'Sirius 4 (5.0E)',48:'Sirius 4 (4.8E)',30:'Telecom 2 (3.0E)'
+									3590:'Thor/Intelsat (1.0\xc2\xb0W)',3560:'Amos 2/3 (4.0\xc2\xb0W)',3550:'Atlantic Bird 3 (5.0\xc2\xb0W)',3530:'Nilesat/Atlantic Bird (7.0\xc2\xb0W)',
+									3520:'Atlantic Bird 2 (8.0\xc2\xb0W)',3475:'Atlantic Bird 1 (12.5\xc2\xb0W)',3460:'Express A4 (14.0\xc2\xb0W)', 3450:'Telstar 12 (15.0\xc2\xb0W)',
+									3420:'Intelsat 901 (18.0\xc2\xb0W)',3380:'Nss 7 (22.0\xc2\xb0W)',3355:'Intelsat 905 (24.5\xc2\xb0W)', 3325:'Intelsat 907 (27.5\xc2\xb0W)',3300:'Hispasat 1C/1D (30.0\xc2\xb0W)',
+									3170:'Intelsat 11 (43.0\xc2\xb0W)',3150:'Intelsat 14 (IS-14) (45.0\xc2\xb0W)',3070:'Intelsat 707 (53.0\xc2\xb0W)',3045:'Intelsat 805 (55.5\xc2\xb0W)',
+									3020:'Intelsat 9 (58.0\xc2\xb0W)',2990:'Amazonas (61.0\xc2\xb0W)',2900:'Star One C2 (70.0\xc2\xb0W)',2875:'Nimiq 5 (72.7\xc2\xb0W)',
+									2780:'NIMIQ 4 (82.0\xc2\xb0W)',2690:'NIMIQ 1 (91.0\xc2\xb0W)',3592:'Thor/Intelsat (0.8\xc2\xb0W)',
+									2985:'EchoStar 12/15 (61.5\xc2\xb0W)',2830:'Echostar 4/8 (77.0\xc2\xb0W)',2500:'Echostar 10/11 (110.0\xc2\xb0W)',
+									2502:'Echostar 10/11 (110.0\xc2\xb0W)',2410:'Echostar/Anik F3 (119.0\xc2\xb0W)',2391:'Galaxy 23 (121.0\xc2\xb0W)',2390:'Echostar 9 (121.0\xc2\xb0W)',
+									2412:'DirectTV 7S (119.0\xc2\xb0W)',2310:'Galaxy 27 (129.0\xc2\xb0W)',2311:'Ciel 2 (129.0\xc2\xb0W)',2120:'Echostar 2 (148.0\xc2\xb0W)',
+									1100:'BSAT 2A (110.0\xc2\xb0E)',1101:'N-Sat 110 (110.0\xc2\xb0E)',1131:'KoreaSat 5 (113.0\xc2\xb0E)',1440:'SuperBird C2 (144.0\xc2\xb0E)',
+									1006:'AsiaSat 5 (100.5\xc2\xb0E)',1056:'Asiasat 3S (105.5\xc2\xb0E)',1082:'NSS 11 (108.2\xc2\xb0E)',
+									881:'ST1 (88.0\xc2\xb0E)',917:'Measat 3 (91.5\xc2\xb0E)',950:'Insat 4B (95.0\xc2\xb0E)',951:'NSS 6 (95.0\xc2\xb0E)',
+									765:'Apstar 2R (76.5\xc2\xb0E)',785:'ThaiCom 5 (78.5\xc2\xb0E)',800:'Express (80.0\xc2\xb0E)',830:'Insat 4A (83.0\xc2\xb0E)',850:'Intelsat 15 (85.2\xc2\xb0E)',
+									750:'Abs 1 (75.0\xc2\xb0E)',720:'Intelsat (72.0\xc2\xb0E)',705:'Eutelsat W5 (70.5\xc2\xb0E)',685:'Intelsat 7/10 (68.5\xc2\xb0E)',620:'Intelsat 902 (62.0\xc2\xb0E)',
+									600:'Intelsat 904 (60.0\xc2\xb0E)',570:'Nss 12 (57.0\xc2\xb0E)',530:'Express AM22 (53.0\xc2\xb0E)',482:'Eutelsat W48 (48.2\xc2\xb0E)',450:'Intelsat 12 (45.0\xc2\xb0E)',
+									420:'Turksat 2A/3A (42.0\xc2\xb0E)',400:'Express AM1 (40.0\xc2\xb0E)',390:'Hellas Sat 2 (39.0\xc2\xb0E)',380:'Paksat 1 (38.0\xc2\xb0E)',
+									360:'Eutelsat W4/W7 (36.0\xc2\xb0E)',335:'Astra 1M (33.5\xc2\xb0E)',330:'Eurobird 3 (33.0\xc2\xb0E)',328:'Galaxy 11 (32.8\xc2\xb0E)',
+									315:'Astra 1G (31.5\xc2\xb0E)',310:'Turksat (31.0\xc2\xb0E)',305:'Arabsat 5A (30.5\xc2\xb0E)',285:'Eurobird/Astra (28.5\xc2\xb0E)',
+									284:'Eurobird/Astra (28.2\xc2\xb0E)',282:'Eurobird/Astra (28.2\xc2\xb0E)',1220:'AsiaSat 4 (122.0\xc2\xb0E)',1380:'Telstar 18 (138.0\xc2\xb0E)',
+									260:'Badr 6 (26.0\xc2\xb0E)',255:'Eurobird 2 (25.5\xc2\xb0E)',232:'Astra 3A/3B (23.5\xc2\xb0E)',235:'Astra 3A/3B (23.5\xc2\xb0E)',215:'Eutelsat W6 (21.5\xc2\xb0E)',
+									216:'Eutelsat W6 (21.6\xc2\xb0E)',210:'AfriStar 1 (21.0\xc2\xb0E)',192:'Astra 1M/1H/1L/1KR (19.2\xc2\xb0E)',160:'Eutelsat W2M/16A/Sesat (16.0\xc2\xb0E)',
+									130:'Hot Bird 6/8/9 (13.0\xc2\xb0E)',100:'Eutelsat W2A (10.0\xc2\xb0E)',90:'Eurobird 9A (9.0\xc2\xb0E)',70:'Eutelsat W3A (7.0\xc2\xb0E)',
+									50:'Sirius 4 (5.0\xc2\xb0E)',48:'Astra 4A (4.8\xc2\xb0E)',40:'Eurobird 4A (4.0\xc2\xb0E)',30:'Telecom 2 (3.0\xc2\xb0E)',
+									852:'Intelsat 15 (85.2\xc2\xb0E)',660:'Intelsat 17 (66.0\xc2\xb0E)',3490:'Express AM44 (11.0\xc2\xb0W)'
 								}[frontendData.get("orbital_position", "None")]
 				except:
 					orb = 'Unsupported SAT: %s' % str([frontendData.get("orbital_position", "None")])
