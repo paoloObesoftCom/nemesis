@@ -75,8 +75,6 @@ class NemesisExtraSource(Converter, object):
 				return "%3.02f" % (self.source.snr_db / 100.0)
 		elif self.type == self.AGCTEXT:
 			percent = self.source.agc
-			if (HardwareInfo().get_device_name() == 'dm800se' or HardwareInfo().get_device_name() == 'dm500hd') and percent is not None:
-				percent = min((percent*10), 65536)
 		if percent is None:
 			return "N/A"
 		return "%d" % (percent * 100 / 65536)
@@ -101,8 +99,6 @@ class NemesisExtraSource(Converter, object):
 				return (count * 15 / 32768)
 		elif self.type == self.AGCNUM:
 			count = self.source.agc
-			if (HardwareInfo().get_device_name() == 'dm800se' or HardwareInfo().get_device_name() == 'dm500hd') and count is not None:
-				count = min((count * 10), 65536)
 			if count is None:
 				return 0
 			return (count * 100 / 65536)
