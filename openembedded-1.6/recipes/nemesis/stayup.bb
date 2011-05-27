@@ -8,7 +8,7 @@ PR = "r1"
 PN = "enigma2-plugin-extensions-stayup"
 PV = "svn-${REV}"
 
-SRC_URI = "svn://osp.edg-nemesis.tv/stayUP;module=trunk;proto=svn;rev=${REV}"
+SRC_URI = "svn://osp.genesi-project.it/stayUP;module=trunk;proto=svn;rev=${REV}"
 
 S = "${WORKDIR}/trunk"
 PACKAGE_ARCH := "${MACHINE_ARCH}"

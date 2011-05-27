@@ -1,0 +1,11 @@
+diff -ruN pcsc-lite-1.7.2.orig/src/hotplug_libusb.c pcsc-lite-1.7.2/src/hotplug_libusb.c
+--- pcsc-lite-1.7.2.orig/src/hotplug_libusb.c	2011-02-25 18:15:21.000000000 +0100
++++ pcsc-lite-1.7.2/src/hotplug_libusb.c	2011-05-09 20:41:18.000000000 +0200
+@@ -352,6 +352,7 @@
+ 				}
+ 			}
+ 		}
++		libusb_free_config_descriptor(config_desc);
+ 	}
+ 
+ 	/*

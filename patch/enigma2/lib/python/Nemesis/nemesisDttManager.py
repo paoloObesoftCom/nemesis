@@ -90,8 +90,7 @@ class manageDttDevice(Screen):
 		self.updating = True
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
-		self["key_yellow"] = Label(_("Install"))
-		self["key_yellow"].hide()
+		self["key_yellow"] = Label("")
 		self['conn'] = StaticText("")
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
@@ -171,7 +170,7 @@ class manageDttDevice(Screen):
 		del self.list[:]
 		if fileExists('/usr/script/loaddttmodules.sh'):
 			self['conn'].text = ''
-			self["key_yellow"].hide()
+			self["key_yellow"].setText(_("Remove Driver"))
 			self.readStatus()
 			self.needInstall = False
 			skin_path = GetSkinPath()
@@ -183,7 +182,7 @@ class manageDttDevice(Screen):
 			self['list'].setList(self.list)
 		else:
 			self.needInstall = True
-			self["key_yellow"].show()
+			self["key_yellow"].setText(_("Install Driver"))
 			self.showInstMess()
 
 	def showInstMess(self):
@@ -202,6 +201,9 @@ class manageDttDevice(Screen):
 			self.updating = True
 			self.timeoutTimer.start(config.nemesis.ipkg.updateTimeout.value * 1000)
 			self.ipkg.startCmd(IpkgComponent.CMD_UPDATE)
+		else:
+			msg = _('Do you want remove the support\npackages, for DVB-T/C adapters?') + _("\nAfter pressing OK, please wait!")
+			self.session.openWithCallback(self.runRemove, MessageBox, msg, MessageBox.TYPE_YESNO )
 			
 	def doTimeoutTimer(self):
 		self['conn'].text = _("Server connection timeout!\nPlease try again later.")
@@ -213,6 +215,21 @@ class manageDttDevice(Screen):
 		else:
 			self.showInstMess()
 			
+	def runRemove(self, result):
+		if result:
+			self.cmdList = []
+			self.cmdList.append((IpkgComponent.CMD_REMOVE, { "package": "dreambox-tuner-usb" }))
+			if len(self.cmdList):
+				self.session.openWithCallback(self.pakageRemoved, Ipkg, cmdList = self.cmdList)
+
+	def pakageRemoved(self):
+		self.updateList()
+		if fileExists('/etc/dtt.devices'):
+			unlink("/etc/dtt.devices")
+		msg = _('Dreambox will be now rebooted to disable DVB/T.\nDo You want reboot the box now?')
+		box = self.session.openWithCallback(self.rebootDream, MessageBox, msg , MessageBox.TYPE_YESNO)
+		box.setTitle(_('Reboot Dreambox'))
+
 	def ipkgCallback(self, event, param):
 		if event == IpkgComponent.EVENT_ERROR:
 			self.updating = False
@@ -224,5 +241,5 @@ class manageDttDevice(Screen):
 				self.cmdList = []
 				self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": "dreambox-tuner-usb" }))
 				if len(self.cmdList):
-					self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want to install the support\npackages, for DVB-T/C adapters?") + _("\nAfter pressing OK, please wait!"), MessageBox.TYPE_YESNO )
+					self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want install the support\npackages, for DVB-T/C adapters?") + _("\nAfter pressing OK, please wait!"), MessageBox.TYPE_YESNO )
 		pass

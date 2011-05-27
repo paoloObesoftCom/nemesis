@@ -35,6 +35,12 @@ def parse_ecm(filename):
 			if line.find('msec') >= 0:
 				x = line.split(' ',1)
 				ecmtime = int(x[0].strip())
+			elif line.find('response:') >= 0:
+				x = line.split(':',1)
+				try:
+					ecmtime = int(float(x[1].strip()))
+				except:
+					ecmtime = 0
 			elif line.find('ecm time:') >= 0:
 				x = line.split(':',1)
 				if x[1].strip() == "nan":
