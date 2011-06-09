@@ -1,6 +1,7 @@
 from Components.config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, \
 	ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSlider, ConfigText, \
-	ConfigEnableDisable, ConfigDateTime, ConfigInteger
+	ConfigEnableDisable, ConfigDateTime, ConfigInteger, ConfigNothing
+from enigma import eDBoxLCD
 
 def InitNemesisConfig():
 #system
@@ -12,9 +13,13 @@ def InitNemesisConfig():
 	config.nemesis.eiinfobardelayonzap = ConfigNumber(default = 100)
 	config.nemesis.emminfodelay = ConfigNumber(default = 400)
 	config.nemesis.ecminfodelay = ConfigNumber(default = 1000)
-	config.nemesis.picontype = ConfigSelection(default = "Reference", choices = [ ("Name","Name"), ("Reference","Reference") ])
-	config.nemesis.piconlcd = ConfigYesNo(default = False)
-	config.nemesis.piconlcdtype = ConfigSelection(default = "Reference", choices = [ ("Name","Name"), ("Reference","Reference") ])
+	config.nemesis.picontype = ConfigSelection(default = "Reference", choices = [ ("Name",_("Name")), ("Reference",_("Reference")) ])
+	if eDBoxLCD.getInstance().detected():
+		config.nemesis.piconlcd = ConfigYesNo(default = False)
+		config.nemesis.piconlcdtype = ConfigSelection(default = "Reference", choices = [ ("Name",_("Name")), ("Reference",_("Reference")) ])
+	else:
+		config.nemesis.piconlcd = ConfigNothing()
+		config.nemesis.piconlcdtype = ConfigNothing()
 	config.nemesis.usevkeyboard = ConfigEnableDisable(default = False)
 	config.nemesis.autocloseconsole = ConfigYesNo(default = True)
 	config.nemesis.autocloseconsoledelay = ConfigSelection(default = "1", choices = [

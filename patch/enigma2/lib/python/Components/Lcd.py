@@ -1,6 +1,9 @@
 from config import config, ConfigSubsection, ConfigSlider, ConfigYesNo, ConfigNothing
 from enigma import eDBoxLCD
 from Components.SystemInfo import SystemInfo
+from Tools.HardwareInfo import HardwareInfo
+
+model = HardwareInfo().get_device_name()
 
 class LCD:
 	def __init__(self):
@@ -61,11 +64,17 @@ def InitLcd():
 			config.lcd.contrast = ConfigNothing()
 			standby_default = 1
 		
-		config.lcd.lcdbri = ConfigSlider(default=3, limits=(0, 10))
-		config.lcd.lcdbri.addNotifier(setLCDbright);
-		config.lcd.lcdbri.apply = lambda : setLCDbright(config.lcd.lcdbri)
-		config.lcd.lcdbri.callNotifiersOnSaveAndCancel = True
-		
+		if model not in ('dm800se'):
+			config.lcd.enablelcdbri = ConfigYesNo(default=False)
+			config.lcd.lcdbri = ConfigSlider(default=3, limits=(0, 10))
+			config.lcd.lcdbri.addNotifier(setLCDbright);
+			config.lcd.lcdbri.apply = lambda : setLCDbright(config.lcd.lcdbri)
+			config.lcd.lcdbri.callNotifiersOnSaveAndCancel = True
+		else:
+			config.lcd.enablelcdbri = ConfigNothing()
+			config.lcd.lcdbri = ConfigNothing()
+			config.lcd.lcdbri.apply = lambda :  doNothing()
+			
 		config.lcd.standby = ConfigSlider(default=0, limits=(0, 10))
 		config.lcd.standby.addNotifier(setLCDbright);
 		config.lcd.standby.apply = lambda : setLCDbright(config.lcd.standby)
@@ -85,6 +94,9 @@ def InitLcd():
 		config.lcd.standby = ConfigNothing()
 		config.lcd.bright.apply = lambda : doNothing()
 		config.lcd.standby.apply = lambda : doNothing()
+		config.lcd.enablelcdbri = ConfigNothing()
+		config.lcd.lcdbri = ConfigNothing()
+		config.lcd.lcdbri.apply = lambda :  doNothing()
 
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 

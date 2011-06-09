@@ -25,8 +25,9 @@
 	<setup key="dev" title="Setup Device">
 		<item level="0" text="Force Umount before Format">config.nemesis.forceumount</item>
 	</setup>
-	<setup key="lcd" title="Setup Display LCD/OLED">
+	<setup key="lcd" title="Setup Display LCD/OLED" requires="FrontpanelDisplay">
 		<item level="0" text="Brightness">config.lcd.bright</item>
+		<item level="0" text="Enable Brightness on vision">config.lcd.enablelcdbri</item>
 		<item level="0" text="Brightness on vision">config.lcd.lcdbri</item>
 		<item level="0" text="Contrast">config.lcd.contrast</item>
 		<item level="0" text="Standby">config.lcd.standby</item>

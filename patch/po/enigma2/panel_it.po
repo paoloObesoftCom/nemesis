@@ -763,6 +763,9 @@ msgstr "Abilitare la VirtualKeyBoard (Sperimentale)"
 msgid "Setup Display LCD/OLED"
 msgstr "Configura Display LCD/OLED"
 
+msgid "Enable Brightness on vision"
+msgstr "Abilita Lumininosità in visione"
+
 msgid "Brightness on vision"
 msgstr "Lumin. in visione"
 

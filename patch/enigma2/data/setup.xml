@@ -91,8 +91,11 @@
 		<setup key="lcd" title="Display Setup" requires="FrontpanelDisplay">
 			<item level="0" text="Brightness">config.lcd.bright</item>
 			<item level="0" text="Contrast">config.lcd.contrast</item>
+			<item level="0" text="Enable Brightness on vision">config.lcd.enablelcdbri</item>
 			<item level="0" text="Brightness on vision">config.lcd.lcdbri</item>
 			<item level="0" text="Standby">config.lcd.standby</item>
+			<item level="0" text="Show Picon on LCD? (Need GUI Restart)">config.nemesis.piconlcd</item>
+			<item level="0" text="Set LCD Picon type">config.nemesis.piconlcdtype</item>
 		</setup>
 		<setup key="satconfig" title="Sat / Dish Setup">
 			<item text="Tuner Slot">config.sat.tunerslot</item>

@@ -11,7 +11,6 @@ from Components.Sources.StaticText import StaticText
 from nemesisTool import GetSkinPath, createProxy, createInadynConf, createIpupdateConf
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Tools.LoadPixmap import LoadPixmap
-from Tools.HardwareInfo import HardwareInfo
 from enigma import eTimer
 
 import xml.etree.cElementTree
@@ -46,12 +45,12 @@ class NSetupSum(Screen):
 		self["key_red"] = Label(_("Exit"))
 		self['conn'] = StaticText("")
 		skin_path = GetSkinPath()
+
 		xmldata = setupdom.getroot()
-		self.model = HardwareInfo().get_device_name()
 		for x in xmldata.findall("setup"):
-			print "%s: %s" % (self.model,x.get("key"))
-			if self.model == 'dm500hd' and x.get("key") == 'lcd':
-				continue
+			requires = x.get("requires")
+			if requires and not SystemInfo.get(requires, False):
+				continue;
 			self.list.append((x.get("key"), _(x.get("title", "").encode("UTF-8")), LoadPixmap(skin_path + 'icons/setup.png')))
 			
 		self['list'] = List(self.list)
@@ -151,10 +150,9 @@ class NSetup(ConfigListScreen, Screen):
 			if x.tag == 'item':
 				item_level = int(x.get("level", 0))
 				item_text = _(x.get("text", "??").encode("UTF-8"))
-				b = eval(x.text or "");
-				if b == "":
+				item = eval(x.text or "");
+				if item == "":
 					continue
-				item = b
 				if not isinstance(item, ConfigNothing):
 					list.append( (item_text, item) )
 	

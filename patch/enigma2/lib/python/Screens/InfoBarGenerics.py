@@ -46,11 +46,15 @@ from RecordTimer import RecordTimerEntry, RecordTimer
 # hack alert!
 from Menu import MainMenu, mdom
 
+detected = eDBoxLCD.getInstance().detected()
+
 def displayBriChange(idx):
-	if idx < 1:
-		idx = 3
-	idx = ((idx * 255) /10)
-	eDBoxLCD.getInstance().setLCDBrightness(idx)
+	if detected:
+		if config.lcd.enablelcdbri.value:
+			if idx < 1:
+				idx = 3
+			idx = ((idx * 255) /10)
+			eDBoxLCD.getInstance().setLCDBrightness(idx)
 
 def alphaChange(alphastate):
 	f=open("/proc/stb/video/alpha","w")
@@ -161,8 +165,7 @@ class InfoBarShowHide:
 	def __onShow(self):
 		self.__state = self.STATE_SHOWN
 		self.startHideTimer()
-		if HardwareInfo().get_device_name() != 'dm500hd':
-			displayBriChange(config.lcd.bright.value)
+		displayBriChange(config.lcd.bright.value)
 		if config.nemesis.einfo.value and self.TunerTest():
 			if config.nemesis.einfotimeout.value == 0  or config.nemesis.replaceinfobar.value:
 				self.showEInfo()
@@ -202,8 +205,7 @@ class InfoBarShowHide:
 			self.activityTimer.stop()
 		if self.__stateExtra == self.STATE_SHOWN:
 			self.hideEInfo()
-		if HardwareInfo().get_device_name() != 'dm500hd':
-			displayBriChange(config.lcd.lcdbri.value)
+		displayBriChange(config.lcd.lcdbri.value)
 
 	def doShow(self):
 		if self.showTimer.isActive():
@@ -514,8 +516,7 @@ class InfoBarMenu:
 		self.session.infobar = None
 
 	def mainMenu(self):
-		if HardwareInfo().get_device_name() != 'dm500hd':
-			displayBriChange(config.lcd.bright.value)
+		displayBriChange(config.lcd.bright.value)
 		print "loading mainmenu XML..."
 		menu = mdom.getroot()
 		assert menu.tag == "menu", "root element in menu must be 'menu'!"
@@ -527,8 +528,7 @@ class InfoBarMenu:
 		self.session.openWithCallback(self.mainMenuClosed, MainMenu, menu)
 
 	def mainMenuClosed(self, *val):
-		if HardwareInfo().get_device_name() != 'dm500hd':
-			displayBriChange(config.lcd.lcdbri.value)
+		displayBriChange(config.lcd.lcdbri.value)
 		self.session.infobar = None
 
 class InfoBarSimpleEventView:
