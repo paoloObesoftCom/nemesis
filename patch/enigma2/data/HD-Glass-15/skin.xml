@@ -255,6 +255,7 @@
 			<convert type="FrontendInfo">AGC</convert>
 		</widget>
 		<ePixmap pixmap="skin_default/icons/bar_back.png" position="879,599" size="5,75" zPosition="1" backgroundColor="background" alphatest="on" />
+
 		<eLabel text="Snr:" font="Prive2; 14" position="775,597" zPosition="2" size="40,20" halign="left" foregroundColor="un99bad6" />
 		<widget source="session.FrontendStatus" render="Label" font="Prive2; 14" position="817,597" zPosition="5" size="50,20" halign="left" foregroundColor="unb2e0b4">
 			<convert type="NemesisExtraSource">SnrdB</convert>
@@ -3182,6 +3183,16 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="key_red" render="Label" position="46,310" zPosition="2" size="240,28" font="Prive2;22" halign="center" foregroundColor="red" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="334,303" size="240,44" zPosition="1" alphatest="on" />
 		<widget source="key_green" render="Label"  position="334,310" zPosition="2" size="240,28" font="Prive2;22" halign="center" foregroundColor="green" transparent="1" />
+	</screen>
+	<!-- VirtualKeyBoard -->
+	<screen name="VirtualKeyBoard" position="center,center" size="560,350" zPosition="99" title="Virtual KeyBoard">
+		<ePixmap pixmap="skin_default/vkey_text.png" position="9,45" zPosition="-4" size="542,52" alphatest="on" />
+		<widget source="country" render="Pixmap" position="490,0" size="60,40" alphatest="on" borderWidth="0" borderColor="white" >
+			<convert type="ValueToPixmap">LanguageCode</convert>
+		</widget>
+		<widget name="header" position="10,20" size="500,20" font="Regular;20" transparent="1" noWrap="1" />
+		<widget name="text" position="12,45" size="536,46" font="Regular;38" transparent="1" noWrap="1" halign="right" />
+		<widget name="list" position="10,110" size="540,225" selectionDisabled="1" transparent="1" />
 	</screen>
 	<screen name="FilebrowserScreen" position="center,100" size="1100,560" title="">
 		<widget name="list_left" position="10,10" size="540,480" scrollbarMode="showOnDemand" />

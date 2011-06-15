@@ -174,7 +174,7 @@ void eZapSetup::parental_lock()
 }
 void eZapSetup::external_ip()
 {
-    system ("wget -O /tmp/extip http://www.dreamboxonline.com/ADDONS/get_ip.php");
+    system ("wget -O /tmp/extip http://www.genesi-project.it/Nemesis/get_ip.php");
     FILE *f;
     f = fopen("/tmp/extip", "r");
     char ext_ip[15];
