@@ -55,7 +55,7 @@ class nemesisBluePanel(Screen):
 		<widget name="ecmtext" position="407,118" size="392,230" font="Prive2;19" zPosition="2" halign="center" foregroundColor="un99bad6" />
 	</screen>"""
 	
-	NEMESISVER = "2.2"
+	NEMESISVER = "2.3"
 	OEVER = "1.6"
 	IMAGEVER = about.getImageVersionString()
 	ENIGMAVER = about.getEnigmaVersionString()
@@ -95,6 +95,8 @@ class nemesisBluePanel(Screen):
 		self.ecmTimer = eTimer()
 		self.ecmTimer.timeout.get().append(self.readEcmInfo)
 		self.ecmTimer.start(10000, False)
+		self.upgradeTimer = eTimer()
+		self.upgradeTimer.timeout.get().append(self.connShowHide)
 		self.onLayoutFinish.append(self.loadEmuList)
 		self.onShown.append(self.setWindowTitle)
 		self.container = eConsoleAppContainer()
@@ -126,10 +128,16 @@ class nemesisBluePanel(Screen):
 				unlink('/tmp/ver.txt')
 				if int(self.SVNVERSION) < int(newVer):
 					NAddons.CANUPGRADE = True
-					self['conn'].show()
+					self.upgradeTimer.start(500, False)
 					self['conn'].setText(_('Update is available!\nCurrent version: %s\nNew Version: %s\nPlease upgrade Nemesis firmware!') % (self.SVNVERSION, newVer))
 			except:
 				pass
+
+	def connShowHide(self):
+		if self['conn'].visible:
+			self['conn'].hide()
+		else:
+			self['conn'].show()
 
 	def setWindowTitle(self):
 		self.setTitle("%s - %s: %s SVN(%s)" % (_("Nemesis Blue Panel"), _("Image Version"), self.NEMESISVER, self.SVNVERSION))
@@ -141,6 +149,8 @@ class nemesisBluePanel(Screen):
 		else:
 			if self.checkVersionContainer.running():
 				self.checkVersionContainer.kill()
+			if self.upgradeTimer.isActive():
+				self.upgradeTimer.stop()
 			if self.ecmTimer.isActive():
 				self.ecmTimer.stop()
 			if self.checkVersionTimer.isActive():
@@ -222,7 +232,7 @@ class nemesisBluePanel(Screen):
 			self.message += "\nBuild by Gianathem"
 			self.message += "\nBased on Enigma Version: " +  self.ENIGMAVER
 			self.message += "\nKernel version: " + self.KERNELVER
-			self.message += "\n\nFor support visit: http://www.genesi-project.it/"
+			self.message += "\n\nFor download visit: http://www.genesi-project.it/"
 			self.mbox = self.session.open(MessageBox, self.message, MessageBox.TYPE_INFO)
 			self.mbox.setTitle("About Nemesis " + self.NEMESISVER)
 	

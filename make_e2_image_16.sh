@@ -8,7 +8,7 @@ git_dir=`grep "OE_ROOT=" env.source | cut -d "=" -f 2`/1.6/openembedded/conf
 patchdir=$envpath/nemesis
 
 svn_ver=`grep -m 1 "SVN" ${envpath}/git/recipes/nemesis/nemesis-version.bb | cut -d "=" -f 2  | sed -e 's/[a-zA-Z" =]//g'`
-ver='2.2'
+ver='2.3'
 enigmaver='2'
 oever='1.6'
 subver=''

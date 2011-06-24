@@ -4,10 +4,10 @@ LICENSE = "GPLv2"
 
 PN = "enigma2-plugin-systemplugins-lcnscanner"
 
-SRCDATE = "20110306"
+SRCDATE = "20110615"
 BRANCH = "master"
 PV = "2.0-git${SRCDATE}"
-SRCREV = "8bc72766a0af5904f3d9386a123a163e7adf55dd"
+SRCREV = "02b7aca32693015f2977ad34c887eed3d49c36c3"
 PR = "r1"
 
 SRC_URI = "git://openee.git.sourceforge.net/gitroot/openee/lcnscanner;protocol=git;branch=${BRANCH};tag=${SRCREV}"

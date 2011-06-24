@@ -61,7 +61,7 @@ DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy s
 PN = "enigma2"
 PR = "r0"
 
-SRCDATE = "20110615"
+SRCDATE = "20110624"
 SRCREV = "5e19a3f8a5e8ce8a4e2cb2b601a1b8ef3554e4be"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
@@ -96,6 +96,7 @@ EXTRA_OECONF = " \
 
 do_install_append() {
 	find ${D}/usr/lib/enigma2/python/Nemesis -name "*.py" | xargs rm -f
+	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ClockToText.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/Nemesis*.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ServiceSat.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ServiceNumber.py
