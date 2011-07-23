@@ -69,7 +69,7 @@ class nemesisDownloader(Screen):
 	
 	def fileDownload(self):
 		from Tools.Downloader import downloadWithProgress
-		print "[download] downloading %s to %s" % (self.url, self.dstfilename)
+		print "[download] downloading file..."
 		self.download = downloadWithProgress(self.url, self.dstfilename)
 		self.download.addProgress(self.progress)
 		self.download.start().addCallback(self.finished).addErrback(self.failed)

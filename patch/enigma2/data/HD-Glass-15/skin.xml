@@ -2234,12 +2234,11 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="key_red" render="Label" position="5,460" transparent="1"  zPosition="2" size="170,28" font="Prive2;20" halign="center" valign="center" foregroundColor="red" />
 		<widget source="key_green" render="Label" position="185,460" transparent="1"  zPosition="2" size="170,28" font="Prive2;20" halign="center" valign="center" foregroundColor="green"  />
 	</screen>
-	<screen name="UpdatePlugin" position="center,190" size="550,380" title="Software update">
-		<widget name="activityslider" position="125,70" size="300,8" pixmap="skin_default/slider/slider_tv.png" transparent="1" />
-		<widget name="slider" position="25,360" size="500,5" />
-		<widget source="package" render="Label" position="5,5" size="540,60" font="Prive2;18" halign="center" valign="center" />
-		<widget source="status" render="Label" position="5,83" size="540,60" font="Prive2;18" halign="center" valign="center" />
-		<ePixmap position="125,144" size="300,215" pixmap="skin_default/menu/box.png" alphatest="blend" transparent="1" />
+	<screen name="UpdatePlugin" position="710,532" size="550,168" title="Software update">
+		<widget source="package" render="Label" position="10,10" size="530,60" font="Prive2;18" halign="center" valign="center" />
+		<widget name="activityslider" position="125,75" size="300,8" pixmap="skin_default/slider/slider_tv.png" transparent="1" />
+		<widget source="status" render="Label" position="10,88" size="530,60" font="Prive2;18" halign="center" valign="center" />
+		<widget name="slider" position="25,153" size="500,5" />
 	</screen>
 	<screen name="BackupSelection" position="center,130" size="720,500" title="Select files/folders to backup">
 		<widget name="checkList" position="5,5" size="710,450" transparent="1" scrollbarMode="showOnDemand" />

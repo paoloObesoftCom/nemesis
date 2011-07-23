@@ -42,7 +42,7 @@ class NInfo(Screen):
 			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
 		</screen>"""
 
-	def getPlugins(self):
+	def getPluginsExt(self):
 		plist = []
 		pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSMENU)
 		for plugin in pluginlist:
@@ -52,18 +52,35 @@ class NInfo(Screen):
 				self.cccmaplugyn = p[0]
 			if (p[0].name.find("Gbox Suite") != -1):
 				self.gboxplugyn = p[0]
+			if (p[0].name.find("OscamInfo") != -1):
+				self.oscamplugyn = p[0]
 	
+	def getPluginsMenu(self):
+		plist = []
+		pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU)
+		for plugin in pluginlist:
+			plist.append(PluginEntryComponent(plugin))
+		for p in plist:
+			if (p[0].name.find("CCcam Info") != -1):
+				self.cccmaplugyn = p[0]
+			if (p[0].name.find("Gbox Suite") != -1):
+				self.gboxplugyn = p[0]
+			if (p[0].name.find("OscamInfo") != -1):
+				self.oscamplugyn = p[0]
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self["title"] = Label(_("System Information"))
-		self.cccmaplugyn = self.gboxplugyn = ''
-		self.getPlugins()
+		self.cccmaplugyn = self.gboxplugyn = self.oscamplugyn = ''
+		self.getPluginsExt()
+		self.getPluginsMenu()
 		self.infoMenuList = [
 			('GboxInfo',_('Gbox Suite'),'icons/cams.png',self.gboxplugyn),
 			('CInfo',_('CCcam Info'),'icons/cams.png',self.cccmaplugyn),
+			('OInfo',_('Oscam Info'),'icons/cams.png',self.oscamplugyn),
 			('DInfo',_('Show Device Status'),'icons/space.png',True),
 			('PInfo',_('Show Active Process'),'icons/process.png',True),
 			('SInfo',_('Show Service Info'),'icons/service.png',True),
@@ -101,6 +118,9 @@ class NInfo(Screen):
 		elif (self.sel == "CInfo"):
 			if self.cccmaplugyn:
 				self.cccmaplugyn(session=self.session, servicelist=self)
+		elif (self.sel == "OInfo"):
+			if self.oscamplugyn:
+				self.oscamplugyn(session=self.session, servicelist=self)
 		elif (self.sel == "DInfo"):
 				self.session.open(showDevSpaceInfo)
 		elif (self.sel == "PInfo"):
@@ -229,6 +249,12 @@ class showDevSpaceInfo(Screen):
 					line = line.replace('part1', ' ')
 					x = line.strip().split()
 					if x[0] == '/dev/root':
+						fls = int(x[4].replace('%', ''))
+						s = getUnit(int(x[1]))
+						self['f1'].setText('Flash: %s  in use: %s' % (s, x[4]))
+						s = getSize(int(x[1]),int(x[2]),int(x[3]))
+						self['f2'].setText('Flash: %s\tUsed: %s\tFree: %s' % (s[0],s[1],s[2]))
+					elif x[0] == '/dev/mtdblock3':
 						fls = int(x[4].replace('%', ''))
 						s = getUnit(int(x[1]))
 						self['f1'].setText('Flash: %s  in use: %s' % (s, x[4]))

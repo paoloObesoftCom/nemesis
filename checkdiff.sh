@@ -110,6 +110,7 @@ check_enigma2()
 	kompare $e2_cvssrc/data/setup.xml patch/enigma2/data/setup.xml
 	kompare $e2_cvssrc/data/menu.xml patch/enigma2/data/menu.xml
 	kompare $e2_cvssrc/data/fonts/Makefile.am patch/enigma2/data/fonts/Makefile.am
+	kompare $e2_cvssrc/data/unicable.xml patch/enigma2/data/unicable.xml
 
 	kompare $e2_cvssrc/main/Makefile.am patch/enigma2/main/Makefile.am
 	kompare $e2_cvssrc/main/enigma.cpp patch/enigma2/main/enigma.cpp

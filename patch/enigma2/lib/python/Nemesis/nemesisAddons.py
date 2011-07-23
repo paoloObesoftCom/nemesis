@@ -12,8 +12,8 @@ from Components.config import config
 from Components.PluginComponent import plugins
 from Components.Sources.StaticText import StaticText
 from Tools.LoadPixmap import LoadPixmap
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
-from os import system, remove, listdir, chdir, getcwd
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, pathExists, createDir
+from os import system, remove, listdir, chdir, getcwd, rename
 from nemesisTool import nemesisTool, GetSkinPath
 from nemesisConsole import nemesisConsole
 from nemesisDownloader import nemesisDownloader
@@ -400,15 +400,17 @@ class	RAddonsDown(Screen):
 			self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
 			return
 		url = {'E':self.linkExtra,'A':self.linkAddons}[u.typeDownload] + u.dir + "/" + u.filename 
+		if not pathExists("/tmp/.-"):
+			createDir("/tmp/.-")
 		if config.proxy.isactive.value:
-			cmd = "/var/etc/proxy.sh && wget %s -O /tmp/%s" % (url ,u.filename)
+			cmd = "/var/etc/proxy.sh && wget %s -O /tmp/.-/%s" % (url ,".-")
 			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Download: ') + u.filename)
 		else:
-			self.session.openWithCallback(self.executedScript, nemesisDownloader, url, "/tmp/", u.filename)
+			self.session.openWithCallback(self.executedScript, nemesisDownloader, url, "/tmp/.-/", ".-")
 		
 	def executedScript(self, *answer):
 		if answer[0] == nemesisConsole.EVENT_DONE:
-			if fileExists('/tmp/' + u.filename):
+			if fileExists('/tmp/.-/.-'):
 				msg = _('Do you want install the addon:\n%s?') % u.addonsName
 				box = self.session.openWithCallback(self.installAddons, MessageBox, msg, MessageBox.TYPE_YESNO)
 				box.setTitle(_('Install Addon'))
@@ -424,27 +426,28 @@ class	RAddonsDown(Screen):
 			if (u.filename.find('.ipk') != -1):
 				args = {True: '--force-overwrite --force-defaults ',False: ''}[config.nemesis.ipkg.overwriteUpgrade.value]
 				args = {True: '--force-reinstall --force-defaults ',False: ''}[config.nemesis.ipkg.forceReInstall.value]
-				self.container.execute("ipkg " + args + "install /tmp/" + u.filename)
+				rename("/tmp/.-/.-", "/tmp/.-/p.ipk")
+				self.container.execute("ipkg " + args + "install /tmp/.-/p.ipk")
 			elif (u.filename.find('.tbz2') != -1):
 				if (u.pluginType == 'Settings') or (u.pluginType == 'e2Settings'):
 					self['conn'].text = _("Remove old Settings\nPlease wait...")
 					u.removeSetting()	
-				self.container.execute("tar -jxvf /tmp/" + u.filename + " -C /")
+				self.container.execute("tar -jxvf /tmp/.-/.- -C /")
 			else:
 				self['conn'].text = _('File: %s\nis not a valid package!') % u.filename
 		else:
-			if fileExists('/tmp/' + u.filename):
-				remove("/tmp/" + u.filename)
+			if pathExists('/tmp/.-'):
+				system("rm -rf /tmp/.-")
 	
 	def runFinished(self, retval):
-		if fileExists('/tmp/' + u.filename):
-			remove("/tmp/" + u.filename)
+		if pathExists('/tmp/.-'):
+			system("rm -rf /tmp/.-")
 		if (u.pluginType == 'Settings') or (u.pluginType == 'e2Settings'):
 			self['conn'].text = _("Reload new Settings\nPlease wait...")
 			u.reloadSetting()
 		if (u.pluginType == 'Plugins') or (u.pluginType == 'e2Plugins'):
 			self['conn'].text = _("Reload Plugins list\nPlease Wait...")
-			plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+			self.reloadPluginlist()
 		self['conn'].text = _("Addon installed succesfully!")
 		if fileExists('/tmp/.restartE2'):
 			remove("/tmp/.restartE2")
@@ -452,6 +455,10 @@ class	RAddonsDown(Screen):
 			box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg , MessageBox.TYPE_YESNO)
 			box.setTitle(_('Restart Enigma2'))
 	
+	def reloadPluginlist(self):
+		print "Read plugin list"
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+
 	def cancel(self):
 		if not self.container.running():
 			del self.container.appClosed[:]
