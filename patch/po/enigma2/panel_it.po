@@ -961,8 +961,8 @@ msgstr ""
 msgid "Remove from EPG Blacklist"
 msgstr "Rimuovi dalla EPG Blacklist"
 
-msgid "Add to EPG Blacklist"
-msgstr "Aggiungi alla EPG Blacklist"
+msgid "CrossEPG Setup"
+msgstr "Configura CrossEPG"
 
 msgid "January"
 msgstr "Gennaio"

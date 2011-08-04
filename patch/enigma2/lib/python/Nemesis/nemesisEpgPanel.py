@@ -13,7 +13,7 @@ from Components.config import config, ConfigNothing, ConfigFile
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.MenuList import MenuList
 from Tools.LoadPixmap import LoadPixmap
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, SCOPE_PLUGINS
 from os import system, remove as os_remove
 from nemesisTool import GetSkinPath, ListboxE2
 from nemesisConsole import nemesisConsole
@@ -66,15 +66,6 @@ class nemesisEpgPanel(Screen):
 			if (p[0].name.find("EPGSearch") != -1):
 				self.epgserchplugin = p[0]
 	
-	def getE2loader(self):
-		searchPaths = ['/media/usb/e2_loadepg/%s','/media/cf/e2_loadepg/%s']
-		for path in searchPaths:
-			pngname = (path % 'e2_loadepg.py')
-			if fileExists(pngname):
-				self.e2loadepgpgname = pngname
-				return True
-		return False
-	
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
@@ -85,17 +76,19 @@ class nemesisEpgPanel(Screen):
 		self["title"] = Label(_("EPG Control Center"))
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
-		self.e2loadepgpgname = ''
-		self.e2Loader = self.getE2loader()
 		self.epgserchplugin = ''
 		self.getPlugins()
+
+		isCrossEPG = False
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/CrossEPG/plugin.py")):
+			isCrossEPG = True
+
 		self.epgMenuList = [
 			('searchEPGe2',_('EPG Search (enigma2)'),'icons/search.png',self.epgserchplugin),
 			('searchEPG',_('EPG Search (Nemesis)'),'icons/search.png',True),
 			('searchEPGLast',_('EPG Search History (Nemesis)'),'icons/search.png',True),
+			('setupCrossEPG',_('CrossEPG Setup'),'icons/extensions.png',isCrossEPG),
 			('downloadEPG',_('Download EPG with CrossEPG'),'icons/get.png',True),
-			('e2LoaderEpg',_('Start e2_loadepg (background)'),'icons/get.png',self.e2Loader),
-			('e2LoaderEpgI',_('Start e2_loadepg (interactive)'),'icons/get.png',self.e2Loader),
 			('reloadEPG',_('Load EPG in Enigma cache'),'icons/manual.png',True),
 			('eraseEPG',_('Erase Enigma EPG cache'),'icons/remove.png',True),
 			('backupEPG',_('Backup Enigma EPG cache'),'icons/save.png',True),
@@ -155,6 +148,13 @@ class nemesisEpgPanel(Screen):
 				self.session.openWithCallback(self.beginSearch,InputBox, title = _("Enter event to search:"), windowTitle = _("Search in EPG cache"), text="")
 		elif (sel == "searchEPGLast"):
 			self.session.open(NEpgSearchLast)
+		elif (sel == "setupCrossEPG"):
+			try:
+				from Plugins.SystemPlugins.CrossEPG.crossepg_main import crossepg_main
+			except ImportError:
+				self.session.open(MessageBox, _("The CrossEPG Plugin is not installed!\nPlease install it."), type = MessageBox.TYPE_INFO,timeout = 10 )
+			else:
+				crossepg_main.setup(self.session)
 		elif (sel == "downloadEPG"):
 			if self.checkDevice():
 				self.ref = self.session.nav.getCurrentlyPlayingServiceReference()
@@ -162,18 +162,7 @@ class nemesisEpgPanel(Screen):
 					self.downloadItEPG()
 				elif config.nemepg.downskyuk.value:
 					self.downloadUkEPG()
-		elif (sel == "e2LoaderEpg") or (sel == "e2LoaderEpgI"):
-			self.downIMode = { 'e2LoaderEpg':False, 'e2LoaderEpgI':True }[sel]
-			msg = _('Do you want download EPG\nusing e2_loadepg?')
-			self.epgDBox = self.session.openWithCallback(self.downEPG,MessageBox, msg, MessageBox.TYPE_YESNO)
-			self.epgDBox.setTitle(_("Download EPG"))
 		elif (sel == "reloadEPG"):
-			if self.e2Loader:
-				searchPaths = ['/tmp/%s','/media/usb/%s','/media/cf/%s','/media/hdd/%s']
-				for path in searchPaths:
-					epgFile = (path % 'ext.epg.dat')
-					if fileExists(epgFile):
-						system("mv " +  epgFile + " " + config.misc.epgcache_filename.value + "/epg.dat")
 			msg = _('Load EPG data in Enigma cache from:\n%s/epg.dat.\nPlease Wait...') % config.misc.epgcache_filename.value
 			self.epgRBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, enable_input = False)
 			self.epgRBox.setTitle(_("Loading EPG"))
@@ -227,15 +216,6 @@ class nemesisEpgPanel(Screen):
 		if cmd is not None:
 			self.session.open(NEpgSearch, cmd)
 
-	def downEPG(self, answer):
-		if (answer is True):
-			cmd = { True:self.e2loadepgpgname, False:self.e2loadepgpgname + ' &' }[self.downIMode]
-			if self.downIMode:
-				self.session.open(nemesisConsole, cmd, _('e2_loadepg is running...'))
-			else:
-				tool.sendCmd(cmd)
-			self.close()
-	
 	def downloadItEPG(self):
 		self.zap(eServiceReference(getSid(config.nemepg.skyitch.value)))
 		cmd = self.myEpgDownloader + " skyitalia"
@@ -289,6 +269,7 @@ class nemesisEpgPanel(Screen):
 		epg.saveEpg()
 		system("cp " +  config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
 		self.epgRBox.close()
+		self.close()
 			
 	def clearEPG(self):
 		if self.clearEPGTimer.isActive():
