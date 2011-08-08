@@ -41,8 +41,8 @@ rebuild_image()
 
 move_image()
 {
-	cp tmp/deploy/images/*.nfi ${HOME}/${imagename}.nfi
-	cd ${HOME}
+	cp tmp/deploy/images/*.nfi ${HOME}/Images/${imagename}.nfi
+	cd ${HOME}/Images
 	zip ${imagename}.zip ${imagename}.nfi
 	rm -f ${imagename}.nfi
 	cd ${curdir}
