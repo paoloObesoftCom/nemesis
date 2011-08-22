@@ -61,7 +61,7 @@ DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy s
 PN = "enigma2"
 PR = "r0"
 
-SRCDATE = "20110725"
+SRCDATE = "20110822"
 SRCREV = "5e19a3f8a5e8ce8a4e2cb2b601a1b8ef3554e4be"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
@@ -75,7 +75,8 @@ PV = "experimental-git${SRCDATE}"
 #SRCREV = ""
 ####################################################
 
-SRC_URI = "file://../../../../sources/enigma2.git_Nemesis_16.tar.gz"
+SRC_URI = "file://../../../../sources/enigma2.git_Nemesis_16.tar.gz \
+           file://gpatch.diff;patch=1"
 SRC_URI_append_dm7025 = " file://7025_pvr_device_compatibility.diff;patch=1;pnum=1"
 
 S = "${WORKDIR}/git"

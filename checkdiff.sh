@@ -161,6 +161,7 @@ check_oe_16()
 	kompare $oesrc16/openembedded/recipes/initscripts/initscripts-1.0/dm7020hd/bootup openembedded-1.6/recipes/initscripts/initscripts-1.0/dm7020hd/bootup
 	kompare $oesrc16/openembedded/recipes/initscripts/initscripts-1.0/dm8000/bootup openembedded-1.6/recipes/initscripts/initscripts-1.0/dm8000/bootup
 	kompare $oesrc16/openembedded/recipes/initscripts/initscripts-opendreambox_1.0.bb openembedded-1.6/recipes/initscripts/initscripts-opendreambox_1.0.bb
+	kompare $oesrc16/openembedded/recipes/linux/linux-opendreambox-2.6.18.inc openembedded-1.6/recipes/linux/linux-opendreambox-2.6.18.inc
 	kompare $oesrc16/openembedded/recipes/linux/linux-dm500hd-2.6.18/defconfig openembedded-1.6/recipes/linux/linux-dm500hd-2.6.18/defconfig
 	kompare $oesrc16/openembedded/recipes/linux/linux-dm800-2.6.18/defconfig openembedded-1.6/recipes/linux/linux-dm800-2.6.18/defconfig
 	kompare $oesrc16/openembedded/recipes/linux/linux-dm800se-2.6.18/defconfig openembedded-1.6/recipes/linux/linux-dm800se-2.6.18/defconfig

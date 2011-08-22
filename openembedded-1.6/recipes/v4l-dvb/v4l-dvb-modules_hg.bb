@@ -2,10 +2,10 @@ require v4l-dvb-modules.inc
 
 DEPENDS += " mercurial-native"
 
-SRCDATE = "20100904"
+SRCDATE = "20110822"
 SRCREV = "6e0befab696a"
 PV = "0.0+hg${SRCDATE}"
-PR = "r58"
+PR = "r0"
 
 SRC_URI = "hg://linuxtv.org/hg/;module=v4l-dvb;rev=${SRCREV} \
            file://defconfig \
@@ -16,7 +16,7 @@ SRC_URI = "hg://linuxtv.org/hg/;module=v4l-dvb;rev=${SRCREV} \
            file://localversion.patch;patch=1 \
            file://fix-strip.patch;patch=1 \
            file://build-fix.patch;patch=1 \
-           file://fix-get-property.patch;patch=1 \
+           file://backport-*.patch \
            file://v4l-dvb-as102.patch;patch=1 \
            file://v4l-dvb-a867.patch;patch=1 \
            file://v4l-dvb-tua9001.patch;patch=1 \
@@ -33,4 +33,17 @@ SRC_URI = "hg://linuxtv.org/hg/;module=v4l-dvb;rev=${SRCREV} \
 "
 
 S = "${WORKDIR}/v4l-dvb"
+
+do_munge() {
+	CUR=`pwd`
+	cd ${S}/linux
+	oenote "cd to '${S}/linux'";
+	for i in `ls ${WORKDIR}/backport-*.patch | sort -n | xargs`; do
+		oenote "Applying v4l-dvb backport patch '$i'";
+		patch -p1 < $i;
+	done;
+	cd $CUR
+}
+
+addtask munge before do_compile after do_patch
 

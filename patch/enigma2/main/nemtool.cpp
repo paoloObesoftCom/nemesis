@@ -144,6 +144,32 @@ int nemTool::getVarSpacePer()
 	return ris;
 }
 
+bool nemTool::exists(char *path, bool *mode=false)
+{
+	if (!instance)
+		instance=this;
+	FILE *f = fopen(path,"r");
+	if (f) {
+		fclose(f);
+		return true;
+	} 
+	else 
+		return false;
+}
+
+bool nemTool::existsdir(char *path, bool *mode=false)
+{
+	if (!instance)
+		instance=this;
+	DIR *f = opendir(path);
+	if (f) {
+		closedir(f);
+		return true;
+	} 
+	else 
+		return false;
+}
+
 nemTool::~nemTool()
 {
 	if (instance==this)

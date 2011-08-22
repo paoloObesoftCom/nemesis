@@ -7,8 +7,8 @@ dmdir=`grep "OE_BASE=" env.source | cut -d "=" -f 2`/
 git_dir=`grep "OE_ROOT=" env.source | cut -d "=" -f 2`/1.6/openembedded/conf
 patchdir=$envpath/nemesis
 
-svn_ver=`grep -m 1 "SVN" ${envpath}/git/recipes/nemesis/nemesis-version.bb | cut -d "=" -f 2  | sed -e 's/[a-zA-Z" =]//g'`
-ver='2.3'
+svn_ver=`grep -m 1 "SVN" ${envpath}/git/recipes/nemesis/nemesis-version.bb | cut -d "-" -f 2  | sed -e 's/[a-zA-Z" =]//g'`
+ver=`grep -m 1 "PV" ${envpath}/git/recipes/nemesis/nemesis-version.bb | cut -d "=" -f 2 | sed -e 's/[a-zA-Z" =]//g' | cut -d "-" -f 1`
 enigmaver='2'
 oever='1.6'
 subver=''
@@ -129,6 +129,7 @@ case "$1" in
 		rebuild_image
 		;;
 	*)
+		echo "Script to build image: ${imagename}" 
 		echo $"Usage for $dmver: $0 {patch|enigma2|plugins|feed|all|logo|move|kernel|nemesis|tuner|clean}"
 		exit 1
 		;;
