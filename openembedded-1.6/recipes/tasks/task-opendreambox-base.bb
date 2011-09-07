@@ -1,8 +1,8 @@
 DESCRIPTION = "OpenDreambox: Base Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PV = "2.2"
-PR = "r2"
+PV = "2.3"
+PR = "r0"
 
 inherit task
 
@@ -38,6 +38,7 @@ NEMESIS_COMMON = "\
   ez-ipupdate \
   bzip2 \
   libcap \
+  libpcsclite \
   python-gdata \
   dreambox-nemesis \
   nemesis-socket \

@@ -2,7 +2,7 @@ require v4l-dvb-modules.inc
 
 DEPENDS += " mercurial-native"
 
-SRCDATE = "20110822"
+SRCDATE = "20110906"
 SRCREV = "6e0befab696a"
 PV = "0.0+hg${SRCDATE}"
 PR = "r0"

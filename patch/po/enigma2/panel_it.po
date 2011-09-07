@@ -154,7 +154,7 @@ msgstr ""
 "Addon non installato correttamente!"
 
 msgid "Manual Installation"
-msgstr "Installatione Manuale"
+msgstr "Installazione Manuale"
 
 msgid ""
 "Put your plugin xxx.tbz2 or xxx.ipk\n"

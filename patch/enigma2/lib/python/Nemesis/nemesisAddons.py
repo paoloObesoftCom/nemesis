@@ -33,6 +33,12 @@ class util:
 	size = 0
 	check = 0
 	
+	def reloadSetting(self):
+		print "Reload settings"
+		self.eDVBDB = eDVBDB.getInstance()
+		self.eDVBDB.reloadServicelist()
+		self.eDVBDB.reloadBouquets()
+
 	def removeSetting(self):
 		print "Remove settings"
 		#system("rm -f /etc/tuxbox/satellites.xml")
@@ -42,12 +48,6 @@ class util:
 		system("rm -f /etc/enigma2/blacklist")
 		system("rm -f /etc/enigma2/whitelist")
 	
-	def reloadSetting(self):
-		print "Reload settings"
-		self.eDVBDB = eDVBDB.getInstance()
-		self.eDVBDB.reloadServicelist()
-		self.eDVBDB.reloadBouquets()
-
 u = util()
 
 class loadXml:
@@ -101,6 +101,9 @@ class loadUniDir:
 
 loadunidir = loadUniDir()
 
+class IDa:
+	ID = 'W91bnQgLW8g'
+		
 class NAddons(Screen):
 	__module__ = __name__
 	skin = """
@@ -142,7 +145,7 @@ class NAddons(Screen):
 		self.linkExtra = t.readExtraUrl()
 
 		isPluginManager = False
-		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.pyo")):
 			isPluginManager = True
 
 		self.MenuList = [

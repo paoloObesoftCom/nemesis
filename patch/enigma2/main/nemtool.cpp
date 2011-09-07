@@ -14,6 +14,8 @@
 
 nemTool *nemTool::instance;
 
+extern "C" int gprint();
+
 void nemTool::readPortNumber(char * port)
 {
 	if (!instance)
@@ -144,7 +146,14 @@ int nemTool::getVarSpacePer()
 	return ris;
 }
 
-bool nemTool::exists(char *path, bool *mode=false)
+bool nemTool::checkUpdate()
+{
+	if (!instance)
+		instance=this;
+  gprint();
+}
+
+bool nemTool::exists(char *path)
 {
 	if (!instance)
 		instance=this;
@@ -157,7 +166,7 @@ bool nemTool::exists(char *path, bool *mode=false)
 		return false;
 }
 
-bool nemTool::existsdir(char *path, bool *mode=false)
+bool nemTool::existsdir(char *path)
 {
 	if (!instance)
 		instance=this;

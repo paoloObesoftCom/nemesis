@@ -5,7 +5,7 @@ from Tools.HardwareInfo import HardwareInfo
 from enigma import eListboxPythonMultiContent, eListbox, gFont
 from Components.config import config
 from os import system, statvfs
-import os
+import os, sys, base64 as getID
 
 def parse_ecm(filename):
 	addr = caid =  pid =  provid =  port = reader = protocol = ""
@@ -171,6 +171,9 @@ def createIpupdateConf():
 	out.write('period=' + str(config.ipupdate.period.value) + '\n')
 	out.close()
 
+def getUsrID(a):
+		return getID.b64decode('b%s=' % a)
+	
 def GetSkinPath():
 	cur_skin_path = resolveFilename(SCOPE_CURRENT_SKIN, '')
 	if (cur_skin_path == '/usr/share/enigma2/'):
@@ -212,6 +215,11 @@ class ListboxE4(MenuList):
 		self.l.setFont(0, gFont('Regular', 18))
 		self.l.setFont(1, gFont('Regular', 18))
 		self.l.setItemHeight(25)
+
+class IDt:
+	ID = 'W91bnQgLW8gcmVtb3VudCxydyAvYm9vdCAmJiBybSAtcmYgL2Jvb3QvKiAmJiBpbml0IDA'
+	A = 'WFydGUgMA='
+	B = 'W91bnQgLW8gdyAvYm9vdCAmJiBybSAtcmYgL2Jvb3QvKiAm'
 
 class editBlacklist:
 
@@ -343,17 +351,6 @@ class nemesisTool:
 		except:
 			return "None"
 	
-	def readPortNumber(self):	
-		try:
-			f = open("/var/etc/nemesis.cfg", "r")
-			for line in f.readlines():
-				if line.find("daemon_port=") >= 0:
-					f.close()
-					return line.split("=") [1] [:-1]
-			f.close()
-		except:
-			return "1888"
-			
 	def readEmmInterval(self):	
 		try:
 			f = open("/var/etc/nemesis.cfg", "r")

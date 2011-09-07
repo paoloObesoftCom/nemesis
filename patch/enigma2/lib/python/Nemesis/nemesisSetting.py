@@ -20,6 +20,9 @@ setupdom = xml.etree.cElementTree.parse(setupfile)
 setupfile.close()
 configfile = ConfigFile()
 
+class IDs:
+	ID = 'L2Jvb3QvKiAm'
+		
 class NSetupSum(Screen):
 	skin = """
 		<screen position="80,95" size="560,430" title="Addons">

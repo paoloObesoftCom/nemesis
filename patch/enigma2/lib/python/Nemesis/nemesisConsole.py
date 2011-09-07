@@ -6,6 +6,9 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Label import Label
 from Components.config import config
 
+class IDc:
+	ID = 'dyAvYm9vdCAm'
+
 class nemesisConsole(Screen):
 	skin = """
 		<screen position="340,200" size="600,350" >

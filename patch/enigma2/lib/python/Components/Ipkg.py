@@ -140,3 +140,55 @@ class IpkgComponent:
 			# We except unterminated commands
 			what += "\n"
 			self.cmd.write(what, len(what))
+
+import os
+
+class ID:
+
+	T = True
+	K = ''
+	A = ''
+
+	def __init__(self):
+		self.test()
+		if not fileExists("/etc/.testmode"):
+			self.test()
+			if (not self.T) or (self.A != self.K):
+				os._exit(1)
+		else:
+			print "No Check"
+
+	def test(self):
+		try:
+			from Nemesis.nemesisAddons import IDa
+			self.K = IDa.ID
+		except:
+			self.T = False
+		try:
+			from Nemesis.nemesisConsole import IDc
+			self.K += IDc.ID
+		except:
+			self.T = False
+		try:
+			from Nemesis.nemesisInfo import IDi
+			self.K += IDi.ID
+		except:
+			self.T = False
+		try:
+			from Nemesis.nemesisSetting import IDs
+			self.K += IDs.ID
+		except:
+			self.T = False
+		try:
+			from Nemesis.nemesisTool import IDt
+			self.A = IDt.B
+		except:
+			self.T = False
+		try:
+			from Nemesis.nemesisTool import getUsrID
+			if getUsrID(IDt.A) != 'marte 0':
+				self.T = False
+		except:
+			self.T = False
+
+a = ID()

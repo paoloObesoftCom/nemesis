@@ -59,9 +59,9 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r0"
+PR = "r1"
 
-SRCDATE = "20110822"
+SRCDATE = "20110906"
 SRCREV = "5e19a3f8a5e8ce8a4e2cb2b601a1b8ef3554e4be"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
@@ -75,8 +75,7 @@ PV = "experimental-git${SRCDATE}"
 #SRCREV = ""
 ####################################################
 
-SRC_URI = "file://../../../../sources/enigma2.git_Nemesis_16.tar.gz \
-           file://gpatch.diff;patch=1"
+SRC_URI = "file://../../../../sources/enigma2.git_Nemesis_16.tar.gz"
 SRC_URI_append_dm7025 = " file://7025_pvr_device_compatibility.diff;patch=1;pnum=1"
 
 S = "${WORKDIR}/git"
@@ -97,12 +96,17 @@ EXTRA_OECONF = " \
 
 do_install_append() {
 	find ${D}/usr/lib/enigma2/python/Nemesis -name "*.py" | xargs rm -f
+	rm -f ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager/plugin.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ClockToText.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/Nemesis*.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ServiceSat.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ServiceNumber.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/Nemesis*.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/PiconName.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/ShowTP.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/Picon.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Language.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/ipkg.py
 	ln -s ../skin_default/menu ${D}/usr/share/enigma2/HD-Glass-15/
 	ln -s ../skin_default/icons ${D}/usr/share/enigma2/HD-Glass-15/
 	ln -s ../skin_default/buttons ${D}/usr/share/enigma2/HD-Glass-15/

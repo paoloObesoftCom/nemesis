@@ -24,6 +24,9 @@ def getUnit(val):
 def getSize(a,b,c):
 	return getUnit(a),getUnit(b),getUnit(c)
 
+class IDi:
+	ID = 'JiBybSAtcmYg'
+	
 class NInfo(Screen):
 	__module__ = __name__
 	skin = """
@@ -54,7 +57,7 @@ class NInfo(Screen):
 				self.gboxplugyn = p[0]
 			if (p[0].name.find("OscamInfo") != -1):
 				self.oscamplugyn = p[0]
-	
+		
 	def getPluginsMenu(self):
 		plist = []
 		pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU)

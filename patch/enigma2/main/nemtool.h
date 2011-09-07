@@ -30,11 +30,12 @@ public:
 	static nemTool *getInstance() { return instance; }
 	void getRegKey(const char * key, char * ris);
 	void readPortNumber(char * port);
-	bool exists(char *path, bool *mode);
-	bool existsdir(char *path, bool *mode);
+	bool exists(char *path);
+	bool existsdir(char *path);
 	bool sendCmd(char *command);
 	int getVarSpace();
 	int getVarSpacePer();
+	bool checkUpdate();
 	nemTool() {}
 	~nemTool();
 };

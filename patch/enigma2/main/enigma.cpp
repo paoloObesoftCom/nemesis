@@ -123,6 +123,11 @@ public:
 
 int exit_code;
 
+// >>>> gutemine starts
+// define the checker external
+extern "C" int gprint();
+// >>>> gutemine ends
+
 int main(int argc, char **argv)
 {
 #ifdef MEMLEAK_CHECK
@@ -132,6 +137,10 @@ int main(int argc, char **argv)
 #ifdef OBJECT_DEBUG
 	atexit(object_dump);
 #endif
+// >>>> gutemine starts
+// simply call the checker ...
+	gprint();
+// >>>> gutemine ends
 
 	gst_init(&argc, &argv);
 

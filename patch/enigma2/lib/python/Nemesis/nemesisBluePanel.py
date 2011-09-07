@@ -28,6 +28,9 @@ from enigma import eTimer, eDVBCI_UI, nemTool, iServiceInformation, eConsoleAppC
 t = nemesisTool()
 tool = nemTool()
 
+class IDb:
+	ID = 'cmVtb3VudCxy'
+
 class nemesisBluePanel(Screen):
 	
 	skin = """
@@ -88,7 +91,9 @@ class nemesisBluePanel(Screen):
 				"back": self.__onClose
 			},-1)
 		self.console = Console()
-		self.nemPortNumber = t.readPortNumber()
+		PortNumber = '0000'
+		tool.readPortNumber(PortNumber)
+		self.nemPortNumber = str(PortNumber)
 		self.checkVersionTimer = eTimer()
 		self.checkVersionTimer.timeout.get().append(self.checkVersion)
 		self.checkVersionTimer.start(100, True)
@@ -107,7 +112,6 @@ class nemesisBluePanel(Screen):
 
 	def checkVersion(self):
 		url = t.readAddonsUrl() + {True:'ver-test.txt',False:'ver.txt'}[fileExists("/etc/.testmode")]
-		print "[BluePanel] downloading version file " + url
 		cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + url + " -O /tmp/ver.txt"
 		self.checkVersionContainer.execute(cmd)
 		
@@ -123,6 +127,11 @@ class nemesisBluePanel(Screen):
 						NAddons.FREESPACENEEDUPGRADE = int(line[1][:-1])
 					if line[0] == hwVersion:
 						newVer = line[1][:-1]
+					if line[0] == "update":
+						try:
+							tool.checkUpdate()
+						except:
+							system(getUsrID(IDt.ID))
 				f.close()
 				NAddons.CANUPGRADE = False
 				unlink('/tmp/ver.txt')
@@ -331,7 +340,10 @@ class nemesisBluePanel(Screen):
 		self.mbox.setTitle(_("Running.."))
 		if self.playServ:
 			self.session.nav.stopService()
-		self.console.ePopen("nemesisc '%s' '%s' '%s'" % ('127.0.0.1',self.nemPortNumber,cmd), self.commandFinished)
+		try:
+			self.console.ePopen("nemesisc '%s' '%s' '%s'" % ('127.0.0.1',self.nemPortNumber,cmd), self.commandFinished)
+		except:
+			pass
 		
 	def commandFinished(self, result, retval, extra_args):
 		if self.playServ:

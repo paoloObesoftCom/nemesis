@@ -55,6 +55,9 @@ def checkDev():
 	except:
 		return None
 
+class IDu:
+	ID = 'JiBpbml0IDA'
+		
 class NUtility(Screen):
 	__module__ = __name__
 	skin = """

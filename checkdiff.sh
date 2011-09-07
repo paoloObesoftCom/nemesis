@@ -132,6 +132,7 @@ check_plugins_e2()
 	kompare $e2_plugsrc/webinterface/src/WebComponents/Sources/WAPfunctions.py patch/enigma2-plugins/webinterface/src/WebComponents/Sources/WAPfunctions.py
 	kompare $e2_plugsrc/quickbutton/src/keymap.xml patch/enigma2-plugins/quickbutton/src/keymap.xml
 	kompare $e2_plugsrc/quickbutton/src/plugin.py patch/enigma2-plugins/quickbutton/src/plugin.py
+	kompare $e2_plugsrc/pluginsort/src/plugin.py patch/enigma2-plugins/pluginsort/src/plugin.py
 }
 
 check_oe_16()
