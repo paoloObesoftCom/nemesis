@@ -10,7 +10,7 @@ from Components.ConfigList import ConfigList
 from Components.config import ConfigSelection, getConfigListEntry, ConfigNothing, KEY_LEFT, KEY_RIGHT, KEY_OK
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Tools.HardwareInfo import HardwareInfo
 from nemesisTool import *
 from nemesisShowPanel import nemesisShowPanel
@@ -111,6 +111,13 @@ class nemesisBluePanel(Screen):
 		self.readEcmInfo()
 
 	def checkVersion(self):
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/WebInterface/plugin.pyo")):
+			try:
+				from Plugins.Extensions.WebInterface.plugin import IDW
+				if getUsrID(IDW.ID) != 'marte 0':
+					os._exit(1)
+			except:
+				os._exit(1)
 		url = t.readAddonsUrl() + {True:'ver-test.txt',False:'ver.txt'}[fileExists("/etc/.testmode")]
 		cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + url + " -O /tmp/ver.txt"
 		self.checkVersionContainer.execute(cmd)
@@ -241,7 +248,7 @@ class nemesisBluePanel(Screen):
 			self.message += "\nBuild by Gianathem"
 			self.message += "\nBased on Enigma Version: " +  self.ENIGMAVER
 			self.message += "\nKernel version: " + self.KERNELVER
-			self.message += "\n\nFor download visit: http://www.genesi-project.it/"
+			self.message += "\n\nFor download visit: http://www.nemesis.tv/"
 			self.mbox = self.session.open(MessageBox, self.message, MessageBox.TYPE_INFO)
 			self.mbox.setTitle("About Nemesis " + self.NEMESISVER)
 	

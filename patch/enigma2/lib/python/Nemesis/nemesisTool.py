@@ -370,7 +370,7 @@ class nemesisTool:
 			f.close()
 			return line [:-1]
 		except:
-			return "http://genesi-project.it/Nemesis/"
+			return "http://nemesis.tv/Nemesis/"
 
 	def readExtraUrl(self):	
 		try:

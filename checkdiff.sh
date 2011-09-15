@@ -82,6 +82,7 @@ check_enigma2()
 	
 	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py patch/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py
 	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/WirelessLan/Wlan.py patch/enigma2/lib/python/Plugins/SystemPlugins/WirelessLan/Wlan.py
+	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/WirelessLan/plugin.py patch/enigma2/lib/python/Plugins/SystemPlugins/WirelessLan/plugin.py
 	kompare $e2_cvssrc/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py patch/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py
 
 	kompare $e2_cvssrc/lib/python/Screens/AudioSelection.py patch/enigma2/lib/python/Screens/AudioSelection.py
@@ -126,6 +127,7 @@ check_enigma2()
 check_plugins_e2()
 {
 	# Check Plugins
+	kompare $e2_plugsrc/webinterface/src/plugin.py patch/enigma2-plugins/webinterface/src/plugin.py
 	kompare $e2_plugsrc/webinterface/src/web-data/objects.js patch/enigma2-plugins/webinterface/src/web-data/objects.js 
 	kompare $e2_plugsrc/webinterface/src/web-data/timer.js patch/enigma2-plugins/webinterface/src/web-data/timer.js 
 	kompare $e2_plugsrc/webinterface/src/WebComponents/Sources/Timer.py patch/enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py

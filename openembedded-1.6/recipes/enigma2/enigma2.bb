@@ -61,7 +61,7 @@ DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy s
 PN = "enigma2"
 PR = "r1"
 
-SRCDATE = "20110906"
+SRCDATE = "20110915"
 SRCREV = "5e19a3f8a5e8ce8a4e2cb2b601a1b8ef3554e4be"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
@@ -106,7 +106,7 @@ do_install_append() {
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/ShowTP.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/Picon.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Language.py
-	rm -f ${D}/usr/lib/enigma2/python/Components/ipkg.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Ipkg.py
 	ln -s ../skin_default/menu ${D}/usr/share/enigma2/HD-Glass-15/
 	ln -s ../skin_default/icons ${D}/usr/share/enigma2/HD-Glass-15/
 	ln -s ../skin_default/buttons ${D}/usr/share/enigma2/HD-Glass-15/

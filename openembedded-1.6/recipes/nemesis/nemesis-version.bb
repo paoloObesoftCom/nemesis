@@ -1,7 +1,7 @@
 DESCRIPTION = "nemesis version"
 LICENSE = "GPL"
 
-SVN = "092"
+SVN = "093"
 PR = "r0"
 PV = "2.3-svn-${SVN}"
 

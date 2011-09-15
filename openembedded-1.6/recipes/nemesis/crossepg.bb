@@ -4,7 +4,7 @@ DEPENDS = "libxml2 zlib python"
 LICENSE = "GPLv2"
 
 REV ="306"
-PR = "r0"
+PR = "r1"
 PN = "enigma2-plugin-systemplugins-crossepg"
 PV = "0.5.9999-svn-${REV}"
 
