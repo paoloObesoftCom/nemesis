@@ -1,8 +1,8 @@
 DESCRIPTION = "nemesis version"
 LICENSE = "GPL"
 
-SVN = "093"
-PR = "r0"
+SVN = "094"
+PR = "r3"
 PV = "2.3-svn-${SVN}"
 
 S = "${WORKDIR}/"
@@ -12,9 +12,10 @@ FILES_${PN} = "/"
 do_install() {
 
 	IMAGE_VERSION="${SVN}"
+	IMAGE_PR="${PR}"
 	IMAGE_DATE="$(date +%Y%m%d%H%M)"
 	IMAGE_TYPE="1"
-	echo "version=${IMAGE_TYPE}${IMAGE_VERSION}${IMAGE_DATE}" > ${S}image-version
+	echo "version=${IMAGE_TYPE}${IMAGE_VERSION}${PR}${IMAGE_DATE}" > ${S}image-version
 	echo "comment=${DISTRO_NAME}" >> ${S}image-version
 	echo "target=9" >> ${S}image-version
 	echo "creator=Gianathem" >> ${S}image-version

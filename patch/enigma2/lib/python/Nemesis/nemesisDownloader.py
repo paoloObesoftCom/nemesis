@@ -27,7 +27,7 @@ class nemesisDownloader(Screen):
 		Screen.__init__(self, session)
 		self.url = url
 		self.filename = filename
-		self.dstfilename = folder + filename
+		self.dstfilename = "%s.-" % folder
 		self["oktext"] = Label(_("OK"))
 		self["canceltext"] = Label(_("Cancel"))
 		self["fname"] = StaticText('')

@@ -17,10 +17,11 @@
 		<item level="0" text="Enable fade in of InfoBar on Zap">config.plugins.FadeSet.fadeInOnZap</item>
 		<item level="0" text="Speed for fade in/out of InfoBar (1-10)">config.plugins.FadeSet.timeout</item>
 	</setup>
-	<setup key="ipkgop" title="Setup OPKG Options">
+	<setup key="ipkgop" title="Setup OPKG/Upgrade Options">
 		<item level="0" text="Force overwrite on upgrade">config.nemesis.ipkg.overwriteUpgrade</item>
 		<item level="0" text="Force reinstall on install">config.nemesis.ipkg.forceReInstall</item>
 		<item level="0" text="OPKG Update connection timeout (20-60 sec)">config.nemesis.ipkg.updateTimeout</item>
+		<item level="0" text="Show firmware upgrade availability on Blue Panel">config.nemesis.ipkg.upgrade</item>
 	</setup>
 	<setup key="dev" title="Setup Device">
 		<item level="0" text="Force Umount before Format">config.nemesis.forceumount</item>

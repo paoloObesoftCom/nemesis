@@ -1,8 +1,8 @@
 DESCRIPTION = "Configuration files for online package repositories aka feeds"
-PR = "r2"
+PR = "r4"
 
-DISTRO_FEED_PREFIX ?= "official"
-DISTRO_FEED_URI ?= "http://sources.dreamboxupdate.com/${DISTRO}/${DISTRO_VERSION}"
+DISTRO_FEED_PREFIX = "Nemesis"
+DISTRO_FEED_URI = "http://nemesis.tv/1.6/EDG/${MACHINE}"
 
 SRC_URI = "file://addons.url"
 

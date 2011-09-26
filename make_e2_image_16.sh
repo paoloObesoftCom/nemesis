@@ -8,12 +8,13 @@ git_dir=`grep "OE_ROOT=" env.source | cut -d "=" -f 2`/1.6/openembedded/conf
 patchdir=$envpath/nemesis
 
 svn_ver=`grep -m 1 "SVN" ${envpath}/git/recipes/nemesis/nemesis-version.bb | cut -d "-" -f 2  | sed -e 's/[a-zA-Z" =]//g'`
+pr_ver=`grep -m 1 "PR" ${envpath}/git/recipes/nemesis/nemesis-version.bb | cut -d "-" -f 2  | sed -e 's/[a-zA-Z" =]//g'`
 ver=`grep -m 1 "PV" ${envpath}/git/recipes/nemesis/nemesis-version.bb | cut -d "=" -f 2 | sed -e 's/[a-zA-Z" =]//g' | cut -d "-" -f 1`
 enigmaver='2'
 oever='1.6'
 subver=''
 data=`date +'%d-%m-%Y-%H-%M'`
-imagename="Nemesis${ver}${subver}-${dmver}-e${enigmaver}-OE(${oever})-SVN(${svn_ver})"
+imagename="Nemesis${ver}${subver}-${dmver}-e${enigmaver}-OE(${oever})-SVN(${svn_ver}${pr_ver})"
 
 [ -e $git_dir/checksums.ini ] && rm -f $git_dir/checksums.ini
 

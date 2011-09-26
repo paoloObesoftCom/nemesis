@@ -21,21 +21,17 @@ class About:
 					#0123 4567 89 01 23 45
 					version = splitted[1]
 					image_type = version[0] # 0 = release, 1 = experimental
-					major = version[1]
-					minor = version[2]
-					revision = version[3]
-					year = version[4:8]
-					month = version[8:10]
-					day = version[10:12]
+					svn = version[1:6]
+					year = version[6:10]
+					month = version[10:12]
+					day = version[12:14]
 					date = '-'.join((day, month, year))
 					if image_type == '0':
 						image_type = "Release"
-						version = ''.join((major, minor, revision))
-						return ' '.join((image_type, "SVN(%s)," % version, date))
+						return ' '.join((image_type, "SVN(%s)," % (svn), date))
 					else:
 						image_type = "Experimental"
-						version = ''.join((major, minor, revision))
-						return ' '.join(("Release SVN(%s)," % version, date))
+						return ' '.join(("Release SVN(%s)," % (svn), date))
 			file.close()
 		except IOError:
 			pass
@@ -47,11 +43,7 @@ class About:
 			for x in lines:
 				splitted = x.split('=')
 				if splitted[0] == "version":
-					version = splitted[1]
-					major = version[1]
-					minor = version[2]
-					revision = version[3]
-					return ''.join((major, minor, revision))
+					return splitted[1][1:4]+splitted[1][6]
 			file.close()
 		except IOError:
 			pass

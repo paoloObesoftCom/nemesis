@@ -409,7 +409,7 @@ class	RAddonsDown(Screen):
 			cmd = "/var/etc/proxy.sh && wget %s -O /tmp/.-/%s" % (url ,".-")
 			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Download: ') + u.filename)
 		else:
-			self.session.openWithCallback(self.executedScript, nemesisDownloader, url, "/tmp/.-/", ".-")
+			self.session.openWithCallback(self.executedScript, nemesisDownloader, url, "/tmp/.-/", u.filename)
 		
 	def executedScript(self, *answer):
 		if answer[0] == nemesisConsole.EVENT_DONE:

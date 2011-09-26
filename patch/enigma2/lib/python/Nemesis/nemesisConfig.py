@@ -33,6 +33,7 @@ def InitNemesisConfig():
 	config.nemesis.ipkg.overwriteUpgrade = ConfigYesNo(default = True)
 	config.nemesis.ipkg.forceReInstall = ConfigYesNo(default = False)
 	config.nemesis.ipkg.updateTimeout = ConfigInteger(20, (20,60))
+	config.nemesis.ipkg.upgrade = ConfigYesNo(default = True)
 #Fadeset
 	config.plugins.FadeSet = ConfigSubsection()
 	config.plugins.FadeSet.fadeIn = ConfigYesNo(default = True) # fade in enable

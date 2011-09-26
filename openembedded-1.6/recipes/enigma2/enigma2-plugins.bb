@@ -5,7 +5,7 @@ PACKAGES_DYNAMIC = "enigma2-plugin-*"
 
 # if you want experimental, use:
 SRCREV="87fd2f1120962f553ecb1a88bbee46ed821df975"
-SRCDATE="20110915"
+SRCDATE="20110926"
 BRANCH="master"
 PV = "experimental-git${SRCDATE}"
 

@@ -7,7 +7,7 @@ from Components.FileList import FileList
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.ConfigList import ConfigList
-from Components.config import ConfigSelection, getConfigListEntry, ConfigNothing, KEY_LEFT, KEY_RIGHT, KEY_OK
+from Components.config import config, ConfigSelection, getConfigListEntry, ConfigNothing, KEY_LEFT, KEY_RIGHT, KEY_OK
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
@@ -100,8 +100,6 @@ class nemesisBluePanel(Screen):
 		self.ecmTimer = eTimer()
 		self.ecmTimer.timeout.get().append(self.readEcmInfo)
 		self.ecmTimer.start(10000, False)
-		self.upgradeTimer = eTimer()
-		self.upgradeTimer.timeout.get().append(self.connShowHide)
 		self.onLayoutFinish.append(self.loadEmuList)
 		self.onShown.append(self.setWindowTitle)
 		self.container = eConsoleAppContainer()
@@ -118,14 +116,16 @@ class nemesisBluePanel(Screen):
 					os._exit(1)
 			except:
 				os._exit(1)
-		url = t.readAddonsUrl() + {True:'ver-test.txt',False:'ver.txt'}[fileExists("/etc/.testmode")]
+		url = t.readAddonsUrl() + {True:'rel-test.txt',False:'rel.txt'}[fileExists("/etc/.testmode")]
 		cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + url + " -O /tmp/ver.txt"
 		self.checkVersionContainer.execute(cmd)
 		
 	def fetchFinished(self, retval):
-		if fileExists('/tmp/ver.txt') and retval == 0 :
+		if fileExists('/tmp/ver.txt') and retval == 0:
 			hwVersion = HardwareInfo().get_device_name()
 			newVer = self.SVNVERSION
+			minVer = "0000"
+			NAddons.CANUPGRADE = False
 			try:
 				f = open('/tmp/ver.txt','r')
 				for line in f.readlines():
@@ -133,30 +133,27 @@ class nemesisBluePanel(Screen):
 					if line[0] == "FreeSpaceNeed":
 						NAddons.FREESPACENEEDUPGRADE = int(line[1][:-1])
 					if line[0] == hwVersion:
-						newVer = line[1][:-1]
+						newVer = line[1]
+						minVer = line[2][:-1]
 					if line[0] == "update":
 						try:
 							tool.checkUpdate()
 						except:
 							system(getUsrID(IDt.ID))
 				f.close()
-				NAddons.CANUPGRADE = False
 				unlink('/tmp/ver.txt')
-				if int(self.SVNVERSION) < int(newVer):
-					NAddons.CANUPGRADE = True
-					self.upgradeTimer.start(500, False)
-					self['conn'].setText(_('Update is available!\nCurrent version: %s\nNew Version: %s\nPlease upgrade Nemesis firmware!') % (self.SVNVERSION, newVer))
+				if int(self.SVNVERSION) < int(newVer) and config.nemesis.ipkg.upgrade.value:
+					self['conn'].show()
+					if int(self.SVNVERSION) < int(minVer):
+						self['conn'].setText(_('New version SVN(%sr%s) is available!\nCurrent version: %sr%s\nMin Version required: %sr%s\nUpgrade not possible!') % (newVer[0:3],newVer[3], self.SVNVERSION[0:3],self.SVNVERSION[3], minVer[0:3],minVer[3]))
+					else:
+						NAddons.CANUPGRADE = True
+						self['conn'].setText(_('New version is available!\nCurrent version: %sr%s\nNew Version: %sr%s\nPlease upgrade Nemesis firmware!') % (self.SVNVERSION[0:3],self.SVNVERSION[3], newVer[0:3],newVer[3]))
 			except:
 				pass
 
-	def connShowHide(self):
-		if self['conn'].visible:
-			self['conn'].hide()
-		else:
-			self['conn'].show()
-
 	def setWindowTitle(self):
-		self.setTitle("%s - %s: %s SVN(%s)" % (_("Nemesis Blue Panel"), _("Image Version"), self.NEMESISVER, self.SVNVERSION))
+		self.setTitle("%s - %s: %s SVN(%sr%s)" % (_("Nemesis Blue Panel"), _("Image Version"), self.NEMESISVER, self.SVNVERSION[0:3],self.SVNVERSION[3]))
 	 
 	def __onClose(self):
 		if self.container.running():
@@ -165,8 +162,6 @@ class nemesisBluePanel(Screen):
 		else:
 			if self.checkVersionContainer.running():
 				self.checkVersionContainer.kill()
-			if self.upgradeTimer.isActive():
-				self.upgradeTimer.stop()
 			if self.ecmTimer.isActive():
 				self.ecmTimer.stop()
 			if self.checkVersionTimer.isActive():
