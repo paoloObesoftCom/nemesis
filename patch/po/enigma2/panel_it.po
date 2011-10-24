@@ -748,8 +748,8 @@ msgstr "Ritardo ECM Info (msec)"
 msgid "Set InfoBar Picon type"
 msgstr "Scegli tipo Picon per InfoBar"
 
-msgid "Setup Console"
-msgstr "Configura Console"
+msgid "Setup Console/RC"
+msgstr "Configura Console/RC"
 
 msgid "Auto close Console on finished event"
 msgstr "Chiudi automaticamente la Console"

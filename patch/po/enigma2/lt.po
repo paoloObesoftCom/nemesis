@@ -3,16 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-01 08:09+0000\n"
-"PO-Revision-Date: 2011-01-28 21:11+0200\n"
-"Last-Translator: Audronis <audrgrin@takas.lt>\n"
+"POT-Creation-Date: 2011-09-07 11:08+0000\n"
+"PO-Revision-Date: 2011-09-29 19:24+0200\n"
+"Last-Translator: AUDRONIS GRINCEVICIUS <audrgrin@takas.lt>\n"
 "Language-Team: Adga / enigma2 (c) <audrgrin@takas.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: lt\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.0.3\n"
 "X-Poedit-Language: Lithuanian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -127,32 +126,8 @@ msgstr ""
 "\n"
 "Peržiūrėkite, įdiekite ir pašalinkite esamus arba įdiegtus paketus."
 
-msgid "CardServers (%s) :"
-msgstr "Kortelių serveriai (%s) :"
-
-msgid "Restart Enigma"
-msgstr "Paleisti iš naujo Enigma"
-
-msgid "Running.."
-msgstr "Veikia.."
-
-msgid "Nemesis Blue Panel"
-msgstr "Nemesis Mėlynoji Panėlė"
-
-msgid "Reload /tmp"
-msgstr "Perkrauti /tmp"
-
-msgid "About Nemesis"
-msgstr "Apie Nemesis"
-
-msgid "Nemesis Timeline"
-msgstr "Nemesis chronologija"
-
-msgid "Nemesis News"
-msgstr "Nemesis naujienos"
-
-msgid "NetworkBrowser"
-msgstr "Tinklo naršyklė"
+msgid " "
+msgstr " "
 
 msgid " Results"
 msgstr "Rezultatai"
@@ -210,13 +185,13 @@ msgstr "#ffffffff"
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#, python-format
 msgid ""
 "%d conflict(s) encountered when trying to add new timers:\n"
 "%s"
 msgstr ""
+"% d konfliktas (-ai), su kuriais, kai bandote pridėti naujus laikmačius:\n"
+"%s"
 
-#, python-format
 msgid "%d jobs are running in the background!"
 msgstr "%d darbai, veikiantys fone!"
 
@@ -244,9 +219,8 @@ msgstr ""
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
 
-#, python-format
 msgid "%s: %s at %s"
-msgstr ""
+msgstr "%s: %s alle %s"
 
 msgid "(ZAP)"
 msgstr "(JUNGTI)"
@@ -397,7 +371,7 @@ msgid "A"
 msgstr "A"
 
 msgid "A BackToTheRoots-Skin .. but with Warp-8 speed."
-msgstr ""
+msgstr "Atgal į TheRoots-Temą .. arba su Warp-8 greičiu."
 
 msgid "A BackToTheRoots-Skin .. or good old times."
 msgstr "Atgal į TheRoots-Temą .. arba kaip senais gerais laikais."
@@ -420,7 +394,7 @@ msgid "A demo plugin for TPM usage."
 msgstr "Demonstracinė papildoma programa TPM vartojimui"
 
 msgid "A dreambox simulation from SG-Atlantis displays."
-msgstr ""
+msgstr "Dreambox imitavimas iš SG-Atlantis ekranų."
 
 #
 msgid ""
@@ -445,7 +419,7 @@ msgid "A graphical EPG interface"
 msgstr "Grafinė EPG sąsaja"
 
 msgid "A graphical EPG interface and EPG tools manager"
-msgstr ""
+msgstr "grafinė EPG sąsaja ir EPG įrankių valdymas"
 
 msgid "A graphical EPG interface."
 msgstr "Grafinė EPG sąsaja."
@@ -842,9 +816,6 @@ msgstr "Visada klausti"
 msgid "Always ask before sending"
 msgstr "Visada klauskite prieš siuntimą"
 
-msgid "Ammount of recordings left"
-msgstr "Suma įrašų kairėje"
-
 #
 msgid "An empty filename is illegal."
 msgstr "Tuščias failo pavadinimas negalimas"
@@ -860,6 +831,9 @@ msgstr "Įvyko nežinoma klaida!"
 #
 msgid "Anonymize crashlog?"
 msgstr "Anonimizuotas crashlog?"
+
+msgid "April"
+msgstr "Balandis"
 
 #
 msgid "Arabic"
@@ -934,11 +908,12 @@ msgstr "Klausti vartotojo"
 msgid "Aspect Ratio"
 msgstr "Vaizdo formatas"
 
+#
+msgid "Aspect ratio"
+msgstr "Vaizdo santykis"
+
 msgid "Assigning providers/services/caids to a CI module"
 msgstr "Priskirti tiekėjus/kanalus/caids CI moduliui"
-
-msgid "Atheros"
-msgstr "Atheros"
 
 #
 msgid "Audio"
@@ -947,6 +922,10 @@ msgstr "Garsas"
 #
 msgid "Audio Options..."
 msgstr "Garso nustatymai..."
+
+#
+msgid "Audio PID"
+msgstr "Garso PID"
 
 msgid "Audio Sync"
 msgstr "Garso sinchronizavimas"
@@ -957,6 +936,10 @@ msgstr "Garso sinchronizavimo nustatymai"
 
 msgid "AudoSync allows delaying the sound output (Bitstream/PCM) so that it is synchronous to the picture."
 msgstr "AudoSync leidžia uždelsti garso išėjimą (Bitstream/PCM), kad tai būtų sinchroniška paveikslėlyje."
+
+#
+msgid "August"
+msgstr "Rugpjūtis"
 
 #
 msgid "Australia"
@@ -1011,6 +994,16 @@ msgstr "Auto laikmačio apžvalga"
 msgid "AutoTimer scans the EPG and creates Timers depending on user-defined search  criteria."
 msgstr "Autolaikmatis skanuoja EPG ir kuria Laikmačius priklausomai nuo vartotojo apibrėžtų paieškos kriterijų."
 
+msgid "AutoTimer was added successfully"
+msgstr "Auto laikmatis buvo pridėtas sėkmingai"
+
+msgid "AutoTimer was changed successfully"
+msgstr "Auto laikmatis buvo pakeistas sėkmingai"
+
+#
+msgid "AutoTimer was removed"
+msgstr "Auto laikmatis buvo pašalintas"
+
 #
 msgid "Automatic"
 msgstr "Automatinis"
@@ -1042,6 +1035,19 @@ msgstr "Automatiškai atnaujinti EPG"
 
 msgid "Automatically send crashlogs to Dream Multimedia"
 msgstr "Automatiškai siųsti crashlogs į Dream Multimediją"
+
+msgid "Autoresolution Switch"
+msgstr "Jungti automatinę skiriamąją gebą"
+
+msgid "Autoresolution is not working in Scart/DVI-PC Mode"
+msgstr "Auto skiriamoji geba neveikia Scart/DVI-PC režime"
+
+#
+msgid "Autoresolution settings"
+msgstr "Auto skiriamosios gebos nustatymai"
+
+msgid "Autoresolution videomode setup"
+msgstr "Auto skiriamosios gebos vaizdo režimo nustatymas"
 
 msgid "Autos & Vehicles"
 msgstr "Automobiliai ir transporto priemonės"
@@ -1077,6 +1083,12 @@ msgstr "BER:"
 #
 msgid "Back"
 msgstr "Atgal"
+
+msgid "Back, lower USB Slot"
+msgstr "Galinis, apatinis USB lizdas"
+
+msgid "Back, upper USB Slot"
+msgstr "Galinis, viršutinis USB lizdas"
 
 #
 msgid "Background"
@@ -1195,6 +1207,9 @@ msgstr "Šviesumas"
 msgid "Brightness on vision"
 msgstr "Vaizdo šviesumas"
 
+msgid "Browse ORF and SAT1 Teletext independent from channel. This need I-net conection."
+msgstr "Peržiūrėkite ORF ir SAT1 Teletekstą, nepriklausomą nuo kanalo. Tam reikalingas interneto ryšys."
+
 msgid "Browse for and connect to network shares"
 msgstr "Ieškoti ir jungtis prie tinklo bendrinimo"
 
@@ -1221,6 +1236,12 @@ msgstr "Irašyti savo įrašus į DVD"
 
 msgid "Bus: "
 msgstr "Bus:"
+
+msgid "By enabling this events will not be matched if they don't occur on certain dates."
+msgstr "Įjungus tai, įvykiai nebus suderinti, jie neįvyks tam tikromis datomis."
+
+msgid "By enabling this you will be notified about timer conflicts found during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
+msgstr "Įjungus tai, jūs būsite informuotas apie laikmačio konfliktus, surastus per automatizuotą apklausinėjimą. Nėra jokio apimto intelekto, tokiu būdu tai gali trukdyti jus apie tą patį konfliktą nuolat."
 
 #
 msgid "By pressing the OK Button on your remote control, the info bar is being displayed."
@@ -1264,7 +1285,7 @@ msgid "Cache Thumbnails"
 msgstr "Slėpti nedidelius"
 
 msgid "Callmonitor for NCID-based call notification"
-msgstr "Callmonitor dėl NCID pagrindu skambinamo pranešimo"
+msgstr "Callmonitor dėl NCID skambučių pranešimo"
 
 msgid "Callmonitor for the Fritz!Box routers"
 msgstr "Callmonitor dėl Fritz!Box routerių"
@@ -1481,17 +1502,11 @@ msgstr "Uždaryti ir išsaugoti pakeitimus"
 msgid "Close title selection"
 msgstr "Uždaryti pavadinimo pasirinkimą"
 
-msgid "Code rate high"
-msgstr "Aukšta kodavimo norma"
-
-msgid "Code rate low"
-msgstr "Žema kodavimo norma"
-
 #
-msgid "Coderate HP"
-msgstr "Kodavimo greitis HP"
+msgid "Code rate HP"
+msgstr "Kodavimo norma HP"
 
-msgid "Coderate LP"
+msgid "Code rate LP"
 msgstr "Kodavimo norma LP"
 
 #
@@ -1599,7 +1614,7 @@ msgstr "Patvirtinkite formatą"
 
 #
 msgid "Conflicting timer"
-msgstr "Laikmačio nesuderinamumas"
+msgstr "Nesuderinamas laikmatis"
 
 #
 msgid "Connect"
@@ -1663,13 +1678,13 @@ msgid "Control your dreambox with only the MUTE button."
 msgstr "Kontroliuokite savo Dreambox tiktai su MUTE mygtuku."
 
 msgid "Control your internal system fan."
-msgstr "Kontroliuokite savo vidaus sistemą."
+msgstr "Kontroliuokite savo vidaus sistemos ventiliatorių."
 
 msgid "Control your kids's tv usage"
 msgstr "Kontroliuokite savo vaikų televizijos naudojimą"
 
 msgid "Control your system fan"
-msgstr "Kontroliuokite savo sistemą"
+msgstr "Kontroliuokite savo sistemos ventiliatorių"
 
 msgid "Copy, rename, delete, move local files on your Dreambox."
 msgstr "Nukopijuokite, pervadinkite, pašalinkite, perkelkite vietinius failus į savo Dreambox."
@@ -1685,6 +1700,9 @@ msgstr "Negalima atidaryti paveikslėlio paveikslėlyje"
 
 msgid "Couldn't record due to conflicting timer %s"
 msgstr "Neįrašyta dėl prieštaringo laikmačio %s"
+
+msgid "Couldn't record due to invalid service %s"
+msgstr "Neįrašyta dėl nesančio kanalo %s"
 
 msgid "Crashlog settings"
 msgstr "Crashlog nustatymai"
@@ -1749,6 +1767,9 @@ msgstr "Disko skaidinio sukurti nepavyko"
 
 msgid "Croatian"
 msgstr "Kroatų"
+
+msgid "CrossEPG Setup"
+msgstr "CrossEPG valdymas"
 
 msgid "Current Information"
 msgstr "Dabartinė informacija"
@@ -1853,6 +1874,9 @@ msgstr "DVB-S"
 msgid "DVB-S2"
 msgstr "DVB-S2"
 
+msgid "DVD Drive"
+msgstr "Drive DVD"
+
 #
 msgid "DVD File Browser"
 msgstr "DVD failų naršyklė"
@@ -1886,6 +1910,9 @@ msgstr "Danų"
 #
 msgid "Date"
 msgstr "Data"
+
+msgid "December"
+msgstr "Gruodis"
 
 #
 msgid "Decide if you want to enable or disable the Cleanup Wizard."
@@ -1935,12 +1962,21 @@ msgstr "Nustatykite paleidimo kanalą"
 msgid "Define a startup service for your Dreambox."
 msgstr "Nustatykite paleidimo kanalą jūsų Dreambox'e."
 
+msgid "Deinterlacer mode for interlaced content"
+msgstr "Deinterlacer režimu besikeičiantis turinys"
+
+msgid "Deinterlacer mode for progressive content"
+msgstr "Deinterlacer režimas progresyviam turiniui"
+
 #
 msgid "Delay"
 msgstr "Užlaikymas"
 
 msgid "Delay before auto close Console (sec)"
 msgstr "Pauzė prieš automatinį konsolės uždarymą (sek)"
+
+msgid "Delay x seconds after service started"
+msgstr "Vėlavimas x sekundžių po kanalo starto"
 
 #
 msgid "Delete"
@@ -2024,7 +2060,7 @@ msgid "Detected NIMs:"
 msgstr "Rasti imtuvai:"
 
 msgid "Device in Read-Only"
-msgstr "Device in sola scrittura"
+msgstr "Įrenginys tik skaityti"
 
 msgid "DiSEqC"
 msgstr "DiSEqC"
@@ -2134,9 +2170,6 @@ msgstr "Parodyti paieškos rezultatus:"
 msgid "Display your photos on the TV"
 msgstr "Parodyti savo fotografijas televizoriuje"
 
-msgid "Displays movie information from the InternetMovieDatabase"
-msgstr "Parodyti kino filmo informaciją iš InternetMovieDatabase"
-
 #
 msgid "Do You want restart enigma2 now?"
 msgstr "Jūs norite paleisti iš naujo Enigma2 dabar?"
@@ -2155,6 +2188,14 @@ msgid ""
 msgstr ""
 "Tikrai norite atlikti failų sistemos tikrinimą?\n"
 "Tai gali trukti ilgą laiką!"
+
+#
+msgid ""
+"Do you really want to delete %s\n"
+"%s?"
+msgstr ""
+"Jūs tikrai norite trinti %s\n"
+"%s?"
 
 #
 msgid "Do you really want to delete %s?"
@@ -2192,7 +2233,7 @@ msgid ""
 "Do you want download EPG\n"
 "using e2_loadepg?"
 msgstr ""
-"Ar norite parsisiųsti EPG\n"
+"Jūs norite parsisiųsti EPG\n"
 "naudojant e2_loadepg?"
 
 #
@@ -2205,11 +2246,27 @@ msgstr ""
 
 #
 msgid ""
+"Do you want install the support\n"
+"packages, for DVB-T/C adapters?"
+msgstr ""
+"Jūs norite įdiegti palaikymą\n"
+"paketų, dėl DVB-T/C adapterių?"
+
+#
+msgid ""
 "Do you want remove the addon:\n"
 "%s?"
 msgstr ""
 "Jūs norite pašalinti priedą:\n"
 "%s?"
+
+#
+msgid ""
+"Do you want remove the support\n"
+"packages, for DVB-T/C adapters?"
+msgstr ""
+"Jūs norite pašalinti palaikymą\n"
+"paketų, dėl DVB-T/C adapterių?"
 
 #
 msgid "Do you want to burn this collection to DVD medium?"
@@ -2240,14 +2297,6 @@ msgstr "Jūs norite įdiegti numatytus palydovų sąrašus?"
 #
 msgid "Do you want to install the package:\n"
 msgstr "Jūs norite įdiegti paketą:\n"
-
-#
-msgid ""
-"Do you want to install the support\n"
-"packages, for DVB-T/C adapters?"
-msgstr ""
-"Jūs norite įdiegti palaikymą\n"
-"paketų, dėl DVB-T/C adapterių?"
 
 #
 msgid "Do you want to play DVD in drive?"
@@ -2404,7 +2453,7 @@ msgid "Downloading file: %s ..."
 msgstr "Parsisiunčiamas failas: %s ..."
 
 msgid "Downloading killed by user!"
-msgstr "Scaricamento interrotto dall'utente!"
+msgstr "Parsisiuntimas nutrauktas vartotojo!"
 
 #
 msgid "Downloading plugin information. Please wait..."
@@ -2425,6 +2474,12 @@ msgstr "Dreambox formatuoja DVD duomenis (suderinama su HDTV)"
 #
 msgid "Dreambox software because updates are available."
 msgstr "Dreambox programinės įrangos atnaujinimas, nes yra pasiekiamas."
+
+msgid "Driver for Ralink RT8070/RT3070/RT3370 based wireless-n USB devices."
+msgstr "Ralink RT8070/RT3070/RT3370 Wireless-N USB įrenginių tvarkyklė."
+
+msgid "Driver for Realtek r8712u based wireless-n USB devices."
+msgstr "Realtek r8712u Wireless-N USB įrenginių tvarkyklė"
 
 #
 msgid "Duration: "
@@ -2472,13 +2527,6 @@ msgstr "EPG pasirinkimas"
 msgid "EPG encoding"
 msgstr "EPG kodavimas"
 
-msgid ""
-"EPGRefresh will automatically switch to user-defined channels when the box is idleing\n"
-"(in standby mode without any running recordings) to perform updates of the epg information on these channels."
-msgstr ""
-"EPGRefresh automatiškai persijungs į vartotojo nustatytus kanalus, kai imtuvas yra nenaudojamas\n"
-"(Laukimo režimu be jokių veikiančių įrašų) ir atliks atnaujinimus EPG informacijos apie šiuos kanalus."
-
 msgid "ERROR - failed to scan (%s)!"
 msgstr "KLAIDA - nenuskanuota (%s)!"
 
@@ -2496,7 +2544,7 @@ msgstr "Redaguoti Auto Laikmatį"
 
 #
 msgid "Edit AutoTimer filters"
-msgstr "Suredaguokite Auto Laikmačio filtrus"
+msgstr "Redaguokite Auto Laikmačio filtrus"
 
 #
 msgid "Edit AutoTimer services"
@@ -2524,11 +2572,11 @@ msgstr "Redaguokite dabartinio pavadinimo skyrius"
 
 #
 msgid "Edit new timer defaults"
-msgstr "Suredaguokite naują laikmatį kaip numatytą"
+msgstr "Redaguokite naują laikmatį kaip numatytą"
 
 #
 msgid "Edit selected AutoTimer"
-msgstr "Suredaguokite išsirinktą Auto Laikmatį"
+msgstr "Redaguokite išsirinktą Auto Laikmatį"
 
 #
 msgid "Edit services list"
@@ -2594,9 +2642,28 @@ msgstr "Įjungti"
 msgid "Enable /media"
 msgstr "Įjungta /medija"
 
+msgid "Enable 1080p24 Mode"
+msgstr "Įjungti 1080p24 būdą"
+
+msgid "Enable 1080p25 Mode"
+msgstr "Įjungti 1080p25 būdą"
+
+msgid "Enable 1080p30 Mode"
+msgstr "Įjungti 1080p30 būdą"
+
 #
 msgid "Enable 5V for active antenna"
 msgstr "Įjungti 5V aktyviai antenai"
+
+msgid "Enable 720p24 Mode"
+msgstr "Įjungti 720p24 būdą"
+
+msgid "Enable Autoresolution"
+msgstr "Įjungti auto rezoliuciją"
+
+#
+msgid "Enable Brightness on vision"
+msgstr "Įjungti vaizdo ryškumą"
 
 msgid "Enable Cleanup Wizard?"
 msgstr "Įjungti išvalymo vedlį?"
@@ -2670,9 +2737,6 @@ msgstr "Užšifravimo mygtukas"
 msgid "Encryption Keytype"
 msgstr "Mygtuko užšifravimo tipas"
 
-msgid "Encryption Type"
-msgstr "Užšifravimo būdas"
-
 msgid "Encryption:"
 msgstr "Užšifravimas:"
 
@@ -2715,14 +2779,8 @@ msgstr ""
 msgid "Enigma2 will be now hard restarted to complete package installation."
 msgstr "Enigma2 bus pilnai paleista iš naujo, kad baigti paketo įdiegimą."
 
-msgid "Enter Fast Forward at speed"
-msgstr "Eiti į greitą persukimą"
-
 msgid "Enter IP to scan..."
 msgstr "Įrašykite IP skanavimui..."
-
-msgid "Enter Rewind at speed"
-msgstr "Eiti į greitą atsukimą"
 
 msgid "Enter event to search:"
 msgstr "Įrašykite užduotį paieškai:"
@@ -2794,6 +2852,9 @@ msgstr ""
 
 msgid "Estonian"
 msgstr "Estų"
+
+msgid "Ethernet network interface"
+msgstr "Ethernet tinklo sąsajos"
 
 msgid "Eventview"
 msgstr "Įvykių peržiūra"
@@ -2904,13 +2965,13 @@ msgid "Failed"
 msgstr "Klaidingas"
 
 msgid "Fan %d"
-msgstr "Aušintuvas %d"
+msgstr "Ventiliatorius %d"
 
 msgid "Fan %d PWM"
-msgstr "Aušintuvo %d PWM"
+msgstr "Ventiliatorius %d PWM"
 
 msgid "Fan %d Voltage"
-msgstr "Aušintuvo %d įtampa"
+msgstr "Ventiliatoriaus %d įtampa"
 
 msgid "Fast"
 msgstr "Greitas"
@@ -2926,6 +2987,9 @@ msgstr "Greita epocha"
 
 msgid "Favourites"
 msgstr "Geriausi"
+
+msgid "February"
+msgstr "Febbraio"
 
 msgid "Fetching feed entries"
 msgstr "Perdavimo serverio nustatymas"
@@ -2970,7 +3034,7 @@ msgid "Filesystem contains uncorrectable errors"
 msgstr "Failų sistema turi nepataisomų klaidų"
 
 msgid "Film & Animation"
-msgstr "Filmai ir Multiplikacija"
+msgstr "Filmai ir Animacija"
 
 msgid "Filter"
 msgstr "Filtras"
@@ -2996,6 +3060,9 @@ msgstr "Baigtas jūsų tinklo paleidimas iš naujo"
 
 msgid "Finnish"
 msgstr "Suomių"
+
+msgid "First day to match events. No event that begins before this date will be matched."
+msgstr "Pirma diena, kuri atitiktų įvykius. Joks atvejis, kuris prasideda prieš šią datą nebus suderintas."
 
 msgid "First generate your skin-style with the Ai.HD-Control plugin."
 msgstr "Pirma savo temos stiliaus generacija su Ai.HD-Control priedu."
@@ -3065,16 +3132,6 @@ msgstr ""
 "Formatuojant įrenginį, bus ištrinti visi duomenys negrįžtamai!\n"
 "Ar norite tęsti?"
 
-msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and %d modified."
-msgstr ""
-"Surasta iš viso %d atitikimo įvykių.\n"
-"%d Laikmatis buvo pridėtas ir %d pakeistas."
-
-msgid "Frame repeat count during non-smooth winding"
-msgstr "Rėmo pakartojimo skaičiavimas per nelygų vingiavimą"
-
 msgid "Frame size in full view"
 msgstr "Kadro dydis pilname vaizde"
 
@@ -3108,6 +3165,9 @@ msgstr "Frizų"
 msgid "FritzCall shows incoming calls to your Fritz!Box on your Dreambox."
 msgstr "FritzCall rodo gaunamus skambučius į jūsų Fritz! Box jūsų Dreambox'e."
 
+msgid "Front USB Slot"
+msgstr "Priekinis USB lizdas"
+
 msgid "Frontend for /tmp/mmi.socket"
 msgstr "Priekinės ir /tmp/mmi.socket"
 
@@ -3140,16 +3200,19 @@ msgid "Gateway"
 msgstr "Šliuzas"
 
 msgid "General AC3 Delay"
-msgstr "Bendras AC3 užlaikymas"
+msgstr "Bendras AC3 vėlavimas"
 
 msgid "General AC3 delay (ms)"
-msgstr "Bendras AC3 užlaikymas (ms)"
+msgstr "Bendras AC3 vėlavimas (ms)"
 
 msgid "General PCM Delay"
-msgstr "Bendras PCM užlaikymas"
+msgstr "Bendras PCM vėlavimas"
 
 msgid "General PCM delay (ms)"
-msgstr "Bendras PCM užlaikymas (ms)"
+msgstr "Bendras PCM vėlavimas (ms)"
+
+msgid "Generates and Shows TV Charts of all users having this plugin installed"
+msgstr "Sukuria ir parodo TV Charts visų vartotojų, įdiegiančių šią papildomą programą"
 
 msgid "Genre"
 msgstr "Žanras"
@@ -3218,21 +3281,20 @@ msgstr "Graikų"
 msgid "Green boost"
 msgstr "Žalio didėjimas"
 
-msgid ""
-"Growlee allows your Dreambox to send short messages using the growl protocol\n"
-"like Recording started notifications to a PC running a growl client"
-msgstr ""
-"Growlee leidžia jūsų Dreambox siųsti trumpąsias žinutes, naudojant growl protokolą\n"
-"Įrašas paleidžia pranešimus į PC, veikiant growl klientui"
+msgid "Growlee allows your Dreambox to forward notifications like 'Record started' to a PC running a growl, snarl or syslog compatible client or directly to an iPhone using prowl."
+msgstr "Growlee leidžia jūsų Dreambox persiųsti pranešimus, kaip 'Įrašas prasidėjo', į asmeninį kompiuterį, valdantį growl, snarl ar syslog suderinamą klientą ar tiesiogiai į iPhone, naudojant klaidžiojimą."
 
-msgid "Guard Interval"
+msgid "Guard interval"
 msgstr "Apsaugos intervalas"
-
-msgid "Guard interval mode"
-msgstr "Apsaugos intervalo režimas"
 
 msgid "Guess existing timer based on begin/end"
 msgstr "Spėti esamą laikmatį remiantis pradžia/pabaiga"
+
+msgid "HD Interlace Mode"
+msgstr "HD vaizdavimo būdas"
+
+msgid "HD Progressive Mode"
+msgstr "HD progresyvinis būdas"
 
 msgid "HD videos"
 msgstr "HD vaizdai"
@@ -3267,17 +3329,11 @@ msgstr "Kietas diskas išsijungs po"
 msgid "Help"
 msgstr "Pagalba"
 
-msgid "Hidden network SSID"
-msgstr "Paslėptas tinklo SSID"
+msgid "Hidden network"
+msgstr "Paslėptas tinkas"
 
-msgid "Hidden networkname"
-msgstr "Paslėptas tinklo pavadinimas"
-
-msgid "Hierarchy Information"
+msgid "Hierarchy info"
 msgstr "Hierarchijos informacija"
-
-msgid "Hierarchy mode"
-msgstr "Hierarchijos režimas"
 
 msgid "High bitrate support"
 msgstr "Aukštos bitų spartos palaikymas"
@@ -3333,8 +3389,8 @@ msgstr "ISO kelias"
 msgid "Icelandic"
 msgstr "Islandų"
 
-msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
-msgstr "Jei tai įjungiama į egzistuojantį laikmatį, tai svarstoma įrašymo atveju jei jis įrašys bent jau 80% of to."
+msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80%% of the it."
+msgstr "Jei tai įjungiama į egzistuojantį laikmatį, tai svarstoma įrašymo atvejuб jei jis įrašys bent jau 80%% to."
 
 msgid ""
 "If you see this, something is wrong with\n"
@@ -3408,6 +3464,12 @@ msgstr "Informacija"
 msgid "Init"
 msgstr "Inicializacija"
 
+msgid "Initial Fast Forward speed"
+msgstr "Pradinis greito prasukimo greitis"
+
+msgid "Initial Rewind speed"
+msgstr "Pradinis greito atsukimo greitis"
+
 msgid "Initial location in new timers"
 msgstr "Pradinė naujų laikmačių vieta"
 
@@ -3434,6 +3496,9 @@ msgstr "Įdiegti"
 
 msgid "Install Addon"
 msgstr "Įdiegti priedą"
+
+msgid "Install Driver"
+msgstr "Įdiegti draiverį"
 
 msgid "Install a new image with a USB stick"
 msgstr "Įdiekite naują atvaizdą su USB raktu"
@@ -3500,8 +3565,8 @@ msgstr "Normalus"
 msgid "Internal Flash"
 msgstr "Vidinė atmintinė"
 
-msgid "Internal LAN adapter."
-msgstr "Vidinis LAN adapteris"
+msgid "Internal USB Slot"
+msgstr "Vidinis USB lizdas"
 
 msgid "Internal firmware updater"
 msgstr "Vidinis programinės įrangos atnaujinimas"
@@ -3560,11 +3625,20 @@ msgstr "Italų Orų prognozė Dreambox iš www.google.it."
 msgid "Italy"
 msgstr "Italija"
 
+msgid "January"
+msgstr "Sausis"
+
 msgid "Japan"
 msgstr "Japonija"
 
 msgid "Job View"
 msgstr "Darbo vaizdas"
+
+msgid "July"
+msgstr "Luglio"
+
+msgid "June"
+msgstr "Birželis"
 
 msgid "Just Scale"
 msgstr "Tik skalė"
@@ -3633,7 +3707,7 @@ msgid "Keymap"
 msgstr "Mygtukų išdėstymas"
 
 msgid "KiddyTimer allows to control your kids's daily tv usage."
-msgstr "KiddyTimer leidžia kontroliuoti jūsų vaikų kasdieninį televizijos vartojimą."
+msgstr "KiddyTimer leidžia kontroliuoti jūsų vaikų kasdieninį televizijos naudojimą."
 
 msgid "LAN Adapter"
 msgstr "LAN adapteris"
@@ -3660,7 +3734,10 @@ msgid "Language selection"
 msgstr "Kalbos pasirinkimas"
 
 msgid "Last config"
-msgstr "Paskutinis config"
+msgstr "Konfig"
+
+msgid "Last day to match events. Events have to begin before this date to be matched."
+msgstr "Praėjusią dieną atitikti įvykiai. Įvykiai turi prasidėti prieš šią datą ir būti suderinti."
 
 msgid "Last speed"
 msgstr "Paskutinis greitis"
@@ -3704,14 +3781,11 @@ msgstr "Sąsaja:"
 msgid "Linked titles with a DVD menu"
 msgstr "Sujungti pavadinimai su DVD meniu"
 
+msgid "List available networks"
+msgstr "Galimų tinklų sąrašas"
+
 msgid "List of Storage Devices"
 msgstr "Išsaugotų įrenginių sąrašas"
-
-msgid "Listen and record internet radio"
-msgstr "Klausykite ir įrašykite interneto radiją"
-
-msgid "Listen and record shoutcast internet radio on your Dreambox."
-msgstr "Klausykite ir įrašykite shoutcast interneto radiją į savo Dreambox."
 
 msgid "Lithuanian"
 msgstr "Lietuvių"
@@ -3859,11 +3933,17 @@ msgstr "Rankinis paketo įdiegimas"
 msgid "Manual Scan"
 msgstr "Rankinė paieška"
 
+msgid "Manual configuration"
+msgstr "Rankinis konfigūravimas"
+
 msgid "Manual transponder"
 msgstr "Rankinis transponderis"
 
 msgid "Manufacturer"
 msgstr "Gamintojas"
+
+msgid "March"
+msgstr "Kovas"
 
 msgid "Margin after record"
 msgstr "Sujungti po įrašymo"
@@ -3886,8 +3966,8 @@ msgstr "Maks. Sparta bitais:"
 msgid "Maximum duration (in m)"
 msgstr "Maksimali trukmė (m)"
 
-msgid "Maximum event duration to match. If an event is longer than this ammount of time (without offset) it won't be matched."
-msgstr "Maksimali atvejo trukmė rasta. Jei atvejis bus ilgesnis negu šis laiko ammount (be padengimo), tai nebus suderinama."
+msgid "May"
+msgstr "Gegužė"
 
 msgid "Media player"
 msgstr "Media grotuvas"
@@ -4074,12 +4154,6 @@ msgstr "Perkelkite ekraną į viršų"
 msgid "Move west"
 msgstr "Sukti į vakarus"
 
-msgid "Movie information from the Online Film Datenbank (German)."
-msgstr "Kino filmo informacija iš Internetinio Filmų Datenbank (vokiečių kalba)."
-
-msgid "Movie informations from the Online Film Datenbank"
-msgstr "Kino filmų informacijos iš Internetinio Filmų Datenbank"
-
 msgid "Movie location"
 msgstr "Filmo vieta"
 
@@ -4095,11 +4169,17 @@ msgstr "Filmų sąrašo meniu"
 msgid "Multi EPG"
 msgstr "Kanalų EPG"
 
+msgid "Multi-EPG bouquet selection"
+msgstr "Kanalų EPG paketo pasirinkimas"
+
 msgid "Multimedia"
 msgstr "Multimedija"
 
 msgid "Multiple service support"
 msgstr "Kelių kanalų palaikymas"
+
+msgid "Multiplex"
+msgstr "Daugkartinis"
 
 msgid "Multisat"
 msgstr "Daug palydovų"
@@ -4152,6 +4232,9 @@ msgstr "NFI atvaizdo diegimas baigtas. Spauskite geltoną mygtuką, kad paleisti
 msgid "NFS share"
 msgstr "NFS bendrinimas"
 
+msgid "NIM"
+msgstr "NIM"
+
 msgid "NOW"
 msgstr "DABAR"
 
@@ -4172,6 +4255,9 @@ msgstr "Serverio nustatymas"
 
 msgid "Nameserver settings"
 msgstr "Serverio pavadinimas"
+
+msgid "Namespace"
+msgstr "Pavadinimo sritis"
 
 msgid "Nemesis BlackBox Skin"
 msgstr "Nemesis BlackBox tema"
@@ -4284,9 +4370,6 @@ msgstr "Tinklo konfigūracija..."
 msgid "Network Mount"
 msgstr "Pajungti tinklą"
 
-msgid "Network SSID"
-msgstr "Tinklo SSID"
-
 msgid "Network Setup"
 msgstr "Tinklo nustatymas"
 
@@ -4311,11 +4394,14 @@ msgstr "Tinklo bandymas:"
 msgid "Network:"
 msgstr "Tinklas:"
 
-msgid "Network Browser"
+msgid "NetworkBrowser"
 msgstr "Tinklo naršyklė"
 
 msgid "NetworkWizard"
 msgstr "Tinklo vedlys"
+
+msgid "Networkname (SSID)"
+msgstr "Tinklo pavadinimas (SSID)"
 
 msgid "Never"
 msgstr "Niekada"
@@ -4328,6 +4414,28 @@ msgstr "Naujas PIN"
 
 msgid "New Zealand"
 msgstr "Naujoji Zelandija"
+
+msgid ""
+"New version SVN(%sr%s) is available!\n"
+"Current version: %sr%s\n"
+"Min Version required: %sr%s\n"
+"Upgrade not possible!"
+msgstr ""
+"Naujoji versija SVN(%sr%s) pasiekima!\n"
+"Dabartinė versija:%sr%s\n"
+"Min.reikalinga versija: %sr%s\n"
+"Atnaujinti neįmanoma!"
+
+msgid ""
+"New version is available!\n"
+"Current version: %sr%s\n"
+"New Version: %sr%s\n"
+"Please upgrade Nemesis firmware!"
+msgstr ""
+"Pasiekiama nauja versija!\n"
+"Dabartinė versija: %sr%s\n"
+"Nauja versija: %sr%s\n"
+"Prašome atnaujinti Nemesis programinę įrangą!"
 
 msgid "New version:"
 msgstr "Nauja versija:"
@@ -4349,13 +4457,17 @@ msgstr "Nėra prisijungimo"
 
 #
 msgid "No Delay"
-msgstr "Be uždelsimo"
+msgstr "Jokio uždelsimo"
 
 msgid "No HDD found or HDD not initialized!"
 msgstr "Kietas diskas nerastas arba neinicializuotas!"
 
-msgid "No Networks found"
-msgstr "Jokie Tinklai nesurasti"
+msgid ""
+"No Upgrade available!\n"
+"Your decoder is up to date."
+msgstr ""
+"Nėra jokių atnaujinimų!\n"
+"Jūsų dekoderis yra naujausias."
 
 msgid "No Users Script Found!"
 msgstr "Nerasta jokių vartotojo scenarijų!"
@@ -4454,8 +4566,8 @@ msgstr ""
 msgid "No videos to display"
 msgstr "Nėra vaizdų rodymui"
 
-msgid "No wireless networks found! Please refresh."
-msgstr "Jokie belaidžiai tinklai nesurasti! Prašome pakartoti."
+msgid "No wireless networks found! Searching..."
+msgstr "Jokie belaidžiai tinklai nesurasti! Vyksta paieška..."
 
 msgid ""
 "No working local network adapter found.\n"
@@ -4526,6 +4638,12 @@ msgstr "Šiaurė"
 msgid "Norwegian"
 msgstr "Norvegų"
 
+msgid "Not after"
+msgstr "Ne po"
+
+msgid "Not before"
+msgstr "Ne anksčiau"
+
 msgid "Not enough diskspace. Please free up some diskspace and try again. (%d MB required, %d MB available)"
 msgstr "Nepakanka laisvos vietos diske. Prašome atlaisvinti vietos diske ir pabandyti dar kartą. (Reikalinga %d MB, %d esama MB)"
 
@@ -4548,6 +4666,9 @@ msgstr ""
 msgid "Not fetching feed entries"
 msgstr "Ne perdavimo įėjimų nustatymas"
 
+msgid "Not-Associated"
+msgstr "Non associato"
+
 msgid "Nothing to do!"
 msgstr "Nieko!"
 
@@ -4560,6 +4681,9 @@ msgstr ""
 
 msgid "Nothing to uninstall!"
 msgstr "Nieko nešalinti!"
+
+msgid "November"
+msgstr "Lapkritis"
 
 msgid "Now Playing"
 msgstr "Dabar grojama"
@@ -4585,6 +4709,9 @@ msgstr "Gerai, pašalinkite kitus išplėtimus"
 msgid "OK, remove some extensions"
 msgstr "Gerai, pašalinkite bet kokius išplėtimus"
 
+msgid "ONID"
+msgstr "ONID"
+
 msgid "OPKG Update connection timeout (20-60 sec)"
 msgstr "OPKG atnaujinimo prisijungimo pertrauka (20-60 sek)"
 
@@ -4593,6 +4720,9 @@ msgstr "OSD nustatymai"
 
 msgid "OSD visibility"
 msgstr "OSD matomumas"
+
+msgid "October"
+msgstr "Ottobre"
 
 msgid "Off"
 msgstr "Išjungta"
@@ -4642,8 +4772,8 @@ msgstr "Atidaryti papildomų programų meniu"
 msgid "Optionally enter your name if you want to."
 msgstr "Pasirinktinai įrašykite savo vardą, jei jūs norite."
 
-msgid "Orbital Position"
-msgstr "Pozicija orbitoje"
+msgid "Orbital position"
+msgstr "Orbitinė pozicija"
 
 msgid "Outer Bound (+/-)"
 msgstr "Išorinis Susijęs (+/-)"
@@ -4669,8 +4799,14 @@ msgstr "Perrašyti konfigūracijos failus per programinės įrangos atnaujinimą
 msgid "PAL"
 msgstr "PAL"
 
+msgid "PCR PID"
+msgstr "PID PCR"
+
 msgid "PIDs"
 msgstr "PIDs"
+
+msgid "PMT PID"
+msgstr "PID PMT"
 
 msgid "Package list update"
 msgstr "Paketo sąrašo atnaujinimas"
@@ -4723,6 +4859,9 @@ msgstr "Liaudis ir Blogai"
 msgid "PermanentClock shows the clock permanently on the screen."
 msgstr "PermanentClock rodo laikrodį ilgam ant ekrano."
 
+msgid "Persian"
+msgstr "Persų"
+
 msgid "Pets & Animals"
 msgstr "Numylėtiniai ir Gyvūnai"
 
@@ -4758,12 +4897,6 @@ msgstr "Groti muziką..."
 
 msgid "Play YouTube movies"
 msgstr "Rodyti YouTube filmus"
-
-msgid "Play music from Last.fm"
-msgstr "Groti muziką iš Last.fm"
-
-msgid "Play music from Last.fm."
-msgstr "Groti muziką iš Last.fm."
 
 msgid "Play next video"
 msgstr "Rodyti kitą vaizdą"
@@ -5023,9 +5156,6 @@ msgstr "Podcast srautų užsakomosios transliacijos į savo Dreambox"
 msgid "Poland"
 msgstr "Lenkija"
 
-msgid "Polarity"
-msgstr "Poliariškumas"
-
 msgid "Polarization"
 msgstr "Poliarizacija"
 
@@ -5052,6 +5182,9 @@ msgstr "Jungtis D"
 
 msgid "Portuguese"
 msgstr "Portugalų"
+
+msgid "Position of finished Timers in Timerlist"
+msgstr "Padėtis baigtų laikmačių sąraše"
 
 msgid "Positioner"
 msgstr "Pozicionierius"
@@ -5105,7 +5238,7 @@ msgid "Press OK to close window."
 msgstr "Spauskite OK, kad uždaryti langą."
 
 msgid "Press OK to collapse this host"
-msgstr "Paspauskite OK, kad panaikinti šį hostą"
+msgstr "Spauskite OK, kad panaikinti šį hostą"
 
 msgid "Press OK to edit selected settings."
 msgstr "Spauskite OK ir redaguokite nustatymus."
@@ -5181,7 +5314,7 @@ msgstr ""
 "Pabandykite perkrauti kompiuterį!"
 
 msgid "Process"
-msgstr "Eiga"
+msgstr "Procesas"
 
 msgid ""
 "Process Killed by user\n"
@@ -5266,11 +5399,11 @@ msgstr "RGB"
 msgid "RSS viewer"
 msgstr "RSS žiūrėjimas"
 
+msgid "RT8070/RT3070/RT3370 USB wireless-n driver"
+msgstr "Tvarkyklė wireless-n USB RT8070/RT3070/RT3370"
+
 msgid "Radio"
 msgstr "Radijas"
-
-msgid "Ralink"
-msgstr "Ralink"
 
 msgid "Ram Disk"
 msgstr "Ram Diskas"
@@ -5350,6 +5483,9 @@ msgstr "Įrašai"
 msgid "Recordings always have priority"
 msgstr "Įrašai visada turi pirmenybę"
 
+msgid "Redirect notifications to Growl, Snarl, Prowl or Syslog"
+msgstr "Peradresuokite pranešimus"
+
 msgid "Reenter new PIN"
 msgstr "Iš naujo įrašykite naują PIN"
 
@@ -5410,6 +5546,9 @@ msgstr "Pašalinti priedus"
 msgid "Remove Bookmark"
 msgstr "Pašalinti žymę"
 
+msgid "Remove Driver"
+msgstr "Pašalinti draiverį"
+
 msgid "Remove Plugins"
 msgstr "Pašalinti"
 
@@ -5424,6 +5563,9 @@ msgstr "Pašalinimas klaidingas."
 
 msgid "Remove finished."
 msgstr "Pašalinimas baigtas."
+
+msgid "Remove from EPG Blacklist"
+msgstr "Pašalinti iš EPG juodojo sąrašo"
 
 msgid ""
 "Remove old Settings\n"
@@ -5568,6 +5710,9 @@ msgstr "Atkurkite savo Dreambox su USB įrenginiu"
 msgid "Restrict \"after event\" to a certain timespan?"
 msgstr "Riboti \"po įvykio \" tam tikrą laiko atkarpą?"
 
+msgid "Restrict to events on certain dates"
+msgstr "Apriboti įvykius dėl tam tikrų datų"
+
 msgid "Resume from last position"
 msgstr "Tęsti nuo paskutinės pozicijos"
 
@@ -5592,14 +5737,17 @@ msgstr "Persukimo greitis"
 msgid "Right"
 msgstr "Dešinys"
 
-msgid "Rolloff"
-msgstr "Rolloff"
+msgid "Roll-off"
+msgstr "Roll-off"
 
 msgid "Rotor turning speed"
 msgstr "Pozicionieriaus sukimosi greitis"
 
 msgid "Running"
 msgstr "Veikiantis"
+
+msgid "Running in testmode"
+msgstr "Veikia bandymo režime"
 
 msgid "Russia"
 msgstr "Rusija"
@@ -5609,6 +5757,21 @@ msgstr "Rusų"
 
 msgid "S-Video"
 msgstr "S-Video"
+
+msgid "SD 25/50HZ Interlace Mode"
+msgstr "SD 25/50HZ vaizdavimo būdas"
+
+msgid "SD 25/50HZ Progressive Mode"
+msgstr "SD 25/50HZ progresyvus būdas"
+
+msgid "SD 30/60HZ Interlace Mode"
+msgstr "SD 30/60HZ vaizdavimo būdas"
+
+msgid "SD 30/60HZ Progressive Mode"
+msgstr "SD 30/60HZ  progresyvus būdas"
+
+msgid "SID"
+msgstr "SID"
 
 msgid "SINGLE LAYER DVD"
 msgstr "VIENO SLUOKSNIO DVD"
@@ -5621,6 +5784,20 @@ msgstr "SNR:"
 
 msgid "SSID:"
 msgstr "SSID:"
+
+msgid ""
+"SVDRP is a protocol developed for the VDR software to control a set-top box remotely.\n"
+"This plugin only supports a subset of SVDRP and starts automatically using default settings.\n"
+"\n"
+"You probably don't need this plugin and should use the regular Web Interface for Enigma2 instead."
+msgstr ""
+"SVDRP yra protokolas sukurtas dėl VDR programinės įrangos kontrolės set-top box nuotoliniu būdu.\n"
+"Šis priedas palaiko tik iš SVDRP poaibio ir pasileidžia automatiškai, naudojant numatytuosius parametrus.\n"
+"\n"
+"Jums tikriausiai nereikia šio priedo ir turite panaudoti reguliarią Tinklo sąsąją dėl Enigma2 vietoj to."
+
+msgid "SVDRP server for Enigma2"
+msgstr "SVDRP serveris dėl Enigma2"
 
 msgid "Sat"
 msgstr "Šeš"
@@ -5862,7 +6039,7 @@ msgid "Select"
 msgstr "Išsirinkite"
 
 msgid "Select \"exact match\" to enforce \"Match title\" to match exactly or \"partial match\" if you only want to search for a part of the event title."
-msgstr "Pasirinkite \"Tikslus atitikimas \" vykdyti \"Atitikimo pavadinimas \", kad tiksliai atitiktų arba \"dalinis atitikimas \", jei norite ieškoti įvykio pavadinimo dalį."
+msgstr "Išsirinkite \"Tikslus atitikimas \" vykdyti \"Atitikimo pavadinimas \", kad tiksliai atitiktų arba \"dalinis atitikimas \", jei norite ieškoti įvykio pavadinimo dalį."
 
 msgid "Select HDD"
 msgstr "Išsirinkite kietą diską"
@@ -5895,7 +6072,7 @@ msgid "Select desired image from feed list"
 msgstr "Išsirinkite pageidaujamą atvaizdą iš perdavimo sąrašo"
 
 msgid "Select files for backup."
-msgstr "Pasirinkite failus atsarginei kopijai."
+msgstr "Išsirinkite failus atsarginei kopijai."
 
 msgid "Select files/folders to backup"
 msgstr "Išsirinkite failus/aplankus dėl atsarginės kopijos"
@@ -5931,7 +6108,7 @@ msgid "Select the location to save the recording to."
 msgstr "Išsirinkite vietą kur išsaugoti įrašus."
 
 msgid "Select type of Filter"
-msgstr "Pasirinkite filtro tipą"
+msgstr "Išsirinkite filtro tipą"
 
 msgid "Select upgrade source to edit."
 msgstr "Išsirinkite atnaujinimo šaltinį dėl redagavimo."
@@ -5959,6 +6136,9 @@ msgstr "Siųskite DiSEqC tik palydovo pakeitimui"
 
 msgid "Seperate titles with a main menu"
 msgstr "Pavadinimai su pagrindiniu meniu"
+
+msgid "September"
+msgstr "Rugsėjis"
 
 msgid "Sequence repeat"
 msgstr "Sekos pakartojimas"
@@ -6020,6 +6200,9 @@ msgid ""
 msgstr ""
 "Kanalas nerastas!\n"
 "(SID nėra PAT)"
+
+msgid "Service reference"
+msgstr "Kanalo informacija"
 
 msgid "Service scan"
 msgstr "Kanalo skanavimas"
@@ -6087,10 +6270,10 @@ msgid "Set maximum duration"
 msgstr "Nustatykite maksimalią trukmę"
 
 msgid "Set password"
-msgstr "Įrašykite slaptažodį"
+msgstr "Nustatyti slaptažodį"
 
 msgid "Set server"
-msgstr "Pasirinkite serverį"
+msgstr "Nustatyti serverį"
 
 msgid "Set this NO to disable this AutoTimer."
 msgstr "Nustatykite NE, kad išjungti šį Auto Laikmatį."
@@ -6101,9 +6284,6 @@ msgstr "Nustatykite atnaujinimo periodą (sek)"
 #
 msgid "Set user"
 msgstr "Nustatykite vartotoją"
-
-msgid "Sets your Dreambox into Deep-Standby"
-msgstr "Nustatykite jūsų Dreambox į gilų budėjimą"
 
 msgid "Setting key canceled"
 msgstr "Nustatymų mygtukas panaikintas"
@@ -6138,8 +6318,8 @@ msgstr "OSD infojuostos nustatymas"
 msgid "Setup Mode"
 msgstr "Valdymo būdas"
 
-msgid "Setup OPKG Options"
-msgstr "OPKG funkcijų nustatymas"
+msgid "Setup OPKG/Upgrade Options"
+msgstr "OPKG/Atnaujinimų nustatymas"
 
 msgid "Setup Picon"
 msgstr "Ikonų nustatymas"
@@ -6226,8 +6406,14 @@ msgstr "Rodyti iššifruoto tinklo duomenis"
 msgid "Show event-progress in channel selection"
 msgstr "Rodyti atvejo eigą kanalo pasirinkime"
 
+msgid "Show firmware upgrade availability on Blue Panel"
+msgstr "Rodyti programinius atnaujinimus Mėlynojoje Panėlėje "
+
 msgid "Show in extension menu"
 msgstr "Rodyti išplėstame meniu"
+
+msgid "Show info screen"
+msgstr "Rodyti informaciją ekrane"
 
 msgid "Show infobar on channel change"
 msgstr "Rodyti infojuostą perjungiant kanalą"
@@ -6237,6 +6423,9 @@ msgstr "Rodyti infojuostą pasikeičiant užduočiai"
 
 msgid "Show infobar on skip forward/backward"
 msgstr "Rodyti infojuostą praleidžiant į priekį/atgal"
+
+msgid "Show notification on conflicts"
+msgstr "Rodyti konfliktų pranešimus"
 
 msgid "Show positioner movement"
 msgstr "Rodyti pozicionieriaus judėjimą"
@@ -6383,7 +6572,7 @@ msgid "Sorry no backups found!"
 msgstr "Gaila, jokios atsarginės kopijos nerastos!"
 
 msgid "Sorry no events found matching to the search criteria."
-msgstr "Nessun evento corrispondente ai criteri di ricerca trovato!."
+msgstr "Gaila, jokie įvykiai nesurasti, atitinkantys paieškos kriterijus."
 
 msgid ""
 "Sorry your backup destination is not writeable.\n"
@@ -6450,10 +6639,10 @@ msgid "Standby / Restart"
 msgstr "Budėti / Perkrauti"
 
 msgid "Standby Fan %d PWM"
-msgstr "Aušintuvo budėjimo %d PWM"
+msgstr "Ventiliatoriaus budėjimo %d PWM"
 
 msgid "Standby Fan %d Voltage"
-msgstr "Aušintuvo budėjimo %d įtampa"
+msgstr "Ventiliatoriaus budėjimo %d įtampa"
 
 msgid "Start"
 msgstr "Įjungti"
@@ -6466,6 +6655,9 @@ msgstr "Paleisti e2_loadepg (fone)"
 
 msgid "Start e2_loadepg (interactive)"
 msgstr "Paleisti e2_loadepg (interaktyvus)"
+
+msgid "Start easy your multimedia plugins with the PVR-button."
+msgstr "Paleisti savo multimedijos priedus su PVR mygtuku."
 
 msgid "Start from the beginning"
 msgstr "Pradėti nuo pradžios"
@@ -6581,6 +6773,9 @@ msgstr "Sek"
 msgid "Sunday"
 msgstr "Sekmadienis"
 
+msgid "Support \"Fast Scan\"?"
+msgstr "Palaikymas \"Greita paieška \"?"
+
 msgid "Swap Error"
 msgstr "Swap klaida"
 
@@ -6614,10 +6809,7 @@ msgstr "Perjungti į ankstesnį subkanalą"
 msgid "Switchable tuner types:"
 msgstr "Perjungiamų imtuvą tipai:"
 
-msgid "Symbol Rate"
-msgstr "Simbolių greitis"
-
-msgid "Symbolrate"
+msgid "Symbol rate"
 msgstr "Simbolių greitis"
 
 msgid "System"
@@ -6638,8 +6830,17 @@ msgstr "Audronis Grincevičius (ADGA) Pasvalys, Lietuva"
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS failas yra per didelis ISO9660 lygmeniui 1!"
 
+msgid "TSID"
+msgstr "TSID"
+
+msgid "TV Charts of all users"
+msgstr "TV Charts visiems vartotojams"
+
 msgid "TV System"
 msgstr "TV sistema"
+
+msgid "TXT PID"
+msgstr "TXT PID"
 
 msgid "Table of content for collection"
 msgstr "Turinio lentelė dėl kolekcijos"
@@ -6663,7 +6864,10 @@ msgid "Taiwan"
 msgstr "Taivanis"
 
 msgid "Temperature and Fan control"
-msgstr "Temperatūros ir aušintuvo kontrolė"
+msgstr "Temperatūros ir ventiliatoriaus kontrolė"
+
+msgid "Temperature-dependent fan control."
+msgstr "Temperatūros ir ventiliatoriaus kontrolė."
 
 msgid "Terrestrial"
 msgstr "Antžeminė"
@@ -6718,15 +6922,6 @@ msgstr "CleanupWizard jus informuoja, kai vidinė laisva atmintis jūsų Dreambo
 
 msgid "The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to create a Dreambox format data DVD (which will not play in stand-alone DVD players) instead?"
 msgstr "DVD standartas nepalaiko H.264 (HDTV) vaizdo srauto. Jūs norite sukurti Dreambox formato duomenų DVD (kuris nepasileis viena pozicija DVD grotuvuose), vietoj to?"
-
-msgid ""
-"The Elektro Power Save plugin puts the box from standby to sleep mode (Deep Standby) at certain times.\n"
-"This only happens if the box is in standby and no recording is running or sheduled in the next 20 minutes.\n"
-"The box automatically wakes up for recordings or at the end of the sleep time. You therefore don't have to wait until it is on again."
-msgstr ""
-"Elektro Energijos taupymo priedas padeda imtuvui iš laukimo pereiti į miego režimą (Gilus budėjimas) tam tikru laiku.\n"
-"Tai atsitinka tik jei imtuvas yra budėjime ir neveikia joks įrašymas ar laikamtis per ateinančias 20 minučių.\n"
-"Imtuvas automatiškai atsibus įrašams arba po miego pabaigos. Jums nereikia laukti, kol jis įsijungs vėl."
 
 msgid "The Hotplug plugin notifies your system of newly added or removed devices."
 msgstr "Hotplug priedas praneša jūsų sistemą apie naujai pridėtus ar pašalintus prietaisus."
@@ -7186,26 +7381,17 @@ msgstr "Labiausiai įvertinti"
 msgid "Track"
 msgstr "Takelis"
 
-msgid "TrafficInfo shows german traffic information."
-msgstr "TrafficInfo rodo vokiečių informaciją apie eismą."
-
 msgid "Translation"
 msgstr "Vertimas"
 
 msgid "Translation:"
 msgstr "Vertimas:"
 
-msgid "Transmission Mode"
-msgstr "Perdavimo būdas"
-
 msgid "Transmission mode"
 msgstr "Perdavimo būdas"
 
 msgid "Transponder"
 msgstr "Transponderis"
-
-msgid "Transponder Type"
-msgstr "Transponderio tipas"
 
 msgid "Travel & Events"
 msgstr "Kelionės ir Įvykiai"
@@ -7308,6 +7494,9 @@ msgstr "Atšaukti įdiegimą"
 msgid "Undo uninstall"
 msgstr "Atšaukti šalinimą"
 
+msgid "Unencrypted"
+msgstr "Nekoduota"
+
 msgid "UnhandledKey"
 msgstr "Nežinomas mygtukas"
 
@@ -7329,8 +7518,8 @@ msgstr "JAV"
 msgid "Universal LNB"
 msgstr "Universali LNB"
 
-msgid "Unknown network adapter."
-msgstr "Nežinomas tinklo adapteris"
+msgid "Unknown"
+msgstr "Nežinoma"
 
 msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
 msgstr "Jei tai įjungta, Auto laikmatis automatiškai neieškos įvykių, atitinkančių jūsų Auto laikmačius, bet tiktai kai jūs paliekate GUI su žaliu mygtuku."
@@ -7340,9 +7529,6 @@ msgstr "Atjungimas nepavyko"
 
 msgid "Unsupported"
 msgstr "Nepalaikoma"
-
-msgid "UnwetterInfo shows german storm information."
-msgstr "UnwetterInfo rodo vokiečių audrų informaciją."
 
 msgid "Update"
 msgstr "Atnaujinimas"
@@ -7356,17 +7542,6 @@ msgstr "Atnaujinimas baigtas..."
 msgid "Update done... The genuine dreambox test will now be rerun and should not ask you to update again."
 msgstr "Atnaujinimas baigtas... Tikro dreambox testas bus dabar paleistas iš naujo ir neturi prašyti jūsų atnaujinti dar kartą."
 
-msgid ""
-"Update is available!\n"
-"Current version: %s\n"
-"New Version: %s\n"
-"Please upgrade Nemesis firmware!"
-msgstr ""
-"Pasiekiami atnaujinimai!\n"
-"Dabartinė versija: %s\n"
-"Nauja versija: %s\n"
-"Prašome atnaujinti Nemesis programinę įrangą!"
-
 msgid "Updatefeed not available."
 msgstr "Atnaujinimo perdavimas nepasiekiamas."
 
@@ -7377,7 +7552,7 @@ msgid "Updating finished. Here is the result:"
 msgstr "Atnaujinimas baigtas. Rezultatas čia:"
 
 msgid "Updating software catalog"
-msgstr "Programinės įrangos katalogo atnaujinimas"
+msgstr "Atnaujinti programinės įrangos katalogą"
 
 msgid "Updating, please wait..."
 msgstr "Atnaujinama, prašome laukti..."
@@ -7429,9 +7604,6 @@ msgstr "Naudoti bei kontroliuoti kelis Dreambox su skirtingais RC."
 
 msgid "Use arrows < > to select"
 msgstr "Rodyklės < > ir pasirinkite"
-
-msgid "Use non-smooth winding at speeds above"
-msgstr "Naudoti nelygų vingiavimą greičiais didesniais kaip"
 
 msgid "Use power measurement"
 msgstr "Naudoti įtampos išmatavimus"
@@ -7496,11 +7668,20 @@ msgstr "VMGM (įvadas)"
 msgid "Vali-XD skin"
 msgstr "Vali-XD tema"
 
+msgid "Vali.HD.atlantis skin"
+msgstr "Vali.HD.atlantis tema"
+
 msgid "Vali.HD.nano skin"
 msgstr "Vali.HD.nano tema"
 
+msgid "Vali.HD.warp skin"
+msgstr "Vali.HD.warp tema"
+
 msgid "Verify your Dreambox authenticity by running the genuine dreambox plugin!"
 msgstr "Patvirtinkite savo Dreambox autentiškumą paleisdami tikro Dreambox priedą!"
+
+msgid "Verifying your internet connection..."
+msgstr "Jūsų interneto ryšio patvirtinimas..."
 
 msgid "Vertical"
 msgstr "Vertikalus"
@@ -7513,6 +7694,10 @@ msgstr "Tikslaus vaizdo suderinimo vedlys"
 
 msgid "Video Output"
 msgstr "Vaizdo išėjimas"
+
+#
+msgid "Video PID"
+msgstr "Vaizdo PID"
 
 msgid "Video Setup"
 msgstr "Vaizdo valdymas"
@@ -7677,9 +7862,6 @@ msgstr "W"
 msgid "WEP"
 msgstr "WEP"
 
-msgid "WLAN adapter."
-msgstr "WLAN adapteris."
-
 msgid "WLAN connection"
 msgstr "Ryšys su WLAN tinklu"
 
@@ -7712,6 +7894,9 @@ msgstr "WeatherPlugin rodo orų prognozes jūsų Dreambox."
 
 msgid "Weatherforecast on your Dreambox"
 msgstr "Orų prognozė Jūsų Dreambox"
+
+msgid "Web-Bouquet-Editor for PC"
+msgstr "PC-Editor di bouquet via web"
 
 msgid "Webinterface"
 msgstr "Web sąsaja"
@@ -7856,6 +8041,9 @@ msgstr "Ką Jūs norite skanuoti?"
 msgid "What to do with submitted crashlogs?"
 msgstr "Ką daryti su pateiktu crashlogs?"
 
+msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr "Se \\\"Fast Scan\\\" è abilitato, il tipo di canale è ignorato. Non è necessario abilitare il parametro, a meno che l'immagine lo supporti e sia utilizzato.  "
+
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."
 msgstr "Kai ši parinktis įjungta, Auto laikmatis neatitiks įvykių, kur kitas laikmatis su tuo pačiu apibūdinimu jau egzistuoja laikmačio sąraše."
 
@@ -7884,8 +8072,14 @@ msgstr "Belaidis LAN"
 msgid "Wireless Network"
 msgstr "Belaidis tinklas"
 
-msgid "Wireless Network State"
-msgstr "Belaidis tinklas"
+msgid "Wireless network connection setup"
+msgstr "Bevielio tinklo ryšio nustatymai"
+
+msgid "Wireless network connection setup."
+msgstr "Bevielio tinklo ryšio nustatymai."
+
+msgid "Wireless network state"
+msgstr "Belaidžio tinklo būklė"
 
 msgid "With AntiScrollbar you can cover up annoying ticker lines (e.g. in news channels)."
 msgstr "Su AntiScrollbar galite uždengti jus erzinančių simbolių eilutes (pvz., naujienų kanalai)."
@@ -7904,9 +8098,6 @@ msgstr "Su EPGSearch galite ieškoti EPG ir sukurti laikmačius."
 
 msgid "With Genuine Dreambox you can verify the authenticity of your Dreambox."
 msgstr "Su Genuine Dreambox galite patikrinti savo Dreambox autentiškumą."
-
-msgid "With IMDb you can download and displays movie information (rating, poster, cast, synopsis etc.) about the selected event."
-msgstr "Su IMDb galite atsisiųsti ir rodyti kino filmų informaciją (reitingas, plakatas, dauguma, santrauką ir tt) apie pasirinktą įvykį."
 
 msgid "With MovieRetitle you can rename your movies."
 msgstr "Su MovieRetitle jūs galite pervadinti savo filmus."
@@ -7965,9 +8156,6 @@ msgstr "Su SatelliteEquipmentControl priedu galima sureguliuoti DiSEqC-parametru
 
 msgid "With this option enabled the channel to record on can be changed to a alternative service it is restricted to."
 msgstr "Naudodami šią parinktį, įjungtas kanalas įrašymui negali būti pakeistas į alternatyvius kanalus."
-
-msgid "With this option you can restrict the AutoTimer to a certain ammount of scheduled recordings. Set this to 0 to disable this functionality."
-msgstr "Naudodami šią parinktį galite apriboti Auto laikmatį į tam tikrą oficialų sąrašą įtrauktų įrašų. Nustačius 0, išjungti šią funkciją."
 
 msgid "Wizard"
 msgstr "Vedlys"
@@ -8059,6 +8247,9 @@ msgid ""
 msgstr ""
 "Jūs galite nustatyti pagrindines Auto laikmačio ypatybes čia.\n"
 "Tuo metu, kai 'Vardas' yra tik žmogaus lengvai skaitomas vardas, rodytas Peržiūroje, 'Pavadinime' yra tai, kas ieškoma EPG."
+
+msgid "You can use the EasyInfo for manage your EPG plugins from info button. You have also a new now-next event viewer. Easy-PG, the own graphical EPG bowser is also included."
+msgstr "EasyInfo permette la gestione dei plugin per EPG attraverso l'uso del tasto Info. Dispone anche di un nuovo visualizzatore di eventi in onda-prossimi. Include anche Easy-EPG, un browser grafico per EPG."
 
 msgid "You cannot delete this!"
 msgstr "Jūs negalite to ištrinti!"
@@ -8205,6 +8396,9 @@ msgstr "Jūsų (laisvai pasirenkamas) vardas:"
 msgid "Your network configuration has been activated."
 msgstr "Jūsų tinklo konfigūracija aktyvuota."
 
+msgid "Your network is not working. Please try again."
+msgstr "La rete non sembra funzionare. Provare di nuovo."
+
 msgid "Your network mount has been activated."
 msgstr "Jūsų tinklo pajungimas aktyvuotas."
 
@@ -8254,9 +8448,6 @@ msgstr "Padidinti į letterboxed/anamorfa filmus"
 
 msgid "Zoom into letterboxed/anamorph movies."
 msgstr "Padidinti į letterboxed/anamorfa filmus."
-
-msgid "Zydas"
-msgstr "Zydas"
 
 msgid "[alternative edit]"
 msgstr "[kitų redagavimas]"
@@ -8354,9 +8545,6 @@ msgstr "pridėti kanalą į mėgstamiausi"
 msgid "add services"
 msgstr "pridėti kanalus"
 
-msgid "add tags to recorded movies"
-msgstr "pridėti korteles su užrašu prie įrašytų kino filmų"
-
 msgid "add to parental protection"
 msgstr "pridėti į tėvų kontrolę"
 
@@ -8384,6 +8572,12 @@ msgstr "priskirti CAIds:"
 msgid "assigned Services/Provider:"
 msgstr "priskirti Kanalai/Tiekėjai:"
 
+msgid "at beginning"
+msgstr "pradžioje"
+
+msgid "at end"
+msgstr "pabaigoje"
+
 msgid "audio track (%s) format"
 msgstr "Garso takelio (%s) formatas"
 
@@ -8395,6 +8589,9 @@ msgstr "garso takeliai"
 
 msgid "auto"
 msgstr "auto"
+
+msgid "autotimers need a match attribute"
+msgstr "auto laikmačiams reikia suderinimo požymių"
 
 msgid "available"
 msgstr "pasiekiamas"
@@ -8419,6 +8616,9 @@ msgstr "juodas sąrašas"
 
 msgid "blue"
 msgstr "mėlynas"
+
+msgid "bob"
+msgstr "bob"
 
 msgid "burn audio track (%s)"
 msgstr "įrašyti garso takelį (%s)"
@@ -8450,6 +8650,9 @@ msgstr "išvalyti grojaraštį"
 msgid "complex"
 msgstr "sudėtinis"
 
+msgid "config changed."
+msgstr "config pasikeitė."
+
 msgid "config menu"
 msgstr "konfigūracijos meniu"
 
@@ -8474,6 +8677,12 @@ msgstr "negalėjo būti pašalintas"
 msgid "create directory"
 msgstr "kurti direktoriją"
 
+msgid "creates virtual series folders from episodes"
+msgstr "sukuria virtualų serijų aplankus iš epizodų"
+
+msgid "creates virtual series folders from sets of recorded episodes"
+msgstr "sukuria virtualų serijų rinkinių aplankus iš įrašytų epizodų"
+
 msgid "currently installed image: %s"
 msgstr "šiuo metu įdiegtas atvaizdas: %s"
 
@@ -8482,6 +8691,10 @@ msgstr "kasdien"
 
 msgid "day"
 msgstr "diena"
+
+#
+msgid "default"
+msgstr "numatytasis"
 
 msgid "delete"
 msgstr "trinti"
@@ -8528,6 +8741,9 @@ msgstr "nerašyti"
 msgid "done!"
 msgstr "baigta!"
 
+msgid "driver for Realtek USB wireless devices"
+msgstr "tvarkyklė Realtek Wireless USB įrenginiams"
+
 msgid "e2_loadepg is running..."
 msgstr "e2_loadepg veikia..."
 
@@ -8569,9 +8785,6 @@ msgstr "kirpimo pabaiga čia"
 
 msgid "end favourites edit"
 msgstr "baigti mėgstamiausių redagavimą"
-
-msgid "enter hidden network SSID"
-msgstr "Įrašykite paslėpto tinklo SSID"
 
 msgid "equal to"
 msgstr "lygus į"
@@ -8741,6 +8954,9 @@ msgstr "minutė"
 msgid "minutes"
 msgstr "minučių"
 
+msgid "missing parameter \"id\""
+msgstr "trūksta parametro \"id\""
+
 msgid "month"
 msgstr "mėnuo"
 
@@ -8891,9 +9107,6 @@ msgstr "raudonas"
 msgid "redesigned Kerni-HD1 skin"
 msgstr "pertvarkyta Kerni-HD1 tema"
 
-msgid "redirect notifications to Growl"
-msgstr "nukreipti pranešimai Growl"
-
 msgid "remove a nameserver entry"
 msgstr "pašalinkite serverio pavadinimo įrašą"
 
@@ -8952,10 +9165,10 @@ msgid "save playlist on exit"
 msgstr "išsaugoti grojaraštį išeinant"
 
 msgid "scan done!"
-msgstr "skanavimas baigtas!"
+msgstr "paieška baigta!"
 
 msgid "scan in progress - %d%% done!"
-msgstr "vyksta skanavimas - %d %% baigta!"
+msgstr "vyksta paieška - %d %% baigta!"
 
 msgid "scan state"
 msgstr "paieškos eiga"
@@ -9149,8 +9362,8 @@ msgstr "laikas, skyrius, garsas, subtitrų informacija"
 msgid "tuner is not supported"
 msgstr "imtuvas nepalaikomas"
 
-msgid "unavailable"
-msgstr "nepasiekiamas"
+msgid "unable to find timer with id %i"
+msgstr "Impossibile trovare il timer con id %i"
 
 msgid "unconfirmed"
 msgstr "neparvirtintas"
@@ -9203,6 +9416,9 @@ msgstr "kas savaitę"
 msgid "whitelist"
 msgstr "baltas sąrašas"
 
+msgid "wireless network interface"
+msgstr "Bevielio tinklo sąsaja"
+
 msgid "working"
 msgstr "dirba"
 
@@ -9224,5 +9440,203 @@ msgstr "jungti"
 msgid "zapped"
 msgstr "įjungta"
 
-#~ msgid "Persian"
-#~ msgstr "Persų"
+msgid "Add to EPG Blacklist"
+msgstr "Įtraukti į EPG juodąjį sąrašą"
+
+msgid "Ammount of recordings left"
+msgstr "Suma įrašų kairėje"
+
+msgid "Atheros"
+msgstr "Atheros"
+
+msgid ""
+"Autoresolution Plugin Testmode:\n"
+"Is %s ok?"
+msgstr ""
+"Auto skiriamosios gebos priedo bandymo būdas:\n"
+"tai %s gerai?"
+
+msgid "Code rate high"
+msgstr "Aukšta kodavimo norma"
+
+msgid "Code rate low"
+msgstr "Žema kodavimo norma"
+
+msgid "Displays movie information from the InternetMovieDatabase"
+msgstr "Parodyti kino filmo informaciją iš InternetMovieDatabase"
+
+msgid ""
+"EPGRefresh will automatically switch to user-defined channels when the box is idleing\n"
+"(in standby mode without any running recordings) to perform updates of the epg information on these channels."
+msgstr ""
+"EPGRefresh automatiškai persijungs į vartotojo nustatytus kanalus, kai imtuvas yra nenaudojamas\n"
+"(Laukimo režimu be jokių veikiančių įrašų) ir atliks atnaujinimus EPG informacijos apie šiuos kanalus."
+
+msgid "Encryption Type"
+msgstr "Užšifravimo būdas"
+
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and %d modified, %d conflicts encountered."
+msgstr ""
+"Surasta iš viso %d atitikimo įvykių.\n"
+"%d Laikmatis buvo pridėtas ir %d pakeistas, %d konfliktų su kuriais susidurta."
+
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and %d modified."
+msgstr ""
+"Surasta iš viso %d atitikimo įvykių.\n"
+"%d Laikmatis buvo pridėtas ir %d pakeistas."
+
+msgid "Guard Interval"
+msgstr "Apsaugos intervalas"
+
+msgid "Guard interval mode"
+msgstr "Apsaugos intervalo režimas"
+
+msgid "Hidden network SSID"
+msgstr "Paslėptas tinklo SSID"
+
+msgid "Hierarchy Information"
+msgstr "Hierarchijos informacija"
+
+msgid "Hierarchy mode"
+msgstr "Hierarchijos režimas"
+
+msgid "Internal LAN adapter."
+msgstr "Vidinis LAN adapteris"
+
+msgid "Listen and record internet radio"
+msgstr "Klausykite ir įrašykite interneto radiją"
+
+msgid "Listen and record shoutcast internet radio on your Dreambox."
+msgstr "Klausykite ir įrašykite shoutcast interneto radiją į savo Dreambox."
+
+msgid "Maximum event duration to match. If an event is longer than this ammount of time (without offset) it won't be matched."
+msgstr "Maksimali atvejo trukmė rasta. Jei atvejis bus ilgesnis negu šis laiko ammount (be padengimo), tai nebus suderinama."
+
+msgid "Movie information from the Online Film Datenbank (German)."
+msgstr "Kino filmo informacija iš Internetinio Filmų Datenbank (vokiečių kalba)."
+
+msgid "Movie informations from the Online Film Datenbank"
+msgstr "Kino filmų informacijos iš Internetinio Filmų Datenbank"
+
+msgid "No Networks found"
+msgstr "Jokie Tinklai nesurasti"
+
+msgid "Orbital Position"
+msgstr "Orbitinė pozicija"
+
+msgid "Play music from Last.fm"
+msgstr "Groti muziką iš Last.fm"
+
+msgid "Play music from Last.fm."
+msgstr "Groti muziką iš Last.fm."
+
+msgid "Polarity"
+msgstr "Poliariškumas"
+
+msgid "Ralink"
+msgstr "Ralink"
+
+msgid "Rolloff"
+msgstr "Rolloff"
+
+msgid "Sets your Dreambox into Deep-Standby"
+msgstr "Nustatykite jūsų Dreambox į gilų budėjimą"
+
+msgid "Symbol Rate"
+msgstr "Simbolių greitis"
+
+msgid ""
+"The Elektro Power Save plugin puts the box from standby to sleep mode (Deep Standby) at certain times.\n"
+"This only happens if the box is in standby and no recording is running or sheduled in the next 20 minutes.\n"
+"The box automatically wakes up for recordings or at the end of the sleep time. You therefore don't have to wait until it is on again."
+msgstr ""
+"Elektro Energijos taupymo priedas padeda imtuvui iš laukimo pereiti į miego režimą (Gilus budėjimas) tam tikru laiku.\n"
+"Tai atsitinka tik jei imtuvas yra budėjime ir neveikia joks įrašymas ar laikamtis per ateinančias 20 minučių.\n"
+"Imtuvas automatiškai atsibus įrašams arba po miego pabaigos. Jums nereikia laukti, kol jis įsijungs vėl."
+
+msgid "TrafficInfo shows german traffic information."
+msgstr "TrafficInfo rodo vokiečių informaciją apie eismą."
+
+msgid "Transmission Mode"
+msgstr "Perdavimo būdas"
+
+msgid "Transponder Type"
+msgstr "Transponderio tipas"
+
+msgid "Unknown network adapter."
+msgstr "Nežinomas tinklo adapteris"
+
+msgid "UnwetterInfo shows german storm information."
+msgstr "UnwetterInfo rodo vokiečių audrų informaciją."
+
+msgid "WLAN adapter."
+msgstr "WLAN adapteris."
+
+msgid "With IMDb you can download and displays movie information (rating, poster, cast, synopsis etc.) about the selected event."
+msgstr "Su IMDb galite atsisiųsti ir rodyti kino filmų informaciją (reitingas, plakatas, dauguma, santrauką ir tt) apie pasirinktą įvykį."
+
+msgid "With this option you can restrict the AutoTimer to a certain ammount of scheduled recordings. Set this to 0 to disable this functionality."
+msgstr "Naudodami šią parinktį galite apriboti Auto laikmatį į tam tikrą oficialų sąrašą įtrauktų įrašų. Nustačius 0, išjungti šią funkciją."
+
+msgid "Zydas"
+msgstr "Zydas"
+
+msgid "add tags to recorded movies"
+msgstr "pridėti korteles su užrašu prie įrašytų kino filmų"
+
+msgid "enter hidden network SSID"
+msgstr "Įrašykite paslėpto tinklo SSID"
+
+msgid "unavailable"
+msgstr "nepasiekiamas"
+
+msgid "CardServers (%s) :"
+msgstr "Kortelių serveriai (%s) :"
+
+msgid "Restart Enigma"
+msgstr "Paleisti iš naujo Enigma"
+
+msgid "Running.."
+msgstr "Veikia.."
+
+msgid "Nemesis Blue Panel"
+msgstr "Nemesis Mėlynoji Panėlė"
+
+msgid "Reload /tmp"
+msgstr "Perkrauti /tmp"
+
+msgid "About Nemesis"
+msgstr "Apie Nemesis"
+
+msgid "Nemesis Timeline"
+msgstr "Nemesis chronologija"
+
+msgid "Nemesis News"
+msgstr "Nemesis naujienos"
+
+msgid "A BackToTheRoots-Skin ... or good old times."
+msgstr "Atgal į TheRoots-Temą ... arba kaip senais gerais laikais."
+
+msgid "Enter Fast Forward at speed"
+msgstr "Eiti į greitą persukimą"
+
+msgid "Frame repeat count during non-smooth winding"
+msgstr "Rėmo pakartojimo skaičiavimas per nelygų vingiavimą"
+
+msgid ""
+"Growlee allows your Dreambox to send short messages using the growl protocol\n"
+"like Recording started notifications to a PC running a growl client"
+msgstr ""
+"Growlee leidžia jūsų Dreambox siųsti trumpąsias žinutes, naudojant growl protokolą\n"
+"Įrašas paleidžia pranešimus į PC, veikiant growl klientui"
+
+msgid "Network Browser"
+msgstr "Tinklo naršyklė"
+
+msgid "Use non-smooth winding at speeds above"
+msgstr "Naudoti nelygų vingiavimą greičiais didesniais kaip"
+

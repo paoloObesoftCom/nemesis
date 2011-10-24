@@ -14,7 +14,7 @@ enigmaver='2'
 oever='1.6'
 subver=''
 data=`date +'%d-%m-%Y-%H-%M'`
-imagename="Nemesis${ver}${subver}-${dmver}-e${enigmaver}-OE(${oever})-SVN(${svn_ver}${pr_ver})"
+imagename="Nemesis${ver}${subver}-${dmver}-e${enigmaver}-OE(${oever})-SVN(${svn_ver}r${pr_ver})"
 
 [ -e $git_dir/checksums.ini ] && rm -f $git_dir/checksums.ini
 

@@ -6,6 +6,7 @@ dist_pkgdata_DATA = \
 	dreampackagewizard.xml \
 	encoding.conf \
 	keymap.xml \
+	keymap_gsw.xml \
 	keymap_neutrino.xml \
 	menu.xml \
 	prev.png \

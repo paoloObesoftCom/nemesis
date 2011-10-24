@@ -74,6 +74,7 @@ dist_install_DATA = \
 	selected-4.png \
 	selected-5.png \
 	selected-6.png \
+	selected-7.png \
 	selected-back.png \
 	selected-menu.png \
 	title_bar.png \

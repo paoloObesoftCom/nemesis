@@ -109,13 +109,6 @@ class nemesisBluePanel(Screen):
 		self.readEcmInfo()
 
 	def checkVersion(self):
-		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/WebInterface/plugin.pyo")):
-			try:
-				from Plugins.Extensions.WebInterface.plugin import IDW
-				if getUsrID(IDW.ID) != 'marte 0':
-					os._exit(1)
-			except:
-				os._exit(1)
 		url = t.readAddonsUrl() + {True:'rel-test.txt',False:'rel.txt'}[fileExists("/etc/.testmode")]
 		cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + url + " -O /tmp/ver.txt"
 		self.checkVersionContainer.execute(cmd)

@@ -2,7 +2,7 @@ DESCRIPTION = "OpenDreambox: Base Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
 PV = "2.3"
-PR = "r1"
+PR = "r2"
 
 inherit task
 
@@ -61,7 +61,6 @@ OPENDREAMBOX_BASE_OPTIONAL_RECOMMENDS = "\
   joe \
   mc \
   ncdu \
-  ppp \
   smartmontools \
   avahi-daemon \
 "

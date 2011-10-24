@@ -2,13 +2,13 @@ DESCRIPTION = "Generic USB CCID smart card reader driver"
 HOMEPAGE = "http://pcsclite.alioth.debian.org/ccid.html"
 LICENSE = "GPL"
 
-PV = "1.4.4"
+PV = "1.4.5"
 PR = "r0"
 
 DEPENDS = "pcsc-lite"
 RDEPENDS = "pcsc-lite"
 
-SRC_URI = "https://alioth.debian.org/frs/download.php/3579/ccid-1.4.4.tar.bz2"
+SRC_URI = "https://alioth.debian.org/frs/download.php/3672/ccid-1.4.5.tar.bz2"
 
 inherit autotools
 

@@ -2,8 +2,8 @@ DESCRIPTION = "OpenDreambox: Enigma2 Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
 
-PV = "2.2"
-PR = "r5"
+PV = "2.3"
+PR = "r1"
 
 inherit task
 
@@ -55,11 +55,13 @@ RRECOMMENDS_task-opendreambox-enigma2 = "\
   enigma2-plugin-extensions-cutlisteditor \
   enigma2-plugin-extensions-graphmultiepg \
   enigma2-plugin-extensions-mediaplayer \
+  enigma2-plugin-extensions-webbouqueteditor \
   enigma2-plugin-extensions-webinterface \
   enigma2-plugin-systemplugins-satfinder \
   enigma2-plugin-systemplugins-positionersetup \
   enigma2-plugin-systemplugins-skinselector \
   ${@base_contains("MACHINE_FEATURES", "wifi", "task-opendreambox-wlan", "", d)} \
+  ${@base_contains("MACHINE_FEATURES", "dreambox-libpassthrough", "libpassthrough", "", d)} \
   enigma2-plugin-extensions-audiosync \
   enigma2-plugin-extensions-stayup \
   enigma2-plugin-extensions-epgsearch \
@@ -69,7 +71,6 @@ RRECOMMENDS_task-opendreambox-enigma2 = "\
   enigma2-plugin-systemplugins-lcnscanner \
   enigma2-locale-it \
   enigma2-locale-de \
-  ${@base_contains("MACHINE_FEATURES", "dreambox-libpassthrough", "libpassthrough", "", d)} \
 "
 
 RDEPENDS_task-opendreambox-enigma2_append_dm500hd = "\
@@ -96,6 +97,12 @@ RDEPENDS_task-opendreambox-enigma2_append_dm7020hd = "\
   enigma2-plugin-systemplugins-commoninterfaceassignment \
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-nfiflash \
+"
+
+RRECOMMENDS_task-opendreambox-enigma2_append_dm8000 = "\
+  task-opendreambox-cdplayer \
+  task-opendreambox-dvdplayer \
+  task-opendreambox-dvdburn \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

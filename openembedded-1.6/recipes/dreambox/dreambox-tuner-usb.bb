@@ -46,7 +46,7 @@ do_install() {
 	install -m 644 ${OE_BASE}/build/tmp/work/${MACHINE}-oe-linux/v4l-dvb-modules-0.0+hg${dvb_srcdate}-r${dvb_srcrev}/package/lib/modules/${KERNEL_VERSION}/kernel/drivers/media/dvb/siano/*.ko  ${D}/lib/modules/dvbt
 	install -m 644 ${OE_BASE}/build/tmp/work/${MACHINE}-oe-linux/v4l-dvb-modules-0.0+hg${dvb_srcdate}-r${dvb_srcrev}/package/lib/modules/${KERNEL_VERSION}/kernel/drivers/media/dvb/ttusb-budget/*.ko  ${D}/lib/modules/dvbt
 	install -m 644 ${OE_BASE}/build/tmp/work/${MACHINE}-oe-linux/v4l-dvb-modules-0.0+hg${dvb_srcdate}-r${dvb_srcrev}/package/lib/modules/${KERNEL_VERSION}/kernel/drivers/media/dvb/ttusb-dec/*.ko  ${D}/lib/modules/dvbt
-	if [ "${MACHINE}" != "dm800" ]; then
+	if [ "${MACHINE}" = "dm800se" -o "${MACHINE}" = "dm500hd" -o "${MACHINE}" = "dm8000" ]; then
 		rm -f  ${D}/lib/modules/dvbt/dvb-usb-af9015.ko
 		install -m 644 ${WORKDIR}/dvb-usb-af9015-${MACHINE}.ko  ${D}/lib/modules/dvbt/dvb-usb-af9015.ko
 	fi

@@ -5,7 +5,7 @@ PACKAGES_DYNAMIC = "enigma2-plugin-*"
 
 # if you want experimental, use:
 SRCREV="87fd2f1120962f553ecb1a88bbee46ed821df975"
-SRCDATE="20110926"
+SRCDATE="20111023"
 BRANCH="master"
 PV = "experimental-git${SRCDATE}"
 
@@ -28,12 +28,8 @@ inherit autotools
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "python-pyopenssl python-gdata streamripper python-mutagen python-daap"
+DEPENDS = "python-pyopenssl python-gdata streamripper python-mutagen python-daap python-flickrapi python-transmissionrpc"
 DEPENDS += "enigma2"
-
-do_install_append() {
-	rm -f ${D}/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/plugin.py
-}
 
 python populate_packages_prepend () {
 	enigma2_plugindir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)

@@ -35,10 +35,11 @@
 		<item level="0" text="Show Picon on LCD? (Need GUI Restart)">config.nemesis.piconlcd</item>
 		<item level="0" text="Set LCD Picon type">config.nemesis.piconlcdtype</item>
 	</setup>
-	<setup key="console" title="Setup Console">
+	<setup key="console" title="Setup Console/RC">
 		<item level="0" text="Auto close Console on finished event">config.nemesis.autocloseconsole</item>
 		<item level="0" text="Delay before auto close Console (sec)">config.nemesis.autocloseconsoledelay</item>
 		<item level="0" text="Enable VirtualKeyBoard (Experimental)">config.nemesis.usevkeyboard</item>
+		<item level="0" text="RC-Setup (enable after restart GUI Def enig.)">config.usage.remote_control_setup</item>
 	</setup>
 	<setup key="picon" title="Setup Picon">
 		<item level="0" text="Show Picon on LCD? (Need GUI Restart)">config.nemesis.piconlcd</item>

@@ -127,7 +127,6 @@ check_enigma2()
 check_plugins_e2()
 {
 	# Check Plugins
-	kompare $e2_plugsrc/webinterface/src/plugin.py patch/enigma2-plugins/webinterface/src/plugin.py
 	kompare $e2_plugsrc/webinterface/src/web-data/objects.js patch/enigma2-plugins/webinterface/src/web-data/objects.js 
 	kompare $e2_plugsrc/webinterface/src/web-data/timer.js patch/enigma2-plugins/webinterface/src/web-data/timer.js 
 	kompare $e2_plugsrc/webinterface/src/WebComponents/Sources/Timer.py patch/enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py

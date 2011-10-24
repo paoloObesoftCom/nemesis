@@ -43,7 +43,7 @@ class About:
 			for x in lines:
 				splitted = x.split('=')
 				if splitted[0] == "version":
-					return splitted[1][1:4]+splitted[1][6]
+					return splitted[1][1:4]+splitted[1][5]
 			file.close()
 		except IOError:
 			pass

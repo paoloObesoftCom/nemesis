@@ -12,6 +12,7 @@ fi
 if [ -x @bindir@/enigma2_pre_start.sh ]; then
 	@bindir@/enigma2_pre_start.sh
 fi
+
 if [ -e /etc/init.d/restartDtt.sh ]; then
 	/etc/init.d/restartDtt.sh
 fi

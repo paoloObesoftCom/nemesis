@@ -432,7 +432,7 @@ class	RAddonsDown(Screen):
 				rename("/tmp/.-/.-", "/tmp/.-/p.ipk")
 				self.container.execute("ipkg " + args + "install /tmp/.-/p.ipk")
 			elif (u.filename.find('.tbz2') != -1):
-				if (u.pluginType == 'Settings') or (u.pluginType == 'e2Settings'):
+				if u.pluginType.find('Settings') >= 0:
 					self['conn'].text = _("Remove old Settings\nPlease wait...")
 					u.removeSetting()	
 				self.container.execute("tar -jxvf /tmp/.-/.- -C /")
@@ -445,7 +445,7 @@ class	RAddonsDown(Screen):
 	def runFinished(self, retval):
 		if pathExists('/tmp/.-'):
 			system("rm -rf /tmp/.-")
-		if (u.pluginType == 'Settings') or (u.pluginType == 'e2Settings'):
+		if u.pluginType.find('Settings') >= 0:
 			self['conn'].text = _("Reload new Settings\nPlease wait...")
 			u.reloadSetting()
 		if (u.pluginType == 'Plugins') or (u.pluginType == 'e2Plugins'):

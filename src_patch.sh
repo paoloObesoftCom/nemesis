@@ -126,8 +126,8 @@ enigma2_16()
 		mv $srcpatchedpath/enigma2/enigma2 $srcpatchedpath/enigma2/git
 		echo -n "Copy patch/enigma2/* to $srcpatchedpath/enigma2/git/... "
 		cp -r patch/enigma2/* $srcpatchedpath/enigma2/git/  && echo 'Copied!'
-		echo -n "Copy patch/po/enigma2/*.po to $srcpatchedpath/enigma2/git/po... "
-		cp -r patch/po/enigma2/*.po $srcpatchedpath/enigma2/git/po  && echo 'Copied!'
+		echo -n "Patch enigma2 to Nemesis sources... "
+		cp -r patch/po/enigma2/*.po $srcpatchedpath/enigma2/git/po  && echo 'Patched!'
 		echo -n "Copy patch/po/enigma2/Makefile.am to $srcpatchedpath/enigma2/git/po... "
 		cp -r patch/po/enigma2/Makefile.am $srcpatchedpath/enigma2/git/po  && echo 'Copied!'
 		echo -n "Merge patch/po/enigma2/panel_it.po in $srcpatchedpath/enigma2/git/po/it.po... "
@@ -155,11 +155,14 @@ enigma2_plugins()
 		[ -e $srcpatchedpath/enigma2-plugins ] && rm -rf $srcpatchedpath/enigma2-plugins
 		echo 'Removed!'
 		mkdir -p $srcpatchedpath/enigma2-plugins/
-		cp -r $srcpath/enigma2-plugins $srcpatchedpath/enigma2-plugins/
+		echo -n "Copy $srcpath/enigma2-plugins/* to $srcpatchedpath/enigma2-plugins/... "
+		cp -r $srcpath/enigma2-plugins $srcpatchedpath/enigma2-plugins/ && echo 'Copied!'
+		echo -n "Patch enigma2-plugins to Nemesis sources... "
 		cp -r patch/enigma2-plugins $srcpatchedpath/enigma2-plugins/
 		mv $srcpatchedpath/enigma2-plugins/enigma2-plugins/ $srcpatchedpath/enigma2-plugins/git
 		cd $srcpatchedpath/enigma2-plugins/
 		find git/ -name ".svn" | xargs rm -rf
+		echo 'Patched!'
 		echo -n "Create $e2_plugins archive... "
 		tar -zcf $e2_plugins git/ && echo 'Created!'
 		mv $e2_plugins ../$sourcespath

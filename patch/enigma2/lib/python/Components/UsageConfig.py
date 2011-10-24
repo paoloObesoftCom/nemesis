@@ -57,7 +57,7 @@ def InitUsageConfig():
 		("intermediate", _("Intermediate")),
 		("expert", _("Expert")) ])
 				
-	config.usage.remote_control_setup = ConfigSelection(default = "Enigma", choices = ["Enigma", "Neutrino"])	
+	config.usage.remote_control_setup = ConfigSelection(default = "Enigma", choices = ["Enigma","Enigma Key Green Swap","Neutrino"])	
 
 	config.usage.on_long_powerpress = ConfigSelection(default = "show_menu", choices = [
 		("show_menu", _("show shutdown menu")),
@@ -109,6 +109,8 @@ def InitUsageConfig():
 	def setKeymapConfig(configElement):
 		if configElement.value == "Enigma":
 			config.usage.keymap.value = eEnv.resolve("${datadir}/enigma2/keymap.xml")
+		elif configElement.value == "Enigma Key Green Swap":
+			config.usage.keymap.value = eEnv.resolve("${datadir}/enigma2/keymap_gsw.xml")
 		else:
 			config.usage.keymap.value = eEnv.resolve("${datadir}/enigma2/keymap_neutrino.xml")
 	config.usage.remote_control_setup.addNotifier(setKeymapConfig)
