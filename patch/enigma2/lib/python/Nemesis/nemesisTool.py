@@ -274,6 +274,17 @@ class editBlacklist:
 
 class nemesisTool:
 	
+	def readPortNumber(self):	
+		try:
+			f = open("/var/etc/nemesis.cfg", "r")
+			for line in f.readlines():
+				if line.find("daemon_port=") >= 0:
+					f.close()
+					return line.split("=") [1] [:-1]
+			f.close()
+		except:
+			return "1888"
+			
 	def readEmuName(self,emu):	
 		try:
 			f = open("/var/script/" + emu + "_em.sh", "r")

@@ -245,19 +245,19 @@ fi
 #Download enigma2 from branch experimental
 [ -d $INIT_DIR/src ] || mkdir $INIT_DIR/src
 cd $INIT_DIR/src
-if [ -d $INIT_DIR/src/enigma2/.git ];then
+if [ -d $INIT_DIR/src/enigma2.orig/.git ];then
 	echo "Update enigma2 from branch experimental"
-	cd enigma2
+	cd enigma2.orig
 	git pull
 else
 	echo "Download enigma2 from branch experimental"
-	[ -d $INIT_DIR/src/enigma2 ] && rm -rf $INIT_DIR/src/enigma2
-	git clone git://git.opendreambox.org/git/enigma2.git
+	[ -d $INIT_DIR/src/enigma2.orig ] && rm -rf $INIT_DIR/src/enigma2.orig
+	git clone git://git.opendreambox.org/git/enigma2.git enigma2.orig
 	if ( test $? -ne 0 ) then
 		echo -e $ANSI_RED"Fehler beim downloaden von enigma2 source"$ANSI_RESET2
 		exit 72		#Code für: wichtige Systemdatei fehlt
 	fi;
-	cd enigma2
+	cd enigma2.orig
 	git checkout -f experimental
 fi
 
@@ -277,6 +277,7 @@ else
 	fi;
 	cd enigma2-plugins
 	git checkout -f master
+# 	git checkout 0583479ced50001bfd61e0b20c7f35985a117745
 fi
 
 #Download enigma1
@@ -302,8 +303,36 @@ fi
 # clean src folder
 cd $INIT_DIR/src
 find . -name ".svn" | xargs rm -rf
-
 }
+
+_download_e2_src()
+{
+# download new enigma2 source
+cd $INIT_DIR/src
+PV=`grep -m 1 "PV" ../git/recipes/enigma2/enigma2.bb | cut -d "=" -f 2 | sed -e 's/[" {}$A-Z]//g'`
+SRCDATE=`grep -m 1 "SRCDATE" ../git/recipes/enigma2/enigma2.bb | cut -d "=" -f 2 | sed -e 's/[a-zA-Z" =]//g'`
+for MACHINE in "dm500hd" "dm800" "dm800se" "dm7020hd" "dm8000"
+do
+	[ -f $INIT_DIR/src/enigma2_${PV}${SRCDATE}_${MACHINE}.tar.bz2 ] && rm -rf $INIT_DIR/src/enigma2_${PV}${SRCDATE}_${MACHINE}.tar.bz2
+	echo -n "Download enigma2_${PV}${SRCDATE}_${MACHINE}.tar.bz2..."
+	wget http://dreamboxupdate.com/download/snapshots/enigma2_${PV}${SRCDATE}_${MACHINE}.tar.bz2 -q && echo 'Done!'
+	if ( test $? -ne 0 ) then
+		echo -e $ANSI_RED"Failed to download enigma2 source"$ANSI_RESET2
+		exit 72
+	fi;
+	[ -d $INIT_DIR/src/$MACHINE ] && rm -rf $INIT_DIR/src/$MACHINE
+	echo -n "Extract enigma2_${PV}${SRCDATE}_${MACHINE}.tar.bz2..."
+	tar -jxf enigma2_${PV}${SRCDATE}_${MACHINE}.tar.bz2  && echo 'Done!'
+	rm -f enigma2_${PV}${SRCDATE}_${MACHINE}.tar.bz2
+	mv enigma2_${PV}${SRCDATE}_${MACHINE} $MACHINE
+	rm -f LICENSE
+	echo -n "Clean source folder..."
+	find $MACHINE/ -name "*.pyc" | xargs rm -f
+	find $MACHINE/ -name "*.pyo" | xargs rm -f
+	echo 'Done!'
+done
+}
+
 ###############################################################################
 _create_makefile()
 {
@@ -804,6 +833,9 @@ if (test "$#" = 1) then
 		exit;;
 	'--download')
 		_download_src
+		exit;;
+	'--download_e2')
+		_download_e2_src
 		exit;;
 	'--makefile')
 		cd $INIT_DIR

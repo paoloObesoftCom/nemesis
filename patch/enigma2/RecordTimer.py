@@ -89,11 +89,20 @@ class timerEpgDownload():
 				os.system("mv /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat")
 				if config.nemepg.clearcache.value:
 					self.writeLog('Clear enigma EPG cache')
-					epg.clearEpg()
+					try:
+						epg.flushEPG()
+					except:
+						pass
 				self.writeLog('Load EPG in a cache')
-				epg.reloadEpg()
+				try:
+					epg.load()
+				except:
+					pass
 				self.writeLog('Save EPG backup')
-				epg.saveEpg()
+				try:
+					epg.save()
+				except:
+					pass
 				if fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
 					os.system("mv " + config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
 				self.writeLog('Download EPG finished!')
@@ -337,7 +346,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			if self.first_try_prepare:
 				self.first_try_prepare = False
 				cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-				if cur_ref and not cur_ref.getPath():
+				if cur_ref and (not cur_ref.getPath() or cur_ref.getPath()[0] != '/'):
 					if not config.recording.asktozap.value:
 						self.log(8, "asking user to zap away")
 						Notifications.AddNotificationWithCallback(self.failureCB, MessageBox, _("A timer failed to record!\nDisable TV and try again?\n"), timeout=20)

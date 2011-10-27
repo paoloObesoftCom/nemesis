@@ -67,7 +67,7 @@ def InitLcd():
 		if model not in ('dm800se'):
 			config.lcd.enablelcdbri = ConfigYesNo(default=False)
 			config.lcd.lcdbri = ConfigSlider(default=3, limits=(0, 10))
-			config.lcd.lcdbri.addNotifier(setLCDbright);
+			config.lcd.lcdbri.addNotifier(setLCDbright, call_on_save_or_cancel=True);
 			config.lcd.lcdbri.apply = lambda : setLCDbright(config.lcd.lcdbri)
 			config.lcd.lcdbri.callNotifiersOnSaveAndCancel = True
 		else:
@@ -76,13 +76,12 @@ def InitLcd():
 			config.lcd.lcdbri.apply = lambda :  doNothing()
 			
 		config.lcd.standby = ConfigSlider(default=0, limits=(0, 10))
-		config.lcd.standby.addNotifier(setLCDbright);
+		config.lcd.standby.addNotifier(setLCDbright, call_on_save_or_cancel=True);
 		config.lcd.standby.apply = lambda : setLCDbright(config.lcd.standby)
 
 		config.lcd.bright = ConfigSlider(default=5, limits=(0, 10))
-		config.lcd.bright.addNotifier(setLCDbright);
+		config.lcd.bright.addNotifier(setLCDbright, call_on_save_or_cancel=True);
 		config.lcd.bright.apply = lambda : setLCDbright(config.lcd.bright)
-		config.lcd.bright.callNotifiersOnSaveAndCancel = True
 
 		config.lcd.invert = ConfigYesNo(default=False)
 		config.lcd.invert.addNotifier(setLCDinverted);

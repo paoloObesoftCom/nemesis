@@ -19,11 +19,10 @@ from nemesisTool import GetSkinPath, ListboxE2
 from nemesisConsole import nemesisConsole
 from nemesisSetting import NSetup
 from nemesisShowPanel import nemesisShowPanel
-from enigma import eTimer, eEPGCache, nemTool, eServiceCenter, eServiceReference
+from enigma import eTimer, eEPGCache, eServiceCenter, eServiceReference
 from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry
 
-tool = nemTool()
 epg = eEPGCache.getInstance()
 configfile = ConfigFile()
 
@@ -264,9 +263,15 @@ class nemesisEpgPanel(Screen):
 		if not fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
 			system("cp " + config.misc.epgcache_filename.value + "/epg.dat.save " + config.misc.epgcache_filename.value + "/epg.dat")
 		if config.nemepg.clearcache.value:
-			epg.clearEpg()
-		epg.reloadEpg()
-		epg.saveEpg()
+			try:
+				epg.flushEPG()
+			except:
+				pass
+		try:
+			epg.load()
+			epg.save()
+		except:
+			pass
 		system("cp " +  config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
 		self.epgRBox.close()
 		self.close()
@@ -274,7 +279,10 @@ class nemesisEpgPanel(Screen):
 	def clearEPG(self):
 		if self.clearEPGTimer.isActive():
 			self.clearEPGTimer.stop()
-		epg.clearEpg()
+		try:
+			epg.flushEPG()
+		except:
+			pass
 		if config.nemepg.clearbackup.value:
 			system("rm -f " + config.misc.epgcache_filename.value + "/epg.dat.save")
 		self.epgCBox.close()
@@ -282,7 +290,10 @@ class nemesisEpgPanel(Screen):
 	def backupEPG(self):
 		if self.saveEPGTimer.isActive():
 			self.saveEPGTimer.stop()
-		epg.saveEpg()
+		try:
+			epg.save()
+		except:
+			pass
 		if fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
 			system("mv " + config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
 			self.epgBBox.close()

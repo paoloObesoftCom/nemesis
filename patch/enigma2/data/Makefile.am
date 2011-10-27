@@ -11,6 +11,7 @@ dist_pkgdata_DATA = \
 	menu.xml \
 	prev.png \
 	radio.mvi \
+	pic_frame.png \
 	rcpositions.xml \
 	setup.xml \
 	skin_default.xml \

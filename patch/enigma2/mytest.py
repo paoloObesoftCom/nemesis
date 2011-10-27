@@ -14,11 +14,27 @@ from enigma import runMainloop, eDVBDB, eTimer, quitMainloop, \
 	eEPGCache
 from tools import *
 
+from Components.ResourceManager import resourcemanager
+
+profile("ImageDefaults")
+from Components.DreamInfoHandler import ImageDefaultInstaller
+ImageDefaultInstaller()
+
 # Nemesis Patch
-from enigma import nemTool
-t = nemTool()
+PortNumber = "1888"
+try:
+	f = open("/var/etc/nemesis.cfg", "r")
+	for line in f.readlines():
+		if line.find("daemon_port=") >= 0:
+			f.close()
+			PortNumber = line.split("=") [1] [:-1]
+	f.close()
+except:
+	pass
+
 print "Restart EMU/CS"
-t.sendCmd("/etc/init.d/restartEmu.sh &")
+cmd = "nemesisc '%s' '%s' '%s'" % ('127.0.0.1',PortNumber,'/etc/init.d/restartEmu.sh &')
+system(cmd)
 #End
 
 profile("LANGUAGE")
@@ -32,6 +48,7 @@ def setEPGLanguage():
 language.addCallback(setEPGLanguage)
 
 from traceback import print_exc
+
 profile("LOAD:InfoBar")
 import Screens.InfoBar
 from Screens.SimpleSummary import SimpleSummary
@@ -103,9 +120,10 @@ except ImportError:
 		runMainloop()
 
 profile("LOAD:Plugin")
-
 # initialize autorun plugins and plugin menu entries
 from Components.PluginComponent import plugins
+from Plugins.Plugin import PluginDescriptor
+plugins.runEarlyPlugins(resolveFilename(SCOPE_PLUGINS))
 
 profile("LOAD:Wizard")
 from Screens.Wizard import wizardManager
@@ -114,7 +132,6 @@ from Screens.StartWizard import *
 from Screens.TutorialWizard import *
 import Screens.Rc
 from Tools.BoundFunction import boundFunction
-from Plugins.Plugin import PluginDescriptor
 
 profile("misc")
 had = dict()
@@ -569,8 +586,7 @@ import keymapparser
 keymapparser.readKeymap(config.usage.keymap.value)
 
 profile("Network")
-import Components.Network
-Components.Network.InitNetwork()
+from Components.Network import iNetwork
 
 profile("LCD")
 import Components.Lcd

@@ -293,14 +293,11 @@ private:
 // called from epgcache thread
 	int m_running;
 	char m_filename[1024];
-	void save();
-	void load();
 #ifdef ENABLE_PRIVATE_EPG
 	void privateSectionRead(const uniqueEPGKey &, const __u8 *);
 #endif
 	void sectionRead(const __u8 *data, int source, channel_data *channel);
 	void gotMessage(const Message &message);
-	void flushEPG(const uniqueEPGKey & s=uniqueEPGKey());
 	void cleanLoop();
 
 // called from main thread
@@ -315,25 +312,11 @@ private:
 	eEPGCache();
 	~eEPGCache();
 #endif // SWIG
-
-	typedef struct epg_block_list_s
-	{
-		uint16_t	service_id;
-		uint16_t	transport_stream_id;
-		uint16_t	original_network_id;
-		int 		source;
-	} epg_block_list_t;
-	std::list<epg_block_list_t> block_list;
-
 public:
+	void save();
+	void load();
+	void flushEPG(const uniqueEPGKey & s=uniqueEPGKey());
 	static eEPGCache *getInstance() { return instance; }
-	void crossepgImportEPGv21(std::string dbroot);
-//nemesis
-	void saveEpg();
-	void reloadEpg();
-	void clearEpg();
-	void InitEPGBlock ();
-	bool CheckEPGBlock (int32_t service_id, uint16_t transport_stream_id, uint16_t original_network_id, int source);
 
 #ifndef SWIG
 	eEPGCache();

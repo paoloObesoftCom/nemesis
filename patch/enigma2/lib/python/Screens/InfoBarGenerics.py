@@ -531,6 +531,7 @@ class InfoBarMenu:
 		displayBriChange(config.lcd.lcdbri.value)
 		self.session.infobar = None
 
+#yet used in MoviePlayer.. not normal Infobar ... look at InfoBarEPG!
 class InfoBarSimpleEventView:
 	""" Opens the Eventview for now/next """
 	def __init__(self):
@@ -681,10 +682,11 @@ class InfoBarEPG:
 
 	def closed(self, ret=False):
 		closedScreen = self.dlg_stack.pop()
-		if self.bouquetSel and closedScreen == self.bouquetSel:
+		if closedScreen is self.bouquetSel:
 			self.bouquetSel = None
-		elif self.eventView and closedScreen == self.eventView:
+		elif closedScreen is self.eventView:
 			self.eventView = None
+			self.is_now_next = False
 		if ret:
 			dlgs=len(self.dlg_stack)
 			if dlgs > 0:
@@ -692,7 +694,6 @@ class InfoBarEPG:
 
 	def openMultiServiceEPG(self, withCallback=True):
 		bouquets = self.servicelist.getBouquetList()
-		root = self.servicelist.getRoot()
 		if bouquets is None:
 			cnt = 0
 		else:
@@ -795,9 +796,8 @@ class InfoBarEPG:
 	# FIX END
 	
 	def __evEventInfoChanged(self):
-		if self.is_now_next and len(self.dlg_stack) == 1:
+		if self.is_now_next:
 			self.getNowNext()
-			assert self.eventView
 			if self.epglist:
 				self.eventView.setEvent(self.epglist[0])
 
@@ -810,7 +810,6 @@ class InfoBarEPG:
 		# FIX END
 		epglist = self.epglist
 		if not epglist:
-			self.is_now_next = False
 			epg = eEPGCache.getInstance()
 			ptr = ref and ref.valid() and epg.lookupEventTime(ref, -1)
 			if ptr:
@@ -1672,8 +1671,16 @@ class InfoBarInstantRecord:
 			{
 				"instantRecord": (self.instantRecord, _("Instant Record...")),
 			})
+		
+		self.session.nav.RecordTimer.on_state_change.append(self.timerentryOnStateChange)
 		self.recording = []
 
+	def timerentryOnStateChange(self, timer):
+		# timer recording has been started, append to self.recording list
+		if hasattr(self, "recording") and timer.isRunning():
+			if not timer in self.recording: # only if timer is not in list already
+				self.recording.append(timer)
+				
 	def stopCurrentRecording(self, entry = -1):
 		if entry is not None and entry != -1:
 			self.session.nav.RecordTimer.removeEntry(self.recording[entry])
@@ -1717,16 +1724,15 @@ class InfoBarInstantRecord:
 
 		recording = RecordTimerEntry(serviceref, begin, end, name, description, eventid, dirname = preferredInstantRecordPath())
 		recording.dontSave = True
-
+		
 		if event is None or limitEvent == False:
 			recording.autoincrease = True
 			recording.setAutoincreaseEnd()
 
+		self.recording.append(recording)
 		simulTimerList = self.session.nav.RecordTimer.record(recording)
 
-		if simulTimerList is None:	# no conflict
-			self.recording.append(recording)
-		else:
+		if simulTimerList is not None:	
 			if len(simulTimerList) > 1: # with other recording
 				name = simulTimerList[1].name
 				name_date = ' '.join((name, strftime('%c', localtime(simulTimerList[1].begin))))
@@ -1734,11 +1740,12 @@ class InfoBarInstantRecord:
 				recording.autoincrease = True	# start with max available length, then increment
 				if recording.setAutoincreaseEnd():
 					self.session.nav.RecordTimer.record(recording)
-					self.recording.append(recording)
 					self.session.open(MessageBox, _("Record time limited due to conflicting timer %s") % name_date, MessageBox.TYPE_INFO)
 				else:
+					self.recording.remove(recording)
 					self.session.open(MessageBox, _("Couldn't record due to conflicting timer %s") % name, MessageBox.TYPE_INFO)
 			else:
+				self.recording.remove(recording)
 				self.session.open(MessageBox, _("Couldn't record due to invalid service %s") % serviceref, MessageBox.TYPE_INFO)
 			recording.autoincrease = False
 
@@ -1760,24 +1767,15 @@ class InfoBarInstantRecord:
 		for x in recording:
 			if not x in self.session.nav.RecordTimer.timer_list:
 				self.recording.remove(x)
-			elif x.dontSave and x.isRunning():
+			elif x.isRunning():
 				list.append((x, False))
 
 		if answer[1] == "changeduration":
-			if len(self.recording) == 1:
-				self.changeDuration(0)
-			else:
-				self.session.openWithCallback(self.changeDuration, TimerSelection, list)
+			self.session.openWithCallback(self.changeDuration, TimerSelection, list)
 		elif answer[1] == "changeendtime":
-			if len(self.recording) == 1:
-				self.setEndtime(0)
-			else:
-				self.session.openWithCallback(self.setEndtime, TimerSelection, list)
+			self.session.openWithCallback(self.setEndtime, TimerSelection, list)
 		elif answer[1] == "stop":
-			if len(self.recording) == 1:
-				self.stopCurrentRecording(0)
-			else:
-				self.session.openWithCallback(self.stopCurrentRecording, TimerSelection, list)
+			self.session.openWithCallback(self.stopCurrentRecording, TimerSelection, list)
 		elif answer[1] in ( "indefinitely" , "manualduration", "manualendtime", "event"):
 			self.startInstantRecording(limitEvent = answer[1] in ("event", "manualendtime") or False)
 			if answer[1] == "manualduration":
@@ -1859,7 +1857,7 @@ class InfoBarAudioSelection:
 
 	def audioSelection(self):
 		from Screens.AudioSelection import AudioSelection
-		self.session.openWithCallback(self.audioSelected, AudioSelection, infobar=self)
+		self.session.openWithCallback(self.audioSelected, AudioSelection, infobar=self.session.infobar or self)
 		
 	def audioSelected(self, ret=None):
 		print "[infobar::audioSelected]", ret
@@ -1995,7 +1993,7 @@ class InfoBarAdditionalInfo:
 
 		self["RecordingPossible"] = Boolean(fixed=harddiskmanager.HDDCount() > 0 and config.misc.rcused.value == 1)
 		self["TimeshiftPossible"] = self["RecordingPossible"]
-		self["ShowTimeshiftOnYellow"] = Boolean(fixed=(not config.misc.rcused.value == 0))
+		self["ShowTimeshiftOnYellow"] = Boolean(fixed=(not config.misc.rcused.value in (0, 2)))
 		self["ShowAudioOnYellow"] = Boolean(fixed=config.misc.rcused.value == 0)
 		self["ShowRecordOnRed"] = Boolean(fixed=config.misc.rcused.value == 1)
 		self["ExtensionsAvailable"] = Boolean(fixed=1)

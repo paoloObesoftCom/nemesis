@@ -1,4 +1,5 @@
 import gettext
+import os
 
 from Tools.Directories import SCOPE_LANGUAGE, resolveFilename, fileExists
 
@@ -6,7 +7,7 @@ import language_cache
 
 class Language:
 	def __init__(self):
-		gettext.install('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), unicode=0, codeset="utf-8")
+		self.currLangObj = gettext.install('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), unicode=0, codeset="utf-8")
 		self.activeLanguage = 0
 		self.lang = {}
 		self.langlist = []
@@ -50,6 +51,8 @@ class Language:
 			self.addLanguage(_("Italian"), "it", "IT")
 		if fileExists(language_path % "no"):
 			self.addLanguage(_("Norwegian"), "no", "NO")
+		if fileExists(language_path % "fa"):
+			self.addLanguage(_("Persian"), "fa", "IR")
 		if fileExists(language_path % "pl"):
 			self.addLanguage(_("Polish"), "pl", "PL")
 		if fileExists(language_path % "pt"):
@@ -86,18 +89,33 @@ class Language:
 		try:
 			lang = self.lang[index]
 			print "Activating language " + lang[0]
-			gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[lang[1]]).install()
+			gettext._translations = {}
+			self.currLangObj = gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[lang[1]], fallback=True)
+			self.currLangObj.install()
+			os.environ["LANGUAGE"] = lang[1]
 			self.activeLanguage = index
+			self.activateLanguageFallback(index, 'enigma2-plugins' )
 			for x in self.callbacks:
 				x()
 		except:
 			print "Selected language does not exist!"
 			lang = self.lang["en_EN"]
 			print "Activating default language " + lang[0]
-			gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[lang[1]]).install()
+			gettext._translations = {}
+			self.currLangObj = gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[lang[1]], fallback=True)
+			self.currLangObj.install()
+			os.environ["LANGUAGE"] = lang[1]
 			self.activeLanguage = "en_EN"
+			self.activateLanguageFallback("en_EN", 'enigma2-plugins' )
 			for x in self.callbacks:
 				x()
+
+	def activateLanguageFallback(self, index, domain):
+		if index == self.getLanguage() and self.currLangObj:
+			lang = self.lang[index]
+			if fileExists(resolveFilename(SCOPE_LANGUAGE, lang[1] + "/LC_MESSAGES/" + domain + ".mo")):
+				print "Activating " + domain + " language fallback " + lang[0]
+				self.currLangObj.add_fallback(gettext.translation(domain, resolveFilename(SCOPE_LANGUAGE, ""), languages=[lang[1]], fallback=True))
 
 	def activateLanguageIndex(self, index):
 		if index < len(self.langlist):

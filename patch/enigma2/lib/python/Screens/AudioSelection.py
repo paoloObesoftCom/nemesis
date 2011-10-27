@@ -59,7 +59,7 @@ class AudioSelection(Screen, ConfigListScreen):
 		}, -2)
 
 		self.settings = ConfigSubsection()
-		choicelist = [(PAGE_AUDIO,_("audio tracks")), (PAGE_SUBTITLES,_("Subtitles"))]
+		choicelist = [(PAGE_AUDIO,_("Subtitles")), (PAGE_SUBTITLES,_("audio tracks"))]
 		self.settings.menupage = ConfigSelection(choices = choicelist, default=page)
 		self.onLayoutFinish.append(self.__layoutFinished)
 

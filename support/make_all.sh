@@ -13,23 +13,33 @@ if [ $# -ne 0 ]; then
 			./src_patch.sh enigma2
 			./src_patch.sh pluginse2
 			cd $curdir
-		elif [ $arg = "build" ]; then
-			for distro in 500hd 800 800se 8000
+		elif [ $arg = "create" ]; then
+			for distro in 500hd 800se 800 8000 7020hd
 			do
 				cd $distro/build
-				echo -e '\nMake image for dm'$distro' distro...\n'
- 				./make_e2_image.sh all
+ 				./make_e2_image.sh pack
 				if [ "$?" -ne "0" ]; then
 					exit 1
 				fi
 				cd $curdir 
 			done
-		elif [ $arg = "move" ]; then
-			rm -f ${HOME}/Nemesis*
-			for distro in 500hd 800 800se 8000
+		elif [ $arg = "build" ]; then
+			for distro in 500hd 800se 800 8000 7020hd
 			do
 				cd $distro/build
-				echo -e 'Move image for dm'$distro' on '${HOME}'...'
+				echo -e '\nMake image for dm'$distro' distro...\n'
+ 				./make_e2_image.sh all
+				if [ "$?" -ne "0" ]; then
+					cd $curdir 
+					exit 1
+				fi
+				cd $curdir 
+			done
+		elif [ $arg = "move" ]; then
+			for distro in 500hd 800 800se 8000 7020hd
+			do
+				cd $distro/build
+				echo -e 'Move image for dm'$distro' on '${HOME}'/Images...'
 				./make_e2_image.sh move
 				cd $curdir 
 			done
@@ -38,5 +48,5 @@ if [ $# -ne 0 ]; then
 		fi
 	done
 else
-	echo "Usage : $0 {List of arguments (patch e/o build e/o move)}"
+	echo "Usage : $0 {List of arguments (patch e/o create e/o build e/o move)}"
 fi

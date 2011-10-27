@@ -284,7 +284,7 @@ self.instance.move(ePoint((720-wsizex)/2, (576-wsizey)/(count &gt; 7 and 2 or 3)
 			<widget name="config" position="50,300" zPosition="1" size="440,200" transparent="1" scrollbarMode="showOnDemand" />            
 			<!--widget name="stepslider" position="50,500" zPosition="1" borderWidth="2" size="440,20" backgroundColor="dark" /-->
 			<widget name="wizard" pixmap="skin_default/wizard.png" position="40,50" zPosition="10" size="110,174" transparent="1" alphatest="on"/>
-			<widget name="rc" pixmap="skin_default/rc.png" position="500,600" zPosition="10" size="154,471" transparent="1" alphatest="on"/>
+			<widget name="rc" pixmap="skin_default/rc0.png" position="500,600" zPosition="10" size="154,471" transparent="1" alphatest="on"/>
 			<widget name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
 			<widget name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
 			<widget name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
@@ -299,7 +299,7 @@ self.instance.move(ePoint((720-wsizex)/2, (576-wsizey)/(count &gt; 7 and 2 or 3)
 			<widget name="config" position="50,300" zPosition="1" size="440,200" transparent="1" scrollbarMode="showOnDemand" />            
 			<!--widget name="stepslider" position="50,500" zPosition="1" borderWidth="2" size="440,20" backgroundColor="dark" /-->
 			<widget name="wizard" pixmap="skin_default/wizard.png" position="40,50" zPosition="10" size="110,174" transparent="1" alphatest="on"/>
-			<widget name="rc" pixmap="skin_default/rc.png" position="500,600" zPosition="10" size="154,471" transparent="1" alphatest="on"/>
+			<widget name="rc" pixmap="skin_default/rc0.png" position="500,600" zPosition="10" size="154,471" transparent="1" alphatest="on"/>
 			<widget name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
 			<widget name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
 			<widget name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
@@ -314,7 +314,7 @@ self.instance.move(ePoint((720-wsizex)/2, (576-wsizey)/(count &gt; 7 and 2 or 3)
 			<widget name="config" position="50,300" zPosition="1" size="440,200" transparent="1" scrollbarMode="showOnDemand" />            
 			<!--widget name="stepslider" position="50,500" zPosition="1" borderWidth="2" size="440,20" backgroundColor="dark" /-->
 			<widget name="wizard" pixmap="skin_default/wizard.png" position="40,50" zPosition="10" size="110,174" transparent="1" alphatest="on"/>
-			<widget name="rc" pixmap="skin_default/rc.png" position="500,600" zPosition="10" size="154,471" transparent="1" alphatest="on"/>
+			<widget name="rc" pixmap="skin_default/rc0.png" position="500,600" zPosition="10" size="154,471" transparent="1" alphatest="on"/>
 			<widget name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
 			<widget name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
 			<widget name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
@@ -440,7 +440,7 @@ self.instance.move(ePoint((720-wsizex)/2, (576-wsizey)/(count &gt; 7 and 2 or 3)
 	<screen name="HelpMenu" position="0,0" size="720,576" title="Menu" flags="wfNoBorder">
 		<eLabel text="help..." position="400,40" size="220,60" font="Regular;40" />
 		<widget name="list" position="50,100" size="450,380" scrollbarMode="showOnDemand" />
-		<widget name="rc" pixmaps="skin_default/rc.png,skin_default/rcold.png" position="540,10" zPosition="10" size="154,500" alphatest="on" />
+		<widget name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="540,10" zPosition="10" size="154,500" alphatest="on" />
 		<widget name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" alphatest="on" />
 		<widget name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" alphatest="on" />
 		<widget name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" alphatest="on" />
@@ -487,7 +487,7 @@ self.instance.move(ePoint((720-wsizex)/2, (576-wsizey)/(count &gt; 7 and 2 or 3)
 			</convert>
 		</widget>
 		<widget name="wizard" pixmap="skin_default/wizard.png" position="40,50" zPosition="10" size="110,174" alphatest="on" />
-		<widget name="rc" pixmaps="skin_default/rc.png,skin_default/rcold.png" position="500,50" zPosition="10" size="154,500" alphatest="on" />
+		<widget name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="500,50" zPosition="10" size="154,500" alphatest="on" />
 		<widget name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" alphatest="on" />
 		<widget name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" alphatest="on" />
 		<widget name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" alphatest="on" />
@@ -855,6 +855,21 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget name="RtpText" position="50,510" size="620,29" font="Regular;21" halign="right" noWrap="1" backgroundColor="#003258" shadowOffset="-2,-2" shadowColor="transpBlack" />
 		<widget name="RassLogo" pixmap="skin_default/icons/rass_logo.png" position="50,445" size="50,21" />
 	</screen>
+	<!-- Sat Blindscan State screen -->
+	<screen name="SatBlindscanState" position="center,center" size="620,436" title="Satellite Blindscan">
+		<widget name="text" position="10,10" size="600,20" font="Regular;19" />
+		<widget name="progress" position="10,35" size="600,20" font="Regular;19" />
+		<widget source="list" render="Listbox" position="10,65" size="335,360" scrollbarMode="showAlways" >
+			<convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos = (0, 0), size = (335, 20), flags = RT_HALIGN_LEFT, text = 0) ],
+				 "fonts": [gFont("Regular", 16)],
+				 "itemHeight": 20
+				}
+			</convert>
+		</widget>
+		<widget name="post_action" position="354,65" size="256,100" font="Regular;19" halign="right" />
+		<widget source="constellation" render="Canvas" position="354,170" size="256,256" correct_aspect="width" />
+	</screen>
 	<!-- Satfinder -->
 	<screen name="Satfinder" position="center,center" size="520,400" title="Satfinder">
 		<widget name="introduction" position="0,0" size="0,0" font="Regular;23" />
@@ -995,7 +1010,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="40,225" size="15,16" alphatest="on" />
 		<widget name="languagetext" position="55,225" size="95,30" font="Regular;18" />
 		<widget name="wizard" pixmap="skin_default/wizard.png" position="40,50" zPosition="10" size="110,174" alphatest="on" />
-		<widget name="rc" pixmaps="skin_default/rc.png,skin_default/rcold.png" position="500,50" zPosition="10" size="154,500" alphatest="on" />
+		<widget name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="500,50" zPosition="10" size="154,500" alphatest="on" />
 		<widget name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" alphatest="on" />
 		<widget name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" alphatest="on" />
 		<widget name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" alphatest="on" />
@@ -1094,10 +1109,26 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget name="timerlist" position="0,45" size="560,350" scrollbarMode="showOnDemand" />
 	</screen>
 	<!-- Timeshift state -->
-	<screen name="TimeshiftState" position="70,70" zPosition="2" size="150,60" backgroundColor="transpBlack" flags="wfNoBorder">
+	<!--<screen name="TimeshiftState" position="70,70" zPosition="2" size="150,60" backgroundColor="transpBlack" flags="wfNoBorder">
 		<widget name="state" position="0,0" size="150,30" font="Regular;25" halign="center" backgroundColor="transpBlack" />
 		<widget source="session.CurrentService" render="Label" position="0,30" size="150,30" font="Regular;25" halign="center" foregroundColor="white" backgroundColor="transpBlack">
 			<convert type="ServicePosition">Remaining</convert>
+		</widget>
+	</screen> -->
+	<screen name="TimeshiftState" position="center,70" zPosition="2" size="640,60" backgroundColor="transpBlack" flags="wfNoBorder">
+		<widget name="state" position="10,3" size="100,30" font="Regular;25" halign="center" backgroundColor="transpBlack" />
+		<widget source="session.CurrentService" render="Label" position="110,5" size="150,30" font="Regular;25" halign="left" foregroundColor="white" backgroundColor="transpBlack">
+			<convert type="ServicePosition">Remaining</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="450,5" size="80,30" font="Regular;25" halign="right" foregroundColor="white" backgroundColor="transpBlack">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<eLabel text="/" position="535,5" size="10,30" font="Regular;25" halign="center" foregroundColor="white" backgroundColor="transpBlack" />
+		<widget source="session.CurrentService" render="Label" position="550,5" size="80,30" font="Regular;25" halign="left" foregroundColor="white" backgroundColor="transpBlack">
+			<convert type="ServicePosition">Length</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Progress" position="20,33" size="600,15" zPosition="2" borderWidth="2" borderColor="#bbbbbb" transparent="1">
+			<convert type="ServicePosition">Position</convert>
 		</widget>
 	</screen>
 	<!-- Translator Info -->
@@ -1110,7 +1141,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 	<screen name="TutorialWizard" position="0,0" size="720,576" title="Welcome..." flags="wfNoBorder">
 		<widget name="text" position="50,100" size="440,200" font="Regular;23" />
 		<widget name="list" position="50,300" zPosition="1" size="440,200" />
-		<widget name="rc" pixmap="skin_default/rc.png" position="500,600" zPosition="10" size="154,475" alphatest="on"/>
+		<widget name="rc" pixmap="skin_default/rc0.png" position="500,600" zPosition="10" size="154,475" alphatest="on"/>
 		<widget name="arrowdown" pixmap="skin_default/arrowdown.png" position="0,0" zPosition="11" size="37,70" alphatest="on"/>
 		<widget name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" alphatest="on"/>
 		<widget name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" alphatest="on"/>

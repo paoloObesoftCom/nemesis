@@ -1,8 +1,8 @@
 DESCRIPTION = "OpenDreambox: Base Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PV = "2.3"
-PR = "r2"
+PV = "2.4"
+PR = "r0"
 
 inherit task
 
@@ -22,13 +22,15 @@ OPENDREAMBOX_BASE_ESSENTIAL = "\
   e2fsprogs-e2fsck \
   e2fsprogs-mke2fs \
   fakelocale \
+  hdparm \
+  libpagecache \
   netkit-base \
   opkg-nogpg \
+  sdparm \
   timezones-alternative \
   tuxbox-common \
   util-linux-sfdisk \
   vsftpd \
-  hdparm \
 "
 
 NEMESIS_COMMON = "\
@@ -61,6 +63,7 @@ OPENDREAMBOX_BASE_OPTIONAL_RECOMMENDS = "\
   joe \
   mc \
   ncdu \
+  ppp \
   smartmontools \
   avahi-daemon \
 "

@@ -28,6 +28,13 @@ if [ -e @libdir@/libpassthrough.so ]; then
 	LIBS="$LIBS @libdir@/libpassthrough.so"
 fi
 
+#check start with old or new enigma2
+if [ -e /etc/.oldenigma ] ; then
+	ln -sf enigma2.nemesis @bindir@/enigma2
+else
+	ln -sf enigma2.new @bindir@/enigma2
+fi
+
 LD_PRELOAD=$LIBS @bindir@/enigma2
 
 # enigma2 exit codes:

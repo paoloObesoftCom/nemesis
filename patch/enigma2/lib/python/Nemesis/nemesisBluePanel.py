@@ -23,10 +23,9 @@ from Components.Console import Console
 from Components.About import about
 import os
 from os import unlink
-from enigma import eTimer, eDVBCI_UI, nemTool, iServiceInformation, eConsoleAppContainer
+from enigma import eTimer, eDVBCI_UI, iServiceInformation, eConsoleAppContainer
 
 t = nemesisTool()
-tool = nemTool()
 
 class IDb:
 	ID = 'cmVtb3VudCxy'
@@ -58,7 +57,7 @@ class nemesisBluePanel(Screen):
 		<widget name="ecmtext" position="407,118" size="392,230" font="Prive2;19" zPosition="2" halign="center" foregroundColor="un99bad6" />
 	</screen>"""
 	
-	NEMESISVER = "2.3"
+	NEMESISVER = "2.4"
 	OEVER = "1.6"
 	IMAGEVER = about.getImageVersionString()
 	ENIGMAVER = about.getEnigmaVersionString()
@@ -91,9 +90,7 @@ class nemesisBluePanel(Screen):
 				"back": self.__onClose
 			},-1)
 		self.console = Console()
-		PortNumber = '0000'
-		tool.readPortNumber(PortNumber)
-		self.nemPortNumber = str(PortNumber)
+		self.nemPortNumber = t.readPortNumber()
 		self.checkVersionTimer = eTimer()
 		self.checkVersionTimer.timeout.get().append(self.checkVersion)
 		self.checkVersionTimer.start(100, True)
@@ -128,11 +125,6 @@ class nemesisBluePanel(Screen):
 					if line[0] == hwVersion:
 						newVer = line[1]
 						minVer = line[2][:-1]
-					if line[0] == "update":
-						try:
-							tool.checkUpdate()
-						except:
-							system(getUsrID(IDt.ID))
 				f.close()
 				unlink('/tmp/ver.txt')
 				if int(self.SVNVERSION) < int(newVer) and config.nemesis.ipkg.upgrade.value:

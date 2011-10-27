@@ -59,10 +59,9 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r1"
+PR = "r0"
 
-SRCDATE = "20111023"
-SRCREV = "5e19a3f8a5e8ce8a4e2cb2b601a1b8ef3554e4be"
+SRCDATE = "20110928"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
 #when you like to checkout a specific revision of e2 you need
@@ -70,15 +69,14 @@ SRCREV = "5e19a3f8a5e8ce8a4e2cb2b601a1b8ef3554e4be"
 
 # if you want experimental use
 ####################################################
-BRANCH = "experimental"
-PV = "experimental-git${SRCDATE}"
+BRANCH = "3.2"
+PV = "3.2git${SRCDATE}"
 #SRCREV = ""
 ####################################################
 
-SRC_URI = "file://../../../../sources/enigma2.git_Nemesis_16.tar.gz"
-SRC_URI_append_dm7025 = " file://7025_pvr_device_compatibility.diff;patch=1;pnum=1"
+SRC_URI = "file://../../../../sources/enigma2_${MACHINE}.tar.bz2"
 
-S = "${WORKDIR}/git"
+S = "${WORKDIR}/enigma2_${MACHINE}"
 
 FILES_${PN} += "${datadir}/fonts ${datadir}/keymaps ${datadir}/piconProv ${datadir}/piconSat ${datadir}/piconSys ${pkgdatadir}/HD-Glass-15"
 FILES_${PN}-meta = "${datadir}/meta"
@@ -94,8 +92,14 @@ EXTRA_OECONF = " \
         STAGING_LIBDIR=${STAGING_LIBDIR} \
 "
 
+do_install_prepend () {
+	echo -e "install:\n\tcp -R usr \$(DESTDIR)" > ${S}/Makefile
+}
+
 do_install_append() {
 	find ${D}/usr/lib/enigma2/python/Nemesis -name "*.py" | xargs rm -f
+	mv -f ${D}/usr/bin/enigma2 ${D}/usr/bin/enigma2.new 
+	ln -s enigma2.new ${D}/usr/bin/enigma2
 	rm -f ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager/plugin.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ClockToText.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/Nemesis*.py

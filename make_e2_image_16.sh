@@ -1,4 +1,16 @@
 #!/bin/sh
+###############################################################################
+ANSI_BLACK="\033[37;30m"
+ANSI_RED="\033[37;31m"
+ANSI_GREEN="\033[37;32m"
+ANSI_YELLOW="\033[37;33m"
+ANSI_BLUE="\033[37;34m"
+ANSI_MAGENTA="\033[37;35m"
+ANSI_CYAN="\033[37;36m"
+ANSI_WITHE="\033[37;37m"
+ANSI_RESET="\033[37;39m"
+ANSI_RESET2="\033[0m"
+###############################################################################
 
 curdir=`pwd`
 envpath=`grep -m 1 "ENVPATH=" ../make_init.sh | cut -d "=" -f 2`
@@ -59,6 +71,25 @@ patch_image()
  	cd $curdir
 }
 
+create_e2_package()
+{
+	echo "Creating enigma2 package for ${dmver}..."
+	. ./env.source
+	bitbake -cclean enigma2-nemesis
+	bitbake enigma2-nemesis
+	if ( test $? -ne 0 ) then
+		echo -e $ANSI_RED"Failed to build enima2-nemesis!"$ANSI_RESET2
+		exit 1
+	fi;
+	cd $patchdir
+	./create_e2_package.sh ${dmver}
+	if ( test $? -ne 0 ) then
+		echo -e $ANSI_RED"Failed to create e2 package!"$ANSI_RESET2
+		exit 1
+	fi;
+ 	cd $curdir
+}
+
 rebuild_feed()
 {
 	. ./env.source
@@ -101,6 +132,9 @@ case "$1" in
 	enigma2)
 		rebuild_enigma
 		;;
+	pack)
+		create_e2_package
+		;;
 	plugins)
 		rebuild_plugins
 		;;
@@ -131,7 +165,7 @@ case "$1" in
 		;;
 	*)
 		echo "Script to build image: ${imagename}" 
-		echo $"Usage for $dmver: $0 {patch|enigma2|plugins|feed|all|logo|move|kernel|nemesis|tuner|clean}"
+		echo $"Usage for $dmver: $0 {patch|enigma2|plugins|feed|all|logo|move|kernel|nemesis|tuner|clean|pack}"
 		exit 1
 		;;
 esac
