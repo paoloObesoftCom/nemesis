@@ -58,6 +58,7 @@ def InitUsageConfig():
 		("expert", _("Expert")) ])
 				
 	config.usage.remote_control_setup = ConfigSelection(default = "Enigma", choices = ["Enigma","Enigma Key Green Swap","Neutrino"])	
+	config.usage.set_e2_start_config = ConfigSelection(default = "Enigma 3.2", choices = ["Enigma 3.2","Enigma Experimental"])	
 
 	config.usage.on_long_powerpress = ConfigSelection(default = "show_menu", choices = [
 		("show_menu", _("show shutdown menu")),
@@ -114,6 +115,14 @@ def InitUsageConfig():
 		else:
 			config.usage.keymap.value = eEnv.resolve("${datadir}/enigma2/keymap_neutrino.xml")
 	config.usage.remote_control_setup.addNotifier(setKeymapConfig)
+
+	def setE2StartConfig(configElement):
+		if configElement.value == "Enigma Experimental":
+			os.system("touch /etc/.enigma_nemesis")
+		else:
+			os.system("rm -f /etc/.enigma_nemesis")
+	config.usage.set_e2_start_config.addNotifier(setE2StartConfig)
+
 
 	config.seek = ConfigSubsection()
 	config.seek.selfdefined_13 = ConfigNumber(default=15)

@@ -25,7 +25,9 @@ class EventName(Converter, object):
 			return ""
 			
 		if self.type == self.NAME:
+			print event.getEventName()
 			if event.getEventName() == "Visibile in analogico o digit. terrestre":
+				print event.getShortDescription().title()
 				return event.getShortDescription().title()
 			else:
 				return event.getEventName()

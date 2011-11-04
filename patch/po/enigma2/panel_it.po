@@ -140,6 +140,9 @@ msgstr "Addon installato correttamente!"
 msgid "Enigma2 will be now hard restarted to complete package installation."
 msgstr "Enigma2 deve essre riavviato per completare l'installazione."
 
+msgid "Enigma2 will be now hard restarted to load EPG on system cache."
+msgstr "Enigma2 deve essre riavviato per EPG nella cache di sistema."
+
 msgid "Do You want restart enigma2 now?"
 msgstr "Vuoi riavviare Enigma2 adesso?"
 
@@ -316,6 +319,14 @@ msgstr ""
 "Carico i dati EPG nella cache di Enigma2 da:\n"
 "%s/epg.dat.\n"
 "Attendere prego..."
+
+msgid ""
+"File epg.dat not found!\n"
+"Please use Download EPG with CrossEPG!"
+
+msgstr ""
+"Nessun file epg.dat é stato trovato!\n"
+"Avviare Scaricare EPG con CrossEPG!"
 
 msgid "Loading EPG"
 msgstr "Caricamento  EPG"
@@ -748,8 +759,8 @@ msgstr "Ritardo ECM Info (msec)"
 msgid "Set InfoBar Picon type"
 msgstr "Scegli tipo Picon per InfoBar"
 
-msgid "Setup Console/RC"
-msgstr "Configura Console/RC"
+msgid "Setup Console/RC/Enigma"
+msgstr "Configura Console/RC/Enigma"
 
 msgid "Auto close Console on finished event"
 msgstr "Chiudi automaticamente la Console"
@@ -760,7 +771,7 @@ msgstr "Ritardo prima della chiusura Console (sec)"
 msgid "Enable VirtualKeyBoard (Experimental)"
 msgstr "Abilitare la VirtualKeyBoard (Sperimentale)"
 
-msgid "Setup Display LCD/OLED"
+msgid "Setup Display LCD/"
 msgstr "Configura Display LCD/OLED"
 
 msgid "Enable Brightness on vision"
@@ -769,8 +780,8 @@ msgstr "Abilita Lumininosità in visione"
 msgid "Brightness on vision"
 msgstr "Lumin. in visione"
 
-msgid "Show Picon on LCD? (Need GUI Restart)"
-msgstr "Mostra Picon in LCD? (Necessario riavvio GUI)"
+msgid "Show Picon on LCD? (Need enigma restart)"
+msgstr "Mostra Picon in LCD? (Necessita riavvio GUI)"
 
 msgid "Set LCD Picon type"
 msgstr "Scelgi tipo Picon per LCD"
@@ -1011,3 +1022,18 @@ msgstr "Novembre"
 
 msgid "December"
 msgstr "Dicemnbre"
+
+msgid "Please restart Enigma to apply the new configuration."
+msgstr "Riavviare enigma per attivare la nuova configurazione."
+
+msgid "RC-Setup (Need enigma restart)"
+msgstr "Configurazione RC (Necessita riavvio GUI)"
+
+msgid "Select Enigma Version (Need enigma restart)"
+msgstr "Seleziona versione Enigma (Necessita riavvio GUI)"
+
+msgid "LED Manager"
+msgstr "Gestione LED"
+
+msgid "LED Manager..."
+msgstr "Gestione LED..."

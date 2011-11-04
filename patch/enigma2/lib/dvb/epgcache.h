@@ -316,6 +316,7 @@ public:
 	void save();
 	void load();
 	void flushEPG(const uniqueEPGKey & s=uniqueEPGKey());
+	void crossepgImportEPGv21(std::string dbroot);
 	static eEPGCache *getInstance() { return instance; }
 
 #ifndef SWIG

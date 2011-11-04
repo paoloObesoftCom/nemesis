@@ -8,31 +8,35 @@ if [ -x @bindir@/showiframe -a -f @datadir@/backdrop.mvi ]; then
 	@bindir@/showiframe @datadir@/backdrop.mvi
 fi
 
+#check start with old or new enigma2
+rm -f /usr/lib/enigma2/python/enigma.pyo
+if [ -e /etc/.enigma_nemesis ] ; then
+	ln -sf enigma2.nemesis /usr/bin/enigma2
+	ln -sf enigma.py.nemesis /usr/lib/enigma2/python/enigma.py
+else
+	ln -sf enigma2.32 /usr/bin/enigma2
+	ln -sf enigma.py.32 /usr/lib/enigma2/python/enigma.py
+fi
+
+# hook to execute USB-DTT Support Script
+if [ -e /etc/init.d/restartDtt.sh ]; then
+	/etc/init.d/restartDtt.sh
+fi
+
 # hook to execute scripts always before enigma2 start
 if [ -x @bindir@/enigma2_pre_start.sh ]; then
 	@bindir@/enigma2_pre_start.sh
-fi
-
-if [ -e /etc/init.d/restartDtt.sh ]; then
-	/etc/init.d/restartDtt.sh
 fi
 
 if [ -d /home/root ]; then
 	cd /home/root
 fi
 
-LIBS=@libdir@/libopen.so.0.0.0
+LIBS="$LIBS @libdir@/libopen.so.0.0.0"
 
 #check for dreambox specific passthrough helper lib
 if [ -e @libdir@/libpassthrough.so ]; then
 	LIBS="$LIBS @libdir@/libpassthrough.so"
-fi
-
-#check start with old or new enigma2
-if [ -e /etc/.oldenigma ] ; then
-	ln -sf enigma2.nemesis @bindir@/enigma2
-else
-	ln -sf enigma2.new @bindir@/enigma2
 fi
 
 LD_PRELOAD=$LIBS @bindir@/enigma2

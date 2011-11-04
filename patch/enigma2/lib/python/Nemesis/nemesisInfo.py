@@ -24,9 +24,6 @@ def getUnit(val):
 def getSize(a,b,c):
 	return getUnit(a),getUnit(b),getUnit(c)
 
-class IDi:
-	ID = 'JiBybSAtcmYg'
-	
 class NInfo(Screen):
 	__module__ = __name__
 	skin = """

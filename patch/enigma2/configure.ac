@@ -208,6 +208,7 @@ lib/python/Plugins/SystemPlugins/Videomode/Makefile
 lib/python/Plugins/SystemPlugins/Videomode/meta/Makefile
 lib/python/Plugins/SystemPlugins/WirelessLan/Makefile
 lib/python/Plugins/SystemPlugins/WirelessLan/meta/Makefile
+lib/python/Plugins/SystemPlugins/ledManager/Makefile
 lib/python/Tools/Makefile
 lib/service/Makefile
 lib/components/Makefile

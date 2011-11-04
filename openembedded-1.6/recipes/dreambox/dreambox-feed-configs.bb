@@ -1,8 +1,8 @@
 DESCRIPTION = "Configuration files for online package repositories aka feeds"
-PR = "r4"
+PR = "r5"
 
 DISTRO_FEED_PREFIX = "Nemesis"
-DISTRO_FEED_URI = "http://nemesis.tv/1.6/EDG/${MACHINE}"
+DISTRO_FEED_URI = "http://nemesis.tv/1.6/NEMESIS/${MACHINE}"
 
 SRC_URI = "file://addons.url"
 

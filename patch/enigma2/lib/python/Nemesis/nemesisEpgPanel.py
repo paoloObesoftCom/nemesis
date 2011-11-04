@@ -108,6 +108,8 @@ class nemesisEpgPanel(Screen):
 		self.reloadEPGTimer.timeout.get().append(self.reloadEPG)
 		self.clearEPGTimer = eTimer()
 		self.clearEPGTimer.timeout.get().append(self.clearEPG)
+		self.restartE2Timer = eTimer()
+		self.restartE2Timer.timeout.get().append(self.restartE2)
 		self.onLayoutFinish.append(self.updateList)
 		self.onShown.append(self.setWindowTitle)
 	
@@ -162,6 +164,14 @@ class nemesisEpgPanel(Screen):
 				elif config.nemepg.downskyuk.value:
 					self.downloadUkEPG()
 		elif (sel == "reloadEPG"):
+			if not fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
+				if fileExists(config.misc.epgcache_filename.value + "/epg.dat.save"):
+					system("cp " + config.misc.epgcache_filename.value + "/epg.dat.save " + config.misc.epgcache_filename.value + "/epg.dat")
+				else:
+					msg = _('File epg.dat not found!\nPlease use Download EPG with CrossEPG!')
+					self.epgRBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, enable_input = False, timeout = 10)
+					self.epgRBox.setTitle(_("Loading EPG"))
+					return
 			msg = _('Load EPG data in Enigma cache from:\n%s/epg.dat.\nPlease Wait...') % config.misc.epgcache_filename.value
 			self.epgRBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, enable_input = False)
 			self.epgRBox.setTitle(_("Loading EPG"))
@@ -251,31 +261,39 @@ class nemesisEpgPanel(Screen):
 		system("rm -f /tmp/crossepg*")
 		if answer[0] == nemesisConsole.EVENT_DONE:
 			if fileExists('/tmp/ext.epg.dat'):
-				system("mv /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat")
+				system("cp /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat")
+				system("mv /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
 				msg = _('Load EPG data in Enigma cache from:\n%s/epg.dat.\nPlease Wait...') % config.misc.epgcache_filename.value
 				self.epgRBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, enable_input = False)
 				self.epgRBox.setTitle(_("Loading EPG"))
-				self.reloadEPGTimer.start(500, False)
+				self.reloadEPGTimer.start(500, True)
 	
 	def reloadEPG(self):
 		if self.reloadEPGTimer.isActive():
 			self.reloadEPGTimer.stop()
-		if not fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
-			system("cp " + config.misc.epgcache_filename.value + "/epg.dat.save " + config.misc.epgcache_filename.value + "/epg.dat")
-		if config.nemepg.clearcache.value:
-			try:
-				epg.flushEPG()
-			except:
-				pass
 		try:
+			if config.nemepg.clearcache.value:
+				epg.flushEPG()
 			epg.load()
 			epg.save()
+			if fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
+				system("cp " +  config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
+			self.epgRBox.close()
+			self.close()
 		except:
-			pass
-		system("cp " +  config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
-		self.epgRBox.close()
-		self.close()
+			self.epgRBox.close()
+			self.restartE2Timer.start(500, True)
 			
+	def restartE2(self):
+		configfile.save()
+		msg = _("Enigma2 will be now hard restarted to load EPG on system cache.") + "\n" + _("Do You want restart enigma2 now?")
+		box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg , MessageBox.TYPE_YESNO, timeout = 10)
+		box.setTitle(_('Restart Enigma2'))
+
+	def restartEnigma2(self, answer):
+		if (answer is True):
+			system('killall -9 enigma2')
+
 	def clearEPG(self):
 		if self.clearEPGTimer.isActive():
 			self.clearEPGTimer.stop()
@@ -292,16 +310,16 @@ class nemesisEpgPanel(Screen):
 			self.saveEPGTimer.stop()
 		try:
 			epg.save()
+			if fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
+				system("mv " + config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
+				self.epgBBox.close()
+			else:
+				self.epgBBox.close()
+				msg = _('File %s/epg.dat.\nNot Found!') % config.misc.epgcache_filename.value
+				self.Box = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
+				self.Box.setTitle(_("Backup Error"))
 		except:
 			pass
-		if fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
-			system("mv " + config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
-			self.epgBBox.close()
-		else:
-			self.epgBBox.close()
-			msg = _('File %s/epg.dat.\nNot Found!') % config.misc.epgcache_filename.value
-			self.Box = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
-			self.Box.setTitle(_("Backup Error"))
 
 class NEpgSearch(Screen):
 	__module__ = __name__

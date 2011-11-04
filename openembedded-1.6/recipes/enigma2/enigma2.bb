@@ -59,9 +59,11 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r0"
+PR = "r2"
 
 SRCDATE = "20110928"
+SRCDATENEMESIS = "20111103"
+
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
 #when you like to checkout a specific revision of e2 you need
@@ -70,7 +72,7 @@ SRCDATE = "20110928"
 # if you want experimental use
 ####################################################
 BRANCH = "3.2"
-PV = "3.2git${SRCDATE}"
+PV = "3.2git${SRCDATENEMESIS}"
 #SRCREV = ""
 ####################################################
 
@@ -98,8 +100,6 @@ do_install_prepend () {
 
 do_install_append() {
 	find ${D}/usr/lib/enigma2/python/Nemesis -name "*.py" | xargs rm -f
-	mv -f ${D}/usr/bin/enigma2 ${D}/usr/bin/enigma2.new 
-	ln -s enigma2.new ${D}/usr/bin/enigma2
 	rm -f ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager/plugin.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ClockToText.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/Nemesis*.py

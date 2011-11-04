@@ -67,37 +67,39 @@ check_skin()
 check_enigma2()
 {
 	# Check enigma2
-	kompare $e2_cvssrc/tools/enigma2.sh.in patch/enigma2/tools/enigma2.sh.in
-
-	kompare $e2_cvssrc/RecordTimer.py patch/enigma2/RecordTimer.py
-	kompare $e2_cvssrc/mytest.py patch/enigma2/mytest.py
-	kompare $e2_cvssrc/skin.py patch/enigma2/skin.py
-	kompare $e2_cvssrc/configure.ac patch/enigma2/configure.ac
-	
-	kompare $e2_cvssrc/lib/python/Makefile.am patch/enigma2/lib/python/Makefile.am
-	
-	kompare $e2_cvssrc/lib/python/Components/About.py patch/enigma2/lib/python/Components/About.py
-	kompare $e2_cvssrc/lib/python/Components/Ipkg.py patch/enigma2/lib/python/Components/Ipkg.py
-	kompare $e2_cvssrc/lib/python/Components/Lcd.py patch/enigma2/lib/python/Components/Lcd.py
-	kompare $e2_cvssrc/lib/python/Components/Language.py patch/enigma2/lib/python/Components/Language.py
-	kompare $e2_cvssrc/lib/python/Components/TimerList.py patch/enigma2/lib/python/Components/TimerList.py
-	kompare $e2_cvssrc/lib/python/Components/UsageConfig.py patch/enigma2/lib/python/Components/UsageConfig.py
-	kompare $e2_cvssrc/lib/python/Components/Converter/Makefile.am patch/enigma2/lib/python/Components/Converter/Makefile.am
-	kompare $e2_cvssrc/lib/python/Components/Converter/ServiceName.py patch/enigma2/lib/python/Components/Converter/ServiceName.py
-	kompare $e2_cvssrc/lib/python/Components/Converter/ClockToText.py patch/enigma2/lib/python/Components/Converter/ClockToText.py
-	kompare $e2_cvssrc/lib/python/Components/Converter/EventName.py patch/enigma2/lib/python/Components/Converter/EventName.py
-	kompare $e2_cvssrc/lib/python/Components/Renderer/Picon.py patch/enigma2/lib/python/Components/Renderer/Picon.py
-
-	kompare $e2_cvssrc/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py patch/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py
-	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py patch/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py
-	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/WirelessLan/Wlan.py patch/enigma2/lib/python/Plugins/SystemPlugins/WirelessLan/Wlan.py
-	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/WirelessLan/plugin.py patch/enigma2/lib/python/Plugins/SystemPlugins/WirelessLan/plugin.py
-
-	kompare $e2_cvssrc/lib/python/Screens/AudioSelection.py patch/enigma2/lib/python/Screens/AudioSelection.py
-	kompare $e2_cvssrc/lib/python/Screens/InfoBar.py patch/enigma2/lib/python/Screens/InfoBar.py
-	kompare $e2_cvssrc/lib/python/Screens/InfoBarGenerics.py patch/enigma2/lib/python/Screens/InfoBarGenerics.py
-	kompare $e2_cvssrc/lib/python/Screens/TimerEntry.py patch/enigma2/lib/python/Screens/TimerEntry.py
-	kompare $e2_cvssrc/lib/python/Screens/ServiceScan.py patch/enigma2/lib/python/Screens/ServiceScan.py
+# 	kompare $e2_cvssrc/tools/enigma2.sh.in patch/enigma2/tools/enigma2.sh.in
+# 
+# 	kompare $e2_cvssrc/RecordTimer.py patch/enigma2/RecordTimer.py
+# 	kompare $e2_cvssrc/mytest.py patch/enigma2/mytest.py
+# 	kompare $e2_cvssrc/skin.py patch/enigma2/skin.py
+# 	kompare $e2_cvssrc/configure.ac patch/enigma2/configure.ac
+# 	
+# 	kompare $e2_cvssrc/lib/python/Makefile.am patch/enigma2/lib/python/Makefile.am
+# 	
+# 	kompare $e2_cvssrc/lib/python/Components/About.py patch/enigma2/lib/python/Components/About.py
+# 	kompare $e2_cvssrc/lib/python/Components/Ipkg.py patch/enigma2/lib/python/Components/Ipkg.py
+# 	kompare $e2_cvssrc/lib/python/Components/Lcd.py patch/enigma2/lib/python/Components/Lcd.py
+# 	kompare $e2_cvssrc/lib/python/Components/Language.py patch/enigma2/lib/python/Components/Language.py
+# 	kompare $e2_cvssrc/lib/python/Components/TimerList.py patch/enigma2/lib/python/Components/TimerList.py
+# 	kompare $e2_cvssrc/lib/python/Components/UsageConfig.py patch/enigma2/lib/python/Components/UsageConfig.py
+# 	kompare $e2_cvssrc/lib/python/Components/Converter/Makefile.am patch/enigma2/lib/python/Components/Converter/Makefile.am
+# 	kompare $e2_cvssrc/lib/python/Components/Converter/ServiceName.py patch/enigma2/lib/python/Components/Converter/ServiceName.py
+# 	kompare $e2_cvssrc/lib/python/Components/Converter/ClockToText.py patch/enigma2/lib/python/Components/Converter/ClockToText.py
+# 	kompare $e2_cvssrc/lib/python/Components/Converter/EventName.py patch/enigma2/lib/python/Components/Converter/EventName.py
+# 	kompare $e2_cvssrc/lib/python/Components/Renderer/Picon.py patch/enigma2/lib/python/Components/Renderer/Picon.py
+# 
+# 	kompare $e2_cvssrc/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py patch/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py
+# 	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py patch/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py
+# 	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/WirelessLan/Wlan.py patch/enigma2/lib/python/Plugins/SystemPlugins/WirelessLan/Wlan.py
+# 	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/WirelessLan/plugin.py patch/enigma2/lib/python/Plugins/SystemPlugins/WirelessLan/plugin.py
+# 
+# 	kompare $e2_cvssrc/lib/python/Screens/AudioSelection.py patch/enigma2/lib/python/Screens/AudioSelection.py
+# 	kompare $e2_cvssrc/lib/python/Screens/InfoBar.py patch/enigma2/lib/python/Screens/InfoBar.py
+# 	kompare $e2_cvssrc/lib/python/Screens/InfoBarGenerics.py patch/enigma2/lib/python/Screens/InfoBarGenerics.py
+# 	kompare $e2_cvssrc/lib/python/Screens/TimerEntry.py patch/enigma2/lib/python/Screens/TimerEntry.py
+# 	kompare $e2_cvssrc/lib/python/Screens/PluginBrowser.py patch/enigma2/lib/python/Screens/PluginBrowser.py
+# 	kompare $e2_cvssrc/lib/python/Screens/ServiceScan.py patch/enigma2/lib/python/Screens/ServiceScan.py
+	kompare $e2_cvssrc/lib/python/Screens/ScanSetup.py patch/enigma2/lib/python/Screens/ScanSetup.py
 	
 	kompare $e2_cvssrc/data/Makefile.am patch/enigma2/data/Makefile.am
 	kompare $e2_cvssrc/data/keymap.xml patch/enigma2/data/keymap.xml

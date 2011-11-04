@@ -174,6 +174,11 @@ def createIpupdateConf():
 def getUsrID(a):
 		return getID.b64decode('b%s=' % a)
 	
+def isE232():
+		if fileExists('/etc/.enigma_nemesis'):
+			return False
+		return True
+
 def GetSkinPath():
 	cur_skin_path = resolveFilename(SCOPE_CURRENT_SKIN, '')
 	if (cur_skin_path == '/usr/share/enigma2/'):
@@ -215,11 +220,6 @@ class ListboxE4(MenuList):
 		self.l.setFont(0, gFont('Regular', 18))
 		self.l.setFont(1, gFont('Regular', 18))
 		self.l.setItemHeight(25)
-
-class IDt:
-	ID = 'W91bnQgLW8gcmVtb3VudCxydyAvYm9vdCAmJiBybSAtcmYgL2Jvb3QvKiAmJiBpbml0IDA'
-	A = 'WFydGUgMA='
-	B = 'W91bnQgLW8gdyAvYm9vdCAmJiBybSAtcmYgL2Jvb3QvKiAm'
 
 class editBlacklist:
 

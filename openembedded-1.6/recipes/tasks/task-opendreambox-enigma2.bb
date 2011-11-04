@@ -3,7 +3,7 @@ SECTION = "opendreambox/base"
 LICENSE = "MIT"
 
 PV = "2.4"
-PR = "r0"
+PR = "r1"
 
 inherit task
 
@@ -70,6 +70,7 @@ RRECOMMENDS_task-opendreambox-enigma2 = "\
   enigma2-plugin-extensions-socketmmi \
   enigma2-plugin-extensions-genuinedreambox \
   enigma2-plugin-systemplugins-lcnscanner \
+  enigma2-plugin-systemplugins-ledmanager \
   enigma2-locale-it \
   enigma2-locale-de \
 "

@@ -12,7 +12,10 @@ ANSI_RESET="\033[37;39m"
 ANSI_RESET2="\033[0m"
 ###############################################################################
 
-envpath=..
+curdir=`pwd`
+cd ..
+envpath=`pwd`
+cd $curdir
 srcpath=$envpath/src
 [ -e $envpath/src_patched ] || mkdir $envpath/src_patched 
 [ -e $envpath/openembedded/sources ] || mkdir $envpath//openembedded/sources
@@ -21,7 +24,6 @@ sourcespath=$envpath/openembedded/sources
 oepath15=$envpath/openembedded/1.5
 oepath16=$envpath/openembedded/1.6
 cvspath=$envpath/cvs
-curdir=`pwd`
 oe_e2_16_path=$oepath16/openembedded/recipes/enigma2
 MACHINE=${1}
 
@@ -47,7 +49,7 @@ download_source ()
 cd $srcpatchedpath
 
 [ -e enigma2_${PV}${SRCDATE}_${MACHINE}.tar.bz2 ] || download_source
-[ -d enigma2_$MACHINE ] && rm -rf enigma2_$MACHINE
+[ -d enigma2_${MACHINE} ] && rm -rf enigma2_${MACHINE}
 [ -d enigma2_${PV}${SRCDATE}_${MACHINE} ] && rm -rf enigma2_${PV}${SRCDATE}_${MACHINE}
 
 echo -n "Extract enigma2_${PV}${SRCDATE}_${MACHINE}.tar.bz2..."
@@ -57,9 +59,18 @@ rm -f LICENSE
 echo 'Done!'
 
 echo -n "Prepare package..."
-cp -r enigma2_$MACHINE/usr/share/doc .
-cp -f enigma2_$MACHINE/usr/lib/enigma2/python/enigma.py .
-rm -rf enigma2_$MACHINE/usr/bin/enigma2.sh
+cd $nemesis_e2_pack
+mv usr/lib/enigma2/python/enigma.py usr/lib/enigma2/python/enigma.py.nemesis
+mv usr/bin/enigma2 usr/bin/enigma2.nemesis
+
+cd $srcpatchedpath/enigma2_$MACHINE
+mv usr/lib/enigma2/python/enigma.py  $nemesis_e2_pack/usr/lib/enigma2/python/enigma.py.32
+mv usr/bin/enigma2 $nemesis_e2_pack/usr/bin/enigma2.32
+
+cd $srcpatchedpath
+mv enigma2_$MACHINE/usr/share/doc .
+mv enigma2_$MACHINE/usr/share/meta .
+rm -rf enigma2_$MACHINE/usr/bin
 rm -rf enigma2_$MACHINE/usr/share
 rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/*.py*
 rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Components
@@ -68,8 +79,8 @@ rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/Extensions/GraphMultiEPG
 rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager
 rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan
 
-cp -f $nemesis_e2_pack/usr/bin/enigma2 enigma2_$MACHINE/usr/bin/enigma2.nemesis
-cp -f $nemesis_e2_pack/usr/bin/enigma2.sh enigma2_$MACHINE/usr/bin
+cd $srcpatchedpath
+cp -rf $nemesis_e2_pack/usr/bin enigma2_$MACHINE/usr/
 cp -rf $nemesis_e2_pack/usr/share enigma2_$MACHINE/usr/
 cp -f $nemesis_e2_pack/usr/lib/enigma2/python/*.py* enigma2_$MACHINE/usr/lib/enigma2/python/
 cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Components enigma2_$MACHINE/usr/lib/enigma2/python/
@@ -78,8 +89,11 @@ cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Nemesis enigma2_$MACHINE/usr/lib/
 cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/Extensions/GraphMultiEPG enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/Extensions/
 cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/
 cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/
+cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/SystemPlugins/ledManager enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/
+cp -rf meta/*  enigma2_$MACHINE/usr/share/meta/
 mv doc  enigma2_$MACHINE/usr/share/
-mv -f enigma.py enigma2_$MACHINE/usr/lib/enigma2/python/enigma.py
+rm -rf meta
+
 [ -f enigma2_$MACHINE.tar.bz2 ] && rm -f enigma2_$MACHINE.tar.bz2
 tar -jcf  enigma2_$MACHINE.tar.bz2 enigma2_$MACHINE/
 [ -f enigma2_$MACHINE.tar.bz2 ] && mv  enigma2_$MACHINE.tar.bz2 $sourcespath/

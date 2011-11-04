@@ -21,6 +21,7 @@ from Components.DreamInfoHandler import ImageDefaultInstaller
 ImageDefaultInstaller()
 
 # Nemesis Patch
+from os import system
 PortNumber = "1888"
 try:
 	f = open("/var/etc/nemesis.cfg", "r")
@@ -604,6 +605,13 @@ profile("Init:CI")
 import Screens.Ci
 Screens.Ci.InitCiConfig()
 
+from Tools.Directories import fileExists
+if fileExists('/tmp/.enigma2_is_restarted'):
+	from os import unlink
+	from Tools import Notifications
+	unlink("/tmp/.enigma2_is_restarted")
+	Notifications.AddNotification(Screens.Standby.Standby)
+
 #from enigma import dump_malloc_stats
 #t = eTimer()
 #t.callback.append(dump_malloc_stats)
@@ -623,3 +631,4 @@ except:
 	print_exc(file=stdout)
 	quitMainloop(5)
 	print '-'*60
+

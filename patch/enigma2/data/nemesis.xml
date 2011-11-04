@@ -32,14 +32,15 @@
 		<item level="0" text="Brightness on vision">config.lcd.lcdbri</item>
 		<item level="0" text="Contrast">config.lcd.contrast</item>
 		<item level="0" text="Standby">config.lcd.standby</item>
-		<item level="0" text="Show Picon on LCD? (Need GUI Restart)">config.nemesis.piconlcd</item>
+		<item level="0" text="Show Picon on LCD? (Need enigma restart)">config.nemesis.piconlcd</item>
 		<item level="0" text="Set LCD Picon type">config.nemesis.piconlcdtype</item>
 	</setup>
-	<setup key="console" title="Setup Console/RC">
+	<setup key="console" title="Setup Console/RC/Enigma">
 		<item level="0" text="Auto close Console on finished event">config.nemesis.autocloseconsole</item>
 		<item level="0" text="Delay before auto close Console (sec)">config.nemesis.autocloseconsoledelay</item>
 		<item level="0" text="Enable VirtualKeyBoard (Experimental)">config.nemesis.usevkeyboard</item>
-		<item level="0" text="RC-Setup (enable after restart GUI Def enig.)">config.usage.remote_control_setup</item>
+		<item level="0" text="RC-Setup (Need enigma restart)">config.usage.remote_control_setup</item>
+		<item level="0" text="Select Enigma Version (Need enigma restart)">config.usage.set_e2_start_config</item>
 	</setup>
 	<setup key="picon" title="Setup Picon">
 		<item level="0" text="Show Picon on LCD? (Need GUI Restart)">config.nemesis.piconlcd</item>

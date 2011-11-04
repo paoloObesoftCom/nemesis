@@ -27,9 +27,6 @@ from enigma import eTimer, eDVBCI_UI, iServiceInformation, eConsoleAppContainer
 
 t = nemesisTool()
 
-class IDb:
-	ID = 'cmVtb3VudCxy'
-
 class nemesisBluePanel(Screen):
 	
 	skin = """

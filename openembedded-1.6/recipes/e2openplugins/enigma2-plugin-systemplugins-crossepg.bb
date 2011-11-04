@@ -5,10 +5,10 @@ LICENSE = "GPLv2"
 
 PN = "enigma2-plugin-systemplugins-crossepg"
 
-SRCDATE = "20111020"
+SRCDATE = "20111102"
 BRANCH = "master"
-PV = "2.3-git${SRCDATE}"
-SRCREV = "6121f90aa1ed6891f6551c6b1de8655ccac713ec"
+PV = "2.4-git${SRCDATE}"
+SRCREV = "3e635eeead5b8e00b25e58ce4a52d84f2c666b3d"
 PR = "r1"
 
 SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-CrossEPG.git;protocol=git;branch=${BRANCH};tag=${SRCREV} \
@@ -24,9 +24,6 @@ PACKAGE_ARCH := "${MACHINE_ARCH}"
 FILES_${PN} = "/usr/*"
 
 CFLAGS_append = " -I${STAGING_INCDIR}/libxml2/ -I${STAGING_INCDIR}/python2.6/"
-
-RCONFLICTS_${PN} = "enigma2-plugin-systemplugins-crossepg"
-RREPLACES_${PN} = "enigma2-plugin-systemplugins-crossepg"
 
 do_compile() {
 	oe_runmake SWIG="swig"

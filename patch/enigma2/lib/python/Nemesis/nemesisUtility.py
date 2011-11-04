@@ -7,6 +7,7 @@ from Components.FileList import FileList
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Sources.List import List
+from Components.SystemInfo import SystemInfo
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists
 from Components.ConfigList import ConfigListScreen
@@ -35,6 +36,18 @@ if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/plugi
 else:
 	isNetworkPlugin = False
 
+if SystemInfo.get("NumFrontpanelLEDs", 0) !=0:
+	isledManagerPlugin = True
+	if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/ledManager/plugin.py")):
+		try:
+			from Plugins.SystemPlugins.ledManager.plugin import ledManager
+		except:
+			isledManagerPlugin = False
+	else:
+		isledManagerPlugin = False
+else:
+	isledManagerPlugin = False
+
 t = nemesisTool()
 configfile = ConfigFile()
 
@@ -55,9 +68,6 @@ def checkDev():
 	except:
 		return None
 
-class IDu:
-	ID = 'JiBpbml0IDA'
-		
 class NUtility(Screen):
 	__module__ = __name__
 	skin = """
@@ -88,6 +98,7 @@ class NUtility(Screen):
 			('Ccommand',_('Execute commands'),'icons/terminal.png',True),
 			('NUserScript',_('Execute Users Scripts'),'icons/user.png',True),
 			('NSwap',_('Manage Swap File'),'icons/swapsettings.png',True),
+			('ledManager',_('LED Manager'),'icons/led.png',isledManagerPlugin),
 			('NDevice',_('Manage Devices'),'icons/device.png',True),
 			('DttDevice',_('Manage DVB-T/C Adapter'),'icons/device.png',True),
 			('Csave',_('Save Enigma Setting'),'icons/save.png',True)
@@ -137,6 +148,8 @@ class NUtility(Screen):
 				self.session.open(NSwap)
 		elif (self.sel == "NetBrowser"):
 			self.session.open(NetworkBrowser, None, GetSkinPath())
+		elif (self.sel == "ledManager"):
+			self.session.open(ledManager)
 		elif (self.sel == "Csave"):
 			msg = _('Saving Enigma Setting\nPlease Wait...')
 			self.confBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, enable_input = False)

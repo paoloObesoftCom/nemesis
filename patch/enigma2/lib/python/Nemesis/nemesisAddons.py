@@ -100,9 +100,6 @@ class loadUniDir:
 				count +=1
 
 loadunidir = loadUniDir()
-
-class IDa:
-	ID = 'W91bnQgLW8g'
 		
 class NAddons(Screen):
 	__module__ = __name__
