@@ -981,6 +981,9 @@ msgstr ""
 "Nessun aggiornamento disponibile!\n"
 "Il vostro decoder é aggiornato."
 
+msgid "Add to EPG Blacklist"
+msgstr "Aggiungi alla EPG Blacklist"
+
 msgid "Remove from EPG Blacklist"
 msgstr "Rimuovi dalla EPG Blacklist"
 

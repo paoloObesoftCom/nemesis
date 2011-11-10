@@ -279,7 +279,6 @@ class nemesisEpgPanel(Screen):
 			if fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
 				system("cp " +  config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
 			self.epgRBox.close()
-			self.close()
 		except:
 			self.epgRBox.close()
 			self.restartE2Timer.start(500, True)

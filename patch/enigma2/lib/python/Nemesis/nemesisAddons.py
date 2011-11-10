@@ -240,6 +240,7 @@ class NAddons(Screen):
 				self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + self.linkExtra + "iuregdoiuwqcdiuewq/" + line + " -O /tmp/addons.xml")
 			except:
 				self['conn'].text = (_("Server not found!\nPlease check internet connection."))
+			remove('/tmp/tmp.tmp')
 		else:
 			self['conn'].text = (_("Server not found!\nPlease check internet connection."))
 

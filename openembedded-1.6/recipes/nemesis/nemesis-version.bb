@@ -1,8 +1,8 @@
 DESCRIPTION = "nemesis version"
 LICENSE = "GPL"
 
-SVN = "098"
-PR = "r6"
+SVN = "099"
+PR = "r1"
 PV = "2.4-svn-${SVN}"
 
 S = "${WORKDIR}/"

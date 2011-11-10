@@ -1,6 +1,6 @@
 # -*- coding: ISO-8859-1 -*-
 #===============================================================================
-# ledManager 0.1 Plugin by DarkVolli 2009
+# ledManager 0.2 Plugin by DarkVolli 2009
 # Big thanks to dr.best for his support in autostart...
 # www.dreambox-tools.info
 #
@@ -15,9 +15,8 @@ from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
-from Components.Pixmap import Pixmap
-from Components.Label import Label
 from Components.MenuList import MenuList
+from Components.Sources.StaticText import StaticText
 from Components.ConfigList import ConfigListScreen
 from Components.config import config
 from Components.config import ConfigSubsection
@@ -26,13 +25,8 @@ from Components.config import ConfigSequence
 from Components.config import ConfigSelection
 from Components.config import getConfigListEntry
 from Components.SystemInfo import SystemInfo
+from Components.Label import Label
 
-from Components.Sources.CurrentService import CurrentService
-from Components.Sources.EventInfo import EventInfo
-from Components.Sources.FrontendStatus import FrontendStatus
-from Components.Sources.FrontendInfo import FrontendInfo
-from Components.Sources.Source import Source
-from Components.Sources.TunerInfo import TunerInfo
 from Components.Sources.Boolean import Boolean
 from Components.Sources.RecordState import RecordState
 from Components.Converter.Combine import Combine
@@ -51,14 +45,6 @@ config.plugins.ledManager.led1 = ConfigLEDpatterns(default = [1,1,0,0])
 def autostart(session, **kwargs):
 	session.screen["RecordState"] = None
 	session.screen["Standby"] = None
-
-	session.screen["CurrentService"] = CurrentService(session.nav)
-	session.screen["Event_Now"] = EventInfo(session.nav, EventInfo.NOW)
-	session.screen["Event_Next"] = EventInfo(session.nav, EventInfo.NEXT)
-	session.screen["FrontendStatus"] = FrontendStatus(service_source = session.nav.getCurrentService)
-	session.screen["FrontendInfo"] = FrontendInfo(navcore = session.nav)
-	session.screen["VideoPicture"] = Source()
-	session.screen["TunerInfo"] = TunerInfo()
 	session.screen["RecordState"] = RecordState(session)
 	session.screen["Standby"] = Boolean(fixed = False)
 
@@ -190,4 +176,3 @@ def Plugins(**kwargs):
 	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]
 	list.append(PluginDescriptor(name="LED Manager", description=_("setup for frontpanel led(s)"), where = [PluginDescriptor.WHERE_MENU], fnc=ledManagerSetup))
 	return list
-

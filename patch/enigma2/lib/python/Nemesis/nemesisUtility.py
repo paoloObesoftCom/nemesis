@@ -36,8 +36,8 @@ if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/plugi
 else:
 	isNetworkPlugin = False
 
+isledManagerPlugin = True
 if SystemInfo.get("NumFrontpanelLEDs", 0) !=0:
-	isledManagerPlugin = True
 	if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/ledManager/plugin.py")):
 		try:
 			from Plugins.SystemPlugins.ledManager.plugin import ledManager

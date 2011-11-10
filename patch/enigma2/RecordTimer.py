@@ -316,7 +316,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			self.backoff *= 2
 			if self.backoff > 100:
 				self.backoff = 100
-		self.log(10, "backoff: retry in %d seconds" % st.STATE_RESTART_E2elf.backoff)
+		self.log(10, "backoff: retry in %d seconds" % self.backoff)
 
 	def activate(self):
 		next_state = self.state + 1

@@ -312,12 +312,24 @@ private:
 	eEPGCache();
 	~eEPGCache();
 #endif // SWIG
+
+	typedef struct epg_block_list_s
+	{
+		uint16_t	service_id;
+		uint16_t	transport_stream_id;
+		uint16_t	original_network_id;
+		int 		source;
+	} epg_block_list_t;
+	std::list<epg_block_list_t> block_list;
+
 public:
 	void save();
 	void load();
 	void flushEPG(const uniqueEPGKey & s=uniqueEPGKey());
 	void crossepgImportEPGv21(std::string dbroot);
 	static eEPGCache *getInstance() { return instance; }
+	void InitEPGBlock ();
+	bool CheckEPGBlock (int32_t service_id, uint16_t transport_stream_id, uint16_t original_network_id, int source);
 
 #ifndef SWIG
 	eEPGCache();

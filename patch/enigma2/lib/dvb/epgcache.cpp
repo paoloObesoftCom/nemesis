@@ -991,6 +991,7 @@ void eEPGCache::thread()
 	hasStarted();
 	m_running=1;
 	nice(4);
+	InitEPGBlock ();
 	load();
 	cleanLoop();
 	runLoop();
@@ -1438,6 +1439,57 @@ void eEPGCache::channel_data::abortEPG()
 	pthread_mutex_unlock(&channel_active);
 }
 
+void eEPGCache::InitEPGBlock ()
+{
+	FILE *fd = NULL;
+	fd = fopen ("/etc/enigma2/epg.blacklist", "r");
+	if (fd)
+	{
+		char line[256];
+		while (fgets (line, sizeof(line), fd))
+		{
+			char* tmp;
+			block_list.clear();
+			epg_block_list_t block_item;
+			if (!(tmp = strtok (line, ","))) continue;
+			block_item.service_id = atoi (tmp);
+			if (!(tmp = strtok (NULL, ","))) continue;
+			block_item.transport_stream_id = atoi (tmp);
+			if (!(tmp = strtok (NULL, ","))) continue;
+			block_item.original_network_id = atoi (tmp);
+			if (!(tmp = strtok (NULL, ","))) continue;
+			block_item.source = atoi (tmp);
+			block_list.push_back (block_item);
+		}
+		fclose (fd);
+		eDebug ("[EPGC] Blacklist loaded");
+	}
+	else eDebug ("[EPGC] No blacklist found");
+}
+
+bool eEPGCache::CheckEPGBlock (int32_t service_id, uint16_t transport_stream_id, uint16_t original_network_id, int source)
+{
+	//static bool first = true;
+	std::list<epg_block_list_t>::iterator i;
+	
+	//if (first)
+	//{
+
+	//}
+	
+	for (i=block_list.begin(); i != block_list.end(); ++i)
+		if ((i->service_id == service_id || service_id == -1) &&
+			i->transport_stream_id == transport_stream_id &&
+			i->original_network_id == original_network_id &&
+			i->source == source)
+	{
+		eDebug ("[EPGC] Blacklist active!");
+		return true;
+	}
+	
+	return false;
+}
+
 void eEPGCache::channel_data::readDataViasat( const __u8 *data)
 {
 	__u8 *d=0;
@@ -1513,6 +1565,13 @@ void eEPGCache::channel_data::readData( const __u8 *data)
 	else
 	{
 		eit_t *eit = (eit_t*) data;
+		
+		if (eEPGCache::getInstance()->CheckEPGBlock (eit->service_id_hi << 8 | eit->service_id_lo,
+							eit->transport_stream_id_hi << 8 | eit->transport_stream_id_lo,
+							eit->original_network_id_hi << 8 | eit->original_network_id_lo,
+							source))
+								return;
+								
 		__u32 sectionNo = data[0] << 24;
 		sectionNo |= data[3] << 16;
 		sectionNo |= data[4] << 8;
