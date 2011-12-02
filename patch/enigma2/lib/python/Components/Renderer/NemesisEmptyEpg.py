@@ -18,6 +18,7 @@
 from Renderer import Renderer
 from enigma import eLabel
 from Components.VariableText import VariableText
+from Components.config import config
 
 class NemesisEmptyEpg(VariableText, Renderer):
 
@@ -36,8 +37,9 @@ class NemesisEmptyEpg(VariableText, Renderer):
 			self.text = ""
 		else:
 			self.text = self.source.text
-			if len(self.text) > 25:
-				self.text = self.text[:29] + "..."
+			epgtextlenght = config.nemesis.epgtextlenght.value
+			if len(self.text) > epgtextlenght:
+				self.text = self.text[:epgtextlenght + 4] + "..."
 			elif self.text == "":
-				self.text = "No EPG data available"
+				self.text = _("No EPG data available")
 

@@ -1,6 +1,5 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Screens.Standby import TryQuitMainloop
 from enigma import eTimer, eDVBDB, eConsoleAppContainer
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -14,7 +13,7 @@ from Components.Sources.StaticText import StaticText
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, pathExists, createDir
 from os import system, remove, listdir, chdir, getcwd, rename
-from nemesisTool import nemesisTool, GetSkinPath
+from nemesisTool import nemesisTool, GetSkinPath, restartE2
 from nemesisConsole import nemesisConsole
 from nemesisDownloader import nemesisDownloader
 from Tools import Notifications
@@ -359,6 +358,7 @@ class	RAddonsDown(Screen):
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
 		self['type'].setText(_("Download ") + str(u.pluginType))
+		self._restartE2 = restartE2(session)
 
 		self.linkAddons = t.readAddonsUrl()
 		self.linkExtra = t.readExtraUrl()
@@ -453,8 +453,7 @@ class	RAddonsDown(Screen):
 		if fileExists('/tmp/.restartE2'):
 			remove("/tmp/.restartE2")
 			msg = _("Enigma2 will be now hard restarted to complete package installation.") + "\n" + _("Do You want restart enigma2 now?")
-			box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg , MessageBox.TYPE_YESNO)
-			box.setTitle(_('Restart Enigma2'))
+			self._restartE2.go(msg)
 	
 	def reloadPluginlist(self):
 		print "Read plugin list"
@@ -468,10 +467,6 @@ class	RAddonsDown(Screen):
 		else:
 			self.container.kill()
 			self['conn'].text = _('Process Killed by user.\nAddon not installed correctly!')
-	
-	def restartEnigma2(self, answer):
-		if (answer is True):
-			system('killall -9 enigma2')
 	
 	def getAddonsPar(self):
 		for tag in loadxml.plugin_list: 
@@ -512,6 +507,7 @@ class	RManual(Screen):
 		self["key_yellow"] = Label(_("Reload /tmp"))
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
+		self._restartE2 = restartE2(session)
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
@@ -568,9 +564,8 @@ class	RManual(Screen):
 		if fileExists('/tmp/.restartE2'):
 			remove('/tmp/.restartE2')
 			msg = 'Enigma2 will be now hard restarted to complete package installation.\nDo You want restart enigma2 now?'
-			box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg , MessageBox.TYPE_YESNO)
-			box.setTitle('Restart enigma')
-	
+			self._restartE2.go(msg)
+
 	def cancel(self):
 		if not self.container.running():
 			del self.container.appClosed[:]
@@ -580,10 +575,6 @@ class	RManual(Screen):
 			self.container.kill()
 			self['conn'].text = (_('Process Killed by user.\nAddon not installed correctly!'))
 	
-	def restartEnigma2(self, answer):
-		if (answer is True):
-			self.session.open(TryQuitMainloop, 3)
-
 class	RRemove(Screen):
 	__module__ = __name__
 	skin = """

@@ -36,6 +36,7 @@ from Tools.Directories import fileExists
 from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, \
 	iPlayableService, eServiceReference, eEPGCache, eActionMap, eDBoxLCD
 from Nemesis.nemesisExtraInfoBar import nemesisEI
+from Nemesis.nemesisTool import cleanServiceHistoryList
 
 from time import time, localtime, strftime
 from os import stat as os_stat
@@ -366,7 +367,8 @@ class InfoBarNumberZap:
 			if isinstance(self, InfoBarPiP) and self.pipHandles0Action():
 				self.pipDoHandle0Action()
 			else:
-				self.servicelist.recallPrevService()
+				if cleanServiceHistoryList(self.servicelist):
+					self.zapToNumber(1)
 		else:
 			if self.has_key("TimeshiftActions") and not self.timeshift_enabled:
 				self.session.openWithCallback(self.numberEntered, NumberZap, number)

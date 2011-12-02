@@ -126,6 +126,20 @@ from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 plugins.runEarlyPlugins(resolveFilename(SCOPE_PLUGINS))
 
+def LoadEPG (instance):
+	import epgloader
+	epgloader.LoadEPG()
+
+try:
+	import epgloader
+	import enigma
+	import _enigma
+	enigma.eEPGCache.load = epgloader.LoadEPG	
+	_enigma.eEPGCache_load = LoadEPG
+	print "install public eEPGCache.load() method ok!"
+except:
+	print "install public eEPGCache.load() method failed...."
+
 profile("LOAD:Wizard")
 from Screens.Wizard import wizardManager
 from Screens.DefaultWizard import *
@@ -384,15 +398,21 @@ class PowerKey:
 		globalActionMap.actions["power_down"]=self.powerdown
 		globalActionMap.actions["power_up"]=self.powerup
 		globalActionMap.actions["power_long"]=self.powerlong
-		globalActionMap.actions["deepstandby"]=self.shutdown # frontpanel long power button press
+		globalActionMap.actions["deepstandby"]=self.nemesispowerdown # frontpanel long power button press
 		self.standbyblocked = 1
 
 	def MenuClosed(self, *val):
 		self.session.infobar = None
 
-	def shutdown(self):
-		print "PowerOff - Now!"
+	def nemesispowerdown(self):
 		if not Screens.Standby.inTryQuitMainloop and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND:
+			if config.usage.long_powerpress_enabled.value:
+				print "PowerOff - Now!"
+				self.session.open(Screens.Standby.TryQuitMainloop, 1)
+
+	def shutdown(self):
+		if not Screens.Standby.inTryQuitMainloop and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND:
+			print "PowerOff - Now!"
 			self.session.open(Screens.Standby.TryQuitMainloop, 1)
 
 	def powerlong(self):
@@ -418,7 +438,9 @@ class PowerKey:
 						return
 		elif action == "standby":
 			self.standby()
-
+		elif action == "nothing":
+			return
+			
 	def powerdown(self):
 		self.standbyblocked = 0
 
@@ -465,9 +487,6 @@ from Components.VolumeControl import VolumeControl
 
 def runScreenTest():
 	config.misc.startCounter.value += 1
-
-	profile("readPluginList")
-	plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 
 	profile("Init:Session")
 	nav = Navigation(config.misc.isNextRecordTimerAfterEventActionAuto.value)
@@ -581,6 +600,7 @@ Components.RecordingConfig.InitRecordingConfig()
 profile("UsageConfig")
 import Components.UsageConfig
 Components.UsageConfig.InitUsageConfig()
+config.save()
 
 profile("keymapparser")
 import keymapparser
@@ -606,11 +626,15 @@ import Screens.Ci
 Screens.Ci.InitCiConfig()
 
 from Tools.Directories import fileExists
-if fileExists('/tmp/.enigma2_is_restarted'):
+if fileExists('/etc/.reboot_ok'):
 	from os import unlink
-	from Tools import Notifications
-	unlink("/tmp/.enigma2_is_restarted")
-	Notifications.AddNotification(Screens.Standby.Standby)
+	unlink('/etc/.reboot_ok')
+	print "[Safe reboot detected]: OK!!"
+else:
+	if config.usage.go_standby_after_reboot.value:
+		from Tools import Notifications
+		print "[Unwanted reboot detected]: Go to Standby!!!!!!!!!"
+		Notifications.AddNotification(Screens.Standby.Standby)
 
 #from enigma import dump_malloc_stats
 #t = eTimer()

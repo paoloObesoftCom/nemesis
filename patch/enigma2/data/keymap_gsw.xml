@@ -194,6 +194,9 @@
 	</map>
 
 	<map context="InfobarActions">
+		<device name="dreambox ir keyboard">
+			<key id="KEY_F8" mapto="showMovies" flags="m" />
+		</device>
 		<key id="KEY_VIDEO" mapto="showMovies" flags="m" />
 		<key id="KEY_RADIO" mapto="showRadio" flags="m" />
 		<key id="KEY_TV" mapto="showTv" flags="m" />
@@ -356,6 +359,7 @@
 		<device name="dreambox ir keyboard">
 			<key id="KEY_YELLOW" mapto="timeshiftStart" flags="m" />
 			<key id="KEY_PAUSE" mapto="timeshiftStart" flags="m" />
+			<key id="KEY_TV" mapto="timeshiftStop" flags="m" />
 			<key id="KEY_STOP" mapto="timeshiftStop" flags="m" />
 		</device>
 	</map>
@@ -385,6 +389,9 @@
 		<key id="KEY_UP" mapto="up" flags="m" />
 		<key id="KEY_DOWN" mapto="down" flags="m" />
 		<key id="KEY_VIDEO" mapto="movieList" flags="m" />
+		<device name="dreambox ir keyboard">
+			<key id="KEY_F8" mapto="showMovies" flags="m" />
+		</device>
 	</map>
 
 	<map context="MoviePlayerActions">
@@ -396,6 +403,7 @@
 			<key id="KEY_STOP" mapto="leavePlayer" flags="m" />
 		</device>
 		<device name="dreambox ir keyboard">
+			<key id="KEY_TV" mapto="leavePlayer" flags="m" />
 			<key id="KEY_STOP" mapto="leavePlayer" flags="m" />
 		</device>
 	</map>

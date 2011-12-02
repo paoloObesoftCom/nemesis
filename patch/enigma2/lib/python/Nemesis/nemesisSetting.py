@@ -1,5 +1,4 @@
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.config import config, ConfigNothing, ConfigFile
 from Components.SystemInfo import SystemInfo
@@ -8,7 +7,7 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
-from nemesisTool import GetSkinPath, createProxy, createInadynConf, createIpupdateConf
+from nemesisTool import GetSkinPath, createProxy, createInadynConf, createIpupdateConf, restartE2
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Tools.LoadPixmap import LoadPixmap
 from enigma import eTimer
@@ -46,6 +45,7 @@ class NSetupSum(Screen):
 		self["key_red"] = Label(_("Exit"))
 		self['conn'] = StaticText("")
 		skin_path = GetSkinPath()
+		self._restartE2 = restartE2(session)
 
 		xmldata = setupdom.getroot()
 		for x in xmldata.findall("setup"):
@@ -90,14 +90,11 @@ class NSetupSum(Screen):
 			createIpupdateConf()
 		configfile.save()
 		self['conn'].text = ('')
-		if (self.RCStatus != config.usage.remote_control_setup.value or self.E2Status != config.usage.set_e2_start_config.value or self.PiconStatus != config.nemesis.piconlcd.value):
+		if (self.RCStatus != config.usage.remote_control_setup.value 
+				or self.E2Status != config.usage.set_e2_start_config.value 
+				or self.PiconStatus != config.nemesis.piconlcd.value):
 			msg = _("Please restart Enigma to apply the new configuration.") + "\n" + _("Do You want restart enigma2 now?")
-			box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg , MessageBox.TYPE_YESNO, timeout = 10)
-			box.setTitle(_('Restart Enigma2'))
-			
-	def restartEnigma2(self, answer):
-		if (answer is True):
-			system("killall -9 enigma2")
+			self._restartE2.go(msg)
 
 class NSetup(ConfigListScreen, Screen):
 

@@ -2,10 +2,13 @@ from Components.MenuList import MenuList
 from Tools.Directories import fileExists
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.HardwareInfo import HardwareInfo
-from enigma import eListboxPythonMultiContent, eListbox, gFont
+from enigma import eListboxPythonMultiContent, eListbox, gFont, getDesktop
 from Components.config import config
 from os import system, statvfs
 import os, sys, base64 as getID
+from Components.config import ConfigFile
+
+configfile = ConfigFile()
 
 def parse_ecm(filename):
 	addr = caid =  pid =  provid =  port = reader = protocol = ""
@@ -185,6 +188,14 @@ def GetSkinPath():
 		cur_skin_path = '/usr/share/enigma2/skin_default/'
 	return cur_skin_path
 
+def cleanServiceHistoryList(slist):
+	if config.nemesis.enableclean.value:
+		slist.history = [ ]
+		slist.history_pos = 0
+	else:
+		slist.recallPrevService()
+	return config.nemesis.zapafterclean.value and config.nemesis.enableclean.value
+
 class ListboxE1(MenuList):
 	__module__ = __name__
 
@@ -220,6 +231,23 @@ class ListboxE4(MenuList):
 		self.l.setFont(0, gFont('Regular', 18))
 		self.l.setFont(1, gFont('Regular', 18))
 		self.l.setItemHeight(25)
+
+from Screens.MessageBox import MessageBox
+
+class restartE2:
+
+	def __init__(self, session):
+		self.session = session
+
+	def go(self, msg):
+		box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg, MessageBox.TYPE_YESNO, timeout = 10)
+		box.setTitle(_('Restart Enigma2'))
+
+	def restartEnigma2(self, answer):
+		if (answer is True):
+			configfile.save()
+			system("touch /etc/.reboot_ok")
+			system("killall -9 enigma2")
 
 class editBlacklist:
 

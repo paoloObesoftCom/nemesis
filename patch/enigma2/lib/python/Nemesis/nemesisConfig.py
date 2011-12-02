@@ -13,6 +13,7 @@ def InitNemesisConfig():
 	config.nemesis.eiinfobardelayonzap = ConfigNumber(default = 100)
 	config.nemesis.emminfodelay = ConfigNumber(default = 400)
 	config.nemesis.ecminfodelay = ConfigNumber(default = 1000)
+	config.nemesis.epgtextlenght = ConfigInteger(default=25, limits=(1, 60))
 	config.nemesis.picontype = ConfigSelection(default = "Reference", choices = [ ("Name",_("Name")), ("Reference",_("Reference")) ])
 	if eDBoxLCD.getInstance().detected():
 		config.nemesis.piconlcd = ConfigYesNo(default = False)
@@ -28,6 +29,10 @@ def InitNemesisConfig():
 		("6", "6 " + _("seconds")),("7", "7 " + _("seconds")),("8", "8 " + _("seconds"))])
 	config.nemesis.usepiconinhdd = ConfigYesNo(default = False)
 	config.nemesis.forceumount = ConfigYesNo(default = False)
+#Clean zap history
+	config.nemesis.enableclean = ConfigEnableDisable(default = False)
+	config.nemesis.zapafterclean = ConfigYesNo(default = False)
+	config.nemesis.channeltozap = ConfigText(default = "", fixed_size = False)
 #IPKG
 	config.nemesis.ipkg = ConfigSubsection();
 	config.nemesis.ipkg.overwriteUpgrade = ConfigYesNo(default = True)

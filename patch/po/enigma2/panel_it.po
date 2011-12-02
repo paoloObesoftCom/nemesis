@@ -735,6 +735,9 @@ msgstr "Forza umount prima di formattare"
 msgid "Setup InfoBar OSD"
 msgstr "Configura InfoBar OSD"
 
+msgid "Setup Extended InfoBar OSD"
+msgstr "Configura Extended InfoBar OSD"
+
 msgid "Show Extended InfoBar Permanent"
 msgstr "Mostra Extended InfoBar in modo permanente"
 
@@ -1040,3 +1043,21 @@ msgstr "Gestione LED"
 
 msgid "LED Manager..."
 msgstr "Gestione LED..."
+
+msgid "Enable Clean History ZAP (Button 0)"
+msgstr "Abilitare Pulizia Storico ZAP (Tasto 0)"
+
+msgid "Zap To Channel 1 after history cleaning"
+msgstr "Zap al canale 1 dopo la pulizia storico"
+
+msgid "InfoBar EPG text lenght (Character)"
+msgstr "Lunghezza testo EPG su InfoBar (Caratteri)"
+
+msgid "No EPG data available"
+msgstr "Nessun dato EPG disponibile"
+
+msgid "Go to standby after (unwanted) reboot"
+msgstr "Vai in standby dopo un reboot non gestito"
+
+msgid "Enable deepstandby on front power button long press"
+msgstr "Abilita deepstandby su pressione lunga tasto frontale"

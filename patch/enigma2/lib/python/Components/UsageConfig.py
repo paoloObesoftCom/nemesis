@@ -1,6 +1,6 @@
 from Components.Harddisk import harddiskmanager
 from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigInteger
-from Tools.Directories import resolveFilename, SCOPE_HDD
+from Tools.Directories import resolveFilename, SCOPE_HDD, fileExists
 from enigma import Misc_Options, setTunerTypePriorityOrder, eEnv;
 from SystemInfo import SystemInfo
 import os
@@ -57,19 +57,29 @@ def InitUsageConfig():
 		("intermediate", _("Intermediate")),
 		("expert", _("Expert")) ])
 				
-	config.usage.remote_control_setup = ConfigSelection(default = "Enigma", choices = ["Enigma","Enigma Key Green Swap","Neutrino"])	
-	config.usage.set_e2_start_config = ConfigSelection(default = "Enigma 3.2", choices = ["Enigma 3.2","Enigma Experimental"])	
+	config.usage.remote_control_setup = ConfigSelection(default = "Enigma", choices = [
+		"Enigma",
+		"Enigma Key Green Swap",
+		"Neutrino"])
+
+	config.usage.set_e2_start_config = ConfigSelection(default = 'Enigma 3.2', choices = [
+		"Enigma 3.2",
+		"Enigma Experimental"])	
+	config.usage.set_e2_start_config.setValue({True:'Enigma Experimental', False:'Enigma 3.2'}[fileExists('/etc/.enigma_nemesis')])
+	print "[Enigma2 Mode] This decoder is running in Mode: %s" % config.usage.set_e2_start_config.value
+	
+	config.usage.long_powerpress_enabled = ConfigYesNo(default = True)
 
 	config.usage.on_long_powerpress = ConfigSelection(default = "show_menu", choices = [
 		("show_menu", _("show shutdown menu")),
 		("shutdown", _("immediate shutdown")),
-		("standby", _("Standby")) ] )
+		("standby", _("Standby")),
+		("nothing", _("do nothing")) ] )
 	
 	config.usage.on_short_powerpress = ConfigSelection(default = "standby", choices = [
 		("show_menu", _("show shutdown menu")),
 		("shutdown", _("immediate shutdown")),
 		("standby", _("Standby")) ] )
-
 
 	config.usage.alternatives_priority = ConfigSelection(default = "0", choices = [
 		("0", "DVB-S/-C/-T"),
@@ -87,6 +97,8 @@ def InitUsageConfig():
 
 	config.usage.load_length_of_movies_in_moviellist = ConfigYesNo(default = True)
 	
+	config.usage.go_standby_after_reboot = ConfigYesNo(default = False)
+
 	def TunerTypePriorityOrderChanged(configElement):
 		setTunerTypePriorityOrder(int(configElement.value))
 	config.usage.alternatives_priority.addNotifier(TunerTypePriorityOrderChanged, immediate_feedback=False)

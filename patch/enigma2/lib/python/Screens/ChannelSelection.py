@@ -34,6 +34,7 @@ from os import remove
 profile("ChannelSelection.py after imports")
 from Nemesis.nemesisTool import editBlacklist, isE232
 
+_isE232 = isE232()
 t = editBlacklist()
 epg = eEPGCache.getInstance()
 
@@ -155,7 +156,7 @@ class ChannelContextMenu(Screen):
 						append_when_current_valid(current, menu, (_("remove all new found flags"), self.removeAllNewFoundFlags), level = 0)
 				if inBouquet:
 					append_when_current_valid(current, menu, (_("remove entry"), self.removeCurrentService), level = 0)
-					if not isE232():
+					if not _isE232:
 						if t.check(self.channelToManage):
 							menu.append(ChoiceEntryComponent(text = (_("Remove from EPG Blacklist"), self.removeFromEpgBL)))
 						else:
@@ -992,14 +993,22 @@ class ChannelSelectionBase(Screen):
 							orbpos = service.getData(4) >> 16
 							if orbpos < 0:
 								orbpos += 3600
-							if service.getPath().find("FROM PROVIDER") != -1:
-								service_type = _("Providers")
-							elif service.getPath().find("flags == %d" %(FLAG_SERVICE_NEW_FOUND)) != -1:
-								service_type = _("New")
-							elif service.getPath().find("numCAIDs") != -1:
-								service_type = _("Services") + " FTA"
+							if _isE232:
+								if service.getPath().find("FROM PROVIDER") != -1:
+									service_type = _("Providers")
+								elif service.getPath().find("flags == %d" %(FLAG_SERVICE_NEW_FOUND)) != -1:
+									service_type = _("New")
+								elif service.getPath().find("numCAIDs") != -1:
+									service_type = _("Services") + " FTA"
+								else:
+									service_type = _("Services")
 							else:
-								service_type = _("Services")
+								if service.getPath().find("FROM PROVIDER") != -1:
+									service_type = _("Providers")
+								elif service.getPath().find("flags == %d" %(FLAG_SERVICE_NEW_FOUND)) != -1:
+									service_type = _("New")
+								else:
+									service_type = _("Services")
 							try:
 								# why we need this cast?
 								service_name = str(nimmanager.getSatDescription(orbpos))

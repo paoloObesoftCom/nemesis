@@ -60,8 +60,8 @@ create ()
 
 	echo -n "Prepare package..."
 	cd $nemesis_e2_pack
-	mv usr/lib/enigma2/python/enigma.py usr/lib/enigma2/python/enigma.py.nemesis
-	mv usr/bin/enigma2 usr/bin/enigma2.nemesis
+	[ -e usr/lib/enigma2/python/enigma.py ] && mv usr/lib/enigma2/python/enigma.py usr/lib/enigma2/python/enigma.py.nemesis
+	[ -e usr/bin/enigma2 ] && mv usr/bin/enigma2 usr/bin/enigma2.nemesis
 
 	cd $srcpatchedpath/enigma2_$MACHINE
 	mv usr/lib/enigma2/python/enigma.py  $nemesis_e2_pack/usr/lib/enigma2/python/enigma.py.32
@@ -75,6 +75,7 @@ create ()
 	rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/*.py*
 	rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Components
 	rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Screens
+	rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Tools
 	rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/Extensions/GraphMultiEPG
 	rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager
 	rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan
@@ -85,6 +86,7 @@ create ()
 	cp -f $nemesis_e2_pack/usr/lib/enigma2/python/*.py* enigma2_$MACHINE/usr/lib/enigma2/python/
 	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Components enigma2_$MACHINE/usr/lib/enigma2/python/
 	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Screens enigma2_$MACHINE/usr/lib/enigma2/python/
+	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Tools enigma2_$MACHINE/usr/lib/enigma2/python/
 	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Nemesis enigma2_$MACHINE/usr/lib/enigma2/python/
 	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/Extensions/GraphMultiEPG enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/Extensions/
 	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/

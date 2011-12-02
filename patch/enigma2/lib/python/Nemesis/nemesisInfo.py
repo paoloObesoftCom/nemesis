@@ -286,14 +286,15 @@ class showDevSpaceInfo(Screen):
 							usb = [0,0,0,0]
 					elif x[len(x)-1] == '/media/hdd':
 						try:
-							hdd[0] = int(x[4].replace('%', ''))
-							hdd[1] = int(x[1])
-							hdd[2] = int(x[2])
-							hdd[3] = int(x[3])
-							s = getUnit(int(x[1]))
-							g = getSize(int(x[1]),int(x[2]),int(x[3]))
-							self['h1'].setText('HDD: %s  in use: %s' % (s, x[4]))
-							self['h2'].setText('HDD: %s\tUsed: %s\tFree: %s' % (g[0],g[1],g[2]))
+							a = len(x)
+							hdd[0] = int(x[a - 2].replace('%', ''))
+							hdd[1] = int(x[a - 5])
+							hdd[2] = int(x[a - 4])
+							hdd[3] = int(x[a - 3])
+							s = getUnit(int(hdd[1]))
+							g = getSize(int(hdd[1]),int(hdd[2]),int(hdd[3]))
+							self['h1'].setText('HDD: %s  in use: %s' % (s, x[a - 2]))
+							self['h2'].setText('HDD: %s Used: %s Free: %s' % (g[0],g[1],g[2]))
 						except:
 							hdd = [0,0,0,0]
 				f.close()

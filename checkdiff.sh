@@ -82,11 +82,13 @@ check_enigma2()
 	kompare $e2_cvssrc/lib/python/Components/Language.py patch/enigma2/lib/python/Components/Language.py
 	kompare $e2_cvssrc/lib/python/Components/TimerList.py patch/enigma2/lib/python/Components/TimerList.py
 	kompare $e2_cvssrc/lib/python/Components/UsageConfig.py patch/enigma2/lib/python/Components/UsageConfig.py
+	kompare $e2_cvssrc/lib/python/Components/NimManager.py patch/enigma2/lib/python/Components/NimManage.py
 	kompare $e2_cvssrc/lib/python/Components/Converter/Makefile.am patch/enigma2/lib/python/Components/Converter/Makefile.am
 	kompare $e2_cvssrc/lib/python/Components/Converter/ServiceName.py patch/enigma2/lib/python/Components/Converter/ServiceName.py
 	kompare $e2_cvssrc/lib/python/Components/Converter/ClockToText.py patch/enigma2/lib/python/Components/Converter/ClockToText.py
 	kompare $e2_cvssrc/lib/python/Components/Converter/EventName.py patch/enigma2/lib/python/Components/Converter/EventName.py
 	kompare $e2_cvssrc/lib/python/Components/Renderer/Picon.py patch/enigma2/lib/python/Components/Renderer/Picon.py
+	kompare $e2_cvssrc/lib/python/Components/Sources/FrontendInfo.py patch/enigma2/lib/python/Components/Sources/FrontendInfo.py
 
 	kompare $e2_cvssrc/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py patch/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py
 	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py patch/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py
@@ -101,6 +103,7 @@ check_enigma2()
 	kompare $e2_cvssrc/lib/python/Screens/PluginBrowser.py patch/enigma2/lib/python/Screens/PluginBrowser.py
 	kompare $e2_cvssrc/lib/python/Screens/ServiceScan.py patch/enigma2/lib/python/Screens/ServiceScan.py
 	kompare $e2_cvssrc/lib/python/Screens/ScanSetup.py patch/enigma2/lib/python/Screens/ScanSetup.py
+	kompare $e2_cvssrc/lib/python/Screens/ServiceInfo.py patch/enigma2/lib/python/Screens/ServiceInfo.py
 	
 	kompare $e2_cvssrc/data/Makefile.am patch/enigma2/data/Makefile.am
 	kompare $e2_cvssrc/data/keymap.xml patch/enigma2/data/keymap.xml
@@ -139,6 +142,7 @@ check_oe_16()
 	kompare $oesrc16/openembedded/conf/machine/dm7020hd.conf openembedded-1.6/conf/machine/dm7020hd.conf
 	kompare $oesrc16/openembedded/conf/machine/dm7025.conf openembedded-1.6/conf/machine/dm7025.conf
 	kompare $oesrc16/openembedded/conf/machine/dm8000.conf openembedded-1.6/conf/machine/dm8000.conf
+	kompare $oesrc16/openembedded/recipes/base-files/base-files_3.0.14.bb openembedded-1.6/recipes/base-files/base-files_3.0.14.bb
 	kompare $oesrc16/openembedded/recipes/base-files/base-files/opendreambox/profile openembedded-1.6/recipes/base-files/base-files/opendreambox/profile
 	kompare $oesrc16/openembedded/recipes/base-passwd/base-passwd_3.5.20.bb openembedded-1.6/recipes/base-passwd/base-passwd_3.5.20.bb
 	kompare $oesrc16/openembedded/recipes/busybox/busybox_1.15.3.bb openembedded-1.6/recipes/busybox/busybox_1.15.3.bb

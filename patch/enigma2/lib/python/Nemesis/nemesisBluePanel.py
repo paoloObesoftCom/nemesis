@@ -75,6 +75,7 @@ class nemesisBluePanel(Screen):
 		self["key_green"] = Label(_("System Information"))
 		self["key_red"] = Label(_("System Utility"))
 		self["info_use"] = Label(_("Use arrows < > to select"))
+		
 		self["actions"] = NumberActionMap(["ColorActions", "CiSelectionActions","WizardActions","SetupActions"],
 			{
 				"left": self.keyLeft,
@@ -86,6 +87,7 @@ class nemesisBluePanel(Screen):
 				"ok": self.ok_pressed,
 				"back": self.__onClose
 			},-1)
+	
 		self.console = Console()
 		self.nemPortNumber = t.readPortNumber()
 		self.checkVersionTimer = eTimer()

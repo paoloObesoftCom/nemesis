@@ -226,6 +226,9 @@ case "$1" in
 	script)
 		script
 		;;
+	po)
+		extract_po
+		;;
 	*)
 		echo "Usage: $0 {command}"
 		echo 'command:enigma1'

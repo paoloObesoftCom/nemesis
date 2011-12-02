@@ -126,7 +126,7 @@ class Language:
 
 	def getActiveLanguage(self):
 		return self.activeLanguage
-	
+
 	def getActiveLanguageIndex(self):
 		idx = 0
 		for x in self.langlist:

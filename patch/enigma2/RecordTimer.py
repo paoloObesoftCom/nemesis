@@ -87,19 +87,21 @@ class timerEpgDownload():
 				os.system("rm -f /tmp/crossepg*")
 				os.system("cp -f /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat")
 				os.system("mv /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
-				try:
-					if config.nemepg.clearcache.value:
+				if config.nemepg.clearcache.value:
+					try:
 						self.writeLog('Clear enigma EPG cache')
 						epg.flushEPG()
-					self.writeLog('Load EPG in a cache')
-					epg.load()
+					except:
+						self.writeLog('Clear enigma EPG cache failed!')
+				self.writeLog('Load EPG in a cache')
+				epg.load()
+				try:
 					self.writeLog('Save EPG backup')
 					epg.save()
 					if fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
 						os.system("cp " + config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
 				except:
-					os.system("touch /tmp/.enigma2_is_restarted")
-					self.writeLog('No load function on Enigma2, maybe Enigma2 v. 3.2')
+					self.writeLog('Save EPG backup failed!')
 				self.writeLog('Download EPG finished!')
 			else:
 				self.writeLog('File /tmp/ext.epg.dat not found!')
@@ -408,8 +410,6 @@ class RecordTimerEntry(timer.TimerEntry, object):
 				del self.t
 				self.log(12, "stop EPG Download")
 				os.system("echo `date` '[TIMER] stop EPG Download' >> /usr/log/crossepg.log")
-				if fileExists('/tmp/.enigma2_is_restarted'):
-					os.system('killall -9 enigma2')
 
 			if self.afterEvent == AFTEREVENT.STANDBY:
 				if not Screens.Standby.inStandby: # not already in standby

@@ -3,8 +3,8 @@ DEPENDS = "libxml2 python dreambox-nemesis"
 LICENSE = "GPLv2"
 RDEPENDS = "dreambox-nemesis (>=1.0-r5)"
 
-REV ="1"
-PR = "r1"
+REV ="3"
+PR = "r0"
 PN = "enigma2-plugin-extensions-stayup"
 PV = "svn-${REV}"
 

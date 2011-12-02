@@ -242,23 +242,26 @@ else
 	git checkout -f 1.8-dream
 fi
 
-#Download enigma2 from branch experimental
+# download new enigma2 3.1 source
+_download_e2_31
+
+#Download enigma2 3.2 source
 [ -d $INIT_DIR/src ] || mkdir $INIT_DIR/src
 cd $INIT_DIR/src
-if [ -d $INIT_DIR/src/enigma2.orig/.git ];then
-	echo "Update enigma2 from branch experimental"
-	cd enigma2.orig
+if [ -d $INIT_DIR/src/enigma2.32/.git ];then
+	echo "Update enigma2 3.2 sources"
+	cd enigma2.32
 	git pull
 else
-	echo "Download enigma2 from branch experimental"
-	[ -d $INIT_DIR/src/enigma2.orig ] && rm -rf $INIT_DIR/src/enigma2.orig
-	git clone git://git.opendreambox.org/git/enigma2.git enigma2.orig
+	echo "Download enigma2 3.2 sources"
+	[ -d $INIT_DIR/src/enigma2.32 ] && rm -rf $INIT_DIR/src/enigma2.32
+	git clone git://git.opendreambox.org/git/enigma2.git enigma2.32
 	if ( test $? -ne 0 ) then
-		echo -e $ANSI_RED"Fehler beim downloaden von enigma2 source"$ANSI_RESET2
+		echo -e $ANSI_RED"Fehler beim downloaden von enigma2 3.2 source"$ANSI_RESET2
 		exit 72		#Code für: wichtige Systemdatei fehlt
 	fi;
-	cd enigma2.orig
-	git checkout -f experimental
+	cd enigma2.32
+	git checkout -f master
 fi
 
 #Download enigma2-plugins from branch master
@@ -305,9 +308,29 @@ cd $INIT_DIR/src
 find . -name ".svn" | xargs rm -rf
 }
 
-_download_e2_src()
+_download_e2_31()
 {
-# download new enigma2 source
+# download enigma2 3.1 source
+[ -d $INIT_DIR/src ] || mkdir $INIT_DIR/src
+cd $INIT_DIR/src
+if [ -d $INIT_DIR/src/enigma2.31/.git ];then
+	echo "Update enigma2 3.1 from branch tideglo"
+	cd enigma2.31
+	git pull
+else
+	echo "Download enigma2 3.1 from branch tideglo"
+	[ -d $INIT_DIR/src/enigma2.31 ] && rm -rf $INIT_DIR/src/enigma2.31
+	git clone https://github.com/Tideglo/Enigma2.git enigma2.31
+	if ( test $? -ne 0 ) then
+		echo -e $ANSI_RED"Fehler beim downloaden von enigma2 3.1 source"$ANSI_RESET2
+		exit 72		#Code für: wichtige Systemdatei fehlt
+	fi;
+fi
+}
+
+_download_e2_32()
+{
+# download new enigma2 packages
 cd $INIT_DIR/src
 PV=`grep -m 1 "PV" ../git/recipes/enigma2/enigma2.bb | cut -d "=" -f 2 | sed -e 's/[" {}$A-Z]//g'`
 SRCDATE=`grep -m 1 "SRCDATE" ../git/recipes/enigma2/enigma2.bb | cut -d "=" -f 2 | sed -e 's/[a-zA-Z" =]//g'`
@@ -317,7 +340,7 @@ do
 	echo -n "Download enigma2_${PV}${SRCDATE}_${MACHINE}.tar.bz2..."
 	wget http://dreamboxupdate.com/download/snapshots/enigma2_${PV}${SRCDATE}_${MACHINE}.tar.bz2 -q && echo 'Done!'
 	if ( test $? -ne 0 ) then
-		echo -e $ANSI_RED"Failed to download enigma2 source"$ANSI_RESET2
+		echo -e $ANSI_RED"Failed to download enigma2 packages"$ANSI_RESET2
 		exit 72
 	fi;
 	[ -d $INIT_DIR/src/$MACHINE ] && rm -rf $INIT_DIR/src/$MACHINE
@@ -834,8 +857,11 @@ if (test "$#" = 1) then
 	'--download')
 		_download_src
 		exit;;
-	'--download_e2')
-		_download_e2_src
+	'--e2_32')
+		_download_e2_32
+		exit;;
+	'--e2_31')
+		_download_e2_31
 		exit;;
 	'--makefile')
 		cd $INIT_DIR

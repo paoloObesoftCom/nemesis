@@ -61,8 +61,8 @@ DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy s
 PN = "enigma2"
 PR = "r0"
 
-SRCDATE = "20110928"
-SRCDATENEMESIS = "20111110"
+SRCDATE = "20111110"
+SRCDATENEMESIS = "20111201"
 
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
@@ -76,7 +76,8 @@ PV = "3.2git${SRCDATENEMESIS}"
 #SRCREV = ""
 ####################################################
 
-SRC_URI = "file://../../../../sources/enigma2_${MACHINE}.tar.bz2"
+SRC_URI = "file://../../../../sources/enigma2_${MACHINE}.tar.bz2 \
+           file://epgloader.so"
 
 S = "${WORKDIR}/enigma2_${MACHINE}"
 
@@ -100,6 +101,7 @@ do_install_prepend () {
 
 do_install_append() {
 	find ${D}/usr/lib/enigma2/python/Nemesis -name "*.py" | xargs rm -f
+	install -m 644 ${WORKDIR}/epgloader.so ${D}/usr/lib/enigma2/python
 	rm -f ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager/plugin.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ClockToText.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/Nemesis*.py
@@ -109,6 +111,7 @@ do_install_append() {
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/PiconName.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/ShowTP.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/Picon.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/NNextEvent.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Language.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Ipkg.py
 	ln -s ../skin_default/menu ${D}/usr/share/enigma2/HD-Glass-15/
@@ -122,6 +125,7 @@ do_install_append() {
 
 python populate_packages_prepend () {
 	enigma2_plugindir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)
+
 	do_split_packages(d, enigma2_plugindir, '(.*?/.*?)/.*', 'enigma2-plugin-%s', '%s ', recursive=True, match_path=True, prepend=True)
 	enigma2_podir = bb.data.expand('${datadir}/enigma2/po', d)
 	do_split_packages(d, enigma2_podir, '(.*?)/.*', 'enigma2-locale-%s', ' Enigma2 Language Pack %s', recursive=True, match_path=True, prepend=True, extra_depends='enigma2')

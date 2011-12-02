@@ -12,25 +12,21 @@ ANSI_RESET="\033[37;39m"
 ANSI_RESET2="\033[0m"
 ###############################################################################
 
-curdir=`pwd`
-cd ..
-envpath=`pwd`
-cd $curdir
-srcpath=$envpath/src
-[ -e $envpath/e2_unpaked ] || mkdir $envpath/e2_unpaked
-[ -e $envpath/openembedded/sources ] || mkdir $envpath//openembedded/sources
-srcpatchedpath=$envpath/e2_unpaked
-oepath16=$envpath/openembedded/1.6
-oe_e2_16_path=$oepath16/openembedded/recipes/enigma2
-
-[ -e $srcpatchedpath/enigma2 ] || ln -s $envpath/src/enigma2 $srcpatchedpath/
-[ -e $srcpatchedpath/enigma2.orig ] || ln -s $envpath/src/enigma2.orig $srcpatchedpath/
-
-PV_N=`grep -m 1 "PV" $oe_e2_16_path/enigma2-nemesis.bb | cut -d "=" -f 2 | sed -e 's/[" {}$A-Z]//g'`
-PR_N=`grep -m 1 "PR" $oe_e2_16_path/enigma2-nemesis.bb | cut -d "=" -f 2 | sed -e 's/[" {}$A-Z]//g'`
-
-PV=`grep -m 1 "PV" $oe_e2_16_path/enigma2.bb | cut -d "=" -f 2 | sed -e 's/[" {}$A-Z]//g'`
-SRCDATE=`grep -m 1 "SRCDATE" $oe_e2_16_path/enigma2.bb | cut -d "=" -f 2 | sed -e 's/[a-zA-Z" =]//g'`
+create_extract_po ()
+{
+	cd $srcpatchedpath
+	echo '#!/bin/sh' > $nomefile
+	echo 'curdir=`pwd`' >> $nomefile
+	echo '' >> $nomefile
+	echo 'cd dm800se/data/po/' >> $nomefile
+	echo 'for i in `ls`' >> $nomefile
+	echo 'do' >> $nomefile
+	echo -e '\tmsgunfmt $i/LC_MESSAGES/enigma2.mo > $curdir/enigma2/po/$i.po' >> $nomefile
+	echo 'done' >> $nomefile
+	echo 'cd $curdir' >> $nomefile
+	echo '' >> $nomefile
+	chmod 755 $nomefile
+}
 
 download_source ()
 {
@@ -88,13 +84,36 @@ extract()
 	remove_unused
 }
 
+curdir=`pwd`
+cd ..
+envpath=`pwd`
+cd $curdir
+srcpath=$envpath/src
+[ -e $srcpath/e2_unpaked ] || mkdir $srcpath/e2_unpaked
+
+srcpatchedpath=$srcpath/e2_unpaked
+oepath16=$envpath/openembedded/1.6
+oe_e2_16_path=$oepath16/openembedded/recipes/enigma2
+
+[ -e $srcpatchedpath/enigma2 ] || ln -s $srcpath/enigma2 $srcpatchedpath/
+[ -e $srcpatchedpath/enigma2.31 ] || ln -s $srcpath/enigma2.31 $srcpatchedpath/
+
+nomefile='extract_po.sh'
+[ -e $srcpatchedpath/$nomefile ] || create_extract_po
+
+PV_N=`grep -m 1 "PV" $oe_e2_16_path/enigma2-nemesis.bb | cut -d "=" -f 2 | sed -e 's/[" {}$A-Z]//g'`
+PR_N=`grep -m 1 "PR" $oe_e2_16_path/enigma2-nemesis.bb | cut -d "=" -f 2 | sed -e 's/[" {}$A-Z]//g'`
+
+PV=`grep -m 1 "PV" $oe_e2_16_path/enigma2.bb | cut -d "=" -f 2 | sed -e 's/[" {}$A-Z]//g'`
+SRCDATE=`grep -m 1 "SRCDATE" $oe_e2_16_path/enigma2.bb | cut -d "=" -f 2 | sed -e 's/[a-zA-Z" =]//g'`
+
 if [ $# -ne 0 ]; then
 	for arg in $@
 	do
 		if [ $arg == "compare" ]; then
 			MACHINE=dm800se
 			kdiff3 $srcpatchedpath/$MACHINE $srcpatchedpath/enigma2
-			kdiff3 $srcpatchedpath/$MACHINE $srcpatchedpath/enigma2.orig
+			kdiff3 $srcpatchedpath/$MACHINE $srcpatchedpath/enigma2.31
 			exit 0
 		fi
 		if [ $arg == "all" -o $arg == "clean" ]; then
