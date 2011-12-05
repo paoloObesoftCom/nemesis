@@ -51,8 +51,8 @@ class timerEpgDownload():
 		self.STATE_DOWN_UK = False
 		self.STATE_CONVERTED = False
 		self.ref = None
-		self.myEpgDownloader = "sleep " + config.nemepg.zapdelay.value + " && /usr/crossepg/download_epg.sh"
-		self.myEpgConverter = "sleep " + config.nemepg.zapdelay.value + " && /usr/crossepg/convert_epg.sh"
+		self.myEpgDownloader = "sleep %s && /usr/crossepg/download_epg.sh %s" % (config.nemepg.zapdelay.value, config.nemepg.demux.value)
+		self.myEpgConverter = "sleep %s && /usr/crossepg/convert_epg.sh" % config.nemepg.zapdelay.value
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
 	

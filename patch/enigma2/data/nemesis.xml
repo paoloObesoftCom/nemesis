@@ -93,5 +93,6 @@
 		<item level="0" text="Clear Backup EPG after clear Enigma cache">config.nemepg.clearbackup</item>
 		<item level="0" text="Enable EPG Download via Timer">config.nemepg.enatimer</item>
 		<item level="0" text="Multi-EPG bouquet selection">config.usage.multiepg_ask_bouquet</item>
+		<item level="0" text="CrossEPG demux">config.nemepg.demux</item>
 	</setup>
 </setupxml>

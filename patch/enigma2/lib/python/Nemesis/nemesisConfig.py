@@ -96,4 +96,19 @@ def InitNemesisConfig():
 	config.nemepg.clearcache = ConfigYesNo(default = True)
 	config.nemepg.clearbackup = ConfigYesNo(default = False)
 	config.nemepg.enatimer = ConfigEnableDisable(default = True)
+	config.nemepg.demux = ConfigSelection(default = "/dev/dvb/adapter0/demux0", choices = [
+		("/dev/dvb/adapter0/demux0", "demux 0"), 
+		("/dev/dvb/adapter0/demux1", "demux 1"), 
+		("/dev/dvb/adapter0/demux2", "demux 2"), 
+		("/dev/dvb/adapter0/demux3", "demux 3"), 
+		("/dev/dvb/adapter0/demux4", "demux 4")])
 	
+	from Tools.HardwareInfo import HardwareInfo
+	from Nemesis.nemesisTool import isE232
+	_isE232 = isE232()
+	
+	config.nemepg.demux.setValue("/dev/dvb/adapter0/demux0")
+	if _isE232:
+		if HardwareInfo().get_device_name() == 'dm8000' or HardwareInfo().get_device_name() == 'dm7020hd':
+			config.nemepg.demux.setValue("/dev/dvb/adapter0/demux3")
+	print "[CrossEPG Demux] Used demux: %s" % config.nemepg.demux.value

@@ -94,7 +94,7 @@ class NSetupSum(Screen):
 				or self.E2Status != config.usage.set_e2_start_config.value 
 				or self.PiconStatus != config.nemesis.piconlcd.value):
 			msg = _("Please restart Enigma to apply the new configuration.") + "\n" + _("Do You want restart enigma2 now?")
-			self._restartE2.go(msg)
+			self._restartE2.go(msg, True)
 
 class NSetup(ConfigListScreen, Screen):
 

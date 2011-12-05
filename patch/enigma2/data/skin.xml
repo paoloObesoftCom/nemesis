@@ -140,7 +140,7 @@
 		<color name="WindowTitleBackground" color="black" />
 	</windowstyle>
 	<screen name="InfoBar" position="0,0" size="1280,720" title="InfoBar" backgroundColor="transparent" flags="wfNoBorder">
-		<ePixmap position="2,6" zPosition="-2" size="1368,710" pixmap="skin_default/general/infobar.png" />
+		<ePixmap position="5,6" zPosition="-2" size="1365,710" pixmap="skin_default/general/infobar.png" />
 		<widget source="session.CurrentService" render="Label" position="71,548" size="140,35" font="Prive2;26" halign="center" transparent="1" backgroundColor="un353e575e" shadowColor="#1A58A6" shadowOffset="-2,-1" zPosition="2">
 			<convert type="ServiceNumber">Number</convert>
 		</widget>
@@ -160,11 +160,11 @@
 		<widget source="session.CurrentService" render="Picon" position="91,620" size="100,60" zPosition="2" transparent="1" alphatest="on">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
-		<widget position="210,609" size="83,31" source="session.Event_Now" render="Label" zPosition="1" font="Prive2;27" valign="bottom" foregroundColor="unb2e0b4">
+		<widget position="210,609" size="91,31" source="session.Event_Now" render="Label" zPosition="1" font="Prive2;27" valign="bottom" foregroundColor="unb2e0b4">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget position="301,609" size="581,32" source="session.Event_Now" render="NemesisEmptyEpg" zPosition="-1" font="Prive2;27" valign="bottom" noWrap="1" foregroundColor="unb2e0b4">
+		<widget position="306,609" size="576,32" source="session.Event_Now" render="NemesisEmptyEpg" zPosition="-1" font="Prive2;27" valign="bottom" noWrap="1" foregroundColor="unb2e0b4">
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget position="896,607" size="95,32" source="session.Event_Now" render="Label" zPosition="1" font="Prive2;27" valign="bottom" foregroundColor="unb2e0b4" halign="right">
@@ -174,11 +174,11 @@
 		<widget source="session.Event_Now" render="Progress" pixmap="skin_default/slider/slider_main.png" position="210,588" size="672,14" zPosition="1" transparent="1">
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget position="210,645" size="69,27" source="session.Event_Next" render="Label" font="Prive2;22" valign="bottom" foregroundColor="un99bad6">
+		<widget position="217,645" size="69,27" source="session.Event_Next" render="Label" font="Prive2;22" valign="bottom" foregroundColor="un99bad6">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget position="301,645" size="582,27" source="session.Event_Next" render="NemesisEmptyEpg" font="Prive2;22" valign="bottom" noWrap="1" foregroundColor="un99bad6">
+		<widget position="306,645" size="577,27" source="session.Event_Next" render="NemesisEmptyEpg" font="Prive2;22" valign="bottom" noWrap="1" foregroundColor="un99bad6">
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget position="896,646" size="94,26" source="session.Event_Next" render="Label" font="Prive2;22" valign="bottom" foregroundColor="un99bad6" halign="right">
@@ -267,7 +267,7 @@
 	<!--  Nemesis Panels  -->
 	<!-- Extended Info Bar panel	 -->
 	<!-- 	<screen name="nemesisEI" position="798,91" size="420,410" title="Extended InfoBar" > -->
-	<screen name="nemesisEI" position="62,71" size="420,430" title="Extended InfoBar">
+	<screen name="nemesisEI" position="799,71" size="420,430" title="Extended InfoBar">
 		<ePixmap position="10,5" size="126,82" pixmap="skin_default/frame_hd.png" zPosition="1" alphatest="on" />
 		<widget source="session.CurrentService" render="Picon" position="23,16" size="100,60" zPosition="2" transparent="1" alphatest="on">
 			<convert type="ServiceName">Reference</convert>
@@ -337,12 +337,10 @@
 		<widget position="70,347" size="50,25" halign="center" text="BIS" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="bis" valign="center" zPosition="1" />
 		<widget position="130,347" size="50,25" halign="center" text="BUL" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="bul" valign="center" zPosition="1" />
 		<widget position="190,347" size="50,25" halign="center" text="DRC" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="dream" valign="center" zPosition="1" />
-
 		<widget position="10,372" size="50,25" halign="center" text="DRE" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="dre" valign="center" zPosition="1" />
 		<widget position="70,372" size="50,25" halign="center" text="CON" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="conax" valign="center" zPosition="1" />
 		<widget position="130,372" size="50,25" halign="center" text="CRW" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="cw" valign="center" zPosition="1" />
 		<widget position="190,372" size="50,25" halign="center" text="IRD" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="irdeto" valign="center" zPosition="1" />
-
 		<widget position="10,397" size="50,25" halign="center" text="NAG" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="nagra" valign="center" zPosition="1" />
 		<widget position="70,397" size="50,25" halign="center" text="NDS" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="nds" valign="center" zPosition="1" />
 		<widget position="130,397" size="50,25" halign="center" text="SEC" font="Prive2;15" transparent="1" foregroundColors="fta,emm,ecm" name="seca" valign="center" zPosition="1" />
@@ -776,12 +774,12 @@
 		<widget name="key_red" position="180,288" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
 	<!-- end Nemesis Panels-->
-	<screen name="Volume" position="22,178" zPosition="1" size="32,338" title="Volume" flags="wfNoBorder">
-		<ePixmap pixmap="skin_default/vol_back.png" position="3,0" size="32,338" />
-		<widget name="Volume" pixmap="skin_default/volume.png" position="8,5" zPosition="1" orientation="orBottomToTop" size="18,328" transparent="1" />
+	<screen name="Volume" position="25,178" zPosition="1" size="29,338" title="Volume" flags="wfNoBorder">
+		<ePixmap pixmap="skin_default/vol_back.png" position="1,0" size="32,338" />
+		<widget name="Volume" pixmap="skin_default/volume.png" position="6,6" zPosition="1" orientation="orBottomToTop" size="18,328" transparent="1" />
 	</screen>
-	<screen name="Mute" position="1170,70" zPosition="10" size="48,48" title="Mute" backgroundColor="transparent2" flags="wfNoBorder">
-		<ePixmap position="1,274" size="48,48" pixmap="skin_default/mute.png" transparent="1" />
+	<screen name="Mute" position="30,70" zPosition="10" size="48,48" title="Mute" backgroundColor="transparent2" flags="wfNoBorder">
+		<ePixmap position="0,0" size="48,48" pixmap="skin_default/mute.png" transparent="1" />
 	</screen>
 	<screen name="menu_mainmenu" position="90,100" size="1105,562" backgroundColor="background" title="Main menu">
 		<widget source="title" render="Label" position="5,20" size="540,40" font="Prive2;34" halign="center" transparent="1" foregroundColor="grey" shadowColor="#1A58A6" shadowOffset="-2,-1" />
@@ -1018,18 +1016,18 @@
 		<widget source="ServiceEvent" render="Label" position="832,314" zPosition="1" size="404,22" font="Prive2;18" halign="center" backgroundColor="backgroundf" transparent="1">
 			<convert type="EventName">Name</convert>
 		</widget>
-		
 		<ePixmap position="40,610" size="575,25" pixmap="skin_default/buttons/selected-back.png" zPosition="0" alphatest="on" />
 		<widget position="40,611" size="575,25" source="ServiceEvent" render="NemesisShowReference" halign="center" font="Prive2;17" foregroundColor="un6cbcf0" zPosition="1" transparent="1" />1
-	<ePixmap position="665,610" size="575,25" pixmap="skin_default/buttons/selected-back.png" zPosition="0" alphatest="on" /><widget position="665,611" size="575,25" source="ServiceEvent" render="ShowTP" font="Prive2;17" halign="center" foregroundColor="un6cbcf0" zPosition="1" transparent="1" />
-	<ePixmap pixmap="skin_default/buttons/select_tv.png" position="40,646" size="265,44" zPosition="1" alphatest="on" />
-	<ePixmap pixmap="skin_default/buttons/select_tv.png" position="350,646" size="265,44" zPosition="1" alphatest="on" />
-	<ePixmap pixmap="skin_default/buttons/select_tv.png" position="665,646" size="265,44" zPosition="1" alphatest="on" />
-	<ePixmap pixmap="skin_default/buttons/select_tv.png" position="975,646" size="265,44" zPosition="1" alphatest="on" />
-	<widget name="key_red" position="40,641" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="red" zPosition="2" transparent="1" />
-	<widget name="key_green" position="350,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="green" zPosition="2" transparent="1" />
-	<widget name="key_yellow" position="665,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
-	<widget name="key_blue" position="975,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="blue" zPosition="2" transparent="1" /></screen>
+		<ePixmap position="665,610" size="575,25" pixmap="skin_default/buttons/selected-back.png" zPosition="0" alphatest="on" /><widget position="665,611" size="575,25" source="ServiceEvent" render="ShowTP" font="Prive2;17" halign="center" foregroundColor="un6cbcf0" zPosition="1" transparent="1" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="40,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="350,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="665,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="975,646" size="265,44" zPosition="1" alphatest="on" />
+		<widget name="key_red" position="40,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="red" zPosition="2" transparent="1" />
+		<widget name="key_green" position="350,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="green" zPosition="2" transparent="1" />
+		<widget name="key_yellow" position="665,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
+		<widget name="key_blue" position="975,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="blue" zPosition="2" transparent="1" />
+	</screen>
 	<screen name="ChannelSelectionRadio" position="center,100" size="1116,360" title="Channel Selection">
 		<widget name="list" position="10,8" size="1096,304" scrollbarMode="showOnDemand" foregroundColorServiceNotAvail="#666666" serviceNumberFont="Prive2;24" serviceNameFont="Prive2;24" serviceInfoFont="Prive2;22" transparent="1" />
 		<widget name="key_red" position=" 30,325" size="250,30" font="Prive2;24" halign="center" valign="center" foregroundColor="red" />
@@ -1037,7 +1035,7 @@
 		<widget name="key_yellow" position="570,325" size="250,30" font="Prive2;24" halign="center" valign="center" foregroundColor="yellow" />
 		<widget name="key_blue" position="840,325" size="250,30" font="Prive2;24" halign="center" valign="center" foregroundColor="blue" />
 	</screen>
-	<screen name="ChoiceBox" position="center,180" size="550,400" title="Input">
+	<screen name="ChoiceBox" position="center,center" size="550,400" title="Input">
 		<widget name="text" position="10,10" size="530,25" font="Prive2;20" />
 		<widget name="list" position="0,50" size="550,335" scrollbarMode="showOnDemand" />
 		<applet type="onLayoutFinish">
@@ -1046,7 +1044,7 @@ from enigma import eSize, ePoint
 
 orgwidth = self.instance.size().width()
 orgpos = self.instance.position()
-textsize = self["text"].getSize()
+textsize = self[&quot;text&quot;].getSize()
 
 # y size still must be fixed in font stuff...
 textsize = (textsize[0] + 80, textsize[1] + 80)
@@ -1065,12 +1063,12 @@ wsize = (wsizex, wsizey)
 self.instance.resize(eSize(*wsize))
 
 # resize label
-self["text"].instance.resize(eSize(*textsize))
+self[&quot;text&quot;].instance.resize(eSize(*textsize))
 
 # move list
 listsize = (wsizex - 20, 25 * count)
-self["list"].instance.move(ePoint(10, textsize[1]))
-self["list"].instance.resize(eSize(*listsize))
+self[&quot;list&quot;].instance.move(ePoint(10, textsize[1]))
+self[&quot;list&quot;].instance.resize(eSize(*listsize))
 
 # center window
 newwidth = wsize[0]
@@ -1343,7 +1341,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/(count &gt; 7 and 2 or 3
 			</convert>
 		</widget>
 	</screen>
-	<screen name="MessageBox" position="350,center" size="600,10" title="Message">
+	<screen name="MessageBox" position="center,center" size="600,10" title="Message">
 		<widget name="text" position="65,20" size="520,0" font="Prive2;20" />
 		<widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="5,20" size="53,53" alphatest="on" />
 		<widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="5,20" size="53,53" alphatest="on" />
@@ -1355,7 +1353,7 @@ from enigma import eSize, ePoint
 
 orgwidth = self.instance.size().width()
 orgpos = self.instance.position()
-textsize = self["text"].getSize()
+textsize = self[&quot;text&quot;].getSize()
 
 # y size still must be fixed in font stuff...
 textsize = (textsize[0] + 80, textsize[1] + 80)
@@ -1373,12 +1371,12 @@ wsize = (wsizex, wsizey)
 self.instance.resize(eSize(*wsize))
 
 # resize label
-self["text"].instance.resize(eSize(*textsize))
+self[&quot;text&quot;].instance.resize(eSize(*textsize))
 
 # move list
 listsize = (wsizex - 20, 50)
-self["list"].instance.move(ePoint(10, textsize[1]))
-self["list"].instance.resize(eSize(*listsize))
+self[&quot;list&quot;].instance.move(ePoint(0, textsize[1]))
+self[&quot;list&quot;].instance.resize(eSize(*listsize))
 
 # center window
 newwidth = wsize[0]
@@ -3253,7 +3251,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget name="blue" position="830,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 	</screen>
 	<!-- Timeshift state -->
-	<screen name="TimeshiftState" position="510,70" zPosition="2" size="640,60" backgroundColor="transpBlack" flags="wfNoBorder">
+	<screen name="TimeshiftState" position="87,97" zPosition="2" size="640,60" backgroundColor="transpBlack" flags="wfNoBorder">
 		<widget name="state" position="10,3" size="100,30" font="Regular;25" halign="center" backgroundColor="transpBlack" />
 		<widget source="session.CurrentService" render="Label" position="110,5" size="150,30" font="Regular;25" halign="left" foregroundColor="white" backgroundColor="transpBlack">
 			<convert type="ServicePosition">Remaining</convert>

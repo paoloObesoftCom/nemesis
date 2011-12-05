@@ -22,7 +22,9 @@ from nemesisShowPanel import nemesisShowPanel
 from enigma import eTimer, eEPGCache, eServiceCenter, eServiceReference
 from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry
+from Nemesis.nemesisTool import isE232
 
+_isE232 = isE232()
 epg = eEPGCache.getInstance()
 configfile = ConfigFile()
 
@@ -68,8 +70,8 @@ class nemesisEpgPanel(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
-		self.myEpgDownloader = "sleep " + config.nemepg.zapdelay.value + " && /usr/crossepg/download_epg.sh"
-		self.myEpgConverter = "sleep " + config.nemepg.zapdelay.value + " && /usr/crossepg/convert_epg.sh"
+		self.myEpgDownloader = "sleep %s && /usr/crossepg/download_epg.sh %s" % (config.nemepg.zapdelay.value, config.nemepg.demux.value)
+		self.myEpgConverter = "sleep %s && /usr/crossepg/convert_epg.sh" % config.nemepg.zapdelay.value
 		self.ref = None
 		self.downIMode = False
 		self["title"] = Label(_("EPG Control Center"))
@@ -89,8 +91,8 @@ class nemesisEpgPanel(Screen):
 			('setupCrossEPG',_('CrossEPG Setup'),'icons/extensions.png',isCrossEPG),
 			('downloadEPG',_('Download EPG with CrossEPG'),'icons/get.png',True),
 			('reloadEPG',_('Load EPG in Enigma cache'),'icons/manual.png',True),
-			('eraseEPG',_('Erase Enigma EPG cache'),'icons/remove.png',True),
-			('backupEPG',_('Backup Enigma EPG cache'),'icons/save.png',True),
+			('eraseEPG',_('Erase Enigma EPG cache'),'icons/remove.png',not _isE232),
+			('backupEPG',_('Backup Enigma EPG cache'),'icons/save.png',not _isE232),
 			('createTIMER',_('Create EPG Timer Entry'),'icons/addtimer.png',True),
 			('openTIMER',_('Open Timer List'),'icons/timer.png',True),
 			('epglog',_('View EPG Timer Log'),'icons/log.png',True),
@@ -162,20 +164,15 @@ class nemesisEpgPanel(Screen):
 				elif config.nemepg.downskyuk.value:
 					self.downloadUkEPG()
 		elif (sel == "reloadEPG"):
-			restoreCopy = False
 			if not fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
-				if fileExists(config.misc.epgcache_filename.value + "/epg.dat.save"):
-					restoreCopy = True
-				else:
+				if not fileExists(config.misc.epgcache_filename.value + "/epg.dat.save"):
 					msg = _('File epg.dat not found!\nPlease use Download EPG with CrossEPG!')
-					self.epgRBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, enable_input = False, timeout = 10)
+					self.epgRBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, timeout = 10)
 					self.epgRBox.setTitle(_("Loading EPG"))
 					return
 			msg = _('Load EPG data in Enigma cache from:\n%s/epg.dat.\nPlease Wait...') % config.misc.epgcache_filename.value
 			self.epgRBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, enable_input = False)
 			self.epgRBox.setTitle(_("Loading EPG"))
-			if restoreCopy:
-				system("cp " + config.misc.epgcache_filename.value + "/epg.dat.save " + config.misc.epgcache_filename.value + "/epg.dat")
 			self.reloadEPGTimer.start(1000, True)
 		elif (sel == "eraseEPG"):
 			msg = _('Erasing EPG Chache.\nPlease Wait...')
@@ -261,17 +258,19 @@ class nemesisEpgPanel(Screen):
 	def downEpgFinish(self, *answer):
 		system("rm -f /tmp/crossepg*")
 		if answer[0] == nemesisConsole.EVENT_DONE:
-			if fileExists('/tmp/ext.epg.dat'):
-				msg = _('Load EPG data in Enigma cache from:\n%s/epg.dat.\nPlease Wait...') % config.misc.epgcache_filename.value
-				self.epgRBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, enable_input = False)
-				self.epgRBox.setTitle(_("Loading EPG"))
-				system("cp /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat")
-				system("mv /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
-				self.reloadEPGTimer.start(1000, True)
+			msg = _('Load EPG data in Enigma cache from:\n%s/epg.dat.\nPlease Wait...') % config.misc.epgcache_filename.value
+			self.epgRBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, enable_input = False)
+			self.epgRBox.setTitle(_("Loading EPG"))
+			self.reloadEPGTimer.start(1000, True)
 	
 	def reloadEPG(self):
 		if self.reloadEPGTimer.isActive():
 			self.reloadEPGTimer.stop()
+		if fileExists('/tmp/ext.epg.dat'):
+			system("cp /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat")
+			system("mv /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
+		if not fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
+			system("cp " + config.misc.epgcache_filename.value + "/epg.dat.save " + config.misc.epgcache_filename.value + "/epg.dat")
 		if config.nemepg.clearcache.value:
 			try:
 				epg.flushEPG()
@@ -285,6 +284,7 @@ class nemesisEpgPanel(Screen):
 		except:
 			pass
 		self.epgRBox.close()
+		self.close()
 
 	def clearEPG(self):
 		if self.clearEPGTimer.isActive():
@@ -298,22 +298,12 @@ class nemesisEpgPanel(Screen):
 		self.epgCBox.close()
 	
 	def backupEPG(self):
-		isNotSaved = False
 		if self.saveEPGTimer.isActive():
 			self.saveEPGTimer.stop()
-		try:
-			epg.save()
-			if fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
-				system("mv " + config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
-			else:
-				isNotSaved = True
-		except:
-			pass
+		epg.save()
+		if fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
+			system("mv " + config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
 		self.epgBBox.close()
-		if isNotSaved:
-			msg = _('File %s/epg.dat.\nNot Found!') % config.misc.epgcache_filename.value
-			self.Box = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
-			self.Box.setTitle(_("Backup Error"))
 
 class NEpgSearch(Screen):
 	__module__ = __name__

@@ -1027,7 +1027,7 @@ msgid "November"
 msgstr "Novembre"
 
 msgid "December"
-msgstr "Dicemnbre"
+msgstr "Dicembre"
 
 msgid "Please restart Enigma to apply the new configuration."
 msgstr "Riavviare enigma per attivare la nuova configurazione."

@@ -239,8 +239,11 @@ class restartE2:
 	def __init__(self, session):
 		self.session = session
 
-	def go(self, msg):
-		box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg, MessageBox.TYPE_YESNO, timeout = 10)
+	def go(self, msg, modeClean = False):
+		if modeClean:
+			box = self.session.openWithCallback(self.restartEnigma2Clean, MessageBox, msg, MessageBox.TYPE_YESNO, timeout = 10)
+		else:	
+			box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg, MessageBox.TYPE_YESNO, timeout = 10)
 		box.setTitle(_('Restart Enigma2'))
 
 	def restartEnigma2(self, answer):
@@ -248,6 +251,12 @@ class restartE2:
 			configfile.save()
 			system("touch /etc/.reboot_ok")
 			system("killall -9 enigma2")
+	
+	def restartEnigma2Clean(self, answer):
+		if (answer is True):
+			from Screens.Standby import TryQuitMainloop
+			self.session.open(TryQuitMainloop, 3)
+
 
 class editBlacklist:
 
