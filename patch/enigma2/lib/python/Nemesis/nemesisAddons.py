@@ -1,6 +1,6 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from enigma import eTimer, eDVBDB, eConsoleAppContainer
+from enigma import eTimer, eDVBDB, eConsoleAppContainer, ePicLoad
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Sources.List import List
@@ -10,9 +10,10 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from Components.config import config
 from Components.PluginComponent import plugins
 from Components.Sources.StaticText import StaticText
+from Components.Pixmap import Pixmap
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, pathExists, createDir
-from os import system, remove, listdir, chdir, getcwd, rename
+from os import system, remove, listdir, chdir, getcwd, rename, path
 from nemesisTool import nemesisTool, GetSkinPath, restartE2
 from nemesisConsole import nemesisConsole
 from nemesisDownloader import nemesisDownloader
@@ -102,22 +103,6 @@ loadunidir = loadUniDir()
 		
 class NAddons(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430" title="Addons">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (50, 5), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
-							],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 40
-					}
-				</convert>
-			</widget>
-			<widget source="conn" render="Label" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" transparent="1" />
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	FREESPACENEEDUPGRADE = 4000
 	CANUPGRADE = False
@@ -284,20 +269,6 @@ class NAddons(Screen):
 
 class	RAddons(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 0), size = (340, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-						],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 35
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -331,25 +302,18 @@ class	RAddons(Screen):
 
 class	RAddonsDown(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,530" title="Addons">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (5, 0), size = (530, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-							],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 30
-					}
-				</convert>
-			</widget>
-			<widget source="conn" render="Label" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" transparent="1" />
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.IS_SKIN_SECTION = False
+		if u.pluginType.find('Skin') >= 0:
+			self.skinName = "RAddonsDownSkin"
+			self.IS_SKIN_SECTION = True
+			self["key_green"] = Label(_("Install"))
+			self["preview"] = Pixmap()
+			self["preview"].hide()
+			self.checkPreviewContainer = eConsoleAppContainer()
+			self.checkPreviewContainer.appClosed.append(self.fetchFinished)
 		self.list = []
 		self['list'] = List(self.list)
 		self['conn'] = StaticText(_("Loading elements.\nPlease wait..."))
@@ -363,14 +327,27 @@ class	RAddonsDown(Screen):
 		self.linkAddons = t.readAddonsUrl()
 		self.linkExtra = t.readExtraUrl()
 
-		self['actions'] = ActionMap(['WizardActions','ColorActions'],
-		{
-			'ok': self.KeyOk,
-			"red": self.cancel,
-			'back': self.cancel
-		})
+		if self.IS_SKIN_SECTION:
+			self['actions'] = ActionMap(['WizardActions','ColorActions'],
+			{
+				'ok': self.openPreview,
+				"green": self.KeyOk,
+				"red": self.cancel,
+				'back': self.cancel
+			})
+		else:
+			self['actions'] = ActionMap(['WizardActions','ColorActions'],
+			{
+				'ok': self.KeyOk,
+				"red": self.cancel,
+				'back': self.cancel
+			})
+		
 		self.onLayoutFinish.append(self.loadPlugin)
 		self.onShown.append(self.setWindowTitle)
+
+		if self.IS_SKIN_SECTION:
+			self["list"].onSelectionChanged.append(self.checkPreview)
 	
 	def setWindowTitle(self):
 		self.setTitle(_("Download ") + str(u.pluginType))
@@ -393,6 +370,45 @@ class	RAddonsDown(Screen):
 				self.list.append((tag [3], tag [3]))
 		self['list'].setList(self.list)
 		self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
+		if self.IS_SKIN_SECTION:
+			self.checkPreview()
+			
+	def checkPreview(self):
+		self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
+		self["preview"].hide()
+		if self.checkPreviewContainer.running():
+			self.checkPreviewContainer.kill()
+		if len(self["list"].list) > 0:
+			sel = self['list'].getIndex() 
+			for tag in loadxml.plugin_list: 
+				if tag [0] == u.pluginIndex:
+					if tag [7] == sel:
+						u.addonsName = tag [3]
+						break
+			self.getAddonsPar()
+			system("rm -f /tmp/skin_preview.png")
+			url = "%s%s/%s.png"% (self.linkAddons, u.dir, u.filename)
+			cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + url + " -O /tmp/skin_preview.png"
+			self.checkPreviewContainer.execute(cmd)
+
+	def fetchFinished(self, retval):
+		if path.exists("/tmp/skin_preview.png") and u.pluginType.find('Skin') >= 0:
+			self['conn'].text = _('The selected Skin has a preview.\nPress OK button to show it on full screen.')
+			self.picload = ePicLoad()
+			self.picload.PictureData.get().append(self.previewShow)
+			self.picload.setPara((self["preview"].instance.size().width(), self["preview"].instance.size().height(), 1, 1, False, 1, "#00000000"))
+			self.picload.startDecode("/tmp/skin_preview.png")	
+
+	def previewShow(self, picInfo=None):
+		ptr = self.picload.getData()
+		if ptr != None:
+			self["preview"].instance.setPixmap(ptr.__deref__())
+			self["preview"].show()
+		del self.picload
+
+	def openPreview(self):
+		if path.exists("/tmp/skin_preview.png"):
+			self.session.open(openPreviewScreen, "/tmp/skin_preview.png")
 
 	def downloadAddons(self):
 		self.getAddonsPar()
@@ -461,6 +477,11 @@ class	RAddonsDown(Screen):
 
 	def cancel(self):
 		if not self.container.running():
+			if self.IS_SKIN_SECTION:
+				if self.checkPreviewContainer.running():
+					self.checkPreviewContainer.kill()
+				del self.checkPreviewContainer.appClosed[:]
+				del self.checkPreviewContainer
 			del self.container.appClosed[:]
 			del self.container
 			self.close()
@@ -477,25 +498,32 @@ class	RAddonsDown(Screen):
 					u.size  = tag [5] 
 					u.check  = tag [6] 
 
+class openPreviewScreen(Screen):
+
+	skin = """
+	<screen position="0,0" size="1280,720"  backgroundColor="transparent" flags="wfNoBorder">
+		<widget name="Preview" position="0,0" size="1280,720" alphatest="on"/>
+	</screen>"""
+
+	def __init__(self, session, pngpath):
+		Screen.__init__(self, session)
+		
+		self["Preview"] = Pixmap()
+		self.pngpath = pngpath
+		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
+			{
+			'ok': self.close,
+			'back': self.close,
+			'red': self.close
+			}, -1)
+
+		self.onLayoutFinish.append(self.layoutFinished)
+		
+	def layoutFinished(self):
+		self["Preview"].instance.setPixmapFromFile(self.pngpath)
+
 class	RManual(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget source="list" render="Listbox" position="50,20" size="400,390" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 0), size = (410, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
-							],
-					"fonts": [gFont("Prive2", 20)],
-					"itemHeight": 30
-					}
-				</convert>
-			</widget>
-			<widget source="conn" render="Label" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" transparent="1" />
-			<widget name="key_red" position="0,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-			<widget name="key_yellow" position="280,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -577,22 +605,6 @@ class	RManual(Screen):
 	
 class	RRemove(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430" title="Addons">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget source="list" render="Listbox" position="50,20" size="400,390" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 0), size = (410, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
-							],
-					"fonts": [gFont("Prive2", 20)],
-					"itemHeight": 30
-					}
-				</convert>
-			</widget>
-			<widget source="conn" render="Label" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" transparent="1" />
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)

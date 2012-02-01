@@ -56,6 +56,6 @@ class ServiceNumber(Converter, object):
 		if name in self.list:
 			for idx in range(1, len(self.list)):
 				if name == self.list[idx-1]:
-					return str(idx) + ". "
+					return str(idx) + " "
 		else:
 			return " "

@@ -79,6 +79,7 @@ create ()
 	rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/Extensions/GraphMultiEPG
 	rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager
 	rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan
+	rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/SkinSelector
 
 	cd $srcpatchedpath
 	cp -rf $nemesis_e2_pack/usr/bin enigma2_$MACHINE/usr/
@@ -92,6 +93,7 @@ create ()
 	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/
 	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/
 	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/SystemPlugins/ledManager enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/
+	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/SystemPlugins/SkinSelector enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/
 	cp -rf meta/*  enigma2_$MACHINE/usr/share/meta/
 	mv doc  enigma2_$MACHINE/usr/share/
 	rm -rf meta

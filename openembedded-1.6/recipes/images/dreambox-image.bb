@@ -9,7 +9,6 @@ OPENDREAMBOX_COMMON = "\
 REQUIRE_COMMON = "\
 	task-opendreambox-cdplayer \
 	task-opendreambox-dvdplayer \
-	dreamdts \
 	dreambox-tuner-usb \
 	${@base_contains("MACHINE_FEATURES", "modem", "task-opendreambox-modem", "", d)} \
 "

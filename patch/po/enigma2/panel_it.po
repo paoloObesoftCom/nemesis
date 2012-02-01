@@ -86,7 +86,7 @@ msgid ""
 "Process Killed by user!\n"
 "Addon not downloaded."
 msgstr ""
-"Processo inetrrotto dall'utente!\n"
+"Processo interrotto dall'utente!\n"
 "Addon non scaricato."
 
 msgid ""
@@ -778,7 +778,7 @@ msgid "Setup Display LCD/"
 msgstr "Configura Display LCD/OLED"
 
 msgid "Enable Brightness on vision"
-msgstr "Abilita Lumininosità in visione"
+msgstr "Abilita Luminosità in visione"
 
 msgid "Brightness on vision"
 msgstr "Lumin. in visione"
@@ -787,7 +787,7 @@ msgid "Show Picon on LCD? (Need enigma restart)"
 msgstr "Mostra Picon in LCD? (Necessita riavvio GUI)"
 
 msgid "Set LCD Picon type"
-msgstr "Scelgi tipo Picon per LCD"
+msgstr "Scegli tipo Picon per LCD"
 
 msgid "Setup Picon"
 msgstr "Configura Picon"
@@ -814,7 +814,7 @@ msgid "Set update period (sec)"
 msgstr "Imposta periodo di aggiornamento (sec)"
 
 msgid "Set DNS System"
-msgstr "Scelgi sistema DNS"
+msgstr "Scegli sistema DNS"
 
 msgid "Set log file"
 msgstr "Imposta file di log"
@@ -1061,3 +1061,16 @@ msgstr "Vai in standby dopo un reboot non gestito"
 
 msgid "Enable deepstandby on front power button long press"
 msgstr "Abilita deepstandby su pressione lunga tasto frontale"
+
+msgid "Manage"
+msgstr "Gestione"
+
+msgid "No preview Image available!"
+msgstr "Nessuna immagine di anteprima disponibile!"
+
+msgid ""
+"The selected Skin has a preview."
+"\nPress OK button to show it on full screen."
+msgstr ""
+"Lo Skin selezionato ha un'anteprima."
+"\nPremere il tasto OK per visualizzarla a schermo intero."

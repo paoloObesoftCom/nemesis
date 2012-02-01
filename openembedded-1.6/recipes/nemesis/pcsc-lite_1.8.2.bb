@@ -5,10 +5,10 @@ LICENSE = "BSD"
 DEPENDS = "libusb1"
 RDEPENDS = "libusb1"
 
-PV="1.7.4"
+PV="1.8.2"
 PR="r0"
 
-SRC_URI = "https://alioth.debian.org/frs/download.php/3598/pcsc-lite-1.7.4.tar.bz2 \
+SRC_URI = "https://alioth.debian.org/frs/download.php/3695/pcsc-lite-1.8.2.tar.bz2 \
 	file://pcscd.init "
 
 inherit autotools_stage

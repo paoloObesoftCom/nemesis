@@ -70,21 +70,6 @@ def checkDev():
 
 class NUtility(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (50, 2), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
-							],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 35
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,400" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -171,21 +156,6 @@ class NUtility(Screen):
 
 class NCommand(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 0), size = (340, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-						],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 30
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,400" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-			<widget name="key_yellow" position="280,400" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -234,20 +204,6 @@ class NCommand(Screen):
 
 class NUserScript(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 0), size = (340, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-						],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 30
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,400" size="510,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -288,22 +244,6 @@ class NUserScript(Screen):
 
 class NServices(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 0), size = (400, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-							MultiContentEntryPixmapAlphaTest(pos=(405, 6), size=(80, 23), png=png),
-						],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 30
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,400" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-			<widget name="key_yellow" position="400,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -376,22 +316,6 @@ class NServices(Screen):
 class NModule(Screen):
 	__module__ = __name__
 
-	skin = """
-		<screen position="80,95" size="560,430">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 0), size = (400, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-							MultiContentEntryPixmapAlphaTest(pos=(405, 6), size=(80, 23), png=png),
-						],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 30Label
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,400" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
-
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.modules = [
@@ -448,13 +372,16 @@ class NModule(Screen):
 		for mod in self.modules:
 			self.modstatus[mod[0]] = False
 		system("lsmod > /tmp/status.log")
-		f = open('/tmp/status.log', 'r')
-		for line in f.readlines():
-			for mod in self.modules:
-				if (line.find(mod[0]) != -1):
-					self.modstatus[mod[0]] = True
-		f.close()
-		self.saveStatus()
+		try:
+			f = open('/tmp/status.log', 'r')
+			for line in f.readlines():
+				for mod in self.modules:
+					if (line.find(mod[0]) != -1):
+						self.modstatus[mod[0]] = True
+			f.close()
+			self.saveStatus()
+		except:
+			pass
 		
 	def updateList(self):
 		self.readStatus()
@@ -469,16 +396,6 @@ class NModule(Screen):
 class NServicesSetup(Screen, ConfigListScreen):
 	__module__ = __name__
 	
-	skin = """
-		<screen position="330,160" size="620,440">
-			<eLabel position="0,0" size="620,2" backgroundColor="grey" zPosition="5"/>
-			<widget name="config" position="20,20" size="580,330" scrollbarMode="showOnDemand" />
-			<widget source="conn" render="Label" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center"  foregroundColor="#ffffff" transparent="1" />
-			<eLabel position="0,399" size="620,2" backgroundColor="grey" zPosition="5"/>
-			<widget name="canceltext" position="20,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-			<widget name="oktext" position="310,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
-		</screen>"""
-
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
@@ -537,22 +454,6 @@ class NServicesSetup(Screen, ConfigListScreen):
 
 class NServicesLog(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430" title="Addons">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (50, 2), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
-							],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 35
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-			<widget name="key_yellow" position="280,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -601,16 +502,6 @@ class NServicesLog(Screen):
 
 class deleteLog(Screen, ConfigListScreen):
 	__module__ = __name__
-	
-	skin = """
-		<screen position="330,160" size="620,440" title="Delete log files">
-			<eLabel position="0,0" size="620,2" backgroundColor="grey" zPosition="5"/>
-			<widget name="config" position="20,20" size="580,330" scrollbarMode="showOnDemand" />
-			<widget source="conn" render="Label" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" transparent="1" />
-			<eLabel position="0,399" size="620,2" backgroundColor="grey" zPosition="5"/>
-			<widget name="canceltext" position="20,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-			<widget name="oktext" position="310,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -663,16 +554,6 @@ class deleteLog(Screen, ConfigListScreen):
 
 class NSwap(Screen, ConfigListScreen):
 	__module__ = __name__
-	
-	skin = """
-		<screen position="330,160" size="620,440">
-			<eLabel position="0,0" size="620,2" backgroundColor="grey" zPosition="5"/>
-			<widget name="config" position="20,20" size="580,330" scrollbarMode="showOnDemand" />
-			<widget source="conn" render="Label" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center"  foregroundColor="#ffffff" transparent="1" />
-			<eLabel position="0,399" size="620,2" backgroundColor="grey" zPosition="5"/>
-			<widget name="canceltext" position="20,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-			<widget name="oktext" position="310,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)

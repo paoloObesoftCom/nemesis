@@ -487,6 +487,26 @@
 		<ePixmap pixmap="skin_default/buttons/select_s.png" position="215,500" size="240,44" zPosition="1" alphatest="on" />
 		<widget name="key_red" position="215,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 	</screen>
+	<screen name="RAddonsDownSkin" position="0,0" size="1280,720" backgroundColor="black" flags="wfNoBorder" >
+		<ePixmap position="40,30" size="1200,40" pixmap="skin_default/buttons/title_bar.png" zPosition="0" alphatest="on" />
+		<widget source="Title" render="Label" position="40,30" size="1200,40" foregroundColor="un6cbcf0" zPosition="1" valign="center" halign="center" font="Prive2;21" transparent="1"/>
+		<widget name="preview" position="44,80" zPosition="2" size="588,352" alphatest="on"/>
+		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-2.png" position="645,80" size="595,515" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (0, 0), size = (595, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+						],
+				"fonts": [gFont("Prive2", 20)],
+				"itemHeight": 30
+				}
+			</convert>
+		</widget>
+		<widget source="conn" render="Label" position="44,440" size="588,60" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="40,646" size="265,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="350,646" size="265,44" zPosition="1" alphatest="on" />
+		<widget name="key_red" position="40,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="red" zPosition="2" transparent="1" />
+		<widget name="key_green" position="350,646" size="265,44" font="Prive2;22" halign="center" valign="center" foregroundColor="green" zPosition="2" transparent="1" />
+	</screen>
 	<screen name="RManual" position="center,105" size="510,550">
 		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-5.png" position="25,20" size="460,390" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
 			<convert type="TemplatedMultiContent">
@@ -577,6 +597,16 @@
 		<widget name="canceltext" position="10,502" size="240,40" zPosition="2" font="Prive2;22" valign="center" halign="center" foregroundColor="red" transparent="1" />
 		<widget name="oktext" position="260,502" zPosition="2" size="240,40" font="Prive2;22" valign="center" halign="center" foregroundColor="green" transparent="1" />
 	</screen>
+	<!-- nemesisDownloader panels -->
+	<screen name="nemesisDownloader" position="390,200" size="500,190" >
+			<ePixmap pixmap="skin_default/slider/slider_gauge_bg.png" position="10,17" size="480,24" zPosition="-1"  transparent="1" />
+			<widget source="progressbar" render="Progress" pixmap="skin_default/slider/slider_gauge_fg.png" position="10,20" size="480,18" zPosition="1" transparent="1" />
+			<widget source="fname" render="Label" position="10,55" size="480,40" font="Regular;20" halign="center" valign="center" foregroundColor="white"/>
+			<widget source="status" render="Label" position="10,100" size="480,30" font="Regular;18" halign="center" valign="center" foregroundColor="white"/>
+			<eLabel position="0,149" size="500,2" backgroundColor="grey" zPosition="5"/>
+			<widget name="canceltext" position="0,150" zPosition="1" size="500,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
+			<widget name="oktext" position="0,150" zPosition="1" size="500,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
+		</screen>"""
 	<!-- Utility panels -->
 	<screen name="NUtility" position="center,105" size="510,550">
 		<widget source="list" render="Listbox" selectionPixmap="skin_default/buttons/selected-4.png" position="25,20" size="455,490" zPosition="2" scrollbarMode="showOnDemand" transparent="1">
@@ -1110,7 +1140,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/(count &gt; 7 and 2 or 3
 		<widget name="config" position="50,300" zPosition="1" size="440,200" transparent="1" scrollbarMode="showOnDemand" />
 		<!--widget name="stepslider" position="50,500" zPosition="1" borderWidth="2" size="440,20" backgroundColor="dark" /-->
 		<widget name="wizard" pixmap="skin_default/wizard.png" position="40,50" zPosition="10" size="110,174" transparent="1" alphatest="on" />
-		<widget name="rc" pixmap="skin_default/rc0.png" position="500,600" zPosition="10" size="154,471" transparent="1" alphatest="on" />
+		<widget name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="500,600" zPosition="10" size="154,471" transparent="1" alphatest="on" />
 		<widget name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on" />
 		<widget name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on" />
 		<widget name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on" />
@@ -1976,9 +2006,14 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget name="key_yellow" position="555,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
 		<widget name="key_blue" position="830,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 	</screen>
-	<screen name="SkinSelector" position="center,130" size="800,500" title="Choose your Skin">
-		<widget name="SkinList" position="10,10" size="450,475" scrollbarMode="showOnDemand" />
+	<screen name="SkinSelector" position="center,100" size="800,560" title="Choose your Skin">
+		<widget name="SkinList" position="10,10" size="450,465" scrollbarMode="showOnDemand" />
 		<widget name="Preview" position="500,140" size="280,210" alphatest="on" />
+		<widget source="introduction" render="Label" position="0,475" size="800,30" zPosition="10" font="Prive2;20" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
+		<ePixmap pixmap="skin_default/buttons/select_p.png" position="45,506" size="335,44" zPosition="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/select_p.png" position="420,506" size="335,44" zPosition="1" alphatest="on" />
+		<widget source="key_red" render="Label" position="45,508" size="335,40" font="Prive2;20" valign="center" halign="center" zPosition="2" foregroundColor="red" transparent="1" />
+		<widget source="key_yellow" render="Label" position="420,508" size="335,40" font="Prive2;20" valign="center" halign="center" zPosition="2" foregroundColor="yellow" transparent="1" />
 	</screen>
 	<screen name="Standby" position="0,0" size="1280,720" title="Standby" flags="wfNoBorder" />
 	<screen name="StartWizard" position="center,130" size="600,500" title="Welcome...">
@@ -1990,7 +2025,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 			<convert type="StringList" />
 		</widget>
 		<widget name="config" zPosition="1" position="20,300" size="560,200" scrollbarMode="showOnDemand" transparent="1" />
-		<widget name="rc" pixmap="skin_default/rc0.png" position="600,502" zPosition="10" size="154,471" transparent="1" alphatest="on" />
+		<widget name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="600,502" zPosition="10" size="154,471" transparent="1" alphatest="on" />
 		<widget name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on" />
 		<widget name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on" />
 		<widget name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on" />
@@ -2031,7 +2066,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget name="apply" position="210,240" size="250,35" />
 	</screen>
 	<screen name="TimerEditList" position="90,100" size="1100,560" title="Timer Editor">
-		<widget name="timerlist" position="10,20" size="1080,350" scrollbarMode="showOnDemand" />
+		<widget name="timerlist" position="10,10" size="1080,495" scrollbarMode="showOnDemand" />
 		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="5,508" size="265,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="280,508" size="265,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="555,508" size="265,44" zPosition="1" alphatest="on" />
@@ -2042,7 +2077,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget name="key_blue" position="830,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 	</screen>
 	<screen name="TimerEntry" position="center,100" size="1100,560" title="Timer entry">
-		<widget name="config" position="10,20" size="1080,350" scrollbarMode="showOnDemand" />
+		<widget name="config" position="10,10" size="1080,295" scrollbarMode="showOnDemand" />
 		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="5,508" size="265,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="280,508" size="265,44" zPosition="1" alphatest="on" />
 		<widget name="canceltext" position=" 5,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="red" zPosition="2" transparent="1" />
@@ -2051,7 +2086,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget name="ok" position="0,0" size="0,0" />
 	</screen>
 	<screen name="TimerLog" position="90,100" size="1100,560" title="Timer log">
-		<widget name="loglist" position="10,10" size="1080,350" scrollbarMode="showOnDemand" />
+		<widget name="loglist" position="10,10" size="1080,495" scrollbarMode="showOnDemand" />
 		<widget name="logentry" position="10,300" size="1080,130" font="Prive2;20" />
 		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="5,508" size="265,44" zPosition="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/select_tv.png" position="280,508" size="265,44" zPosition="1" alphatest="on" />
@@ -2076,7 +2111,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget name="key_blue" position="830,515" size="265,28" font="Prive2;22" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
 	</screen>
 	<screen name="TimerSelection" position="90,100" size="1100,560" title="Timer selection">
-		<widget name="timerlist" position="10,20" size="1080,350" scrollbarMode="showOnDemand" />
+		<widget name="timerlist" position="10,10" size="1080,540" scrollbarMode="showOnDemand" />
 	</screen>
 	<screen name="VideoFinetune" position="0,0" size="1280,720" backgroundColor="transpBlack">
 		<widget source="Canvas" render="Canvas" position="280,70" size="720,576" />

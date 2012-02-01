@@ -73,15 +73,6 @@ def readFile(filename):
 
 class HDDSetup(ConfigListScreen, Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="330,160" size="620,440">
-			<eLabel position="0,0" size="620,2" backgroundColor="grey" zPosition="5"/>
-			<widget name="config" position="20,20" size="580,330" scrollbarMode="showOnDemand" />
-			<widget source="conn" render="Label" position="20,350" size="580,30" font="Regular;20" halign="center" valign="center"  foregroundColor="#ffffff" transparent="1" />
-			<eLabel position="0,399" size="620,2" backgroundColor="grey" zPosition="5"/>
-			<widget name="canceltext" position="20,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-			<widget name="oktext" position="310,400" zPosition="1" size="290,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -127,20 +118,6 @@ class HDDSetup(ConfigListScreen, Screen):
 
 class HDDInfo(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 0), size = (340, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-						],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 30
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 	
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -194,21 +171,6 @@ class HDDInfo(Screen):
 
 class USBSetup(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,540">
-			<widget name="model" position="10,10" size="540,200" font="Regular;22" foregroundColor="yellow" backgroundColor="transpBlack" transparent="1"/>
-			<widget source="list" render="Listbox" position="10,220" size="540,300" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 0), size = (340, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-						],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 30
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session, sel):
 		Screen.__init__(self, session)
@@ -306,12 +268,6 @@ class USBSetup(Screen):
 		
 class CFSetup(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430">
-			<widget name="title" position="10,5" size="320,55" font="Regular;28" foregroundColor="#ff2525" backgroundColor="transpBlack" transparent="1"/>
-			<widget name="list" position="10,10" size="540,340" scrollbarMode="showOnDemand" />
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -386,21 +342,6 @@ def checkDev():
 
 class manageDevice(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (50, 2), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
-							],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 35
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)

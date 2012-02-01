@@ -24,10 +24,10 @@ GST_BASE_RDEPENDS = "${GST_ALSA_RDEPENDS} ${GST_MISC_RDEPENDS} ${GST_RTSP_RDEPEN
 RDEPENDS_append_dm7020 = " gst-plugin-ossaudio gst-plugin-ivorbisdec"
 RDEPENDS_append_dm7025 = " ${GST_ALSA_RDEPENDS} gst-plugin-ivorbisdec"
 RDEPENDS_append_dm800 = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-ivorbisdec"
-RDEPENDS_append_dm8000 = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi"
-RDEPENDS_append_dm500hd = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi"
-RDEPENDS_append_dm800se = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi"
-RDEPENDS_append_dm7020hd = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi"
+RDEPENDS_append_dm8000 = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi dreamdts"
+RDEPENDS_append_dm500hd = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi dreamdts"
+RDEPENDS_append_dm800se = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi dreamdts"
+RDEPENDS_append_dm7020hd = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi dreamdts"
 
 # 'forward depends' - no two providers can have the same PACKAGES_DYNAMIC, however both
 # enigma2 and enigma2-plugins produce enigma2-plugin-*.
@@ -59,10 +59,10 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r1"
+PR = "r0"
 
 SRCDATE = "20111110"
-SRCDATENEMESIS = "20111204"
+SRCDATENEMESIS = "20120201"
 
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version

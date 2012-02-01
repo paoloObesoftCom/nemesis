@@ -3,7 +3,6 @@ from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ParentalControlSetup
 from Screens.PluginBrowser import PluginBrowser
 from Components.ActionMap import ActionMap, NumberActionMap
-from Components.FileList import FileList
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.ConfigList import ConfigList
@@ -22,38 +21,12 @@ from nemesisAddons import NAddons
 from Components.Console import Console
 from Components.About import about
 import os
-from os import unlink
 from enigma import eTimer, eDVBCI_UI, iServiceInformation, eConsoleAppContainer
 
 t = nemesisTool()
 
 class nemesisBluePanel(Screen):
-	
-	skin = """
-	<screen name="nemesisBluePanel" position="center,130" size="800,500">
-		<widget name="info_use" position="30,10" zPosition="2" size="360,30" halign="center" font="Prive2;20" foregroundColor="unb2e0b4" />
-		<widget name="config" position="30,50" size="360,150" zPosition="2" transparent="1" foregroundColor="unb2e0b4" />
-		<widget name="conn" position="30,200" size="360,140" font="Prive2;20" halign="center" valign="center" zPosition="2" foregroundColor="red" />
-		<widget source="conninfo" render="Label" position="30,340" size="740,30" font="Prive2;18" halign="center" valign="center" foregroundColor="conncol" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/select_p.png" position="43,380" size="335,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_p.png" position="422,380" size="335,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_p.png" position="43,440" size="335,44" zPosition="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/select_p.png" position="422,440" size="335,44" zPosition="1" alphatest="on" />
-		<widget name="key_red" position="43,380" size="335,44" font="Prive2;22" valign="center" halign="center" foregroundColor="red" zPosition="2" transparent="1" />
-		<widget name="key_green" position="43,440" size="335,44" font="Prive2;22" valign="center" halign="center" foregroundColor="green" zPosition="2" transparent="1" />
-		<widget name="key_yellow" position="422,380" size="335,44" font="Prive2;22" valign="center" halign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
-		<widget name="key_blue" position="422,440" size="335,44" font="Prive2;22" valign="center" halign="center" foregroundColor="blue" zPosition="2" transparent="1" />
-		<ePixmap position="43,164" size="355,206" pixmap="skin_default/menu/box-2.png" zPosition="1" alphatest="blend" />
-		<eLabel text="Emu decode info:" position="422,10" size="335,30" halign="center" font="Prive2;20" foregroundColor="unb2e0b4" />
-		<widget position="422,48" size="335,25" source="session.CurrentService" render="Label" font="Prive2;20" valign="bottom" halign="center" noWrap="1" foregroundColor="unb2e0b4">
-			<convert type="ServiceName">Name</convert>
-		</widget>
-		<widget source="session.CurrentService" render="Label" position="422,74" size="335,25" font="Prive2;19" halign="center" foregroundColor="unb2e0b4">
-			<convert type="ServiceName">Provider</convert>
-		</widget>
-		<widget name="ecmtext" position="407,118" size="392,230" font="Prive2;19" zPosition="2" halign="center" foregroundColor="un99bad6" />
-	</screen>"""
-	
+
 	NEMESISVER = "2.4"
 	OEVER = "1.6"
 	IMAGEVER = about.getImageVersionString()
@@ -125,7 +98,7 @@ class nemesisBluePanel(Screen):
 						newVer = line[1]
 						minVer = line[2][:-1]
 				f.close()
-				unlink('/tmp/ver.txt')
+				os.unlink('/tmp/ver.txt')
 				if int(self.SVNVERSION) < int(newVer) and config.nemesis.ipkg.upgrade.value:
 					self['conn'].show()
 					if int(self.SVNVERSION) < int(minVer):
@@ -146,14 +119,18 @@ class nemesisBluePanel(Screen):
 		else:
 			if self.checkVersionContainer.running():
 				self.checkVersionContainer.kill()
+			del self.container.appClosed[:]
+			del self.checkVersionContainer.appClosed[:]
+			del self.container
+			del self.checkVersionContainer
 			if self.ecmTimer.isActive():
 				self.ecmTimer.stop()
 			if self.checkVersionTimer.isActive():
 				self.checkVersionTimer.stop()
 			if fileExists('/tmp/ver.txt'):
-				unlink('/tmp/ver.txt')
+				os.unlink('/tmp/ver.txt')
 			if fileExists('/tmp/info.txt'):
-				unlink('/tmp/info.txt')
+				os.unlink('/tmp/info.txt')
 			self.close()
 
 	def loadEmuList(self):
@@ -165,21 +142,20 @@ class nemesisBluePanel(Screen):
 		self.crd_list = {}
 		self.emu_list["None"] = "None"
 		self.crd_list["None"] = "None"
-		emufilelist = FileList("/usr/script", matchingPattern = "_em.*")
-		srvfilelist = FileList("/usr/script", matchingPattern = "_cs.*")
-		
-		for x in emufilelist.getFileList():
-			if x[0][1] != True:
-				emuName = t.readEmuName(x[0][0][:-6]) 
+
+		for x in os.listdir("/usr/script/"):
+			if x.find('_em.sh') >= 0:
+				emuName = t.readEmuName(x[:-6]) 
 				emu.append(emuName)
-				self.emu_list[emuName] = x[0][0][:-6]
-		softcam = ConfigSelection(default = t.readEmuName(t.readEmuActive()), choices = emu)
-		
-		for x in srvfilelist.getFileList():
-			if x[0][1] != True:
-				srvName = t.readSrvName(x[0][0][:-6])
+				self.emu_list[emuName] = x[:-6]
+				continue
+			if x.find('_cs.sh') >= 0:
+				srvName = t.readSrvName(x[:-6]) 
 				crd.append(srvName)
-				self.crd_list[srvName] = x[0][0][:-6]
+				self.crd_list[srvName] = x[:-6]
+				continue
+
+		softcam = ConfigSelection(default = t.readEmuName(t.readEmuActive()), choices = emu)
 		cardserver = ConfigSelection(default = t.readSrvName(t.readSrvActive()), choices = crd)
 		
 		del self.list[:]
@@ -235,7 +211,7 @@ class nemesisBluePanel(Screen):
 		if fileExists('/tmp/info.txt') and retval == 0 :
 			self['conninfo'].text = ('')
 			self.session.open(nemesisShowPanel, "/tmp/info.txt" ,{2:_('Nemesis News'),3:_('Nemesis Timeline')}[self.sel])
-			unlink('/tmp/info.txt')
+			os.unlink('/tmp/info.txt')
 		else:
 			self['conninfo'].text = (_("Server not found! Please check internet connection."))
 

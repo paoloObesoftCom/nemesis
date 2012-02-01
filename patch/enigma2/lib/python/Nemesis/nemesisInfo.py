@@ -26,21 +26,6 @@ def getSize(a,b,c):
 
 class NInfo(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430" title="Addons">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (50, 5), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
-							],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 40
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def getPluginsExt(self):
 		plist = []
@@ -134,12 +119,6 @@ class NInfo(Screen):
 
 class showRunProcessInfo(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="70,110" size="580,380">
-			<ePixmap position="0,0" pixmap="skin_default/shout_back2.png" size="580,380" alphatest="on" />
-			<widget name="titlebar" zPosition="2" position="10,1" size="560,30" font="Regular;18" valign="center" transparent="1" foregroundColor="white" backgroundColor="white" />
-			<widget name="psinfo" position="20,50" size="560,320" font="Regular;18" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -180,33 +159,6 @@ class showRunProcessInfo(Screen):
 
 class showDevSpaceInfo(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="339,135" size="602,480">	
-		<widget name="flsp" position="40,25" pixmap="skin_default/slider/slider_main.png" size="100,15" borderWidth="2" borderColor="#3366cc" transparent="1" />
-		<widget name="f1" position="150,20" size="410,30" font="Regular;18" valign="center" transparent="1" foregroundColor="#3366cc" />
-		<widget name="f2" position="40,45" size="520,30" font="Regular;18" valign="center" transparent="1" />
-		<widget name="cfp" position="40,85" pixmap="skin_default/slider/slider_main.png" size="100,15" borderWidth="2" borderColor="#3366cc" transparent="1" />
-		<widget name="c1" position="150,80" size="410,30" font="Regular;18" valign="center" transparent="1" foregroundColor="#3366cc" />
-		<widget name="c2" position="40,105" size="520,30" font="Regular;18" valign="center" transparent="1" />
-		<widget name="usbp" position="40,145" pixmap="skin_default/slider/slider_main.png" size="100,15" borderWidth="2" borderColor="#3366cc" transparent="1" />
-		<widget name="u1" position="150,140" size="410,30" font="Regular;18" valign="center" transparent="1" foregroundColor="#3366cc" />
-		<widget name="u2" position="40,165" size="520,30" font="Regular;18" valign="center" transparent="1" />
-		<widget name="hddp" position="40,205" pixmap="skin_default/slider/slider_main.png" size="100,15" borderWidth="2" borderColor="#3366cc" transparent="1" />
-		<widget name="h1" position="150,200" size="410,30" font="Regular;18" valign="center" transparent="1" foregroundColor="#3366cc" />
-		<widget name="h2" position="40,225" size="520,30" font="Regular;18" valign="center" transparent="1" />
-		<widget name="totp" position="40,265" pixmap="skin_default/slider/slider_main.png" size="100,15" borderWidth="2" borderColor="#3366cc" transparent="1" />
-		<widget name="t1" position="150,260" size="410,30" font="Regular;18" valign="center" transparent="1" foregroundColor="#3366cc" />
-		<widget name="t2" position="40,285" size="520,30" font="Regular;18" valign="center" />
-		<widget name="rrpr" position="40,325" pixmap="skin_default/slider/slider_main.png" size="100,15" borderWidth="2" borderColor="#3366cc" transparent="1" />
-		<widget name="rr1" position="150,320" size="190,30" font="Regular;18" valign="center" transparent="1" foregroundColor="#3366cc" />
-		<widget name="rr2" position="40,345" size="470,30" font="Regular;18" valign="center" transparent="1" />
-		<widget name="rspr" position="40,385" pixmap="skin_default/slider/slider_main.png" size="100,15" borderWidth="2" borderColor="#3366cc" transparent="1" />
-		<widget name="rs1" position="150,380" size="190,30" font="Regular;18" valign="center" transparent="1" foregroundColor="#3366cc" />
-		<widget name="rs2" position="40,405" size="470,30" font="Regular;18" valign="center" transparent="1" />
-		<widget name="rtpr" position="40,445" pixmap="skin_default/slider/slider_main.png" size="100,15" borderWidth="2" borderColor="#3366cc" transparent="1" />
-		<widget name="rt1" position="150,440" size="190,30" font="Regular;18" valign="center" transparent="1" foregroundColor="#3366cc" />
-		<widget name="rt2" position="40,465" size="580,30" font="Regular;18" valign="center" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -253,13 +205,13 @@ class showDevSpaceInfo(Screen):
 						s = getUnit(int(x[1]))
 						self['f1'].setText('Flash: %s  in use: %s' % (s, x[4]))
 						s = getSize(int(x[1]),int(x[2]),int(x[3]))
-						self['f2'].setText('Flash: %s\tUsed: %s\tFree: %s' % (s[0],s[1],s[2]))
+						self['f2'].setText('Flash: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
 					elif x[0] == '/dev/mtdblock3':
 						fls = int(x[4].replace('%', ''))
 						s = getUnit(int(x[1]))
 						self['f1'].setText('Flash: %s  in use: %s' % (s, x[4]))
 						s = getSize(int(x[1]),int(x[2]),int(x[3]))
-						self['f2'].setText('Flash: %s\tUsed: %s\tFree: %s' % (s[0],s[1],s[2]))
+						self['f2'].setText('Flash: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
 					elif x[len(x)-1] == '/media/cf':
 						try:
 							cf[0] = int(x[4].replace('%', ''))
@@ -269,7 +221,7 @@ class showDevSpaceInfo(Screen):
 							s = getUnit(int(x[1]))
 							g = getSize(int(x[1]),int(x[2]),int(x[3]))
 							self['c1'].setText('CF: %s  in use: %s' % (s, x[4]))
-							self['c2'].setText('CF: %s\tUsed: %s\tFree: %s' % (g[0],g[1],g[2]))
+							self['c2'].setText('CF: %s - Used: %s - Free: %s' % (g[0],g[1],g[2]))
 						except:
 							cf = [0,0,0,0]
 					elif x[len(x)-1] == '/media/usb':
@@ -281,7 +233,7 @@ class showDevSpaceInfo(Screen):
 							s = getUnit(int(x[1]))
 							g = getSize(int(x[1]),int(x[2]),int(x[3]))
 							self['u1'].setText('USB: %s  in use: %s' % (s, x[4]))
-							self['u2'].setText('USB: %s\tUsed: %s\tFree: %s' % (g[0],g[1],g[2]))
+							self['u2'].setText('USB: %s - Used: %s - Free: %s' % (g[0],g[1],g[2]))
 						except:
 							usb = [0,0,0,0]
 					elif x[len(x)-1] == '/media/hdd':
@@ -327,12 +279,12 @@ class showDevSpaceInfo(Screen):
 							r[1] = int(int(x[2]) * 100 / int(x[1]))
 						self['rs1'].setText('Swap in use: %d%%' %  r[1])
 						s = getSize(int(x[1]),int(x[2]),int(x[3]))
-						self['rs2'].setText('Swap: %s\tUsed: %s\tFree: %s' % (s[0],s[1],s[2]))
+						self['rs2'].setText('Swap: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
 					elif (x[0] == 'Total:'):
 						r[2] = int(int(x[2]) * 100 / int(x[1]))
 						self['rt1'].setText('Total Memory:  %s  in use:: %d%%' % (getUnit(int(x[1])), r[2]))
 						s = getSize(int(x[1]),int(x[2]),int(x[3]))
-						self['rt2'].setText('Total: %s\tUsed: %s\tFree: %s' % (s[0],s[1],s[2]))
+						self['rt2'].setText('Total: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
 				f.close()
 				self['rrpr'].setValue(r[0])
 				self['rspr'].setValue(r[1])
@@ -340,10 +292,6 @@ class showDevSpaceInfo(Screen):
 
 class showEnigmaInfo(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="110,95" size="500,405">
-		<widget name="infotext" position="10,10" size="480,380" font="Regular;18" />
-	</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)

@@ -21,22 +21,6 @@ setupfile.close()
 configfile = ConfigFile()
 
 class NSetupSum(Screen):
-	skin = """
-		<screen position="80,95" size="560,430" title="Addons">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (50, 5), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
-							],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 40
-					}
-				</convert>
-			</widget>
-			<widget source="conn" Render="Label" position="0,360" size="540,50" font="Regular;20" halign="center" valign="center" transparent="1" />
-			<widget name="key_red" position="0,510" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -99,16 +83,6 @@ class NSetupSum(Screen):
 class NSetup(ConfigListScreen, Screen):
 
 	ALLOW_SUSPEND = True
-	
-	skin = """
-		<screen name="NSetup" position="330,130" size="620,500">
-			<eLabel position="0,0" size="620,2" backgroundColor="grey" zPosition="5"/>
-			<widget name="config" position="10,10" size="590,440" scrollbarMode="showOnDemand" />
-			<eLabel position="0,459" size="620,2" backgroundColor="grey" zPosition="5"/>
-			<widget name="canceltext" position="10,460" zPosition="1" size="300,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-			<widget name="oktext" position="310,460" zPosition="1" size="300,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
-		</screen>"""
-	
 
 	def refill(self, list):
 		xmldata = setupdom.getroot()

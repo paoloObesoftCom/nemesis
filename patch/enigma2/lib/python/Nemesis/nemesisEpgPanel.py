@@ -42,21 +42,6 @@ def getSid(sid):
 
 class nemesisEpgPanel(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="80,95" size="560,430">
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (50, 2), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-							MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(34, 34), png=2),
-							],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 35
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,400" size="560,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def getPlugins(self):
 		plist = []
@@ -307,10 +292,6 @@ class nemesisEpgPanel(Screen):
 
 class NEpgSearch(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="30,70" size="660,460" title="EPG Search">
-			<widget name="list" position="10,10" size="640,440" scrollbarMode="showOnDemand" />
-		</screen>"""
 
 	def __init__(self, session, cmd):
 		Screen.__init__(self, session)
@@ -408,11 +389,6 @@ class NEpgSearch(Screen):
 
 class NEpgSearchLast(Screen):
 	__module__ = __name__
-	skin = """
-		<screen position="160,115" size="390,320" title="Epg Search History">
-			<widget name="list" position="10,10" size="370,260" scrollbarMode="showOnDemand" />
-			<widget name="key_red" position="0,260" zPosition="1" size="390,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)

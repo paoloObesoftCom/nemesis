@@ -2,6 +2,8 @@
 
 curdir=`pwd`
 patchdir=$curdir/nemesis
+[ -e $curdir/machines ] || echo -n '500hd 800se' > $curdir/machines
+machines=`cat machines`
 
 if [ $# -ne 0 ]; then
 	for arg in $@
@@ -14,7 +16,7 @@ if [ $# -ne 0 ]; then
 			./src_patch.sh pluginse2
 			cd $curdir
 		elif [ $arg = "create" ]; then
-			for distro in 500hd 800se 800 8000 7020hd
+			for distro in $machines
 			do
 				cd $distro/build
  				./make_e2_image.sh pack
@@ -24,7 +26,7 @@ if [ $# -ne 0 ]; then
 				cd $curdir 
 			done
 		elif [ $arg = "build" ]; then
-			for distro in 500hd 800se 800 8000 7020hd
+			for distro in $machines
 			do
 				cd $distro/build
 				echo -e '\nMake image for dm'$distro' distro...\n'
@@ -36,7 +38,7 @@ if [ $# -ne 0 ]; then
 				cd $curdir 
 			done
 		elif [ $arg = "move" ]; then
-			for distro in 500hd 800 800se 8000 7020hd
+			for distro in $machines
 			do
 				cd $distro/build
 				echo -e 'Move image for dm'$distro' on '${HOME}'/Images...'

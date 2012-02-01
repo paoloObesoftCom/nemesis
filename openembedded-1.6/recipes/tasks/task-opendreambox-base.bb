@@ -2,7 +2,7 @@ DESCRIPTION = "OpenDreambox: Base Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
 PV = "2.4"
-PR = "r0"
+PR = "r1"
 
 inherit task
 
@@ -30,6 +30,7 @@ OPENDREAMBOX_BASE_ESSENTIAL = "\
   timezones-alternative \
   tuxbox-common \
   util-linux-sfdisk \
+  util-linux-ng-blkid \
   vsftpd \
 "
 

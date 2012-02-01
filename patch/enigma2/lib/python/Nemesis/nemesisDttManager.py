@@ -62,24 +62,6 @@ def checkDev():
 
 class manageDttDevice(Screen):
 	__module__ = __name__
-	
-	skin = """
-		<screen position="80,95" size="560,430">
-			<widget source="conn" render=Label position="10,10" size="540,340" font="Regular;20" halign="center" transparent="1" />
-			<widget source="list" render="Listbox" position="10,10" size="540,340" scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 0), size = (400, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),
-							MultiContentEntryPixmapAlphaTest(pos=(405, 6), size=(80, 23), png=png),
-						],
-					"fonts": [gFont("Regular", 20)],
-					"itemHeight": 30
-					}
-				</convert>
-			</widget>
-			<widget name="key_red" position="0,400" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#0064c7" backgroundColor="#9f1313" transparent="1" />
-			<widget name="key_yellow" position="400,510" size="280,20" zPosition="1" font="Regular;22" valign="center" foregroundColor="#bab329" backgroundColor="#9f1313" transparent="1" />
-		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)

@@ -7,6 +7,7 @@ from Components.ActionMap import NumberActionMap, ActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.NimManager import nimmanager, getConfigSatlist
 from Components.Label import Label
+from Components.Pixmap import MultiPixmap
 from Tools.Directories import resolveFilename, SCOPE_DEFAULTPARTITIONMOUNTDIR, SCOPE_DEFAULTDIR, SCOPE_DEFAULTPARTITION
 from Tools.HardwareInfo import HardwareInfo
 from Tools.Transponder import ConvertToHumanReadable
@@ -606,6 +607,12 @@ class DefaultSatLists(DefaultWizard):
 		self.xmlfile = "defaultsatlists.xml"
 		DefaultWizard.__init__(self, session, silent, showSteps, neededTag = "services")
 		print "configuredSats:", nimmanager.getConfiguredSats()
+		self["rc"] = MultiPixmap()
+
+		self.onShown.append(self.initRc)
+
+	def initRc(self):
+		self["rc"].setPixmapNum(config.misc.rcused.value)		
 
 	def setDirectory(self):
 		self.directory = []

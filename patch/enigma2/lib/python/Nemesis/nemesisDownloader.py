@@ -8,16 +8,6 @@ from Tools.Directories import fileExists
 from os import remove
 
 class nemesisDownloader(Screen):
-	skin = """
-		<screen position="390,200" size="500,190" >
-			<ePixmap pixmap="skin_default/slider/slider_gauge_bg.png" position="10,17" size="480,24" zPosition="-1"  transparent="1" />
-			<widget source="progressbar" render="Progress" pixmap="skin_default/slider/slider_gauge_fg.png" position="10,20" size="480,18" zPosition="1" transparent="1" />
-			<widget source="fname" render="Label" position="10,55" size="480,40" font="Regular;20" halign="center" valign="center" foregroundColor="white"/>
-			<widget source="status" render="Label" position="10,100" size="480,30" font="Regular;18" halign="center" valign="center" foregroundColor="white"/>
-			<eLabel position="0,149" size="500,2" backgroundColor="grey" zPosition="5"/>
-			<widget name="canceltext" position="0,150" zPosition="1" size="500,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-			<widget name="oktext" position="0,150" zPosition="1" size="500,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
-		</screen>"""
 		
 	EVENT_DONE = 10
 	EVENT_KILLED = 5

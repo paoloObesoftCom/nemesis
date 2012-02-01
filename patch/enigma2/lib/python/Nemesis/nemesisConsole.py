@@ -7,14 +7,7 @@ from Components.Label import Label
 from Components.config import config
 
 class nemesisConsole(Screen):
-	skin = """
-		<screen position="340,200" size="600,350" >
-			<widget name="text" position="20,20" size="560,270" font="Regular;18"/>
-			<eLabel position="0,309" size="600,2" backgroundColor="grey" zPosition="5"/>
-			<widget name="canceltext" position="0,310" zPosition="1" size="600,40" font="Regular;20" halign="center" valign="center" foregroundColor="red" transparent="1" />
-			<widget name="oktext" position="0,310" zPosition="1" size="600,40" font="Regular;20" halign="center" valign="center" foregroundColor="green" transparent="1" />
-		</screen>"""
-		
+	
 	EVENT_DONE = 10
 	EVENT_KILLED = 5
 	EVENT_CURR = 0

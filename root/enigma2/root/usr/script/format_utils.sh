@@ -87,7 +87,7 @@ case $cmdtoexecute in
 		umount_usb_device
 		if [ -b /dev/$host ]; then
 			echo "Trying to create part"
-			echo "0" | /sbin/sfdisk -f /dev/$host
+			echo "0" | /usr/sbin/sfdisk -f /dev/$host
 			echo "Start creating FS on USB flash"
 			echo "y" | /sbin/mkfs.ext3 -i 16384 -b 1024 /dev/$host1
 			echo "Trying mount USB flash"
@@ -100,7 +100,7 @@ case $cmdtoexecute in
 		umount_usb_device
 		if [ -b /dev/$host ]; then
 			echo "Trying to create part"
-			echo "0" | /sbin/sfdisk -f /dev/$host
+			echo "0" | /usr/sbin/sfdisk -f /dev/$host
 			echo "Start creating FS on USB flash"
 			echo "y" | /sbin/mkfs.ext3 -i 16384 -b 1024 /dev/${host}1
 			echo "Trying mount USB flash"
@@ -164,7 +164,7 @@ case $cmdtoexecute in
 		umount_hdd_device
 		if [ -b /dev/ide/$host/bus0/target0/lun0/disc ]; then
 			echo "Trying to create part"
-			echo "0" | /sbin/sfdisk -f /dev/ide/$host/bus0/target0/lun0/disc
+			echo "0" | /usr/sbin/sfdisk -f /dev/ide/$host/bus0/target0/lun0/disc
 			echo "Start creating FS on CF flash"
 			echo "y" | /sbin/mkfs.ext3 -i 16384 -b 1024 /dev/ide/$host/bus0/target0/lun0/part1
 			echo "Trying mount CF flash"
@@ -177,7 +177,7 @@ case $cmdtoexecute in
 		umount_hdd_device
 		if [ -b /dev/ide/$host/bus0/target0/lun0/disc ]; then
 			echo "Trying to create part"
-			echo "0" | /sbin/sfdisk -f /dev/ide/$host/bus0/target0/lun0/disc
+			echo "0" | /usr/sbin/sfdisk -f /dev/ide/$host/bus0/target0/lun0/disc
 			echo "Start creating FS on CF flash"
 			echo "y" | /sbin/mkfs.ext3 -i 16384 -b 1024 /dev/ide/$host/bus0/target0/lun0/part1
 			echo "Trying mount CF flash"

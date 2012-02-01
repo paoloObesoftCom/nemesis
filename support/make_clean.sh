@@ -1,10 +1,12 @@
 #!/bin/bash
 
 curdir=`pwd`
+[ -e $curdir/machines ] || echo -n '500hd 800se' > $curdir/machines
+machines=`cat machines`
 
 if  [ $# -ne 0 ]; then
 	args=$@
-	for distro in 500hd 800 800se 8000 7020hd
+	for distro in $machines
 	do
 		cd $distro/build
 		echo -e '\nRemove package(s) "'$args'" from dm'$distro' distro...\n'

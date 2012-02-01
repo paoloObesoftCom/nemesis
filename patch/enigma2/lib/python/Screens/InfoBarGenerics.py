@@ -624,6 +624,7 @@ class InfoBarEPG:
 		self.dlg_stack = [ ]
 		self.bouquetSel = None
 		self.eventView = None
+		self.fullepglist = [ ]
 		self["EPGActions"] = HelpableActionMap(self, "InfobarEPGActions",
 			{
 				"showEventInfo": (self.openEventView, _("show EPG...")),

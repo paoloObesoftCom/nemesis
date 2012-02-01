@@ -82,7 +82,7 @@ check_enigma2()
 	kompare $e2_cvssrc/lib/python/Components/Language.py patch/enigma2/lib/python/Components/Language.py
 	kompare $e2_cvssrc/lib/python/Components/TimerList.py patch/enigma2/lib/python/Components/TimerList.py
 	kompare $e2_cvssrc/lib/python/Components/UsageConfig.py patch/enigma2/lib/python/Components/UsageConfig.py
-	kompare $e2_cvssrc/lib/python/Components/NimManager.py patch/enigma2/lib/python/Components/NimManage.py
+	kompare $e2_cvssrc/lib/python/Components/NimManager.py patch/enigma2/lib/python/Components/NimManager.py
 	kompare $e2_cvssrc/lib/python/Components/Converter/Makefile.am patch/enigma2/lib/python/Components/Converter/Makefile.am
 	kompare $e2_cvssrc/lib/python/Components/Converter/ServiceName.py patch/enigma2/lib/python/Components/Converter/ServiceName.py
 	kompare $e2_cvssrc/lib/python/Components/Converter/ClockToText.py patch/enigma2/lib/python/Components/Converter/ClockToText.py
@@ -123,19 +123,20 @@ check_enigma2()
 check_plugins_e2()
 {
 	# Check Plugins
-	kompare $e2_plugsrc/webinterface/src/web-data/objects.js patch/enigma2-plugins/webinterface/src/web-data/objects.js 
-	kompare $e2_plugsrc/webinterface/src/web-data/timer.js patch/enigma2-plugins/webinterface/src/web-data/timer.js 
+	kompare $e2_plugsrc/bitrateviewer/src/plugin.py patch/enigma2-plugins/bitrateviewer/src/plugin.py
+	kompare $e2_plugsrc/bitrateviewer/src/bitratecalc/bitratecalc.h patch/enigma2-plugins/bitrateviewer/src/bitratecalc/bitratecalc.h
+	kompare $e2_plugsrc/bitrateviewer/src/bitratecalc/bitratecalc.cpp patch/enigma2-plugins/bitrateviewer/src/bitratecalc/bitratecalc.cpp
+	kompare $e2_plugsrc/webbouqueteditor/src/web-data/objects.js patch/enigma2-plugins/webbouqueteditor/src/web-data/objects.js 
+	kompare $e2_plugsrc/webinterface/src/web-data/handler.js patch/enigma2-plugins/webinterface/src/web-data/handler.js 
+	kompare $e2_plugsrc/webinterface/src/web-data/helpers.js patch/enigma2-plugins/webinterface/src/web-data/helpers.js 
 	kompare $e2_plugsrc/webinterface/src/WebComponents/Sources/Timer.py patch/enigma2-plugins/webinterface/src/WebComponents/Sources/Timer.py
 	kompare $e2_plugsrc/webinterface/src/WebComponents/Sources/WAPfunctions.py patch/enigma2-plugins/webinterface/src/WebComponents/Sources/WAPfunctions.py
-	kompare $e2_plugsrc/quickbutton/src/keymap.xml patch/enigma2-plugins/quickbutton/src/keymap.xml
-	kompare $e2_plugsrc/quickbutton/src/plugin.py patch/enigma2-plugins/quickbutton/src/plugin.py
 	kompare $e2_plugsrc/pluginsort/src/plugin.py patch/enigma2-plugins/pluginsort/src/plugin.py
 }
 
 check_oe_16()
 {
 	# Check openembedded 1.6
-	kompare $oesrc16/openembedded/conf/distro/opendreambox.conf openembedded-1.6/conf/distro/opendreambox.conf
 	kompare $oesrc16/openembedded/conf/machine/dm500hd.conf openembedded-1.6/conf/machine/dm500hd.conf
 	kompare $oesrc16/openembedded/conf/machine/dm800.conf openembedded-1.6/conf/machine/dm800.conf
 	kompare $oesrc16/openembedded/conf/machine/dm800se.conf openembedded-1.6/conf/machine/dm800se.conf
@@ -244,7 +245,7 @@ case "$1" in
 	e2)
 		check_enigma2
 		;;
-	pluginse2)
+	pluge2)
 		check_plugins_e2
 		;;
 	oe15)
@@ -275,7 +276,7 @@ case "$1" in
 		check_skin
 		;;
 	*)
-		echo "Usage : $0 {e1|e2|pluginse2|oe15|oe16|po_e1|po_e2|all|e2_cvs|e1_cvs|skin}"
+		echo "Usage : $0 {e1|e2|pluge2|oe15|oe16|po_e1|po_e2|all|e2_cvs|e1_cvs|skin}"
 		;;
 esac
 
