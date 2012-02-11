@@ -50,6 +50,7 @@ class NSetupSum(Screen):
 		self.RCStatus = config.usage.remote_control_setup.value
 		self.E2Status = config.usage.set_e2_start_config.value
 		self.PiconStatus = config.nemesis.piconlcd.value
+		self.EIStatus = config.nemesis.eitype.value
 
 	def setWindowTitle(self):
 		self.setTitle(_("System Settings"))
@@ -75,6 +76,7 @@ class NSetupSum(Screen):
 		configfile.save()
 		self['conn'].text = ('')
 		if (self.RCStatus != config.usage.remote_control_setup.value 
+				or self.EIStatus != config.nemesis.eitype.value 
 				or self.E2Status != config.usage.set_e2_start_config.value 
 				or self.PiconStatus != config.nemesis.piconlcd.value):
 			msg = _("Please restart Enigma to apply the new configuration.") + "\n" + _("Do You want restart enigma2 now?")

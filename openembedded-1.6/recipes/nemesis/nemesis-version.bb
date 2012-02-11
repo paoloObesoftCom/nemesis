@@ -1,9 +1,9 @@
 DESCRIPTION = "nemesis version"
 LICENSE = "GPL"
 
-SVN = "102"
-PR = "r8"
-PV = "2.4-svn-${SVN}"
+SVN = "103"
+PR = "r5"
+PV = "2.5-svn-${SVN}"
 
 S = "${WORKDIR}/"
 PACKAGE_ARCH := "${MACHINE_ARCH}"

@@ -1,4 +1,4 @@
-SUBDIRS = menu icons buttons spinner frame slider general
+SUBDIRS = menu icons buttons spinner full
 
 installdir = $(pkgdatadir)/skin_default
 

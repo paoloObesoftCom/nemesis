@@ -115,10 +115,7 @@ data/skin_default/menu/Makefile
 data/skin_default/icons/Makefile
 data/skin_default/buttons/Makefile
 data/skin_default/spinner/Makefile
-data/skin_default/frame/Makefile
-data/skin_default/general/Makefile
-data/skin_default/slider/Makefile
-data/HD-Glass-15/Makefile
+data/skin_default/full/Makefile
 data/piconProv/Makefile
 data/piconSat/Makefile
 data/piconSys/Makefile

@@ -34,6 +34,7 @@ class nemesisEI(Screen):
 				
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.skinName =  str(config.nemesis.eitype.value)
 		
 		self.systemCod = [
 				"beta", "bis", "bul", "dream", "dre", "conax",

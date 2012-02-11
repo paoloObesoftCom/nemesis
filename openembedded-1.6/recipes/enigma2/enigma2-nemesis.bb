@@ -1,6 +1,6 @@
 PN = "enigma2-nemesis"
 PR = "r0"
-PV = "2.4"
+PV = "2.5"
 
 SRC_URI = "file://../../../../sources/enigma2.git_Nemesis_16.tar.gz"
 

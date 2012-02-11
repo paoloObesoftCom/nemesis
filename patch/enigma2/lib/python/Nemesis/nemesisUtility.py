@@ -89,7 +89,6 @@ class NUtility(Screen):
 			('Csave',_('Save Enigma Setting'),'icons/save.png',True)
 			]
 			
-		self["title"] = Label(_("System Utility"))
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
@@ -160,7 +159,6 @@ class NCommand(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
-		self["title"] = Label(_("Execute commands"))
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self["key_yellow"] = Label(_("Custom"))
@@ -208,7 +206,6 @@ class NUserScript(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
-		self["title"] = Label(_("Execute Users Scripts"))
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
@@ -262,7 +259,6 @@ class NServices(Screen):
 			('pcscd','/etc/init.d/pcscd','/usr/sbin/pcscd','Omnikey Smart Card')
 			]
 		self.servicestatus = {}
-		self["title"] = Label(_("Manage Services"))
 		self["key_red"] = Label(_("Exit"))
 		self["key_yellow"] = Label(_("Setup"))
 		self['list'] = List(self.list)
@@ -336,7 +332,6 @@ class NModule(Screen):
 			]
 		self.modstatus = {}
 		self.list = []
-		self["title"] = Label(_("Manage Modules"))
 		self["key_red"] = Label(_("Exit"))
 		self['list'] = List(self.list)
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
@@ -459,11 +454,11 @@ class NServicesLog(Screen):
 		Screen.__init__(self, session)
 		self.list = []
 		self.logsList = [
+			('openvpn','/tmp/openvpn.log',_('Show OpenVPN Log')),
 			('inadyn',config.inadyn.log.value.strip() +'/inadyn.log',_('Show InaDyn Log')),
 			('smb','/var/log/log.smbd',_('Show SMB Server Log')),
 			('nmb','/var/log/log.nmbd',_('Show NMB Log')),
-			('vsftpd','/var/log/vsftpd.log',_('Show FTP Server Log')),
-			('openvpn','/etc/openvpn/openvpn.log',_('Show OpenVPN Log'))
+			('vsftpd','/var/log/vsftpd.log',_('Show FTP Server Log'))
 			]
 		self["title"] = Label(_("Services Logs"))
 		self['list'] = List(self.list)

@@ -14,6 +14,7 @@
 		<item level="0" text="Zap To Channel 1 after history cleaning">config.nemesis.zapafterclean</item>
 	</setup>
 	<setup key="eosd" title="Setup Extended InfoBar OSD">
+		<item level="0" text="Choice Extended InfoBar type (Need enigma restart)">config.nemesis.eitype</item>
 		<item level="0" text="Show Extended InfoBar Permanent">config.nemesis.einfo</item>
 		<item level="0" text="Replace InfoBar with Extended InfoBar">config.nemesis.replaceinfobar</item>
 		<item level="0" text="Extended InfoBar delay (msec)">config.nemesis.einfotimeout</item>

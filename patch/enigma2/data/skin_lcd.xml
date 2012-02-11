@@ -1,7 +1,7 @@
 <skin>
 	<fonts>
 		<font filename="nmsbd2.ttf" name="lcdRegular" scale="90"/>
-		<font filename="nmsbd.ttf" name="lcdDisplay" scale="90"/>
+		<font filename="nmsbd.ttf" name="lcdDisplay" scale="87"/>
 	</fonts>
 	<!-- LCD screen (main) -->
 	<screen name="InfoBarSummary" position="0,0" size="132,64" id="1">

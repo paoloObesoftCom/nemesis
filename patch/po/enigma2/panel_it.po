@@ -170,6 +170,10 @@ msgstr ""
 msgid "Do you want install the addon:\n%s?"
 msgstr "Vuoi installare l'addon:\n%s?"
 
+#, python-format
+msgid "Do you want install the addon: %s?"
+msgstr "Vuoi installare l'addon: %s?"
+
 msgid "Install Addon"
 msgstr "Installare Addon"
 
@@ -195,6 +199,10 @@ msgstr "Niente da rimuovere!"
 #, python-format
 msgid "Do you want remove the addon:\n%s?"
 msgstr "Vuoi rimuovere l'addon:\n%s?"
+
+#, python-format
+msgid "Do you want remove the addon: %s?"
+msgstr "Vuoi rimuovere l'addon: %s?"
 
 #, python-format
 msgid ""
@@ -228,12 +236,36 @@ msgid "Downloading file: %s ..."
 msgstr "Ricezione file: %s ..."
 
 #, python-format
+msgid ""
+"Downloading file:\n"
+"%s ..."
+msgstr ""
+"Ricezione file:\n"
+"%s ..."
+
+#, python-format
 msgid "Download file %s failed!"
 msgstr "Ricezione file %s fallita!"
 
 #, python-format
+msgid ""
+"Download file\n"
+"%s failed!"
+msgstr ""
+"Ricezione file\n"
+"%s fallita!"
+
+#, python-format
 msgid "Download file %s finished!"
 msgstr "Ricezione file %s completata!"
+
+#, python-format
+msgid ""
+"Download file\n"
+"%s finished!"
+msgstr ""
+"Ricezione file\n"
+"%s completata!"
 
 msgid "Downloading killed by user!"
 msgstr "Scaricamento interrotto dall'utente!"
@@ -1073,4 +1105,27 @@ msgid ""
 "\nPress OK button to show it on full screen."
 msgstr ""
 "Lo Skin selezionato ha un'anteprima."
-"\nPremere il tasto OK per visualizzarla a schermo intero."
+"\nPremere OK per visualizzarla a schermo intero."
+
+msgid ""
+"Loading Preview...."
+"\nPlease Wait.."
+
+msgstr ""
+"Caricamento Preview...."
+"\nAttendere prego.."
+
+msgid "Free space: %d kB (%d%%)"
+msgstr "Spazio libero: %d kB (%d%%)"
+
+msgid "Utility"
+msgstr "Utilità"
+
+msgid "Press OK to Start/Stop the service"
+msgstr "Premere OK per Avviare/Fermare il servizio"
+
+msgid "Press OK to Enable/Disable the kernel module"
+msgstr "Premere OK per Abilitare/Disabilitare il modulo del kernel"
+
+msgid "Choice Extended InfoBar type (Need enigma restart)"
+msgstr "Scegli tipo di Extended InfoBar (Necessita riavvio GUI)"

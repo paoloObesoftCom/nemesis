@@ -1996,7 +1996,7 @@ msgid "Done - Installed, upgraded or removed %d packages with %d errors"
 msgstr "Fatto! Installati, aggiornati o rimossi %d pacchetti con %d errori"
 
 msgid "Download"
-msgstr "Download"
+msgstr "Scaricare"
 
 msgid "Download %s from Server"
 msgstr "Scaricare %s dal server"
@@ -2942,7 +2942,7 @@ msgid "Installation finished."
 msgstr "Installazione terminata."
 
 msgid "Installing"
-msgstr "Inst. in corso"
+msgstr "Installazione in corso"
 
 msgid "Installing Software..."
 msgstr "Installazione software in corso..."
@@ -6786,7 +6786,7 @@ msgstr "Non supportata"
 
 msgid "UnwetterInfo shows German storm information."
 msgstr ""
-"UnwetterInfo consente di ottenete informazioni metereologiche per la "
+"UnwetterInfo consente di ottenere informazioni metereologiche per la "
 "Germania."
 
 msgid "Update"
@@ -8888,7 +8888,7 @@ msgid ""
 "assistance before rebooting your dreambox."
 msgstr ""
 "Il DreamBox potrebbe risultare inutilizzabile ora. Prima di riavviarlo "
-"consultare il manuale per ottenete ulteriori istruzioni."
+"consultare il manuale per ottenere ulteriori istruzioni."
 
 msgid "zap"
 msgstr "Zap"

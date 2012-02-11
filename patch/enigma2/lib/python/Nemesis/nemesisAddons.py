@@ -4,12 +4,13 @@ from enigma import eTimer, eDVBDB, eConsoleAppContainer, ePicLoad
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Sources.List import List
+from Components.Sources.StaticText import StaticText
+from Components.Sources.Progress import Progress
 from Components.ProgressBar import ProgressBar
 from Components.ScrollLabel import ScrollLabel
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.config import config
 from Components.PluginComponent import plugins
-from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, pathExists, createDir
@@ -130,8 +131,8 @@ class NAddons(Screen):
 			isPluginManager = True
 
 		self.MenuList = [
-			('NAddons',_('Download Addons'),'icons/network.png',True),
-			('NExtra',_('Download Extra'),'icons/network.png',fileExists('/etc/extra.url')),
+			('NAddons',_('Download Addons'),'icons/get.png',True),
+			('NExtra',_('Download Extra'),'icons/get.png',fileExists('/etc/extra.url')),
 			('NManual',_('Manual Package Install'),'icons/manual.png',True),
 			('NRemove',_('Remove Addons'),'icons/remove.png',True),
 			('NReload',_('Reload Settings'),'icons/enigma.png',True),
@@ -303,13 +304,21 @@ class	RAddons(Screen):
 class	RAddonsDown(Screen):
 	__module__ = __name__
 
+	EVENT_DONE = 10
+	EVENT_KILLED = 5
+	EVENT_CURR = 0
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.IS_SKIN_SECTION = False
+		self.url = ''
+		self.filename = ''
+		self.dstfilename = ''
+		self.download = None
+		self.installFile = False
 		if u.pluginType.find('Skin') >= 0:
 			self.skinName = "RAddonsDownSkin"
 			self.IS_SKIN_SECTION = True
-			self["key_green"] = Label(_("Install"))
 			self["preview"] = Pixmap()
 			self["preview"].hide()
 			self.checkPreviewContainer = eConsoleAppContainer()
@@ -317,13 +326,21 @@ class	RAddonsDown(Screen):
 		self.list = []
 		self['list'] = List(self.list)
 		self['conn'] = StaticText(_("Loading elements.\nPlease wait..."))
-		self['type'] = Label("")
 		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("Download"))
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
-		self['type'].setText(_("Download ") + str(u.pluginType))
-		self._restartE2 = restartE2(session)
 
+		self['type'] = StaticText('')
+		self["progressbar"] = Progress()
+		self["progressbar"].range = 1000
+		self['spaceused'] = Progress()
+		self['spaceusedtext'] = StaticText()
+		self.activity = 0
+		self.activityTimer = eTimer()
+		self.activityTimer.callback.append(self.doActivityTimer)
+
+		self._restartE2 = restartE2(session)
 		self.linkAddons = t.readAddonsUrl()
 		self.linkExtra = t.readExtraUrl()
 
@@ -339,6 +356,7 @@ class	RAddonsDown(Screen):
 			self['actions'] = ActionMap(['WizardActions','ColorActions'],
 			{
 				'ok': self.KeyOk,
+				"green": self.KeyOk,
 				"red": self.cancel,
 				'back': self.cancel
 			})
@@ -351,9 +369,22 @@ class	RAddonsDown(Screen):
 	
 	def setWindowTitle(self):
 		self.setTitle(_("Download ") + str(u.pluginType))
-	
+		diskSpace = t.getVarSpaceKb()
+		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
+		percUsed = int(((diskSpace[1] - diskSpace[0]) / diskSpace[1]) * 100)
+		self["spaceusedtext"].text = _("Free space: %d kB (%d%%)") % (int(diskSpace[0]), percFree)
+		self["spaceused"].setValue(percUsed)
+
+	def doActivityTimer(self):
+		self.activity += 10
+		if self.activity == 1000:
+			self.activity = 0
+		self["progressbar"].value = self.activity
+
 	def KeyOk(self):
-		if not self.container.running():
+		if self['list'].count() == 0:
+			self.close()
+		if not self.container.running() and self.download == None and not self.installFile:
 			self.sel = self['list'].getIndex() 
 			for tag in loadxml.plugin_list: 
 				if tag [0] == u.pluginIndex:
@@ -361,20 +392,25 @@ class	RAddonsDown(Screen):
 						u.addonsName = tag [3]
 						self.downloadAddons()
 						return
-			self.close()
+		if self.installFile:
+			self.installAddons(True)
+			return
 			
 	def loadPlugin(self):
+		self["progressbar"].value = 0
 		del self.list[:]
 		for tag in loadxml.plugin_list: 
 			if tag [0] == u.pluginIndex:
 				self.list.append((tag [3], tag [3]))
 		self['list'].setList(self.list)
-		self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
 		if self.IS_SKIN_SECTION:
 			self.checkPreview()
-			
+		else:
+			self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
+
 	def checkPreview(self):
-		self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
+		self.activityTimer.start(20, False)
+		self['conn'].text = _('Loading Preview....\nPlease Wait..')
 		self["preview"].hide()
 		if self.checkPreviewContainer.running():
 			self.checkPreviewContainer.kill()
@@ -392,18 +428,26 @@ class	RAddonsDown(Screen):
 			self.checkPreviewContainer.execute(cmd)
 
 	def fetchFinished(self, retval):
+		if self.activityTimer.isActive():
+			self.activityTimer.stop()
+			self["progressbar"].value = 0
+			self.activity = 0
 		if path.exists("/tmp/skin_preview.png") and u.pluginType.find('Skin') >= 0:
-			self['conn'].text = _('The selected Skin has a preview.\nPress OK button to show it on full screen.')
 			self.picload = ePicLoad()
 			self.picload.PictureData.get().append(self.previewShow)
 			self.picload.setPara((self["preview"].instance.size().width(), self["preview"].instance.size().height(), 1, 1, False, 1, "#00000000"))
 			self.picload.startDecode("/tmp/skin_preview.png")	
+		else:
+			self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
 
 	def previewShow(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr != None:
 			self["preview"].instance.setPixmap(ptr.__deref__())
+			self['conn'].text = _('The selected Skin has a preview.\nPress OK button to show it on full screen.')
 			self["preview"].show()
+		else:
+			self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
 		del self.picload
 
 	def openPreview(self):
@@ -413,8 +457,7 @@ class	RAddonsDown(Screen):
 	def downloadAddons(self):
 		self.getAddonsPar()
 		if int(u.size) > int(t.getVarSpaceKb()[0]) and int(u.check) != 0:
-			msg = _('Not enough space!\nPlease delete addons before install new.')
-			self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
+			self["conn"].text = _('Not enough space!\nPlease delete addons before install new.')
 			return
 		url = {'E':self.linkExtra,'A':self.linkAddons}[u.typeDownload] + u.dir + "/" + u.filename 
 		if not pathExists("/tmp/.-"):
@@ -423,59 +466,60 @@ class	RAddonsDown(Screen):
 			cmd = "/var/etc/proxy.sh && wget %s -O /tmp/.-/%s" % (url ,".-")
 			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Download: ') + u.filename)
 		else:
-			self.session.openWithCallback(self.executedScript, nemesisDownloader, url, "/tmp/.-/", u.filename)
-		
-	def executedScript(self, *answer):
-		if answer[0] == nemesisConsole.EVENT_DONE:
-			if fileExists('/tmp/.-/.-'):
-				msg = _('Do you want install the addon:\n%s?') % u.addonsName
-				box = self.session.openWithCallback(self.installAddons, MessageBox, msg, MessageBox.TYPE_YESNO)
-				box.setTitle(_('Install Addon'))
-			else:
-				msg = _('File: %s not found!\nPlease check your internet connection.') % u.filename
-				self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
-		elif answer[0] == nemesisConsole.EVENT_KILLED:
-			self['conn'].text = _('Process Killed by user!\nAddon not downloaded.')
-	
-	def installAddons(self, answer):
-		if (answer is True):
-			self['conn'].text = _('Installing addons.\nPlease Wait...')
-			if (u.filename.find('.ipk') != -1):
-				args = {True: '--force-overwrite --force-defaults ',False: ''}[config.nemesis.ipkg.overwriteUpgrade.value]
-				args = {True: '--force-reinstall --force-defaults ',False: ''}[config.nemesis.ipkg.forceReInstall.value]
-				rename("/tmp/.-/.-", "/tmp/.-/p.ipk")
-				self.container.execute("ipkg " + args + "install /tmp/.-/p.ipk")
-			elif (u.filename.find('.tbz2') != -1):
-				if u.pluginType.find('Settings') >= 0:
-					self['conn'].text = _("Remove old Settings\nPlease wait...")
-					u.removeSetting()	
-				self.container.execute("tar -jxvf /tmp/.-/.- -C /")
-			else:
-				self['conn'].text = _('File: %s\nis not a valid package!') % u.filename
-		else:
-			if pathExists('/tmp/.-'):
-				system("rm -rf /tmp/.-")
-	
-	def runFinished(self, retval):
-		if pathExists('/tmp/.-'):
-			system("rm -rf /tmp/.-")
-		if u.pluginType.find('Settings') >= 0:
-			self['conn'].text = _("Reload new Settings\nPlease wait...")
-			u.reloadSetting()
-		if (u.pluginType == 'Plugins') or (u.pluginType == 'e2Plugins'):
-			self['conn'].text = _("Reload Plugins list\nPlease Wait...")
-			self.reloadPluginlist()
-		self['conn'].text = _("Addon installed succesfully!")
-		if fileExists('/tmp/.restartE2'):
-			remove("/tmp/.restartE2")
-			msg = _("Enigma2 will be now hard restarted to complete package installation.") + "\n" + _("Do You want restart enigma2 now?")
-			self._restartE2.go(msg)
-	
-	def reloadPluginlist(self):
-		print "Read plugin list"
-		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+			self.fileDownload(url, "/tmp/.-/", u.filename)
+
+	def fileDownload(self, url, folder, filename):
+		from Tools.Downloader import downloadWithProgress
+		self.url = url
+		self.filename = filename
+		self.dstfilename = "%s.-" % folder
+		print "[download] downloading file..."
+		self.download = downloadWithProgress(self.url, self.dstfilename)
+		self.download.addProgress(self.progress)
+		self.download.start().addCallback(self.finished).addErrback(self.failed)
+		self["conn"].text = _("Downloading file:\n%s ...") % (self.filename)
+
+	def progress(self, recvbytes, totalbytes):
+		if self.download:
+			self["progressbar"].value = int(1000*recvbytes/float(totalbytes))
+			self["type"].text = "Downloading: %d of %d kBytes (%.2f%%)" % (recvbytes/1024, totalbytes/1024, 100*recvbytes/float(totalbytes))
+
+	def failed(self, failure_instance=None, error_message=""):
+		if error_message == "" and failure_instance is not None:
+			error_message = failure_instance.getErrorMessage()
+		print "[Download_failed] " + error_message
+		if fileExists(self.dstfilename):
+			remove(self.dstfilename)
+		self["conn"].text = _("Download file %s\nfailed!") % (self.filename)
+		self["type"].text = error_message
+		self.EVENT_CURR = self.EVENT_KILLED
+		self.downloading()
+
+	def finished(self, string = ""):
+		if self.download:
+			print "[Download_finished] " + str(string)
+			self.EVENT_CURR = self.EVENT_DONE
+			self["conn"].text = _("Download file %s\nfinished!") % (self.filename)
+			self["type"].text = ''
+			self.executedScript(self.EVENT_CURR)
 
 	def cancel(self):
+		if self.activityTimer.isActive():
+			self.activityTimer.stop()
+			self["progressbar"].value = 0
+		if self.download:
+			self.download.stop()
+			if fileExists(self.dstfilename):
+				remove(self.dstfilename)
+			self.EVENT_CURR = self.EVENT_KILLED
+			self.executedScript(self.EVENT_CURR)
+			self.downloading()
+			return
+		if self.installFile:
+			if pathExists('/tmp/.-'):
+				system("rm -rf /tmp/.-")
+			self.downloading()
+			return
 		if not self.container.running():
 			if self.IS_SKIN_SECTION:
 				if self.checkPreviewContainer.running():
@@ -488,7 +532,80 @@ class	RAddonsDown(Screen):
 		else:
 			self.container.kill()
 			self['conn'].text = _('Process Killed by user.\nAddon not installed correctly!')
+
+	def executedScript(self, *answer):
+		if answer[0] == nemesisConsole.EVENT_DONE:
+			if fileExists('/tmp/.-/.-'):
+				self.downloading("Install")
+			else:
+				self['conn'].text = _('File: %s not found!\nPlease check your internet connection.') % u.filename
+		elif answer[0] == nemesisConsole.EVENT_KILLED:
+			self['conn'].text = _('Process Killed by user!\nAddon not downloaded.')
 	
+	def downloading(self, state=""):
+		if state == "Install":	
+			self.setTitle(_('Do you want install the addon: %s?') % u.addonsName)
+			self["key_red"].setText(_("No"))
+			self["key_green"].setText(_("Yes"))
+			self.installFile = True
+		elif state == "Installing":
+			self.setTitle(_('Do you want install the addon: %s?') % u.addonsName)
+			self["key_red"].setText(_("Cancel"))
+			self["key_green"].setText("")
+			self.installFile = False
+			self["progressbar"].value = 0
+			self['conn'].text = ''
+		else:
+			if self.activityTimer.isActive():
+				self.activityTimer.stop()
+			self["progressbar"].value = 0
+			self.activity = 0
+			self.setTitle(_("Download ") + str(u.pluginType))
+			self["key_red"].setText(_("Cancel"))
+			self["key_green"].setText(_("Download"))
+			self.installFile = False
+			self["progressbar"].value = 0
+			self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
+			self['type'].text = ''
+		if self.download:
+			self.download = None
+
+	def installAddons(self, answer):
+		if (answer is True):
+			self.downloading("Installing")
+			self['conn'].text = _('Installing addons.\nPlease Wait...')
+			if (u.filename.find('.ipk') != -1):
+				self.activityTimer.start(20, False)
+				self['type'].text = _('Install')
+				args = {True: '--force-overwrite --force-defaults ',False: ''}[config.nemesis.ipkg.overwriteUpgrade.value]
+				args = {True: '--force-reinstall --force-defaults ',False: ''}[config.nemesis.ipkg.forceReInstall.value]
+				rename("/tmp/.-/.-", "/tmp/.-/p.ipk")
+				self.container.execute("ipkg " + args + "install /tmp/.-/p.ipk")
+			elif (u.filename.find('.tbz2') != -1):
+				self.activityTimer.start(20, False)
+				self['type'].text = _('Installing')
+				if u.pluginType.find('Settings') >= 0:
+					self['conn'].text = _("Remove old Settings\nPlease wait...")
+					u.removeSetting()	
+				self.container.execute("tar -jxvf /tmp/.-/.- -C /")
+			else:
+				self.downloading()
+				self['conn'].text = _('File: %s\nis not a valid package!') % u.filename
+	
+	def runFinished(self, retval):
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		if pathExists('/tmp/.-'):
+			system("rm -rf /tmp/.-")
+		if u.pluginType.find('Settings') >= 0:
+			self['conn'].text = _("Reload new Settings\nPlease wait...")
+			u.reloadSetting()
+		self.downloading()
+		self['conn'].text = _("Addon installed succesfully!")
+		if fileExists('/tmp/.restartE2'):
+			remove("/tmp/.restartE2")
+			msg = _("Enigma2 will be now hard restarted to complete package installation.") + "\n" + _("Do You want restart enigma2 now?")
+			self._restartE2.go(msg)
+
 	def getAddonsPar(self):
 		for tag in loadxml.plugin_list: 
 			if tag [0] == u.pluginIndex:
@@ -532,69 +649,134 @@ class	RManual(Screen):
 		self['conn'] = StaticText("")
 		self["title"] = Label(_("Manual Installation"))
 		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("Install"))
 		self["key_yellow"] = Label(_("Reload /tmp"))
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
+
+		self['type'] = StaticText()
+		self["progressbar"] = Progress()
+		self["progressbar"].range = 1000
+		self['spaceused'] = Progress()
+		self['spaceusedtext'] = StaticText()
+		self.activity = 0
+		self.activityTimer = eTimer()
+		self.activityTimer.callback.append(self.doActivityTimer)
+
 		self._restartE2 = restartE2(session)
+		self.installFile = False
+
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
+			'green': self.KeyOk,
 			"yellow": self.readTmp,
 			"red": self.cancel,
 			'back': self.cancel
 		})
+
 		self.onLayoutFinish.append(self.readTmp)
 		self.onShown.append(self.setWindowTitle)
 	
 	def setWindowTitle(self):
 		self.setTitle(_("Manual Installation"))
-	
+		diskSpace = t.getVarSpaceKb()
+		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
+		percUsed = int(((diskSpace[1] - diskSpace[0]) / diskSpace[1]) * 100)
+		self["spaceusedtext"].text = _("Free space: %d kB (%d%%)") % (int(diskSpace[0]), percFree)
+		self["spaceused"].setValue(percUsed)
+
+	def doActivityTimer(self):
+		self.activity += 10
+		if self.activity == 1000:
+			self.activity = 0
+		self["progressbar"].value = self.activity
+
 	def readTmp(self):
-		del self.list[:]
-		loadtmpdir.load()
-		if len(loadtmpdir.tmp_list) > 0:
-			for fil in loadtmpdir.tmp_list: 
-				self.list.append((fil[1], fil[1]))
-		else:	
-			self['conn'].text = (_("Put your plugin xxx.tbz2 or xxx.ipk\nvia FTP in /tmp."))
-		self['list'].setList(self.list)
+		self["progressbar"].value = 0
+		if not self.container.running() and not self.installFile:
+			del self.list[:]
+			loadtmpdir.load()
+			if len(loadtmpdir.tmp_list) > 0:
+				for fil in loadtmpdir.tmp_list: 
+					self.list.append((fil[1], fil[1]))
+			else:	
+				self['conn'].text = (_("Put your plugin xxx.tbz2 or xxx.ipk\nvia FTP in /tmp."))
+			self['list'].setList(self.list)
 	
 	def KeyOk(self):
-		if not self.container.running():
+		if self['list'].count() == 0:
+			self.close()
+		if not self.container.running() and not self.installFile:
 			if len(loadtmpdir.tmp_list) > 0:
 				self.sel = self['list'].getIndex() 
 				for p in loadtmpdir.tmp_list: 
 					if (p [0] == self.sel):
 						u.filename = p [1]
-				msg = _('Do you want install the addon:\n%s?') % u.filename
-				box = self.session.openWithCallback(self.installAddons, MessageBox, msg, MessageBox.TYPE_YESNO)
-				box.setTitle(_('Install Addon'))
-			else:
-				self.close()
+				self.downloading("Install")
+				return
+		if self.installFile:
+			self.installAddons(True)
+			return
 	
 	def installAddons(self, answer):
 		if (answer is True):
 			self['conn'].text = (_('Installing: %s.\nPlease wait...') % u.filename)
 			if (u.filename.find('.ipk') != -1):
+				self.downloading("Installing")
+				self.activityTimer.start(20, False)
 				args = {True: '--force-overwrite --force-defaults ',False: ''}[config.nemesis.ipkg.overwriteUpgrade.value]
 				args = {True: '--force-reinstall --force-defaults ',False: ''}[config.nemesis.ipkg.forceReInstall.value]
 				self.container.execute("ipkg " + args + "install /tmp/" + u.filename)
 			elif (u.filename.find('.tbz2') != -1):
+				self.downloading("Installing")
+				self.activityTimer.start(20, False)
 				self.container.execute("tar -jxvf /tmp/" + u.filename + " -C /")
 			else:
+				self.downloading()
 				self['conn'].text = (_('File: %s\nis not a valid package!') % u.filename)
-	
+
 	def runFinished(self, retval):
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		remove("/tmp/" + u.filename);
 		self['conn'].text = (_("Addon: %s\ninstalled succesfully!") % u.filename)
 		self.readTmp()
+		self.downloading()
 		if fileExists('/tmp/.restartE2'):
 			remove('/tmp/.restartE2')
 			msg = 'Enigma2 will be now hard restarted to complete package installation.\nDo You want restart enigma2 now?'
 			self._restartE2.go(msg)
 
+	def downloading(self, state=""):
+		if state == "Install":	
+			self.setTitle(_('Do you want install the addon: %s?') % u.addonsName)
+			self["key_red"].setText(_("No"))
+			self["key_green"].setText(_("Yes"))
+			self.installFile = True
+		elif state == "Installing":
+			self['type'].text = _("Installing")
+			self.setTitle('')
+			self["key_red"].setText(_("Cancel"))
+			self["key_green"].setText('')
+			self.installFile = False
+		else:
+			if self.activityTimer.isActive():
+				self.activityTimer.stop()
+				self["progressbar"].value = 0
+				self.activity = 0
+			self['type'].text = ''
+			self.setTitle(_("Manual Installation"))
+			self["key_red"].setText(_("Cancel"))
+			self["key_green"].setText(_("Install"))
+			self.installFile = False
+
 	def cancel(self):
+		if self.activityTimer.isActive():
+			self.activityTimer.stop()
+			self["progressbar"].value = 0
+		if self.installFile:
+			self.downloading()
+			return
 		if not self.container.running():
 			del self.container.appClosed[:]
 			del self.container
@@ -613,45 +795,78 @@ class	RRemove(Screen):
 		self['conn'] = StaticText("")
 		self["title"] = Label(_("Remove Addons"))
 		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("Remove"))
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
+
+		self['type'] = StaticText()
+		self["progressbar"] = Progress()
+		self["progressbar"].range = 1000
+		self['spaceused'] = Progress()
+		self['spaceusedtext'] = StaticText()
+		self.activity = 0
+		self.activityTimer = eTimer()
+		self.activityTimer.callback.append(self.doActivityTimer)
+
+		self._restartE2 = restartE2(session)
+		self.installFile = False
+
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
+			'green': self.KeyOk,
 			'ok': self.KeyOk,
 			"red": self.cancel,
 			'back': self.cancel
 		})
+
 		self.onLayoutFinish.append(self.readTmp)
 		self.onShown.append(self.setWindowTitle)
 	
 	def setWindowTitle(self):
 		self.setTitle(_("Remove Addons"))
+		diskSpace = t.getVarSpaceKb()
+		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
+		percUsed = int(((diskSpace[1] - diskSpace[0]) / diskSpace[1]) * 100)
+		self["spaceusedtext"].text = _("Free space: %d kB (%d%%)") % (int(diskSpace[0]), percFree)
+		self["spaceused"].setValue(percUsed)
+
+	def doActivityTimer(self):
+		self.activity += 10
+		if self.activity == 1000:
+			self.activity = 0
+		self["progressbar"].value = self.activity
 
 	def readTmp(self):
-		loadunidir.load()
-		del self.list[:]
-		if len(loadunidir.uni_list) > 0:
-			for fil in loadunidir.uni_list: 
-				self.list.append((fil[1], fil[1] [:-10]))
-		else:
-			self['conn'].text = (_("Nothing to uninstall!"))
-		self['list'].setList(self.list)
+		self["progressbar"].value = 0
+		if not self.container.running() and not self.installFile:
+			loadunidir.load()
+			del self.list[:]
+			if len(loadunidir.uni_list) > 0:
+				for fil in loadunidir.uni_list: 
+					self.list.append((fil[1], fil[1] [:-10]))
+			else:
+				self['conn'].text = (_("Nothing to uninstall!"))
+			self['list'].setList(self.list)
 	
 	def KeyOk(self):
-		if not self.container.running():
+		if self['list'].count() == 0:
+			self.close()
+		if not self.container.running() and not self.installFile:
 			if len(loadunidir.uni_list) > 0:
 				self.sel = self['list'].getIndex() 
 				for p in loadunidir.uni_list: 
 					if (p [0] == self.sel):
 						u.filename = p [1]
-				msg = _('Do you want remove the addon:\n%s?') % u.filename[:-10]
-				box = self.session.openWithCallback(self.removeAddons, MessageBox, msg, MessageBox.TYPE_YESNO)
-				box.setTitle('Remove Addon')
-			else:
-				self.close()
+				self.downloading("Remove")
+				return
+		if self.installFile:
+				self.removeAddons(True)
+				return
 	
 	def removeAddons(self, answer):
 		if (answer is True):
+			self.activityTimer.start(20, False)
+			self.downloading("Removing")
 			self['conn'].text = (_('Removing: %s.\nPlease wait...') % u.filename[:-10])
 			self.container.execute("/usr/uninstall/" + u.filename)
 	
@@ -659,8 +874,43 @@ class	RRemove(Screen):
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.readTmp()
 		self['conn'].text = (_('Addons: %s\nremoved succeffully.') % u.filename[:-10])
+		self.downloading()
+		if fileExists('/tmp/.restartE2'):
+			remove('/tmp/.restartE2')
+			msg = 'Enigma2 will be now hard restarted to complete package installation.\nDo You want restart enigma2 now?'
+			self._restartE2.go(msg, True)
+
+	def downloading(self, state=""):
+		if state == "Remove":
+			self.setTitle(_('Do you want remove the addon: %s?') % u.filename[:-10])
+			self["key_red"].setText(_("No"))
+			self["key_green"].setText(_("Yes"))
+			self.installFile = True
+		elif state == "Removing":
+			self['type'].text = _("Removing")
+			self.setTitle('')
+			self["key_red"].setText(_("Cancel"))
+			self["key_green"].setText("")
+			self.installFile = False
+		else:
+			if self.activityTimer.isActive():
+				self.activityTimer.stop()
+				self["progressbar"].value = 0
+				self.activity = 0
+			self['type'].text = ''
+			self["progressbar"].value = 0
+			self.setTitle(_("Remove Addons"))
+			self["key_red"].setText(_("Cancel"))
+			self["key_green"].setText(_("Remove"))
+			self.installFile = False
 
 	def cancel(self):
+		if self.activityTimer.isActive():
+			self.activityTimer.stop()
+			self["progressbar"].value = 0
+		if self.installFile:
+			self.downloading()
+			return
 		if not self.container.running():
 			del self.container.appClosed[:]
 			del self.container

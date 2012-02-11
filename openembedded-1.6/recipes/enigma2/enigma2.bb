@@ -17,17 +17,17 @@ RDEPENDS = "python-codecs python-core python-lang python-re python-threading \
 
 GST_RTSP_RDEPENDS = "gst-plugin-udp gst-plugin-rtsp gst-plugin-rtp gst-plugin-rtpmanager"
 GST_ALSA_RDEPENDS = "gst-plugin-alsa alsa-conf"
-GST_MISC_RDEPENDS = "gst-plugin-matroska gst-plugin-isomp4 gst-plugin-vorbis gst-plugin-audioparsers"
+GST_MISC_RDEPENDS = "gst-plugin-matroska gst-plugin-isomp4 gst-plugin-audioparsers gst-plugin-flv"
 GST_DVD_RDEPENDS = "gst-plugin-cdxaparse gst-plugin-cdio gst-plugin-vcdsrc"
 GST_BASE_RDEPENDS = "${GST_ALSA_RDEPENDS} ${GST_MISC_RDEPENDS} ${GST_RTSP_RDEPENDS} gst-plugin-mpeg4videoparse gst-plugin-h264parse"
 
 RDEPENDS_append_dm7020 = " gst-plugin-ossaudio gst-plugin-ivorbisdec"
 RDEPENDS_append_dm7025 = " ${GST_ALSA_RDEPENDS} gst-plugin-ivorbisdec"
 RDEPENDS_append_dm800 = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-ivorbisdec"
-RDEPENDS_append_dm8000 = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi dreamdts"
-RDEPENDS_append_dm500hd = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi dreamdts"
-RDEPENDS_append_dm800se = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi dreamdts"
-RDEPENDS_append_dm7020hd = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi dreamdts"
+RDEPENDS_append_dm8000 = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi gst-plugin-vorbis dreamdts"
+RDEPENDS_append_dm500hd = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi gst-plugin-vorbis dreamdts"
+RDEPENDS_append_dm800se = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi gst-plugin-vorbis dreamdts"
+RDEPENDS_append_dm7020hd = " ${GST_BASE_RDEPENDS} ${GST_DVD_RDEPENDS} gst-plugin-avi gst-plugin-vorbis dreamdts"
 
 # 'forward depends' - no two providers can have the same PACKAGES_DYNAMIC, however both
 # enigma2 and enigma2-plugins produce enigma2-plugin-*.
@@ -62,7 +62,7 @@ PN = "enigma2"
 PR = "r0"
 
 SRCDATE = "20111110"
-SRCDATENEMESIS = "20120201"
+SRCDATENEMESIS = "20120209"
 
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
@@ -114,13 +114,20 @@ do_install_append() {
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/NNextEvent.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Language.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Ipkg.py
-	ln -s ../skin_default/menu ${D}/usr/share/enigma2/HD-Glass-15/
-	ln -s ../skin_default/icons ${D}/usr/share/enigma2/HD-Glass-15/
-	ln -s ../skin_default/buttons ${D}/usr/share/enigma2/HD-Glass-15/
-	ln -s ../skin_default/spinner ${D}/usr/share/enigma2/HD-Glass-15/
-	ln -s ../skin_default/frame ${D}/usr/share/enigma2/HD-Glass-15/
-	ln -s ../skin_default/slider ${D}/usr/share/enigma2/HD-Glass-15/
-	ln -s ../skin_default/general ${D}/usr/share/enigma2/HD-Glass-15/
+
+	if [ "${MACHINE}" = "dm7020hd" ]; then
+		rm -f ${D}/usr/share/enigma2/keymap.xml
+		rm -f ${D}/usr/share/enigma2/keymap_gsw.xml
+		rm -f ${D}/usr/share/enigma2/keymap_neutrino.xml
+		mv -f ${D}/usr/share/enigma2/keymap_7020.xml ${D}/usr/share/enigma2/keymap.xml
+		mv -f ${D}/usr/share/enigma2/keymap_gsw_7020.xml ${D}/usr/share/enigma2/keymap_gsw.xml
+		mv -f ${D}/usr/share/enigma2/keymap_neutrino_7020.xml ${D}/usr/share/enigma2/keymap_neutrino.xml
+	else
+		rm -f ${D}/usr/share/enigma2/keymap_7020.xml
+		rm -f ${D}/usr/share/enigma2/keymap_gsw_7020.xml
+		rm -f ${D}/usr/share/enigma2/keymap_neutrino_7020.xml
+	fi
+
 }
 
 python populate_packages_prepend () {
@@ -144,6 +151,18 @@ pkg_preinst_${PN} () {
 	fi
 }
 pkg_postinst_${PN} () {
+	if [ -e ${datadir}/enigma2/HD-Glass-15 ]; then
+		rm -rf ${datadir}/enigma2/HD-Glass-15
+	fi
+	if [ -e ${datadir}/enigma2/skin_default/frame ]; then
+		rm -rf ${datadir}/enigma2/skin_default/frame
+	fi
+	if [ -e ${datadir}/enigma2/skin_default/slider ]; then
+		rm -rf ${datadir}/enigma2/skin_default/slider
+	fi
+	if [ -e ${datadir}/enigma2/skin_default/general ]; then
+		rm -rf ${datadir}/enigma2/skin_default/general
+	fi
 	if [ "x$D" != "x" ]; then
 		exit 1
 	fi

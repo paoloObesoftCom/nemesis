@@ -1,4 +1,4 @@
-SUBDIRS = countries fonts defaults extensions keymaps skin_default piconProv piconSat piconSys HD-Glass-15
+SUBDIRS = countries fonts defaults extensions keymaps skin_default piconProv piconSat piconSys
 
 dist_pkgdata_DATA = \
 	defaultsatlists.xml \
@@ -8,6 +8,9 @@ dist_pkgdata_DATA = \
 	keymap.xml \
 	keymap_gsw.xml \
 	keymap_neutrino.xml \
+	keymap_7020.xml \
+	keymap_gsw_7020.xml \
+	keymap_neutrino_7020.xml \
 	menu.xml \
 	prev.png \
 	radio.mvi \

@@ -232,31 +232,40 @@ class ListboxE4(MenuList):
 		self.l.setFont(1, gFont('Regular', 18))
 		self.l.setItemHeight(25)
 
-from Screens.MessageBox import MessageBox
+from Screens.ChoiceBox import ChoiceBox
+from Tools import Notifications
 
 class restartE2:
+
+	list = (
+		(_("Yes"), "restart"),
+		(_("No"), "no_restart")
+	)
 
 	def __init__(self, session):
 		self.session = session
 
 	def go(self, msg, modeClean = False):
-		if modeClean:
-			box = self.session.openWithCallback(self.restartEnigma2Clean, MessageBox, msg, MessageBox.TYPE_YESNO, timeout = 10)
-		else:	
-			box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg, MessageBox.TYPE_YESNO, timeout = 10)
-		box.setTitle(_('Restart Enigma2'))
-
+		try:
+			if modeClean:
+				Notifications.AddNotificationWithCallback(self.restartEnigma2Clean, ChoiceBox, title=msg, list = self.list)
+			else:	
+				Notifications.AddNotificationWithCallback(self.restartEnigma2, ChoiceBox, title=msg, list = self.list)
+		except:
+			self.restartEnigma2(True)
+			
 	def restartEnigma2(self, answer):
-		if (answer is True):
+		answer = answer and answer[1]
+		if answer == "restart":
 			configfile.save()
 			system("touch /etc/.reboot_ok")
 			system("killall -9 enigma2")
 	
 	def restartEnigma2Clean(self, answer):
-		if (answer is True):
+		answer = answer and answer[1]
+		if answer == "restart":
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 3)
-
 
 class editBlacklist:
 

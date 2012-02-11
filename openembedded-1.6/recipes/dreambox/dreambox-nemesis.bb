@@ -1,8 +1,8 @@
 DESCRIPTION = "Nemesis files"
 LICENSE = "GPL"
 
-PV = "2.4"
-PR = "r2"
+PV = "2.5"
+PR = "r0"
 
 S = "${WORKDIR}/"
 PACKAGE_ARCH := "${MACHINE_ARCH}"
@@ -16,6 +16,8 @@ do_install() {
 	mkdir -p ${D}/etc/init.d
 	mkdir ${D}/sbin/
 	mkdir -p ${D}/home/root/.ssh
+	chmod 755 ${D}/home/root
+	chmod 700 ${D}/home/root/.ssh
 
 	if [ "${MACHINE}" = "dm500hd" ]; then
 		cp -rf $srcpath/nemesis/root/enigma2/root/* ${D}/
@@ -68,3 +70,15 @@ do_install() {
 	find ${D}/ -name ".svn" | xargs rm -rf
 }
 
+pkg_preinst_${PN} () {
+	if [ -e /etc/openvpn ]; then
+		cp -r /etc/openvpn /tmp
+	fi
+}
+
+pkg_postinst_${PN} () {
+	if [ -e /tmp/openvpn ]; then
+		rm -rf /etc/openvpn
+		mv -f /tmp/openvpn /etc/
+	fi
+}

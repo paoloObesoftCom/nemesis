@@ -27,7 +27,7 @@ t = nemesisTool()
 
 class nemesisBluePanel(Screen):
 
-	NEMESISVER = "2.4"
+	NEMESISVER = "2.5"
 	OEVER = "1.6"
 	IMAGEVER = about.getImageVersionString()
 	ENIGMAVER = about.getEnigmaVersionString()
@@ -43,10 +43,10 @@ class nemesisBluePanel(Screen):
 		self['conninfo'] = StaticText('')
 		self['conn'] = Label("")
 		self['conn'].hide()
-		self["key_blue"] = Label(_("Addons Manager"))
-		self["key_yellow"] = Label(_("System Settings"))
-		self["key_green"] = Label(_("System Information"))
-		self["key_red"] = Label(_("System Utility"))
+		self["key_blue"] = Label(_("Addons"))
+		self["key_yellow"] = Label(_("Settings"))
+		self["key_green"] = Label(_("Information"))
+		self["key_red"] = Label(_("Utility"))
 		self["info_use"] = Label(_("Use arrows < > to select"))
 		
 		self["actions"] = NumberActionMap(["ColorActions", "CiSelectionActions","WizardActions","SetupActions"],

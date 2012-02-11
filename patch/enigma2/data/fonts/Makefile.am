@@ -7,4 +7,4 @@ dist_install_DATA = \
 	nmsbd.ttf \
 	nmsbd2.ttf \
 	tuxtxt.ttf \
-	prive2.ttf
+	Verdana_R.ttf

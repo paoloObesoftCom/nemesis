@@ -210,9 +210,8 @@
 			<key id="KEY_AUDIO" mapto="audioSelection" flags="m" />
 		</device>
 		<device name="dreambox advanced remote control (native)">
-			<key id="KEY_YELLOW" mapto="audioSelection" flags="b" />
 			<key id="KEY_AUDIO" mapto="audioSelection" flags="m" />
-			<key id="KEY_YELLOW" mapto="nemesisOPlugins" flags="l" />
+			<key id="KEY_YELLOW" mapto="nemesisOPlugins" flags="m" />
 		</device>
 	</map>
 

@@ -2,11 +2,14 @@ from Components.config import ConfigSubsection, ConfigYesNo, config, ConfigSelec
 	ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSlider, ConfigText, \
 	ConfigEnableDisable, ConfigDateTime, ConfigInteger, ConfigNothing
 from enigma import eDBoxLCD
+from Tools.HardwareInfo import HardwareInfo
+
 
 def InitNemesisConfig():
 #system
 	config.nemesis = ConfigSubsection();
-	config.nemesis.einfo = ConfigYesNo(default = True)
+	config.nemesis.einfo = ConfigYesNo(default = False)
+	config.nemesis.eitype = ConfigSelection(default = "nemesisEI", choices = [ ("nemesisEIfull", _("Full")), ("nemesisEImedium", _("Medium")), ("nemesisEI", _("Lite")) ])
 	config.nemesis.replaceinfobar = ConfigYesNo(default = False)
 	config.nemesis.einfotimeout = ConfigNumber(default = 800)
 	config.nemesis.shownetdet = ConfigYesNo(default = True)
@@ -41,10 +44,14 @@ def InitNemesisConfig():
 	config.nemesis.ipkg.upgrade = ConfigYesNo(default = True)
 #Fadeset
 	config.plugins.FadeSet = ConfigSubsection()
-	config.plugins.FadeSet.fadeIn = ConfigYesNo(default = True) # fade in enable
-	config.plugins.FadeSet.fadeOut = ConfigYesNo(default = True) # fade out enable
+	if HardwareInfo().get_device_name() == 'dm800':
+		config.plugins.FadeSet.fadeIn = ConfigYesNo(default = False) # fade in enable
+		config.plugins.FadeSet.fadeOut = ConfigYesNo(default = False) # fade out enable
+	else:
+		config.plugins.FadeSet.fadeIn = ConfigYesNo(default = True) # fade in enable
+		config.plugins.FadeSet.fadeOut = ConfigYesNo(default = True) # fade out enable
 	config.plugins.FadeSet.fadeInOnZap = ConfigYesNo(default = False) # fade in enable on Zap
-	config.plugins.FadeSet.timeout = ConfigInteger(3, (1,10)) # fade in/out value
+	config.plugins.FadeSet.timeout = ConfigInteger(2, (1,10)) # fade in/out value
 #inadyn
 	config.inadyn = ConfigSubsection();
 	config.inadyn.user = ConfigText(default = "myuser", fixed_size = False)
@@ -112,3 +119,4 @@ def InitNemesisConfig():
 		if HardwareInfo().get_device_name() == 'dm8000' or HardwareInfo().get_device_name() == 'dm7020hd':
 			config.nemepg.demux.setValue("/dev/dvb/adapter0/demux3")
 	print "[CrossEPG Demux] Used demux: %s" % config.nemepg.demux.value
+	
