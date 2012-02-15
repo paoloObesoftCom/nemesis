@@ -81,6 +81,7 @@ def InitUsageConfig():
 		("shutdown", _("immediate shutdown")),
 		("standby", _("Standby")) ] )
 
+
 	config.usage.alternatives_priority = ConfigSelection(default = "0", choices = [
 		("0", "DVB-S/-C/-T"),
 		("1", "DVB-S/-T/-C"),
@@ -169,6 +170,8 @@ def InitUsageConfig():
 
 	config.seek.speeds_backward.addNotifier(updateEnterBackward, immediate_feedback = False)
 
+	harddiskmanager.verifyDefaultStorageDevice()
+
 def updateChoices(sel, choices):
 	if choices:
 		defval = None
@@ -201,3 +204,5 @@ def preferredInstantRecordPath():
 def defaultMoviePath():
 	return config.usage.default_path.value
 
+def defaultStorageDevice():
+	return config.storage_options.default_device.value

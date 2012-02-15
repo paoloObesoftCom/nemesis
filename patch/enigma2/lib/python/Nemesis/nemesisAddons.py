@@ -115,7 +115,9 @@ class NAddons(Screen):
 		self['list'] = List(self.list)
 		self['conn'] = StaticText("")
 		self['spaceused'] = ProgressBar()
-		self["key_red"] = Label(_("Cancel"))
+		self["key_red"] = StaticText(_("Exit"))
+		self["key_green"] = Label(_('OK'))
+		self.installFile = False
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
 		self.containerExtra = eConsoleAppContainer()
@@ -143,6 +145,7 @@ class NAddons(Screen):
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
+			'green': self.KeyOk,
 			"red": self.cancel,
 			'back': self.cancel
 		})
@@ -158,13 +161,19 @@ class NAddons(Screen):
 
 	def KeyOk(self):
 		self['conn'].text = ('')
+		if self.installFile:
+			self.downloading()
+			self.runUpgrade(True)
+			return
 		if not self.container.running():
 			sel = self["list"].getCurrent()[0]
 			if (sel == "NAddons"):
+				self["key_red"].text = _("Cancel")
 				self['conn'].text = (_("Connetting to addons server.\nPlease wait..."))
 				u.typeDownload = 'A'
 				self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + self.linkAddons + "/addonsE2.xml -O /tmp/addons.xml")
 			elif (sel == "NExtra"):
+				self["key_red"].text = _("Cancel")
 				self['conn'].text = (_("Connetting to addons server.\nPlease wait..."))
 				u.typeDownload = 'E'
 				if self.linkExtra != None:
@@ -191,17 +200,27 @@ class NAddons(Screen):
 					self.session.open(PacketManager, GetSkinPath())
 			elif (sel == "NUpdate"):
 				if (not self.CANUPGRADE) and (not fileExists("/etc/.testmode")):
-					msg = _('No Upgrade available!\nYour decoder is up to date.')
-					self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
+					self['conn'].text = _('No Upgrade available!\nYour decoder is up to date.')
 					return
 				if int(t.getVarSpaceKb()[0]) < self.FREESPACENEEDUPGRADE:
-					msg = _('Not enough free space on flash to perform Upgrade!\nUpgrade require at least %d kB free on Flash.\nPlease remove some addons or skins before upgrade.') % self.FREESPACENEEDUPGRADE
-					self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
+					self['conn'].text = _('Not enough free space on flash to perform Upgrade!\nUpgrade require at least %d kB free on Flash.\nPlease remove some addons or skins before upgrade.') % self.FREESPACENEEDUPGRADE
 					return
-				self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want to update your Dreambox?")+"\n"+_("\nAfter pressing OK, please wait!"))
+				self.downloading("Upgrading")
 			elif (sel == "NReload"):
 				self['conn'].text = _("Reload settings, please wait...")
 				self.reloadTimer.start(250, True)
+
+	def downloading(self, state=""):
+		if state == "Upgrading":	
+			self['conn'].text = _("Do you want to update your Dreambox?") + _("\nAfter pressing Yes, please wait!")
+			self["key_red"].text = _("No")
+			self["key_green"].setText(_("Yes"))
+			self.installFile = True
+		else:
+			self['conn'].text = ''
+			self["key_red"].text = _("Exit")
+			self["key_green"].setText(_('OK'))
+			self.installFile = False
 
 	def relSetting(self):
 		u.reloadSetting()
@@ -212,7 +231,7 @@ class NAddons(Screen):
 			try:
 				from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePlugin
 			except ImportError:
-				self.session.open(MessageBox, _("The Softwaremanagement extension is not installed!\nPlease install it."), type = MessageBox.TYPE_INFO,timeout = 10 )
+				self['conn'].text = _("The Softwaremanagement extension is not installed!\nPlease install it.")
 			else:
 				self.session.open(UpdatePlugin, GetSkinPath())
 
@@ -225,9 +244,11 @@ class NAddons(Screen):
 				self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + self.linkExtra + "iuregdoiuwqcdiuewq/" + line + " -O /tmp/addons.xml")
 			except:
 				self['conn'].text = (_("Server not found!\nPlease check internet connection."))
+				self["key_red"].text = _("Exit")
 			remove('/tmp/tmp.tmp')
 		else:
 			self['conn'].text = (_("Server not found!\nPlease check internet connection."))
+			self["key_red"].text = _("Exit")
 
 	def runFinished(self, retval):
 		if fileExists('/tmp/addons.xml'):
@@ -240,8 +261,13 @@ class NAddons(Screen):
 				self['conn'].text = (_("File xml is not correctly formatted!."))
 		else:
 			self['conn'].text = (_("Server not found!\nPlease check internet connection."))
+		self["key_red"].text = _("Exit")
 	
 	def cancel(self):
+		self["key_red"].text = _("Exit")
+		if self.installFile:
+			self.downloading()
+			return
 		if not self.container.running() and not self.containerExtra.running():
 			del self.container.appClosed[:]
 			del self.container
@@ -266,7 +292,6 @@ class NAddons(Screen):
 			if i[3]:
 				self.list.append((i[0], i[1], LoadPixmap(skin_path + i[2])))
 		self['list'].setList(self.list)
-	
 
 class	RAddons(Screen):
 	__module__ = __name__
@@ -277,7 +302,7 @@ class	RAddons(Screen):
 		self.wtitle = {'A': _('Download Addons'),'E': _('Download Extra')}[u.typeDownload]
 		self['list'] = List(self.list)
 		self["title"] = Label(self.wtitle)
-		self["key_red"] = Label(_("Cancel"))
+		self["key_red"] = Label(_("Exit"))
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
@@ -326,7 +351,7 @@ class	RAddonsDown(Screen):
 		self.list = []
 		self['list'] = List(self.list)
 		self['conn'] = StaticText(_("Loading elements.\nPlease wait..."))
-		self["key_red"] = Label(_("Cancel"))
+		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = Label(_("Download"))
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
@@ -409,9 +434,12 @@ class	RAddonsDown(Screen):
 			self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
 
 	def checkPreview(self):
-		self.activityTimer.start(20, False)
-		self['conn'].text = _('Loading Preview....\nPlease Wait..')
 		self["preview"].hide()
+		self['conn'].text = _('Loading Preview....\nPlease Wait..')
+		if self.activityTimer.isActive():
+			self.activityTimer.stop()
+		self.activity = 0
+		self.activityTimer.start(20, False)
 		if self.checkPreviewContainer.running():
 			self.checkPreviewContainer.kill()
 		if len(self["list"].list) > 0:
@@ -430,7 +458,6 @@ class	RAddonsDown(Screen):
 	def fetchFinished(self, retval):
 		if self.activityTimer.isActive():
 			self.activityTimer.stop()
-			self["progressbar"].value = 0
 			self.activity = 0
 		if path.exists("/tmp/skin_preview.png") and u.pluginType.find('Skin') >= 0:
 			self.picload = ePicLoad()
@@ -438,6 +465,7 @@ class	RAddonsDown(Screen):
 			self.picload.setPara((self["preview"].instance.size().width(), self["preview"].instance.size().height(), 1, 1, False, 1, "#00000000"))
 			self.picload.startDecode("/tmp/skin_preview.png")	
 		else:
+			self["progressbar"].value = 0
 			self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
 
 	def previewShow(self, picInfo=None):
@@ -448,6 +476,7 @@ class	RAddonsDown(Screen):
 			self["preview"].show()
 		else:
 			self['conn'].text = _('Elements Loaded!.\nPlease select one to install.')
+		self["progressbar"].value = 0
 		del self.picload
 
 	def openPreview(self):
@@ -459,6 +488,7 @@ class	RAddonsDown(Screen):
 		if int(u.size) > int(t.getVarSpaceKb()[0]) and int(u.check) != 0:
 			self["conn"].text = _('Not enough space!\nPlease delete addons before install new.')
 			return
+		self["key_red"].text = _("Cancel")
 		url = {'E':self.linkExtra,'A':self.linkAddons}[u.typeDownload] + u.dir + "/" + u.filename 
 		if not pathExists("/tmp/.-"):
 			createDir("/tmp/.-")
@@ -496,6 +526,7 @@ class	RAddonsDown(Screen):
 		self.downloading()
 
 	def finished(self, string = ""):
+		self["key_red"].text = _("Exit")
 		if self.download:
 			print "[Download_finished] " + str(string)
 			self.EVENT_CURR = self.EVENT_DONE
@@ -545,12 +576,12 @@ class	RAddonsDown(Screen):
 	def downloading(self, state=""):
 		if state == "Install":	
 			self.setTitle(_('Do you want install the addon: %s?') % u.addonsName)
-			self["key_red"].setText(_("No"))
+			self["key_red"].text = _("No")
 			self["key_green"].setText(_("Yes"))
 			self.installFile = True
 		elif state == "Installing":
 			self.setTitle(_('Do you want install the addon: %s?') % u.addonsName)
-			self["key_red"].setText(_("Cancel"))
+			self["key_red"].text = _("Cancel")
 			self["key_green"].setText("")
 			self.installFile = False
 			self["progressbar"].value = 0
@@ -561,7 +592,7 @@ class	RAddonsDown(Screen):
 			self["progressbar"].value = 0
 			self.activity = 0
 			self.setTitle(_("Download ") + str(u.pluginType))
-			self["key_red"].setText(_("Cancel"))
+			self["key_red"].text = _("Exit")
 			self["key_green"].setText(_("Download"))
 			self.installFile = False
 			self["progressbar"].value = 0
@@ -648,7 +679,7 @@ class	RManual(Screen):
 		self['list'] = List(self.list)
 		self['conn'] = StaticText("")
 		self["title"] = Label(_("Manual Installation"))
-		self["key_red"] = Label(_("Cancel"))
+		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = Label(_("Install"))
 		self["key_yellow"] = Label(_("Reload /tmp"))
 		self.container = eConsoleAppContainer()
@@ -750,13 +781,13 @@ class	RManual(Screen):
 	def downloading(self, state=""):
 		if state == "Install":	
 			self.setTitle(_('Do you want install the addon: %s?') % u.addonsName)
-			self["key_red"].setText(_("No"))
+			self["key_red"].text = _("No")
 			self["key_green"].setText(_("Yes"))
 			self.installFile = True
 		elif state == "Installing":
 			self['type'].text = _("Installing")
 			self.setTitle('')
-			self["key_red"].setText(_("Cancel"))
+			self["key_red"].text = _("Cancel")
 			self["key_green"].setText('')
 			self.installFile = False
 		else:
@@ -766,7 +797,7 @@ class	RManual(Screen):
 				self.activity = 0
 			self['type'].text = ''
 			self.setTitle(_("Manual Installation"))
-			self["key_red"].setText(_("Cancel"))
+			self["key_red"].setText(_("Exit"))
 			self["key_green"].setText(_("Install"))
 			self.installFile = False
 
@@ -794,7 +825,7 @@ class	RRemove(Screen):
 		self['list'] = List(self.list)
 		self['conn'] = StaticText("")
 		self["title"] = Label(_("Remove Addons"))
-		self["key_red"] = Label(_("Cancel"))
+		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = Label(_("Remove"))
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
@@ -883,13 +914,13 @@ class	RRemove(Screen):
 	def downloading(self, state=""):
 		if state == "Remove":
 			self.setTitle(_('Do you want remove the addon: %s?') % u.filename[:-10])
-			self["key_red"].setText(_("No"))
+			self["key_red"].text = _("No")
 			self["key_green"].setText(_("Yes"))
 			self.installFile = True
 		elif state == "Removing":
 			self['type'].text = _("Removing")
 			self.setTitle('')
-			self["key_red"].setText(_("Cancel"))
+			self["key_red"].text = _("Cancel")
 			self["key_green"].setText("")
 			self.installFile = False
 		else:
@@ -900,7 +931,7 @@ class	RRemove(Screen):
 			self['type'].text = ''
 			self["progressbar"].value = 0
 			self.setTitle(_("Remove Addons"))
-			self["key_red"].setText(_("Cancel"))
+			self["key_red"].text = _("Exit")
 			self["key_green"].setText(_("Remove"))
 			self.installFile = False
 

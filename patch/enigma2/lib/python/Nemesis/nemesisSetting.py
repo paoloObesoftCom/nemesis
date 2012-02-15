@@ -103,7 +103,7 @@ class NSetup(ConfigListScreen, Screen):
 		self.setup = setup
 		list = []
 		self.refill(list)
-		self["oktext"] = Label(_("OK"))
+		self["oktext"] = Label(_("Confirm"))
 		self["canceltext"] = Label(_("Exit"))
 		
 		self["actions"] = NumberActionMap(["SetupActions"], 

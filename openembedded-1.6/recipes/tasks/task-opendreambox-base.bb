@@ -1,7 +1,7 @@
 DESCRIPTION = "OpenDreambox: Base Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
-PV = "2.4"
+PV = "2.5"
 PR = "r1"
 
 inherit task
@@ -23,7 +23,6 @@ OPENDREAMBOX_BASE_ESSENTIAL = "\
   e2fsprogs-mke2fs \
   fakelocale \
   hdparm \
-  libpagecache \
   netkit-base \
   opkg-nogpg \
   sdparm \
@@ -82,3 +81,4 @@ RRECOMMENDS_${PN} = "\
 RRECOMMENDS_${PN}_dm7025 = "\
 	${OPENDREAMBOX_BASE_RECOMMENDS} \
 "
+

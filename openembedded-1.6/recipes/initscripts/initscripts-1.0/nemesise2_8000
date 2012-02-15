@@ -18,28 +18,6 @@ for item in $list
 		${item} start
 	done
 
-#Start device
-if [ `ls -al /dev/sda | grep disk -c` -ne "0" ]; then
-	if [ -b /dev/sdc ]; then
-		if [ -b /dev/sdd ]; then 
-			mount /dev/sdc1 /media/usb || mount /dev/sdc /media/usb
-			mount /dev/sdd1 /media/cf || mount /dev/sdd /media/cf
-		else
-			mount /dev/sdc1 /media/cf || mount /dev/sdc /media/cf
-		fi
-	fi
-else
-	umount /media/hdd
-	if [ -b /dev/sdc ]; then
-		if [ -b /dev/sdd ]; then 
-			mount /dev/sdc1 /media/usb || mount /dev/sdc /media/usb
-			mount /dev/sdd1 /media/cf || mount /dev/sdd /media/cf
-		else
-			mount /dev/sdc1 /media/cf || mount /dev/sdc /media/cf
-		fi
-	fi
-fi
-
 #Activate Swap
 [ -e /media/usb/swapfile ] && swapon /media/usb/swapfile
 [ -e /media/cf/swapfile ] && swapon /media/cf/swapfile
@@ -49,5 +27,3 @@ fi
 [ -e /media/cf/epg.dat.save ] && cp /media/cf/epg.dat.save /media/cf/epg.dat
 [ -e /media/hdd/epg.dat.save ] && cp /media/hdd/epg.dat.save /media/hdd/epg.dat
 [ -e /media/usb/epg.dat.save ] && cp /media/usb/epg.dat.save /media/usb/epg.dat
-
-

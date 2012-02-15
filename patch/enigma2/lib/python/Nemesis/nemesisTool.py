@@ -245,12 +245,15 @@ class restartE2:
 	def __init__(self, session):
 		self.session = session
 
-	def go(self, msg, modeClean = False):
+	def go(self, msg, modeClean = False, reboot = False):
 		try:
-			if modeClean:
-				Notifications.AddNotificationWithCallback(self.restartEnigma2Clean, ChoiceBox, title=msg, list = self.list)
-			else:	
-				Notifications.AddNotificationWithCallback(self.restartEnigma2, ChoiceBox, title=msg, list = self.list)
+			if reboot:
+				Notifications.AddNotificationWithCallback(self.rebootDB, ChoiceBox, title=msg, list = self.list)
+			else:
+				if modeClean:
+					Notifications.AddNotificationWithCallback(self.restartEnigma2Clean, ChoiceBox, title=msg, list = self.list)
+				else:	
+					Notifications.AddNotificationWithCallback(self.restartEnigma2, ChoiceBox, title=msg, list = self.list)
 		except:
 			self.restartEnigma2(True)
 			
@@ -266,6 +269,12 @@ class restartE2:
 		if answer == "restart":
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 3)
+
+	def rebootDB(self, answer):
+		answer = answer and answer[1]
+		if answer == "restart":
+			from Screens.Standby import TryQuitMainloop
+			self.session.open(TryQuitMainloop, 2)
 
 class editBlacklist:
 

@@ -1,5 +1,4 @@
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
 from Screens.Ipkg import Ipkg
 from Components.Sources.List import List
@@ -11,7 +10,7 @@ from Components.Sources.StaticText import StaticText
 from Components.config import config
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists
-from nemesisTool import nemesisTool, GetSkinPath
+from nemesisTool import nemesisTool, GetSkinPath, restartE2
 from nemesisConsole import nemesisConsole
 from nemesisTunerList import tList
 from enigma import eTimer
@@ -72,15 +71,16 @@ class manageDttDevice(Screen):
 		self.updating = True
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
-		self["key_yellow"] = Label("")
+		self["key_green"] = Label("")
 		self['conn'] = StaticText("")
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
-			'yellow': self.modulesInstall,
+			'green': self.modulesInstall,
 			'red': self.exit,
 			'back': self.exit
 		})
+		self._restartE2 = restartE2(session)
 		self.cmdList = []
 		self.ipkg = IpkgComponent()
 		self.ipkg.addCallback(self.ipkgCallback)
@@ -105,22 +105,12 @@ class manageDttDevice(Screen):
 				self.updateList()
 				if self.devstatus[sel]:
 					msg = _('Enigma2 will be now hard restarted to enable DVB/T.please wait\nDo You want restart now?')
-					box = self.session.openWithCallback(self.restartEnigma2, MessageBox, msg , MessageBox.TYPE_YESNO)
-					box.setTitle(_('Restart Enigma2'))
+					self._restartE2.go(msg, True)
 				else:
 					msg = _('Dreambox will be now rebooted to disable DVB/T.\nDo You want reboot the box now?')
-					box = self.session.openWithCallback(self.rebootDream, MessageBox, msg , MessageBox.TYPE_YESNO)
-					box.setTitle(_('Reboot Dreambox'))
+					self._restartE2.go(msg, True, True)
 		else:
 			self.close()
-
-	def restartEnigma2(self, answer):
-		if (answer is True):
-			self.session.open(TryQuitMainloop, 3)
-	
-	def rebootDream(self, answer):
-		if (answer is True):
-			self.session.open(TryQuitMainloop, 2)
 
 	def readStatus(self):
 		try:
@@ -152,7 +142,7 @@ class manageDttDevice(Screen):
 		del self.list[:]
 		if fileExists('/usr/script/loaddttmodules.sh'):
 			self['conn'].text = ''
-			self["key_yellow"].setText(_("Remove Driver"))
+			self["key_green"].setText(_("Remove Driver"))
 			self.readStatus()
 			self.needInstall = False
 			skin_path = GetSkinPath()
@@ -164,53 +154,40 @@ class manageDttDevice(Screen):
 			self['list'].setList(self.list)
 		else:
 			self.needInstall = True
-			self["key_yellow"].setText(_("Install Driver"))
+			self["key_green"].setText(_("Install Driver"))
 			self.showInstMess()
 
 	def showInstMess(self):
 		diskSpace = t.getVarSpaceKb()
 		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
-		strMess = _("Modules for support\nUSB DVB-T/C adapter\nare not installed!\n\nPress yellow button\nto install it.")
+		strMess = _("Modules for support\nUSB DVB-T/C adapter\nare not installed!\n\nPress green button\nto install it.")
 		self['conn'].text = ("%s\n\nFree: %d kB (%d%%)" % (strMess, int(diskSpace[0]), percFree))
 
 	def modulesInstall(self):
 		if self.needInstall:
 			if int(t.getVarSpaceKb()[0]) < 2500:
-				msg = _('Not enough space!\nPlease delete addons before install new.')
-				self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
+				self['conn'].setText(_('Not enough space!\nPlease delete addons before install new.'))
 				return
 			self['conn'].setText(_("Connetting to addons server.\nPlease wait..."))
 			self.updating = True
 			self.timeoutTimer.start(config.nemesis.ipkg.updateTimeout.value * 1000)
 			self.ipkg.startCmd(IpkgComponent.CMD_UPDATE)
 		else:
-			msg = _('Do you want remove the support\npackages, for DVB-T/C adapters?') + _("\nAfter pressing OK, please wait!")
-			self.session.openWithCallback(self.runRemove, MessageBox, msg, MessageBox.TYPE_YESNO )
-			
-	def doTimeoutTimer(self):
-		self['conn'].text = _("Server connection timeout!\nPlease try again later.")
-		self.ipkg.stop()
-
-	def runUpgrade(self, result):
-		if result:
-			self.session.openWithCallback(self.updateList, Ipkg, cmdList = self.cmdList)
-		else:
-			self.showInstMess()
-			
-	def runRemove(self, result):
-		if result:
 			self.cmdList = []
 			self.cmdList.append((IpkgComponent.CMD_REMOVE, { "package": "dreambox-tuner-usb" }))
 			if len(self.cmdList):
 				self.session.openWithCallback(self.pakageRemoved, Ipkg, cmdList = self.cmdList)
+			
+	def doTimeoutTimer(self):
+		self['conn'].text = _("Server connection timeout!\nPlease try again later.")
+		self.ipkg.stop()
 
 	def pakageRemoved(self):
 		self.updateList()
 		if fileExists('/etc/dtt.devices'):
 			unlink("/etc/dtt.devices")
 		msg = _('Dreambox will be now rebooted to disable DVB/T.\nDo You want reboot the box now?')
-		box = self.session.openWithCallback(self.rebootDream, MessageBox, msg , MessageBox.TYPE_YESNO)
-		box.setTitle(_('Reboot Dreambox'))
+		self._restartE2.go(msg, True, True)
 
 	def ipkgCallback(self, event, param):
 		if event == IpkgComponent.EVENT_ERROR:
@@ -223,5 +200,5 @@ class manageDttDevice(Screen):
 				self.cmdList = []
 				self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": "dreambox-tuner-usb" }))
 				if len(self.cmdList):
-					self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want install the support\npackages, for DVB-T/C adapters?") + _("\nAfter pressing OK, please wait!"), MessageBox.TYPE_YESNO )
+					self.session.openWithCallback(self.updateList, Ipkg, cmdList = self.cmdList)
 		pass

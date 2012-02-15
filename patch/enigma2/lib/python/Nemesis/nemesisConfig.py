@@ -3,13 +3,13 @@ from Components.config import ConfigSubsection, ConfigYesNo, config, ConfigSelec
 	ConfigEnableDisable, ConfigDateTime, ConfigInteger, ConfigNothing
 from enigma import eDBoxLCD
 from Tools.HardwareInfo import HardwareInfo
-
+from Nemesis.nemesisTool import isE232
 
 def InitNemesisConfig():
 #system
 	config.nemesis = ConfigSubsection();
 	config.nemesis.einfo = ConfigYesNo(default = False)
-	config.nemesis.eitype = ConfigSelection(default = "nemesisEI", choices = [ ("nemesisEIfull", _("Full")), ("nemesisEImedium", _("Medium")), ("nemesisEI", _("Lite")) ])
+	config.nemesis.eitype = ConfigSelection(default = "nemesisEI", choices = [ ("nemesisEI", _("Lite")), ("nemesisEImedium", _("Medium")), ("nemesisEIfull", _("Full")) ])
 	config.nemesis.replaceinfobar = ConfigYesNo(default = False)
 	config.nemesis.einfotimeout = ConfigNumber(default = 800)
 	config.nemesis.shownetdet = ConfigYesNo(default = True)
@@ -31,7 +31,6 @@ def InitNemesisConfig():
 		("3", "3 " + _("seconds")),("4", "4 " + _("seconds")),("5", "5 " + _("seconds")),
 		("6", "6 " + _("seconds")),("7", "7 " + _("seconds")),("8", "8 " + _("seconds"))])
 	config.nemesis.usepiconinhdd = ConfigYesNo(default = False)
-	config.nemesis.forceumount = ConfigYesNo(default = False)
 #Clean zap history
 	config.nemesis.enableclean = ConfigEnableDisable(default = False)
 	config.nemesis.zapafterclean = ConfigYesNo(default = False)
@@ -45,8 +44,8 @@ def InitNemesisConfig():
 #Fadeset
 	config.plugins.FadeSet = ConfigSubsection()
 	if HardwareInfo().get_device_name() == 'dm800':
-		config.plugins.FadeSet.fadeIn = ConfigYesNo(default = False) # fade in enable
-		config.plugins.FadeSet.fadeOut = ConfigYesNo(default = False) # fade out enable
+		config.plugins.FadeSet.fadeIn = ConfigYesNo(default = False) # fade in disabel
+		config.plugins.FadeSet.fadeOut = ConfigYesNo(default = False) # fade out disable
 	else:
 		config.plugins.FadeSet.fadeIn = ConfigYesNo(default = True) # fade in enable
 		config.plugins.FadeSet.fadeOut = ConfigYesNo(default = True) # fade out enable
@@ -110,10 +109,7 @@ def InitNemesisConfig():
 		("/dev/dvb/adapter0/demux3", "demux 3"), 
 		("/dev/dvb/adapter0/demux4", "demux 4")])
 	
-	from Tools.HardwareInfo import HardwareInfo
-	from Nemesis.nemesisTool import isE232
 	_isE232 = isE232()
-	
 	config.nemepg.demux.setValue("/dev/dvb/adapter0/demux0")
 	if _isE232:
 		if HardwareInfo().get_device_name() == 'dm8000' or HardwareInfo().get_device_name() == 'dm7020hd':

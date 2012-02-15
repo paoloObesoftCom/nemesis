@@ -59,15 +59,15 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r0"
+PR = "r1"
 
-SRCDATE = "20111110"
-SRCDATENEMESIS = "20120209"
-
+SRCDATE = "20120214"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
 #when you like to checkout a specific revision of e2 you need
 #have to specify a commit id or a tag name in SRCREV
+
+SRCDATENEMESIS = "20120214"
 
 # if you want experimental use
 ####################################################
@@ -81,7 +81,7 @@ SRC_URI = "file://../../../../sources/enigma2_${MACHINE}.tar.bz2 \
 
 S = "${WORKDIR}/enigma2_${MACHINE}"
 
-FILES_${PN} += "${datadir}/fonts ${datadir}/keymaps ${datadir}/piconProv ${datadir}/piconSat ${datadir}/piconSys ${pkgdatadir}/HD-Glass-15"
+FILES_${PN} += "${datadir}/fonts ${datadir}/keymaps ${datadir}/piconProv ${datadir}/piconSat ${datadir}/piconSys"
 FILES_${PN}-meta = "${datadir}/meta"
 PACKAGES += "${PN}-meta"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -109,8 +109,10 @@ do_install_append() {
 	rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ServiceNumber.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/Nemesis*.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/PiconName.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/PiconNameB.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/ShowTP.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/Picon.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/PiconB.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/NNextEvent.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Language.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Ipkg.py
@@ -150,7 +152,17 @@ pkg_preinst_${PN} () {
 		cp -a ${datadir}/fonts/tuxtxt.ttf /tmp/tuxtxt.ttf
 	fi
 }
+
 pkg_postinst_${PN} () {
+
+	for rc in /etc/rc2.d /etc/rc3.d /etc/rc4.d /etc/rc5.d
+	do
+		if [ -L $rc/S30openvpn ]; then
+			rm -f $rc/S30openvpn
+			ln -s /etc/init.d/openvpn  $rc/S03openvpn
+		fi
+	done
+
 	if [ -e ${datadir}/enigma2/HD-Glass-15 ]; then
 		rm -rf ${datadir}/enigma2/HD-Glass-15
 	fi

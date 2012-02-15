@@ -88,7 +88,7 @@ class nemesisEpgPanel(Screen):
 			'ok': self.KeyOk,
 			"red": self.close,
 			'back': self.close
-		})
+		},-1)
 		self.saveEPGTimer = eTimer()
 		self.saveEPGTimer.timeout.get().append(self.backupEPG)
 		self.reloadEPGTimer = eTimer()

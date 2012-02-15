@@ -3,7 +3,7 @@
 ##
 from Components.config import config
 from Renderer import Renderer
-from enigma import ePixmap, eEnv
+from enigma import ePixmap, eEnv, ePicLoad
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 
 class PiconName(Renderer):
@@ -46,8 +46,18 @@ class PiconName(Renderer):
 							pngname = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/picon_default.png")
 					self.nameCache["default"] = pngname
 			if self.pngname != pngname:
-				self.instance.setPixmapFromFile(pngname)
+				# setScale doesn't work very well, so we work around it
+				self.picload = ePicLoad()
+				self.picload.PictureData.get().append(self.piconShow)
+				self.picload.setPara((self.instance.size().width(), self.instance.size().height(), 1, 1, False, 1, "#00000000"))
+				self.picload.startDecode(pngname)
 				self.pngname = pngname
+
+	def piconShow(self, picInfo=None):
+		ptr = self.picload.getData()
+		if ptr != None:
+			self.instance.setPixmap(ptr.__deref__())
+		del self.picload
 
 	def findPicon(self, serviceName):
 		if config.nemesis.usepiconinhdd.value:

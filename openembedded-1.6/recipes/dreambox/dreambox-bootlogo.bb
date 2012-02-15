@@ -5,7 +5,7 @@ LICENSE = "proprietary"
 MAINTAINER = "Felix Domke <tmbinc@elitedvb.net>"
 
 BINARY_VERSION = "1"
-BINARY_VERSION_mipsel = "8"
+BINARY_VERSION_mipsel = "10"
 
 IMAGES_VERSION = "1"
 IMAGES_VERSION_dm500hd = "2"
@@ -14,7 +14,7 @@ IMAGES_VERSION_dm7020hd= "2"
 IMAGES_VERSION_dm8000 = "2"
 
 PV = "${BINARY_VERSION}.${IMAGES_VERSION}"
-PR = "r9"
+PR = "r10"
 
 SRC_URI = "http://sources.dreamboxupdate.com/download/7020/bootlogo-${MACHINE}-${BINARY_VERSION}.elf \
 	file://bootlogo.mvi \

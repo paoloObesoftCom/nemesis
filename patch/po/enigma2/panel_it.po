@@ -409,6 +409,9 @@ msgstr ""
 "File %s/epg.dat.\n"
 "Non trovato!"
 
+msgid "Not Found!"
+msgstr "Non trovato!"
+
 msgid "Backup Error"
 msgstr "Errore di salvataggio"
 
@@ -757,8 +760,11 @@ msgstr ""
 msgid "Confirm Format"
 msgstr "Conferma formattazione"
 
+msgid "Confirm"
+msgstr "Conferma"
+
 # nemesis.xml
-msgid "Setup Device"
+msgid "Setup Devices"
 msgstr "Configura periferiche"
 
 msgid "Force Umount before Format"
@@ -941,12 +947,12 @@ msgstr "Gestione DVB-T/C Adapter"
 msgid "Modules for support"
 "\nUSB DVB-T/C adapter"
 "\nare not installed!"
-"\n\nPress yellow button"
+"\n\nPress green button"
 "\nto install it."
 msgstr "I moduli per il supporto"
 "\ndegli adapter USB DVB-T/C"
 "\nnon sono installati!"
-"\n\nPremi il tasto giallo"
+"\n\nPremi il tasto verde"
 "\nper installarli."
 
 msgid "Do you want install the support"
@@ -1129,3 +1135,9 @@ msgstr "Premere OK per Abilitare/Disabilitare il modulo del kernel"
 
 msgid "Choice Extended InfoBar type (Need enigma restart)"
 msgstr "Scegli tipo di Extended InfoBar (Necessita riavvio GUI)"
+
+msgid "\nAfter pressing Yes, please wait!"
+msgstr "\nDopo aver premuto Si, attendere prego!"
+
+msgid "Storage devices"
+msgstr "Gesitione periferiche"

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-06 22:26+0100\n"
-"PO-Revision-Date: 2011-09-23 22:48+0200\n"
+"POT-Creation-Date: 2012-02-03 16:19+0100\n"
+"PO-Revision-Date: 2011-12-25 04:10+0200\n"
 "Last-Translator: spaeleus <spaeleus@croci.org>\n"
 "Language-Team: WWW.LINSAT.NET <spaeleus@croci.org>\n"
 "Language: it\n"
@@ -193,8 +193,20 @@ msgstr "%d min"
 msgid "%d services found!"
 msgstr "%d canali trovati!"
 
+msgid "%d transponder(s) found"
+msgstr "Transponder rilevati: %d"
+
+msgid "%d transponders found at %d:%02dmin"
+msgstr "%d transponder rilevati in %d:%02d min"
+
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
+
+msgid "%d:%02d/%d:%02dmin"
+msgstr "%d:%02d/%d:%02dmin"
+
+msgid "%dMhz scanned"
+msgstr "Scansione di %d Mhz"
 
 msgid "%i ms"
 msgstr "%i ms"
@@ -223,6 +235,9 @@ msgstr "(Mostrare il menu opzionale DVD audio)"
 
 msgid "* Only available if more than one interface is active."
 msgstr "* Disponibile solo se più di un'interfaccia è attiva."
+
+msgid "/"
+msgstr "/"
 
 msgid "0"
 msgstr "0"
@@ -486,6 +501,9 @@ msgstr "Default AC3"
 msgid "AC3 downmix"
 msgstr "AC3 >> Stereo (downmix)"
 
+msgid "AUTOMATICALLY start service searching, press green to change"
+msgstr "Avvio automatico ricerca canali: VERDE >> cambiare"
+
 msgid "Abort"
 msgstr "Annullare"
 
@@ -507,8 +525,14 @@ msgstr "Plugin per accedere a ARD-Mediathek"
 msgid "Access to the ARD-Mediathek online video database."
 msgstr "Plugin per accedere al database video online di ARD-Mediathek"
 
+msgid "Accesspoint"
+msgstr "Accesspoint"
+
 msgid "Accesspoint:"
 msgstr "Accesspoint:"
+
+msgid "Accuracy (higher is better)"
+msgstr "Precisione (valore più elevato = maggiore)"
 
 msgid "Action on long powerbutton press"
 msgstr "Su press. prolungata tasto power"
@@ -649,6 +673,9 @@ msgstr "Configurazione avanzata video"
 msgid "Advanced restore"
 msgstr "Ripristino avanzato"
 
+msgid "Advanced settings."
+msgstr "Configurazioni avanzate."
+
 msgid ""
 "After a reboot or power outage, StartupToStandby will bring your Dreambox to "
 "standby-mode."
@@ -711,11 +738,11 @@ msgid ""
 "player, e.g. EMC. It will probably break and you might end up with a "
 "unusable movie player until you uninstall one of the conflicting plugins."
 msgstr ""
-"Consente di accedere all'elenco canali (direttamente o tramite plugin, come "
-"Graphical Multi EPG) dal Movie Player strandard. NON INSTALLARE il plugin se "
-"si utilizza un player non standard (come EMC): probabilmente andrebbe in "
-"crash e ci si ritroverebbe con un movie player inutilizzabile fino alla "
-"rimozione di uno dei plugin in conflitto!"
+"Plugin che consente di accedere all'elenco canali (direttamente o tramite "
+"altro plugin, come Graphical Multi EPG) dal Movie Player strandard. NON "
+"INSTALLARE il plugin se si utilizza un player non standard (come EMC): con "
+"ogni probabilità andrebbe in crash e ci si ritroverebbe con un movie player "
+"inutilizzabile fino alla rimozione di uno dei plugin in conflitto!"
 
 msgid "Alpha"
 msgstr "Trasparenza"
@@ -934,8 +961,8 @@ msgid ""
 "Autoresolution Plugin Testmode:\n"
 "Is %s OK?"
 msgstr ""
-"Modalità test di Autoresolution:\n"
-"%s è Ok?"
+"Autoresolution: modalità test.\n"
+"%s funziona correttamente?"
 
 msgid "Autoresolution Switch"
 msgstr "Switch Autoresolution"
@@ -1009,6 +1036,9 @@ msgstr "Banda"
 msgid "Bandwidth"
 msgstr "Banda passante"
 
+msgid "Basic Picasa client."
+msgstr "Semplice client Picasa."
+
 msgid "Begin of \"after event\" timespan"
 msgstr "Inizio intervallo dopo l'evento"
 
@@ -1033,8 +1063,17 @@ msgstr "Su arresto riproduzione"
 msgid "Behavior when a movie reaches the end"
 msgstr "Su riproduzione terminata"
 
+msgid "Bitrate"
+msgstr "Bitrate"
+
 msgid "Bitrate:"
 msgstr "Bitrate:"
+
+msgid "Blindscan"
+msgstr "Blindscan"
+
+msgid "Blindscan is not supported by this tuner (%s)"
+msgstr "Il tuner %s non supporta il blindscan."
 
 msgid "Block noise reduction"
 msgstr "Riduzione disturbo blocchi"
@@ -1065,7 +1104,7 @@ msgid ""
 "conection."
 msgstr ""
 "Plugin per navigare tra le pagine Teletext di ORF e SAT1, indipendentemente "
-"dal canale sintonizzato. Richiede connessione I-net."
+"dal canale sintonizzato. Richiede una connessione I-net."
 
 msgid "Browse for and connect to network shares"
 msgstr "Plugin per la ricerca e la connessione di condivisioni di rete"
@@ -1444,6 +1483,9 @@ msgstr "I contenuti superano la capacità del DVD!"
 msgid "Continue"
 msgstr "Continuare"
 
+msgid "Continue configuring your network"
+msgstr "Proseguire nella configurazione della rete"
+
 msgid "Continue in background"
 msgstr "Proseguire in background"
 
@@ -1533,8 +1575,14 @@ msgstr "Impostare un nuovo timer con editor classico"
 msgid "Create a new timer using the wizard"
 msgstr "Impostare un nuovo timer usando la conf. guidata"
 
+msgid "Create directory"
+msgstr "Creare una directory"
+
 msgid "Create movie folder failed"
 msgstr "Creazione cartella video fallita!"
+
+msgid "Create movie folder failed. Please verify your mountpoint!"
+msgstr "Creazione directory movie fallita. Verificare il mountpoint!"
 
 msgid "Create preview pictures of your Movies"
 msgstr "Plugin per creare anteprime delle registrazioni"
@@ -1617,7 +1665,7 @@ msgid ""
 "cut'.\n"
 "Then seek to the end, press OK, select 'end cut'. That's it."
 msgstr ""
-"CutListsEditor consente di applicare tagli alle registrazioni.\n"
+"Plugin che consente di applicare tagli alle registrazioni.\n"
 "Portarsi all'inizio dela sequenza da tagliare. Premere Ok, selezionare \\"
 "\"Inizio taglio\\\".\n"
 "Portarsi alla fine della sequenza da rimuovere, premere Ok, selezionare \\"
@@ -1643,6 +1691,12 @@ msgstr "DVD doppio strato"
 
 msgid "DVB-S"
 msgstr "DVB-S"
+
+msgid "DVB-S + DVB-S2"
+msgstr "DVB-S + DVB-S2"
+
+msgid "DVB-S only"
+msgstr "Solo DVB-S"
 
 msgid "DVB-S2"
 msgstr "DVB-S2"
@@ -1713,6 +1767,12 @@ msgstr "Liste canali predefinite"
 msgid "Defaults"
 msgstr "Predefiniti"
 
+msgid "Define a related pip service"
+msgstr "Plugin per definire un canale associato alla PiP"
+
+msgid "Define a related pip service "
+msgstr "Definire un canale associato alla PiP"
+
 msgid "Define a startup service"
 msgstr "Definire un canale di avvio"
 
@@ -1772,6 +1832,11 @@ msgstr "HDD rilevato:"
 
 msgid "Detected NIMs:"
 msgstr "Tuner rilevati:"
+
+msgid "Device already hard mounted over filesystem table. Remove fstab entry?"
+msgstr ""
+"Il supporto è già montato stabilmente nella tavola del filesystem. Rimuovere "
+"la voce da fstab?"
 
 msgid "DiSEqC"
 msgstr "DiSEqC"
@@ -1872,8 +1937,8 @@ msgid ""
 "Do you really want to REMOVE\n"
 "the plugin \"%s\"?"
 msgstr ""
-"Si conferma la rimozione\n"
-"del plugin %s?"
+"RIMUOVERE\n"
+"il plugin %s?"
 
 msgid ""
 "Do you really want to check the filesystem?\n"
@@ -2069,11 +2134,11 @@ msgid ""
 "On multi-tuner boxes it may optionally run in background hidden or in PiP, "
 "to not disturb the current TV program."
 msgstr ""
-"EPGRefresch provvede automaticamente a sintonizzare il decoder su un canale "
-"configurabile dall'utente quando il box non è attivo (in standby e senza "
-"registrazioni in corso) per aggiornare i contenuti EPG.\n"
+"Plugin che provvede automaticamente a sintonizzare il decoder su uno "
+"specifico canale (configurabile dall'utente) quando il box non è attivo (in "
+"standby e senza registrazioni in corso) per aggiornare i contenuti EPG.\n"
 "Su decoder multi-tuner può essere configurato per lavorare in background o "
-"nella PiP, per non disturbare la visione in corso."
+"nella PiP, per non disturbare la visione in corso al momento."
 
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ERRORE - Ricerca fallita (%s)!"
@@ -2206,11 +2271,17 @@ msgstr "Abilitare Restrizione canale"
 msgid "Enable Streaming Authentication"
 msgstr "Abilitare autenticazione streaming"
 
+msgid "Enable automatic partition mounting?"
+msgstr "Abilitare il mount automatico della partizione?"
+
 msgid "Enable multiple bouquets"
 msgstr "Abilitare bouquet multipli"
 
 msgid "Enable parental control"
 msgstr "Attivare il controllo parentale"
+
+msgid "Enable partition automount?"
+msgstr "Abilitare il mount automatico?"
 
 msgid ""
 "Enable this to be able to access the AutoTimer Overview from within the "
@@ -2230,7 +2301,8 @@ msgid ""
 "you're searching for special characters like the german umlauts."
 msgstr ""
 "Codifica caratteri utilizzata dal canale per i dati EPG. Potrebbe essere "
-"necessario modificarla solo per caratteri speciali (es: umlaut tedesca)."
+"necessario modificarla, ma solo per l'eventuale ricerca di caratteri "
+"speciali (es: umlaut tedesca)."
 
 msgid "Encrypted: "
 msgstr "Codificato: "
@@ -2267,7 +2339,7 @@ msgid ""
 "Needs a running VLC from www.videolan.org on your pc."
 msgstr ""
 "Plugin che permette la riproduzione di filmati AVI/DIVX/WMV/ecc. dal PC sul "
-"Dreambox. Richiedeuna sessione attiva di VLC (www.videolan.org) sul pc."
+"Dreambox. Richiede una sessione attiva di VLC (www.videolan.org) sul pc."
 
 msgid ""
 "Enigma2 Skinselector\n"
@@ -2289,6 +2361,9 @@ msgstr "Inserire IP da ricercare..."
 
 msgid "Enter main menu..."
 msgstr "Menu principale..."
+
+msgid "Enter mountpoint path."
+msgstr "Inserire il percorso mountpoint."
 
 msgid "Enter new hostname for your Dreambox"
 msgstr "Inserire il nuovo nome Host per il Dreambox"
@@ -2465,11 +2540,14 @@ msgstr "Recupero feed in corso"
 msgid "Fetching search entries"
 msgstr "Recupero voci di ricerca in corso"
 
+msgid "Filesystem check completed without errors."
+msgstr "Verifica filesystem completata senza errori."
+
 msgid "Filesystem contains uncorrectable errors"
 msgstr "Il filesystem contiene errori non recuperabili!"
 
 msgid "Film & Animation"
-msgstr "Film & Animazione"
+msgstr "Film & animazione"
 
 msgid "Filter"
 msgstr "Filtro"
@@ -2482,8 +2560,9 @@ msgid ""
 msgstr ""
 "I filtri rappresentano un altro potente strumento per la ricerca di eventi. "
 "Ad esempio, un Autotimer può essere circoscritto a determinati giorni della "
-"settimana o alla corrispondenza al testo contenuto nella sua descrizione.\n"
-"Premere BLU per aggiungere una nuova regola, GIALLO per cancellarla. "
+"settimana o in base a corrispondenze rilevabili nel testo contenuto nella "
+"descrizione.\n"
+"BLU >> aggiungere una nuova regola, GIALLO >> cancellarla. "
 
 msgid "Finetune"
 msgstr "Sint. fine"
@@ -2517,10 +2596,23 @@ msgid "Flashing failed"
 msgstr "Flash fallito!"
 
 msgid "Following tasks will be done after you press OK!"
-msgstr "I processi seguenti saranno eseguiti premendo Ok!"
+msgstr "Ok >> eseguire i processi seguenti!"
 
 msgid "Format"
 msgstr "Formattare"
+
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and\n"
+"%d modified,\n"
+"%d conflicts encountered,\n"
+"%d similars added."
+msgstr ""
+"Trovate in totale %d corrispondenze.\n"
+"Timer: %d aggiunti\n"
+"%d modificati.\n"
+"Conflitti riscontrati: %d\n"
+"Simili aggiunti: %d"
 
 msgid "Frame size in full view"
 msgstr "Dimensione frame in visualizzazione piena"
@@ -2540,8 +2632,14 @@ msgstr "Bande di frequenza"
 msgid "Frequency scan step size(khz)"
 msgstr "Passo di frequenza ricerca (kHz)"
 
+msgid "Frequency start"
+msgstr "Frequenza iniziale"
+
 msgid "Frequency steps"
 msgstr "Passi di frequenza"
+
+msgid "Frequency stop"
+msgstr "Frequenza finale"
 
 msgid "Frequently asked questions"
 msgstr "FAQ"
@@ -2580,7 +2678,7 @@ msgstr ""
 "il riavvio di enigma2. Riavviare ora?"
 
 msgid "GUI that allows user to change the ftp- / telnet password."
-msgstr "Plugin che consente la gestione della password ftp / telnet."
+msgstr "Plugin per la gestione della password ftp / telnet."
 
 msgid ""
 "GUI that allows user to change the ftp-/telnet-password of the Dreambox."
@@ -2589,7 +2687,9 @@ msgstr ""
 "telnet del Dreambox."
 
 msgid "GUI to change the ftp and telnet-password"
-msgstr "Plugin che consente la gestione della password ftp / telnet"
+msgstr ""
+"Plugin (interfaccia grafica) che consente la gestione della password ftp / "
+"telnet"
 
 msgid "Gaming"
 msgstr "Giochi"
@@ -2759,7 +2859,7 @@ msgid "How to handle found crashlogs?"
 msgstr "Come gestire i crashlog rilevati?"
 
 msgid "Howto & Style"
-msgstr "Howto & Stile"
+msgstr "Howto & stile"
 
 msgid "Hue"
 msgstr "Colore"
@@ -2800,8 +2900,8 @@ msgid ""
 "main menu are shown.It can be changed using the \"MenuSort\" plugin, "
 "launchable from the regular plugin overview."
 msgstr ""
-"Il plugin consente di modificare l'ordine di visualizzazione delle voci "
-"inserite nel menu principale. Iil plugin MenuSort, se installato, sarà "
+"Plugin che consente di modificare l'ordine di visualizzazione delle voci "
+"inserite nel menu principale. Il plugin MenuSort, se installato, sarà "
 "disponibile tra le voci del menu Plugin."
 
 msgid ""
@@ -2816,7 +2916,7 @@ msgid ""
 "your scart connection. Press OK to return."
 msgstr ""
 "La connessione SCART non funziona\n"
-"correttamente! Premere Ok per uscire."
+"correttamente! Ok >> uscire."
 
 msgid ""
 "If your TV has a brightness or contrast enhancement, disable it. If there is "
@@ -2835,7 +2935,7 @@ msgstr ""
 "Abbassare il più possibile il contrasto.\n"
 "Abbassare al minimo la luminosità, assicurandosi tuttavia che le due "
 "sfumature più scure di grigio rimangano distinguibili.\n"
-"Per il momento non preoccuparsi delle sfumature chiare: saranno regolate "
+"Per il momento, non preoccuparsi delle sfumature chiare: saranno regolate "
 "successivamente.\n"
 "Quando il risultato appare soddisfacente, premere OK."
 
@@ -2912,7 +3012,7 @@ msgid "Input"
 msgstr "Input"
 
 msgid "Input device setup"
-msgstr "Configurazione dispositivo di input"
+msgstr "Conf. dispositivo di input"
 
 msgid "Input devices"
 msgstr "Dispositivi di input"
@@ -2942,7 +3042,7 @@ msgid "Installation finished."
 msgstr "Installazione terminata."
 
 msgid "Installing"
-msgstr "Installazione in corso"
+msgstr "Inst. in corso"
 
 msgid "Installing Software..."
 msgstr "Installazione software in corso..."
@@ -2976,6 +3076,9 @@ msgstr "Porta USB interna"
 
 msgid "Internal firmware updater"
 msgstr "Pluginper l'aggiornamento del firmware interno"
+
+msgid "Internal network setup plugin"
+msgstr "Plugin per la configurazione della rete domestica"
 
 msgid "Invalid Location"
 msgstr "Percorso non valido"
@@ -3021,8 +3124,7 @@ msgstr ""
 "determinati canali o bouquet.\n"
 "Un evento potrà essere compatibile con un AutoTimer se riferito a un canale "
 "specifico e non escluso (all'interno di un bouquet).\n"
-"Premere il tasto BLU per aggiungere una nuova restrizione, il tasto GIALLO "
-"per cancellarla."
+"BLU >> aggiungere una nuova restrizione, GIALLO >> cancellarla."
 
 msgid "Italian"
 msgstr "Italiano"
@@ -3181,6 +3283,9 @@ msgstr "Limiti off"
 msgid "Limits on"
 msgstr "Limiti on"
 
+msgid "Link Quality"
+msgstr "Qualità link"
+
 msgid "Link Quality:"
 msgstr "Qualità:"
 
@@ -3253,8 +3358,8 @@ msgstr ""
 "Limite inferiore intervallo. Niente dopo questo limite verrà confrontato. I "
 "margini registrazione non saranno considerati!"
 
-msgid "MMC Card"
-msgstr "Card MMC"
+msgid "MANUALLY start service searching, press green to change"
+msgstr "Previsto avvio MANUALE ricerca canali: VERDE >> cambiare"
 
 msgid "MORE"
 msgstr "SUCCESSIVI"
@@ -3463,6 +3568,9 @@ msgstr ""
 "Montata\n"
 "Non Montata"
 
+msgid "Mountpoint:"
+msgstr "Mountpoint:"
+
 msgid "Mountpoints management"
 msgstr "Gestione mount point"
 
@@ -3485,7 +3593,7 @@ msgid "Move screen down"
 msgstr "Spostare la finestra giù"
 
 msgid "Move screen to the center of your TV"
-msgstr "Posizionare la finestra al centro"
+msgstr "Posizionare la finestra al centro della TV"
 
 msgid "Move screen to the left"
 msgstr "Spostare la finestra a sx"
@@ -3598,7 +3706,7 @@ msgid "NEXT"
 msgstr "PROSSIMI"
 
 msgid "NFI Image Flashing"
-msgstr "Flash immagine NFI in corso"
+msgstr "Flash immagine NFI"
 
 msgid "NFI image flashing completed. Press Yellow to Reboot!"
 msgstr ""
@@ -3634,6 +3742,9 @@ msgstr "Conf. nameserver"
 
 msgid "Namespace"
 msgstr "Spazio dei nomi"
+
+msgid "Needs attention!"
+msgstr "Fare attenzione!"
 
 msgid "Nemesis BlackBox Skin"
 msgstr "Skin Nemesis BlackBox"
@@ -3841,6 +3952,9 @@ msgstr ""
 msgid "No free tuner!"
 msgstr "Nessun tuner disponibile!"
 
+msgid "No mountpoint defined!"
+msgstr "Nessun mountpoint definito!"
+
 msgid "No network connection available."
 msgstr "Connessione di rete non disponibile."
 
@@ -4008,6 +4122,9 @@ msgstr ""
 "Impossibile effettuare la ricerca!\n"
 "Configurare i tuner prima di effettuare una ricerca canali."
 
+msgid "Nothing to scan! Press Exit!"
+msgstr "Scansione impossibile. Premere Exit."
+
 msgid "Now Playing"
 msgstr "In riproduzione"
 
@@ -4030,10 +4147,10 @@ msgid "OK, guide me through the upgrade process"
 msgstr "Visualizzare una guida sul processo di aggiornamento"
 
 msgid "OK, remove another extensions"
-msgstr "Ok, rimuovere un'altra estensione"
+msgstr "Rimuovere un'altra estensione"
 
 msgid "OK, remove some extensions"
-msgstr "Ok, rimuovere alcune estensioni"
+msgstr "Rimuovere alcune estensioni"
 
 msgid "ONID"
 msgstr "ONID"
@@ -4173,6 +4290,9 @@ msgstr "A termine riproduzione, mettere in pausa"
 msgid "People & Blogs"
 msgstr "Gente & blog"
 
+msgid "Permanent Timeshift Plugin for E2 Dreamboxes"
+msgstr "Plugin Permanent Timeshift per Dreambox E2"
+
 msgid "PermanentClock shows the clock permanently on the screen."
 msgstr "Plugin per visualizzare un orologio in modo permanente sullo schermo."
 
@@ -4180,7 +4300,7 @@ msgid "Persian"
 msgstr "Persiano"
 
 msgid "Pets & Animals"
-msgstr "Cuccioli & Animali"
+msgstr "Cuccioli & animali"
 
 msgid "Phone number"
 msgstr "Numero telefonico"
@@ -4276,6 +4396,9 @@ msgstr "Selezionare il pacchetto..."
 msgid "Please choose the default services lists you want to install."
 msgstr "Selezionare le liste canali predefinite da installare."
 
+msgid "Please choose what you want to do next."
+msgstr "Selezionare l'azione successiva."
+
 msgid ""
 "Please configure or verify your Nameservers by filling out the required "
 "values.\n"
@@ -4315,6 +4438,12 @@ msgstr "Inserire un nome per la nuova cartella"
 msgid "Please enter the correct pin code"
 msgstr "Inserire il codice PIN corretto"
 
+msgid ""
+"Please enter the directory to use as mountpoint or select a directory by "
+"pressing OK."
+msgstr ""
+"Inserire una directory da utilizzare come mountpoint - Ok >> selezionarla."
+
 msgid "Please enter the old PIN code"
 msgstr "Inserire il vecchio codice PIN"
 
@@ -4329,6 +4458,9 @@ msgstr "Inserire i criterii di ricerca"
 
 msgid "Please follow the instructions on the TV"
 msgstr "Seguire le istruzioni mostrate sullo schermo"
+
+msgid "Please initialize!"
+msgstr "Formattare!"
 
 msgid ""
 "Please note that the previously selected media could not be accessed and "
@@ -4345,6 +4477,9 @@ msgstr "Premere OK!"
 
 msgid "Please provide a Text to match"
 msgstr "Introdurre una stringa di confronto"
+
+msgid "Please select a mountpoint for this partition."
+msgstr "Selezionare un mountpoint per questa partizione."
 
 msgid "Please select a playlist to delete..."
 msgstr "Selezionare la playlist da rimuovere..."
@@ -4421,8 +4556,7 @@ msgid ""
 "Please use the UP and DOWN keys to select your language. Afterwards press "
 "the OK button."
 msgstr ""
-"Selezionare la propria lingua utilizzando i tasti Sù/Giù. Premere OK per "
-"confermare."
+"Selezionare la propria lingua utilizzando i tasti Sù/Giù. OK >> confermare."
 
 msgid "Please wait (Step 2)"
 msgstr "Attendere (passo 2)"
@@ -4453,6 +4587,9 @@ msgstr "Configurazione rete in corso. Attendere..."
 
 msgid "Please wait while we prepare your network interfaces..."
 msgstr "Configurazione interfacce di rete in corso. Attendere..."
+
+msgid "Please wait while we test your network connection..."
+msgstr "Attendere: test della connessione di rete in corso..."
 
 msgid "Please wait while we test your network..."
 msgstr "Test della rete in corso. Attendere..."
@@ -4612,6 +4749,12 @@ msgstr "OK >> Iniziare la ricerca"
 msgid "Press OK to toggle the selection."
 msgstr "OK >> Commutare la selezione."
 
+msgid "Press Red to start the filesystem check."
+msgstr "ROSSO >> avviare la verifica del filesystem."
+
+msgid "Press green to start service searching!"
+msgstr "VERDE >> avviare la ricerca canali."
+
 msgid "Press yellow to set this interface as default interface."
 msgstr "Giallo >> Interfaccia come predefinita."
 
@@ -4665,8 +4808,8 @@ msgstr "Pubblicato"
 
 msgid "Push key \"Exit long\" to show the clock while watching TV."
 msgstr ""
-"Consente di visualizzare un orologio, tramite la pressione prolungata del "
-"tasto EXIT."
+"Plugin che consente di visualizzare un orologio, tramite la pressione "
+"prolungata del tasto EXIT."
 
 msgid ""
 "Push key \"Exit long\" to show the clock while watching TV. Clock will "
@@ -4822,7 +4965,10 @@ msgid "Remember service PIN cancel"
 msgstr "Ricordare disabilitazione PIN canale"
 
 msgid "Remote timer and remote TV player"
-msgstr "Plugin che permette gestione timer e visualizzazione remote"
+msgstr "Plugin che permette la gestione di timer e visualizzazione da remoto."
+
+msgid "Remote-Control for the Transmission BitTorrent client."
+msgstr "Controllo remoto per il client BitTorrent Transmission."
 
 msgid "Remove"
 msgstr "Rimuovere"
@@ -5021,6 +5167,9 @@ msgstr "Russo"
 msgid "S-Video"
 msgstr "S-Video"
 
+msgid "SATA"
+msgstr "SATA"
+
 msgid "SD 25/50HZ Interlace Mode"
 msgstr "Modalità SD25/50Hz interlacciata"
 
@@ -5044,6 +5193,9 @@ msgstr "SNR"
 
 msgid "SNR:"
 msgstr "SNR:"
+
+msgid "SSID"
+msgstr "SSID"
 
 msgid "SSID:"
 msgstr "SSID:"
@@ -5076,6 +5228,9 @@ msgstr "Configurazione Sat / Parabola"
 
 msgid "Satellite"
 msgstr "Satellite"
+
+msgid "Satellite Blindscan"
+msgstr "Blindscan satellite"
 
 msgid "Satellite Equipment Setup"
 msgstr "Conf. dispositivo satellitare"
@@ -5225,7 +5380,7 @@ msgstr ""
 "motorizzata"
 
 msgid "Science & Technology"
-msgstr "Scienza e tecnologia"
+msgstr "Scienza & tecnologia"
 
 msgid "Search Term(s)"
 msgstr "Criteri di ricerca"
@@ -5336,6 +5491,9 @@ msgstr "Selezionare il dispositivo di input."
 
 msgid "Select interface"
 msgstr "Selezionare l'interfaccia"
+
+msgid "Select mountpoint"
+msgstr "Selezionare il mountpoint"
 
 msgid "Select new feed to view."
 msgstr "Selezionare il nuovo feed da visualizzare."
@@ -5585,8 +5743,8 @@ msgid ""
 "Shows a list containing the zapping-history and allows user to zap to the "
 "entries or to modify them."
 msgstr ""
-"Plugin per visualizzare la cronologia dello zapping, che consente lo zap "
-"sulle voci presenti o la loro modifica."
+"Plugin per visualizzare la cronologia dello zapping, che consente lo zap tra "
+"le voci presenti o la loro modifica."
 
 msgid "Shows a list of recent zap entries"
 msgstr "Plugin per visualizzare la cronologia recente dello zapping"
@@ -5616,6 +5774,9 @@ msgid "Shuts down your Dreambox into Deep Standby (Power Save Mode)"
 msgstr ""
 "Consente di porre il Dreambox in Deep Standby se non in uso (Modalità "
 "risparmio energetico)."
+
+msgid "Signal Strength"
+msgstr "Livello segnale"
 
 msgid "Signal Strength:"
 msgstr "Potenza Segnale:"
@@ -5726,6 +5887,9 @@ msgstr ""
 "Destinazione backup non aggiornabile!\n"
 "Selezionarne un'altra!"
 
+msgid "Sorry, could not remove mount entry from fstab."
+msgstr "Impossibile rimuovere la voce di mount da fstab."
+
 msgid "Sorry, no Details available!"
 msgstr "Dettagli non disponibili!"
 
@@ -5740,6 +5904,9 @@ msgstr ""
 "La destinazione scelta per il backup non esiste!\n"
 "\n"
 "Selezionarne un'altra!"
+
+msgid "Sorry, your directory is not writeable."
+msgstr "La directory non possiede diritti di scrittura."
 
 msgid "Sort A-Z"
 msgstr "Ordine A-Z"
@@ -5839,7 +6006,7 @@ msgid "Stop"
 msgstr "Stop"
 
 msgid "Stop Timeshift?"
-msgstr "Arrestare timeshift ?"
+msgstr "Arrestare timeshift?"
 
 msgid "Stop current event and disable coming events"
 msgstr "Arrestare l'evento corrente e disabilitare i futuri"
@@ -5868,6 +6035,9 @@ msgstr "Posizione memorizzata"
 msgid "Stream podcasts"
 msgstr "Plugin per stream podcast"
 
+msgid "Streaming error: %s"
+msgstr "Errore di streaming: %s"
+
 msgid "Streaming modules for the orf.at iptv web page."
 msgstr "Plugin per lo stream di moduli dalla pagina web di orf.at iptv"
 
@@ -5882,6 +6052,9 @@ msgstr "Selezione sottotitoli"
 
 msgid "Subtitles"
 msgstr "Sottotitoli"
+
+msgid "Successfully, deactivated mount entry from fstab."
+msgstr "Voce di mount rimossa correttamente da fstab"
 
 msgid "Sun"
 msgstr "Dom"
@@ -5923,7 +6096,7 @@ msgstr ""
 "a cura di Dario Croci\n"
 "www.linsat.net\n"
 "Supporto: spaeleus@croci.org\n"
-"aggiornamento: 21 settembre 2011"
+"Aggiornamento: 04 dicembre 2011"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "File TS troppo grande per ISO9660 livello 1!"
@@ -6155,8 +6328,8 @@ msgstr ""
 msgid ""
 "The WirelessLan plugin helps you configuring your WLAN network interface."
 msgstr ""
-"Il plugin WirelessLan fornisce supporto per la configurazione di "
-"un'interfaccia di rete wireless."
+"Plugin per fornire un supporto alla configurazione di interfacce di rete "
+"wireless."
 
 msgid "The backup failed. Please choose a different backup location."
 msgstr "Backup fallito! Selezionare una destinazione differente per il backup."
@@ -6253,7 +6426,7 @@ msgid ""
 "Please install it and choose what you want to do next."
 msgstr ""
 "Il plugin WirelessLan non è installato!\n"
-"Installarlo per poterlo configurare."
+"Installarlo per poi poterlo configurare."
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
@@ -6394,6 +6567,10 @@ msgstr "Questo plugin è installato."
 msgid "This plugin is not installed."
 msgstr "Questo plugin non è installato."
 
+msgid "This plugin is used to setup the network on your genuine dreambox."
+msgstr ""
+"Plugin utilizzato per la configurazione di rete di un dreambox originale."
+
 msgid "This plugin will be installed."
 msgstr "Questo plugin verrà installato."
 
@@ -6442,7 +6619,7 @@ msgid ""
 "- no valid IP Address was found\n"
 "- please check your DHCP, cabling and adapter setup"
 msgstr ""
-"Questo test verifica che alla scheda venga assegnato un indirizzo IP "
+"Test per verificare che alla scheda sia stato assegnato un indirizzo IP "
 "valido.\n"
 "Se si ottiene il messaggio [non confermato]:\n"
 "- Non è stato trovato un indirizzo valido;\n"
@@ -6458,7 +6635,7 @@ msgid ""
 "If you get an \"enabeld\" message:\n"
 "-verify that you have a configured and working DHCP Server in your network."
 msgstr ""
-"Questo test verifica se la connessione di rete locale è configurata per "
+"Test per verificare se la connessione di rete locale è configurata per "
 "l'assegnazione automatica IP tramite DHCP.\n"
 "Se si ottiene il messaggio [Disabilitato]:\n"
 "- La rete locale è configuata per utilizzare l'assegnazione manuale "
@@ -6596,7 +6773,7 @@ msgid ""
 "for 10 seconds.\n"
 "3) Wait for bootup and follow instructions of the wizard."
 msgstr ""
-"Per aggiornrte il Dreambox, eseguire i seguenti passaggii:\n"
+"Per aggiornare il Dreambox, eseguire i seguenti passaggi:\n"
 "1) Spegnere il box tramite l'interruttore posteriore, e assicurarsi di avere "
 "inserito una penna USB avviabile.\n"
 "2) Riaccendere il box tramite l'interruttore posteriore tenendo premuto il "
@@ -6644,14 +6821,20 @@ msgstr "Modalità trasmissione"
 msgid "Transponder"
 msgstr "Transponder"
 
+msgid "Transponder searching finished!"
+msgstr "Ricerca transponder terminata."
+
 msgid "Travel & Events"
-msgstr "Viaggi & Eventi"
+msgstr "Viaggi & eventi"
 
 msgid "Tries left:"
 msgstr "Tentativi residui:"
 
 msgid "Try to find used Transponders in cable network.. please wait..."
 msgstr "Ricerca transponder utilizzati sulla rete via cavo. Attendere..."
+
+msgid "Try to find used satellite transponders..."
+msgstr "Ricerca transponder in uso sul satellite..."
 
 msgid "Try to find used transponders in cable network.. please wait..."
 msgstr "Ricerca transponder utilizzati sulla rete via cavo. Attendere..."
@@ -6775,8 +6958,8 @@ msgid ""
 "button."
 msgstr ""
 "AutoTimer NON verificherà automaticamente una corrispondenza eventi se tale "
-"funzione non è abilitata. Tale verifica sarà eseguita solo dopo la pressione "
-"del tasto verde."
+"funzione non è abilitata. VERDE >> Uscire dalla schermata ed eseguire la "
+"verifica."
 
 msgid "Unmount failed"
 msgstr "Unmount fallito!"
@@ -6786,7 +6969,7 @@ msgstr "Non supportata"
 
 msgid "UnwetterInfo shows German storm information."
 msgstr ""
-"UnwetterInfo consente di ottenere informazioni metereologiche per la "
+"UnwetterInfo consente di ottenete informazioni metereologiche per la "
 "Germania."
 
 msgid "Update"
@@ -6799,8 +6982,8 @@ msgid ""
 "Update done... The genuine dreambox test will now be rerun and should not "
 "ask you to update again."
 msgstr ""
-"Aggiornamento eseguito... Il test di genuinità verrà ora rieseguito e non "
-"dovrebbe richiedere ulteriori aggiornamenti"
+"Aggiornamento eseguito... Il test di genuinità verrà eseguito di nuovo, e "
+"non dovrebbe richiedere ulteriori aggiornamenti"
 
 msgid "Updatefeed not available."
 msgstr "Feed aggiornamenti non disponibile."
@@ -6921,6 +7104,13 @@ msgstr "Gestione user"
 msgid "Username"
 msgstr "Nome user"
 
+msgid ""
+"Using eMission you can control downloads and settings of a remote (or local) "
+"instance of Transmission."
+msgstr ""
+"Tramite eMission è possibile controllare configurazioni e download di una "
+"istanza remota (o locale) di Transmission."
+
 msgid "VCR scart"
 msgstr "Scart VCR"
 
@@ -6993,7 +7183,7 @@ msgstr ""
 "Se questa pagina è visibile, premere OK o selezionare un ingresso video "
 "diverso.\n"
 "\n"
-"L'ingresso video successivo sarà testato automaticamente tra 10 secondi."
+"L'ingresso video successivo sarà testato automaticamente dopo 10 secondi."
 
 msgid "Video mode selection."
 msgstr "Selezione modalità video."
@@ -7252,15 +7442,15 @@ msgid ""
 "\n"
 "Press exit to get back to the input field."
 msgstr ""
-"benvenuti in MyTube Youtube player.\n"
+"Benvenuti in MyTube Youtube player.\n"
 "\n"
 "Durante l'iserimento dei criteri di ricerca, verranno mostrati suggerimenti "
 "circa le possibili corrispondenze.\n"
 "\n"
-"Per selezionare un suggerimento, premere GIU' sul telecomando, scegliere la "
-"voce desiderata poi premere Ok per avviare la ricerca.\n"
+"GIU' >> Selezionare un suggerimento (scegliere la voce desiderata) poi Ok >> "
+"avviare la ricerca.\n"
 "\n"
-"Premere EXIT per tornare alla schermata di inserimento."
+"EXIT >> tornare alla schermata di inserimento."
 
 msgid ""
 "Welcome to the cleanup wizard.\n"
@@ -7352,7 +7542,7 @@ msgid ""
 "Really do a factory reset?"
 msgstr ""
 "Con il ripristino alla configurazione di fabbrica,\n"
-"tutte le configurazioni personalizzate\n"
+"TUTTE le configurazioni personalizzate\n"
 "(compresi bouquet, canali, dati satelliti...) saranno perdute.\n"
 "Dopo il ripristino il ricevitore sarà automaticamente riavviato!\n"
 "\n"
@@ -7450,7 +7640,7 @@ msgid ""
 "With YouTubePlayer you can watch YouTube-Videos on the Dreambox.\n"
 "This plugin requires a PC with the VLC program running."
 msgstr ""
-"YouTubePlayer consente la visualizzazione di filamti da YouTube sul "
+"YouTubePlayer consente la visualizzazione di filmati da YouTube sul "
 "Dreambox.\n"
 "Questo plugin richiede una sessione di VLC attiva su un PC collegato in rete."
 
@@ -7828,6 +8018,9 @@ msgstr ""
 "Il firmware del frontprocessor deve essere aggiornato.\n"
 "OK >> Iniziare l'aggiornamento."
 
+msgid "Your internet connection is already configured."
+msgstr "La connessione a internet è già configurata."
+
 msgid ""
 "Your internet connection is not working!\n"
 "Please choose what you want to do next."
@@ -8201,6 +8394,12 @@ msgstr "Fatto!"
 msgid "driver for Realtek USB wireless devices"
 msgstr "Driver per penne USB basate su chipset Realtek"
 
+msgid "eSATA"
+msgstr "eSATA"
+
+msgid "ecasa is (so far) a basic picasa client."
+msgstr "ecasa è (per ora) un semplice client picasa"
+
 msgid "edit alternatives"
 msgstr "Edit alternative"
 
@@ -8266,6 +8465,9 @@ msgstr "Uscire da elenco interfacce di rete"
 
 msgid "exit networkadapter setup menu"
 msgstr "Uscire da menu configurazione interfaccia di rete"
+
+msgid "externally loopthrough to"
+msgstr "In cascata esterna da"
 
 msgid "fileformats (BMP, PNG, JPG, GIF)"
 msgstr "Formati file (BMP, PNG, JPG, GIF)"
@@ -8339,6 +8541,9 @@ msgstr "Init moduli"
 msgid "insert mark here"
 msgstr "Inserire contrassegno"
 
+msgid "internally loopthrough to"
+msgstr "in cascata interna da"
+
 msgid "jump back to the previous title"
 msgstr "Tornare al titolo precedente"
 
@@ -8407,6 +8612,9 @@ msgstr "Parametro \\\"id\\\" mancante"
 
 msgid "month"
 msgstr "Mese"
+
+msgid "more than just an EPG..."
+msgstr "Più di un semplice EPG..."
 
 msgid "move PiP to main picture"
 msgstr "Inviare PiP a schermo principale"
@@ -8764,7 +8972,7 @@ msgid "stop entry"
 msgstr "Fermare voce"
 
 msgid "stop recording"
-msgstr "Fermare registrazione"
+msgstr "Fermare la registrazione"
 
 msgid "stop timeshift"
 msgstr "Arrestare timeshift"
@@ -8888,7 +9096,7 @@ msgid ""
 "assistance before rebooting your dreambox."
 msgstr ""
 "Il DreamBox potrebbe risultare inutilizzabile ora. Prima di riavviarlo "
-"consultare il manuale per ottenere ulteriori istruzioni."
+"consultare il manuale per ottenete ulteriori istruzioni."
 
 msgid "zap"
 msgstr "Zap"
@@ -8899,44 +9107,17 @@ msgstr "Zap eseguito"
 msgid "Please make sure to set up your hard drives with the improved storage management in menu -> system -> harddisk."
 msgstr "Assicurarsi di aver configurato il vostro harddisk, con il nuovo gestore periferiche, in Menu -> Configurazione -> Sistema -> Harddisk."
 
-msgid "Enable automatic partition mounting?"
-msgstr "Abilitare automount della partizione?"
-
-msgid "Please enter the directory to use as mountpoint or select a directory by pressing OK."
-msgstr "Immetti la cartella da usare come mountpoint o seleziona la cartella premendo OK"
-
 msgid "New uninitialized harddisk found. Please initialize!"
 msgstr "Disco nuovo non formattato. Formattare prego!"
-
-msgid "Press Red to start the filesystem check."
-msgstr "Premere tasto rosso per iniziare il controllo."
 
 msgid "Verifying harddisk initialization. Please wait!"
 msgstr "Verifica fromattazione harddisk. Attendere!"
 
-msgid "Filesystem check completed without errors."
-msgstr "Controllo completato senza errori."
-
 msgid "Unable to verifying partition information. Please restart!"
 msgstr "Impossibile verficare info partizione. Riavviare prego!"
 
-msgid "Enable partition automount?"
-msgstr "Abilitare automount della partizione?"
-
 msgid "Sorry, your directory is not writeable"
 msgstr "La cartella non ha i permessi in scrittura"
-
-msgid "Device already hard mounted over filesystem table. Remove fstab entry?"
-msgstr "Il device é già montato via la tabella file di sistema. Rimuovere la entry da fstab?"
-
-msgid "Successfully, deactivated mount entry from fstab."
-msgstr "Disattivazione mount da fstab, avvenuto con successo."
-
-msgid "Create movie folder failed. Please verify your mountpoint!"
-msgstr "Impossibile creare la cartella movie, Verificare il mountpoint!"
-
-msgid "Please select a mountpoint for this partition."
-msgstr "Prego selezionare un mountpoint per la partizione"
 
 msgid "Exit harddisk selection."
 msgstr "Esci selezione harddisk."
@@ -8953,23 +9134,6 @@ msgstr "Formattare harddisk selezionato."
 msgid "Check selected harddisk."
 msgstr "Controllare harddisk selezionato."
 
-msgid "Advanced settings."
-msgstr "Configurazione avanzata."
-
-msgid "Please initialize!"
-msgstr "Formattare prego!"
-
-msgid "Needs attention!"
-msgstr "Necessità attenzione!"
-
-msgid "No mountpoint defined!"
-msgstr "Nessun mountpoint definito!"
-
 msgid "Really delete this harddisk entry?"
 msgstr "Vuoi realmente cancellare questa entry?"
 
-msgid "Select mountpoint"
-msgstr "Seleziona mountpoint"
-
-msgid "Enter mountpoint path."
-msgstr "Immetti il percorso del mountpoint."

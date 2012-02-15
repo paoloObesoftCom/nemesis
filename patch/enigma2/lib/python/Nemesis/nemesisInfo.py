@@ -164,10 +164,10 @@ class showDevSpaceInfo(Screen):
 		Screen.__init__(self, session)
 		labelList = [
 			('f1' , ''), ('f2' , ''),
-			('c1' , _('Compact Flash Not Found')), ('c2' , 'N/A'),
-			('u1' , _('Usb Not Found')), ('u2' , 'N/A'),
-			('h1' , _('Hard Disk Not Found')), ('h2' , 'N/A'),
-			('t1' , 'N/A'),('t2' , 'N/A'),
+			('c1' , _('Compact Flash Not Found')), ('c2' , _('Not Found!')),
+			('u1' , _('Usb Not Found')), ('u2' , 'Not Found!'),
+			('h1' , _('Hard Disk Not Found')), ('h2' , 'Not Found!'),
+			('t1' , 'Not Found!'),('t2' , 'Not Found!'),
 			('rr1' , 'Ram: '),('rr2' , ''),
 			('rs1' , 'Swap: '),('rs2' , ''),
 			('rt1' , 'Total: '),('rt2' , '')]
@@ -226,13 +226,14 @@ class showDevSpaceInfo(Screen):
 							cf = [0,0,0,0]
 					elif x[len(x)-1] == '/media/usb':
 						try:
-							usb[0] = int(x[4].replace('%', ''))
-							usb[1] = int(x[1])
-							usb[2] = int(x[2])
-							usb[3] = int(x[3])
-							s = getUnit(int(x[1]))
-							g = getSize(int(x[1]),int(x[2]),int(x[3]))
-							self['u1'].setText('USB: %s  in use: %s' % (s, x[4]))
+							a = len(x)
+							usb[0] = int(x[a - 2].replace('%', ''))
+							usb[1] = int(x[a - 5])
+							usb[2] = int(x[a - 4])
+							usb[3] = int(x[a - 3])
+							s = getUnit(int(usb[1]))
+							g = getSize(int(usb[1]),int(usb[2]),int(usb[3]))
+							self['u1'].setText('USB: %s  in use: %s' % (s, x[a - 2]))
 							self['u2'].setText('USB: %s - Used: %s - Free: %s' % (g[0],g[1],g[2]))
 						except:
 							usb = [0,0,0,0]

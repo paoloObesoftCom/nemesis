@@ -19,7 +19,7 @@ from os import system, remove as os_remove
 from nemesisTool import  GetSkinPath, nemesisTool
 from nemesisConsole import nemesisConsole
 from nemesisShowPanel import nemesisShowPanel
-from nemesisDeviceManager import manageDevice
+from Screens.HarddiskSetup import HarddiskDriveSelection
 from nemesisDttManager import manageDttDevice
 from enigma import eTimer
 from Tools.HardwareInfo import HardwareInfo
@@ -83,8 +83,8 @@ class NUtility(Screen):
 			('Ccommand',_('Execute commands'),'icons/terminal.png',True),
 			('NUserScript',_('Execute Users Scripts'),'icons/user.png',True),
 			('NSwap',_('Manage Swap File'),'icons/swapsettings.png',True),
-			('ledManager',_('LED Manager'),'icons/led.png',isledManagerPlugin),
 			('NDevice',_('Manage Devices'),'icons/device.png',True),
+			('ledManager',_('LED Manager'),'icons/led.png',isledManagerPlugin),
 			('DttDevice',_('Manage DVB-T/C Adapter'),'icons/device.png',True),
 			('Csave',_('Save Enigma Setting'),'icons/save.png',True)
 			]
@@ -122,7 +122,7 @@ class NUtility(Screen):
 		elif (self.sel == "NUserScript"):
 			self.session.open(NUserScript)
 		elif (self.sel == "NDevice"):
-			self.session.open(manageDevice)
+			self.session.open(HarddiskDriveSelection)
 		elif (self.sel == "NSwap"):
 			if checkDev() == None:
 				msg = _('No device for swap found!')
@@ -399,7 +399,7 @@ class NServicesSetup(Screen, ConfigListScreen):
 			('nfsserver','S20nfsserver',_('Activate NFS Server at boot?')),
 			('samba','S20samba',_('Activate Samba Server at boot?')),
 			('autofs','S21autofs',_('Activate Automount at boot?')),
-			('openvpn','S30openvpn',_('Activate OpenVPN at boot?')),
+			('openvpn','S03openvpn',_('Activate OpenVPN at boot?')),
 			('ipupdate','S20ipupdate',_('Activate IpUpdate at boot?')),
 			('inadyn','S30inadyn',_('Activate InaDyn at boot?')),
 			('sshd','S09sshd',_('Activate Openssh (SSHD) at boot?')),

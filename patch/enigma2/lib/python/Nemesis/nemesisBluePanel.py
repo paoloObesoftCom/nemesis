@@ -9,6 +9,7 @@ from Components.ConfigList import ConfigList
 from Components.config import config, ConfigSelection, getConfigListEntry, ConfigNothing, KEY_LEFT, KEY_RIGHT, KEY_OK
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
+from Components.Sources.Progress import Progress
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Tools.HardwareInfo import HardwareInfo
 from nemesisTool import *
@@ -48,6 +49,8 @@ class nemesisBluePanel(Screen):
 		self["key_green"] = Label(_("Information"))
 		self["key_red"] = Label(_("Utility"))
 		self["info_use"] = Label(_("Use arrows < > to select"))
+		self['spaceused'] = Progress()
+		self['spaceusedtext'] = StaticText()
 		
 		self["actions"] = NumberActionMap(["ColorActions", "CiSelectionActions","WizardActions","SetupActions"],
 			{
@@ -111,6 +114,11 @@ class nemesisBluePanel(Screen):
 
 	def setWindowTitle(self):
 		self.setTitle("%s - %s: %s SVN(%sr%s)" % (_("Nemesis Blue Panel"), _("Image Version"), self.NEMESISVER, self.SVNVERSION[0:3],self.SVNVERSION[3]))
+		diskSpace = t.getVarSpaceKb()
+		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
+		percUsed = int(((diskSpace[1] - diskSpace[0]) / diskSpace[1]) * 100)
+		self["spaceusedtext"].text = _("Free space: %d kB (%d%%)") % (int(diskSpace[0]), percFree)
+		self["spaceused"].setValue(percUsed)
 	 
 	def __onClose(self):
 		if self.container.running():
