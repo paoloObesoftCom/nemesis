@@ -1,189 +1,189 @@
 # nemesisAddons.py
 msgid "Addons Manager"
-msgstr "Gestione Addons"
+msgstr "Addons Verwaltung"
 
 msgid ""
 "Connetting to addons server.\n"
 "Please wait..."
 msgstr ""
-"Connessione al server addons.\n"
-"Attendere prego..."
+"Verbinde zu Addons Server.\n"
+"Bitte warten..."
 
 msgid "Connetting to server. Please wait..."
-msgstr "Connessione al server. Attendere prego..."
+msgstr "Verbinde zu Server. Bitte warten..."
 
 msgid "Download Addons"
-msgstr "Scaricare Addons"
+msgstr "Download Addons"
 
 msgid "Download Extra"
-msgstr "Scaricare Extra"
+msgstr "Download Extra"
 
 msgid "File xml is not correctly formatted!."
-msgstr "Formato file XML non corretto!."
+msgstr "XML Datei nicht korrekt formatiert!."
 
 msgid ""
 "Server not found!\n"
 "Please check internet connection."
 msgstr ""
-"Server non trovato!\n"
-"Controlla il collegamento internet."
+"Server nicht gefunden!\n"
+"Kontrolliere Internetverbindung."
 
 msgid "Server not found! Please check internet connection."
-msgstr "Server non trovato! Controlla il collegamento internet."
+msgstr "Server nicht gefunden! Kontrolliere Internetverbindung."
 
 msgid ""
 "Process Killed by user\n"
 "Server Not Connected!"
 msgstr ""
-"Processo interrotto da utente\n"
-"Server non connesso!"
+"Prozess durch Nutzer abgebrochen\n"
+"Server nicht verbunden!"
 
 msgid "Process Killed by user, Server Not Connected!"
-msgstr "Processo interrotto da utente, Server non connesso!"
+msgstr "Prozess durch Nutzer abgebrochen, Server nicht verbunden!"
 
 msgid "Manual Package Install"
-msgstr "Installazione Manuale"
+msgstr "Paket manuell installieren"
 
 msgid "Remove Addons"
-msgstr "Rimuovere Addons"
+msgstr "Entferne Addons"
 
 msgid ""
 "Loading elements.\n"
 "Please wait..."
 msgstr ""
-"Caricamento elementi.\n"
-"Attendere prego..."
+"Lade Elemente.\n"
+"Bitte warten…"
 
 msgid "Download "
-msgstr "Scaricare "
+msgstr "Herunterladen "
 
 msgid ""
 "Not enough space!\n"
 "Please delete addons before install new."
 msgstr ""
-"Spazio Insufficiente!\n"
-"Cancellare prima qualche addons."
+"nicht genügend Speicher!\n"
+"zuerst Addons löschen."
 
 msgid ""
 "Elements Loaded!.\n"
 "Please select one to install."
 msgstr ""
-"Elementi caricati.\n"
-"Selezionarne uno da installare."
+"Elemente geladen.\n"
+"Wähle einen zur Installation."
 
 msgid "Download: "
-msgstr "Scaricare: "
+msgstr "Herunterladen: "
 
 #, python-format
 msgid ""
 "File: %s not found!\n"
 "Please check your internet connection."
 msgstr ""
-"File: %s non trovato!\n"
-"Controlla la connessione Internet."
+"Datei: %s nicht gefunden!\n"
+"Internetverbindung überprüfen."
 
 msgid ""
 "Process Killed by user!\n"
 "Addon not downloaded."
 msgstr ""
-"Processo interrotto dall'utente!\n"
-"Addon non scaricato."
+"Prozess durch Nutzer abgebrochen!\n"
+"Addon nicht geladen."
 
 msgid ""
 "Installing addons.\n"
 "Please Wait..."
 msgstr ""
-"Installazione in corso.\n"
-"Attendere prego..."
+"Installiere Addon.\n"
+"Bitte warten..."
 
 msgid ""
 "Remove old Settings\n"
 "Please wait..."
 msgstr ""
-"Rimozione vecchi Settings\n"
-"Attendere prego..."
+"Entferne alte Einstellungen\n"
+"Bitte warten…"
 
 #, python-format
 msgid ""
 "File: %s\n"
 "is not a valid package!"
 msgstr ""
-"File: %s\n"
-"non é un pacchetto valido!"
+"Datei: %s\n"
+"kein korrektes Paket!"
 
 msgid ""
 "Reload new Settings\n"
 "Please wait..."
 msgstr ""
-"Ricarica nuovi Settings\n"
-"Attendere prego..."
+"Lade neue Einstellungen\n"
+"Bitte warten…"
 
 msgid "Reload Settings"
-msgstr "Ricarica Settings"
+msgstr "Einstellungen neu laden"
 
 msgid "Reload settings, please wait..."
-msgstr "Ricarica settings, attendere prego..."
+msgstr "Einstellungen neu laden, Bitte warten…"
 
 msgid "Settings reloaded succesfully!"
-msgstr "Settings ricaricati correttamente"
+msgstr "Einstellungen geladen"
 
 msgid ""
 "Reload Plugins list\n"
 "Please Wait..."
 msgstr ""
-"Rilettura lista PLugins...\n"
-"Attendere prego..."
+"Plugins neu einlesen...\n"
+"Bitte warten…"
 
 msgid "Addon installed succesfully!"
-msgstr "Addon installato correttamente!"
+msgstr "Addon korrekt installiert!"
 
 msgid "Enigma2 will be now hard restarted to complete package installation."
-msgstr "Enigma2 deve essre riavviato per completare l'installazione."
+msgstr "Für komplette Installation muss Enigma2 neugestartet werden."
 
 msgid "Enigma2 will be now hard restarted to load EPG on system cache."
-msgstr "Enigma2 deve essre riavviato per EPG nella cache di sistema."
+msgstr "Enigma2 muss neugestartet werden um EPG Cache zu laden."
 
 msgid "Do You want restart enigma2 now?"
-msgstr "Vuoi riavviare Enigma2 adesso?"
+msgstr "jetzt Enigma2 neu starten?"
 
 msgid "Restart Enigma2"
-msgstr "Riavvio Enigma2"
+msgstr "Neustart Enigma2"
 
 msgid ""
 "Process Killed by user.\n"
 "Addon not installed correctly!"
 msgstr ""
-"Processo interrotto da utente.\n"
-"Addon non installato correttamente!"
+"Prozess durch Nutzer abgebrochen.\n"
+"Addon nicht korrekt installiert!"
 
 msgid "Manual Installation"
-msgstr "Installazione Manuale"
+msgstr "Manuelle Installation"
 
 msgid ""
 "Put your plugin xxx.tbz2 or xxx.ipk\n"
 "via FTP in /tmp."
 msgstr ""
-"Metti il plugin xxx.tbz2 o xxx.ipk\n"
-"via FTP in /tmp."
+"Stell das Plug-In xxx.tbz2 o xxx.ipk\n"
+"über FTP in /tmp."
 
 #, python-format
 msgid "Do you want install the addon:\n%s?"
-msgstr "Vuoi installare l'addon:\n%s?"
+msgstr "möchtest Du das Addon installieren:\n%s?"
 
 #, python-format
 msgid "Do you want install the addon: %s?"
-msgstr "Vuoi installare l'addon: %s?"
+msgstr "möchtest Du das Addon installieren: %s?"
 
 msgid "Install Addon"
-msgstr "Installare Addon"
+msgstr "Installiere Addon"
 
 #, python-format
 msgid ""
 "Installing: %s.\n"
 "Please wait..."
 msgstr ""
-"Installare: %s.\n"
-"Attendere prego..."
+"Installiere: %s.\n"
+"Bitte warten..."
 
 #, python-format
 msgid ""
@@ -191,26 +191,26 @@ msgid ""
 "installed succesfully!"
 msgstr ""
 "Addon: %s\n"
-"installato correttamente!"
+"korrekt installiert!"
 
 msgid "Nothing to uninstall!"
-msgstr "Niente da rimuovere!"
+msgstr "nichts zum Entfernen!"
 
 #, python-format
 msgid "Do you want remove the addon:\n%s?"
-msgstr "Vuoi rimuovere l'addon:\n%s?"
+msgstr "möchtest Du das Addon entfernen:\n%s?"
 
 #, python-format
 msgid "Do you want remove the addon: %s?"
-msgstr "Vuoi rimuovere l'addon: %s?"
+msgstr "möchtest Du das Addon entfernen: %s?"
 
 #, python-format
 msgid ""
 "Removing: %s.\n"
 "Please wait..."
 msgstr ""
-"Rimozione: %s.\n"
-"Attendere prego..."
+"Entferne: %s.\n"
+"Bitte warten…"
 
 #, python-format
 msgid ""
@@ -218,110 +218,110 @@ msgid ""
 "removed succeffully."
 msgstr ""
 "Addons: %s\n"
-"Rimosso correttamente."
+"korrekt entfernt."
 
 msgid ""
 "Process Killed by user.\n"
 "Addon not removed completly!"
 msgstr ""
-"Processo interrotto da utente.\n"
-"Addon non rimosso correttamente!"
+"Prozess durch Nutzer abgebrochen.\n"
+"Addon nicht komplett entfernt!"
 
 # nemesisDownloader.py
 msgid "Downloading..."
-msgstr "Scaricamento..."
+msgstr "Herunterladen..."
 
 #, python-format
 msgid "Downloading file: %s ..."
-msgstr "Ricezione file: %s ..."
+msgstr "Empfange Datei: %s ..."
 
 #, python-format
 msgid ""
 "Downloading file:\n"
 "%s ..."
 msgstr ""
-"Ricezione file:\n"
+"Empfange Datei:\n"
 "%s ..."
 
 #, python-format
 msgid "Download file %s failed!"
-msgstr "Ricezione file %s fallita!"
+msgstr "Datei empfangen %s fehlgeschlagen!"
 
 #, python-format
 msgid ""
 "Download file\n"
 "%s failed!"
 msgstr ""
-"Ricezione file\n"
-"%s fallita!"
+"Datei empfangen\n"
+"%s fehlgeschlagen!"
 
 #, python-format
 msgid "Download file %s finished!"
-msgstr "Ricezione file %s completata!"
+msgstr "Datei empfangen %s beendet!"
 
 #, python-format
 msgid ""
 "Download file\n"
 "%s finished!"
 msgstr ""
-"Ricezione file\n"
-"%s completata!"
+"Datei empfangen\n"
+"%s beendet!"
 
 msgid "Downloading killed by user!"
-msgstr "Scaricamento interrotto dall'utente!"
+msgstr "Herunterladen durch Nutzer abgebrochen!"
 
 msgid "Press OK to close window."
-msgstr "Premi OK per chiudere la finestra."
+msgstr "Drücke OK um Fenster zu schliessen."
 
 # nemesisBluePanel.py
 msgid "System Settings"
-msgstr "Configurazione Sistema"
+msgstr "System Einstellungen"
 
 msgid "System Information"
-msgstr "Informazioni Sistema"
+msgstr "System Information"
 
 msgid "Parental Control Setup"
-msgstr "Gestione Controllo Parentale"
+msgstr "Kinderschutz Einstellungen"
 
 msgid "Use arrows < > to select"
-msgstr "Usa le frecce < > per selezionare"
+msgstr "Nutze die Pfeile < > zum auswählen"
 
 #, python-format
 msgid "SoftCams (%s) :"
-msgstr "Emulatori (%s) :"
+msgstr "SoftCams (%s) :"
 
 msgid "Downloading Nemesis info..."
-msgstr "Ricezione Nemesis info..."
+msgstr "Empfange Nemesis Info..."
 
 #, python-format
 msgid "Stopping %s and starting %s."
-msgstr "Arresto %s e Avvio %s."
+msgstr "Stoppen %s und Starten %s."
 
 #, python-format
 msgid "Restarting %s."
-msgstr "Riavvio %s."
+msgstr "Neustart %s."
 
 #, python-format
 msgid "Stopping %s."
-msgstr "Arresto %s."
+msgstr "Stoppen %s."
 
 #, python-format
 msgid "Starting %s."
-msgstr "Avvio %s."
+msgstr "Starten %s."
 
 #, python-format
 msgid "Please stop %s\nbefore start cardserver!"
-msgstr "Devi arrestare %s\nprima di avviare il cardserver!"
+msgstr "Bitte stoppen %s\nbevor Cardserver starten!"
 
 # nemesisConsole
 msgid "Done"
-msgstr "Fatto"
+msgstr "Erledigt"
 
 msgid "Please Press OK Button to close windows!"
-msgstr "Premi il Tasto OK per chiudere la finestra!"
+msgstr "Drücke OK um Fenster zu schliessen!"
 
 msgid "Action killed by user"
-msgstr "Azione interrotta da utente"
+msgstr "Aktion durch Nutzer abgebrochen"
 
 # nemesisEpgPanel
 #, python-format
@@ -329,18 +329,18 @@ msgid ""
 "Problem to write on %s.\n"
 "Try to reboot the machine!"
 msgstr ""
-"Problema si scrittura su %s.\n"
-"Prova a riavviare la macchina!"
+"Probleme beim schreiben auf %s.\n"
+"versuchen Gerät neu zu starten!"
 
 msgid "Device in Read-Only"
-msgstr "Device in sola scrittura"
+msgstr "Gerät im Read-Only"
 
 msgid ""
 "Do you want download EPG\n"
 "using e2_loadepg?"
 msgstr ""
-"Vuoi scaricare EPG\n"
-"usando e2_loadepg?"
+"Willst du EPG laden\n"
+"nutze e2_loadepg?"
 
 #, python-format
 msgid ""
@@ -348,36 +348,36 @@ msgid ""
 "%s/epg.dat.\n"
 "Please Wait..."
 msgstr ""
-"Carico i dati EPG nella cache di Enigma2 da:\n"
+"Lade EPG Daten in Enigma2 Cache von:\n"
 "%s/epg.dat.\n"
-"Attendere prego..."
+"Bitte warten…"
 
 msgid ""
 "File epg.dat not found!\n"
 "Please use Download EPG with CrossEPG!"
 
 msgstr ""
-"Nessun file epg.dat é stato trovato!\n"
-"Avviare Scaricare EPG con CrossEPG!"
+"epg.dat nicht gefunden!\n"
+"Bitte nutze Download EPG mit CrossEPG!"
 
 msgid "Loading EPG"
-msgstr "Caricamento  EPG"
+msgstr "Lade  EPG"
 
 msgid ""
 "Erasing EPG Chache.\n"
 "Please Wait..."
 msgstr ""
-"Cancellazione della cache EPG.\n"
-"Attendere prego..."
+"Lösche EPG Cache.\n"
+"Bitte warten…"
 
 msgid "Erasing EPG cache"
-msgstr "Cancellazione cache EPG"
+msgstr "Löschen EPG cache"
 
 msgid "Enter event to search:"
-msgstr "Immetti evento da cercare:"
+msgstr "Ereignis eingeben zum suchen:"
 
 msgid "Search in EPG cache"
-msgstr "Ricerca nella cache EPG"
+msgstr "Suche in EPG Cache"
 
 #, python-format
 msgid ""
@@ -385,759 +385,756 @@ msgid ""
 "%s.\n"
 "Please Wait..."
 msgstr ""
-"Salvataggio dati EPG su:\n"
+"Sichere Enigma EPG Daten auf:\n"
 "%s.\n"
-"Attendere prego..."
+"Bitte warten…"
 
 msgid "Backing-up EPG"
-msgstr "Salvataggio EPG"
+msgstr "EPG sichern"
 
 msgid "e2_loadepg is running..."
-msgstr "e2_loadepg in esecuzione..."
+msgstr "e2_loadepg wird ausgeführt..."
 
 msgid "Download EPG SKY-IT is running..."
-msgstr "Scarico EPG SKY-IT in esecuzione..."
+msgstr "herunterladen von EPG SKY-IT läuft..."
 
 msgid "Download EPG SKY-UK is running..."
-msgstr "Scarico EPG SKY-UK in esecuzione..."
+msgstr "herunterladen von EPG SKY-UK läuft..."
 
 #, python-format
 msgid ""
 "File %s/epg.dat.\n"
 "Not Found!"
 msgstr ""
-"File %s/epg.dat.\n"
-"Non trovato!"
+"Datei %s/epg.dat.\n"
+"Nicht gefunden!"
 
 msgid "Not Found!"
-msgstr "Non trovato!"
+msgstr "Nicht gefunden!"
 
 msgid "Backup Error"
-msgstr "Errore di salvataggio"
+msgstr "Fehler beim Sichern"
 
 msgid "EPG Search (enigma2)"
-msgstr "Ricerca EPG (enigma2)"
+msgstr "EPG Suche (enigma2)"
 
 msgid "EPG Search (Nemesis)"
-msgstr "Ricerca EPG (Nemesis)"
+msgstr "EPG Suche (Nemesis)"
 
 msgid "EPG Search History (Nemesis)"
-msgstr "Storico ricerca EPG (Nemesis)"
+msgstr "EPG Verlauf Suche(Nemesis)"
 
 msgid "Download EPG with CrossEPG"
-msgstr "Scaricare EPG con CrossEPG"
+msgstr "Herunterladen EPG mit CrossEPG"
 
 msgid "Start e2_loadepg (background)"
-msgstr "Avviare e2_loadepg (background)"
+msgstr "Start e2_loadepg (Hintergrund)"
 
 msgid "Start e2_loadepg (interactive)"
-msgstr "Avviare e2_loadepg (inter.)"
+msgstr "Start e2_loadepg (Interaktiv)"
 
 msgid "Backup Enigma EPG cache"
-msgstr "Salvataggio cache EPG"
+msgstr "EPG cache sichern"
 
 msgid "Load EPG in Enigma cache"
-msgstr "Caricare EPG nella cache"
+msgstr "EPG im Cache laden"
 
 msgid "Erase Enigma EPG cache"
-msgstr "Svuota la cache EPG di Enigma"
+msgstr "EPG Cache (in Enigma) leeren"
 
 msgid "Create EPG Timer Entry"
-msgstr "Crea EPG Timer Entry"
+msgstr "erstelle EPG Timer Eintrag"
 
 msgid "Open Timer List"
-msgstr "Apri lista Timer"
+msgstr "öffne Timer Liste"
 
 msgid "View EPG Timer Log"
-msgstr "Mostra EPG Timer Log"
+msgstr "Timer Log einsehen"
 
 msgid "EPG Configuration"
-msgstr "Configura EPG"
+msgstr "EPG Konfiguration"
 
 msgid "Sorry no events found matching to the search criteria."
-msgstr "Nessun evento corrispondente ai criteri di ricerca trovato!."
+msgstr "Sorry, kein Eintrag mit diesem Suchkriterium gefunden!."
 
 # nemesisInfo.py
 msgid "Show Device Status"
-msgstr "Mostra Stato Device"
+msgstr "Zeige Geräte Status"
 
 msgid "Show Memory Status"
-msgstr "Mostra Stato Memoria"
+msgstr "Zeige Speicher Status"
 
 msgid "Show Active Process"
-msgstr "Mostra Processi Attivi"
+msgstr "Zeige Aktive Prozesse"
 
 msgid "Show Service Info"
-msgstr "Mostra Informazioni Servizio"
+msgstr "Zeige Service Info"
 
 msgid "Show Enigma Settings"
-msgstr "Mostra Configurazione Enigma"
+msgstr "Zeige Enigma Einstellungen"
 
 msgid "Active Process Information"
-msgstr "Info Processi Attivi"
+msgstr "Info Aktive Prozesse"
 
 msgid "Memory Status"
-msgstr "Stato Memoria"
+msgstr "Speicher Status"
 
 msgid "Usage Device Status"
-msgstr "Stato Occupazione Device"
+msgstr "Geräte Nutzung"
 
 msgid "Enigma Setting Info"
-msgstr "Info Configurazione Enigma"
+msgstr "Enigma Konfiguration Info"
 
 msgid "Nemesis Firmware Info"
-msgstr "Info firmware Nemesis"
+msgstr "Nemesis Firmware Info"
 
 msgid "Compact Flash Not Found"
-msgstr "Compact Flash Non Trovata"
+msgstr "Compact Flash nicht gefunden"
 
 msgid "Usb Not Found"
-msgstr "Usb Non Trovata"
+msgstr "USB nicht gefunden"
 
 msgid "Hard Disk Not Found"
-msgstr "Hard Disk Non Trovato"
+msgstr "Festplatte nicht gefunden"
 
 # nemesisSetting.py
 msgid ""
 "Saving Enigma Setting\n"
 "Please Wait..."
 msgstr ""
-"Salvataggio configurazioni Enigma\n"
-"Attendere prego..."
+"Speichere Enigma Einstellung\n"
+"Bitte warten..."
 
 msgid ""
 "Saving Setting.\n"
 "Please wait..."
 msgstr ""
-"Salvataggio configurazioni\n"
-"Attendere prego..."
+"Speichere Einstellungen\n"
+"Bitte warten..."
 
 # nemesisShowPanel
 #, python-format
 msgid "File: %s not found!"
-msgstr "File: %s non trovato!"
+msgstr "Datei: %s nicht gefunden!"
 
 # nemesisUtility.py
 msgid "System Utility"
-msgstr "Utilità Sistema"
+msgstr "System Dienste"
 
 msgid "No device for swap found!"
-msgstr "Nessun device per swap trovato!"
+msgstr "Kein Gerät für Swap gefunden!"
 
 msgid "Swap Error"
-msgstr "Errore Swap"
+msgstr "Swap Fehler"
 
 msgid "Saving"
-msgstr "Salvataggio"
+msgstr "Sichern"
 
 msgid "Start/Stop Services"
-msgstr "Avvio/Arresto dei Servizi"
+msgstr "Start/Stopp Service"
 
 msgid "View Services Logs"
-msgstr "Mostra Logs dei Servizi"
+msgstr "Zeige Service Logs"
 
 msgid "Manage Startup Services"
-msgstr "Gestione Avvio dei Servizi"
+msgstr "Verwaltung Startup Service"
 
 msgid "Execute commands"
-msgstr "Esegui Comandi"
+msgstr "Kommando ausführen"
 
 msgid "Execute Users Scripts"
-msgstr "Esegui Scripts Utente"
+msgstr "Benutzer Skripts ausführen"
 
 msgid "Manage Swap File"
-msgstr "Gestione File di Swap"
+msgstr "Verwaltung Swap File"
 
 msgid "Execute command: "
-msgstr "Esegui comando: "
+msgstr "Kommando ausführen: "
 
 msgid "No Users Script Found!"
-msgstr "Nessun Script d'utente Trovato!"
+msgstr "kein Benutzer Skript gefunden!"
 
 msgid "Execute script: "
-msgstr "Esegui script: "
+msgstr "Skript ausführen: "
 
 msgid "Manage Services"
-msgstr "Gestione dei Servizi"
+msgstr "Service Verwaltung"
 
 msgid "Start"
-msgstr "Avvio"
+msgstr "Start"
 
 msgid "Activate NFS Server at boot?"
-msgstr "Avviare NFS Server al boot?"
+msgstr "Aktiviere NFS Server beim boot?"
 
 msgid "Activate Samba Server at boot?"
-msgstr "Avviare Samba Server al boot?"
+msgstr "Aktiviere Samba Server beim boot?"
 
 msgid "Activate Automount at boot?"
-msgstr "Avviare Automount al boot?"
+msgstr "Aktiviere Automount beim boot?"
 
 msgid "Activate OpenVPN at boot?"
-msgstr "Avviare OpenVPN al boot?"
+msgstr "Aktiviere OpenVPN beim boot?"
 
 msgid "Activate IpUpdate at boot?"
-msgstr "Avviare IpUpdate al boot?"
+msgstr "Aktiviere IpUpdate beim boot?"
 
 msgid "Activate InaDyn at boot?"
-msgstr "Avviare InaDyn al boot?"
+msgstr "Aktiviere InaDyn beim boot?"
 
 msgid "Activate Dropbear (SSH) at boot?"
-msgstr "Avviare Dropbear (SSH) al boot?"
+msgstr "Aktiviere Dropbear (SSH) beim boot?"
 
 msgid "Activate FTP Server at boot?"
-msgstr "Avviare FTP Server al boot?"
+msgstr "Aktiviere FTP Server beim boot?"
 
 msgid "Activate Crontab at boot?"
-msgstr "Avviare Crontab al boot?"
+msgstr "Aktiviere Crontab beim boot?"
 
 msgid "Saving Setting. Please wait..."
-msgstr "Salvataggio configurazioni. Attendere prego..."
+msgstr "sichere Einstellungen. Bitte warten…"
 
 msgid "Services Logs"
-msgstr "Logs dei Servizi"
+msgstr "Service Logs"
 
 msgid "Show InaDyn Log"
-msgstr "Mostra Log InaDyn"
+msgstr "Zeige InaDyn Log"
 
 msgid "Show SMB Server Log"
-msgstr "Mostra Log SMB Server"
+msgstr "Zeige SMB Server Log"
 
 msgid "Show NMB Log"
-msgstr "Mostra Log NMB"
+msgstr "Zeige NMB Log"
 
 msgid "Show FTP Server Log"
-msgstr "Mostra Log FTP Server"
+msgstr "Zeige FTP Server Log"
 
 msgid "Show OpenVPN Log"
-msgstr "Mostra Log OpenVPN"
+msgstr "Zeige OpenVPN Log"
 
 msgid "Delete Log Files"
-msgstr "Cancellare files di Log"
+msgstr "Lösche Log Datei"
 
 msgid "Delete InaDyn log file?"
-msgstr "Cancellare InaDyn log file?"
+msgstr "Lösche InaDyn Log Datei?"
 
 msgid "Delete NMB log file?"
-msgstr "Cancellare NMB log file?"
+msgstr "Lösche NMD Log Datei?"
 
 msgid "Delete SMB log file?"
-msgstr "Cancellare SMB log file?"
+msgstr "Lösche SMB Log Datei?"
 
 msgid "Delete FTP log file?"
-msgstr "Cancellare FTP log file?"
+msgstr "Lösche FTP Log Datei?"
 
 msgid "Delete OpenVPN log file?"
-msgstr "Cancellare OpenVPN log file?"
+msgstr "Lösche OpenVPN Log Datei?"
 
 msgid "Delete Enigma Crash log file?"
-msgstr "Cancellare Enigma Crash log file?"
+msgstr "Lösche Enigma Crash Log Datei?"
 
 msgid "Deleting log files. Please wait..."
-msgstr "Cancellazione files di log. Attendere Prego..."
+msgstr "Lösche Log Dateien. Bitte warten..."
 
 msgid "Activate Swap File?"
-msgstr "Attivare lo Swap file?"
+msgstr "Aktiviere Swap Datei?"
 
 msgid "Swap file size"
-msgstr "Grandezza file di Swap"
+msgstr "Grösse Swap Datei"
 
 msgid "Swap file location"
-msgstr "Percorso file di Swap"
+msgstr "Swap Datei Standort"
 
 msgid "Saving swap config. Please wait..."
-msgstr "Salvataggio configurazione Swap. Attendere prego..."
+msgstr "Sichere Swap Konfiguration. Bitte warten…"
 
 msgid "Creating Swap file..."
-msgstr "Creazione file di Swap..."
+msgstr "Erstelle Swap Datei..."
 
 msgid "Deleting Swap file..."
-msgstr "Rimozione file di Swap..."
+msgstr "Lösche Swap File..."
 
 msgid "Nothing to do!"
-msgstr "Niente da configurare!"
+msgstr "Nichts zu Konfigurieren!"
 
 msgid "Swap process completed successfully!"
-msgstr "Prcesso creazione completato con succeso!"
+msgstr "Swap Prozess erfolgreich beendet!"
 
 msgid "Swap process killed by user!"
-msgstr "Processo interrotto da utente!"
+msgstr "Prozess durch Nutzer abgebrochen!"
 
 msgid "Manage Kernel Modules"
-msgstr "Gestione Moduli Kernel"
+msgstr "Verwaltung Kernel Module"
 
 msgid "Manage Modules"
-msgstr "Gestione Moduli"
+msgstr "Verwaltung Module"
 
 msgid "Save Enigma Setting"
-msgstr "Salva Configurazioni"
+msgstr "Sichere Enigma Einstellungen"
 
 # nemesisDeviceManager.py
 msgid "Hard Disk Setup"
-msgstr "Configurazione Hard Disk"
+msgstr "Festplatten Setup"
 
 msgid "Manage Devices"
-msgstr "Gestione periferiche"
+msgstr "Geräte Verwaltung"
 
 msgid "Hard Disk Informations"
-msgstr "Informazioni Hard Disk"
+msgstr "Festplatten Information"
 
 msgid "Acoustics Harddisk:"
-msgstr "Acustica Harddisk:"
+msgstr "Festplatten Geräusche:"
 
 msgid "Enable/Disable UDMA"
-msgstr "Abilita/Disabilita UDMA"
+msgstr "Enable/Disable UDMA"
 
 msgid "Status: HDD is active"
-msgstr "Stato: HDD é attivo"
+msgstr "Status: HDD ist Aktiv"
 
 msgid "Status: HDD is in Standby"
-msgstr "Stato: HDD é in modalità Standby"
+msgstr "Status: HDD im Standby"
 
 msgid "Saving HDD Configuration.."
-msgstr "Salvataggio Configurazioni HDD.."
+msgstr "Sichere HDD Einstellungen"
 
 msgid "Current Information"
-msgstr "Informazioni correnti"
+msgstr "Aktuelle Infos"
 
 msgid "HDD Temperature"
-msgstr "Temperatura HDD"
+msgstr "HDD Temperatur"
 
 msgid "Stop Hard Disk"
-msgstr "Arresta Hard Disk"
+msgstr "Stopp HDD"
 
 msgid "Execute cache read test"
-msgstr "Esegui test di lettura cache"
+msgstr "Cache Lese-Test ausführen"
 
 msgid "Execute device read test"
-msgstr "Esegui test di lettura device"
+msgstr "Geräte Lese-Test ausführen"
 
 msgid "Update device list (hddtemp.db)"
-msgstr "Aggiorna lista device (hddtemp.db)"
+msgstr "Update Geräte Liste (hddtemp.db)"
 
 msgid "File System Check"
-msgstr "Controllo File System"
+msgstr "Stystemdatei Check"
 
 msgid "USB-Pen Setup"
-msgstr "Configura USB-Pen"
+msgstr "USB Stick Setup"
 
 msgid "Format USB-Pen (Auto)"
-msgstr "Formatta USB-Pen (Auto)"
+msgstr "Format USB-Stick (Auto)"
 
 msgid "Format USB-Pen (disk)"
-msgstr "Formatta USB-Pen (disk)"
+msgstr "Format USB-Stick (disk)"
 
 msgid "Format USB-Pen (part1)"
-msgstr "Formatta USB-Pen (part1)"
+msgstr "Format USB-Stick (part1)"
 
 msgid "CF-Card Setup"
-msgstr "Configura CF-Card"
+msgstr "CF-Card Setup"
 
 msgid "Format CF-Card (Auto)"
-msgstr "Formatta CF-Card (Auto)"
+msgstr "Format CF-Card (Auto)"
 
 msgid "Format CF-Card (disk)"
-msgstr "Formatta CF-Card (disk)"
+msgstr "Format CF-Card (disk)"
 
 msgid "Format CF-Card (part1)"
-msgstr "Formatta CF-Card (disk)"
+msgstr "Format CF-Card (disk)"
 
 msgid ""
 "Force Umount is Enabled!\n"
 "If you continue your system may become instable.\n"
 "Do you want continue?"
 msgstr ""
-"Forzare Umount é ablilitato!\n"
-"Se continuate il vostro sistema potrebbe diventare instabile.\n"
-"Vuoi continuare?"
+"Zwangs Trennung ist aktiviert!\n"
+"System kann Instabil werden, .\n"
+"weitermachen?"
 
 msgid ""
 "Format device, will erase all data permanently!\n"
 "Do you want continue?"
 msgstr ""
-"La formattazione cancellerà i dati in modo permanente!\n"
-"Vuoi continuare?"
+"Formatieren löscht die Daten unwiderruflich!\n"
+"weitermachen?"
 
 msgid "Confirm Format"
-msgstr "Conferma formattazione"
+msgstr "Formatieren bestätigen"
 
 msgid "Confirm"
-msgstr "Conferma"
+msgstr "Bestätigen"
 
 # nemesis.xml
 msgid "Setup Devices"
-msgstr "Configura periferiche"
+msgstr "Geräte Setup"
 
 msgid "Force Umount before Format"
-msgstr "Forza umount prima di formattare"
+msgstr "Zwangs Trennung vor dem formatieren"
 
 msgid "Setup InfoBar OSD"
-msgstr "Configura InfoBar OSD"
+msgstr "Konfiguriere InfoBar OSD"
 
 msgid "Setup Extended InfoBar OSD"
-msgstr "Configura Extended InfoBar OSD"
+msgstr "Konfiguriere erweiterte InfoBar OSD"
 
 msgid "Show Extended InfoBar Permanent"
-msgstr "Mostra Extended InfoBar in modo permanente"
+msgstr "zeige erweiterte InfoBar permanent"
 
 msgid "Replace InfoBar with Extended InfoBar"
-msgstr "Sostituisci InfoBar con Extended InfoBar"
+msgstr "Ersetze InfoBar mit erweiterte InfoBar"
 
 msgid "Extended InfoBar delay (msec)"
-msgstr "Ritardo Extended InfoBar (msec)"
+msgstr "Verzögerung InfoBar (msec)"
 
 msgid "Extended InfoBar delay on zap (msec)"
-msgstr "Ritardo Extended InfoBar su zap (msec)"
+msgstr "Verzögerung InfoBar beim Zappen (msec)"
 
 msgid "Show decode network details"
-msgstr "Mostra dettagli decodifica in rete"
+msgstr "Zeige Details zu Netzwerk decodierung"
 
 msgid "EMM Info delay (msec)"
-msgstr "Ritardo EMM Info (msec)"
+msgstr "Verzögerung EMM Info (msec)"
 
 msgid "ECM Info delay (msec)"
-msgstr "Ritardo ECM Info (msec)"
+msgstr "Verzögerung ECM Info (msec)"
 
 msgid "Set InfoBar Picon type"
-msgstr "Scegli tipo Picon per InfoBar"
+msgstr "Wähle InfoBar Picon type"
 
 msgid "Setup Console/RC/Enigma"
-msgstr "Configura Console/RC/Enigma"
+msgstr "Konfiguriere Console/RC/Enigma"
 
 msgid "Auto close Console on finished event"
-msgstr "Chiudi automaticamente la Console"
+msgstr "Konsole automatisch schliessen"
 
 msgid "Delay before auto close Console (sec)"
-msgstr "Ritardo prima della chiusura Console (sec)"
+msgstr "Verzögerung vor Schliessung (sec)"
 
 msgid "Enable VirtualKeyBoard (Experimental)"
-msgstr "Abilitare la VirtualKeyBoard (Sperimentale)"
+msgstr "Virtuelle Tastatur aktivieren (Experimental)"
 
 msgid "Setup Display LCD/"
-msgstr "Configura Display LCD/OLED"
+msgstr "Konfiguriere Display LCD/OLED"
 
 msgid "Enable Brightness on vision"
-msgstr "Abilita Luminosità in visione"
+msgstr "Helligkeit aktivieren"
 
 msgid "Brightness on vision"
 msgstr "Lumin. in visione"
 
 msgid "Show Picon on LCD? (Need enigma restart)"
-msgstr "Mostra Picon in LCD? (Necessita riavvio GUI)"
+msgstr "Zeige Picon auf LCD? (Neustart GUI)"
 
 msgid "Set LCD Picon type"
-msgstr "Scegli tipo Picon per LCD"
+msgstr "Wähle Picon Typ für LCD"
 
 msgid "Setup Picon"
-msgstr "Configura Picon"
+msgstr "Konfiguriere Picon"
 
 msgid "Can Install Picon in HDD?"
-msgstr "Posso installre le Picon su HDD?"
+msgstr "Picon auf HDD installieren?"
 
 msgid "Setup InaDyn"
-msgstr "Configura InaDyn"
+msgstr "Konfiguriere InaDyn"
 
 msgid "Set user"
-msgstr "Imposta user"
+msgstr "Benutzer eingeben"
 
-msgid "Set password"
-msgstr "Imposta password"
+msgid "Set Password"
+msgstr "Passwort setzen"
 
 msgid "Set domain name"
-msgstr "Imposta nome dominio"
+msgstr "Domainname einstellen"
 
 msgid "Set server"
-msgstr "Imposta server"
+msgstr "Server eingeben"
 
 msgid "Set update period (sec)"
-msgstr "Imposta periodo di aggiornamento (sec)"
+msgstr "Zeit für aktualisierung einstellen (sec)"
 
 msgid "Set DNS System"
-msgstr "Scegli sistema DNS"
+msgstr "DNS einstellen"
 
 msgid "Set log file"
-msgstr "Imposta file di log"
+msgstr "Log Datei einstellen"
 
 msgid "Setup EZ-IpUpdate"
-msgstr "Configura EZ-IpUpdate"
+msgstr "Konfiguriere EZ-IpUpdate"
 
 msgid "Setup Proxy"
-msgstr "Configura Proxy"
+msgstr "Proxy einstellen"
 
 msgid "Activate proxy?"
-msgstr "Attivare proxy?"
+msgstr "Proxy aktivieren?"
 
 msgid "Set Proxy Server"
-msgstr "Imposta Server Proxy"
+msgstr "Proxy Server einstellen"
 
 msgid "Set Proxy Server port"
-msgstr "Imposta Porta Server Proxy"
+msgstr "Proxy Server Port einstellen"
 
 msgid "EPG Enigma cache save path"
-msgstr "Percorso di salvataggio cache EPG di Enigma"
+msgstr "EPG Enigma Cache Sicherungspfad"
 
 msgid "Number of displayed element on search"
-msgstr "Numero di elementi visualizzati nella ricerca"
+msgstr "Anzahl Elemente anzeigen bei der Suche"
 
 msgid "Zap delay before download EPG"
-msgstr "Ritardo Zap prima di scaricare EPG"
+msgstr "Zap Verögerung bevor EPG laden"
 
 msgid "Download EPG SKY-IT"
-msgstr "Scaricare EPG SKY-IT"
+msgstr "Herunterladen EPG SKY-IT"
 
 msgid "Channel to download EPG SKY-IT"
-msgstr "Canale per la ricezione EPG SKY-IT"
+msgstr "EPG SKY-IT Kanal zum herunterladen"
 
 msgid "Download EPG SKY-UK"
-msgstr "Scaricare EPG SKY-UK"
+msgstr "Herunterladen EPG SKY-UK"
 
 msgid "Channel to download EPG SKY-UK"
-msgstr "Canale per la ricezione EPG SKY-UK"
+msgstr "EPG SKY-UK Kanal zum herunterladen"
 
 msgid "Clear enigma cache before load EPG"
-msgstr "Pulisci la cache di Enigma prima di caricare EPG"
+msgstr "vor EPG laden, Enigma Cache leeren"
 
 msgid "Clear Backup EPG after clear Enigma cache"
-msgstr "Cancella backup EPG dopo pulizia cache Enigma"
+msgstr "EPG Backup löschen nach Enigma Cache leeren"
 
 msgid "Enable EPG Download via Timer"
-msgstr "Abilta lo scarico di EPG con il Timer"
+msgstr "aktiviere EPG download per Timer"
 
 msgid "No Delay"
-msgstr "Nessuno"
+msgstr "keine Verzögerung"
 
 msgid "Setup OPKG/Upgrade Options"
-msgstr "Configura Opzioni OPKG/Upgrade"
+msgstr "Konfiguriere OPKG/Upgrade Optionen"
 
 msgid "Force overwrite on upgrade ?"
-msgstr "Forza aggiornamento pacchetti?"
+msgstr "zwangsüberschreiben beim Upgrade?"
 
 msgid "Overwrite all package during upgrade operation?"
-msgstr "Sovrascrivi tutti i pacchetti durante l'aggiornamento?"
+msgstr "im Upgrade Modus alle Pakete überschreiben?"
 
 msgid "Overwrite configuration files"
-msgstr "Sovrascrivere i file di configurazione"
+msgstr "überschreiben Konfigurations Datei"
 
 msgid "Force overwrite on upgrade"
-msgstr "Forza aggiornamento pacchetti"
+msgstr "zwangsüberschreiben beim Upgrade"
 
 msgid "Force reinstall on install ?"
-msgstr "Forza re-installazione dei pacchetti ?"
+msgstr "deinstallieren bei Installation erlauben ?"
 
 msgid "Force reinstall package during install operation?"
-msgstr "Forza re-installazione dei pacchetti durante install?"
+msgstr "deinstallation Pakete während Installationsprozess?"
 
 msgid "Force reinstall on install"
-msgstr "Forza re-installazione dei pacchetti"
+msgstr " deinstallieren bei Installation erlauben "
 
 msgid "Enable fade in of InfoBar"
-msgstr "Abilita dissolvenza su apertura InfoBar"
+msgstr "InfoBar einblenden aktivieren"
 
 msgid "Enable fade out of InfoBar"
-msgstr "Abilita dissolvenza su chiusura InfoBar"
+msgstr "InfoBar verblassen aktivieren"
 
 msgid "Enable fade in of InfoBar on Zap"
-msgstr "Abilita dissolvenza InfoBar su Zap"
+msgstr "InfoBar beim Zappen einblenden"
 
 msgid "Speed for fade in/out of InfoBar (1-10)"
-msgstr "Velocità dissolvenza InfoBar (1-10)"
+msgstr "Einblendegeschwindigkeit (1-10)"
 
 msgid "Manage DVB-T/C Adapter"
-msgstr "Gestione DVB-T/C Adapter"
+msgstr "DVB-T/C Adapter verwalten"
 
 msgid "Modules for support"
 "\nUSB DVB-T/C adapter"
 "\nare not installed!"
 "\n\nPress green button"
 "\nto install it."
-msgstr "I moduli per il supporto"
-"\ndegli adapter USB DVB-T/C"
-"\nnon sono installati!"
-"\n\nPremi il tasto verde"
-"\nper installarli."
+msgstr "Modul Unterstützung"
+"\nder Adapter USB DVB-T/C"
+"\nsind nicht installiert!"
+"\n\nDrücke grüne Taste"
+"\nzum installieren."
 
 msgid "Do you want install the support"
 "\npackages, for DVB-T/C adapters?"
-msgstr "Vuoi installare i pacchetti, per il supporto"
-"\ndegli adapter USB DVB-T/C?"
+msgstr "Pakete für Support installieren"
+"\nder Adapter USB DVB-T/C?"
 
 msgid "Do you want remove the support"
 "\npackages, for DVB-T/C adapters?"
-msgstr "Vuoi rimuovere i pacchetti, per il supporto"
-"\ndegli adapter USB DVB-T/C?"
+msgstr "Support Pakete deinstallieren"
+"\nder Adapter USB DVB-T/C?"
 
 msgid "Install Driver"
-msgstr "Installare Driver"
+msgstr "Treiber installieren"
 
 msgid "Remove Driver"
-msgstr "Rimuovi Driver"
+msgstr "Treiber entfernen"
 
 msgid "New version is available!"
 "\nCurrent version: %sr%s"
 "\nNew Version: %sr%s"
 "\nPlease upgrade Nemesis firmware!"
-msgstr "Nuova versione disponibile!"
-"\nVersione corrente: %sr%s"
-"\nNuova Versione: %sr%s"
-"\nAggiornare Nemesis firmware!"
+msgstr "Neue Version verfügbar!"
+"\nAktuelle Version: %sr%s"
+"\nNeue Version: %sr%s"
+"\nNemesis Firmware aktualisieren!"
 
 msgid "New version SVN(%sr%s) is available!"
 "\nCurrent version: %sr%s"
 "\nMin Version required: %sr%s"
 "\nUpgrade not possible!"
-msgstr "Nuova versione SVN(%sr%s) disponibile!"
-"\nVersione corrente: %sr%s"
-"\nVersione min richiesta: %sr%s"
-"\nAggiornamento non possibile!"
+msgstr "Neue Version SVN(%sr%s) verfügbar!"
+"\nAktuelle Version: %sr%s"
+"\nMin Version erforderlich: %sr%s"
+"\nAktualisierung nicht möglich!"
 
 msgid ""
 "Server connection timeout!"
 "\nPlease try again later."
 msgstr ""
-"Timeout di connessione al Server!"
-"\nPrego riprovare più tardi."
+"Server Timeout!"
+"\nBitte später nochmals versuchen."
 
 msgid "OPKG Update connection timeout (20-60 sec)"
-msgstr "Timeout di connessione OPKG update (20-60 sec)"
+msgstr "OPKG Update Timeout (20-60 sec)"
 
 msgid "Show firmware upgrade availability on Blue Panel"
-msgstr "Mostra disponiblitità firmware upgrade nel Blue Panel"
+msgstr "Zeige Firmware Upgrade Info beim Blue Panel"
 
 msgid "Image Version"
-msgstr "Versione Immagine"
+msgstr "Image Version"
 
 msgid ""
 "Not enough free space on flash to perform Upgrade!"
 "\nUpgrade require at least %d kB free on Flash."
 "\nPlease remove some addons or skins before upgrade."
 msgstr ""
-"Non c'é abbastanza spazio per eseguire l'aggiornamento!"
-"\nL'aggiornamento richiede almeno %d kB liberi in Flash."
-"\nRimuovere qualche addon o skin prima di aggiornare."
+"Nicht genügend freier Speicher für Update!"
+"\nUpdate braucht mind  %d kB freien Flashspeicher."
+"\nZuerst Addons oder Skins entfernen."
 
 msgid ""
 "No Upgrade available!\n"
 "Your decoder is up to date."
 
 msgstr ""
-"Nessun aggiornamento disponibile!\n"
-"Il vostro decoder é aggiornato."
+"Kein Update Verfügbar!\n"
+"Ihr Devoder ist aktuell."
 
 msgid "Add to EPG Blacklist"
-msgstr "Aggiungi alla EPG Blacklist"
+msgstr "zu EPG Blacklist hinzufügen"
 
 msgid "Remove from EPG Blacklist"
-msgstr "Rimuovi dalla EPG Blacklist"
+msgstr "von EPG Blacklist entfernen"
 
 msgid "CrossEPG Setup"
-msgstr "Configura CrossEPG"
+msgstr "CrossEPG Setup"
 
 msgid "January"
-msgstr "Gennaio"
+msgstr "Januar"
 
 msgid "February"
-msgstr "Febbraio"
+msgstr "Februar"
 
 msgid "March"
-msgstr "Marzo"
+msgstr "März"
 
 msgid "April"
-msgstr "Aprile"
+msgstr "April"
 
 msgid "May"
-msgstr "Maggio"
+msgstr "Mai"
 
 msgid "June"
-msgstr "Giugno"
+msgstr "Juni"
 
 msgid "July"
-msgstr "Luglio"
+msgstr "Juli"
 
 msgid "August"
-msgstr "Agosto"
+msgstr "August"
 
 msgid "September"
-msgstr "Settembre"
+msgstr "September"
 
 msgid "October"
-msgstr "Ottobre"
+msgstr "Oktober"
 
 msgid "November"
-msgstr "Novembre"
+msgstr "November"
 
 msgid "December"
-msgstr "Dicembre"
+msgstr "Dezember"
 
 msgid "Please restart Enigma to apply the new configuration."
-msgstr "Riavviare enigma per attivare la nuova configurazione."
+msgstr "Neustarten und neue Einstellungen zu übernehmen."
 
 msgid "RC-Setup (Need enigma restart)"
-msgstr "Configurazione RC (Necessita riavvio GUI)"
+msgstr "RC Einstellungen (Neustart GUI)"
 
 msgid "Select Enigma Version (Need enigma restart)"
-msgstr "Seleziona versione Enigma (Necessita riavvio GUI)"
+msgstr "wähle Enigma Version (Neustart GUI)"
 
 msgid "LED Manager"
-msgstr "Gestione LED"
+msgstr "LED Verwaltung"
 
 msgid "LED Manager..."
-msgstr "Gestione LED..."
+msgstr "LED Verwaltung..."
 
 msgid "Enable Clean History ZAP (Button 0)"
-msgstr "Abilitare Pulizia Storico ZAP (Tasto 0)"
+msgstr "ZAP Verlauf leeren aktivieren (Taste 0)"
 
 msgid "Zap To Channel 1 after history cleaning"
-msgstr "Zap al canale 1 dopo la pulizia storico"
+msgstr "nach Verlauf leeren Zap zu Kanal 1"
 
 msgid "InfoBar EPG text lenght (Character)"
-msgstr "Lunghezza testo EPG su InfoBar (Caratteri)"
+msgstr "Textlänge InfoBar EPG (Anzahl)"
 
 msgid "No EPG data available"
-msgstr "Nessun dato EPG disponibile"
+msgstr "keine EPG Dateien verfügbar"
 
 msgid "Go to standby after (unwanted) reboot"
-msgstr "Vai in standby dopo un reboot non gestito"
+msgstr "nach ungewollten Neustart in Standby gehen"
 
 msgid "Enable deepstandby on front power button long press"
-msgstr "Abilita deepstandby su pressione lunga tasto frontale"
+msgstr "aktiviere Deepstandby nach langem Drücken auf Powerknopf"
 
 msgid "Manage"
-msgstr "Gestione"
+msgstr "Verwalten"
 
 msgid "No preview Image available!"
-msgstr "Nessuna immagine di anteprima disponibile!"
+msgstr "Bildvorschau nicht verfügbar!"
 
 msgid ""
 "The selected Skin has a preview."
 "\nPress OK button to show it on full screen."
 msgstr ""
-"Lo Skin selezionato ha un'anteprima."
-"\nPremere OK per visualizzarla a schermo intero."
+"Gewählter Skin hat eine Vorschau."
+"\nDrücke OK für Vollbild Ansicht."
 
 msgid ""
 "Loading Preview...."
 "\nPlease Wait.."
 
 msgstr ""
-"Caricamento Preview...."
-"\nAttendere prego.."
+"Vorschau Laden...."
+"\nBitte warten..."
 
 msgid "Free space: %d kB (%d%%)"
-msgstr "Spazio libero: %d kB (%d%%)"
+msgstr "Freier Platz: %d kB (%d%%)"
 
 msgid "Utility"
-msgstr "Utilità"
+msgstr "Dienste"
 
 msgid "Press OK to Start/Stop the service"
-msgstr "Premere OK per Avviare/Fermare il servizio"
+msgstr "Drücke OK zum Start/Stop des Service"
 
 msgid "Press OK to Enable/Disable the kernel module"
-msgstr "Premere OK per Abilitare/Disabilitare il modulo del kernel"
+msgstr "Drücke OK zum Kernelmodule de-/aktivieren"
 
 msgid "Choice Extended InfoBar type (Need enigma restart)"
-msgstr "Scegli tipo di Extended InfoBar (Necessita riavvio GUI)"
+msgstr "Wähle den erweiterten InfoBar Typ (GUI Neustart)"
 
 msgid "\nAfter pressing Yes, please wait!"
-msgstr "\nDopo aver premuto Si, attendere prego!"
-
-msgid "Storage devices"
-msgstr "Gesitione periferiche"
+msgstr "\nNach Bestätigung, bitte warten!"

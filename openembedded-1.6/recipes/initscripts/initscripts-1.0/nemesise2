@@ -1,0 +1,21 @@
+#!/bin/sh
+
+/usr/bin/ntpdate pool.ntp.org
+
+#create swap
+if [ -e /var/etc/.swapcreate.sh ]; then
+	/usr/bin/showiframe /boot/bootlogo_swap.mvi
+	/var/etc/.swapcreate.sh
+	rm -f /var/etc/.swapcreate.sh
+	/usr/bin/showiframe /boot/bootlogo.mvi
+fi
+
+[ -e /usr/script/mount.sh ] && /usr/script/mount.sh
+[ -e /usr/bin/nemesisd ] && /usr/bin/nemesisd &
+
+#Start tihrd-part at boot
+list=`ls /var/etc/*_startup.sh`
+for item in $list
+	do
+		${item} start
+	done

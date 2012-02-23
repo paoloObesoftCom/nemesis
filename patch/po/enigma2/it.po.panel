@@ -1,0 +1,1085 @@
+# nemesisAddons.py
+msgid "Addons Manager"
+msgstr "Gestione Addons"
+
+msgid ""
+"Connetting to addons server.\n"
+"Please wait..."
+msgstr ""
+"Connessione al server addons.\n"
+"Attendere prego..."
+
+msgid "Connetting to server. Please wait..."
+msgstr "Connessione al server. Attendere prego..."
+
+msgid "Download Addons"
+msgstr "Scaricare Addons"
+
+msgid "Download Extra"
+msgstr "Scaricare Extra"
+
+msgid "File xml is not correctly formatted!."
+msgstr "Formato file XML non corretto!."
+
+msgid ""
+"Server not found!\n"
+"Please check internet connection."
+msgstr ""
+"Server non trovato!\n"
+"Controllare la connessione internet."
+
+msgid "Server not found! Please check internet connection."
+msgstr "Server non trovato! Controllare la connessione internet."
+
+msgid ""
+"Process Killed by user\n"
+"Server Not Connected!"
+msgstr ""
+"Processo interrotto da utente\n"
+"Server non connesso!"
+
+msgid "Process Killed by user, Server Not Connected!"
+msgstr "Processo interrotto da utente, Server non connesso!"
+
+msgid "Manual Package Install"
+msgstr "Installazione manuale"
+
+msgid "Remove Addons"
+msgstr "Rimuovere Addons"
+
+msgid ""
+"Loading elements.\n"
+"Please wait..."
+msgstr ""
+"Caricamento elementi.\n"
+"Attendere prego..."
+
+msgid "Download "
+msgstr "Scaricare "
+
+msgid ""
+"Not enough space!\n"
+"Please delete addons before install new."
+msgstr ""
+"Spazio non sufficiente!\n"
+"Cancellare qualche addons."
+
+msgid ""
+"Elements Loaded!.\n"
+"Please select one to install."
+msgstr ""
+"Elementi caricati.\n"
+"Selezionarne uno da installare."
+
+msgid "Download: "
+msgstr "Scaricare: "
+
+#, python-format
+msgid ""
+"File: %s not found!\n"
+"Please check your internet connection."
+msgstr ""
+"File: %s non trovato!\n"
+"Controllare la connessione Internet."
+
+msgid ""
+"Process Killed by user!\n"
+"Addon not downloaded."
+msgstr ""
+"Processo interrotto dall'utente!\n"
+"Addon non scaricato."
+
+msgid ""
+"Installing addons.\n"
+"Please Wait..."
+msgstr ""
+"Installazione in corso.\n"
+"Attendere prego..."
+
+msgid ""
+"Remove old Settings\n"
+"Please wait..."
+msgstr ""
+"Rimozione vecchi Settings\n"
+"Attendere prego..."
+
+#, python-format
+msgid ""
+"File: %s\n"
+"is not a valid package!"
+msgstr ""
+"File: %s\n"
+"non é un pacchetto valido!"
+
+msgid ""
+"Reload new Settings\n"
+"Please wait..."
+msgstr ""
+"Ricarica nuovi Settings\n"
+"Attendere prego..."
+
+msgid "Reload Settings"
+msgstr "Ricarica Settings"
+
+msgid "Reload settings, please wait..."
+msgstr "Ricarico settings, attendere prego..."
+
+msgid "Settings reloaded succesfully!"
+msgstr "Settings ricaricati correttamente"
+
+msgid ""
+"Reload Plugins list\n"
+"Please Wait..."
+msgstr ""
+"Rilettura lista PLugins...\n"
+"Attendere prego..."
+
+msgid "Addon installed succesfully!"
+msgstr "Addon installato correttamente!"
+
+msgid "Enigma2 will be now hard restarted to complete package installation."
+msgstr "Riavviare Enigma2 per completare l'installazione."
+
+msgid "Enigma2 will be now hard restarted to load EPG on system cache."
+msgstr "Riavviare Enigma2 per caricare gli EPG nella cache di sistema."
+
+msgid "Do You want restart enigma2 now?"
+msgstr "Riavviare Enigma2 adesso?"
+
+msgid "Restart Enigma2"
+msgstr "Riavvio Enigma2"
+
+msgid ""
+"Process Killed by user.\n"
+"Addon not installed correctly!"
+msgstr ""
+"Processo interrotto da utente.\n"
+"Addon non installato correttamente!"
+
+msgid "Manual Installation"
+msgstr "Installazione manuale"
+
+msgid ""
+"Put your plugin xxx.tbz2 or xxx.ipk\n"
+"via FTP in /tmp."
+msgstr ""
+"Metti il plugin xxx.tbz2 o xxx.ipk\n"
+"via FTP in /tmp."
+
+#, python-format
+msgid ""
+"Do you want install the addon:\n"
+"%s?"
+msgstr ""
+"Vuoi installare l'addon:\n"
+"%s?"
+
+#, python-format
+msgid "Do you want install the addon: %s?"
+msgstr "Vuoi installare l'addon: %s?"
+
+msgid "Install Addon"
+msgstr "Installazione Addon"
+
+#, python-format
+msgid ""
+"Installing: %s.\n"
+"Please wait..."
+msgstr ""
+"Installazione: %s.\n"
+"Attendere prego..."
+
+#, python-format
+msgid ""
+"Addon: %s\n"
+"installed succesfully!"
+msgstr ""
+"Addon: %s\n"
+"installato correttamente!"
+
+msgid "Nothing to uninstall!"
+msgstr "Niente da rimuovere!"
+
+#, python-format
+msgid ""
+"Do you want remove the addon:\n"
+"%s?"
+msgstr ""
+"Vuoi rimuovere l'addon:\n"
+"%s?"
+
+#, python-format
+msgid "Do you want remove the addon: %s?"
+msgstr "Vuoi rimuovere l'addon: %s?"
+
+#, python-format
+msgid ""
+"Removing: %s.\n"
+"Please wait..."
+msgstr ""
+"Rimozione: %s.\n"
+"Attendere prego..."
+
+#, python-format
+msgid ""
+"Addons: %s\n"
+"removed succeffully."
+msgstr ""
+"Addons: %s\n"
+"Rimosso correttamente."
+
+msgid ""
+"Process Killed by user.\n"
+"Addon not removed completly!"
+msgstr ""
+"Processo interrotto da utente.\n"
+"Addon non rimosso correttamente!"
+
+# nemesisDownloader.py
+msgid "Downloading..."
+msgstr "Scaricamento..."
+
+#, python-format
+msgid "Downloading file: %s ..."
+msgstr "Ricezione file: %s ..."
+
+#, python-format
+msgid ""
+"Downloading file:\n"
+"%s ..."
+msgstr ""
+"Ricezione file:\n"
+"%s ..."
+
+#, python-format
+msgid "Download file %s failed!"
+msgstr "Ricezione file %s fallita!"
+
+#, python-format
+msgid ""
+"Download file\n"
+"%s failed!"
+msgstr ""
+"Ricezione file\n"
+"%s fallita!"
+
+#, python-format
+msgid "Download file %s finished!"
+msgstr "Ricezione file %s completata!"
+
+#, python-format
+msgid ""
+"Download file\n"
+"%s finished!"
+msgstr ""
+"Ricezione file\n"
+"%s completata!"
+
+msgid "Downloading killed by user!"
+msgstr "Scaricamento interrotto dall'utente!"
+
+msgid "Press OK to close window."
+msgstr "Premi OK per chiudere la finestra."
+
+# nemesisBluePanel.py
+msgid "System Settings"
+msgstr "Configurazione Sistema"
+
+msgid "System Information"
+msgstr "Informazioni Sistema"
+
+msgid "Parental Control Setup"
+msgstr "Gestione controllo parentale"
+
+msgid "Use arrows < > to select"
+msgstr "Usare le frecce < > per selezionare"
+
+#, python-format
+msgid "SoftCams (%s) :"
+msgstr "Emulatori (%s) :"
+
+msgid "Downloading Nemesis info..."
+msgstr "Ricezione Nemesis info..."
+
+#, python-format
+msgid "Stopping %s and starting %s."
+msgstr "Arresto %s e Avvio %s."
+
+#, python-format
+msgid "Restarting %s."
+msgstr "Riavvio %s."
+
+#, python-format
+msgid "Stopping %s."
+msgstr "Arresto %s."
+
+#, python-format
+msgid "Starting %s."
+msgstr "Avvio %s."
+
+#, python-format
+msgid ""
+"Please stop %s\n"
+"before start cardserver!"
+msgstr ""
+"Devi arrestare %s\n"
+"prima di avviare il cardserver!"
+
+# nemesisConsole
+msgid "Done"
+msgstr "Fatto"
+
+msgid "Please Press OK Button to close windows!"
+msgstr "Premere il tasto OK per chiudere la finestra!"
+
+msgid "Action killed by user"
+msgstr "Azione interrotta da utente"
+
+# nemesisEpgPanel
+#, python-format
+msgid ""
+"Problem to write on %s.\n"
+"Try to reboot the machine!"
+msgstr ""
+"Problema di scrittura su %s.\n"
+"Prova a riavviare la macchina!"
+
+msgid "Device in Read-Only"
+msgstr "Device in sola lettura"
+
+msgid ""
+"Do you want download EPG\n"
+"using e2_loadepg?"
+msgstr ""
+"Vuoi scaricare EPG\n"
+"usando e2_loadepg?"
+
+#, python-format
+msgid ""
+"Load EPG data in Enigma cache from:\n"
+"%s/epg.dat.\n"
+"Please Wait..."
+msgstr ""
+"Carico i dati EPG nella cache di Enigma2 da:\n"
+"%s/epg.dat.\n"
+"Attendere prego..."
+
+msgid ""
+"File epg.dat not found!\n"
+"Please use Download EPG with CrossEPG!"
+msgstr ""
+"Nessun file epg.dat é stato trovato!\n"
+"Avviare Scaricare EPG con CrossEPG!"
+
+msgid "Loading EPG"
+msgstr "Caricamento  EPG"
+
+msgid ""
+"Erasing EPG Chache.\n"
+"Please Wait..."
+msgstr ""
+"Cancellazione della cache EPG.\n"
+"Attendere prego..."
+
+msgid "Erasing EPG cache"
+msgstr "Cancellazione cache EPG"
+
+msgid "Enter event to search:"
+msgstr "Immettere evento da cercare:"
+
+msgid "Search in EPG cache"
+msgstr "Ricerca nella cache EPG"
+
+#, python-format
+msgid ""
+"Backup Enigma EPG data on:\n"
+"%s.\n"
+"Please Wait..."
+msgstr ""
+"Salvataggio dati EPG su:\n"
+"%s.\n"
+"Attendere prego..."
+
+msgid "Backing-up EPG"
+msgstr "Salvataggio EPG"
+
+msgid "e2_loadepg is running..."
+msgstr "e2_loadepg in corso..."
+
+msgid "Download EPG SKY-IT is running..."
+msgstr "Download EPG SKY-IT in corso..."
+
+msgid "Download EPG SKY-UK is running..."
+msgstr "Download EPG SKY-UK in corso..."
+
+#, python-format
+msgid ""
+"File %s/epg.dat.\n"
+"Not Found!"
+msgstr ""
+"File %s/epg.dat.\n"
+"Non trovato!"
+
+msgid "Not Found!"
+msgstr "Non trovato!"
+
+msgid "Backup Error"
+msgstr "Errore di salvataggio"
+
+msgid "EPG Search (enigma2)"
+msgstr "Ricerca EPG (enigma2)"
+
+msgid "EPG Search (Nemesis)"
+msgstr "Ricerca EPG (Nemesis)"
+
+msgid "EPG Search History (Nemesis)"
+msgstr "Cronologia ricerca EPG (Nemesis)"
+
+msgid "Download EPG with CrossEPG"
+msgstr "Scaricare EPG con CrossEPG"
+
+msgid "Start e2_loadepg (background)"
+msgstr "Avviare e2_loadepg (background)"
+
+msgid "Start e2_loadepg (interactive)"
+msgstr "Avviare e2_loadepg (inter.)"
+
+msgid "Backup Enigma EPG cache"
+msgstr "Salvataggio cache EPG"
+
+msgid "Load EPG in Enigma cache"
+msgstr "Caricare EPG nella cache"
+
+msgid "Erase Enigma EPG cache"
+msgstr "Svuota la cache EPG di Enigma"
+
+msgid "Create EPG Timer Entry"
+msgstr "Crea EPG Timer Entry"
+
+msgid "Open Timer List"
+msgstr "Apri lista Timer"
+
+msgid "View EPG Timer Log"
+msgstr "Visualizza EPG Log Timer"
+
+msgid "EPG Configuration"
+msgstr "Configurazione EPG"
+
+msgid "Sorry no events found matching to the search criteria."
+msgstr "Nessun evento corrispondente ai criteri di ricerca!."
+
+# nemesisInfo.py
+msgid "Show Device Status"
+msgstr "Visualizza stato device"
+
+msgid "Show Memory Status"
+msgstr "Visualizza stato memoria"
+
+msgid "Show Active Process"
+msgstr "Visualizza processi attivi"
+
+msgid "Show Service Info"
+msgstr "Visualizza informazioni servizio"
+
+msgid "Show Enigma Settings"
+msgstr "Visualizza configurazione Enigma"
+
+msgid "Active Process Information"
+msgstr "Info su processi attivi"
+
+msgid "Memory Status"
+msgstr "Stato Memoria"
+
+msgid "Usage Device Status"
+msgstr "Stato Occupazione Device"
+
+msgid "Enigma Setting Info"
+msgstr "Info configurazione Enigma"
+
+msgid "Nemesis Firmware Info"
+msgstr "Info Firmware Nemesis"
+
+msgid "Compact Flash Not Found"
+msgstr "Compact Flash non trovata"
+
+msgid "Usb Not Found"
+msgstr "Dispositivo Usb non trovato"
+
+msgid "Hard Disk Not Found"
+msgstr "Harddisk non trovato"
+
+# nemesisSetting.py
+msgid ""
+"Saving Setting.\n"
+"Please wait..."
+msgstr ""
+"Salvataggio configurazioni\n"
+"Attendere prego..."
+
+# nemesisShowPanel
+#, python-format
+msgid "File: %s not found!"
+msgstr "File: %s non trovato!"
+
+# nemesisUtility.py
+msgid "System Utility"
+msgstr "Utilità Sistema"
+
+msgid "No device for swap found!"
+msgstr "Nessun device per swap trovato!"
+
+msgid "Swap Error"
+msgstr "Errore Swap"
+
+msgid "Saving"
+msgstr "Salvataggio"
+
+msgid "Start/Stop Services"
+msgstr "Avvio/Arresto Servizi"
+
+msgid "View Services Logs"
+msgstr "Visualizza logs servizi"
+
+msgid "Manage Startup Services"
+msgstr "Gestione avvio servizi"
+
+msgid "Execute commands"
+msgstr "Esegui Comandi"
+
+msgid "Execute Users Scripts"
+msgstr "Esegui Scripts Utente"
+
+msgid "Manage Swap File"
+msgstr "Gestione File di Swap"
+
+msgid "Execute command: "
+msgstr "Esegui comando: "
+
+msgid "No Users Script Found!"
+msgstr "Nessun Script d'utente Trovato!"
+
+msgid "Execute script: "
+msgstr "Esegui script: "
+
+msgid "Manage Services"
+msgstr "Gestione dei Servizi"
+
+msgid "Start"
+msgstr "Avvio"
+
+msgid "Activate NFS Server at boot?"
+msgstr "Avviare NFS Server al boot?"
+
+msgid "Activate Samba Server at boot?"
+msgstr "Avviare Samba Server al boot?"
+
+msgid "Activate Automount at boot?"
+msgstr "Avviare Automount al boot?"
+
+msgid "Activate OpenVPN at boot?"
+msgstr "Avviare OpenVPN al boot?"
+
+msgid "Activate IpUpdate at boot?"
+msgstr "Avviare IpUpdate al boot?"
+
+msgid "Activate InaDyn at boot?"
+msgstr "Avviare InaDyn al boot?"
+
+msgid "Activate Dropbear (SSH) at boot?"
+msgstr "Avviare Dropbear (SSH) al boot?"
+
+msgid "Activate FTP Server at boot?"
+msgstr "Avviare FTP Server al boot?"
+
+msgid "Activate Crontab at boot?"
+msgstr "Avviare Crontab al boot?"
+
+msgid "Saving Setting. Please wait..."
+msgstr "Salvataggio configurazioni. Attendere prego..."
+
+msgid "Services Logs"
+msgstr "Logs dei Servizi"
+
+msgid "Show InaDyn Log"
+msgstr "Visualizza log InaDyn"
+
+msgid "Show SMB Server Log"
+msgstr "Visualizza log SMB Server"
+
+msgid "Show NMB Log"
+msgstr "Visualizza log NMB"
+
+msgid "Show FTP Server Log"
+msgstr "Visualizza log FTP Server"
+
+msgid "Show OpenVPN Log"
+msgstr "Visualizza log OpenVPN"
+
+msgid "Delete Log Files"
+msgstr "Cancellare files di log"
+
+msgid "Delete InaDyn log file?"
+msgstr "Cancellare InaDyn log file?"
+
+msgid "Delete NMB log file?"
+msgstr "Cancellare NMB log file?"
+
+msgid "Delete SMB log file?"
+msgstr "Cancellare SMB log file?"
+
+msgid "Delete FTP log file?"
+msgstr "Cancellare FTP log file?"
+
+msgid "Delete OpenVPN log file?"
+msgstr "Cancellare OpenVPN log file?"
+
+msgid "Delete Enigma Crash log file?"
+msgstr "Cancellare Enigma Crash log file?"
+
+msgid "Deleting log files. Please wait..."
+msgstr "Cancellazione files di log. Attendere Prego..."
+
+msgid "Activate Swap File?"
+msgstr "Attivare lo Swap file?"
+
+msgid "Swap file size"
+msgstr "Dimensioni file di Swap"
+
+msgid "Swap file location"
+msgstr "Percorso file di Swap"
+
+msgid "Saving swap config. Please wait..."
+msgstr "Salvataggio configurazione Swap. Attendere prego..."
+
+msgid "Creating Swap file..."
+msgstr "Creazione file di Swap..."
+
+msgid "Deleting Swap file..."
+msgstr "Rimozione file di Swap..."
+
+msgid "Nothing to do!"
+msgstr "Niente da configurare!"
+
+msgid "Swap process completed successfully!"
+msgstr "Creazione Swap file eseguita con successo!"
+
+msgid "Swap process killed by user!"
+msgstr "Processo interrotto da utente!"
+
+msgid "Manage Kernel Modules"
+msgstr "Gestione Moduli Kernel"
+
+msgid "Manage Modules"
+msgstr "Gestione Moduli"
+
+msgid "Save Enigma Setting"
+msgstr "Salva Configurazioni"
+
+# nemesis.xml
+msgid "Setup Devices"
+msgstr "Configura periferiche"
+
+msgid "Force Umount before Format"
+msgstr "Forza umount prima di formattare"
+
+msgid "Setup InfoBar OSD"
+msgstr "Configurazione InfoBar OSD"
+
+msgid "Setup Extended InfoBar OSD"
+msgstr "Configurazione InfoBar estesa OSD"
+
+msgid "Show Extended InfoBar Permanent"
+msgstr "Visualizza InfoBar estesa in modo permanente"
+
+msgid "Replace InfoBar with Extended InfoBar"
+msgstr "Sostituisci InfoBar con InfoBar estesa"
+
+msgid "Extended InfoBar delay (msec)"
+msgstr "Ritardo InfoBar estesa (msec)"
+
+msgid "Extended InfoBar delay on zap (msec)"
+msgstr "Ritardo Extended InfoBar su zap (msec)"
+
+msgid "Show decode network details"
+msgstr "Visualizza dettagli decodifica in rete"
+
+msgid "EMM Info delay (msec)"
+msgstr "Ritardo EMM Info (msec)"
+
+msgid "ECM Info delay (msec)"
+msgstr "Ritardo ECM Info (msec)"
+
+msgid "Set InfoBar Picon type"
+msgstr "Seleziona Picon per InfoBar"
+
+msgid "Setup Console/RC/Enigma"
+msgstr "Configurazione Console/RC/Enigma"
+
+msgid "Auto close Console on finished event"
+msgstr "Chiudere automaticamente la Console"
+
+msgid "Delay before auto close Console (sec)"
+msgstr "Ritardo prima della chiusura Console (sec)"
+
+msgid "Enable VirtualKeyBoard (Experimental)"
+msgstr "Abilitare la VirtualKeyBoard (Sperimentale)"
+
+msgid "Setup Display LCD/OLED"
+msgstr "Configurazione Display LCD/OLED"
+
+msgid "Enable Brightness on vision"
+msgstr "Abilita Luminosità in visione"
+
+msgid "Brightness on vision"
+msgstr "Lumin. in visione"
+
+msgid "Show Picon on LCD? (Need enigma restart)"
+msgstr "Visualizzare Picon su LCD? (Necessita riavvio GUI)"
+
+msgid "Set LCD Picon type"
+msgstr "Seleziona tipo Picon per LCD"
+
+msgid "Setup Picon"
+msgstr "Configurazione Picon"
+
+msgid "Can Install Picon in HDD?"
+msgstr "Posso installare le Picon's su HDD?"
+
+msgid "Setup InaDyn"
+msgstr "Configurazione InaDyn"
+
+msgid "Set user"
+msgstr "Imposta user"
+
+msgid "Set password"
+msgstr "Imposta password"
+
+msgid "Set domain name"
+msgstr "Imposta nome dominio"
+
+msgid "Set server"
+msgstr "Imposta server"
+
+msgid "Set update period (sec)"
+msgstr "Imposta periodo di aggiornamento (sec)"
+
+msgid "Set DNS System"
+msgstr "Seleziona sistema DNS"
+
+msgid "Set log file"
+msgstr "Imposta file di log"
+
+msgid "Setup EZ-IpUpdate"
+msgstr "Configurazione EZ-IpUpdate"
+
+msgid "Setup Proxy"
+msgstr "Configurazione Proxy"
+
+msgid "Activate proxy?"
+msgstr "Attivare proxy?"
+
+msgid "Set Proxy Server"
+msgstr "Imposta Server Proxy"
+
+msgid "Set Proxy Server port"
+msgstr "Imposta Porta Server Proxy"
+
+msgid "EPG Enigma cache save path"
+msgstr "Percorso di salvataggio cache EPG di Enigma"
+
+msgid "Number of displayed element on search"
+msgstr "Numero di elementi visualizzati nella ricerca"
+
+msgid "Zap delay before download EPG"
+msgstr "Ritardo Zap prima di scaricare EPG"
+
+msgid "Download EPG SKY-IT"
+msgstr "Scaricare EPG SKY-IT"
+
+msgid "Channel to download EPG SKY-IT"
+msgstr "Canale per la ricezione EPG SKY-IT"
+
+msgid "Download EPG SKY-UK"
+msgstr "Scaricare EPG SKY-UK"
+
+msgid "Channel to download EPG SKY-UK"
+msgstr "Canale per la ricezione EPG SKY-UK"
+
+msgid "Clear enigma cache before load EPG"
+msgstr "Pulisci la cache Enigma prima di caricare EPG"
+
+msgid "Clear Backup EPG after clear Enigma cache"
+msgstr "Cancellare backup EPG dopo la pulizia cache Enigma"
+
+msgid "Enable EPG Download via Timer"
+msgstr "Abiltare lo scarico EPG con il Timer"
+
+msgid "No Delay"
+msgstr "Nessuno"
+
+msgid "Setup OPKG/Upgrade Options"
+msgstr "Configurazione OPKG/Upgrade"
+
+msgid "Force overwrite on upgrade ?"
+msgstr "Forza aggiornamento pacchetti?"
+
+msgid "Overwrite all package during upgrade operation?"
+msgstr "Sovrascrivi tutti i pacchetti durante l'aggiornamento?"
+
+msgid "Overwrite configuration files"
+msgstr "Sovrascrivere i file di configurazione"
+
+msgid "Force overwrite on upgrade"
+msgstr "Forzare aggiornamento pacchetti"
+
+msgid "Force reinstall on install ?"
+msgstr "Forzare re-installazione dei pacchetti ?"
+
+msgid "Force reinstall package during install operation?"
+msgstr "Forzare la re-installazione dei pacchetti durante l'install?"
+
+msgid "Force reinstall on install"
+msgstr "Forzare re-installazione dei pacchetti"
+
+msgid "Enable fade in of InfoBar"
+msgstr "Abilitare dissolvenza su apertura InfoBar"
+
+msgid "Enable fade out of InfoBar"
+msgstr "Abilitare dissolvenza su chiusura InfoBar"
+
+msgid "Enable fade in of InfoBar on Zap"
+msgstr "Abilitare dissolvenza InfoBar su Zap"
+
+msgid "Speed for fade in/out of InfoBar (1-10)"
+msgstr "Velocità dissolvenza InfoBar (1-10)"
+
+msgid "Manage DVB-T/C Adapter"
+msgstr "Gestione DVB-T/C Adapter"
+
+msgid ""
+"Modules for support\n"
+"USB DVB-T/C adapter\n"
+"are not installed!\n"
+"\n"
+"Press green button\n"
+"to install it."
+msgstr ""
+"I moduli per il supporto\n"
+"degli adapter USB DVB-T/C\n"
+"non sono installati!\n"
+"\n"
+"Premere il tasto verde\n"
+"per installarli."
+
+msgid ""
+"Do you want install the support\n"
+"packages, for DVB-T/C adapters?"
+msgstr ""
+"Vuoi installare i pacchetti, per il supporto\n"
+"degli adapter USB DVB-T/C?"
+
+msgid ""
+"Do you want remove the support\n"
+"packages, for DVB-T/C adapters?"
+msgstr ""
+"Vuoi rimuovere i pacchetti, per il supporto\n"
+"degli adapter USB DVB-T/C?"
+
+msgid "Install Driver"
+msgstr "Installare Driver"
+
+msgid "Remove Driver"
+msgstr "Rimozione Driver"
+
+msgid ""
+"New version is available!\n"
+"Current version: %sr%s\n"
+"New Version: %sr%s\n"
+"Please upgrade Nemesis firmware!"
+msgstr ""
+"Disponibile nuova versione!\n"
+"Versione corrente: %sr%s\n"
+"Nuova Versione: %sr%s\n"
+"Aggiornare Nemesis firmware!"
+
+msgid ""
+"New version SVN(%sr%s) is available!\n"
+"Current version: %sr%s\n"
+"Min Version required: %sr%s\n"
+"Upgrade not possible!"
+msgstr ""
+"Nuova versione SVN(%sr%s) disponibile!\n"
+"Versione corrente: %sr%s\n"
+"Versione min. richiesta: %sr%s\n"
+"Aggiornamento non possibile!"
+
+msgid ""
+"Server connection timeout!"
+"\nPlease try again later."
+msgstr ""
+"Timeout di connessione al Server!"
+"\nPrego riprovare più tardi."
+
+msgid "OPKG Update connection timeout (20-60 sec)"
+msgstr "Timeout di connessione OPKG update (20-60 sec)"
+
+msgid "Show firmware upgrade availability on Blue Panel"
+msgstr "Mostra disponiblitità firmware upgrade nel Blue Panel"
+
+msgid "Image Version"
+msgstr "Versione Immagine"
+
+msgid ""
+"Not enough free space on flash to perform Upgrade!\n"
+"Upgrade require at least %d kB free on Flash.\n"
+"Please remove some addons or skins before upgrade."
+msgstr ""
+"Spazio insufficente per eseguire l'aggiornamento!\n"
+"L'aggiornamento richiede almeno %d kB liberi in Flash.\n"
+"Rimuovere qualche Addons o Skins prima di aggiornare."
+
+msgid ""
+"No Upgrade available!\n"
+"Your decoder is up to date."
+msgstr ""
+"Nessun aggiornamento disponibile!\n"
+"Il vostro decoder é aggiornato."
+
+msgid "Add to EPG Blacklist"
+msgstr "Aggiungi alla EPG Blacklist"
+
+msgid "Remove from EPG Blacklist"
+msgstr "Rimuovi dalla EPG Blacklist"
+
+msgid "CrossEPG Setup"
+msgstr "Configurazione CrossEPG"
+
+msgid "January"
+msgstr "Gennaio"
+
+msgid "February"
+msgstr "Febbraio"
+
+msgid "March"
+msgstr "Marzo"
+
+msgid "April"
+msgstr "Aprile"
+
+msgid "May"
+msgstr "Maggio"
+
+msgid "June"
+msgstr "Giugno"
+
+msgid "July"
+msgstr "Luglio"
+
+msgid "August"
+msgstr "Agosto"
+
+msgid "September"
+msgstr "Settembre"
+
+msgid "October"
+msgstr "Ottobre"
+
+msgid "November"
+msgstr "Novembre"
+
+msgid "December"
+msgstr "Dicembre"
+
+msgid "Please restart Enigma to apply the new configuration."
+msgstr "Riavviare enigma per attivare la nuova configurazione."
+
+msgid "RC-Setup (Need enigma restart)"
+msgstr "Configurazione RC (Necessita riavvio GUI)"
+
+msgid "Select Enigma Version (Need enigma restart)"
+msgstr "Seleziona versione Enigma (Necessita riavvio GUI)"
+
+msgid "LED Manager"
+msgstr "Gestione LED"
+
+msgid "LED Manager..."
+msgstr "Configurazione LED..."
+
+msgid "Enable Clean History ZAP (Button 0)"
+msgstr "Abilitare pulizia cronologia ZAP (Tasto 0)"
+
+msgid "Zap To Channel 1 after history cleaning"
+msgstr "Zap al canale 1 dopo la pulizia cronologia"
+
+msgid "InfoBar EPG text lenght (Character)"
+msgstr "Lunghezza testo EPG su InfoBar (Caratteri)"
+
+msgid "No EPG data available"
+msgstr "Nessun dato EPG disponibile"
+
+msgid "Go to standby after (unwanted) reboot"
+msgstr "Vai in standby dopo un reboot non gestito"
+
+msgid "Enable deepstandby on front power button long press"
+msgstr "Abilita deepstandby su pressione lunga tasto frontale"
+
+msgid "Manage"
+msgstr "Gestione"
+
+msgid "No preview Image available!"
+msgstr "Nessuna anteprima disponibile!"
+
+msgid ""
+"The selected Plugin has a preview."
+"\nPress OK button to show it on full screen."
+msgstr ""
+"Il Plugin selezionato ha un'anteprima."
+"\nPremere OK per visualizzarla a schermo intero."
+
+msgid ""
+"Loading Preview....\n"
+"Please Wait.."
+msgstr ""
+"Caricamento anteprima....\n"
+"Attendere prego.."
+
+msgid "Free space: %d kB (%d%%)"
+msgstr "Spazio libero: %d kB (%d%%)"
+
+msgid "Utility"
+msgstr "Utilità"
+
+msgid "Press OK to Start/Stop the service"
+msgstr "Premere OK per avviare/fermare il servizio"
+
+msgid "Press OK to Enable/Disable the kernel module"
+msgstr "Premere OK per abilitare/disabilitare il modulo del kernel"
+
+msgid "Choice Extended InfoBar type (Need enigma restart)"
+msgstr "Selezionare la InfoBar estesa (Necessita riavvio GUI)"
+
+msgid ""
+"\n"
+"After pressing Yes, please wait!"
+msgstr ""
+"\n"
+"Dopo aver premuto Si, attendere prego!"
+
+msgid "Storage devices"
+msgstr "Gestione periferiche"
+
+msgid "Confirm"
+msgstr "Conferma"
+
+msgid ""
+"Dreambox will be now rebooted to disable DVB/T.\n"
+"Do You want reboot the box now?"
+msgstr ""
+"Il decoder deve essere riavviato per disabilitare il supporto DVB/T.\n"
+"Riavvare adesso?"
+
+msgid "Enigma setting saved!"
+msgstr "Configurazione Enigam salvata!"
+
+msgid "Manage Devices"
+msgstr "Gestione periferiche"

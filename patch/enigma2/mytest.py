@@ -126,6 +126,18 @@ from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 plugins.runEarlyPlugins(resolveFilename(SCOPE_PLUGINS))
 
+#Activate Swap
+print "[SWAP] Activate Swapfile"
+system("[ -e /media/usb/swapfile ] && swapon /media/usb/swapfile")
+system("[ -e /media/usb1/swapfile ] && swapon /media/usb1/swapfile")
+system("[ -e /media/usb2/swapfile ] && swapon /media/usb2/swapfile")
+system("[ -e /media/cf/swapfile ] && swapon /media/cf/swapfile")
+system("[ -e /media/hdd/swapfile ] && swapon /media/hdd/swapfile")
+
+#Restore EPG
+print "[EPG] Restore EPG data"
+system("/etc/init.d/RestoreEPG.sh")
+
 def LoadEPG (instance):
 	import epgloader
 	epgloader.LoadEPG()

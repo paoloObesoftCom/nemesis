@@ -1,6 +1,5 @@
 from Screens.Screen import Screen
 from Screens.InputBox import InputBox
-from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.Console import Console
 from Components.FileList import FileList
@@ -58,9 +57,13 @@ def checkDev():
 		for line in f.readlines():
 			if (line.find('/cf') != -1):
 				mydev.append(('/media/cf/','COMPACT FLASH'))
-			if (line.find('/media/usb') != -1):
+			if (line.find('/media/usb ') != -1):
 				mydev.append(('/media/usb/','USB PEN'))
-			if (line.find('/hdd') != -1):
+			if (line.find('/media/usb1 ') != -1):
+				mydev.append(('/media/usb1/','USB1 PEN'))
+			if (line.find('/media/usb2 ') != -1):
+				mydev.append(('/media/usb2/','USB2 PEN'))
+			if (line.find('/media/hdd') != -1):
 				mydev.append(('/media/hdd/','HARD DISK'))
 		f.close()
 		if mydev:
@@ -97,10 +100,9 @@ class NUtility(Screen):
 			"red": self.close,
 			'back': self.close
 		})
-		self.saveConfTimer = eTimer()
-		self.saveConfTimer.timeout.get().append(self.saveConf)
 		self.onShown.append(self.setWindowTitle)
 		self.onLayoutFinish.append(self.updateList)
+		self["list"].onSelectionChanged.append(self.setWindowTitle)
 	
 	def setWindowTitle(self):
 		self.setTitle(_("System Utility"))
@@ -126,8 +128,7 @@ class NUtility(Screen):
 		elif (self.sel == "NSwap"):
 			if checkDev() == None:
 				msg = _('No device for swap found!')
-				confBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
-				confBox.setTitle(_("Swap Error"))
+				self.setTitle(msg)
 			else:
 				self.session.open(NSwap)
 		elif (self.sel == "NetBrowser"):
@@ -135,16 +136,9 @@ class NUtility(Screen):
 		elif (self.sel == "ledManager"):
 			self.session.open(ledManager)
 		elif (self.sel == "Csave"):
-			msg = _('Saving Enigma Setting\nPlease Wait...')
-			self.confBox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, enable_input = False)
-			self.confBox.setTitle(_("Saving"))
-			self.saveConfTimer.start(50, False)
+			configfile.save()
+			self.setTitle(_("Enigma setting saved!"))
 		
-	def saveConf(self):
-		self.saveConfTimer.stop()
-		configfile.save()
-		self.confBox.close()
-	
 	def updateList(self):
 		del self.list[:]
 		skin_path = GetSkinPath()

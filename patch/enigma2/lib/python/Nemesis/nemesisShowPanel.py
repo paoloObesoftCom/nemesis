@@ -1,28 +1,39 @@
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
 from Components.Sources.List import List
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Label import Label
+from Components.Sources.StaticText import StaticText
 
 class nemesisShowPanel(Screen):
 	__module__ = __name__
 
-	def __init__(self, session, file, Wtitle):
+	def __init__(self, session, file , Wtitle, text = None):
 		Screen.__init__(self, session)
 		
 		self.file = file
+		self.text = text
 		self.Wtitle = Wtitle
 		self.list = []
 		self["close"] = Label(_("Close"))
+		self["abouttxt"] = Label()
+		self["conn"] = StaticText('')
+		self["list"] = List()
 
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {
 			'red': self.close,
-			'ok': self.openDetails,
-			'back': self.close,
+			'ok': self.close,
+			'back': self.close
 			})
 		
-		self.loadData()
-		self["list"] = List(self.list)
+		if self.file: 
+			self.loadData()
+			self["abouttxt"].hide()
+			self["list"] = List(self.list)
+			self["list"].onSelectionChanged.append(self.openDetails)
+			self.onLayoutFinish.append(self.openDetails)
+		else:
+			if self.text: 
+				self["abouttxt"].setText(self.text)
 		
 		self.onShown.append(self.setWindowTitle)
 	
@@ -40,7 +51,5 @@ class nemesisShowPanel(Screen):
 			self.list.append(mess)
 	
 	def openDetails(self):
-		message = self["list"].getCurrent()
-		if message:
-			mbox = self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
-			mbox.setTitle(_("Details"))
+		if self['list'].count() > 0:
+			self["conn"].text = self["list"].getCurrent()

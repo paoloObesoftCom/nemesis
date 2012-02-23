@@ -1,12 +1,11 @@
 <skin>
 <!-- ######################## mmark_eXcort_luX_Nemesis ############################ -->
 <!-- ########################  version 1.1 15-02-2012  ############################ -->
-
 <!-- (001) [SYSTEM] Input Box ####### (15-01-12) -->
-<screen name="ChoiceBox" position="center,center" size="600,460" title="Input">
+<screen name="ChoiceBox" position="0,0" size="700,600" title="Input Box" >
         <ePixmap pixmap="skin_default/menu/backbox.png" zPosition="-1" position="0,0" size="700,600" alphatest="on" />
-	<widget name="text" position="20,20" size="560,25" font="Regular;20" transparent="1" />
-	<widget name="list" position="20,40" size="560,335" scrollbarMode="showOnDemand" selectionPixmap="skin_default/icons/ls615x26.png" transparent="1" />
+	<widget name="text" position="20,20" size="560,25" font="Regular;24" foregroundColor="bluette" transparent="1" />
+	<widget name="list" position="20,40" size="560,335" scrollbarMode="showOnDemand" selectionPixmap="skin_default/icons/ls1120x28.png" transparent="1" />
 	<applet type="onLayoutFinish">
 # this should be factored out into some helper code, but currently demonstrates applets.
 from enigma import eSize, ePoint
@@ -245,22 +244,22 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 
 <!-- (018) [SYSTEM] Downloader -->
 <screen name="nemesisDownloader" position="center,center" size="550,300" flags="wfNoBorder" >
- <ePixmap position="0,0" zPosition="-1" size="550,300" pixmap="skin_default/menu/fr_download.png" />
- <ePixmap pixmap="skin_default/dw_stop.png" position="0,230" size="130,40" zPosition="1" backgroundColor="transpBlack" />
- <widget source="fname" render="Label" position="55,80" size="430,60" font="Regular;18" halign="center" valign="center" foregroundColor="bluette" backgroundColor="transpBlack" transparent="1" />
- <ePixmap position="57,164" zPosition="1" size="432,21" pixmap="skin_default/br_downgr.png" alphatest="blend" transparent="1" />
- <widget source="progressbar" render="Progress" pixmap="skin_default/br_downco.png" position="57,164" size="432,21" zPosition="2" transparent="1" />
- <widget source="status" render="Label" position="80,270" zPosition="3" size="390,28" font="Regular;22" halign="center" backgroundColor="black" />
+	<ePixmap position="0,0" zPosition="-1" size="550,300" pixmap="skin_default/menu/fr_download.png" />
+	<ePixmap pixmap="skin_default/dw_stop.png" position="0,230" size="130,40" zPosition="1" backgroundColor="transpBlack" />
+	<widget source="fname" render="Label" position="55,80" size="430,60" font="Regular;18" halign="center" valign="center" foregroundColor="bluette" backgroundColor="transpBlack" transparent="1" />
+	<ePixmap position="57,164" zPosition="1" size="432,21" pixmap="skin_default/br_downgr.png" alphatest="blend" transparent="1" />
+	<widget source="progressbar" render="Progress" pixmap="skin_default/br_downco.png" position="57,164" size="432,21" zPosition="2" transparent="1" />
+	<widget source="status" render="Label" position="10,268" zPosition="3" size="530,28" font="Regular;22" halign="center" backgroundColor="black" />
 </screen>
 
 <!-- (019) [SYSTEM] UpdatePlugin -->
 <screen name="UpdatePlugin" position="center,center" size="550,300" title="Software Update" flags="wfNoBorder" >
- <ePixmap position="0,0" zPosition="-1" size="550,300" pixmap="skin_default/menu/fr_download.png" />
- <ePixmap position="58,164" zPosition="1" size="432,21" pixmap="skin_default/br_downgr.png" alphatest="blend" transparent="1" />
- <widget name="activityslider" position="58,164" zPosition="2" size="432,21" pixmap="skin_default/br_downco.png" transparent="1" />
- <widget name="slider" position="131,200" zPosition="3" size="288,14" pixmap="skin_default/upd_cl.png" transparent="1" />
- <widget source="package" render="Label" position="0,265" size="520,40"  font="Regular;18" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
- <widget source="status"  render="Label" position="60,65" size="430,100" font="Regular;18" halign="center" valign="center" foregroundColor="bluette" backgroundColor="#25062748" transparent="1" />
+	<ePixmap position="0,0" zPosition="-1" size="550,300" pixmap="skin_default/menu/fr_download.png" />
+	<ePixmap position="58,164" zPosition="1" size="432,21" pixmap="skin_default/br_downgr.png" alphatest="blend" transparent="1" />
+	<widget name="activityslider" position="58,164" zPosition="2" size="432,21" pixmap="skin_default/br_downco.png" transparent="1" />
+	<widget name="slider" position="131,200" zPosition="3" size="288,14" pixmap="skin_default/upd_cl.png" transparent="1" />
+	<widget source="package" render="Label" position="0,263" size="550,40"  font="Regular;18" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
+	<widget source="status"  render="Label" position="60,65" size="430,100" font="Regular;18" halign="center" valign="center" foregroundColor="bluette" backgroundColor="#25062748" transparent="1" />
 </screen>
 
 <!-- (020) [SYSTEM] Console  -->
@@ -1063,30 +1062,31 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="Title" render="Label" zPosition="1" position="60,554" size="1200,40" halign="left" font="Regular; 20" foregroundColor="bluette" transparent="1" backgroundColor="#333333" />
 	</screen>
 	
-	<!-- (107) [BLUE - RED - SERVICELOGS] View Log Services -->
+	<!-- 	(107) [BLUE - RED - SERVICELOGS] View Log Services -->
 	<screen name="nemesisShowPanel" position="center,center" size="1280,720" title="View logs Services" flags="wfNoBorder" >
 		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/menu/fr_main_channels.png"/>
 		<ePixmap position="56,600" zPosition="1" size="180,38" pixmap="skin_default/menu/colorbar.png" alphatest="blend" transparent="1" />
-		<ePixmap position="0,0" zPosition="1" size="455,69" pixmap="skin_default/menu/tx_log.png" alphatest="blend" transparent="1" />
+		<ePixmap position="0,0" zPosition="1" size="455,69" pixmap="skin_default/menu/tx_information.png" alphatest="blend" transparent="1" />
 		<ePixmap position="910,405" zPosition="1" size="220,220" pixmap="skin_default/menu/ico_log.png" alphatest="blend" transparent="1"/>
 		<ePixmap position="220,600" zPosition="2" size="400,40" pixmap="skin_default/menu/eXc.png" alphatest="blend" transparent="1" />	
- 		<widget source="list" render="Listbox" position="70,120" size="720,400" scrollbarMode="showOnDemand" selectionPixmap="skin_default/icons/ls1120x28.png" transparent="1" >
-        		<convert type="StringList" />
-        	</widget>
+		<widget name="abouttxt" zPosition="1" position="70,120" size="720,330" valign="center" halign="center" font="Regular;24" transparent="1" foregroundColor="#0099bad6" backgroundColor="transpBlack" />
+ 		<widget source="list" render="Listbox" position="70,120" size="720,330" scrollbarMode="showOnDemand" selectionPixmap="skin_default/icons/ls1120x28.png" transparent="1" >
+			<convert type="StringList" />
+		</widget>
 		<!-- Widget Pig -->
 		<widget source="session.VideoPicture" render="Pig" position=" 839,112" size="382,218" zPosition="3" backgroundColor="#df0b1300"/>
 		<!-- Service Name -->
 		<widget source="session.CurrentService" render="Label" position="818,350" size="420,38" zPosition="2" font="Regular;24" halign="center" noWrap="1" transparent="1" foregroundColor="bluette">
 			<convert type="ServiceName">Name</convert>
 		</widget>
+		<ePixmap position="55,450" zPosition="-1" size="822,21" pixmap="skin_default/menu/addcam.png" alphatest="blend" transparent="1" />
+		<widget source="conn" render="Label" zPosition="1" position="80,455" size="680,90" font="Regular;20" valign="center" halign="left" transparent="1" foregroundColor="bluette" backgroundColor="#333333"/>	
  		<widget name="close" position="5,595" zPosition="2" size="250,40" font="Regular;22" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
 		<!-- Informazioni Nemesis -->
-		<widget source="Title" render="Label" zPosition="1" position="60,554" size="1200,40" halign="left" font="Regular; 20" foregroundColor="bluette" transparent="1" backgroundColor="#333333" />
 	</screen>  
 	
 	<!-- (108) [BLUE - RED - SERVICELOGS - YELLOW] Delete Logs -->
     	<screen name="deleteLog" position="center,center" size="1280,720" title="Delete log files" flags="wfNoBorder" >
-		<ePixmap pixmap="skin_default/menu/backbox.png" zPosition="-1" position="0,0" size="750,520" alphatest="on" />
 		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/menu/fr_main_channels.png"/>
 		<ePixmap position="56,600" zPosition="1" size="580,38" pixmap="skin_default/menu/colorbar.png" alphatest="blend" transparent="1" />
 		<ePixmap position="0,0" zPosition="1" size="455,69" pixmap="skin_default/menu/tx_log.png" alphatest="blend" transparent="1" />
@@ -1133,11 +1133,11 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
   		<widget source="session.CurrentService" render="Label" position="818,350" size="420,38" zPosition="2" font="Regular;24" halign="center" noWrap="1" transparent="1" foregroundColor="bluette" backgroundColor="background">
    			<convert type="ServiceName">Name</convert>
   		</widget>
-  		<widget source="key_red" render="Label" position="5,595" size="250,40" zPosition="2" font="Regular;22" halign="center" valign="center" foregroundColor="white" transparent="1"/>
-  		<widget source="key_green" render="Label" position="205,595" size="250,40" zPosition="2" font="Regular;19" halign="center" valign="center" foregroundColor="white" transparent="1"/>
-  		<widget source="key_yellow" render="Label" position="405,595" size="250,40" zPosition="2" font="Regular;22" halign="center" valign="center" foregroundColor="white" backgroundColor="#a18120" transparent="1" />
-  		<widget source="key_blue" render="Label" position="605,595" size="250,40" zPosition="2" font="Regular;22" halign="center" valign="center" foregroundColor="white" transparent="1"/>
-  		<widget source="infotext" render="Label" position="50,555" size="720,30" zPosition="10" font="Regular;24" halign="center" valign="center" foregroundColor="bluette" backgroundColor="#25062748" transparent="1" />
+  		<widget source="key_red" render="Label" position="5,595" size="250,40" zPosition="2" font="Regular;20" halign="center" valign="center" foregroundColor="white" transparent="1"/>
+  		<widget source="key_green" render="Label" position="205,595" size="250,40" zPosition="2" font="Regular;20" halign="center" valign="center" foregroundColor="white" transparent="1"/>
+  		<widget source="key_yellow" render="Label" position="405,595" size="250,40" zPosition="2" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="#a18120" transparent="1" />
+  		<widget source="key_blue" render="Label" position="605,595" size="250,40" zPosition="2" font="Regular;20" halign="center" valign="center" foregroundColor="white" transparent="1"/>
+  		<widget source="infotext" render="Label" position="60,555" size="720,30" zPosition="10" font="Regular;24" halign="left" valign="center" foregroundColor="bluette" backgroundColor="#25062748" transparent="1" />
 	</screen>	
 
 	<!--(110) [BLUE - RED - NETWORK BROWSER] Advanced -->
@@ -1251,7 +1251,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 	
 	<!-- (114) [BLUE - RED] Swap Manager -->
 	<screen name="NSwap" position="center,center" size="1280,720" title="Swap file management" flags="wfNoBorder" >
-		<ePixmap pixmap="skin_default/menu/backbox.png" zPosition="-1" position="0,0" size="750,520" alphatest="on" />
 		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/menu/fr_main_channels.png"/>
 		<ePixmap position="56,600" zPosition="1" size="580,38" pixmap="skin_default/menu/colorbar.png" alphatest="blend" transparent="1" />
 		<ePixmap position="0,0" zPosition="1" size="455,69" pixmap="skin_default/menu/tx_swap.png" alphatest="blend" transparent="1" />
@@ -1273,7 +1272,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 	
 	<!-- (115) [BLUE - RED] LED Manager -->
 	<screen name="ledManager" position="center,center" size="1280,720" title="LED Manager" flags="wfNoBorder" >
-		<ePixmap pixmap="skin_default/menu/backbox.png" zPosition="-1" position="0,0" size="750,520" alphatest="on" />
 		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/menu/fr_main_channels.png"/>
 		<ePixmap position="56,600" zPosition="1" size="380,38" pixmap="skin_default/menu/colorbar.png" alphatest="blend" transparent="1" />
 		<ePixmap position="0,0" zPosition="1" size="455,69" pixmap="skin_default/menu/tx_led.png" alphatest="blend" transparent="1" />
@@ -1296,7 +1294,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/menu/fr_main_channels.png"/>
 		<ePixmap position="56,600" zPosition="1" size="380,38" pixmap="skin_default/menu/colorbar.png" alphatest="blend" transparent="1" />
 		<ePixmap position="0,0" zPosition="1" size="600,69" pixmap="skin_default/menu/tx_dvb.png" alphatest="blend" transparent="1" />
-    		<widget source="conn" render="Label" position="830,385" size="400,250" zPosition="1" font="Regular;22" halign="center" valign="center" foregroundColor="green" transparent="1" />
+		<widget source="conn" render="Label" position="830,385" size="400,250" zPosition="1" font="Regular;22" halign="center" valign="center" foregroundColor="green" transparent="1" />
 		<!--Lista Elementi --> 		
 		<widget source="list" render="Listbox" position="70,120" size="700,400" zPosition="1" scrollbarMode="showOnDemand" selectionPixmap="skin_default/icons/ls700x38.png" transparent="1">
 			<convert type="TemplatedMultiContent">
@@ -1424,7 +1422,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 
 	<!-- (126) [BLUE - GREEN - INFORMATIONS] Process Info -->
 	<screen name="showRunProcessInfo" position="center,center" size="1280,720" title="Process Info">
-		<ePixmap pixmap="skin_default/menu/backbox.png" zPosition="-1" position="0,0" size="750,520" alphatest="on" />
 		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/menu/fr_main_channels.png"/>
 		<ePixmap position="0,0" zPosition="1" size="550,69" pixmap="skin_default/menu/tx_activeproc.png" alphatest="blend" transparent="1" />
 		<ePixmap position="930,425" zPosition="1" size="370,204" pixmap="skin_default/menu/ico_telnet.png" alphatest="blend" transparent="1"/>
@@ -1465,7 +1462,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 
 	<!-- (128) [BLUE - GREEN - INFORMATIONS] Show E2 Config -->
 	<screen name="showEnigmaInfo" position="center,center" size="1280,720" title="Show configuration Enigma2">
-		<ePixmap pixmap="skin_default/menu/backbox.png" zPosition="-1" position="0,0" size="750,520" alphatest="on" />
 		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/menu/fr_main_channels.png"/>
 		<ePixmap position="0,0" zPosition="1" size="550,69" pixmap="skin_default/menu/tx_enigma.png" alphatest="blend" transparent="1" />
 		<ePixmap position="860,425" zPosition="1" size="370,204" pixmap="skin_default/menu/ico_information.png" alphatest="blend" transparent="1"/>
@@ -1584,7 +1580,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget name="key_green" position="205,595" size="250,40" zPosition="2" font="Regular;22" valign="center" halign="center" foregroundColor="white" transparent="1" />	
 		<!--Status Connessione -->
 		<ePixmap position="55,450" zPosition="-1" size="822,21" pixmap="skin_default/menu/addcam.png" alphatest="blend" transparent="1" />
-		<widget source="conn" render="Label" zPosition="1" position="80,460" size="680,80" font="Regular;20" valign="center" halign="left" transparent="1" backgroundColor="#333333"/>	
+		<widget source="conn" render="Label" zPosition="1" position="80,455" size="680,90" font="Regular;20" valign="center" halign="left" transparent="1" backgroundColor="#333333"/>	
 		<!-- Informazioni Nemesis -->
 		<widget source="Title" render="Label" zPosition="1" position="60,554" size="1200,40" halign="left" font="Regular; 20" foregroundColor="bluette" transparent="1" backgroundColor="#333333" />
 	</screen>
@@ -1647,7 +1643,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="spaceusedtext" render="Label" zPosition="1" position="830,390" size="402,30" halign="left" font="Regular; 21" foregroundColor="bluette" transparent="1" backgroundColor="#333333" />
 		<eLabel position="830,420" size="400,1" backgroundColor="darkgrey" />
 		<ePixmap position="830,460" zPosition="1" size="402,21" pixmap="skin_default/br_downbw.png" alphatest="blend" transparent="1" />
-		<widget source="progressbar" render="Progress" pixmap="skin_default/br_downco.png" position="830,460" size="402,21" zPosition="2" transparent="1" />
+		<widget source="progressbar" render="Progress" pixmap="skin_default/br_downco.png" position="830,460" size="400,21" zPosition="2" transparent="1" />
 		<widget source="type" render="Label" position="830 ,490" size="402,30" zPosition="1" halign="left" font="Regular; 21" foregroundColor="bluette" backgroundColor="black" />
 		<eLabel position="830,520" size="400,1" zPosition="5" backgroundColor="darkgrey" />
 		<widget source="conn" render="Label" position="840,515" size="400,120" font="Regular;16" halign="center" valign="center" foregroundColor="white" backgroundColor="black" zPosition="2" />
@@ -1748,7 +1744,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="spaceusedtext" render="Label" zPosition="1" position="830,390" size="402,30" halign="left" font="Regular; 21" foregroundColor="bluette" transparent="1" backgroundColor="#333333" />
 		<eLabel position="830,420" size="400,1" backgroundColor="darkgrey" />
 		<ePixmap position="830,460" zPosition="1" size="402,21" pixmap="skin_default/br_downbw.png" alphatest="blend" transparent="1" />
-		<widget source="progressbar" render="Progress" pixmap="skin_default/br_downco.png" position="830,460" size="402,21" zPosition="2" transparent="1" />
+		<widget source="progressbar" render="Progress" pixmap="skin_default/br_downco.png" position="830,460" size="400,21" zPosition="2" transparent="1" />
 		<widget source="type" render="Label" position="830,490" size="402,24" zPosition="1" halign="left" font="Regular; 21" foregroundColor="bluette" backgroundColor="black" />
 		<eLabel position="830,520" size="400,1" zPosition="5" backgroundColor="darkgrey" />
 		<widget source="conn" render="Label" position="840,515" size="400,120" font="Regular;16" halign="center" valign="center" foregroundColor="white" backgroundColor="black" zPosition="2" />
@@ -1783,7 +1779,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="spaceusedtext" render="Label" zPosition="1" position="830,390" size="402,30" halign="left" font="Regular; 21" foregroundColor="bluette" transparent="1" backgroundColor="#333333" />
 		<eLabel position="830,420" size="400,1" backgroundColor="darkgrey" />
 		<ePixmap position="830,460" zPosition="1" size="402,21" pixmap="skin_default/br_downbw.png" alphatest="blend" transparent="1" />
-		<widget source="progressbar" render="Progress" pixmap="skin_default/br_downco.png" position="830,460" size="402,21" zPosition="2" transparent="1" />
+		<widget source="progressbar" render="Progress" pixmap="skin_default/br_downco.png" position="830,460" size="400,21" zPosition="2" transparent="1" />
 		<widget source="type" render="Label" position="830,490" size="402,30" zPosition="1" halign="left" font="Regular; 21" foregroundColor="bluette" backgroundColor="black" />
 		<eLabel position="830,520" size="400,1" zPosition="5" backgroundColor="darkgrey" />
 		<widget source="conn" render="Label" position="840,515" size="400,120" font="Regular;16" halign="center" valign="center" foregroundColor="white" backgroundColor="black" zPosition="2" />
@@ -1819,7 +1815,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="spaceusedtext" render="Label" zPosition="1" position="830,390" size="402,30" halign="left" font="Regular; 21" foregroundColor="bluette" transparent="1" backgroundColor="#333333" />
 		<eLabel position="830,420" size="400,1" backgroundColor="darkgrey" />
 		<ePixmap position="830,460" zPosition="1" size="402,21" pixmap="skin_default/br_downbw.png" alphatest="blend" transparent="1" />
-		<widget source="progressbar" render="Progress" pixmap="skin_default/br_downco.png" position="830,460" size="402,21" zPosition="2" transparent="1" />
+		<widget source="progressbar" render="Progress" pixmap="skin_default/br_downco.png" position="830,460" size="400,21" zPosition="2" transparent="1" />
 		<widget source="type" render="Label" position="830,490" size="402,30" zPosition="1" halign="left" font="Regular; 21" foregroundColor="bluette" backgroundColor="black" />
 		<eLabel position="830,520" size="400,1" zPosition="5" backgroundColor="darkgrey" />
 		<widget source="conn" render="Label" position="840,515" size="400,120" font="Regular;16" halign="center" valign="center" foregroundColor="white" backgroundColor="black" zPosition="2" />
@@ -1908,8 +1904,8 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/menu/fr_main_channels.png"/>
 		<ePixmap position="56,600" zPosition="1" size="180,38" pixmap="skin_default/menu/colorbar.png" alphatest="blend" transparent="1" />
 		<ePixmap position="220,600" zPosition="2" size="400,40" pixmap="skin_default/menu/eXc.png" alphatest="blend" transparent="1" />
-		<ePixmap position="830,410" zPosition="2" size="290,250" pixmap="skin_default/menu/ico_epgcenter.png" alphatest="blend" transparent="1" />
 		<ePixmap position="0,0" zPosition="1" size="600,69" pixmap="skin_default/menu/tx_epgcc.png" alphatest="blend" transparent="1" />
+		<widget source="conn" render="Label" position="830,385" size="400,250" zPosition="1" font="Regular;18" halign="center" valign="center" foregroundColor="bluette" transparent="1" />
 		<!--Lista Elementi --> 		
 		<widget source="list" render="Listbox" position="70,120" zPosition="1" size="730,510" scrollbarMode="showOnDemand" enableWrapAround="1" selectionPixmap="skin_default/icons/ls700x38.png" backgroundColor="transpBlack" transparent="1">
 			<convert type="TemplatedMultiContent">
@@ -2803,18 +2799,24 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 
 	<!-- (227) [MENU - SETUP - SYSTEM - HDD] HardDisk Selection -->
 	<screen name="HarddiskSelection" position="center,center" size="710,300" title="Select HDD">
-	        <ePixmap pixmap="skin_default/menu/backbox.png" zPosition="-1" position="0,0" size="710,460" alphatest="on" />
-		<widget name="hddlist" position="20,20" size="670,435" transparent="1" />
+	    	<ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="skin_default/menu/fr_main_channels.png"  />
+		<ePixmap position="0,0" zPosition="-1" size="455,69" pixmap="skin_default/menu/tx_devices.png" alphatest="blend" transparent="1" />
+		<ePixmap position="940,425" zPosition="1" size="370,204" pixmap="skin_default/menu/ico_hdd.png" backgroundColor="transparent" alphatest="blend" transparent="1"/>
+		<ePixmap position="220,600" zPosition="2" size="400,40" pixmap="skin_default/menu/eXc.png" alphatest="blend" transparent="1" />
+		<widget name="hddlist" position="70,120" size="720,435" transparent="1" />
 	</screen>
 
 	<!-- (228) [MENU - SETUP - SYSTEM - HDD] HardDisk Format -->
 	<screen name="HarddiskSetup" position="center,center" size="710,360" title="HDD Format/Verify">
-	        <ePixmap pixmap="skin_default/menu/backbox.png" zPosition="-1" position="0,0" size="710,460" alphatest="on" />
-		<widget name="model" position="20,20" size="670,28" font="Regular;25" halign="center" transparent="1"/>
-		<widget name="capacity" position="20,60" size="560,28" font="Regular;25" halign="center" transparent="1"/>
-		<widget name="bus" position="20,100" size="560,28" font="Regular;25" halign="center" transparent="1"/>
-		<ePixmap position="230,300" size="250,40" pixmap="skin_default/buttons/red25.png" alphatest="on" zPosition="1" />
-		<widget name="initializetext" position="230,301" size="250,40" zPosition="2" font="Regular;24" halign="center" transparent="1" foregroundColor="white" />
+	    	<ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="skin_default/menu/fr_main_channels.png"  />
+		<ePixmap position="0,0" zPosition="-1" size="455,69" pixmap="skin_default/menu/tx_devices.png" alphatest="blend" transparent="1" />
+		<ePixmap position="940,425" zPosition="1" size="370,204" pixmap="skin_default/menu/ico_hdd.png" backgroundColor="transparent" alphatest="blend" transparent="1"/>
+		<ePixmap position="220,600" zPosition="2" size="400,40" pixmap="skin_default/menu/eXc.png" alphatest="blend" transparent="1" />
+		<ePixmap position="56,600" zPosition="1" size="180,38" pixmap="skin_default/menu/colorbar.png" alphatest="blend" transparent="1" />
+		<widget name="model" position="70,120" size="670,28" font="Regular;25" halign="center" transparent="1"/>
+		<widget name="capacity" position="70,160" size="560,28" font="Regular;25" halign="center" transparent="1"/>
+		<widget name="bus" position="70,200" size="560,28" font="Regular;25" halign="center" transparent="1"/>
+		<widget name="initializetext" position="60,600" size="250,40" zPosition="2" font="Regular;24" halign="center" transparent="1" foregroundColor="white" />
 	</screen>
 	
 	<!-- (229) [MENU - SETUP - SYSTEM - HDD] Harddrive selection --> 
@@ -2826,8 +2828,8 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="hddlist" render="Listbox" position="70,120" size="710,410" scrollbarMode="showOnDemand" selectionPixmap="skin_default/icons/ls700x70.png" transparent="1" >
 			<convert type="TemplatedMultiContent">
 				{"template": [
-					MultiContentEntryText(pos = (80, 6), size = (500, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 0), # index 0 is the hdd_description
-					MultiContentEntryText(pos = (100, 44), size = (480, 20), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, text = 2), # index 2 is the device info
+					MultiContentEntryText(pos = (80, 6), size = (620, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 0), # index 0 is the hdd_description
+					MultiContentEntryText(pos = (100, 44), size = (600, 20), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, text = 2), # index 2 is the device info
 					MultiContentEntryPixmapAlphaTest(pos = (10, 8), size = (55, 55), png = 7), # index 3 is the device pixmap
 					MultiContentEntryPixmapAlphaTest(pos = (80, 46), size = (15, 16), png = 8), # index 4 is the online state pixmap
 					],
@@ -3274,9 +3276,8 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<ePixmap position="920,425" zPosition="1" size="200,200" pixmap="skin_default/menu/ico_recordings.png" alphatest="blend" transparent="1" />
 		<ePixmap position="55,250" zPosition="1" size="735,4" pixmap="skin_default/menu/line.png" />
 		<widget name="config" position="70,120" size="720,200" scrollbarMode="showOnDemand" selectionPixmap="skin_default/icons/ls1120x28.png" />
-		<ePixmap pixmap="skin_default/div-h.png" position="70,405" zPosition="1" size="580,2" />
-		<widget source="introduction" render="Label" position="80,410" size="560,100" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
-		<ePixmap pixmap="skin_default/div-h.png" position="70,405" zPosition="1" size="580,2" />
+		<ePixmap position="55,400" zPosition="-1" size="822,21" pixmap="skin_default/menu/addcam.png" alphatest="blend" transparent="1" />
+		<widget source="introduction" render="Label" position="80,410" size="680,100" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="bluette" backgroundColor="#333333" transparent="1" />
 		<!-- Widget Pig -->
 			<widget source="session.VideoPicture" render="Pig" position=" 839,112" size="382,218" zPosition="3" backgroundColor="#df0b1300"/>
 		<!-- Nome Canale - Service Name -->
@@ -4054,12 +4055,16 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 	</screen>
 
 	<!-- (404) [MEDIA RECORDINGS MENU] Main Menu -->
-	<screen name="Menu" position="340,134" size="600,500"  title="Main menu">
-	        <ePixmap pixmap="skin_default/menu/backbox.png" zPosition="-1" position="0,0" size="600,500" alphatest="on" />
-		<widget source="title" render="Label" position="10,10" size="580,35" font="Regular;27" halign="center" />
-		<widget source="menu" render="Listbox" position="10,55" size="580,450" scrollbarMode="showOnDemand" transparent="1" >
+	<screen name="Menu" position="0,0" size="1280,720" title="Main menu" flags="wfNoBorder" >
+		<ePixmap pixmap="skin_default/menu/fr_main_channels.png" position="0,0" zPosition="-3" size="1280,720" /> 
+		<ePixmap position="775,120" zPosition="4" size="27,450" pixmap="skin_default/icons/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="775,545" zPosition="4" size="27,40" pixmap="skin_default/icons/endbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="0,0" zPosition="-1" size="356,69" pixmap="skin_default/menu/tx_record.png" alphatest="blend" transparent="1" />
+		<ePixmap position="920,425" zPosition="2" size="200,200"  pixmap="skin_default/menu/ico_recordings.png" alphatest="blend" transparent="1" />
+		<widget source="menu" render="Listbox" position="70,120" size="720,450" scrollbarMode="showOnDemand" transparent="1" >
 			<convert type="StringList" />
 		</widget>
+		<widget source="title" render="Label" position="70,555" size="700,35" font="Regular;27" halign="center" transparent="1" />
 	</screen> 
 
 	<!-- (405) [MEDIA RECORDINGS] Location Media -->	
@@ -4307,7 +4312,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/menu/fr_main_channels.png"/>
 		<ePixmap position="0,0" zPosition="-1" size="550,69" pixmap="skin_default/menu/tx_netbrowser.png" alphatest="blend" transparent="1" />
 		<ePixmap position="56,600" zPosition="2" size="180,38" pixmap="skin_default/menu/colorbar.png" alphatest="blend" transparent="1" />
-	        <ePixmap position="940,400" zPosition="2" size="200,210" pixmap="skin_default/menu/ico_nfs.png" alphatest="blend" transparent="1" />
+		<ePixmap position="940,400" zPosition="2" size="200,210" pixmap="skin_default/menu/ico_nfs.png" alphatest="blend" transparent="1" />
 		<ePixmap position="220,600" zPosition="4" size="400,40" pixmap="skin_default/menu/eXc.png" alphatest="blend" transparent="1" />
 		<widget name="config" position="70,120" zPosition="1" size="720,300" scrollbarMode="showOnDemand" selectionPixmap="skin_default/icons/ls550x26.png" transparent="1" />
 		<widget name="VKeyIcon" pixmap="skin_default/vkey_icon.png" position="70,340" zPosition="10" size="60,48" transparent="1" alphatest="on"/>
@@ -4319,15 +4324,15 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget source="introduction" render="Label" position="60,550" size="400,40" zPosition="10" font="Regular;24" halign="center" foregroundColor="bluette" transparent="1" />
-		<widget name="key_red"  position="5,595" zPosition="2" size="250,40" font="Regular;22" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
+		<widget source="key_red" render="Label" position="5,595" zPosition="2" size="250,40" font="Regular;22" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
 	</screen>
 
 	<!-- (602) [VAR SETTINGS] AutoMountView -->
 	<screen name="AutoMountView" position="0,0" size="1280,720" title="MountView" flags="wfNoBorder" >
 		<ePixmap position="0,0" size="1280,720" zPosition="-1" pixmap="skin_default/menu/fr_main_channels.png"/>
 		<ePixmap position="0,0" zPosition="-1" size="550,69" pixmap="skin_default/menu/tx_netbrowser.png" alphatest="blend" transparent="1" />
-		<ePixmap position="56,600" zPosition="2" size="380,38" pixmap="skin_default/menu/colorbar.png" alphatest="blend" transparent="1" />
-	        <ePixmap position="940,400" zPosition="1" size="200,210" pixmap="skin_default/menu/ico_nfs.png" alphatest="blend" transparent="1" />
+		<ePixmap position="56,600" zPosition="2" size="580,38" pixmap="skin_default/menu/colorbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="940,400" zPosition="1" size="200,210" pixmap="skin_default/menu/ico_nfs.png" alphatest="blend" transparent="1" />
 		<widget source="legend1" render="Label" position="70,110"  zPosition="1" size="130,60" font="Regular;18" halign="center" valign="center"  foregroundColor="bluette" transparent="1"/>
 		<widget source="legend2" render="Label" position="240,110" zPosition="1" size="400,60" font="Regular;20" halign="center" valign="center"  foregroundColor="bluette" transparent="1"/>
 		<widget source="legend3" render="Label" position="650,110" zPosition="1" size="120,60" font="Regular;20" halign="center" valign="center"  foregroundColor="bluette" transparent="1"/>
@@ -4354,14 +4359,14 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget source="introduction" render="Label" position="60,555" size="720,40" zPosition="10" font="Regular;22" halign="left" foregroundColor="bluette" transparent="1" />
-		<widget name="key_red"  position="5,595" zPosition="2" size="250,40" font="Regular;22" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
-		<widget name="key_yellow"  position="405,595" zPosition="2" size="250,40" font="Regular;22" halign="center" valign="center" backgroundColor="#a18120" transparent="1" />
+		<widget source="key_red" render="Label" position="5,595" zPosition="2" size="250,40" font="Regular;20" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
+		<widget source="key_yellow" render="Label" position="405,595" zPosition="2" size="250,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a18120" transparent="1" />
 	</screen>
 	
     	<!-- (603) [VAR SETTINGS] UserManager -->          
 	<screen name="UserManager" position="0,0" size="1280,720" title="UserManager" flags="wfNoBorder" >
 	    	<ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="skin_default/menu/fr_main_channels.png"  />
-		<ePixmap position="57,600" zPosition="1" size="380,36" pixmap="skin_default/menu/colorbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="57,600" zPosition="1" size="580,36" pixmap="skin_default/menu/colorbar.png" alphatest="blend" transparent="1" />
 		<ePixmap position="0,0" zPosition="-1" size="550,69" pixmap="skin_default/menu/tx_netsetup.png" alphatest="blend" transparent="1" />
 		<ePixmap position="940,400" zPosition="1" size="200,210" pixmap="skin_default/menu/ico_estension.png" alphatest="blend" transparent="1" />
 		<widget source="config" render="Listbox" position="70,120" size="720,420" scrollbarMode="showOnDemand" transparent="1">
@@ -4382,8 +4387,8 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget source="introduction" render="Label" position="60,550" size="400,30" zPosition="10" font="Regular;24" halign="left" foregroundColor="bluette" transparent="1"/>
-		<widget name="key_red"  position="5,595" zPosition="2" size="250,40" font="Regular;22" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
-		<widget name="key_yellow"  position="405,595" zPosition="2" size="250,40" font="Regular;22" halign="center" valign="center" backgroundColor="#a18120" transparent="1" />
+		<widget source="key_red" render="Label" position="5,595" zPosition="2" size="250,40" font="Regular;22" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
+		<widget source="key_yellow" render="Label" position="405,595" zPosition="2" size="250,40" font="Regular;22" halign="center" valign="center" backgroundColor="#a18120" transparent="1" />
 	</screen>
 
 	<!-- (604) [VAR SETTINGS] IPKG -->
@@ -4426,7 +4431,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 		<widget source="introduction" render="Label" position="60,550" size="400,30" zPosition="10" font="Regular;24" halign="center" foregroundColor="bluette" transparent="1"/>
 		<widget name="VKeyIcon" pixmap="skin_default/vkey_icon.png" position="70,340" zPosition="10" size="60,48" transparent="1" alphatest="on"/>
 		<widget name="HelpWindow" position="70,400" zPosition="1" size="1,1" transparent="1" alphatest="on" />
-		<widget name="key_red"  position="5,595" zPosition="2" size="250,40" font="Regular;22" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
+		<widget source="key_red" render="Label" position="5,595" zPosition="2" size="250,40" font="Regular;22" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
 	</screen>
 
 	<!-- (609) [VAR SETTINGS] clock Display -->

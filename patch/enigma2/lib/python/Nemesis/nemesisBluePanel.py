@@ -206,14 +206,13 @@ class nemesisBluePanel(Screen):
 		elif self.sel == 4:
 			self.session.open(ParentalControlSetup)
 		elif self.sel == 5:
-			self.message = "\nNemesis Version: %s OE(%s)" % (self.NEMESISVER, self.OEVER)
-			self.message += "\n\nImage version: " + self.IMAGEVER
-			self.message += "\nBuild by Gianathem"
-			self.message += "\nBased on Enigma Version: " +  self.ENIGMAVER
-			self.message += "\nKernel version: " + self.KERNELVER
-			self.message += "\n\nFor download visit: http://www.nemesis.tv/"
-			self.mbox = self.session.open(MessageBox, self.message, MessageBox.TYPE_INFO)
-			self.mbox.setTitle("About Nemesis " + self.NEMESISVER)
+			message = "\nNemesis Version: %s OE(%s)" % (self.NEMESISVER, self.OEVER)
+			message += "\n\nImage version: " + self.IMAGEVER
+			message += "\nBuild by Gianathem"
+			message += "\nBased on Enigma Version: " +  self.ENIGMAVER
+			message += "\nKernel version: " + self.KERNELVER
+			message += "\n\nFor download visit: http://www.nemesis.tv/"
+			self.session.open(nemesisShowPanel, None ,"About Nemesis ", message)
 	
 	def runFinished(self, retval):
 		if fileExists('/tmp/info.txt') and retval == 0 :

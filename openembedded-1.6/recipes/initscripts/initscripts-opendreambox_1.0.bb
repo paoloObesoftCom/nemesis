@@ -5,7 +5,7 @@ PRIORITY = "required"
 PROVIDES = "initscripts"
 RPROVIDES_${PN} = "initscripts"
 LICENSE = "GPL"
-PR = "r36"
+PR = "r39"
 PR_dm7025 = "r35"
 
 FILESPATHPKG = "initscripts-${PV}:initscripts:files"
@@ -27,11 +27,10 @@ SRC_URI = "file://halt \
            file://netmount.sh \
            file://var.tar.gz.default \
            file://nemesise1 \
-           file://nemesise2_500 \
-           file://nemesise2_800 \
-           file://nemesise2_7025 \
-           file://nemesise2_8000 \
+           file://nemesise2 \
+           file://RestoreEPG.sh \
            file://mountcfusb \
+           file://ntpdate \
            file://${BOOTUP}"
 
 SRC_URI_append_dm8000 = " file://fscking.raw"
@@ -40,6 +39,8 @@ do_install () {
 #
 # Create directories and install device independent scripts
 #
+	install -d ${D}/usr
+	install -d ${D}/usr/bin
 	install -d ${D}${sysconfdir}/init.d
 	install -d ${D}${sysconfdir}/rcS.d
 	install -d ${D}${sysconfdir}/rc0.d
@@ -52,6 +53,8 @@ do_install () {
 	install -d ${D}${sysconfdir}/default
 	install -d ${D}${sysconfdir}/default/volatiles
 
+	install -m 0755    ${WORKDIR}/ntpdate		${D}/usr/bin
+	install -m 0755    ${WORKDIR}/RestoreEPG.sh	${D}${sysconfdir}/init.d
 	install -m 0755    ${WORKDIR}/halt		${D}${sysconfdir}/init.d
 	install -m 0755    ${WORKDIR}/reboot		${D}${sysconfdir}/init.d
 	install -m 0755    ${WORKDIR}/rmnologin		${D}${sysconfdir}/init.d
@@ -84,20 +87,20 @@ do_install () {
 	fi
 
 	if [ "${MACHINE}" = "dm800" -o "${MACHINE}" = "dm800se" -o "${MACHINE}" = "dm7020hd" ]; then
-		install -m 0755 ${WORKDIR}/nemesise2_800 ${D}${sysconfdir}/init.d/nemesis
+		install -m 0755 ${WORKDIR}/nemesise2 ${D}${sysconfdir}/init.d/nemesis
 	fi
 
 	if [ "${MACHINE}" = "dm500hd" ]; then
-		install -m 0755 ${WORKDIR}/nemesise2_500 ${D}${sysconfdir}/init.d/nemesis
+		install -m 0755 ${WORKDIR}/nemesise2 ${D}${sysconfdir}/init.d/nemesis
 	fi
 
 	if [ "${MACHINE}" = "dm7025" ]; then
-		install -m 0755 ${WORKDIR}/nemesise2_7025 ${D}${sysconfdir}/init.d/nemesis
+		install -m 0755 ${WORKDIR}/nemesise2 ${D}${sysconfdir}/init.d/nemesis
 	fi
 
 	if [ "${MACHINE}" = "dm8000" ]; then
 		install -m 0755 ${WORKDIR}/fscking.raw ${D}${sysconfdir}/
-		install -m 0755 ${WORKDIR}/nemesise2_8000 ${D}${sysconfdir}/init.d/nemesis
+		install -m 0755 ${WORKDIR}/nemesise2 ${D}${sysconfdir}/init.d/nemesis
 	fi
 
 	if [ "${MACHINE}" = "dm800" -o "${MACHINE}" = "dm500hd" -o "${MACHINE}" = "dm7025" -o "${MACHINE}" = "dm8000" -o "${MACHINE}" = "dm800se" -o "${MACHINE}" = "dm7020hd" ]; then

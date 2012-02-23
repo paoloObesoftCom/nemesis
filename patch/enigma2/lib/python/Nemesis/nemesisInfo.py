@@ -214,13 +214,14 @@ class showDevSpaceInfo(Screen):
 						self['f2'].setText('Flash: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
 					elif x[len(x)-1] == '/media/cf':
 						try:
-							cf[0] = int(x[4].replace('%', ''))
-							cf[1] = int(x[1])
-							cf[2] = int(x[2])
-							cf[3] = int(x[3])
-							s = getUnit(int(x[1]))
-							g = getSize(int(x[1]),int(x[2]),int(x[3]))
-							self['c1'].setText('CF: %s  in use: %s' % (s, x[4]))
+							a = len(x)
+							cf[0] = int(x[a - 2].replace('%', ''))
+							cf[1] = int(x[a - 5])
+							cf[2] = int(x[a - 4])
+							cf[3] = int(x[a - 3])
+							s = getUnit(int(cf[1]))
+							g = getSize(int(cf[1]),int(cf[2]),int(cf[3]))
+							self['c1'].setText('CF: %s  in use: %s' % (s, x[a- 2]))
 							self['c2'].setText('CF: %s - Used: %s - Free: %s' % (g[0],g[1],g[2]))
 						except:
 							cf = [0,0,0,0]

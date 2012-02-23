@@ -168,6 +168,7 @@ check_oe_16()
 	kompare $oesrc16/openembedded/recipes/linux/linux-dm7020hd-2.6.18/defconfig openembedded-1.6/recipes/linux/linux-dm7020hd-2.6.18/defconfig
 	kompare $oesrc16/openembedded/recipes/linux/linux-dm8000-2.6.18/defconfig openembedded-1.6/recipes/linux/linux-dm8000-2.6.18/defconfig
 	kompare $oesrc16/openembedded/recipes/linux/linux-dm7025/dm7025_defconfig openembedded-1.6/recipes/linux/linux-dm7025/dm7025_defconfig
+	kompare $oesrc16/openembedded/recipes/linux/linux-dm7020hd_2.6.18.bb openembedded-1.6/recipes/linux/linux-dm7020hd_2.6.18.bb
 	kompare $oesrc16/openembedded/recipes/openssl/openssl.inc openembedded-1.6/recipes/openssl/openssl.inc
 	kompare $oesrc16/openembedded/recipes/netkit-base/netkit-base-0.17/opendreambox/inetd.conf openembedded-1.6/recipes/netkit-base/netkit-base-0.17/opendreambox/inetd.conf
 	kompare $oesrc16/openembedded/recipes/nfs-utils/nfs-utils_1.1.2.bb openembedded-1.6/recipes/nfs-utils/nfs-utils_1.1.2.bb

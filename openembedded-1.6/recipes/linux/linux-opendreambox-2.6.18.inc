@@ -1,7 +1,7 @@
 require linux-opendreambox.inc
 
 SRCREV = "ac6cc9511a5f70eaa584c63fc5c3de33cae1d0e7"
-PR_INC = "r28"
+PR_INC = "r30"
 
 RREPLACES_kernel = "kernel-2.6.18-7.1-${MACHINE}"
 RCONFLICTS_kernel = "kernel-2.6.18-7.1-${MACHINE}"
@@ -23,8 +23,13 @@ SRC_URI += " http://trappist.elis.ugent.be/~mronsse/cdfs/download/cdfs-2.6.18.ta
 	file://stblinux-2.6.18-libata-revert-no-more-needed-change.patch;patch=1 \
 	file://stblinux-2.6.18-libata-hdd-spinup-workaround.patch;patch=1 \
 	file://0001-MIPS-Fix-possible-hang-in-LL-SC-futex-loops.patch;patch=1 \
-	file://initramfs.patch;patch=1 \
+	file://0001-Add-support-for-FTDI-FT4232H-based-devices.patch;patch=1 \
 "
+SRC_URI_append_dm500hd = " file://initramfs25.patch;patch=1"
+SRC_URI_append_dm7020hd = " file://initramfs25.patch;patch=1"
+SRC_URI_append_dm800 = " file://initramfs25.patch;patch=1"
+SRC_URI_append_dm800se = " file://initramfs25.patch;patch=1"
+SRC_URI_append_dm8000 = " file://initramfs25.patch;patch=1"
 
 do_configure_prepend() {
 	if [ -d ${WORKDIR}/cdfs-${PV} ]; then

@@ -973,14 +973,15 @@ class ScanSetup(ConfigListScreen, Screen, TransponderSearchSupport, CableTranspo
 				(eDVBFrontendParametersSatellite.Pilot_Unknown, _("Auto"))])
 
 
-			self.scan_sat.bs_system = ConfigSelection(default = eDVBFrontendParametersSatellite.System_DVB_S2, 
-				choices = [ (eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S + DVB-S2")),
-					(eDVBFrontendParametersSatellite.System_DVB_S, _("DVB-S only"))])
+			if _isE232:
+				self.scan_sat.bs_system = ConfigSelection(default = eDVBFrontendParametersSatellite.System_DVB_S2, 
+					choices = [ (eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S + DVB-S2")),
+						(eDVBFrontendParametersSatellite.System_DVB_S, _("DVB-S only"))])
 
-			self.scan_sat.bs_accuracy = ConfigSelection(default = 2, choices = [ (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")])
+				self.scan_sat.bs_accuracy = ConfigSelection(default = 2, choices = [ (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")])
 
-			self.scan_sat.bs_horizontal = ConfigYesNo(default = True)
-			self.scan_sat.bs_vertical = ConfigYesNo(default = True)
+				self.scan_sat.bs_horizontal = ConfigYesNo(default = True)
+				self.scan_sat.bs_vertical = ConfigYesNo(default = True)
 
 			# cable
 			self.scan_cab.frequency = ConfigInteger(default = defaultCab["frequency"], limits = (50, 999))
@@ -1058,24 +1059,33 @@ class ScanSetup(ConfigListScreen, Screen, TransponderSearchSupport, CableTranspo
 				#print sat[1]
 				self.scan_scansat[sat[0]] = ConfigYesNo(default = False)
 
-			sec = secClass.getInstance()
+			if _isE232:
+				sec = secClass.getInstance()
 
-			self.nim_sat_frequency_range = []
-			self.scan_satselection = []
-			for slot in nimmanager.nim_slots:
-				slot_id = slot.slot
-				self.nim_sat_frequency_range.append
-				if slot.isCompatible("DVB-S"):
-					satlist_for_slot = self.satList[slot_id]
-					self.scan_satselection.append(getConfigSatlist(defaultSat["orbpos"], satlist_for_slot))
-					sat_freq_range = { }
-					for sat in satlist_for_slot:
-						orbpos = sat[0]
-						sat_freq_range[orbpos] = sec.getFrequencyRangeList(slot_id, orbpos)
-					self.nim_sat_frequency_range.append(sat_freq_range)
-				else:
-					self.nim_sat_frequency_range.append(None)
-					self.scan_satselection.append(None)
+				self.nim_sat_frequency_range = []
+				self.scan_satselection = []
+				for slot in nimmanager.nim_slots:
+					slot_id = slot.slot
+					self.nim_sat_frequency_range.append
+					if slot.isCompatible("DVB-S"):
+						satlist_for_slot = self.satList[slot_id]
+						self.scan_satselection.append(getConfigSatlist(defaultSat["orbpos"], satlist_for_slot))
+						sat_freq_range = { }
+						for sat in satlist_for_slot:
+							orbpos = sat[0]
+							sat_freq_range[orbpos] = sec.getFrequencyRangeList(slot_id, orbpos)
+						self.nim_sat_frequency_range.append(sat_freq_range)
+					else:
+						self.nim_sat_frequency_range.append(None)
+						self.scan_satselection.append(None)
+			else:
+				self.scan_satselection = []
+				for slot in nimmanager.nim_slots:
+					if slot.isCompatible("DVB-S"):
+						self.scan_satselection.append(getConfigSatlist(defaultSat["orbpos"], self.satList[slot.slot]))
+					else:
+						self.scan_satselection.append(None)
+				
 
 			return True
 
