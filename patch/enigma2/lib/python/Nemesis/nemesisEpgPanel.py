@@ -16,23 +16,21 @@ from Components.MenuList import MenuList
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, SCOPE_PLUGINS
 from os import system, remove as os_remove
-from nemesisTool import GetSkinPath, ListboxE2
+from nemesisTool import GetSkinPath, isE232, GetPiconPath, initEpg, checkDevice as t_checkDevice
 from nemesisConsole import nemesisConsole
 from nemesisSetting import NSetup
 from nemesisShowPanel import nemesisShowPanel
 from enigma import eTimer, eEPGCache, eServiceCenter, eServiceReference
 from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry
-from Nemesis.nemesisTool import isE232
-
-_isE232 = isE232()
-epg = eEPGCache.getInstance()
-configfile = ConfigFile()
-
 from Components.PluginComponent import plugins
 from Components.PluginList import *
 from Plugins.Plugin import PluginDescriptor
 import string
+
+_isE232 = isE232()
+epg = eEPGCache.getInstance()
+configfile = ConfigFile()
 
 def getSid(sid):
 	EPG_CHANNEL_INFO_sid="%X" % int(string.split(sid,":")[0],16)
@@ -56,12 +54,12 @@ class nemesisEpgPanel(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
+		self['list'] = List(self.list)
 		self.myEpgDownloader = "sleep %s && /usr/crossepg/download_epg.sh %s" % (config.nemepg.zapdelay.value, config.nemepg.demux.value)
 		self.myEpgConverter = "sleep %s && /usr/crossepg/convert_epg.sh" % config.nemepg.zapdelay.value
 		self.ref = None
 		self.downIMode = False
 		self["title"] = Label(_("EPG Control Center"))
-		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
 		self['conn'] = StaticText()
 		self.epgserchplugin = ''
@@ -125,11 +123,9 @@ class nemesisEpgPanel(Screen):
 		self['list'].setList(self.list)
 	
 	def checkDevice(self):
-		system('touch ' + config.misc.epgcache_filename.value + '/test.test')
-		if fileExists(config.misc.epgcache_filename.value + '/test.test'):
-			system('rm -f ' + config.misc.epgcache_filename.value + '/test.test')
+		if t_checkDevice(config.misc.epgcache_filename.value[:-8]):
 			return True
-		self['conn'].text = _('Problem to write on %s.\nTry to reboot the machine!') % config.misc.epgcache_filename.value
+		self['conn'].text = _('Problem to write on %s.\nTry to reboot the machine!') % (config.misc.epgcache_filename.value + ".test")
 		return False
 	
 	def zap(self, nref):
@@ -162,19 +158,18 @@ class nemesisEpgPanel(Screen):
 				elif config.nemepg.downskyuk.value:
 					self.downloadUkEPG()
 		elif (sel == "reloadEPG"):
-			if not fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
-				if not fileExists(config.misc.epgcache_filename.value + "/epg.dat.save"):
-					self['conn'].text = _('File epg.dat not found!\nPlease use Download EPG with CrossEPG!')
-					return
+			if not initEpg():
+				self['conn'].text = _('File epg.dat not found!\nPlease use Download EPG with CrossEPG!')
+				return
 			self["actions"].setEnabled(False)
-			self['conn'].text = _('Load EPG data in Enigma cache from:\n%s/epg.dat.\nPlease Wait...') % config.misc.epgcache_filename.value
+			self['conn'].text = _('Load EPG data in Enigma cache from:\n%s.\nPlease Wait...') % config.misc.epgcache_filename.value
 			self.reloadEPGTimer.start(500, True)
 		elif (sel == "eraseEPG"):
 			self['conn'].text = _('Erasing EPG Chache.\nPlease Wait...')
 			self["actions"].setEnabled(False)
 			self.clearEPGTimer.start(500, True)
 		elif (sel == "backupEPG"):
-			self['conn'].text = _('Backup Enigma EPG data on:\n%s.\nPlease Wait...') % config.misc.epgcache_filename.value
+			self['conn'].text = _('Backup Enigma EPG data on:\n%s.\nPlease Wait...') % (config.misc.epgcache_filename.value + ".save")
 			self["actions"].setEnabled(False)
 			self.saveEPGTimer.start(500, True)
 		elif (sel == "createTIMER"):
@@ -251,18 +246,15 @@ class nemesisEpgPanel(Screen):
 	def downEpgFinish(self, *answer):
 		system("rm -f /tmp/crossepg*")
 		if answer[0] == nemesisConsole.EVENT_DONE:
-			self['conn'].text = _('Load EPG data in Enigma cache from:\n%s/epg.dat.\nPlease Wait...') % config.misc.epgcache_filename.value
+			self['conn'].text = _('Load EPG data in Enigma cache from:\n%s.\nPlease Wait...') % config.misc.epgcache_filename.value
 			self["actions"].setEnabled(False)
 			self.reloadEPGTimer.start(1000, True)
 			
 	def reloadEPG(self):
 		if self.reloadEPGTimer.isActive():
 			self.reloadEPGTimer.stop()
-		if fileExists('/tmp/ext.epg.dat'):
-			system("cp /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat")
-			system("mv /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
-		if not fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
-			system("cp " + config.misc.epgcache_filename.value + "/epg.dat.save " + config.misc.epgcache_filename.value + "/epg.dat")
+		if not fileExists(config.misc.epgcache_filename.value):
+			system("cp " + config.misc.epgcache_filename.value + ".save " + config.misc.epgcache_filename.value)
 		if config.nemepg.clearcache.value:
 			try:
 				epg.flushEPG()
@@ -271,8 +263,8 @@ class nemesisEpgPanel(Screen):
 		epg.load()
 		try:
 			epg.save()
-			if fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
-				system("cp " +  config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
+			if fileExists(config.misc.epgcache_filename.value):
+				system("cp " +  config.misc.epgcache_filename.value + " " + config.misc.epgcache_filename.value + ".save")
 		except:
 			pass
 		self.__onClose()
@@ -285,7 +277,7 @@ class nemesisEpgPanel(Screen):
 		except:
 			pass
 		if config.nemepg.clearbackup.value:
-			system("rm -f " + config.misc.epgcache_filename.value + "/epg.dat.save")
+			system("rm -f " + config.misc.epgcache_filename.value + ".save")
 		self["actions"].setEnabled(True)
 		self['conn'].text = _('Done')
 	
@@ -293,8 +285,8 @@ class nemesisEpgPanel(Screen):
 		if self.saveEPGTimer.isActive():
 			self.saveEPGTimer.stop()
 		epg.save()
-		if fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
-			system("mv " + config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
+		if fileExists(config.misc.epgcache_filename.value):
+			system("mv " + config.misc.epgcache_filename.value + " " + config.misc.epgcache_filename.value + ".save")
 		self["actions"].setEnabled(True)
 		self['conn'].text = _('Done')
 
@@ -304,29 +296,30 @@ class NEpgSearch(Screen):
 	def __init__(self, session, cmd):
 		Screen.__init__(self, session)
 		self.myserv = []
-		self['list'] = ListboxE2([])
+		self.list = []
+		self['list'] = List(self.list)
+		self.cmd = cmd
 		self['actions'] = ActionMap(['WizardActions'],
 		{
 			'ok': self.KeyOk,
 			'back': self.close
 		})
-		self.searchEvent(cmd)
+		self.onLayoutFinish.append(self.searchEvent)
 		self.onShown.append(self.setWindowTitle)
 	
 	def setWindowTitle(self):
 		self.setTitle(_("EPG Search"))
 	
-	def searchEvent(self, cmd):
-		flist = []
+	def searchEvent(self):
 		mycache = []
-		if len(cmd) > 1:
+		if len(self.cmd) > 1:
 			if fileExists('/etc/epg_cache'):
 				f = open('/etc/epg_cache', 'r')
 				for line in f.readlines():
-					if (cmd != line.strip()):
+					if (self.cmd != line.strip()):
 						mycache.append(line.strip())
 				f.close()
-		mycache.append(cmd)
+		mycache.append(self.cmd)
 		
 		if len(mycache) > 10:
 			mycache = mycache[1:]
@@ -335,8 +328,9 @@ class NEpgSearch(Screen):
 			f1.write((fil + '\n'))
 		f1.close()
 		
-		self.myserv = epg.search(('IR',config.nemepg.elemnum.value,eEPGCache.PARTIAL_TITLE_SEARCH,cmd,1))
-		if (self.myserv is not None):
+		del self.list[:]
+		self.myserv = epg.search(('IR',config.nemepg.elemnum.value,eEPGCache.PARTIAL_TITLE_SEARCH,self.cmd,1))
+		if self.myserv:
 			for fil in self.myserv:
 				sserv = ServiceReference(fil[1])
 				provider = sserv.getServiceName()
@@ -349,28 +343,17 @@ class NEpgSearch(Screen):
 				ext = event.getShortDescription()
 				if ext == '':
 					ext = event.getExtendedDescription()
-				if len(ext) > 70:
-					ext = (ext[:70] + '..')
-				res = self.fill_List(strview, ext, picon)
-				flist.append(res)
-			self['list'].l.setList(flist)
+				if len(ext) > 200:
+					ext = (ext[:200] + '..')
+				self.list.append((strview, ext, LoadPixmap(picon)))
+			self['list'].setList(self.list)
 		else:
 			self.menTimer = eTimer()
 			self.menTimer.timeout.get().append(self.SearchNot)
 			self.menTimer.start(100, False)
-
-	def fill_List(self, title, desc, mypixmap):
-			res = ['Myevents']
-			res.append(MultiContentEntryText(pos=(110, 0), size=(570, 24), font=0, text=title))
-			res.append(MultiContentEntryText(pos=(110, 24), size=(570, 36), font=1, text=desc))
-			res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(mypixmap)))
-			return res
 	
 	def find_Picon(self, sname):
-		if config.nemesis.usepiconinhdd.value:
-			searchPaths = ('/usr/share/enigma2/%s/','/media/cf/%s/','/media/usb/%s/','/media/hdd/%s/')
-		else:
-			searchPaths = ['/usr/share/enigma2/%s/','/media/cf/%s/','/media/usb/%s/']
+		searchPaths = GetPiconPath()
 		
 		if config.nemesis.picontype.value == "Reference":
 			pos = sname.rfind(':')
@@ -384,12 +367,12 @@ class NEpgSearch(Screen):
 		return '/usr/share/enigma2/skin_default/picon_default.png'
 	
 	def KeyOk(self):
-		myi = self['list'].getSelectionIndex()
-		if (self.myserv is not None):
-				fil = self.myserv[myi]
-				sserv = ServiceReference(fil[1])
-				event = epg.lookupEventId(sserv.ref, int(fil[0]))
-				self.session.open(EventViewSimple, event, sserv)
+		myi = self['list'].getIndex()
+		if self.myserv:
+			fil = self.myserv[myi]
+			sserv = ServiceReference(fil[1])
+			event = epg.lookupEventId(sserv.ref, int(fil[0]))
+			self.session.open(EventViewSimple, event, sserv)
 	
 	def SearchNot(self):
 		self.menTimer.stop()

@@ -1,5 +1,5 @@
 DESCRIPTION = "Configuration files for online package repositories aka feeds"
-PR = "r5"
+PR = "r6"
 
 DISTRO_FEED_PREFIX = "Nemesis"
 DISTRO_FEED_URI = "http://nemesis.tv/1.6/NEMESIS/${MACHINE}"

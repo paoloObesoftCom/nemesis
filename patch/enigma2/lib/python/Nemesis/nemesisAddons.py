@@ -1,6 +1,7 @@
+from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from enigma import eTimer, eDVBDB, eConsoleAppContainer, ePicLoad
+from enigma import eTimer, eDVBDB, eConsoleAppContainer, ePicLoad, eEnv
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Sources.List import List
@@ -14,12 +15,21 @@ from Components.PluginComponent import plugins
 from Components.Pixmap import Pixmap
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, pathExists, createDir
-from os import system, remove, listdir, chdir, getcwd, rename, path
-from nemesisTool import nemesisTool, GetSkinPath, restartE2
+from os import system, remove, listdir, chdir, getcwd, rename, path, walk
+from nemesisTool import nemesisTool, GetSkinPath, restartE2, GetPluginInstallPath, getVarSpaceKb, GetSkinsPath, createSkinUninstall
 from nemesisConsole import nemesisConsole
 from nemesisDownloader import nemesisDownloader
 from Tools import Notifications
 import xml.etree.cElementTree as x
+
+def createLink(basedir, create = False):
+	for root, dirs, files in walk(basedir):
+		for file in files:
+			if file == "skin.xml":
+				if create and (root != eEnv.resolve('${datadir}/enigma2')):
+					system('ln -s %s %s' % (root, eEnv.resolve('${datadir}/enigma2/')))
+				return True
+	return False
 
 t = nemesisTool()
 
@@ -102,6 +112,8 @@ class loadUniDir:
 
 loadunidir = loadUniDir()
 		
+xFolder = "iuregdoiuwqcdiuewq"
+
 class NAddons(Screen):
 	__module__ = __name__
 
@@ -126,6 +138,8 @@ class NAddons(Screen):
 		self.reloadTimer.timeout.get().append(self.relSetting)
 			
 		self.linkAddons = t.readAddonsUrl()
+		self.fileAddons = self.linkAddons[1]
+		self.linkAddons = self.linkAddons[0]
 		self.linkExtra = t.readExtraUrl()
 
 		isPluginManager = False
@@ -153,7 +167,7 @@ class NAddons(Screen):
 		self.onShown.append(self.setWindowTitle)
 	
 	def setWindowTitle(self):
-		diskSpace = t.getVarSpaceKb()
+		diskSpace = getVarSpaceKb()
 		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
 		percUsed = int(((diskSpace[1] - diskSpace[0]) / diskSpace[1]) * 100)
 		self.setTitle("%s - Free: %d kB (%d%%)" % ( _("Addons Manager"), int(diskSpace[0]), percFree))
@@ -172,13 +186,15 @@ class NAddons(Screen):
 			self["key_red"].text = _("Cancel")
 			self['conn'].text = (_("Connetting to addons server.\nPlease wait..."))
 			u.typeDownload = 'A'
-			self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + self.linkAddons + "/addonsE2.xml -O /tmp/addons.xml")
+			cmd = "%swget %s%s -O /tmp/addons.xml" % ({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value],self.linkAddons, self.fileAddons)
+			self.container.execute(cmd)
 		elif (sel == "NExtra"):
 			self["key_red"].text = _("Cancel")
 			self['conn'].text = (_("Connetting to addons server.\nPlease wait..."))
 			u.typeDownload = 'E'
 			if self.linkExtra != None:
-				self.containerExtra.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + self.linkExtra + "iuregdoiuwqcdiuewq/tmp.tmp -O /tmp/tmp.tmp")
+				cmd = "%swget %s%s/tmp.tmp -O /tmp/tmp.tmp" % ({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value],self.linkExtra, xFolder)
+				self.containerExtra.execute(cmd)
 			else:
 				self['conn'].text = (_("Server not found!\nPlease check internet connection."))
 		elif (sel == "NManual"):
@@ -203,7 +219,7 @@ class NAddons(Screen):
 			if (not self.CANUPGRADE) and (not fileExists("/etc/.testmode")):
 				self['conn'].text = _('No Upgrade available!\nYour decoder is up to date.')
 				return
-			if int(t.getVarSpaceKb()[0]) < self.FREESPACENEEDUPGRADE:
+			if int(getVarSpaceKb()[0]) < self.FREESPACENEEDUPGRADE:
 				self['conn'].text = _('Not enough free space on flash to perform Upgrade!\nUpgrade require at least %d kB free on Flash.\nPlease remove some addons or skins before upgrade.') % self.FREESPACENEEDUPGRADE
 				return
 			self.downloading("Upgrading")
@@ -242,7 +258,8 @@ class NAddons(Screen):
 				f = open("/tmp/tmp.tmp", "r")
 				line = f.readline() [:-1]
 				f.close()
-				self.container.execute({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + self.linkExtra + "iuregdoiuwqcdiuewq/" + line + " -O /tmp/addons.xml")
+				cmd = "%swget %s%s/%s -O /tmp/addons.xml" % ({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value], self.linkExtra, xFolder, line)
+				self.container.execute(cmd)
 			except:
 				self['conn'].text = (_("Server not found!\nPlease check internet connection."))
 				self["key_red"].text = _("Exit")
@@ -355,11 +372,15 @@ class	RAddonsDown(Screen):
 		self["progressbar"].range = 1000
 		self['spaceused'] = Progress()
 		self['spaceusedtext'] = StaticText()
+		self.pathToInstall = ''
+		self.movingTimer = eTimer()
+		self.movingTimer.callback.append(self.doMovingAddon)
 		self.activity = 0
 		self.activityTimer = eTimer()
 		self.activityTimer.callback.append(self.doActivityTimer)
 		self._restartE2 = restartE2(session)
-		self.linkAddons = t.readAddonsUrl()
+
+		self.linkAddons = t.readAddonsUrl()[0]
 		self.linkExtra = t.readExtraUrl()
 
 		if u.pluginType.find('Skin') >= 0 \
@@ -398,7 +419,7 @@ class	RAddonsDown(Screen):
 
 	def setWindowTitle(self):
 		self.setTitle(_("Download ") + str(u.pluginType))
-		diskSpace = t.getVarSpaceKb()
+		diskSpace = getVarSpaceKb()
 		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
 		percUsed = int(((diskSpace[1] - diskSpace[0]) / diskSpace[1]) * 100)
 		self["spaceusedtext"].text = _("Free space: %d kB (%d%%)") % (int(diskSpace[0]), percFree)
@@ -429,8 +450,8 @@ class	RAddonsDown(Screen):
 				self['conn'].text = _('Loading Preview....\nPlease Wait..')
 				self.getAddonsPar()
 				system("rm -f /tmp/skin_preview.png")
-				url = "%s%s/%s.png"% (self.linkAddons, u.dir, u.filename)
-				cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + url + " -O /tmp/skin_preview.png"
+				url = "%s%s/%s.png" % (self.linkAddons, u.dir, u.filename)
+				cmd = "%swget %s -O /tmp/skin_preview.png" % ({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value],url)
 				self.checkPreviewContainer.execute(cmd)
 			
 	def stopLoadPreview(self):
@@ -487,15 +508,15 @@ class	RAddonsDown(Screen):
 
 	def downloadAddons(self):
 		self.getAddonsPar()
-		if int(u.size) > int(t.getVarSpaceKb()[0]) and int(u.check) != 0:
+		if int(u.size) > int(getVarSpaceKb()[0]) and int(u.check) != 0:
 			self["conn"].text = _('Not enough space!\nPlease delete addons before install new.')
 			return
 		self["key_red"].text = _("Cancel")
-		url = {'E':self.linkExtra,'A':self.linkAddons}[u.typeDownload] + u.dir + "/" + u.filename 
+		url = "%s%s/%s" % ({'E':self.linkExtra,'A':self.linkAddons}[u.typeDownload], u.dir, u.filename)
 		if not pathExists("/tmp/.-"):
 			createDir("/tmp/.-")
 		if config.proxy.isactive.value:
-			cmd = "/var/etc/proxy.sh && wget %s -O /tmp/.-/%s" % (url ,".-")
+			cmd = "/var/etc/proxy.sh && wget %s -O /tmp/.-/.-" % url
 			self.session.openWithCallback(self.executedScript, nemesisConsole, cmd, _('Download: ') + u.filename)
 		else:
 			self.fileDownload(url, "/tmp/.-/", u.filename)
@@ -569,6 +590,8 @@ class	RAddonsDown(Screen):
 			del self.checkPreviewContainer
 		if self.activityTimer.isActive():
 			self.activityTimer.stop()
+		if self.movingTimer.isActive():
+			self.movingTimer.stop()
 		self.close()
 		
 	def executedScript(self, *answer):
@@ -627,6 +650,8 @@ class	RAddonsDown(Screen):
 				if u.pluginType.find('Settings') >= 0:
 					self['conn'].text = _("Remove old Settings\nPlease wait...")
 					u.removeSetting()	
+				if pathExists("/tmp/install"):
+					system("rm -rf /tmp/install")
 				self.container.execute("tar -jxvf /tmp/.-/.- -C /")
 			else:
 				self.downloading()
@@ -634,6 +659,19 @@ class	RAddonsDown(Screen):
 	
 	def runFinished(self, retval):
 		self.removeFile()
+		if pathExists("/tmp/install"):
+			msg = _("Please select a destination media,\nto install %s package.") % u.filename
+			if createLink("/tmp/install/skins"):
+				installPath = GetSkinsPath()
+			else:
+				installPath = GetPluginInstallPath()
+			if installPath:
+				self.pathToInstall = ''
+				self.session.openWithCallback(self.runIstallation, ChoiceBox, title=msg, list = installPath)
+			else:
+				self.downloading()
+				self['conn'].text = _("No device found to installing addon!")
+			return
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.downloading()
 		if u.pluginType.find('Settings') >= 0:
@@ -645,6 +683,37 @@ class	RAddonsDown(Screen):
 			msg = _("Enigma2 will be now hard restarted to complete package installation.") + "\n" + _("Do You want restart enigma2 now?")
 			self._restartE2.go(msg)
 
+	def runIstallation(self, answer):
+		if answer:
+			answer = answer and answer[1]
+			if answer == eEnv.resolve('${datadir}/enigma2') and int(u.size) > int(getVarSpaceKb()[0]):
+				self["conn"].text = _('Not enough space!\nPlease delete addons before install new.')
+			else:
+				self.pathToInstall = answer
+				self.movingTimer.start(100, True)
+		else:
+			if pathExists("/tmp/install"):
+				system("rm -rf /tmp/install")
+			self.downloading()
+
+	def doMovingAddon(self):
+		if self.movingTimer.isActive():
+			self.movingTimer.stop()
+		self['conn'].text = _("Moving addon on %s, please wait...") % self.pathToInstall
+		if createLink("/tmp/install/skins"):
+			if not pathExists(self.pathToInstall) and (self.pathToInstall != eEnv.resolve('${datadir}/enigma2')):
+				system('mkdir %s' % self.pathToInstall)
+			system("cp -r /tmp/install/skins/* %s/" % self.pathToInstall)
+			createLink(self.pathToInstall, True)
+			createSkinUninstall(u.filename,self.pathToInstall)
+		else:
+			system("cp -r /tmp/install/* %s/" % self.pathToInstall)
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		if pathExists("/tmp/install"):
+			system("rm -rf /tmp/install")
+		self['conn'].text = _("Addon installed succesfully!")
+		self.downloading()
+			
 	def getAddonsPar(self):
 		u.filename  = self['list'].getCurrent()[0] 
 		u.addonsName  = self['list'].getCurrent()[1] 
@@ -696,6 +765,9 @@ class	RManual(Screen):
 		self["progressbar"].range = 100
 		self['spaceused'] = Progress()
 		self['spaceusedtext'] = StaticText()
+		self.pathToInstall = ''
+		self.movingTimer = eTimer()
+		self.movingTimer.callback.append(self.doMovingAddon)
 		self.activity = 0
 		self.activityTimer = eTimer()
 		self.activityTimer.callback.append(self.doActivityTimer)
@@ -717,7 +789,7 @@ class	RManual(Screen):
 	
 	def setWindowTitle(self):
 		self.setTitle(_("Manual Installation"))
-		diskSpace = t.getVarSpaceKb()
+		diskSpace = getVarSpaceKb()
 		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
 		percUsed = int(((diskSpace[1] - diskSpace[0]) / diskSpace[1]) * 100)
 		self["spaceusedtext"].text = _("Free space: %d kB (%d%%)") % (int(diskSpace[0]), percFree)
@@ -768,22 +840,65 @@ class	RManual(Screen):
 			elif (u.filename.find('.tbz2') != -1):
 				self.downloading("Installing")
 				self.activityTimer.start(100, False)
+				if pathExists("/tmp/install"):
+					system("rm -rf /tmp/install")
 				self.container.execute("tar -jxvf /tmp/" + u.filename + " -C /")
 			else:
 				self.downloading()
 				self['conn'].text = (_('File: %s\nis not a valid package!') % u.filename)
 
 	def runFinished(self, retval):
-		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		remove("/tmp/" + u.filename);
-		self['conn'].text = (_("Addon: %s\ninstalled succesfully!") % u.filename)
 		self.readTmp()
+		if pathExists("/tmp/install"):
+			msg = _("Please select a destination media,\nto install %s package.") % u.filename
+			if createLink("/tmp/install/skins"):
+				installPath = GetSkinsPath()
+			else:
+				installPath = GetPluginInstallPath()
+			if installPath:
+				self.pathToInstall = ''
+				self.session.openWithCallback(self.runIstallation, ChoiceBox, title=msg, list = installPath)
+			else:
+				self.downloading()
+				self['conn'].text = _("No device found to installing addon!")
+			return
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.downloading()
+		self['conn'].text = (_("Addon: %s\ninstalled succesfully!") % u.filename)
 		if fileExists('/tmp/.restartE2'):
 			remove('/tmp/.restartE2')
 			msg = 'Enigma2 will be now hard restarted to complete package installation.\nDo You want restart enigma2 now?'
 			self._restartE2.go(msg)
 
+	def runIstallation(self, answer):
+		if answer:
+			answer = answer and answer[1]
+			self.pathToInstall = answer
+			self.movingTimer.start(100, True)
+		else:
+			if pathExists("/tmp/install"):
+				system("rm -rf /tmp/install")
+			self.downloading()
+
+	def doMovingAddon(self):
+		if self.movingTimer.isActive():
+			self.movingTimer.stop()
+		self['conn'].text = _("Moving addon on %s, please wait...") % self.pathToInstall
+		if createLink("/tmp/install/skins"):
+			if not pathExists(self.pathToInstall) and (self.pathToInstall != eEnv.resolve('${datadir}/enigma2')):
+				system('mkdir %s' % self.pathToInstall)
+			system("cp -r /tmp/install/skins/* %s/" % self.pathToInstall)
+			createLink(self.pathToInstall, True)
+			createSkinUninstall('Skin_%s' % u.filename,self.pathToInstall)
+		else:
+			system("cp -r /tmp/install/* %s/" % self.pathToInstall)
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		self['conn'].text = _("Addon installed succesfully!")
+		if pathExists("/tmp/install"):
+			system("rm -rf /tmp/install")
+		self.downloading()
+			
 	def downloading(self, state=""):
 		if state == "Install":	
 			self.setTitle(_('Do you want install the addon: %s?') % u.addonsName)
@@ -808,6 +923,8 @@ class	RManual(Screen):
 			self.installFile = False
 
 	def cancel(self):
+		if self.movingTimer.isActive():
+			self.movingTimer.stop()
 		if self.activityTimer.isActive():
 			self.activityTimer.stop()
 			self["progressbar"].value = 0
@@ -834,6 +951,7 @@ class	RRemove(Screen):
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = Label(_("Remove"))
 		self.container = eConsoleAppContainer()
+
 		self.container.appClosed.append(self.runFinished)
 
 		self['type'] = StaticText()
@@ -861,7 +979,7 @@ class	RRemove(Screen):
 	
 	def setWindowTitle(self):
 		self.setTitle(_("Remove Addons"))
-		diskSpace = t.getVarSpaceKb()
+		diskSpace = getVarSpaceKb()
 		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
 		percUsed = int(((diskSpace[1] - diskSpace[0]) / diskSpace[1]) * 100)
 		self["spaceusedtext"].text = _("Free space: %d kB (%d%%)") % (int(diskSpace[0]), percFree)

@@ -25,7 +25,6 @@ class NSetupSum(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
-		self["title"] = Label(_("System Settings"))
 		self["key_red"] = Label(_("Exit"))
 		self['conn'] = StaticText("")
 		skin_path = GetSkinPath()

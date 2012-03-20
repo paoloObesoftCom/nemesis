@@ -34,7 +34,7 @@ except:
 	pass
 
 print "Restart EMU/CS"
-cmd = "nemesisc '%s' '%s' '%s'" % ('127.0.0.1',PortNumber,'/etc/init.d/restartEmu.sh &')
+cmd = "nemesisc '%s' '%s' '%s'" % ('127.0.0.1',PortNumber,'/etc/init.d/restartExt.sh &')
 system(cmd)
 #End
 
@@ -81,10 +81,10 @@ config.misc.isNextRecordTimerAfterEventActionAuto = ConfigYesNo(default=False)
 config.misc.useTransponderTime = ConfigYesNo(default=True)
 config.misc.startCounter = ConfigInteger(default=0) # number of e2 starts...
 config.misc.standbyCounter = NoSave(ConfigInteger(default=0)) # number of standby
-config.misc.epgcache_filename = ConfigSelection(default = "/media/usb", choices = ["/media/usb", "/media/cf", "/media/hdd"])
+config.misc.epgcache_filename = ConfigText(default = "/media/usb/epg.dat")
 
 def setEPGCachePath(configElement):
-	eEPGCache.getInstance().setCacheFile("%s/epg.dat" % configElement.value)
+	eEPGCache.getInstance().setCacheFile(configElement.value)
 
 
 #demo code for use of standby enter leave callbacks
@@ -125,18 +125,6 @@ profile("LOAD:Plugin")
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 plugins.runEarlyPlugins(resolveFilename(SCOPE_PLUGINS))
-
-#Activate Swap
-print "[SWAP] Activate Swapfile"
-system("[ -e /media/usb/swapfile ] && swapon /media/usb/swapfile")
-system("[ -e /media/usb1/swapfile ] && swapon /media/usb1/swapfile")
-system("[ -e /media/usb2/swapfile ] && swapon /media/usb2/swapfile")
-system("[ -e /media/cf/swapfile ] && swapon /media/cf/swapfile")
-system("[ -e /media/hdd/swapfile ] && swapon /media/hdd/swapfile")
-
-#Restore EPG
-print "[EPG] Restore EPG data"
-system("/etc/init.d/RestoreEPG.sh")
 
 def LoadEPG (instance):
 	import epgloader
@@ -647,6 +635,16 @@ else:
 		from Tools import Notifications
 		print "[Unwanted reboot detected]: Go to Standby!!!!!!!!!"
 		Notifications.AddNotification(Screens.Standby.Standby)
+
+#init device list
+from Nemesis.nemesisTool import initSwap, initializeEpg, initNemesisTool
+initNemesisTool()
+
+#init EPG
+initializeEpg()
+
+#Activate Swap
+initSwap()
 
 #from enigma import dump_malloc_stats
 #t = eTimer()

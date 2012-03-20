@@ -4,7 +4,7 @@ from Components.Pixmap import Pixmap
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.config import config
 from enigma import eTimer, eEnv, iServiceInformation, iPlayableService, eDVBFrontendParametersSatellite, eDVBFrontendParametersCable, eDVBFrontendParametersTerrestrial
-from nemesisTool import nemesisTool, parse_ecm
+from nemesisTool import nemesisTool, parse_ecm, GetPiconPath
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 import os
 import re
@@ -255,11 +255,7 @@ class nemesisEI(Screen):
 						self[self.systemCaids.get(caid)].setForegroundColorNum(1)
 	
 	def findPicon(self, codName):
-		if config.nemesis.usepiconinhdd.value:
-			searchPaths = ('/media/hdd/%s/', eEnv.resolve('${datadir}/%s/'),'/media/usb/%s/','/media/cf/%s/')
-		else:
-			searchPaths = (eEnv.resolve('${datadir}/%s/'),'/media/usb/%s/','/media/cf/%s/')
-
+		searchPaths = GetPiconPath()
 		for path in searchPaths:
 			pngname = (path % self.path) + codName + ".png"
 			if fileExists(pngname):

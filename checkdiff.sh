@@ -94,6 +94,7 @@ check_enigma2()
 	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py patch/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py
 	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/WirelessLan/Wlan.py patch/enigma2/lib/python/Plugins/SystemPlugins/WirelessLan/Wlan.py
 	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/WirelessLan/plugin.py patch/enigma2/lib/python/Plugins/SystemPlugins/WirelessLan/plugin.py
+	kompare $e2_cvssrc/lib/python/Plugins/SystemPlugins/SkinSelector/plugin.py patch/enigma2/lib/python/Plugins/SystemPlugins/SkinSelector/plugin.py
 
 	kompare $e2_cvssrc/lib/python/Screens/AudioSelection.py patch/enigma2/lib/python/Screens/AudioSelection.py
 	kompare $e2_cvssrc/lib/python/Screens/ChannelSelection.py patch/enigma2/lib/python/Screens/ChannelSelection.py

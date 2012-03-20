@@ -85,8 +85,8 @@ class timerEpgDownload():
 		elif self.STATE_CONVERTED:
 			if fileExists('/tmp/ext.epg.dat'):
 				os.system("rm -f /tmp/crossepg*")
-				os.system("cp -f /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat")
-				os.system("mv /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
+				os.system("cp -f /tmp/ext.epg.dat " + config.misc.epgcache_filename.value)
+				os.system("mv /tmp/ext.epg.dat " + config.misc.epgcache_filename.value + ".save")
 				if config.nemepg.clearcache.value:
 					try:
 						self.writeLog('Clear enigma EPG cache')
@@ -98,8 +98,8 @@ class timerEpgDownload():
 				try:
 					self.writeLog('Save EPG backup')
 					epg.save()
-					if fileExists(config.misc.epgcache_filename.value + "/epg.dat"):
-						os.system("cp " + config.misc.epgcache_filename.value + "/epg.dat " + config.misc.epgcache_filename.value + "/epg.dat.save")
+					if fileExists(config.misc.epgcache_filename.value):
+						os.system("cp " + config.misc.epgcache_filename.value +  " " + config.misc.epgcache_filename.value + ".save")
 				except:
 					self.writeLog('Save EPG backup failed!')
 				self.writeLog('Download EPG finished!')

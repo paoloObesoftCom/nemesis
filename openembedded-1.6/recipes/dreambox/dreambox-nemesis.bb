@@ -2,7 +2,7 @@ DESCRIPTION = "Nemesis files"
 LICENSE = "GPL"
 
 PV = "2.5"
-PR = "r1"
+PR = "r2"
 
 S = "${WORKDIR}/"
 PACKAGE_ARCH := "${MACHINE_ARCH}"
@@ -81,4 +81,6 @@ pkg_postinst_${PN} () {
 		rm -rf /etc/openvpn
 		mv -f /tmp/openvpn /etc/
 	fi
+	chmod 755 /home/root
+	chmod 700 /home/root/.ssh
 }

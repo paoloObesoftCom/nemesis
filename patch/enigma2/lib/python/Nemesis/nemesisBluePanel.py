@@ -12,7 +12,7 @@ from Components.Sources.StaticText import StaticText
 from Components.Sources.Progress import Progress
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Tools.HardwareInfo import HardwareInfo
-from nemesisTool import *
+from nemesisTool import getVarSpaceKb, nemesisTool
 from nemesisShowPanel import nemesisShowPanel
 from nemesisConsole import nemesisConsole
 from nemesisInfo import NInfo
@@ -21,14 +21,14 @@ from nemesisSetting import NSetupSum
 from nemesisAddons import NAddons
 from Components.Console import Console
 from Components.About import about
-import os
+import os, thread
 from enigma import eTimer, eDVBCI_UI, iServiceInformation, eConsoleAppContainer
 
 t = nemesisTool()
 
 class nemesisBluePanel(Screen):
 
-	NEMESISVER = "2.5"
+	NEMESISVER = "2.6"
 	OEVER = "1.6"
 	IMAGEVER = about.getImageVersionString()
 	ENIGMAVER = about.getEnigmaVersionString()
@@ -39,7 +39,6 @@ class nemesisBluePanel(Screen):
 		Screen.__init__(self, session)
 		self.list = []
 		self['config'] = ConfigList(self.list)
-		self["title"] = Label(_("Nemesis Blue Panel"))
 		self["ecmtext"] = ScrollLabel("")
 		self['conninfo'] = StaticText('')
 		self['conn'] = Label("")
@@ -48,7 +47,7 @@ class nemesisBluePanel(Screen):
 		self["key_yellow"] = Label(_("Settings"))
 		self["key_green"] = Label(_("Information"))
 		self["key_red"] = Label(_("Utility"))
-		self["info_use"] = Label(_("Use arrows < > to select"))
+		#self["info_use"] = Label(_("Use arrows < > to select"))
 		self['spaceused'] = Progress()
 		self['spaceusedtext'] = StaticText()
 		
@@ -78,10 +77,11 @@ class nemesisBluePanel(Screen):
 		self.container.appClosed.append(self.runFinished)
 		self.checkVersionContainer = eConsoleAppContainer()
 		self.checkVersionContainer.appClosed.append(self.fetchFinished)
-		self.readEcmInfo()
+		self.linkAddons = t.readAddonsUrl()[0]
+		thread.start_new_thread(self.readEcmInfo, ())
 
 	def checkVersion(self):
-		url = t.readAddonsUrl() + {True:'rel-test.txt',False:'rel.txt'}[fileExists("/etc/.testmode")]
+		url = self.linkAddons + {True:'rel-test.txt',False:'rel.txt'}[fileExists("/etc/.testmode")]
 		cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + url + " -O /tmp/ver.txt"
 		self.checkVersionContainer.execute(cmd)
 		
@@ -114,12 +114,12 @@ class nemesisBluePanel(Screen):
 
 	def setWindowTitle(self):
 		self.setTitle("%s - %s: %s SVN(%sr%s)" % (_("Nemesis Blue Panel"), _("Image Version"), self.NEMESISVER, self.SVNVERSION[0:3],self.SVNVERSION[3]))
-		diskSpace = t.getVarSpaceKb()
+		diskSpace = getVarSpaceKb()
 		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
 		percUsed = int(((diskSpace[1] - diskSpace[0]) / diskSpace[1]) * 100)
 		self["spaceusedtext"].text = _("Free space: %d kB (%d%%)") % (int(diskSpace[0]), percFree)
 		self["spaceused"].setValue(percUsed)
-	 
+
 	def __onClose(self):
 		if self.container.running():
 			self.container.kill()
@@ -139,6 +139,8 @@ class nemesisBluePanel(Screen):
 				os.unlink('/tmp/ver.txt')
 			if fileExists('/tmp/info.txt'):
 				os.unlink('/tmp/info.txt')
+			from nemesisTool import initNemesisTool
+			thread.start_new_thread(initNemesisTool, ())
 			self.close()
 
 	def loadEmuList(self):
@@ -196,12 +198,12 @@ class nemesisBluePanel(Screen):
 		elif self.sel == 2:
 			if not self.container.running():
 				self['conninfo'].text = (_("Connetting to server. Please wait..."))
-				cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + t.readAddonsUrl() + "info.txt -O /tmp/info.txt"
+				cmd = "%swget %sinfo.txt -O /tmp/info.txt" % ({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value], self.linkAddons)
 				self.container.execute(cmd)
 		elif self.sel == 3:
 			if not self.container.running():
 				self['conninfo'].text = (_("Connetting to server. Please wait..."))
-				cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + t.readAddonsUrl() + "timeline.txt -O /tmp/info.txt"
+				cmd = "%swget %stimeline.txt -O /tmp/info.txt" % ({True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value], self.linkAddons)
 				self.container.execute(cmd)
 		elif self.sel == 4:
 			self.session.open(ParentalControlSetup)

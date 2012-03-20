@@ -2,8 +2,8 @@ DESCRIPTION = "OpenDreambox: Enigma2 Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
 
-PV = "2.4"
-PR = "r1"
+PV = "2.5"
+PR = "r0"
 
 inherit task
 
@@ -78,6 +78,7 @@ RRECOMMENDS_task-opendreambox-enigma2 = "\
 RDEPENDS_task-opendreambox-enigma2_append_dm500hd = "\
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-tempfancontrol \
+  enigma2-plugin-systemplugins-3dsettings \
 "
 
 RDEPENDS_task-opendreambox-enigma2_append_dm800 = "\
@@ -87,18 +88,21 @@ RDEPENDS_task-opendreambox-enigma2_append_dm800 = "\
 RDEPENDS_task-opendreambox-enigma2_append_dm800se = "\
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-tempfancontrol \
+  enigma2-plugin-systemplugins-3dsettings \
 "
 
 RDEPENDS_task-opendreambox-enigma2_append_dm8000 = "\
   enigma2-plugin-systemplugins-commoninterfaceassignment \
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-nfiflash \
+  enigma2-plugin-systemplugins-3dsettings \
 "
 
 RDEPENDS_task-opendreambox-enigma2_append_dm7020hd = "\
   enigma2-plugin-systemplugins-commoninterfaceassignment \
   enigma2-plugin-systemplugins-videomode \
   enigma2-plugin-systemplugins-nfiflash \
+  enigma2-plugin-systemplugins-3dsettings \
 "
 
 RRECOMMENDS_task-opendreambox-enigma2_append_dm8000 = "\

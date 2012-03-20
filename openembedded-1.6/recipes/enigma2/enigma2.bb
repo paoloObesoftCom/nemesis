@@ -61,13 +61,13 @@ DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy s
 PN = "enigma2"
 PR = "r0"
 
-SRCDATE = "20120214"
+SRCDATE = "20120309"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
 #when you like to checkout a specific revision of e2 you need
 #have to specify a commit id or a tag name in SRCREV
 
-SRCDATENEMESIS = "20120223"
+SRCDATENEMESIS = "20120319"
 
 # if you want experimental use
 ####################################################
@@ -77,11 +77,14 @@ PV = "3.2git${SRCDATENEMESIS}"
 ####################################################
 
 SRC_URI = "file://../../../../sources/enigma2_${MACHINE}.tar.bz2 \
-           file://epgloader.so"
+	file://0001-Screens-RecordPaths.py-allow-selection-of-enigma2-co.patch;patch=1 \
+	file://0002-Components-Harddisk.py-reconfigure-old-linked-defaul.patch;patch=1 \
+	file://epgloader.so \
+"
 
 S = "${WORKDIR}/enigma2_${MACHINE}"
 
-FILES_${PN} += "${datadir}/fonts ${datadir}/keymaps ${datadir}/piconProv ${datadir}/piconSat ${datadir}/piconSys"
+FILES_${PN} += "${datadir}/fonts ${datadir}/keymaps"
 FILES_${PN}-meta = "${datadir}/meta"
 PACKAGES += "${PN}-meta"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -114,6 +117,8 @@ do_install_append() {
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/Picon.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/PiconB.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/NNextEvent.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/TimeNextEvent.py
+	rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/DescNextEvent.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Language.py
 	rm -f ${D}/usr/lib/enigma2/python/Components/Ipkg.py
 
@@ -152,7 +157,6 @@ pkg_preinst_${PN} () {
 		cp -a ${datadir}/fonts/tuxtxt.ttf /tmp/tuxtxt.ttf
 	fi
 }
-
 pkg_postinst_${PN} () {
 
 	for rc in /etc/rc2.d /etc/rc3.d /etc/rc4.d /etc/rc5.d
@@ -163,18 +167,20 @@ pkg_postinst_${PN} () {
 		fi
 	done
 
-	if [ -e ${datadir}/enigma2/HD-Glass-15 ]; then
-		rm -rf ${datadir}/enigma2/HD-Glass-15
-	fi
-	if [ -e ${datadir}/enigma2/skin_default/frame ]; then
-		rm -rf ${datadir}/enigma2/skin_default/frame
-	fi
-	if [ -e ${datadir}/enigma2/skin_default/slider ]; then
-		rm -rf ${datadir}/enigma2/skin_default/slider
-	fi
-	if [ -e ${datadir}/enigma2/skin_default/general ]; then
-		rm -rf ${datadir}/enigma2/skin_default/general
-	fi
+	for dir in piconProv piconSys piconSat
+	do
+		if [ -e ${datadir}/$dir ]; then
+			rm -rf ${datadir}/$dir
+		fi
+	done
+
+	for dir in HD-Glass-15 skin_default/frame skin_default/slider skin_default/general
+	do
+		if [ -e ${datadir}/enigma2/$dir ]; then
+			rm -rf ${datadir}/enigma2/$dir
+		fi
+	done
+
 	if [ "x$D" != "x" ]; then
 		exit 1
 	fi

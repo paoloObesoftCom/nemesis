@@ -5,7 +5,7 @@ PRIORITY = "required"
 PROVIDES = "initscripts"
 RPROVIDES_${PN} = "initscripts"
 LICENSE = "GPL"
-PR = "r39"
+PR = "r41"
 PR_dm7025 = "r35"
 
 FILESPATHPKG = "initscripts-${PV}:initscripts:files"
@@ -28,7 +28,6 @@ SRC_URI = "file://halt \
            file://var.tar.gz.default \
            file://nemesise1 \
            file://nemesise2 \
-           file://RestoreEPG.sh \
            file://mountcfusb \
            file://ntpdate \
            file://${BOOTUP}"
@@ -54,7 +53,6 @@ do_install () {
 	install -d ${D}${sysconfdir}/default/volatiles
 
 	install -m 0755    ${WORKDIR}/ntpdate		${D}/usr/bin
-	install -m 0755    ${WORKDIR}/RestoreEPG.sh	${D}${sysconfdir}/init.d
 	install -m 0755    ${WORKDIR}/halt		${D}${sysconfdir}/init.d
 	install -m 0755    ${WORKDIR}/reboot		${D}${sysconfdir}/init.d
 	install -m 0755    ${WORKDIR}/rmnologin		${D}${sysconfdir}/init.d

@@ -12,6 +12,8 @@
 		<item level="0" text="InfoBar EPG text lenght (Character)">config.nemesis.epgtextlenght</item>
 		<item level="0" text="Enable Clean History ZAP (Button 0)">config.nemesis.enableclean</item>
 		<item level="0" text="Zap To Channel 1 after history cleaning">config.nemesis.zapafterclean</item>
+		<item level="0" text="Enable Pig Widget on skin">config.nemesis.enablepig</item>
+		<item level="0" text="Enable skin developper mode">config.nemesis.skindevelopermode</item>
 	</setup>
 	<setup key="eosd" title="Setup Extended InfoBar OSD">
 		<item level="0" text="Choice Extended InfoBar type (Need enigma restart)">config.nemesis.eitype</item>
@@ -42,6 +44,7 @@
 		<item level="0" text="Auto close Console on finished event">config.nemesis.autocloseconsole</item>
 		<item level="0" text="Delay before auto close Console (sec)">config.nemesis.autocloseconsoledelay</item>
 		<item level="0" text="Enable VirtualKeyBoard (Experimental)">config.nemesis.usevkeyboard</item>
+		<item level="0" text="Enable HDD as a device for epg.dat, swap files and skins">config.nemesis.usehddforexternal</item>
 		<item level="0" text="Enable deepstandby on front power button long press">config.usage.long_powerpress_enabled</item>
 		<item level="0" text="Action on long powerbutton press">config.usage.on_long_powerpress</item>
 		<item level="0" text="Action on short powerbutton press">config.usage.on_short_powerpress</item>
@@ -53,7 +56,7 @@
 		<item level="0" text="Show Picon on LCD? (Need enigma restart)">config.nemesis.piconlcd</item>
 		<item level="0" text="Set LCD Picon type">config.nemesis.piconlcdtype</item>
 		<item level="0" text="Set InfoBar Picon type">config.nemesis.picontype</item>
-		<item level="0" text="Can Install Picon in HDD?">config.nemesis.usepiconinhdd</item>
+		<item level="0" text="Search Picon in Hard disk">config.nemesis.usepiconinhdd</item>
 	</setup>
 	<setup key="inadyn" title="Setup InaDyn">
 		<item level="0" text="Set user">config.inadyn.user</item>
@@ -80,7 +83,7 @@
 		<item level="0" text="Set password">config.proxy.password</item>
 	</setup>
 	<setup key="epg" title="EPG Configuration">
-		<item level="0" text="EPG Enigma cache save path">config.misc.epgcache_filename</item>
+		<item level="0" text="Load EPG on boot">config.nemepg.loadonboot</item>
 		<item level="0" text="Number of displayed element on search">config.nemepg.elemnum</item>
 		<item level="0" text="Zap delay before download EPG">config.nemepg.zapdelay</item>
 		<item level="0" text="Download EPG SKY-IT">config.nemepg.downskyit</item>

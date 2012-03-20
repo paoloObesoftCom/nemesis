@@ -15,7 +15,7 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from Components.Sources.StaticText import StaticText
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from os import system, remove as os_remove
-from nemesisTool import  GetSkinPath, nemesisTool
+from nemesisTool import  GetSkinPath, nemesisTool, GetSwapDevice
 from nemesisConsole import nemesisConsole
 from nemesisShowPanel import nemesisShowPanel
 from Screens.HarddiskSetup import HarddiskDriveSelection
@@ -50,27 +50,6 @@ else:
 t = nemesisTool()
 configfile = ConfigFile()
 
-def checkDev():
-	try:
-		mydev = []
-		f = open('/proc/mounts', 'r')
-		for line in f.readlines():
-			if (line.find('/cf') != -1):
-				mydev.append(('/media/cf/','COMPACT FLASH'))
-			if (line.find('/media/usb ') != -1):
-				mydev.append(('/media/usb/','USB PEN'))
-			if (line.find('/media/usb1 ') != -1):
-				mydev.append(('/media/usb1/','USB1 PEN'))
-			if (line.find('/media/usb2 ') != -1):
-				mydev.append(('/media/usb2/','USB2 PEN'))
-			if (line.find('/media/hdd') != -1):
-				mydev.append(('/media/hdd/','HARD DISK'))
-		f.close()
-		if mydev:
-			return mydev
-	except:
-		return None
-
 class NUtility(Screen):
 	__module__ = __name__
 
@@ -86,18 +65,20 @@ class NUtility(Screen):
 			('Ccommand',_('Execute commands'),'icons/terminal.png',True),
 			('NUserScript',_('Execute Users Scripts'),'icons/user.png',True),
 			('NSwap',_('Manage Swap File'),'icons/swapsettings.png',True),
+			('HDDInfo',_('Hard Disk Informations'),'icons/device.png',True),
 			('NDevice',_('Manage Devices'),'icons/device.png',True),
 			('ledManager',_('LED Manager'),'icons/led.png',isledManagerPlugin),
 			('DttDevice',_('Manage DVB-T/C Adapter'),'icons/device.png',True),
-			('Csave',_('Save Enigma Setting'),'icons/save.png',True)
 			]
 			
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
+		self["key_green"] = Label(_("Save Enigma Setting"))
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
 			"red": self.close,
+			"green": self.saveSetting,
 			'back': self.close
 		})
 		self.onShown.append(self.setWindowTitle)
@@ -123,22 +104,25 @@ class NUtility(Screen):
 			self.session.open(NCommand)
 		elif (self.sel == "NUserScript"):
 			self.session.open(NUserScript)
+		elif (self.sel == "HDDInfo"):
+			self.session.open(HDDInfo)
 		elif (self.sel == "NDevice"):
 			self.session.open(HarddiskDriveSelection)
 		elif (self.sel == "NSwap"):
-			if checkDev() == None:
+			if GetSwapDevice():
+				self.session.open(NSwap)
+			else:
 				msg = _('No device for swap found!')
 				self.setTitle(msg)
-			else:
-				self.session.open(NSwap)
 		elif (self.sel == "NetBrowser"):
 			self.session.open(NetworkBrowser, None, GetSkinPath())
 		elif (self.sel == "ledManager"):
 			self.session.open(ledManager)
-		elif (self.sel == "Csave"):
-			configfile.save()
-			self.setTitle(_("Enigma setting saved!"))
-		
+
+	def saveSetting(self):
+		configfile.save()
+		self.setTitle(_("Enigma setting saved!"))
+
 	def updateList(self):
 		del self.list[:]
 		skin_path = GetSkinPath()
@@ -155,12 +139,12 @@ class NCommand(Screen):
 		self.list = []
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
-		self["key_yellow"] = Label(_("Custom"))
+		self["key_green"] = Label(_("Custom"))
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
 			"red": self.close,
-			"yellow": self.openCustom,
+			"green": self.openCustom,
 			'back': self.close
 		})
 		self.onLayoutFinish.append(self.updateList)
@@ -254,12 +238,12 @@ class NServices(Screen):
 			]
 		self.servicestatus = {}
 		self["key_red"] = Label(_("Exit"))
-		self["key_yellow"] = Label(_("Setup"))
+		self["key_green"] = Label(_("Setup"))
 		self['list'] = List(self.list)
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
-			"yellow": self.openSetting,
+			"green": self.openSetting,
 			"red": self.close,
 			'back': self.close
 		})
@@ -287,13 +271,16 @@ class NServices(Screen):
 		for ser in self.servicesList:
 			self.servicestatus[ser[0]] = False
 		system("ps -ef > /tmp/status.log")
-		f = open('/tmp/status.log', 'r')
-		for line in f.readlines():
-			for ser in self.servicesList:
-				if (line.find(ser[2]) != -1):
-					self.servicestatus[ser[0]] = True
-		f.close()
-		
+		try:
+			f = open('/tmp/status.log', 'r')
+			for line in f.readlines():
+				for ser in self.servicesList:
+					if (line.find(ser[2]) != -1):
+						self.servicestatus[ser[0]] = True
+			f.close()
+		except:
+			pass
+
 	def updateList(self):
 		self.readStatus()
 		del self.list[:]
@@ -457,12 +444,12 @@ class NServicesLog(Screen):
 		self["title"] = Label(_("Services Logs"))
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
-		self["key_yellow"] = Label(_("Clear log"))
+		self["key_green"] = Label(_("Clear log"))
 		self.updateList()
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
-			"yellow": self.deleteLog,
+			"green": self.deleteLog,
 			"red": self.close,
 			'back': self.close
 		})
@@ -568,23 +555,25 @@ class NSwap(Screen, ConfigListScreen):
 		self.setTitle(_("Manage Swap File"))
 	
 	def loadSetting(self):
-		self.mydev = checkDev()
+		self.mydev = GetSwapDevice()
 		mystat = self.findSwap()
 		del self.list[:]
 		self.loc = self.mydev[0][0]
 		self.size = 32768
-		if mystat != None:
+		self.active = False
+		if mystat:
 			self.active = True
 			self.loc = mystat[0]
 			self.size = mystat[1] + 8
 		
 		self.swap_active = NoSave(ConfigYesNo(default = self.active))
-		self.list.append(getConfigListEntry(_('Activate Swap File?'), self.swap_active))
 		self.swap_size = NoSave(ConfigSelection(default = self.size, choices =[
 												(8192,'8 MB'), (16384,'16 MB'), (32768,'32 MB'),
 												(65536,'64 MB'), (131072,'128 MB'), (262144,'256 MB')]))
-		self.list.append(getConfigListEntry(_('Swap file size'), self.swap_size))
 		self.swap_location = NoSave(ConfigSelection(default = self.loc, choices = self.mydev))
+
+		self.list.append(getConfigListEntry(_('Activate Swap File?'), self.swap_active))
+		self.list.append(getConfigListEntry(_('Swap file size'), self.swap_size))
 		self.list.append(getConfigListEntry(_('Swap file location'), self.swap_location))
 		self['config'].list = self.list
 		self['config'].l.setList(self.list)
@@ -596,7 +585,7 @@ class NSwap(Screen, ConfigListScreen):
 		
 	def Dsave(self):
 		self.activityTimer.stop()
-		swapfile = self.swap_location.value.strip() + 'swapfile'
+		swapfile = self.swap_location.value.strip() + '/swapfile'
 		cmd = ''
 		if (self.swap_active.value) and (not self.active):
 			cmd += "echo 'Creating swap file...'"
@@ -639,7 +628,58 @@ class NSwap(Screen, ConfigListScreen):
 					myswap = line.strip().split()
 			f.close()
 			if myswap:
-				return '/media/' + myswap[0].split("/")[2] + "/", int(myswap[2])
+				return myswap[0][:-9], int(myswap[2])
 		except:
 			return None
 
+class HDDInfo(Screen):
+	__module__ = __name__
+	
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.list = []
+		self.menuList = [
+			(_('Current Information'),'hdparm -I /dev/sda',True),
+			(_('Harddisk temperature'),'hddtemp PATA:/dev/sda',False),
+			(_('Stop Harddisk'),'hdparm -y /dev/sda',False),
+			(_('Execute cache read test'),'hdparm -T /dev/sda',False),
+			(_('Execute device read test'),'hdparm -t /dev/sda',False),
+			(_('Update device list (hddtemp.db)'),'wget http://www.guzu.net/linux/hddtemp.db -O /var/etc/hddtemp.db',False),
+			]
+		self["conn"] = StaticText(_('Press OK buttom to execute the selected command'))
+		self['list'] = List(self.list)
+		self["close"] = Label(_("Close"))
+		self['actions'] = ActionMap(['WizardActions','ColorActions'],
+		{
+			'ok': self.KeyOk,
+			"red": self.close,
+			'back': self.close
+		})
+		self.onLayoutFinish.append(self.updateList)
+		self.onShown.append(self.setWindowTitle)
+		self["list"].onSelectionChanged.append(self.setConnLabel)
+	
+	def setWindowTitle(self):
+		self.setTitle(_("Hard Disk Informations"))
+	
+	def setConnLabel(self):
+		self["conn"].text = _('Press OK buttom to execute the selected command')
+
+	def updateList(self):
+		del self.list[:]
+		for men in self.menuList:
+			self.list.append((men[1], men[0], men[2]))
+		self['list'].setList(self.list)
+	
+	def KeyOk(self):
+		if self["list"].getIndex() == 2:
+			system(self["list"].getCurrent()[1])
+			self["conn"].text = _('Harddisk stopped!')
+		else:
+			self.autoClose = config.nemesis.autocloseconsole.value
+			config.nemesis.autocloseconsole.value = False
+			self.session.openWithCallback(self.consoleCallback, nemesisConsole, self["list"].getCurrent()[0], self["list"].getCurrent()[1],self["list"].getCurrent()[2])
+
+	def consoleCallback(self, answer):
+		if (self.autoClose):
+			config.nemesis.autocloseconsole.value = True

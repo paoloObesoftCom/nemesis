@@ -2,13 +2,232 @@ from Components.MenuList import MenuList
 from Tools.Directories import fileExists
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.HardwareInfo import HardwareInfo
-from enigma import eListboxPythonMultiContent, eListbox, gFont, getDesktop
-from Components.config import config
-from os import system, statvfs
+from enigma import eListboxPythonMultiContent, eListbox, gFont, getDesktop, eEnv
+from Components.config import config, ConfigFile
+from os import system, statvfs, path as os_path, remove as os_remove, walk
 import os, sys, base64 as getID
-from Components.config import ConfigFile
 
 configfile = ConfigFile()
+
+PICONSEARCHPATH = []
+PLUGININSTALLPATH = []
+EPGPATH = []
+SKINPATH = []
+SWAPDEVICE = []
+DEVICEINFO = []
+
+def getVarSpace():
+	free = -1
+	try:
+		s = statvfs("/")
+	except OSError:
+		return free
+	free = s.f_bfree/1024 * s.f_bsize/1024
+	return s.f_bfree/1024 * (s.f_bsize / 1024)	
+
+def getVarSpaceKb():
+	try:
+		s = statvfs("/")
+	except OSError:
+		return 0,0
+	return float(s.f_bfree * (s.f_bsize / 1024)), float(s.f_blocks * (s.f_bsize / 1024))
+
+def getDeviceKb(dev):
+	try:
+		s = statvfs(dev)
+	except OSError:
+		return 0,0
+	return float(s.f_bavail * (s.f_bsize / 1024)), float(s.f_blocks * (s.f_bsize / 1024))
+
+def checkDevice(device):
+	system('touch %s/test.test' % device)
+	if os_path.isfile('%s/test.test' % device):
+		os_remove('%s/test.test' % device)
+		return True
+	return False
+
+def initNemesisTool():
+	from Components.Harddisk import harddiskmanager
+	print "[ENUMERATE DEVICE] enumerate mounted devices..."
+	del PICONSEARCHPATH[:]
+	del PLUGININSTALLPATH[:]
+	del EPGPATH[:]
+	del SWAPDEVICE[:]
+	del SKINPATH[:]
+	hddPartition = []
+	flashSpace = getVarSpaceKb()
+	for partition in harddiskmanager.getMountedPartitions():
+		if (partition.mountpoint != '/') \
+				and str(partition.mountpoint).find('/autofs') == -1 \
+				and (partition.mountpoint != ''):
+			if not partition.device:
+				if not checkDevice(partition.mountpoint):
+					continue
+			description = partition.description
+			if partition.device:
+				try:
+					physdev = os_path.realpath('/sys/block/' + partition.device[:3] + '/device')[4:]
+					description = harddiskmanager.getUserfriendlyDeviceName(partition.device[:3], physdev)
+				except:
+					description = partition.description
+			if str(partition.mountpoint).find("/media/net") >= 0:
+				description = _("Network Resource %s") % partition.description
+			if description.find("SATA") >= 0 or description.find("Hard disk") >= 0:
+				hddPartition.append((description, partition.mountpoint))
+			else:
+				if partition.device:
+					SWAPDEVICE.append((partition.mountpoint,"%s (%s)" % (description, partition.mountpoint)))
+					SKINPATH.append(("%s (%s)" % (description, "%s/skins" % partition.mountpoint),"%s/skins" % partition.mountpoint))
+				PICONSEARCHPATH.append(partition.mountpoint + '/%s/')
+				PLUGININSTALLPATH.append(("%s (%s)" % (description, partition.mountpoint),partition.mountpoint))
+				EPGPATH.append(("%s (%s)" % (description, partition.mountpoint),partition.mountpoint))
+	PICONSEARCHPATH.append(eEnv.resolve('${datadir}/%s/'))
+	PICONSEARCHPATH.append(eEnv.resolve('${datadir}/enigma2/%s/'))
+	SKINPATH.append((_("%s - [ Free: %d KB ]") % (_('Internal flash (unsuggested)'),int(flashSpace[0]) ),eEnv.resolve('${datadir}/enigma2')))
+	PLUGININSTALLPATH.append((_("%s - [ Free: %d KB ]") % (_('Internal flash (unsuggested)'),int(flashSpace[0]) ),eEnv.resolve('${datadir}/enigma2')))
+	EPGPATH.append((_('Temporary Folder (/tmp)'),'/tmp'))
+
+	from Plugins.SystemPlugins.NetworkBrowser.AutoMount import iAutoMount
+	for partition in iAutoMount.getMountsList():
+		entryExist = False
+		path = "/media/net/%s" % partition
+		description = _("Network Resource %s") % partition
+		if os_path.ismount(path) \
+				and os_path.exists(path) \
+				and checkDevice(path):
+			for item in EPGPATH:
+				if item[1] == path:
+					entryExist = True
+			if not entryExist:
+					EPGPATH.append(("%s (%s)" % (description, path),path))
+			for item in PICONSEARCHPATH:
+				if item == path:
+					entryExist = True
+			if not entryExist:
+				PICONSEARCHPATH.append(path + '/%s/')
+			for item in PLUGININSTALLPATH:
+				if item[1] == path:
+					entryExist = True
+			if not entryExist:
+				PLUGININSTALLPATH.append(("%s (%s)" % (description, path),path))
+
+	for item in hddPartition:
+		if config.nemesis.usepiconinhdd.value:
+			PICONSEARCHPATH.append(item[1] + '/%s/')
+		if config.nemesis.usehddforexternal.value:
+			SWAPDEVICE.append((item[1],"%s (%s)" % (item[0], item[1])))
+			SKINPATH.append(("%s (%s)" % (item[0], "%s/skins" % item[1]),"%s/skins" % item[1]))
+			EPGPATH.append(("%s (%s)" % (item[0], item[1]),item[1]))
+			PLUGININSTALLPATH.append(("%s (%s)" % (item[0], item[1]),item[1]))
+	
+	for item in PLUGININSTALLPATH:
+		print "[PLUGININSTALLPATH] %s, %s" % (item[0], item[1])
+
+	for item in PICONSEARCHPATH:
+		print "[PICONSEARCHPATH] %s" % (item)
+
+	for item in SWAPDEVICE:
+		print "[SWAPDEVICE] %s, %s" % (item[0], item[1])
+
+	for item in SKINPATH:
+		print "[SKINPATH] %s, %s" % (item[0], item[1])
+
+	for item in EPGPATH:
+		print "[EPGPATH] %s, %s" % (item[0], item[1])
+
+def GetPiconPath():
+	return PICONSEARCHPATH
+
+def GetSkinsPath():
+	return SKINPATH
+
+def GetPluginInstallPath():
+	return PLUGININSTALLPATH
+
+def GetEpgPath():
+	return EPGPATH
+
+def GetSwapDevice():
+	return SWAPDEVICE
+
+def initSwap():
+	print "[SWAP] Activating Swapfile..."
+	for path in GetSwapDevice():
+		path = path[0]
+		if fileExists("%s/swapfile" % path):
+			system("swapon %s/swapfile" % path)
+			print "[SWAP] on %s Activate" % path
+			return
+	print "[SWAP] No swap files found!"
+
+def initDeviceInfo():
+	from Components.Harddisk import harddiskmanager
+	print "[ENUMERATE DEVICEINFO] enumerate mounted devices..."
+	del DEVICEINFO[:]
+	for partition in harddiskmanager.getMountedPartitions():
+		print "[PARTITION] %s, %s" % (partition.description, partition.mountpoint)
+		if (partition.mountpoint != '')  \
+				and str(partition.mountpoint).find('/autofs') == -1:
+			if not partition.device:
+				if not checkDevice(partition.mountpoint):
+					continue
+			description = partition.description
+			if partition.device:
+				try:
+					physdev = os_path.realpath('/sys/block/' + partition.device[:3] + '/device')[4:]
+					description = harddiskmanager.getUserfriendlyDeviceName(partition.device[:3], physdev)
+				except:
+					description = partition.description
+			if str(partition.mountpoint).find("/media/net") >= 0:
+				description = _("Network Resource %s") % description
+			if partition.mountpoint == "/":
+				DEVICEINFO.append((partition.mountpoint,description,getVarSpaceKb()))
+			else:
+				DEVICEINFO.append((partition.mountpoint,description,getDeviceKb(partition.mountpoint)))
+
+def getDeviceInfo():
+	return DEVICEINFO
+
+def initEpg():
+	epgFile = config.misc.epgcache_filename.value
+	print "[EPG] Restoring EPG data..."
+	if fileExists(epgFile):
+		print "[EPG] %s found!" % epgFile
+		return True
+	elif fileExists("%s.save" % epgFile):
+		print "[EPG] %s.save found!" % epgFile
+		system("cp %s.save %s" % (epgFile,epgFile))
+		print "[EPG] %s.save restored on %s!" % (epgFile,epgFile)
+		return True
+	else:
+		for path in GetEpgPath():
+			path = path[1]
+			if fileExists("%s/epg.dat" % path):
+				system("cp %s/epg.dat %s" % (path,epgFile))
+				print "[EPG] epg.dat found on %s copied on %s" % (path,epgFile)
+				return True
+			else:
+				if fileExists("%s/epg.dat.save" % path):
+					print "[EPG] restoring %s/epg.dat.save..." % path
+					system("cp %s/epg.dat.save %s" % (path,epgFile))
+					print "[EPG] %s/epg.dat.save restored on %s!" % (path,epgFile)
+					return True
+				if fileExists("%s/ext.epg.dat" % path):
+					print "[EPG] restoring %s/ext.epg.dat..." % path
+					system("cp %s/ext.epg.dat %s" % (path,epgFile))
+					print "[EPG] %sext.epg.dat restored on %s!" % (path,epgFile)
+					return True
+	print "[EPG] No EPG data found!"
+	return False
+
+def initializeEpg():
+	epgFile = config.misc.epgcache_filename.value
+	if config.nemepg.loadonboot.value:
+		initEpg()
+	else:
+		if fileExists(epgFile):
+			print "[EPG] Remove %s" % epgFile
+			os_remove('rm -f %s' % epgFile)
 
 def parse_ecm(filename):
 	addr = caid =  pid =  provid =  port = reader = protocol = ""
@@ -136,43 +355,50 @@ def parse_ecm(filename):
 	except:
 		return 0
 	
+def createSkinUninstall(fileName, installPath):
+	dirname = ''
+	for root, dirs, files in walk("/tmp/install/skins"):
+		for file in files:
+			if file == "skin.xml":
+				root = root.split('/')
+				dirname = root[len(root) - 1]
+				break
+	linkPath = '%s%s' % (eEnv.resolve('${datadir}/enigma2/'),dirname)
+	skinPath = '%s/%s' % (installPath,dirname)
+	entry = "#!/bin/sh\nrm -rf %s\nrm -f %s\nrm -f $0\nkillall -9 enigma2\nexit 0\n" % \
+		( skinPath, \
+			linkPath )
+	open('/usr/uninstall/%s_remove.sh' % fileName[:-5], 'w').write(entry)
+	system('chmod 755 /usr/uninstall/%s_remove.sh' % fileName[:-5])
+
 def createProxy():
-	urlS = "http://"
-	urlS += config.proxy.user.value.strip()
-	urlS += ":"
-	urlS += config.proxy.password.value.strip()
-	urlS += "@"
-	urlS += config.proxy.server.value.strip()
-	urlS += ":"
-	urlS += str(config.proxy.port.value)
-	urlS += "\n"
-	out = open('/var/etc/proxy.sh', 'w')
-	out.write('#!/bin/sh\n')
-	out.write('export http_proxy=' + urlS)
-	out.close()
+	entry = "#!/bin/sh\nexport http_proxy=http://%s:%s@%s:%d\n\n" % \
+		( config.proxy.user.value.strip(), \
+			config.proxy.password.value.strip(), \
+			config.proxy.server.value.strip(), \
+			config.proxy.port.value )
+	open('/var/etc/proxy.sh', 'w').write(entry)
 	system("chmod 755 /var/etc/proxy.sh")
 
 def createInadynConf():
-	out = open('/etc/inadyn.conf', 'w')
-	out.write('username ' + config.inadyn.user.value.strip() + '\n')
-	out.write('password ' + config.inadyn.password.value.strip() + '\n')
-	out.write('alias ' + config.inadyn.alias.value.strip() + '\n')
-	out.write('update_period_sec ' + str(config.inadyn.period.value) + '\n')
-	out.write('dyndns_system ' + config.inadyn.system.value.strip() + '\n')
-	out.write('log_file ' + config.inadyn.log.value.strip() +'/inadyn.log\n')
-	out.write('background\n')
-	out.close()
+	entry = 'username %s\npassword %s\nalias %s\nupdate_period_sec %d\ndyndns_system %s\nlog_file %s/inadyn.log\nbackground\n' % \
+			( config.inadyn.user.value.strip(), \
+				config.inadyn.password.value.strip(), \
+				config.inadyn.alias.value.strip(), \
+				config.inadyn.period.value, \
+				config.inadyn.system.value.strip(), \
+				config.inadyn.log.value.strip() )
+	open('/etc/inadyn.conf', 'w').write(entry)
 
 def createIpupdateConf():
-	out = open('/etc/ipupdate.conf', 'w')
-	out.write('service-type=' + config.ipupdate.system.value.strip() + '\n')
-	out.write('user=' + config.ipupdate.user.value.strip() + ':' + config.ipupdate.password.value.strip() + '\n')
-	out.write('host=' + config.ipupdate.alias.value.strip() + '\n')
-	out.write('server=' + config.ipupdate.server.value.strip() + '\n')
-	out.write('interface=eth0\n')
-	out.write('quiet\n')
-	out.write('period=' + str(config.ipupdate.period.value) + '\n')
-	out.close()
+	entry = 'service-type=%s\nuser=%s:%s\nhost=%s\nserver=%s\ninterface=eth0\nquiet\nperiod=%d\n' % \
+			( config.ipupdate.system.value.strip(), \
+				config.ipupdate.user.value.strip(), \
+				config.ipupdate.password.value.strip(), \
+				config.ipupdate.alias.value.strip(), \
+				config.ipupdate.server.value.strip(), \
+				config.ipupdate.period.value )
+	open('/etc/ipupdate.conf', 'w').write(entry)
 
 def getUsrID(a):
 		return getID.b64decode('b%s=' % a)
@@ -195,42 +421,6 @@ def cleanServiceHistoryList(slist):
 	else:
 		slist.recallPrevService()
 	return config.nemesis.zapafterclean.value and config.nemesis.enableclean.value
-
-class ListboxE1(MenuList):
-	__module__ = __name__
-
-	def __init__(self, list, enableWrapAround = False):
-		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont('Regular', 20))
-		self.l.setFont(1, gFont('Regular', 22))
-		self.l.setItemHeight(36)
-
-class ListboxE2(MenuList):
-	__module__ = __name__
-
-	def __init__(self, list, enableWrapAround = False):
-		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont('Regular', 20))
-		self.l.setFont(1, gFont('Regular', 18))
-		self.l.setItemHeight(60)
-
-class ListboxE3(MenuList):
-	__module__ = __name__
-
-	def __init__(self, list, enableWrapAround = False):
-		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont('Regular', 20))
-		self.l.setFont(1, gFont('Regular', 20))
-		self.l.setItemHeight(30)
-
-class ListboxE4(MenuList):
-	__module__ = __name__
-
-	def __init__(self, list, enableWrapAround = False):
-		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont('Regular', 18))
-		self.l.setFont(1, gFont('Regular', 18))
-		self.l.setItemHeight(25)
 
 from Screens.ChoiceBox import ChoiceBox
 from Tools import Notifications
@@ -429,14 +619,16 @@ class nemesisTool:
 			return int(1000)
 	
 	def readAddonsUrl(self):	
+		line = []
 		try:
 			#os.system("dos2unix /var/etc/addons.url");
 			f = open("/var/etc/addons.url", "r")
-			line = f.readline()
+			line.append(f.readline()[:-1])
+			line.append(f.readline()[:-1])
 			f.close()
-			return line [:-1]
+			return line
 		except:
-			return "http://nemesis.tv/Nemesis/"
+			return "http://nemesis.tv/Nemesis/", "addonsE2_26.xml"
 
 	def readExtraUrl(self):	
 		try:
@@ -447,22 +639,6 @@ class nemesisTool:
 			return line
 		except:
 			return None
-	
-	def getVarSpace(self):
-		free = -1
-		try:
-			s = statvfs("/")
-		except OSError:
-			return free
-		free = s.f_bfree/1024 * s.f_bsize/1024
-		return s.f_bfree/1024 * (s.f_bsize / 1024)	
-
-	def getVarSpaceKb(self):
-		try:
-			s = statvfs("/")
-		except OSError:
-			return 0,0
-		return float(s.f_bfree * (s.f_bsize / 1024)), float(s.f_blocks * (s.f_bsize / 1024))
 
 	def readEcmInfo(self):	
 		emuActive = self.readEmuActive()

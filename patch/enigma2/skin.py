@@ -405,12 +405,16 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 
 		x = eWindowStyleManager.getInstance()
 		x.setStyle(id, style)
+		
+		for skininclude in skin.findall("include"):
+			loadSkin(skininclude.attrib.get("filename"))
 
 def loadSkinData(desktop):
 	skins = dom_skins[:]
-	skins.reverse()
-	for (path, dom_skin) in skins:
-		loadSingleSkinData(desktop, dom_skin, path)
+	if skins:
+		skins.reverse()
+		for (path, dom_skin) in skins:
+			loadSingleSkinData(desktop, dom_skin, path)
 
 def lookupScreen(name, style_id):
 	for (path, skin) in dom_skins:
@@ -428,6 +432,25 @@ class additionalWidget:
 	pass
 
 def readSkin(screen, skin, names, desktop):
+
+	if config.nemesis.skindevelopermode.value:
+		# it's not elegant and low performace... but for skin developing is great!
+		del dom_skins[:]
+		try:
+			loadSkin('skin_lcd.xml')
+		except:
+			pass
+		try:
+			loadSkin('skin_oled.xml')
+		except:
+			pass
+		try:
+			loadSkin('skin_sub.xml')
+		except:
+			pass
+		loadSkin(config.skin.primary_skin.value)
+		loadSkinData(desktop)
+
 	if not isinstance(names, list):
 		names = [names]
 
@@ -573,15 +596,21 @@ def readSkin(screen, skin, names, desktop):
 
 				source = c
 
-			renderer_class = my_import('.'.join(("Components", "Renderer", wrender))).__dict__.get(wrender)
-
-			renderer = renderer_class() # instantiate renderer
-
-			renderer.connect(source) # connect to source
-			attributes = renderer.skinAttributes = [ ]
-			collectAttributes(attributes, widget, skin_path_prefix, ignore=['render', 'source'])
-
-			screen.renderer.append(renderer)
+			if config.nemesis.enablepig.value:
+				renderer_class = my_import('.'.join(("Components", "Renderer", wrender))).__dict__.get(wrender)
+				renderer = renderer_class() # instantiate renderer
+				renderer.connect(source) # connect to source
+				attributes = renderer.skinAttributes = [ ]
+				collectAttributes(attributes, widget, skin_path_prefix, ignore=['render', 'source'])
+				screen.renderer.append(renderer)
+			else:
+				if wrender != "Pig":
+					renderer_class = my_import('.'.join(("Components", "Renderer", wrender))).__dict__.get(wrender)
+					renderer = renderer_class() # instantiate renderer
+					renderer.connect(source) # connect to source
+					attributes = renderer.skinAttributes = [ ]
+					collectAttributes(attributes, widget, skin_path_prefix, ignore=['render', 'source'])
+					screen.renderer.append(renderer)
 
 	from Components.GUIComponent import GUIComponent
 	nonvisited_components = [x for x in set(screen.keys()) - visited_components if isinstance(x, GUIComponent)]

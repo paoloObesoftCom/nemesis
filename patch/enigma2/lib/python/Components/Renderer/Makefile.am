@@ -5,4 +5,4 @@ install_PYTHON = \
 	FixedLabel.py PositionGauge.py Canvas.py Picon.py Pig.py \
 	FrontpanelLed.py NemesisAhours.py NemesisEmptyEpg.py \
 	NemesisRefTV.py NemesisShowReference.py RollName.py ShowTP.py PiconName.py \
-	NNextEvent.py
+	NNextEvent.py DescNextEvent.py TimeNextEvent.py

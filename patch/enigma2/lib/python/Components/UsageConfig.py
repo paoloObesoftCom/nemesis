@@ -7,9 +7,7 @@ import os
 from Nemesis.nemesisConfig import InitNemesisConfig
 
 def InitUsageConfig():
-	#inititilaize Nemesis Config
-	InitNemesisConfig()
-	
+
 	config.usage = ConfigSubsection();
 	config.usage.showdish = ConfigYesNo(default = True)
 	config.usage.multibouquet = ConfigYesNo(default = True)
@@ -80,7 +78,6 @@ def InitUsageConfig():
 		("show_menu", _("show shutdown menu")),
 		("shutdown", _("immediate shutdown")),
 		("standby", _("Standby")) ] )
-
 
 	config.usage.alternatives_priority = ConfigSelection(default = "0", choices = [
 		("0", "DVB-S/-C/-T"),
@@ -170,7 +167,8 @@ def InitUsageConfig():
 
 	config.seek.speeds_backward.addNotifier(updateEnterBackward, immediate_feedback = False)
 
-	harddiskmanager.verifyDefaultStorageDevice()
+	#inititilaize Nemesis Config
+	InitNemesisConfig()
 
 def updateChoices(sel, choices):
 	if choices:

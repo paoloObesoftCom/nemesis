@@ -10,15 +10,16 @@ from Components.Sources.StaticText import StaticText
 from Components.MenuList import MenuList
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
 from os import path, walk
 from enigma import eEnv
+from Nemesis.nemesisTool import GetSkinsPath
 
 class SkinSelector(Screen):
 	# for i18n:
 	# _("Choose your Skin")
 	skinlist = []
-	root = eEnv.resolve("${datadir}/enigma2/")
+	root = eEnv.resolve("${datadir}/enigma2")
 
 	def __init__(self, session, args = None):
 
@@ -26,10 +27,10 @@ class SkinSelector(Screen):
 
 		self.skinlist = []
 		self.previewPath = ""
-		path.walk(self.root, self.find, "")
+		for skinPath in GetSkinsPath():
+			path.walk(skinPath[1], self.find, "")
 
 		self["key_red"] = StaticText(_("Close"))
-		self["key_yellow"] = StaticText(_("Preview"))
 		self["introduction"] = StaticText(_("Press OK to activate the selected skin."))
 		self.skinlist.sort()
 		self["SkinList"] = MenuList(self.skinlist)
@@ -40,7 +41,6 @@ class SkinSelector(Screen):
 			"ok": self.ok,
 			"back": self.close,
 			"red": self.close,
-			"yellow": self.openPreview,
 			"up": self.up,
 			"down": self.down,
 			"left": self.left,
@@ -56,12 +56,27 @@ class SkinSelector(Screen):
 			tmp = config.skin.primary_skin.value[:tmp]
 			idx = 0
 			for skin in self.skinlist:
-				if skin == tmp:
+				if skin[0] == tmp:
 					break
 				idx += 1
 			if idx < len(self.skinlist):
 				self["SkinList"].moveToIndex(idx)
 		self.loadPreview()
+
+	def readTitle(self, dirname, subdir = None):
+		path = '%s/skin.xml.title' % dirname
+		
+		if not fileExists(path):
+			if subdir:
+				return subdir
+			return "Default Skin"
+			
+		title = open(path, 'r').readline()[:-1]
+		if not title:
+			if subdir:
+				return subdir
+			return "Default Skin"
+		return title
 
 	def up(self):
 		self["SkinList"].up()
@@ -87,17 +102,20 @@ class SkinSelector(Screen):
 		for x in names:
 			if x == "skin.xml":
 				if dirname <> self.root:
-					subdir = dirname[19:]
-					self.skinlist.append(subdir)
+					subdir = dirname.split("/")
+					subdir = subdir[len(subdir) - 1]
+					title = self.readTitle(dirname, subdir)
 				else:
 					subdir = "Default Skin"
-					self.skinlist.append(subdir)
+					dirname = self.root
+					title = self.readTitle(dirname)
+				self.skinlist.append((title, subdir,dirname))
 
 	def ok(self):
-		if self["SkinList"].getCurrent() == "Default Skin":
+		if self["SkinList"].getCurrent()[1] == "Default Skin":
 			skinfile = "skin.xml"
 		else:
-			skinfile = self["SkinList"].getCurrent()+"/skin.xml"
+			skinfile = self["SkinList"].getCurrent()[1]+"/skin.xml"
 
 		print "Skinselector: Selected Skin: "+self.root+skinfile
 		config.skin.primary_skin.value = skinfile
@@ -106,10 +124,8 @@ class SkinSelector(Screen):
 		restartbox.setTitle(_("Restart GUI now?"))
 
 	def loadPreview(self):
-		if self["SkinList"].getCurrent() == "Default Skin":
-			pngpath = self.root+"/prev.png"
-		else:
-			pngpath = self.root+self["SkinList"].getCurrent()+"/prev.png"
+		pngpath = "%s/prev.png" % self["SkinList"].getCurrent()[2]
+		print pngpath
 
 		if not path.exists(pngpath):
 			pngpath = resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SkinSelector/noprev.png")
@@ -119,45 +135,9 @@ class SkinSelector(Screen):
 
 		self["Preview"].instance.setPixmapFromFile(self.previewPath)
 
-	def openPreview(self):
-		if self["SkinList"].getCurrent() == "Default Skin":
-			pngpath = self.root+"/prev_big.png"
-		else:
-			pngpath = self.root+self["SkinList"].getCurrent()+"/prev_big.png"
-
-		if not path.exists(pngpath):
-			mbox = self.session.open(MessageBox, _("No preview Image available!"), MessageBox.TYPE_INFO)
-			mbox.setTitle(_("Error"))
-		else:
-			self.session.open(openPreviewScreen, pngpath)
-		
 	def restartGUI(self, answer):
 		if answer is True:
 			self.session.open(TryQuitMainloop, 3)
-			
-class openPreviewScreen(Screen):
-
-	skin = """
-	<screen position="0,0" size="1280,720"  backgroundColor="transparent" flags="wfNoBorder">
-		<widget name="Preview" position="0,0" size="1280,720" alphatest="on"/>
-	</screen>"""
-
-	def __init__(self, session, pngpath):
-		Screen.__init__(self, session)
-		
-		self["Preview"] = Pixmap()
-		self.pngpath = pngpath
-		self["actions"] = NumberActionMap(["WizardActions", "InputActions"],
-			{
-			'ok': self.close,
-			"yellow": self.close,
-			'back': self.close
-			}, -1)
-
-		self.onLayoutFinish.append(self.layoutFinished)
-		
-	def layoutFinished(self):
-		self["Preview"].instance.setPixmapFromFile(self.pngpath)
 
 def SkinSelMain(session, **kwargs):
 	session.open(SkinSelector)

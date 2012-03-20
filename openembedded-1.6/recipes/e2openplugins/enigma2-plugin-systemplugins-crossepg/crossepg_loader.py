@@ -139,9 +139,9 @@ class CrossEPG_Loader(Screen):
 	
 	def loadEPG(self):
 		try:
-			cmd = "%s/crossepg_epgcopy %s/ext.epg.dat %s/epg.dat" % (self.home_directory, self.db_root, config.misc.epgcache_filename.value)
+			cmd = "%s/crossepg_epgcopy %s/ext.epg.dat %s" % (self.home_directory, self.db_root, config.misc.epgcache_filename.value)
 		except Exception, e:
-			cmd = "%s/crossepg_epgcopy %s/ext.epg.dat /hdd/epg.dat" % (self.home_directory, self.db_root)
+			cmd = "%s/crossepg_epgcopy %s/ext.epg.dat /media/hdd/epg.dat" % (self.home_directory, self.db_root)
 			
 		print "[CrossEPG_Loader] %s" % (cmd)
 		os.system(cmd)
@@ -149,7 +149,7 @@ class CrossEPG_Loader(Screen):
 		self.closeAndCallback(True)
 		
 	def loadEDG(self):
-		cmd = "%s/crossepg_epgcopy %s/ext.epg.dat %s/epg.dat" % (self.home_directory, self.db_root, config.nemepg.path.value)
+		cmd = "%s/crossepg_epgcopy %s/ext.epg.dat %s" % (self.home_directory, self.db_root, config.misc.epgcache_filename.value)
 		print "[CrossEPG_Loader] %s" % (cmd)
 		os.system(cmd)
 		self.edgpatch(eEPGCache.getInstance())

@@ -21,6 +21,7 @@ class nemesisConsole(Screen):
 		self.Wtitle = Wtitle
 		self.callbackList = []
 		self["text"] = ScrollLabel("")
+		self["info"] = Label()
 		self["oktext"] = Label(_("OK"))
 		self["canceltext"] = Label(_("Cancel"))
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions",'ColorActions'], 
@@ -42,6 +43,7 @@ class nemesisConsole(Screen):
 		self.onShown.append(self.setWindowTitle)
 	
 	def setWindowTitle(self):
+		self["info"].setText(_('Executing command, please wait...'))
 		self.setTitle(self.Wtitle)
 	
 	def startRun(self):
@@ -52,7 +54,6 @@ class nemesisConsole(Screen):
 	def runFinished(self, retval):
 		self.EVENT_CURR = self.EVENT_DONE
 		self["text"].setText(self["text"].getText() + _('Done') + '\n')
-		self["canceltext"].hide()
 		if config.nemesis.autocloseconsole.value:
 			if int(config.nemesis.autocloseconsoledelay.value) != 0:
 				self.autoCloseTimer.startLongTimer(int(config.nemesis.autocloseconsoledelay.value))
@@ -60,14 +61,15 @@ class nemesisConsole(Screen):
 				self.cancel()
 		else:
 			self["text"].setText(self["text"].getText() + _('Please Press OK Button to close windows!') + '\n')
+			self["info"].setText("%s, %s" % (_('Done'), _('Please Press OK Button to close windows!')))
 			self["oktext"].show()
+		self["canceltext"].setText(_("Exit"))
 	
 	def stop(self):
 		if self.isRunning():
 			self.EVENT_CURR = self.EVENT_KILLED
 			self["text"].setText(self["text"].getText() + _('Action killed by user') + '\n')
 			self.container.kill()
-			self["canceltext"].hide()
 			if config.nemesis.autocloseconsole.value:
 				if int(config.nemesis.autocloseconsoledelay.value) != 0:
 					self.autoCloseTimer.startLongTimer(int(config.nemesis.autocloseconsoledelay.value))
@@ -76,7 +78,10 @@ class nemesisConsole(Screen):
 			else:
 				self["text"].setText(self["text"].getText() + _('Please Press OK Button to close windows!') + '\n')
 				self["oktext"].show()
-	
+				self["canceltext"].setText(_("Exit"))
+		else:
+			self.cancel()
+
 	def cancel(self):
 		if not self.isRunning():
 			if self.autoCloseTimer.isActive():

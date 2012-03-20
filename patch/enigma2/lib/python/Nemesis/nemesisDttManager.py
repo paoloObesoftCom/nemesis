@@ -10,14 +10,12 @@ from Components.Sources.StaticText import StaticText
 from Components.config import config
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists
-from nemesisTool import nemesisTool, GetSkinPath, restartE2
+from nemesisTool import GetSkinPath, restartE2, getVarSpaceKb
 from nemesisConsole import nemesisConsole
 from nemesisTunerList import tList
 from enigma import eTimer
 from os import path as os_path, listdir, unlink
 import os
-
-t = nemesisTool()
 
 def readFile(myFile):
 	try:
@@ -158,14 +156,14 @@ class manageDttDevice(Screen):
 			self.showInstMess()
 
 	def showInstMess(self):
-		diskSpace = t.getVarSpaceKb()
+		diskSpace = getVarSpaceKb()
 		percFree = int((diskSpace[0] / diskSpace[1]) * 100)
 		strMess = _("Modules for support\nUSB DVB-T/C adapter\nare not installed!\n\nPress green button\nto install it.")
 		self['conn'].text = ("%s\n\nFree: %d kB (%d%%)" % (strMess, int(diskSpace[0]), percFree))
 
 	def modulesInstall(self):
 		if self.needInstall:
-			if int(t.getVarSpaceKb()[0]) < 2500:
+			if int(getVarSpaceKb()[0]) < 2500:
 				self['conn'].setText(_('Not enough space!\nPlease delete addons before install new.'))
 				return
 			self['conn'].setText(_("Connetting to addons server.\nPlease wait..."))

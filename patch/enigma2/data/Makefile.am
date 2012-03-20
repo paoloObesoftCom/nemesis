@@ -1,4 +1,4 @@
-SUBDIRS = countries fonts defaults extensions keymaps skin_default piconProv piconSat piconSys
+SUBDIRS = countries fonts defaults extensions keymaps skin_default
 
 dist_pkgdata_DATA = \
 	defaultsatlists.xml \
@@ -19,6 +19,7 @@ dist_pkgdata_DATA = \
 	setup.xml \
 	skin_default.xml \
 	skin.xml \
+	skin.xml.title \
 	startwizard.xml \
 	nemesis.xml \
 	tutorialwizard.xml \

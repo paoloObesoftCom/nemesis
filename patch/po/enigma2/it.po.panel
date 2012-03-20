@@ -357,11 +357,11 @@ msgstr ""
 #, python-format
 msgid ""
 "Load EPG data in Enigma cache from:\n"
-"%s/epg.dat.\n"
+"%s.\n"
 "Please Wait..."
 msgstr ""
 "Carico i dati EPG nella cache di Enigma2 da:\n"
-"%s/epg.dat.\n"
+"%s.\n"
 "Attendere prego..."
 
 msgid ""
@@ -742,8 +742,8 @@ msgstr "Seleziona tipo Picon per LCD"
 msgid "Setup Picon"
 msgstr "Configurazione Picon"
 
-msgid "Can Install Picon in HDD?"
-msgstr "Posso installare le Picon's su HDD?"
+msgid "Search Picon in Hard disk"
+msgstr "Cercare le Picon su Hard disk"
 
 msgid "Setup InaDyn"
 msgstr "Configurazione InaDyn"
@@ -1065,7 +1065,7 @@ msgstr ""
 "\n"
 "Dopo aver premuto Si, attendere prego!"
 
-msgid "Storage devices"
+msgid "Manage Devices"
 msgstr "Gestione periferiche"
 
 msgid "Confirm"
@@ -1079,7 +1079,64 @@ msgstr ""
 "Riavvare adesso?"
 
 msgid "Enigma setting saved!"
-msgstr "Configurazione Enigam salvata!"
+msgstr "Configurazione Enigma salvata!"
 
-msgid "Manage Devices"
-msgstr "Gestione periferiche"
+msgid "Hard Disk Informations"
+msgstr "Informazioni Hard Disk"
+
+msgid "Current Information"
+msgstr "Informazioni correnti"
+
+msgid "Stop Harddisk"
+msgstr "Arresta Harddisk"
+
+msgid "Execute cache read test"
+msgstr "Esegui test di lettura cache"
+
+msgid "Execute device read test"
+msgstr "Esegui test di lettura device"
+
+msgid "Update device list (hddtemp.db)"
+msgstr "Aggiorna lista device (hddtemp.db)"
+
+msgid "Press OK buttom to execute the selected command"
+msgstr "Premere il tasto OK per eseguire il comando selezionato"
+
+msgid "Harddisk stopped!"
+msgstr "Harddisk arrestato!"
+
+msgid "Harddisk temperature"
+msgstr "Temperatura harddisk"
+
+msgid "Select Event and press OK"
+msgstr "Seleziona evento e premi OK"
+
+msgid "Please select a destination media,\nto install %s package."
+msgstr "Selezionare la periferica di destinazione,\nper installare il pacchetto %s."
+
+msgid "No device found to installing addon!"
+msgstr "Nessuna periferica disponible per installare l'addon!"
+
+msgid "Moving addon on %s, please wait..."
+msgstr "Spostamento addon in %s, attendere prego..."
+
+msgid "Load EPG on boot"
+msgstr "Carica EPG all'avvio"
+
+msgid "Temporary Folder (/tmp)"
+msgstr "Cartella temporanea (/tmp)"
+
+msgid "Network Resource %s"
+msgstr "Risorsa di rete %s"
+
+msgid "Enable skin developper mode"
+msgstr "Abilitare skin developper mode"
+
+msgid "Internal flash (unsuggested)"
+msgstr "Flash interna (sconsigliato)"
+
+msgid "Enable Pig Widget on skin"
+msgstr "Abilitare widget Pig nello skin"
+
+msgid "Enable HDD as a device for epg.dat, swap files and skins"
+msgstr "Abilitare HDD come device per epg.dat, swap file e skins"

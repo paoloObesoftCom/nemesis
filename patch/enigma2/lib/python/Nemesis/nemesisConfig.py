@@ -31,6 +31,9 @@ def InitNemesisConfig():
 		("3", "3 " + _("seconds")),("4", "4 " + _("seconds")),("5", "5 " + _("seconds")),
 		("6", "6 " + _("seconds")),("7", "7 " + _("seconds")),("8", "8 " + _("seconds"))])
 	config.nemesis.usepiconinhdd = ConfigYesNo(default = False)
+	config.nemesis.usehddforexternal = ConfigYesNo(default = True)
+	config.nemesis.enablepig = ConfigYesNo(default = True)
+	config.nemesis.skindevelopermode = ConfigYesNo(default = False)
 #Clean zap history
 	config.nemesis.enableclean = ConfigEnableDisable(default = False)
 	config.nemesis.zapafterclean = ConfigYesNo(default = False)
@@ -115,4 +118,5 @@ def InitNemesisConfig():
 		if HardwareInfo().get_device_name() == 'dm8000' or HardwareInfo().get_device_name() == 'dm7020hd':
 			config.nemepg.demux.setValue("/dev/dvb/adapter0/demux3")
 	print "[CrossEPG Demux] Used demux: %s" % config.nemepg.demux.value
+	config.nemepg.loadonboot = ConfigYesNo(default = True)
 	

@@ -21,14 +21,10 @@ from Renderer import Renderer
 from enigma import ePixmap, eEnv
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.config import *
-from enigma import eServiceReference, eServiceCenter, iPlayableService, iServiceInformation
+from enigma import eServiceReference, eServiceCenter, iPlayableService, iServiceInformation, ePicLoad
+from Nemesis.nemesisTool import GetPiconPath
 
 class NemesisRefTV(Renderer):
-	if config.nemesis.usepiconinhdd.value:
-		searchPaths = (eEnv.resolve('${datadir}/enigma2/%s/'),'/media/cf/%s/','/media/usb/%s/','/media/hdd/%s/')
-	else:
-		searchPaths = (eEnv.resolve('${datadir}/enigma2/%s/'),'/media/cf/%s/','/media/usb/%s/')
-
 	def __init__(self):
 		Renderer.__init__(self)
 		self.path = "picon"
@@ -73,11 +69,24 @@ class NemesisRefTV(Renderer):
 							pngname = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/picon_default.png")
 					self.nameCache["default"] = pngname
 			if self.pngname != pngname:
+				self.picload = ePicLoad()
+				self.picload.PictureData.get().append(self.piconShow)
+				self.picload.setPara((self.instance.size().width(), self.instance.size().height(), 1, 1, False, 1, "#00000000"))
+				self.picload.startDecode(pngname)
 				self.pngname = pngname
-				self.instance.setPixmapFromFile(self.pngname)
-            		
+				#self.instance.setPixmapFromFile(self.pngname)
+
+	def piconShow(self, picInfo=None):
+		ptr = self.picload.getData()
+		if ptr != None:
+			self.instance.setPixmap(ptr.__deref__())
+		del self.picload
+
 	def findPicon(self, serviceName):
-		for path in self.searchPaths:
+
+		searchPaths = GetPiconPath()
+
+		for path in searchPaths:
 			pngname = (path % self.path) + serviceName + ".png"
 			if fileExists(pngname):
 				return pngname

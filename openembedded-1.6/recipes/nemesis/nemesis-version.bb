@@ -1,9 +1,9 @@
 DESCRIPTION = "nemesis version"
 LICENSE = "GPL"
 
-SVN = "105"
-PR = "r4"
-PV = "2.5-svn-${SVN}"
+SVN = "106"
+PR = "r9"
+PV = "2.6-svn-${SVN}"
 
 S = "${WORKDIR}/"
 PACKAGE_ARCH := "${MACHINE_ARCH}"
@@ -20,7 +20,7 @@ do_install() {
 	echo "target=9" >> ${S}image-version
 	echo "creator=Gianathem" >> ${S}image-version
 	echo "url=http://www.nemesis.tv/" >> ${S}image-version
-	echo "catalog=http://www.nemesis.tv/" >> ${S}image-version
+	echo "catalog=http://nemesis.tv/" >> ${S}image-version
 
 	install -d "${D}/etc/"
 	install -m 644 "${WORKDIR}/image-version" "${D}/etc"

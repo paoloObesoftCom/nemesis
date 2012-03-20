@@ -3,6 +3,7 @@ from Screens.ServiceInfo import ServiceInfo
 from Screens.About import About
 from Components.ActionMap import ActionMap
 from Components.Label import Label
+from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.ScrollLabel import ScrollLabel
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
@@ -10,16 +11,20 @@ from Components.Sources.List import List
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists
 from os import system, remove
-from nemesisTool import GetSkinPath
+from nemesisTool import GetSkinPath, getDeviceInfo
 from enigma import eConsoleAppContainer
 from Components.PluginComponent import plugins
 from Components.PluginList import *
 from Plugins.Plugin import PluginDescriptor
+import thread
+
 
 def getUnit(val):
+	if val >= 1073741824:
+		return '%.1f%s' % (float(val)/1073741824,' TB')
 	if val >= 1048576:
-		return '%.1f%s' % (float(val)/1048576,' Gb')
-	return '%.1f%s' % (float(val)/1024,' Mb')
+		return '%.1f%s' % (float(val)/1048576,' GB')
+	return '%.1f%s' % (float(val)/1024,' MB')
 
 def getSize(a,b,c):
 	return getUnit(a),getUnit(b),getUnit(c)
@@ -55,6 +60,8 @@ class NInfo(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.c = eConsoleAppContainer()
+		self.c.execute('free > /tmp/info_mem.tmp && ps > /tmp/ninfo.tmp')
 		self.list = []
 		self['list'] = List(self.list)
 		self["key_red"] = Label(_("Exit"))
@@ -72,14 +79,11 @@ class NInfo(Screen):
 			('EInfo',_('Show Enigma Settings'),'icons/enigma.png',True),
 			('About',_('Nemesis Firmware Info'),'icons/about.png',True)
 			]
-		c = eConsoleAppContainer()
-		c.execute('df > /tmp/info_df.tmp && free > /tmp/info_mem.tmp')
-		del c
 		self['actions'] = ActionMap(['WizardActions','ColorActions'],
 		{
 			'ok': self.KeyOk,
-			"red": self.close,
-			'back': self.close
+			"red": self.__onClose,
+			'back': self.__onClose
 		})
 		self.onLayoutFinish.append(self.updateList)
 		self.onShown.append(self.setWindowTitle)
@@ -88,6 +92,8 @@ class NInfo(Screen):
 		self.setTitle(_("System Information"))
 	
 	def updateList(self):
+		from nemesisTool import initDeviceInfo
+		thread.start_new_thread(initDeviceInfo, ())
 		self.list = []
 		skin_path = GetSkinPath()
 		for i in self.infoMenuList:
@@ -116,6 +122,14 @@ class NInfo(Screen):
 				self.session.open(showEnigmaInfo)
 		elif (self.sel == "About"):
 				self.session.open(About)
+				
+	def __onClose(self):
+		if fileExists('/tmp/ninfo.tmp'):
+			remove('/tmp/ninfo.tmp')
+		if fileExists('/tmp/info_mem.tmp'):
+			remove('/tmp/info_mem.tmp')
+		del self.c
+		self.close()
 
 class showRunProcessInfo(Screen):
 	__module__ = __name__
@@ -140,7 +154,6 @@ class showRunProcessInfo(Screen):
 
 	def writepslist(self):
 		p = ''
-		system('ps > /tmp/ninfo.tmp')
 		if fileExists('/tmp/ninfo.tmp'):
 			f = open('/tmp/ninfo.tmp', 'r')
 			for line in f.readlines():
@@ -154,7 +167,6 @@ class showRunProcessInfo(Screen):
 				else:
 					p += x[3] + '\n'
 			f.close()
-			remove('/tmp/ninfo.tmp')
 		self['psinfo'].setText(p)
 
 class showDevSpaceInfo(Screen):
@@ -164,134 +176,82 @@ class showDevSpaceInfo(Screen):
 		Screen.__init__(self, session)
 		labelList = [
 			('f1' , ''), ('f2' , ''),
-			('c1' , _('Compact Flash Not Found')), ('c2' , _('Not Found!')),
-			('u1' , _('Usb Not Found')), ('u2' , 'Not Found!'),
-			('h1' , _('Hard Disk Not Found')), ('h2' , 'Not Found!'),
-			('t1' , 'Not Found!'),('t2' , 'Not Found!'),
-			('rr1' , 'Ram: '),('rr2' , ''),
-			('rs1' , 'Swap: '),('rs2' , ''),
-			('rt1' , 'Total: '),('rt2' , '')]
-		progrList = ['rrpr','rspr','rtpr','flsp','cfp','usbp','hddp','totp']
+			('l1' , ''), ('l2' , ''), ('l3' , ''), ('l4' , ''), ('l5' , ''),
+			('rr2' , ''), ('rs2' , ''), ('rt1' , 'Total: '), ('rt2' , '')]
+		self.progrList = ['rrpr','rspr','rtpr','flsp','p1','p2','p3','p4','p5']
+		self.pixList = ['s1','s2','s3','s4','s5']
 		
 		for x in labelList:
 			self[x[0]] = Label(x[1])
-		for x in progrList:
+		for x in self.progrList:
 			self[x] = ProgressBar()
+		for x in self.pixList:
+			self[x] = Pixmap()
 		
 		self['actions'] = ActionMap(['WizardActions'],
 		{
-			'ok': self.close,
-			'back': self.close
+			'ok': self.__onClose,
+			'back': self.__onClose
 		})
 		self.onLayoutFinish.append(self.writelist)
 		self.onShown.append(self.setWindowTitle)
 	
 	def setWindowTitle(self):
 		self.setTitle(_("Usage Device Status"))
-	
-	def writelist(self):
-		fls = 0
-		cf = [0,0,0,0]
-		usb = [0,0,0,0]
-		hdd = [0,0,0,0]
-		tot = [0,0,0,0]
-		if fileExists('/tmp/info_df.tmp'):
-				f = open('/tmp/info_df.tmp', 'r')
-				for line in f.readlines():
-					line = line.replace('part1', ' ')
-					x = line.strip().split()
-					if x[0] == '/dev/root':
-						fls = int(x[4].replace('%', ''))
-						s = getUnit(int(x[1]))
-						self['f1'].setText('Flash: %s  in use: %s' % (s, x[4]))
-						s = getSize(int(x[1]),int(x[2]),int(x[3]))
-						self['f2'].setText('Flash: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
-					elif x[0] == '/dev/mtdblock3':
-						fls = int(x[4].replace('%', ''))
-						s = getUnit(int(x[1]))
-						self['f1'].setText('Flash: %s  in use: %s' % (s, x[4]))
-						s = getSize(int(x[1]),int(x[2]),int(x[3]))
-						self['f2'].setText('Flash: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
-					elif x[len(x)-1] == '/media/cf':
-						try:
-							a = len(x)
-							cf[0] = int(x[a - 2].replace('%', ''))
-							cf[1] = int(x[a - 5])
-							cf[2] = int(x[a - 4])
-							cf[3] = int(x[a - 3])
-							s = getUnit(int(cf[1]))
-							g = getSize(int(cf[1]),int(cf[2]),int(cf[3]))
-							self['c1'].setText('CF: %s  in use: %s' % (s, x[a- 2]))
-							self['c2'].setText('CF: %s - Used: %s - Free: %s' % (g[0],g[1],g[2]))
-						except:
-							cf = [0,0,0,0]
-					elif x[len(x)-1] == '/media/usb':
-						try:
-							a = len(x)
-							usb[0] = int(x[a - 2].replace('%', ''))
-							usb[1] = int(x[a - 5])
-							usb[2] = int(x[a - 4])
-							usb[3] = int(x[a - 3])
-							s = getUnit(int(usb[1]))
-							g = getSize(int(usb[1]),int(usb[2]),int(usb[3]))
-							self['u1'].setText('USB: %s  in use: %s' % (s, x[a - 2]))
-							self['u2'].setText('USB: %s - Used: %s - Free: %s' % (g[0],g[1],g[2]))
-						except:
-							usb = [0,0,0,0]
-					elif x[len(x)-1] == '/media/hdd':
-						try:
-							a = len(x)
-							hdd[0] = int(x[a - 2].replace('%', ''))
-							hdd[1] = int(x[a - 5])
-							hdd[2] = int(x[a - 4])
-							hdd[3] = int(x[a - 3])
-							s = getUnit(int(hdd[1]))
-							g = getSize(int(hdd[1]),int(hdd[2]),int(hdd[3]))
-							self['h1'].setText('HDD: %s  in use: %s' % (s, x[a - 2]))
-							self['h2'].setText('HDD: %s Used: %s Free: %s' % (g[0],g[1],g[2]))
-						except:
-							hdd = [0,0,0,0]
-				f.close()
-				tot[0] = cf[1] + usb[1] + hdd[1] # Total Memory
-				tot[1] = cf[2] + usb[2] + hdd[2] # Used Memory
-				tot[2] = cf[3] + usb[3] + hdd[3] # Free Memory
-				if (tot[0] > 100):
-					tot[3] = tot[1] * 100 / tot[0]
-				self['t1'].setText('Total Space: %s  in use: %d%%' % (getUnit(tot[0]), tot[3]))
-				s = getSize(tot[0],tot[1],tot[2])
-				self['t2'].setText('Total: %s  Used: %s  Free: %s' % (s[0],s[1],s[2]))
-				self['flsp'].setValue(fls)
-				self['cfp'].setValue(cf[0])
-				self['usbp'].setValue(usb[0])
-				self['hddp'].setValue(hdd[0])
-				self['totp'].setValue(tot[3])
 		
+	def writelist(self):
+		for x in self.progrList:
+			self[x].setValue(0)
+		for x in self.pixList:
+			self[x].hide()
+		i = 1
 		r = [0,0,0]
+		
+		for dev in getDeviceInfo():
+			if dev[0] == "/":
+				s = getSize(int(dev[2][1]),int(dev[2][1] - dev[2][0]),int(dev[2][0]))
+				inUse = int((dev[2][1] - dev[2][0]) / dev[2][1] * 100)
+				self['f1'].setText('%s: %s - In use: %d%%' % (dev[1],s[0], inUse))
+				self['f2'].setText('%s: %s - Used: %s - Free: %s' % (dev[1],s[0],s[1],s[2]))
+				self['flsp'].setValue(inUse)
+			else:
+				if i <= 5:
+					try:
+						s = getSize(int(dev[2][1]),int(dev[2][1] - dev[2][0]),int(dev[2][0]))
+						inUse = int((dev[2][1] - dev[2][0]) / dev[2][1] * 100)
+						self['s%d' % i].show()
+						self['l%d' % i].setText('%s %s\nUsed: %s - Free: %s' % (dev[1],s[0],s[1],s[2]))
+						self['p%d' % i].setValue(inUse)
+						i += 1
+					except:
+						continue
+					
 		if fileExists('/tmp/info_mem.tmp'):
-				f = open('/tmp/info_mem.tmp', 'r')
-				for line in f.readlines():
-					x = line.strip().split()
-					if (x[0] == 'Mem:'):
-						r[0] = int(int(x[2]) * 100 / int(x[1]))
-						self['rr1'].setText('Ram in use: %d%%' %  r[0])
-						s = getSize(int(x[1]),int(x[2]),int(x[3]))
-						self['rr2'].setText('Ram: %s Used: %s Free: %s Shared: %s Buf: %s' % (s[0],s[1],s[2],getUnit(int(x[4])),getUnit(int(x[5]))))
-					elif (x[0] == 'Swap:'):
-						if int(x[1]) > 1:
-							r[1] = int(int(x[2]) * 100 / int(x[1]))
-						self['rs1'].setText('Swap in use: %d%%' %  r[1])
-						s = getSize(int(x[1]),int(x[2]),int(x[3]))
-						self['rs2'].setText('Swap: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
-					elif (x[0] == 'Total:'):
-						r[2] = int(int(x[2]) * 100 / int(x[1]))
-						self['rt1'].setText('Total Memory:  %s  in use:: %d%%' % (getUnit(int(x[1])), r[2]))
-						s = getSize(int(x[1]),int(x[2]),int(x[3]))
-						self['rt2'].setText('Total: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
-				f.close()
-				self['rrpr'].setValue(r[0])
-				self['rspr'].setValue(r[1])
-				self['rtpr'].setValue(r[2])
-
+			f = open('/tmp/info_mem.tmp', 'r')
+			for line in f.readlines():
+				x = line.strip().split()
+				if (x[0] == 'Mem:'):
+					r[0] = int(int(x[2]) * 100 / int(x[1]))
+					s = getSize(int(x[1]),int(x[2]),int(x[3]))
+					self['rr2'].setText('Ram: %s Used: %s Free: %s Shared: %s Buf: %s' % (s[0],s[1],s[2],getUnit(int(x[4])),getUnit(int(x[5]))))
+				elif (x[0] == 'Swap:'):
+					if int(x[1]) > 1:
+						r[1] = int(int(x[2]) * 100 / int(x[1]))
+					s = getSize(int(x[1]),int(x[2]),int(x[3]))
+					self['rs2'].setText('Swap: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
+				elif (x[0] == 'Total:'):
+					r[2] = int(int(x[2]) * 100 / int(x[1]))
+					self['rt1'].setText('Total Memory:  %s  in use:: %d%%' % (getUnit(int(x[1])), r[2]))
+					s = getSize(int(x[1]),int(x[2]),int(x[3]))
+					self['rt2'].setText('Total: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
+			f.close()
+			self['rrpr'].setValue(r[0])
+			self['rspr'].setValue(r[1])
+			self['rtpr'].setValue(r[2])
+				
+	def __onClose(self):
+		self.close()
+		
 class showEnigmaInfo(Screen):
 	__module__ = __name__
 

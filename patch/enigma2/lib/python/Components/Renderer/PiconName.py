@@ -5,6 +5,7 @@ from Components.config import config
 from Renderer import Renderer
 from enigma import ePixmap, eEnv, ePicLoad
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
+from Nemesis.nemesisTool import GetPiconPath
 
 class PiconName(Renderer):
 	def __init__(self):
@@ -61,10 +62,8 @@ class PiconName(Renderer):
 		#del self.picload
 
 	def findPicon(self, serviceName):
-		if config.nemesis.usepiconinhdd.value:
-			searchPaths = ('/media/hdd/%s/',eEnv.resolve('${datadir}/%s/'),'/media/cf/%s/','/media/usb/%s/')
-		else:
-			searchPaths = (eEnv.resolve('${datadir}/%s/'),'/media/usb/%s/','/media/cf/%s/')
+
+		searchPaths = GetPiconPath()
 
 		for path in searchPaths:
 			pngname = (path % self.path) + serviceName + ".png"

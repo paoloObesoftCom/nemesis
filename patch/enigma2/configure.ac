@@ -116,9 +116,6 @@ data/skin_default/icons/Makefile
 data/skin_default/buttons/Makefile
 data/skin_default/spinner/Makefile
 data/skin_default/full/Makefile
-data/piconProv/Makefile
-data/piconSat/Makefile
-data/piconSys/Makefile
 include/Makefile
 lib/Makefile
 lib/actions/Makefile

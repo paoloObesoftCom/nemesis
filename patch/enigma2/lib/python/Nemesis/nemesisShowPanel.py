@@ -44,12 +44,13 @@ class nemesisShowPanel(Screen):
 		try:
 			f = open(self.file, 'r')
 			for line in f.readlines():
-				self.list.append(line)
+				self.list.append(("0",line))
 			f.close()
 		except:
 			mess = _('File: %s not found!') % self.file
-			self.list.append(mess)
-	
+			self.list.append(("0",mess))
+		self['list'].setList(self.list)
+
 	def openDetails(self):
 		if self['list'].count() > 0:
-			self["conn"].text = self["list"].getCurrent()
+			self["conn"].text = self["list"].getCurrent()[1]
