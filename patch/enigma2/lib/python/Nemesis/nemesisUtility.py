@@ -640,7 +640,7 @@ class HDDInfo(Screen):
 		self.list = []
 		self.menuList = [
 			(_('Current Information'),'hdparm -I /dev/sda',True),
-			(_('Harddisk temperature'),'hddtemp PATA:/dev/sda',False),
+			(_('Harddisk temperature'),'hddtemp SATA:/dev/sda',False),
 			(_('Stop Harddisk'),'hdparm -y /dev/sda',False),
 			(_('Execute cache read test'),'hdparm -T /dev/sda',False),
 			(_('Execute device read test'),'hdparm -t /dev/sda',False),

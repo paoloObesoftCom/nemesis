@@ -14,7 +14,7 @@ IMAGES_VERSION_dm7020hd= "2"
 IMAGES_VERSION_dm8000 = "2"
 
 PV = "${BINARY_VERSION}.${IMAGES_VERSION}"
-PR = "r11"
+PR = "r12"
 
 SRC_URI = "http://sources.dreamboxupdate.com/download/7020/bootlogo-${MACHINE}-${BINARY_VERSION}.elf \
 	file://bootlogo.mvi \

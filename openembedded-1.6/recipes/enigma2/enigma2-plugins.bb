@@ -4,8 +4,8 @@ MAINTAINER = "Felix Domke <tmbinc@elitedvb.net>"
 PACKAGES_DYNAMIC = "enigma2-plugin-*"
 
 # if you want experimental, use:
-SRCREV="8f5769dec3f1bf9c1ad26707048fee203fd6dab7"
-SRCDATE="20120319"
+SRCREV="6aa4a99f808164402d53a68c2f1320f8b77b54ef"
+SRCDATE="20120328"
 BRANCH="master"
 PV = "experimental-git${SRCDATE}"
 

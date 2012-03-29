@@ -891,6 +891,9 @@ msgstr "Plugin per l'aggiornamento automatico dell'EPG"
 msgid "Automatically send crashlogs to Dream Multimedia"
 msgstr "Invio automatico di Crashlogs a dream multimedia"
 
+msgid "Set up as default storage device now."
+msgstr "Configura come dispositivo di default."
+
 msgid "Automatically set up a mountpoint now."
 msgstr "Impostare automaticamente un mountpoint."
 
@@ -3137,6 +3140,9 @@ msgstr "Transponder manuale"
 msgid "Manually select a mountpoint now."
 msgstr "Selezionare manualmente un mountpoint."
 
+msgid "Unmount now."
+msgstr "Scollegare."
+
 msgid "Manually select a mountpoint for this storage device now."
 msgstr "Selezionare manualmente un Mount point per questo dispositivo."
 
@@ -4552,7 +4558,7 @@ msgstr "Eliminare i Timers conclusi?"
 msgid "Really delete this hard disk entry?"
 msgstr "Vuoi realmente cancellare questa voce Harddisk?"
 
-msgid "Really delete this storage device entry"
+msgid "Really delete this storage device entry?"
 msgstr "Vuoi realmente cancellare questa voce dispositivo?"
 
 msgid "Really exit the subservices quickzap?"
@@ -8015,6 +8021,12 @@ msgstr "Rimuovere nuovo contrassegno trovato"
 
 msgid "remove selected satellite"
 msgstr "Rimuovere il satellite selezionato"
+
+msgid "remove cable services"
+msgstr "Rimuovere i servizi cable"
+
+msgid "remove terrestrial services"
+msgstr "Rimuovere i servizi terrestrial"
 
 msgid "remove this mark"
 msgstr "Rimuovere contrassegno"

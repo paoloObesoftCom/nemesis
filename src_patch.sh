@@ -130,10 +130,10 @@ enigma2_16()
 		cp -r patch/po/enigma2/*.po $srcpatchedpath/enigma2/git/po  && echo 'Patched!'
 		echo -n "Copy patch/po/enigma2/Makefile.am to $srcpatchedpath/enigma2/git/po... "
 		cp -r patch/po/enigma2/Makefile.am $srcpatchedpath/enigma2/git/po  && echo 'Copied!'
-		echo -n "Merge patch/po/enigma2/it.po.panel in $srcpatchedpath/enigma2/git/po/it.po... "
-		cat patch/po/enigma2/it.po.panel >> $srcpatchedpath/enigma2/git/po/it.po  && echo 'Merged!'
-		echo -n "Merge patch/po/enigma2/de.po.panel in $srcpatchedpath/enigma2/git/po/de.po... "
-		cat patch/po/enigma2/de.po.panel >> $srcpatchedpath/enigma2/git/po/de.po  && echo 'Merged!'
+		echo -n "Merge patch/po/enigma2/panel.it.po in $srcpatchedpath/enigma2/git/po/it.po... "
+		cat patch/po/enigma2/panel.it.po >> $srcpatchedpath/enigma2/git/po/it.po  && echo 'Merged!'
+		echo -n "Merge patch/po/enigma2/panel.de.po in $srcpatchedpath/enigma2/git/po/de.po... "
+		cat patch/po/enigma2/panel.de.po >> $srcpatchedpath/enigma2/git/po/de.po  && echo 'Merged!'
 		cd $srcpatchedpath/enigma2
 		find git/ -name ".svn" | xargs rm -rf
 		echo -n "Create $e2_arc_16 archive... "

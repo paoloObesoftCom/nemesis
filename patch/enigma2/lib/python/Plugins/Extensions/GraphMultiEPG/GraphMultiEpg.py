@@ -24,17 +24,9 @@ from enigma import eEPGCache, eListbox, gFont, eListboxPythonMultiContent, \
 	RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, eRect, eTimer
 
 from time import localtime, time, strftime
+from Nemesis.nemesisTool import GetPiconPath
 
 class EPGList(HTMLComponent, GUIComponent):
-	searchPiconPaths = ['usr/share/enigma2/picon/',
-				'/etc/picon/',
-				'/ba/picon/',
-				'/media/cf/picon/',
-				'/media/usb/picon/',
-				'/share/enigma2/picon/',
-				'/var/etc/picon/',
-				'/media/hdd/picon/']
-	
 	def __init__(self, selChangedCB=None, timer = None, time_epoch = 120, overjump_empty=True):
 		self.cur_event = None
 		self.cur_service = None
@@ -45,7 +37,7 @@ class EPGList(HTMLComponent, GUIComponent):
 			self.onSelChanged.append(selChangedCB)
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()
-		self.l.setItemHeight(62);
+		self.l.setItemHeight(80);
 		self.l.setBuildFunc(self.buildEntry)
 		if overjump_empty:
 			self.l.setSelectableFunc(self.isSelectable)
@@ -223,7 +215,7 @@ class EPGList(HTMLComponent, GUIComponent):
 		esize = self.l.getItemSize()
 		width = esize.width()
 #		height = esize.height()
-		height = 62
+		height = 80
 		xpos = 0;
 		w = int(width/10*2);
 		self.service_rect = Rect(xpos, 0, w, height)
@@ -320,52 +312,23 @@ class EPGList(HTMLComponent, GUIComponent):
 			pos = service.rfind(':')
 			if pos != -1:
 				service_refstr = service[:pos].rstrip(':').replace(':','_')
-			pngname = "/tmp/gmepgpicon/" + service_refstr + ".png"
-			if fileExists(pngname):
-				return pngname
-
-		if serviceName is not None:
-			pngname = "/tmp/gmepgpicon/" + serviceName + ".png"
-			if fileExists(pngname):
-				return pngname
-		
-		if serviceName_ref is not None:
-			pngname = "/tmp/gmepgpicon/" + serviceName_ref + ".png"
-			if fileExists(pngname):
-				return pngname
 
 		if service_refstr is not None:
-			for path in self.searchPiconPaths:
-				pngname = path + service_refstr + ".png"
+			for path in GetPiconPath():
+				pngname = (path % 'picon') + service_refstr + '.png'
 				if fileExists(pngname):
-					#picon skalieren und mit der Referenz als Name nach /tmp/gmepgpicon/ speichern
-					#pngname = "/tmp/gmepgpicon/" + service + ".png"
 					return pngname
 
 		if serviceName is not None:
-			for path in self.searchPiconPaths:
-				pngname = path + serviceName + ".png"
+			for path in GetPiconPath():
+				pngname = (path % 'picon') + serviceName + '.png'
 				if fileExists(pngname):
-					print"picon found"
-					#if service is not None:
-					#	picon skalieren und mit der Referenz als Name nach /tmp/gmepgpicon/ speichern
-					#	pngname = "/tmp/gmepgpicon/" + service + ".png"
-					#else:
-					#	picon skalieren und mit der serviceName als Name nach /tmp/gmepgpicon/ speichern
-					#	pngname = "/tmp/gmepgpicon/" + serviceName + ".png"
 					return pngname
 		
 		if serviceName_ref is not None:
-			for path in self.searchPiconPaths:
-				pngname = path + serviceName_ref + ".png"
+			for path in GetPiconPath():
+				pngname = (path % 'picon') + serviceName_ref + '.png'
 				if fileExists(pngname):
-					print"picon found"
-					#if service is not None:
-					#	picon skalieren und mit der Referenz als Name nach /tmp/gmepgpicon/ speichern
-					#	pngname = "/tmp/gmepgpicon/" + service + ".png"
-					#else:
-					#	picon skalieren und mit der serviceName als Name nach /tmp/gmepgpicon/ speichern
-					#	pngname = "/tmp/gmepgpicon/" + serviceName_ref + ".png"
 					return pngname
 	
 	def selEntry(self, dir, visible=True):

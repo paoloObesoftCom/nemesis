@@ -61,13 +61,13 @@ DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy s
 PN = "enigma2"
 PR = "r0"
 
-SRCDATE = "20120309"
+SRCDATE = "20120327"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
 #when you like to checkout a specific revision of e2 you need
 #have to specify a commit id or a tag name in SRCREV
 
-SRCDATENEMESIS = "20120319"
+SRCDATENEMESIS = "20120329"
 
 # if you want experimental use
 ####################################################
@@ -77,8 +77,7 @@ PV = "3.2git${SRCDATENEMESIS}"
 ####################################################
 
 SRC_URI = "file://../../../../sources/enigma2_${MACHINE}.tar.bz2 \
-	file://0001-Screens-RecordPaths.py-allow-selection-of-enigma2-co.patch;patch=1 \
-	file://0002-Components-Harddisk.py-reconfigure-old-linked-defaul.patch;patch=1 \
+	file://small_hdd_bugfix.patch;patch=1;pnum=1 \
 	file://epgloader.so \
 "
 

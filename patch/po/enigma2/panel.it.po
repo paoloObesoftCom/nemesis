@@ -223,7 +223,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Addons: %s\n"
-"removed succeffully."
+"removed succesfully."
 msgstr ""
 "Addons: %s\n"
 "Rimosso correttamente."
@@ -240,40 +240,28 @@ msgid "Downloading..."
 msgstr "Scaricamento..."
 
 #, python-format
-msgid "Downloading file: %s ..."
-msgstr "Ricezione file: %s ..."
+msgid ""
+"Downloading file:"
+"\n%s ..."
+msgstr ""
+"Ricezione file:"
+"\n%s ..."
 
 #, python-format
 msgid ""
-"Downloading file:\n"
-"%s ..."
+"Download file %s"
+"\nfailed!"
 msgstr ""
-"Ricezione file:\n"
-"%s ..."
-
-#, python-format
-msgid "Download file %s failed!"
-msgstr "Ricezione file %s fallita!"
+"Ricezione file %s"
+"\nfallita!"
 
 #, python-format
 msgid ""
-"Download file\n"
-"%s failed!"
+"Download file %s"
+"\nfinished!"
 msgstr ""
-"Ricezione file\n"
-"%s fallita!"
-
-#, python-format
-msgid "Download file %s finished!"
-msgstr "Ricezione file %s completata!"
-
-#, python-format
-msgid ""
-"Download file\n"
-"%s finished!"
-msgstr ""
-"Ricezione file\n"
-"%s completata!"
+"Ricezione file %s"
+"\ncompletata!"
 
 msgid "Downloading killed by user!"
 msgstr "Scaricamento interrotto dall'utente!"
@@ -661,7 +649,7 @@ msgid "Nothing to do!"
 msgstr "Niente da configurare!"
 
 msgid "Swap process completed successfully!"
-msgstr "Creazione Swap file eseguita con successo!"
+msgstr "Processo Swap completato con successo!"
 
 msgid "Swap process killed by user!"
 msgstr "Processo interrotto da utente!"
@@ -1129,8 +1117,8 @@ msgstr "Cartella temporanea (/tmp)"
 msgid "Network Resource %s"
 msgstr "Risorsa di rete %s"
 
-msgid "Enable skin developper mode"
-msgstr "Abilitare skin developper mode"
+msgid "Enable skin developer mode"
+msgstr "Abilitare skin developer mode"
 
 msgid "Internal flash (unsuggested)"
 msgstr "Flash interna (sconsigliato)"
@@ -1140,3 +1128,21 @@ msgstr "Abilitare widget Pig nello skin"
 
 msgid "Enable HDD as a device for epg.dat, swap files and skins"
 msgstr "Abilitare HDD come device per epg.dat, swap file e skins"
+
+msgid "Remove picons"
+msgstr "Rimuovere i picons"
+
+msgid "Remove EPG data files"
+msgstr "Rimuovere i file di dati EPG"
+
+msgid "%s\nis removed succesfully."
+msgstr "%s\nrimosso correttamente."
+
+msgid "Remove selected picons"
+msgstr "Rimuovere i picons selezionati"
+
+msgid "Remove selected EPG data file"
+msgstr "Rimuovere il file di dati EPG slezionato"
+
+msgid "Setup Skin"
+msgstr "Configurazione Skin"

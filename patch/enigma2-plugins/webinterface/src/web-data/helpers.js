@@ -481,7 +481,7 @@ function EPGList(xml){
 	};
 
 	this.sortFunction = function(a, b){
-	  return a[0] - b[0];
+	return a[0] - b[0];
 	};
 }
 
@@ -496,13 +496,14 @@ function EPGListNowNext(xml){
 	this.getArray = function(){
 		list = [];
 		var len = this.xmlitems.length;
-		var cssclass = 'even';
+		var cssclass = 'odd';
 		var _this = this;
 		for (var i=0; i < len; i += 2){
-			cssclass = cssclass == 'even' ? 'odd' : 'even';
 			now = new EPGEvent(_this.xmlitems.item(i)).toJSON();
 			next = new EPGEvent(_this.xmlitems.item(i+1)).toJSON();
 			list.push({"now" : now, "next" : next, "cssclass": cssclass});
+			if(!now.ismarker)
+				cssclass = cssclass == 'even' ? 'odd' : 'even';
 		}
 		return list;
 	};
@@ -668,13 +669,14 @@ function ServiceList(xml){
 	this.servicelist = [];
 	this.getArray = function(){
 		if(this.servicelist.length === 0){
-			var cssclass = 'even';
+			var cssclass = 'odd';
 
 			var len = this.xmlitems.length;
 			for (var i=0; i<len; i++){
-				cssclass = cssclass == 'even' ? 'odd' : 'even';
 				var service = new Service(this.xmlitems.item(i), cssclass).toJSON();
 				this.servicelist.push(service);
+				if(!service.ismarker)
+					cssclass = cssclass == 'even' ? 'odd' : 'even';
 			}
 		}
 
@@ -821,7 +823,7 @@ function Timer(xml, cssclass){
 	this.startprepare = getNodeContent(xml, 'e2startprepare');
 	this.justplay = getNodeContent(xml, 'e2justplay', '');
 	this.afterevent = getNodeContent(xml, 'e2afterevent', '0');
-	this.dirname = getNodeContent(xml, 'e2dirname', '/hdd/movie/');
+	this.dirname = getNodeContent(xml, 'e2location', '/hdd/movie/');
 	this.tags = getNodeContent(xml, 'e2tags', '');
 	this.logentries = getNodeContent(xml, 'e2logentries');
 	this.tfilename = getNodeContent(xml, 'e2filename');
@@ -957,7 +959,7 @@ function Timer(xml, cssclass){
 	this.endDate = new Date(Number(this.getTimeEnd()) * 1000);
 
 	this.aftereventReadable = [ 'Nothing', 'Standby',
-	                            'Deepstandby/Shutdown', 'Auto' ];
+								'Deepstandby/Shutdown', 'Auto' ];
 
 	this.justplayReadable = ['Record', 'Zap', 'Download Epg'];
 
@@ -1326,12 +1328,14 @@ var External = Class.create({
 		this.name = getNodeContent(xml, 'e2name');
 		this.version = getNodeContent(xml, 'e2externalversion');
 		this.hasGui = getNodeContent(xml, 'e2hasgui') == "True";
+		this.target = getNodeContent(xml, 'e2guitarget');
 
 		this.json = {
 			'path' : this.path,
 			'name' : this.name,
 			'version' : this.version,
-			'hasGui' : this.hasGui
+			'hasGui' : this.hasGui,
+			'target' : this.target,
 		};
 	},
 

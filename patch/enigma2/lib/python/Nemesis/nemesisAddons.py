@@ -16,7 +16,7 @@ from Components.Pixmap import Pixmap
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, pathExists, createDir
 from os import system, remove, listdir, chdir, getcwd, rename, path, walk
-from nemesisTool import nemesisTool, GetSkinPath, restartE2, GetPluginInstallPath, getVarSpaceKb, GetSkinsPath, createSkinUninstall
+from nemesisTool import nemesisTool, restartE2, GetPluginInstallPath, getVarSpaceKb, GetSkinPath, GetSkinsPath, createSkinUninstall, GetEpgPath
 from nemesisConsole import nemesisConsole
 from nemesisDownloader import nemesisDownloader
 from Tools import Notifications
@@ -104,7 +104,9 @@ class loadUniDir:
 	def load(self):
 		del self.uni_list[:]
 		pkgs = listdir('/usr/uninstall')
-		count = 0
+		self.uni_list.append([0,_("Remove picons")])
+		self.uni_list.append([1,_("Remove EPG data files")])
+		count = 2
 		for fil in pkgs:
 			if (fil.find('_remove.sh') != -1 or fil.find('_delete.sh') != -1):
 				self.uni_list.append([count,fil])
@@ -549,8 +551,7 @@ class	RAddonsDown(Screen):
 		self["key_red"].text = _("Exit")
 		if self.download:
 			print "[Download_finished] " + str(string)
-			self["conn"].text = _("Download file %s\nfinished!") % (self.filename)
-			self["type"].text = ''
+			self["type"].text = _("Download file %s\nfinished!") % (self.filename)
 			self.executedScript(self.EVENT_DONE)
 
 	def removeFile(self):
@@ -606,13 +607,12 @@ class	RAddonsDown(Screen):
 	def downloading(self, state=""):
 		if state == "Install":	
 			self.installFile = True
-			self.setTitle(_('Do you want install the addon: %s?') % u.addonsName)
+			self['conn'].text = _('Do you want install the addon: %s?') % u.addonsName
 			self["key_red"].text = _("No")
 			self["key_green"].setText(_("Yes"))
 		elif state == "Installing":
 			self.installFile = False
 			self.installingFile = True
-			self.setTitle('')
 			self["key_red"].text = _("Cancel")
 			self["key_green"].setText("")
 			self["progressbar"].value = 0
@@ -624,7 +624,6 @@ class	RAddonsDown(Screen):
 				self.activityTimer.stop()
 			self["progressbar"].value = 0
 			self.activity = 0
-			self.setTitle(_("Download ") + str(u.pluginType))
 			self["key_red"].text = _("Exit")
 			self["key_green"].setText(_("Download"))
 			self["progressbar"].value = 0
@@ -711,8 +710,8 @@ class	RAddonsDown(Screen):
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		if pathExists("/tmp/install"):
 			system("rm -rf /tmp/install")
-		self['conn'].text = _("Addon installed succesfully!")
 		self.downloading()
+		self['conn'].text = _("Addon installed succesfully!")
 			
 	def getAddonsPar(self):
 		u.filename  = self['list'].getCurrent()[0] 
@@ -901,13 +900,12 @@ class	RManual(Screen):
 			
 	def downloading(self, state=""):
 		if state == "Install":	
-			self.setTitle(_('Do you want install the addon: %s?') % u.addonsName)
+			self['conn'].text = _('Do you want install the addon: %s?') % u.addonsName
 			self["key_red"].text = _("No")
 			self["key_green"].setText(_("Yes"))
 			self.installFile = True
 		elif state == "Installing":
 			self['type'].text = _("Installing")
-			self.setTitle('')
 			self["key_red"].text = _("Cancel")
 			self["key_green"].setText('')
 			self.installFile = False
@@ -917,7 +915,6 @@ class	RManual(Screen):
 				self["progressbar"].value = 0
 				self.activity = 0
 			self['type'].text = ''
-			self.setTitle(_("Manual Installation"))
 			self["key_red"].setText(_("Exit"))
 			self["key_green"].setText(_("Install"))
 			self.installFile = False
@@ -945,23 +942,25 @@ class	RRemove(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
+		self.deleteCmd = []
 		self['list'] = List(self.list)
 		self['conn'] = StaticText("")
 		self["title"] = Label(_("Remove Addons"))
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = Label(_("Remove"))
-		self.container = eConsoleAppContainer()
-
-		self.container.appClosed.append(self.runFinished)
-
 		self['type'] = StaticText()
 		self["progressbar"] = Progress()
 		self["progressbar"].range = 100
 		self['spaceused'] = Progress()
 		self['spaceusedtext'] = StaticText()
+
+		self.container = eConsoleAppContainer()
+		self.container.appClosed.append(self.runFinished)
 		self.activity = 0
 		self.activityTimer = eTimer()
 		self.activityTimer.callback.append(self.doActivityTimer)
+		self.deleteTimer = eTimer()
+		self.deleteTimer.callback.append(self.doDeleteTimer)
 
 		self._restartE2 = restartE2(session)
 		self.installFile = False
@@ -991,44 +990,100 @@ class	RRemove(Screen):
 			self.activity = 0
 		self["progressbar"].value = self.activity
 
+	def fillList(self):
+		del self.list[:]
+		for fil in self.deleteCmd: 
+			self.list.append((fil, fil))
+		self['list'].setList(self.list)
+
 	def readTmp(self):
 		self["progressbar"].value = 0
 		if not self.container.running() and not self.installFile:
 			loadunidir.load()
 			del self.list[:]
-			if len(loadunidir.uni_list) > 0:
-				for fil in loadunidir.uni_list: 
+			for fil in loadunidir.uni_list: 
+				if fil[0] < 2:
+					self.list.append((fil[0], fil[1]))
+				else:
 					self.list.append((fil[1], fil[1] [:-10]))
-			else:
-				self['conn'].text = (_("Nothing to uninstall!"))
 			self['list'].setList(self.list)
 	
 	def KeyOk(self):
-		if self['list'].count() == 0:
-			self.close()
+		if self.installFile:
+			self.removeAddons()
+			return
 		if not self.container.running() and not self.installFile:
-			if len(loadunidir.uni_list) > 0:
-				self.sel = self['list'].getIndex() 
-				for p in loadunidir.uni_list: 
-					if (p [0] == self.sel):
-						u.filename = p [1]
+			if self['list'].getIndex() == 0:
+				self.removePicon()
+				return
+			elif self['list'].getIndex() == 1:
+				self.removeEpg()
+				return
+			elif self['list'].getIndex() >= 2:
+				u.filename = self['list'].getCurrent()[0]
 				self.downloading("Remove")
 				return
-		if self.installFile:
-				self.removeAddons(True)
-				return
-	
-	def removeAddons(self, answer):
-		if (answer is True):
-			self.activityTimer.start(100, False)
+
+	def removeAddons(self):
+		if u.filename == "RemovePicon" or u.filename == "RemoveEpg":
+			self['conn'].text = (_('Removing: %s.\nPlease wait...') % self['list'].getCurrent()[1])
+			self["key_red"].text = ''
+			self.deleteTimer.start(200,True)
+		else:
 			self.downloading("Removing")
+			self.activityTimer.start(100, False)
 			self['conn'].text = (_('Removing: %s.\nPlease wait...') % u.filename[:-10])
 			self.container.execute("/usr/uninstall/" + u.filename)
-	
+
+	def removePicon(self):
+		del self.deleteCmd[:]
+		for dev in GetPluginInstallPath():
+			for folder in ('picon', 'picon_oled', 'piconSys', 'piconProv', 'piconSat'):
+				if pathExists("%s/%s" % (dev[1],folder)):
+					self.deleteCmd.append("%s/%s" % (dev[1],folder))
+		if self.deleteCmd:
+			u.filename = "RemovePicon"
+			self.downloading("Picon")
+			self.fillList()
+		else:
+			if self.installFile:
+				self.installFile = False
+				self.readTmp()
+			self.downloading()
+			self['conn'].text = _('Nothing to uninstall!')
+			
+	def removeEpg(self):
+		del self.deleteCmd[:]
+		if fileExists(config.misc.epgcache_filename.value):
+			self.deleteCmd.append("%s" % config.misc.epgcache_filename.value)
+		for dev in GetEpgPath():
+			for filename in ('epg.dat','ext.epg.dat','epg.dat.save'):
+				if fileExists("%s/%s" % (dev[1],filename)):
+					self.deleteCmd.append("%s/%s" % (dev[1],filename))
+		if self.deleteCmd:
+			u.filename = "RemoveEpg"
+			self.downloading("Epg")
+			self.fillList()
+		else:
+			if self.installFile:
+				self.installFile = False
+				self.readTmp()
+			self.downloading()
+			self['conn'].text = _('Nothing to uninstall!')
+
+	def doDeleteTimer(self):
+		itemToRemove =  self['list'].getCurrent()[1]
+		system('rm -rf %s' % itemToRemove)
+		self['type'].text = _('%s\nis removed succesfully.') % itemToRemove
+		if u.filename == "RemovePicon":
+			self.removePicon()
+		else:
+			self.removeEpg()
+
 	def runFinished(self, retval):
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.readTmp()
-		self['conn'].text = (_('Addons: %s\nremoved succeffully.') % u.filename[:-10])
+		self['conn'].text = (_('Addons: %s\nremoved succesfully.') % u.filename[:-10])
 		self.downloading()
 		if fileExists('/tmp/.restartE2'):
 			remove('/tmp/.restartE2')
@@ -1036,14 +1091,23 @@ class	RRemove(Screen):
 			self._restartE2.go(msg, True)
 
 	def downloading(self, state=""):
-		if state == "Remove":
-			self.setTitle(_('Do you want remove the addon: %s?') % u.filename[:-10])
+		if state == "Picon":
+			self['conn'].text = _('Remove selected picons')
+			self["key_red"].text = _("Cancel")
+			self["key_green"].setText(_("Remove"))
+			self.installFile = True
+		elif state == "Epg":
+			self['conn'].text = _('Remove selected EPG data file')
+			self["key_red"].text = _("Cancel")
+			self["key_green"].setText(_("Remove"))
+			self.installFile = True
+		elif state == "Remove":
+			self['conn'].text = _('Do you want remove the addon: %s?') % u.filename[:-10]
 			self["key_red"].text = _("No")
 			self["key_green"].setText(_("Yes"))
 			self.installFile = True
 		elif state == "Removing":
 			self['type'].text = _("Removing")
-			self.setTitle('')
 			self["key_red"].text = _("Cancel")
 			self["key_green"].setText("")
 			self.installFile = False
@@ -1054,7 +1118,6 @@ class	RRemove(Screen):
 				self.activity = 0
 			self['type'].text = ''
 			self["progressbar"].value = 0
-			self.setTitle(_("Remove Addons"))
 			self["key_red"].text = _("Exit")
 			self["key_green"].setText(_("Remove"))
 			self.installFile = False
@@ -1065,6 +1128,8 @@ class	RRemove(Screen):
 			self["progressbar"].value = 0
 		if self.installFile:
 			self.downloading()
+			self['conn'].text = ''
+			self.readTmp()
 			return
 		if not self.container.running():
 			del self.container.appClosed[:]

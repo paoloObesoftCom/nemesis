@@ -12,8 +12,6 @@
 		<item level="0" text="InfoBar EPG text lenght (Character)">config.nemesis.epgtextlenght</item>
 		<item level="0" text="Enable Clean History ZAP (Button 0)">config.nemesis.enableclean</item>
 		<item level="0" text="Zap To Channel 1 after history cleaning">config.nemesis.zapafterclean</item>
-		<item level="0" text="Enable Pig Widget on skin">config.nemesis.enablepig</item>
-		<item level="0" text="Enable skin developper mode">config.nemesis.skindevelopermode</item>
 	</setup>
 	<setup key="eosd" title="Setup Extended InfoBar OSD">
 		<item level="0" text="Choice Extended InfoBar type (Need enigma restart)">config.nemesis.eitype</item>
@@ -24,6 +22,10 @@
 		<item level="0" text="Show decode network details">config.nemesis.shownetdet</item>
 		<item level="0" text="EMM Info delay (msec)">config.nemesis.emminfodelay</item>
 		<item level="0" text="ECM Info delay (msec)">config.nemesis.ecminfodelay</item>
+	</setup>
+	<setup key="skin" title="Setup Skin">
+		<item level="0" text="Enable Pig Widget on skin">config.nemesis.enablepig</item>
+		<item level="0" text="Enable skin developer mode">config.nemesis.skindevelopermode</item>
 	</setup>
 	<setup key="ipkgop" title="Setup OPKG/Upgrade Options">
 		<item level="0" text="Force overwrite on upgrade">config.nemesis.ipkg.overwriteUpgrade</item>
