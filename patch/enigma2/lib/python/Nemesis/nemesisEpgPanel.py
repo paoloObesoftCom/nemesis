@@ -246,15 +246,18 @@ class nemesisEpgPanel(Screen):
 	def downEpgFinish(self, *answer):
 		system("rm -f /tmp/crossepg*")
 		if answer[0] == nemesisConsole.EVENT_DONE:
+			if not initEpg():
+				self['conn'].text = _('File epg.dat not found!\nPlease use Download EPG with CrossEPG!')
+				return
+			if fileExists(config.misc.epgcache_filename.value) and _isE232:
+				system("cp %s %s.save" % (config.misc.epgcache_filename.value, config.misc.epgcache_filename.value))
 			self['conn'].text = _('Load EPG data in Enigma cache from:\n%s.\nPlease Wait...') % config.misc.epgcache_filename.value
 			self["actions"].setEnabled(False)
 			self.reloadEPGTimer.start(1000, True)
-			
+
 	def reloadEPG(self):
 		if self.reloadEPGTimer.isActive():
 			self.reloadEPGTimer.stop()
-		if not fileExists(config.misc.epgcache_filename.value):
-			system("cp " + config.misc.epgcache_filename.value + ".save " + config.misc.epgcache_filename.value)
 		if config.nemepg.clearcache.value:
 			try:
 				epg.flushEPG()
@@ -264,7 +267,7 @@ class nemesisEpgPanel(Screen):
 		try:
 			epg.save()
 			if fileExists(config.misc.epgcache_filename.value):
-				system("cp " +  config.misc.epgcache_filename.value + " " + config.misc.epgcache_filename.value + ".save")
+				system("mv %s %s.save" % (config.misc.epgcache_filename.value, config.misc.epgcache_filename.value))
 		except:
 			pass
 		self.__onClose()

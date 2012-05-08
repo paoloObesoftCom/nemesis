@@ -4,8 +4,8 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.HardwareInfo import HardwareInfo
 from enigma import eListboxPythonMultiContent, eListbox, gFont, getDesktop, eEnv
 from Components.config import config, ConfigFile
-from os import system, statvfs, path as os_path, remove as os_remove, walk
-import os, sys, base64 as getID
+from os import system, statvfs, path as os_path, remove as os_remove, walk, listdir
+import os, sys, base64 as getID, shutil
 
 configfile = ConfigFile()
 
@@ -194,28 +194,20 @@ def initEpg():
 	if fileExists(epgFile):
 		print "[EPG] %s found!" % epgFile
 		return True
-	elif fileExists("%s.save" % epgFile):
-		print "[EPG] %s.save found!" % epgFile
-		system("cp %s.save %s" % (epgFile,epgFile))
-		print "[EPG] %s.save restored on %s!" % (epgFile,epgFile)
-		return True
-	else:
-		for path in GetEpgPath():
-			path = path[1]
-			if fileExists("%s/epg.dat" % path):
-				system("cp %s/epg.dat %s" % (path,epgFile))
-				print "[EPG] epg.dat found on %s copied on %s" % (path,epgFile)
-				return True
-			else:
-				if fileExists("%s/epg.dat.save" % path):
-					print "[EPG] restoring %s/epg.dat.save..." % path
-					system("cp %s/epg.dat.save %s" % (path,epgFile))
-					print "[EPG] %s/epg.dat.save restored on %s!" % (path,epgFile)
-					return True
-				if fileExists("%s/ext.epg.dat" % path):
-					print "[EPG] restoring %s/ext.epg.dat..." % path
-					system("cp %s/ext.epg.dat %s" % (path,epgFile))
-					print "[EPG] %sext.epg.dat restored on %s!" % (path,epgFile)
+	for dev in GetEpgPath():
+		dev = dev[1]
+		for file in sorted(listdir(dev),reverse=True):
+			if file in ('epg.dat','epg.dat.save','ext.epg.dat','crossepg'):
+				if file == 'crossepg':
+					if fileExists("%s/%s/ext.epg.dat" % (dev,file)):
+						print "[EPG] restoring %s/%s/ext.epg.dat..." % (dev,file)
+						shutil.copyfile("%s/%s/ext.epg.dat" % (dev,file), epgFile)
+						print "[EPG] %s/%s/ext.epg.dat restored on %s!" % (dev,file,epgFile)
+						return True
+				else:
+					print "[EPG] restoring %s/%s..." % (dev,file)
+					shutil.copyfile("%s/%s" % (dev,file), epgFile)
+					print "[EPG] %s/%s restored on %s!" % (dev,file,epgFile)
 					return True
 	print "[EPG] No EPG data found!"
 	return False

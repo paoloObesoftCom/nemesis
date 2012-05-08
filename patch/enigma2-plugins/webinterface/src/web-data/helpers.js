@@ -966,6 +966,7 @@ function Timer(xml, cssclass){
 	this.json = {
 			'servicereference' : this.getServiceReference(),
 			'servicename' : quotes2html(this.getServiceName()),
+			'eventid' : quotes2html(this.getEventID()),
 			'name' : quotes2html(this.getName()),
 			'description' : quotes2html(this.getDescription()),
 			'descriptionextended' : quotes2html(this.getDescriptionExtended()),
@@ -1335,7 +1336,7 @@ var External = Class.create({
 			'name' : this.name,
 			'version' : this.version,
 			'hasGui' : this.hasGui,
-			'target' : this.target,
+			'target' : this.target
 		};
 	},
 

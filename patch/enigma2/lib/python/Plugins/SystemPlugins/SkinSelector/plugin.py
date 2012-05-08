@@ -27,12 +27,8 @@ class SkinSelector(Screen):
 
 		self.skinlist = []
 		self.previewPath = ""
-		for skinPath in GetSkinsPath():
-			path.walk(skinPath[1], self.find, "")
-
 		self["key_red"] = StaticText(_("Close"))
 		self["introduction"] = StaticText(_("Press OK to activate the selected skin."))
-		self.skinlist.sort()
 		self["SkinList"] = MenuList(self.skinlist)
 		self["Preview"] = Pixmap()
 
@@ -51,6 +47,9 @@ class SkinSelector(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
+		for skinPath in GetSkinsPath():
+			path.walk(skinPath[1], self.find, "")
+		self.skinlist.sort()
 		tmp = config.skin.primary_skin.value.find('/skin.xml')
 		if tmp != -1:
 			tmp = config.skin.primary_skin.value[:tmp]
@@ -124,8 +123,10 @@ class SkinSelector(Screen):
 		restartbox.setTitle(_("Restart GUI now?"))
 
 	def loadPreview(self):
-		pngpath = "%s/prev.png" % self["SkinList"].getCurrent()[2]
-		print pngpath
+		try:
+			pngpath = "%s/prev.png" % self["SkinList"].getCurrent()[2]
+		except:
+			pngpath = resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SkinSelector/noprev.png")
 
 		if not path.exists(pngpath):
 			pngpath = resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SkinSelector/noprev.png")

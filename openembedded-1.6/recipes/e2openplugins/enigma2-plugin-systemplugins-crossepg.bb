@@ -5,11 +5,11 @@ LICENSE = "GPLv2"
 
 PN = "enigma2-plugin-systemplugins-crossepg"
 
-SRCDATE = "20120305"
+SRCDATE = "20120323"
 BRANCH = "master"
 PV = "2.6-git${SRCDATE}"
-SRCREV = "fd3284ca98c51408aeeac344bc9a2dfd89af2ebf"
-PR = "r0"
+SRCREV = "5a21280dff56d95333060c88805e81f40df15815"
+PR = "r2"
 
 SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-CrossEPG.git;protocol=git;branch=${BRANCH};tag=${SRCREV} \
            file://download_epg.sh \

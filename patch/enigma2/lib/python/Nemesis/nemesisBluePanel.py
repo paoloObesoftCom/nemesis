@@ -7,7 +7,6 @@ from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.ConfigList import ConfigList
 from Components.config import config, ConfigSelection, getConfigListEntry, ConfigNothing, KEY_LEFT, KEY_RIGHT, KEY_OK
-from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Progress import Progress
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
@@ -67,11 +66,10 @@ class nemesisBluePanel(Screen):
 		self.nemPortNumber = t.readPortNumber()
 		self.checkVersionTimer = eTimer()
 		self.checkVersionTimer.timeout.get().append(self.checkVersion)
-		self.checkVersionTimer.start(100, True)
 		self.ecmTimer = eTimer()
 		self.ecmTimer.timeout.get().append(self.readEcmInfo)
 		self.ecmTimer.start(10000, False)
-		self.onLayoutFinish.append(self.loadEmuList)
+		self.onLayoutFinish.append(self.checkdeveloperMode)
 		self.onShown.append(self.setWindowTitle)
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
@@ -80,11 +78,22 @@ class nemesisBluePanel(Screen):
 		self.linkAddons = t.readAddonsUrl()[0]
 		thread.start_new_thread(self.readEcmInfo, ())
 
+	def checkdeveloperMode(self):
+		self.loadMainList()
+		if config.nemesis.skindevelopermode.value:
+			self['conn'].show()
+			self['conn'].setText(_('!!!! WARNING !!!!\n\nYou are using image in developer mode\nPlease disable it for best performance\nPress: Yellow->Setup Skin to disable it.'))
+		else:
+			self['conn'].hide()
+			self['conn'].setText('')
+			if config.nemesis.ipkg.upgrade.value:
+				self.checkVersionTimer.start(100, True)
+
 	def checkVersion(self):
 		url = self.linkAddons + {True:'rel-test.txt',False:'rel.txt'}[fileExists("/etc/.testmode")]
 		cmd = {True:'/var/etc/proxy.sh && ',False:''}[config.proxy.isactive.value] + "wget " + url + " -O /tmp/ver.txt"
 		self.checkVersionContainer.execute(cmd)
-		
+
 	def fetchFinished(self, retval):
 		if fileExists('/tmp/ver.txt') and retval == 0:
 			hwVersion = HardwareInfo().get_device_name()
@@ -102,7 +111,7 @@ class nemesisBluePanel(Screen):
 						minVer = line[2][:-1]
 				f.close()
 				os.unlink('/tmp/ver.txt')
-				if int(self.SVNVERSION) < int(newVer) and config.nemesis.ipkg.upgrade.value:
+				if int(self.SVNVERSION) < int(newVer):
 					self['conn'].show()
 					if int(self.SVNVERSION) < int(minVer):
 						self['conn'].setText(_('New version SVN(%sr%s) is available!\nCurrent version: %sr%s\nMin Version required: %sr%s\nUpgrade not possible!') % (newVer[0:3],newVer[3], self.SVNVERSION[0:3],self.SVNVERSION[3], minVer[0:3],minVer[3]))
@@ -143,7 +152,7 @@ class nemesisBluePanel(Screen):
 			thread.start_new_thread(initNemesisTool, ())
 			self.close()
 
-	def loadEmuList(self):
+	def loadMainList(self):
 		emu = []
 		crd = []
 		emu.append("None")
@@ -225,16 +234,16 @@ class nemesisBluePanel(Screen):
 			self['conninfo'].text = (_("Server not found! Please check internet connection."))
 
 	def naddons(self):
-		self.session.openWithCallback(self.loadEmuList, NAddons)
+		self.session.openWithCallback(self.loadMainList, NAddons)
 	
 	def nsetting(self):
-		self.session.openWithCallback(self.loadEmuList, NSetupSum)
+		self.session.openWithCallback(self.checkdeveloperMode, NSetupSum)
 		
 	def ninfo(self):
-		self.session.openWithCallback(self.loadEmuList, NInfo)
+		self.session.openWithCallback(self.loadMainList, NInfo)
 		
 	def nutility(self):
-		self.session.openWithCallback(self.loadEmuList, NUtility)
+		self.session.openWithCallback(self.loadMainList, NUtility)
 	
 	def readEcmInfo(self):
 		service = self.session.nav.getCurrentService()

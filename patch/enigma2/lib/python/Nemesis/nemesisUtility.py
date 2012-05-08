@@ -487,7 +487,7 @@ class deleteLog(Screen, ConfigListScreen):
 			('smb','/var/log/log.smbd',_('Delete SMB log file?')),
 			('nmb','/var/log/log.nmbd',_('Delete NMB log file?')),
 			('vsftpd','/var/log/vsftpd.log',_('Delete FTP log file?')),
-			('openvpn','/etc/openvpn/openvpn.log',_('Delete OpenVPN log file?')),
+			('openvpn','/tmp/openvpn.log',_('Delete OpenVPN log file?')),
 			('enigma','/hdd/*.log',_('Delete Enigma Crash log file?'))
 			]
 		self.logconfig = {}

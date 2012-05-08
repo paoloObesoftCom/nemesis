@@ -2,8 +2,8 @@ DESCRIPTION = "OpenDreambox: Enigma2 Task for the OpenDreambox Distribution"
 SECTION = "opendreambox/base"
 LICENSE = "MIT"
 
-PV = "2.5"
-PR = "r0"
+PV = "2.6"
+PR = "r1"
 
 inherit task
 

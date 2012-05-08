@@ -59,7 +59,7 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r0"
+PR = "r1"
 
 SRCDATE = "20120327"
 #SRCDATE is NOT used by git to checkout a specific revision
@@ -67,7 +67,7 @@ SRCDATE = "20120327"
 #when you like to checkout a specific revision of e2 you need
 #have to specify a commit id or a tag name in SRCREV
 
-SRCDATENEMESIS = "20120329"
+SRCDATENEMESIS = "20120502"
 
 # if you want experimental use
 ####################################################

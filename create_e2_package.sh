@@ -70,6 +70,8 @@ create ()
 	cd $srcpatchedpath
 	mv enigma2_$MACHINE/usr/share/doc .
 	mv enigma2_$MACHINE/usr/share/meta .
+	mv enigma2_$MACHINE/usr/share/enigma2/defaults .
+	mv enigma2_$MACHINE/usr/share/enigma2/countries .
 	rm -rf enigma2_$MACHINE/usr/bin
 	rm -rf enigma2_$MACHINE/usr/share
 	rm -rf enigma2_$MACHINE/usr/lib/enigma2/python/*.py*
@@ -94,8 +96,12 @@ create ()
 	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/
 	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/SystemPlugins/ledManager enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/
 	cp -rf $nemesis_e2_pack/usr/lib/enigma2/python/Plugins/SystemPlugins/SkinSelector enigma2_$MACHINE/usr/lib/enigma2/python/Plugins/SystemPlugins/
-	cp -rf meta/*  enigma2_$MACHINE/usr/share/meta/
+	rm -rf  enigma2_$MACHINE/usr/share/enigma2/defaults/
+	rm -rf  enigma2_$MACHINE/usr/share/enigma2/countries/
+	mv countries  enigma2_$MACHINE/usr/share/enigma2/
+	mv defaults  enigma2_$MACHINE/usr/share/enigma2/
 	mv doc  enigma2_$MACHINE/usr/share/
+	cp -rf meta/*  enigma2_$MACHINE/usr/share/meta/
 	rm -rf meta
 
 	[ -e enigma2_$MACHINE.tar.bz2 ] && rm -f enigma2_$MACHINE.tar.bz2

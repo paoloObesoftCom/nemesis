@@ -241,7 +241,7 @@ class showDevSpaceInfo(Screen):
 					self['rs2'].setText('Swap: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
 				elif (x[0] == 'Total:'):
 					r[2] = int(int(x[2]) * 100 / int(x[1]))
-					self['rt1'].setText('Total Memory:  %s  in use:: %d%%' % (getUnit(int(x[1])), r[2]))
+					self['rt1'].setText('Total Memory:  %s  in use: %d%%' % (getUnit(int(x[1])), r[2]))
 					s = getSize(int(x[1]),int(x[2]),int(x[3]))
 					self['rt2'].setText('Total: %s - Used: %s - Free: %s' % (s[0],s[1],s[2]))
 			f.close()
@@ -276,6 +276,7 @@ class showEnigmaInfo(Screen):
 		if fileExists('/etc/enigma2/settings'):
 				f = open('/etc/enigma2/settings', 'r')
 				for line in f.readlines():
-					strview += line
+					if line.find('config.ParentalControl') == -1:
+						strview += line
 				f.close()
 				self['infotext'].setText(strview)

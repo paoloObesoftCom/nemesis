@@ -23,13 +23,14 @@ from Tools import Notifications
 import xml.etree.cElementTree as x
 
 def createLink(basedir, create = False):
+	ret = False
 	for root, dirs, files in walk(basedir):
 		for file in files:
-			if file == "skin.xml":
+			if file == "skin.xml" and basedir.find('/skins') != -1:
+				ret = True
 				if create and (root != eEnv.resolve('${datadir}/enigma2')):
-					system('ln -s %s %s' % (root, eEnv.resolve('${datadir}/enigma2/')))
-				return True
-	return False
+					system("ln -s %s %s" % (root, eEnv.resolve('${datadir}/enigma2/')))
+	return ret
 
 t = nemesisTool()
 
@@ -816,13 +817,9 @@ class	RManual(Screen):
 		if self['list'].count() == 0:
 			self.close()
 		if not self.container.running() and not self.installFile:
-			if len(loadtmpdir.tmp_list) > 0:
-				self.sel = self['list'].getIndex() 
-				for p in loadtmpdir.tmp_list: 
-					if (p [0] == self.sel):
-						u.filename = p [1]
-				self.downloading("Install")
-				return
+			u.filename  = self['list'].getCurrent()[0] 
+			self.downloading("Install")
+			return
 		if self.installFile:
 			self.installAddons(True)
 			return
@@ -900,7 +897,7 @@ class	RManual(Screen):
 			
 	def downloading(self, state=""):
 		if state == "Install":	
-			self['conn'].text = _('Do you want install the addon: %s?') % u.addonsName
+			self['conn'].text = _('Do you want install the addon: %s?') % u.filename
 			self["key_red"].text = _("No")
 			self["key_green"].setText(_("Yes"))
 			self.installFile = True
@@ -1038,9 +1035,9 @@ class	RRemove(Screen):
 	def removePicon(self):
 		del self.deleteCmd[:]
 		for dev in GetPluginInstallPath():
-			for folder in ('picon', 'picon_oled', 'piconSys', 'piconProv', 'piconSat'):
-				if pathExists("%s/%s" % (dev[1],folder)):
-					self.deleteCmd.append("%s/%s" % (dev[1],folder))
+			for file in listdir(dev[1]):
+				if file in ('picon', 'picon_oled', 'piconlcd', 'piconSys', 'piconProv', 'piconSat'):
+					self.deleteCmd.append("%s/%s" % (dev[1], file))
 		if self.deleteCmd:
 			u.filename = "RemovePicon"
 			self.downloading("Picon")
@@ -1054,12 +1051,14 @@ class	RRemove(Screen):
 			
 	def removeEpg(self):
 		del self.deleteCmd[:]
-		if fileExists(config.misc.epgcache_filename.value):
-			self.deleteCmd.append("%s" % config.misc.epgcache_filename.value)
 		for dev in GetEpgPath():
-			for filename in ('epg.dat','ext.epg.dat','epg.dat.save'):
-				if fileExists("%s/%s" % (dev[1],filename)):
-					self.deleteCmd.append("%s/%s" % (dev[1],filename))
+			for file in sorted(listdir(dev[1]), reverse=True):
+				if file in ('epg.dat','epg.dat.save','ext.epg.dat','crossepg'):
+					if file == 'crossepg':
+						if fileExists("%s/%s/ext.epg.dat" % (dev[1],file)):
+							self.deleteCmd.append("%s/%s/ext.epg.dat" % (dev[1],file))
+					else:
+						self.deleteCmd.append("%s/%s" % (dev[1],file))
 		if self.deleteCmd:
 			u.filename = "RemoveEpg"
 			self.downloading("Epg")
