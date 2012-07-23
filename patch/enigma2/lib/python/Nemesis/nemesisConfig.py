@@ -95,8 +95,8 @@ def InitNemesisConfig():
 	config.nemepg.downskyit = ConfigYesNo(default = True)
 	config.nemepg.skyitch = ConfigSelection(default = "0e31:00820000:16a8:fbff:1:0", choices = [
 		("0e31:00820000:16a8:fbff:1:0", "Marcopolo"), 
-		("0e33:00820000:16a8:fbff:1:0", "Fox +1"), 
-		("0e30:00820000:16a8:fbff:1:0", "Nuvolari")])
+		("0fbd:00820000:2db4:fbff:1:0", "Fox +1"), 
+		("0fbc:00820000:2db4:fbff:1:0", "Nuvolari")])
 	config.nemepg.downskyuk = ConfigYesNo(default = False)
 	config.nemepg.skyukch = ConfigSelection(default = "0fd1:011a0000:07d4:0002:2:0", choices = [
 		("0fd1:011a0000:07d4:0002:2:0", "Hip Hop"), 

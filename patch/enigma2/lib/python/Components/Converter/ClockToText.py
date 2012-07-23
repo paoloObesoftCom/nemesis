@@ -54,7 +54,7 @@ class ClockToText(Converter, object):
 			self.type = self.AS_LENGTH
 		elif type == "Timestamp":	
 			self.type = self.TIMESTAMP
-		elif str(type).find("Format:") != -1:
+		elif str(type).find("Format") != -1:
 			self.type = self.FORMAT
 			self.fmt_string = type[7:]
 		else:

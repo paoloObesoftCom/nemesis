@@ -6,6 +6,7 @@ MAINTAINER = "Felix Domke <tmbinc@elitedvb.net>"
 
 BINARY_VERSION = "1"
 BINARY_VERSION_mipsel = "10"
+BINARY_VERSION_dm7025 = "8"
 
 IMAGES_VERSION = "1"
 IMAGES_VERSION_dm500hd = "2"

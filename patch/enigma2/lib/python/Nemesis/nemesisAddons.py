@@ -497,17 +497,18 @@ class	RAddonsDown(Screen):
 			self.session.open(openPreviewScreen, "/tmp/skin_preview.png")
 
 	def KeyOk(self):
-		if self['list'].count() == 0:
+		if self['list'].count() > 0:
+			if self.installingFile:
+				return
+			if self.installFile:
+				self.installAddons(True)
+				return
+			if self.download == None:
+				if self.stopLoadPreview():
+					self.downloadAddons()
+				return
+		else:
 			self.__Close()
-		if self.installingFile:
-			return
-		if self.installFile:
-			self.installAddons(True)
-			return
-		if self.download == None:
-			if self.stopLoadPreview():
-				self.downloadAddons()
-			return
 
 	def downloadAddons(self):
 		self.getAddonsPar()
@@ -814,16 +815,17 @@ class	RManual(Screen):
 			self['list'].setList(self.list)
 	
 	def KeyOk(self):
-		if self['list'].count() == 0:
+		if self['list'].count() > 0:
+			if not self.container.running() and not self.installFile:
+				u.filename  = self['list'].getCurrent()[0] 
+				self.downloading("Install")
+				return
+			if self.installFile:
+				self.installAddons(True)
+				return
+		else:
 			self.close()
-		if not self.container.running() and not self.installFile:
-			u.filename  = self['list'].getCurrent()[0] 
-			self.downloading("Install")
-			return
-		if self.installFile:
-			self.installAddons(True)
-			return
-	
+
 	def installAddons(self, answer):
 		if (answer is True):
 			self['conn'].text = (_('Installing: %s.\nPlease wait...') % u.filename)

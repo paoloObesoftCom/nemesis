@@ -8,8 +8,8 @@ PN = "enigma2-plugin-systemplugins-crossepg"
 SRCDATE = "20120323"
 BRANCH = "master"
 PV = "2.6-git${SRCDATE}"
-SRCREV = "5a21280dff56d95333060c88805e81f40df15815"
-PR = "r2"
+SRCREV = "fb69f62840d3b58b4265d9f50a523fffae0da6a7"
+PR = "r3"
 
 SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-CrossEPG.git;protocol=git;branch=${BRANCH};tag=${SRCREV} \
            file://download_epg.sh \
@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-CrossEPG.git;protocol=git
            file://crossepglib.py \
            file://crossepg_loader.py \
            file://crossepg_setup.py \
+           file://skyit_hotbird_13.0.conf \
            file://crossepg.config"
 
 S = "${WORKDIR}/git"
@@ -50,6 +51,7 @@ do_install_append () {
 	install -m 644 "${WORKDIR}/crossepg.config" "${D}/usr/crossepg"
 	install -m 644 "${WORKDIR}/aliases.conf" "${D}/usr/crossepg/aliases"
 	install -m 644 "${WORKDIR}/mpepg.conf" "${D}/usr/crossepg/import"
+	install -m 644 "${WORKDIR}/skyit_hotbird_13.0.conf" "${D}/usr/crossepg/providers"
 	install -m 644 "${WORKDIR}/crossepglib.py" "${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/CrossEPG"
 	install -m 644 "${WORKDIR}/crossepg_loader.py" "${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/CrossEPG"
 	install -m 644 "${WORKDIR}/crossepg_setup.py" "${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/CrossEPG"

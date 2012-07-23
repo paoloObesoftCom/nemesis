@@ -105,6 +105,15 @@ class CrossEPG_Setup(Screen):
 
 		self.makeList()
 
+	# Modded by IAmATeaf 13/04/2012
+	# def isMountedInRW(self, path):
+	# testfile = path + "/tmp-rw-test"
+	# os.system("touch " + testfile)
+	# if os.path.exists(testfile):
+	# os.system("rm -f " + testfile)
+	# return True
+	# return False
+
 	def showWarning(self):	
 		self.session.open(MessageBox, _("PLEASE READ!\nNo disk found. An hard drive or an usb pen is HARDLY SUGGESTED. If you still want use your internal flash pay attention to:\n(1) If you don't have enough free space your box may completely block and you need to flash it again\n(2) Many write operations on your internal flash may damage your flash memory"), type = MessageBox.TYPE_ERROR)
 	

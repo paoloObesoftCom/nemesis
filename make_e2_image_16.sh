@@ -48,6 +48,7 @@ rebuild_image()
 {
 	. ./env.source
 	rm -f tmp/deploy/images/*
+	bitbake v4l-dvb-modules
 	bitbake dreambox-image
 	exit $?
 }

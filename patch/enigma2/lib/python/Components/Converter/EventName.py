@@ -26,7 +26,10 @@ class EventName(Converter, object):
 			
 		if self.type == self.NAME:
 			print event.getEventName()
-			if event.getEventName() == "Visibile in analogico o digit. terrestre":
+			if event.getEventName().find("Visibile in analogico") >= 0:
+				print event.getShortDescription().title()
+				return event.getShortDescription().title()
+			elif event.getEventName().find("Visibile gratis") >= 0:
 				print event.getShortDescription().title()
 				return event.getShortDescription().title()
 			else:

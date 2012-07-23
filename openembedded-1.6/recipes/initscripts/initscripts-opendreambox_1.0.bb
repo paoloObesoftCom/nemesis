@@ -5,7 +5,7 @@ PRIORITY = "required"
 PROVIDES = "initscripts"
 RPROVIDES_${PN} = "initscripts"
 LICENSE = "GPL"
-PR = "r41"
+PR = "r42"
 PR_dm7025 = "r35"
 
 FILESPATHPKG = "initscripts-${PV}:initscripts:files"
@@ -103,6 +103,7 @@ do_install () {
 
 	if [ "${MACHINE}" = "dm800" -o "${MACHINE}" = "dm500hd" -o "${MACHINE}" = "dm7025" -o "${MACHINE}" = "dm8000" -o "${MACHINE}" = "dm800se" -o "${MACHINE}" = "dm7020hd" ]; then
 		ln -sf ../init.d/nemesis ${D}${sysconfdir}/rc3.d/S99nemesis
+		install -m 0755 ${WORKDIR}/umountfs ${D}${sysconfdir}/init.d/umountfs
 		install -d ${D}${sysconfdir}/network/if-up.d
 		install -m 0755 ${WORKDIR}/netmount.sh	${D}${sysconfdir}/network/if-up.d/02netmount
 		install -d ${D}${sysconfdir}/network/if-down.d

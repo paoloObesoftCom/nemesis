@@ -19,7 +19,8 @@ INHIBIT_PACKAGE_STRIP = "1"
 
 do_install() {
 	install -d ${D}/usr/bin \
-                   ${D}${sysconfdir}/init.d
+                   ${D}${sysconfdir}/init.d \
+                   ${D}${sysconfdir}/rcS.d
 
 	install -m 0755 ${WORKDIR}/dccamd-${MACHINE}-${PV} ${D}/usr/bin/dccamd
 	install -m 0755 ${WORKDIR}/dccamd ${D}${sysconfdir}/init.d
