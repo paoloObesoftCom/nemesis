@@ -3,7 +3,7 @@ SECTION = "opendreambox/base"
 LICENSE = "MIT"
 
 PV = "2.6"
-PR = "r1"
+PR = "r2"
 
 inherit task
 
@@ -48,6 +48,8 @@ RDEPENDS_task-opendreambox-enigma2 = "\
 
 RRECOMMENDS_task-opendreambox-enigma2 = "\
   aio-grab \
+  python-email \
+  python-subprocess \
   python-crypt \
   python-netserver \
   python-twisted-core \

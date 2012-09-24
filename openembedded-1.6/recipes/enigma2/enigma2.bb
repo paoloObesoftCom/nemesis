@@ -67,7 +67,7 @@ SRCDATE = "20120706"
 #when you like to checkout a specific revision of e2 you need
 #have to specify a commit id or a tag name in SRCREV
 
-SRCDATENEMESIS = "20120715"
+SRCDATENEMESIS = "20120723"
 
 # if you want experimental use
 ####################################################
