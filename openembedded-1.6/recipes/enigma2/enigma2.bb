@@ -59,15 +59,15 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 
 PN = "enigma2"
-PR = "r0"
+PR = "r1"
 
-SRCDATE = "20120706"
+SRCDATE = "20121103"
 #SRCDATE is NOT used by git to checkout a specific revision
 #but we need it to build a ipk package version
 #when you like to checkout a specific revision of e2 you need
 #have to specify a commit id or a tag name in SRCREV
 
-SRCDATENEMESIS = "20120723"
+SRCDATENEMESIS = "20130219"
 
 # if you want experimental use
 ####################################################
@@ -157,6 +157,8 @@ pkg_preinst_${PN} () {
 }
 pkg_postinst_${PN} () {
 
+	[ -e /etc/.enigma_nemesis ] || touch /etc/.enigma_nemesis
+	
 	for rc in /etc/rc2.d /etc/rc3.d /etc/rc4.d /etc/rc5.d
 	do
 		if [ -L $rc/S30openvpn ]; then

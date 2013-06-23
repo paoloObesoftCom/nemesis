@@ -46,7 +46,7 @@ class IpkgComponent:
 			if args["test_only"]:
 				append = " -test"
 			if config.nemesis.ipkg.overwriteUpgrade.value:
-				fow = "--force-overwrite --force-defaults "
+				fow = "--force-overwrite --force-defaults --autoremove "
 			self.runCmd(fow + "upgrade" + append)
 		elif cmd == self.CMD_LIST:
 			self.fetchedList = []
@@ -57,9 +57,9 @@ class IpkgComponent:
 		elif cmd == self.CMD_INSTALL:
 			fowi = ""
 			if config.nemesis.ipkg.overwriteUpgrade.value:
-				fowi = "--force-overwrite --force-defaults "
+				fowi = "--force-overwrite --force-defaults --autoremove "
 			if config.nemesis.ipkg.forceReInstall.value:
-				fowi = "--force-reinstall --force-defaults "
+				fowi = "--force-reinstall --force-defaults --autoremove "
 			self.runCmd(fowi + "install " + args['package'])
 		elif cmd == self.CMD_REMOVE:
 			self.runCmd("remove " + args['package'])

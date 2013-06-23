@@ -5,7 +5,7 @@ PRIORITY = "required"
 PROVIDES = "initscripts"
 RPROVIDES_${PN} = "initscripts"
 LICENSE = "GPL"
-PR = "r42"
+PR = "r43"
 PR_dm7025 = "r35"
 
 FILESPATHPKG = "initscripts-${PV}:initscripts:files"
@@ -68,7 +68,7 @@ do_install () {
 #
 	if [ "${MACHINE}" = "dm600pvr" -o "${MACHINE}" = "dm500plus" ]; then
 		install -m 0755 ${WORKDIR}/nemesise1  ${D}${sysconfdir}/init.d/nemesis
-		ln -sf ../init.d/nemesis ${D}${sysconfdir}/rc2.d/S99nemesis
+		ln -sf ../init.d/nemesis ${D}${sysconfdir}/rc2.d/S01nemesis
 		head -n 4 ${WORKDIR}/umountfs > ${D}${sysconfdir}/init.d/umountfs
 		echo "cd /tmp" >> ${D}${sysconfdir}/init.d/umountfs
 		tail -n 14 ${WORKDIR}/umountfs >> ${D}${sysconfdir}/init.d/umountfs
@@ -79,7 +79,7 @@ do_install () {
 	if [ "${MACHINE}" = "dm7020" ]; then
 		install -m 0755 ${WORKDIR}/umountfs ${D}${sysconfdir}/init.d/umountfs
 		install -m 0755 ${WORKDIR}/nemesise1  ${D}${sysconfdir}/init.d/nemesis
-		ln -sf ../init.d/nemesis ${D}${sysconfdir}/rc2.d/S99nemesis
+		ln -sf ../init.d/nemesis ${D}${sysconfdir}/rc2.d/S01nemesis
 		install -m 0755 ${WORKDIR}/mountcfusb ${D}${sysconfdir}/init.d
 		ln -sf ../init.d/mountcfusb ${D}${sysconfdir}/rcS.d/S36mountcfusb
 	fi
@@ -102,7 +102,7 @@ do_install () {
 	fi
 
 	if [ "${MACHINE}" = "dm800" -o "${MACHINE}" = "dm500hd" -o "${MACHINE}" = "dm7025" -o "${MACHINE}" = "dm8000" -o "${MACHINE}" = "dm800se" -o "${MACHINE}" = "dm7020hd" ]; then
-		ln -sf ../init.d/nemesis ${D}${sysconfdir}/rc3.d/S99nemesis
+		ln -sf ../init.d/nemesis ${D}${sysconfdir}/rc3.d/S01nemesis
 		install -m 0755 ${WORKDIR}/umountfs ${D}${sysconfdir}/init.d/umountfs
 		install -d ${D}${sysconfdir}/network/if-up.d
 		install -m 0755 ${WORKDIR}/netmount.sh	${D}${sysconfdir}/network/if-up.d/02netmount
@@ -130,4 +130,15 @@ do_install () {
 	ln -sf		../init.d/sysfs.sh	${D}${sysconfdir}/rcS.d/S02sysfs
 	ln -sf		../init.d/devpts.sh	${D}${sysconfdir}/rcS.d/S38devpts.sh
 	ln -sf		../init.d/bootup	${D}${sysconfdir}/rcS.d/S04bootup
+}
+
+
+pkg_postinst_${PN} () {
+
+	for rc in /etc/rc2.d /etc/rc3.d /etc/rc4.d /etc/rc5.d
+	do
+		if [ -L $rc/S99nemesis ]; then
+			rm -f $rc/S99nemesis
+		fi
+	done
 }
