@@ -3,7 +3,7 @@ SECTION = "opendreambox/base"
 LICENSE = "MIT"
 
 PV = "2.6"
-PR = "r2"
+PR = "r4"
 
 inherit task
 

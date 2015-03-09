@@ -5,9 +5,9 @@ PACKAGES_DYNAMIC = "enigma2-plugin-*"
 
 # if you want experimental, use:
 SRCREV="b263370ebde5eacd622c4d58174574cb6f27d183"
-SRCDATE="20121104"
+SRCDATE="20141227"
 BRANCH="3.2"
-PV = "experimental-git${SRCDATE}"
+PV = "3.2git${SRCDATE}"
 
 PR = "r0"
 SRC_URI = "file://../../../../sources/enigma2-plugins.git_Nemesis_16.tar.gz"

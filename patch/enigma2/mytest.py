@@ -411,8 +411,8 @@ class PowerKey:
 				self.session.open(Screens.Standby.TryQuitMainloop, 1)
 
 	def shutdown(self):
+		print "PowerOff - Now!"
 		if not Screens.Standby.inTryQuitMainloop and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND:
-			print "PowerOff - Now!"
 			self.session.open(Screens.Standby.TryQuitMainloop, 1)
 
 	def powerlong(self):
@@ -665,4 +665,3 @@ except:
 	print_exc(file=stdout)
 	quitMainloop(5)
 	print '-'*60
-

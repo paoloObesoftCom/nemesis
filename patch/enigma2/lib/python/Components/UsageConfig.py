@@ -7,7 +7,6 @@ import os
 from Nemesis.nemesisConfig import InitNemesisConfig
 
 def InitUsageConfig():
-
 	config.usage = ConfigSubsection();
 	config.usage.showdish = ConfigYesNo(default = True)
 	config.usage.multibouquet = ConfigYesNo(default = True)

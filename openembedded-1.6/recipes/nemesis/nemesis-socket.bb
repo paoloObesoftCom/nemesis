@@ -3,7 +3,7 @@ HOMEPAGE = http://www.genesi-project.com
 LICENSE = "GPLv2"
 MAINTAINER = Gianathem
 
-PR = "r1"
+PR = "r3"
 PV = "2.6"
 
 SRC_URI = "file://nemesisd.c \

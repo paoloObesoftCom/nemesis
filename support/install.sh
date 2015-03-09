@@ -243,7 +243,7 @@ else
 fi
 
 # download new enigma2 3.1 source
-_download_e2_31
+# _download_e2_31
 
 #Download enigma2 3.2 source
 [ -d $INIT_DIR/src ] || mkdir $INIT_DIR/src
@@ -261,7 +261,7 @@ else
 		exit 72		#Code für: wichtige Systemdatei fehlt
 	fi;
 	cd enigma2.32
-	git checkout -f master
+	git checkout -f 3.2
 fi
 
 #Download enigma2-plugins from branch master
@@ -279,7 +279,7 @@ else
 		exit 72		#Code für: wichtige Systemdatei fehlt
 	fi;
 	cd enigma2-plugins
-	git checkout -f master
+	git checkout -f 3.2
 # 	git checkout 0583479ced50001bfd61e0b20c7f35985a117745
 fi
 
@@ -372,7 +372,7 @@ do
 			GIT_URL="git://git.opendreambox.org/git/openembedded.git"
 			;;
 		1.6) 	
-			BRANCH="opendreambox-1.6"
+			BRANCH="3.2"
 			BB_VERSION="1.8-dream"
 			PACKAGES="recipes"
 			GIT_URL="git://git.opendreambox.org/git/openembedded.git"
