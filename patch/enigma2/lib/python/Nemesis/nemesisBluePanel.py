@@ -321,7 +321,8 @@ class nemesisBluePanel(Screen):
 		if self.playServ:
 			self.session.nav.stopService()
 		try:
-			self.console.ePopen("nemesisc '%s' '%s' '%s'" % ('127.0.0.1',self.nemPortNumber,cmd), self.commandFinished)
+			#self.console.ePopen("nemesisc '%s' '%s' '%s'" % ('127.0.0.1',self.nemPortNumber,cmd), self.commandFinished)
+			self.console.ePopen(cmd, self.commandFinished)
 		except:
 			pass
 		

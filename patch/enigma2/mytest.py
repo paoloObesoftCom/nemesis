@@ -34,7 +34,8 @@ except:
 	pass
 
 print "Restart EMU/CS"
-cmd = "nemesisc '%s' '%s' '%s'" % ('127.0.0.1',PortNumber,'/etc/init.d/restartExt.sh &')
+#cmd = "nemesisc '%s' '%s' '%s'" % ('127.0.0.1',PortNumber,'/etc/init.d/restartExt.sh &')
+cmd = '/etc/init.d/restartExt.sh &'
 system(cmd)
 #End
 
