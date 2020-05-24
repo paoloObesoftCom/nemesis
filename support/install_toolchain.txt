@@ -1,0 +1,128 @@
+http://www.streamboard.tv/oscam/wiki/crosscompiling#Howtoinstallthetoolchain
+
+
+Dreambox 500 /DM500 and DM500-S/ and Dbox2 (PPC Tuxbox Old)
+
+    Download:http://www.streamboard.tv/wbb2/tut-pics/toolchains/Toolchain_powerpc-tuxbox-linux_DreamboxPPC.SSL.tar.bz2ll
+
+
+
+Dreambox 600/7000/7020 (PPC Tuxbox)
+
+    Download: http://www.streamboard.tv/wbb2/tut-pics/toolchains/Toolchain_powerpc-tuxbox-linux_DreamboxPPC.tar.bz2
+    Download ​With SSL support: http://www.streamboard.tv/wbb2/tut-pics/toolchains/Toolchain_mipsel-tuxbox-linux.Dreambox.SSL.tar.bz2
+
+Dreambox 800/8000/7025 (MIPSEL)
+
+
+
+
+    Download: ​http://www.streamboard.tv/wbb2/tut-pics/toolchains/Toolchain_mipsel-tuxbox-linux.Dreambox.tar.bz2
+    Download (SSL support): ​http://www.streamboard.tv/wbb2/tut-pics/toolchains/Toolchain_mipsel-tuxbox-linux.Dreambox.SSL.tar.bz2
+        Architecture: mipsel
+        SSL installed: no / yes
+        libusb installed: no (see how to install libusb in toolchain) 
+
+How to install the toolchain
+
+Run the following commands as NORMAL (non-root user).
+
+cd /tmp
+mkdir -p /e2/oscam/complier
+wget http://www.streamboard.de.vu/wbb2/tut-pics/toolchains/Toolchain_mipsel-tuxbox-linux.Dreambox.tar.bz2
+tar -xf Toolchain_mipsel-tuxbox-linux.Dreambox.tar.bz2 -C /e2/oscam/complier
+mv /e2/oscam/complier/mipsel-unknown-linux-gnu /e2/oscam/complier/mips
+___________________________________________________________________________________________________________________________________
+
+
+How to install openssl/libcrypto
+
+Run the following commands as NORMAL (non-root user).
+
+cd /tmp
+wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz
+tar -xf openssl-1.1.1g.tar.gz
+cd openssl-1.1.1g
+
+Complile for mips
+export TOOLCHAIN=/e2/oscam/compiler/mips
+export CC=$TOOLCHAIN/bin/mipsel-unknown-linux-gnu-gcc
+export RANLIB=$TOOLCHAIN/bin/mipsel-unknown-linux-gnu-ranlib
+./Configure --prefix=$TOOLCHAIN/mipsel-unknown-linux-gnu/sys-root/usr/ linux-generic32 shared
+
+Complile for ppc
+export TOOLCHAIN=/e2/oscam/compiler/ppc
+export CC=$TOOLCHAIN/bin/powerpc-linux-gcc
+export RANLIB=$TOOLCHAIN/bin/powerpc-linux-ranlib
+./Configure --prefix=$TOOLCHAIN/powerpc-linux linux-generic32 shared
+
+make
+sudo make install
+___________________________________________________________________________________________________________________________________
+
+
+How to install libusb
+
+Run the following commands as NORMAL (non-root user).
+
+cd /tmp
+wget http://downloads.sourceforge.net/project/libusb/libusb-1.0/libusb-1.0.9/libusb-1.0.9.tar.bz2
+tar -xf libusb-1.0.9.tar.bz2
+cd libusb-1.0.9
+export TOOLCHAIN=/e2/oscam/compiler/mips
+export PATH="$TOOLCHAIN/bin:$PATH"
+./configure --prefix=$TOOLCHAIN/mipsel-unknown-linux-gnu/sys-root/usr/ --host=mipsel-unknown-linux-gnu --enable-shared=no
+make
+make install
+___________________________________________________________________________________________________________________________________
+
+
+How to install pcsc
+
+Run the following commands as NORMAL (non-root user). 
+
+cd /tmp
+wget http://downloads.sourceforge.net/project/libusb/libusb-1.0/libusb-1.0.9/libusb-1.0.9.tar.bz2
+tar -xf libusb-1.0.9.tar.bz2
+cd libusb-1.0.9
+export TOOLCHAIN=/e2/oscam/compiler/mips
+export PATH="$TOOLCHAIN/bin:$PATH"
+./configure --prefix=$TOOLCHAIN/mipsel-unknown-linux-gnu/sys-root/usr --host=mipsel-unknown-linux-gnu
+make
+make install
+
+cd /tmp
+wget https://alioth.debian.org/frs/download.php/3757/pcsc-lite-1.8.6.tar.bz2
+tar -xf pcsc-lite-1.8.6.tar.bz2
+cd pcsc-lite-1.8.6
+./configure CC=$TOOLCHAIN/bin/mipsel-unknown-linux-gnu-gcc-4.3.2 --disable-libudev --host=mipsel-unknown-linux-gnu --prefix=$TOOLCHAIN/mipsel-unknown-linux-gnu/sys-root/usr --exec-prefix=$TOOLCHAIN/mipsel-unknown-linux-gnu/sys-root/usr --disable-shared LIBUSB_LIBS="-L$TOOLCHAIN/mipsel-unknown-linux-gnu/sys-root/usr/lib -lusb-1.0" LIBUSB_CFLAGS="-I$TOOLCHAIN/mipsel-unknown-linux-gnu/sys-root/usr/include/libusb-1.0"
+make
+make install
+___________________________________________________________________________________________________________________________________
+
+
+How to use cross compile OSCAM
+
+Run the following commands as your regular user in the directory where OSCAM source is. See GettingOscam.
+
+# Set this variable to the root directory of your toolchain
+export TOOLCHAIN=/e2/oscam/compiler/mips
+# Default compilation
+make CROSS=$TOOLCHAIN/bin/mipsel-unknown-linux-gnu-
+
+# Cross compile with SSL (and libcrypto) support
+make CROSS=$TOOLCHAIN/bin/mipsel-unknown-linux-gnu- USE_SSL=1
+
+# Cross compile libusb (smartreader) support
+make CROSS=$TOOLCHAIN/bin/mipsel-unknown-linux-gnu- USE_LIBUSB=1
+
+# Cross compile with static libusb (smartreader) support
+make CROSS=$TOOLCHAIN/bin/mipsel-unknown-linux-gnu- USE_LIBUSB=1 LIBUSB_LIB="$TOOLCHAIN/mipsel-unknown-linux-gnu/sys-root/usr/lib/libusb-1.0.a -lrt"
+
+# Cross compile with pcsc support
+make CROSS=$TOOLCHAIN/bin/mipsel-unknown-linux-gnu- USE_PCSC=1 EXTRA_FLAGS="-I$TOOLCHAIN/mipsel-unknown-linux-gnu/sys-root/usr/include/PCSC"
+
+# Cross compile with static libusb, pcsc, SSL support
+make CROSS=$TOOLCHAIN/bin/mipsel-unknown-linux-gnu- CONF_DIR=/etc/tuxbox/config/ USE_LIBUSB=1 LIBUSB_LIB="$TOOLCHAIN/mipsel-unknown-linux-gnu/sys-root/usr/lib/libusb-1.0.a -lrt" USE
+__________________________________________________________________________________________________________________________________
+
